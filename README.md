@@ -13,6 +13,8 @@ python run.py train --model rgcn [training options]
 python run.py train --model rgat [training options]
 python run.py train --model compgcn [training options]
 python run.py explain [explanation options]
+python run.py link-prepare [link-preparation options]
+python run.py link-train [link-training options]
 ```
 
 旧根目录脚本仅为兼容保留；不要以 `main.py`、`train_rgat.py` 或旧
@@ -34,8 +36,28 @@ training/
 ├── train.py              # 共享 NeighborLoader 训练、评估与早停
 └── explain.py            # R-GAT attention 候选边导出
 legacy/original_baseline/ # 原始不可复现实验代码，只供追溯
+link_prediction/          # 独立异构图职业 link-prediction 尝试
 run.py                    # 唯一命令入口
 ```
+
+## 独立尝试：异构图职业 Link Prediction
+
+`link_prediction/` 不改变既有节点分类实验。它建立 `Person`、`Occupation`
+两种节点；全部 Person--Person 社会边保留，仅训练人物的
+`Person --has_occupation--> Occupation` 边作为消息传递图的一部分。验证和测试
+人物的职业边从图中移除，作为待预测链接。
+
+```bash
+python run.py link-prepare --input Q_R_Q_extended.txt \
+  --output-dir link_artifacts/level3 --target-level 3 --min-class-count 20 --seed 42
+
+python run.py link-train --data link_artifacts/level3/hetero_graph.pt \
+  --output-dir link_runs/level3_hgt --epochs 50 --batch-size 512 \
+  --num-neighbors 15,10 --hidden-dim 128 --branch-dim 64 --heads 4 --device cuda
+```
+
+第一版是 HGT encoder + DistMult decoder，报告 MRR、Hits@1、Hits@3、Hits@10。
+训练时会从采样消息图中移除当前监督的正职业边，避免通过目标边本身得到答案。
 
 ## 环境
 
