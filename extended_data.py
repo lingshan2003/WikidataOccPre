@@ -87,19 +87,30 @@ class ExtendedGraphLoader:
 
     @staticmethod
     def _canonicalise_nodes(candidates: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+        """Collapse repeated endpoint attributes without per-node Python loops."""
         columns = [column for column in candidates.columns if column != "node_id"]
-        conflict_rows: List[Dict[str, object]] = []
-        for node_id, group in candidates.groupby("node_id", sort=False):
-            for column in columns:
-                values = group[column].dropna().unique()
-                if len(values) > 1:
-                    conflict_rows.append({
-                        "node_id": node_id, "attribute": column, "values": values.tolist()
-                    })
+        grouped = candidates.groupby("node_id", sort=False)
+        # Pandas GroupBy.first skips missing values, which is precisely the
+        # canonicalisation policy. The vectorised implementation matters for
+        # the roughly 1.4M endpoint records in the real export.
+        nodes = grouped[columns].first().reset_index()
 
-        nodes = candidates.groupby("node_id", as_index=False, sort=False).agg(
-            {column: _first_present for column in columns}
-        )
+        conflict_rows: List[Dict[str, object]] = []
+        uniqueness = grouped[columns].nunique(dropna=True)
+        for column in columns:
+            conflict_ids = uniqueness.index[uniqueness[column] > 1]
+            if len(conflict_ids) == 0:
+                continue
+            conflicted = candidates.loc[
+                candidates["node_id"].isin(conflict_ids), ["node_id", column]
+            ]
+            values_by_node = conflicted.groupby("node_id", sort=False)[column].agg(
+                lambda values: list(pd.unique(values.dropna()))
+            )
+            conflict_rows.extend(
+                {"node_id": node_id, "attribute": column, "values": values}
+                for node_id, values in values_by_node.items()
+            )
         return nodes, pd.DataFrame(conflict_rows)
 
     @staticmethod

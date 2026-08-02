@@ -54,6 +54,17 @@ feature_specs = {
 The initial data tensors are `country` and `temporal`; occupation is excluded
 until the batch-level masking policy is implemented.
 
+## Preparation command
+
+Run the following once before training. It creates `artifacts/graph_data.pt`
+plus inspectable CSV/JSON audit artifacts. The default first experiment excludes
+occupation from model inputs, so it is a leak-safe structural-and-attribute
+baseline.
+
+```bash
+python prepare_data.py --input Q_R_Q_extended.txt --output-dir artifacts
+```
+
 ## Sampling and explanation
 
 Use two-hop neighbor sampling, with loss calculated only on seed nodes. A
