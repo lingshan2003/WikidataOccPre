@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare a leak-safe PyG graph for occupation prediction.
+"""Prepare a transductive PyG graph for occupation prediction.
 
 The script is intentionally separate from training. It makes every irreversible
 data decision -- label filtering, node split, reverse relations and feature
@@ -104,6 +104,11 @@ def build_pyg_data(
 ):
     country, country_to_id = encode_categorical(nodes["country"])
     temporal = make_numeric_features(nodes, nodes.loc[train_mask, "node_id"])
+    # Only training-node occupations are observable in the global graph.
+    # training/train.py additionally hides the current seed nodes per batch.
+    occupation_unknown_id = int(class_ids[class_ids >= 0].max()) + 1
+    observed_occupation = np.full(len(nodes), occupation_unknown_id, dtype=np.int64)
+    observed_occupation[train_mask] = class_ids[train_mask]
 
     edge_index = torch.tensor(
         edges[["source_id", "target_id"]].to_numpy(dtype=np.int64).T,
@@ -115,12 +120,13 @@ def build_pyg_data(
         y=torch.tensor(class_ids, dtype=torch.long),
         num_nodes=len(nodes),
     )
+    data.occupation = torch.tensor(observed_occupation, dtype=torch.long)
     data.country = torch.tensor(country, dtype=torch.long)
     data.temporal = torch.tensor(temporal, dtype=torch.float)
     data.train_mask = torch.tensor(train_mask, dtype=torch.bool)
     data.val_mask = torch.tensor(val_mask, dtype=torch.bool)
     data.test_mask = torch.tensor(test_mask, dtype=torch.bool)
-    return data, country_to_id
+    return data, country_to_id, occupation_unknown_id
 
 
 def write_tables(output_dir: Path, nodes: pd.DataFrame, edges: pd.DataFrame, conflicts: pd.DataFrame) -> None:
@@ -153,7 +159,7 @@ def main() -> None:
         args.test_ratio,
         args.seed,
     )
-    data, country_to_id = build_pyg_data(
+    data, country_to_id, occupation_unknown_id = build_pyg_data(
         tables.nodes, edges, class_ids, train_mask, val_mask, test_mask
     )
 
@@ -165,11 +171,16 @@ def main() -> None:
                 "num_relations": len(tables.relation_to_id),
                 "num_classes": len(label_to_id),
                 "feature_schema": {
+                    "occupation": {
+                        "kind": "categorical",
+                        "cardinality": len(label_to_id) + 1,
+                    },
                     "country": {"kind": "categorical", "cardinality": len(country_to_id)},
                     "temporal": {"kind": "numeric", "input_dim": int(data.temporal.size(1))},
                 },
                 "country_to_id": country_to_id,
                 "label_to_id": label_to_id,
+                "occupation_unknown_id": occupation_unknown_id,
                 "relation_to_id": tables.relation_to_id,
                 "seed": args.seed,
             },
@@ -191,6 +202,8 @@ def main() -> None:
         "edges_after_reverse_and_deduplication": int(data.edge_index.size(1)),
         "relation_types": len(tables.relation_to_id),
         "target_classes_retained": len(label_to_id),
+        "occupation_feature_protocol": "train labels visible; validation/test labels unknown; current seed labels masked per forward pass",
+        "occupation_unknown_id": occupation_unknown_id,
         "labeled_nodes_retained": int(eligible.sum()),
         "ignored_unlabeled_or_rare_nodes": int((~eligible).sum()),
         "train_nodes": int(train_mask.sum()),

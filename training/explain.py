@@ -105,9 +105,14 @@ def main() -> None:
         num_workers=0,
     )
     batch = next(iter(loader)).to(device)
+    if "occupation" not in metadata["feature_schema"] or "occupation_unknown_id" not in metadata:
+        raise ValueError("This checkpoint predates transductive occupation masking; regenerate data and retrain")
+    features = {name: getattr(batch, name) for name in metadata["feature_schema"] if hasattr(batch, name)}
+    features["occupation"] = features["occupation"].clone()
+    features["occupation"][:batch.batch_size] = int(metadata["occupation_unknown_id"])
     with torch.no_grad():
         logits, explanation = model(
-            {name: getattr(batch, name) for name in metadata["feature_schema"] if hasattr(batch, name)},
+            features,
             batch.edge_index,
             batch.edge_type,
             return_attention_weights=True,

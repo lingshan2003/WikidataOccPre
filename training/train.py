@@ -22,7 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", default="artifacts/graph_data.pt")
     parser.add_argument("--output-dir", default="runs/rgat_level3")
-    parser.add_argument("--model", choices=["rgcn", "rgat"], default="rgat")
+    parser.add_argument("--model", choices=["rgcn", "rgat", "compgcn"], default="rgat")
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--num-neighbors", default="20,10", help="One fan-out per GNN layer")
@@ -37,6 +37,12 @@ def parse_args() -> argparse.Namespace:
         choices=["fast", "standard"],
         default="fast",
         help="FastRGCNConv trades more memory for speed; ignored by R-GAT",
+    )
+    parser.add_argument(
+        "--compgcn-composition",
+        choices=["mult", "sub"],
+        default="mult",
+        help="How CompGCN combines a source-node state with its relation embedding",
     )
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
@@ -102,18 +108,33 @@ def make_loader(data, mask: torch.Tensor, fanouts: Sequence[int], args: argparse
     )
 
 
-def batch_features(batch, feature_schema: Dict) -> Dict[str, torch.Tensor]:
-    return {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
+def batch_features(batch, feature_schema: Dict, occupation_unknown_id: int) -> Dict[str, torch.Tensor]:
+    """Hide occupations of the seed people currently being predicted.
+
+    The prepared graph exposes known occupations for training people only.
+    NeighborLoader places this forward pass's seed people in the first
+    ``batch.batch_size`` rows, so cloning and masking those rows prevents a
+    target from seeing its own label while retaining its neighbours' labels.
+    """
+    features = {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
+    if "occupation" not in features:
+        raise ValueError("Prepared graph is missing the required transductive 'occupation' feature")
+    occupation = features["occupation"].clone()
+    occupation[:batch.batch_size] = occupation_unknown_id
+    features["occupation"] = occupation
+    return features
 
 
-def train_epoch(model, loader, optimizer, device, feature_schema, class_weights=None) -> float:
+def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unknown_id, class_weights=None) -> float:
     model.train()
     total_loss = 0.0
     seed_count = 0
     for batch in loader:
         batch = batch.to(device)
         optimizer.zero_grad(set_to_none=True)
-        logits = model(batch_features(batch, feature_schema), batch.edge_index, batch.edge_type)
+        logits = model(
+            batch_features(batch, feature_schema, occupation_unknown_id), batch.edge_index, batch.edge_type
+        )
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
         loss = F.cross_entropy(seed_logits, seed_labels, weight=class_weights)
@@ -126,14 +147,16 @@ def train_epoch(model, loader, optimizer, device, feature_schema, class_weights=
 
 
 @torch.no_grad()
-def evaluate(model, loader, device, feature_schema) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
+def evaluate(model, loader, device, feature_schema, occupation_unknown_id) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
     model.eval()
     all_labels, all_predictions, all_confidences, all_node_ids = [], [], [], []
     total_loss = 0.0
     seed_count = 0
     for batch in loader:
         batch = batch.to(device)
-        logits = model(batch_features(batch, feature_schema), batch.edge_index, batch.edge_type)
+        logits = model(
+            batch_features(batch, feature_schema, occupation_unknown_id), batch.edge_index, batch.edge_type
+        )
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
         probabilities = seed_logits.softmax(dim=-1)
@@ -213,7 +236,8 @@ def main() -> None:
     data, metadata = bundle["data"], bundle["metadata"]
     if len(fanouts) != 2:
         raise ValueError("The current RelationalGATClassifier has two layers; use exactly two fan-outs")
-    if not all(hasattr(data, key) for key in ("country", "temporal", "edge_type", "train_mask", "val_mask", "test_mask")):
+    required_attributes = ("occupation", "country", "temporal", "edge_type", "train_mask", "val_mask", "test_mask")
+    if not all(hasattr(data, key) for key in required_attributes) or "occupation_unknown_id" not in metadata:
         raise ValueError("Prepared graph does not have the required features and masks")
 
     specs = {
@@ -236,6 +260,7 @@ def main() -> None:
         attention_dropout=args.attention_dropout,
         num_bases=args.num_bases,
         rgcn_backend=args.rgcn_backend,
+        compgcn_composition=args.compgcn_composition,
     ).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
@@ -254,12 +279,20 @@ def main() -> None:
     best_val_f1, best_state, stale_epochs = float("-inf"), None, 0
     history = []
     feature_schema = metadata["feature_schema"]
-    backend_info = f"; rgcn_backend: {args.rgcn_backend}" if args.model == "rgcn" else ""
+    occupation_unknown_id = int(metadata["occupation_unknown_id"])
+    if args.model == "rgcn":
+        backend_info = f"; rgcn_backend: {args.rgcn_backend}"
+    elif args.model == "compgcn":
+        backend_info = f"; compgcn_composition: {args.compgcn_composition}"
+    else:
+        backend_info = ""
     print(f"Model: {args.model}{backend_info}; device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}")
 
     for epoch in range(1, args.epochs + 1):
-        train_loss = train_epoch(model, train_loader, optimizer, device, feature_schema, class_weights)
-        val_metrics, _ = evaluate(model, val_loader, device, feature_schema)
+        train_loss = train_epoch(
+            model, train_loader, optimizer, device, feature_schema, occupation_unknown_id, class_weights
+        )
+        val_metrics, _ = evaluate(model, val_loader, device, feature_schema, occupation_unknown_id)
         scheduler.step(val_metrics["loss"])
         monitor_value = val_metrics["loss"] if is_loss_monitor else val_metrics["macro_f1"]
         record = {
@@ -295,7 +328,9 @@ def main() -> None:
     if best_state is None:
         raise RuntimeError("Training did not produce a model checkpoint")
     model.load_state_dict(best_state)
-    test_metrics, test_predictions = evaluate(model, test_loader, device, feature_schema)
+    test_metrics, test_predictions = evaluate(
+        model, test_loader, device, feature_schema, occupation_unknown_id
+    )
     checkpoint = {
         "state_dict": model.state_dict(),
         "metadata": metadata,
@@ -308,6 +343,7 @@ def main() -> None:
             "attention_dropout": args.attention_dropout,
             "num_bases": args.num_bases,
             "rgcn_backend": args.rgcn_backend,
+            "compgcn_composition": args.compgcn_composition,
         },
         "selection_metric": args.early_stop_metric,
         "best_selection_metric": best_monitor,

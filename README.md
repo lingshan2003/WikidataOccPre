@@ -1,7 +1,7 @@
 # Wikidata Occupation Prediction
 
 基于人物知识图谱的职业分类实验。项目使用同一份已处理图数据，公平比较
-R-GCN、R-GAT，以及未来可加入的 CompGCN。
+R-GCN、R-GAT 和 CompGCN。
 
 ## 唯一入口
 
@@ -11,6 +11,7 @@ R-GCN、R-GAT，以及未来可加入的 CompGCN。
 python run.py prepare [prepare options]
 python run.py train --model rgcn [training options]
 python run.py train --model rgat [training options]
+python run.py train --model compgcn [training options]
 python run.py explain [explanation options]
 ```
 
@@ -27,7 +28,8 @@ models/
 ├── features.py           # 可扩展的类别/数值/向量属性编码与融合
 ├── rgcn.py               # 当前 R-GCN baseline
 ├── rgat.py               # 当前关系注意力模型
-└── __init__.py           # 模型注册表；未来注册 CompGCN 的唯一位置
+├── compgcn.py             # 关系嵌入组合的 CompGCN
+└── __init__.py            # 模型注册表
 training/
 ├── train.py              # 共享 NeighborLoader 训练、评估与早停
 └── explain.py            # R-GAT attention 候选边导出
@@ -50,12 +52,14 @@ python run.py --help
 
 原始 `Q_R_Q_extended.txt` 含人物—关系—人物边及端点属性。预处理会创建
 反向关系、稳定的节点级分层划分、Country 类别特征和出生/死亡时间特征。
-职业只作为监督标签，不会输入模型，因而第一版没有目标标签泄漏。
+职业是核心的 transductive 节点特征：训练人物职业对邻居可见，验证/测试人物
+职业全局置为 `unknown`；每次 forward 再将当前 seed 人物职业置为 `unknown`。
+模型因此能使用已知亲友职业，但永远看不到目标人物自身答案。
 
 ```bash
 python run.py prepare \
   --input Q_R_Q_extended.txt \
-  --output-dir artifacts \
+  --output-dir artifacts/level3 \
   --target-level 3 \
   --min-class-count 20 \
   --seed 42
@@ -64,6 +68,13 @@ python run.py prepare \
 生成的核心文件是 `artifacts/graph_data.pt`；`nodes.csv` 用于将预测和解释
 映射回 Wikidata Q-ID。
 
+旧版 `graph_data.pt` 不含职业特征，升级代码后必须重新执行 `prepare`，再重新
+训练所有模型。
+
+分别跑 Level 1/2/3 时，请使用不同的输出目录（如 `artifacts/level1`、
+`artifacts/level2`、`artifacts/level3`），并让所有待比较模型读取同一层级的
+同一份 artifact。
+
 ## 2. 训练 R-GCN baseline
 
 R-GCN 和 R-GAT 使用完全相同的数据、邻居采样、优化器和早停规则，因此结果
@@ -71,7 +82,7 @@ R-GCN 和 R-GAT 使用完全相同的数据、邻居采样、优化器和早停�
 
 ```bash
 python run.py train --model rgcn \
-  --data artifacts/graph_data.pt \
+  --data artifacts/level3/graph_data.pt \
   --output-dir runs/rgcn_level3 \
   --epochs 50 --batch-size 512 --num-neighbors 15,10 \
   --hidden-dim 128 --branch-dim 64 --num-bases 30 --rgcn-backend fast \
@@ -85,7 +96,7 @@ python run.py train --model rgcn \
 
 ```bash
 python run.py train --model rgat \
-  --data artifacts/graph_data.pt \
+  --data artifacts/level3/graph_data.pt \
   --output-dir runs/rgat_level3 \
   --epochs 50 --batch-size 512 --num-neighbors 15,10 \
   --hidden-dim 128 --branch-dim 64 --heads 4 \
@@ -108,7 +119,7 @@ runs/<experiment>/test_predictions.csv
 
 ```bash
 python run.py explain \
-  --data artifacts/graph_data.pt \
+  --data artifacts/level3/graph_data.pt \
   --checkpoint runs/rgat_level3/best_model.pt \
   --node-id Q1000023 \
   --output-dir explanations \
@@ -119,22 +130,21 @@ python run.py explain \
 attention 边。Attention 仅代表模型的注意力候选，不是因果重要性；后续应对
 top 边做删除实验，验证目标职业 logit 的下降。
 
-## 扩展 CompGCN
+## 5. 训练 CompGCN
 
-在 `models/compgcn.py` 实现模型，接口保持：
-
-```python
-forward(features, edge_index, edge_type) -> logits
-```
-
-然后在 `models/__init__.py` 的 `MODEL_REGISTRY` 注册：
-
-```python
-"compgcn": RelationalCompGCNClassifier
-```
-
-之后无需改数据或训练代码，直接运行：
+CompGCN 保持“人物节点的职业分类”任务不变，但为每一种人物关系学习一个
+relation embedding；消息由邻居人物表示与关系表示组合而成。因此它可用于检验
+关系语义本身是否带来额外预测价值。它与 R-GCN/R-GAT 使用相同数据、划分、
+采样、优化器和默认早停规则，适合横向比较。
 
 ```bash
-python run.py train --model compgcn ...
+python run.py train --model compgcn \
+  --data artifacts/level3/graph_data.pt \
+  --output-dir runs/compgcn_level3 \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --compgcn-composition mult \
+  --num-workers 4 --device cuda
 ```
+
+`mult` 是默认的逐元素组合；`sub` 是一个受控结构消融。请先只跑 `mult`，
+其余超参数与已完成的 R-GCN/R-GAT 实验保持完全一致。

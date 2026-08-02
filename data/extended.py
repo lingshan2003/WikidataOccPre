@@ -2,8 +2,8 @@
 
 The source is edge-centric: a person's attributes repeat once for every
 incident edge.  This module converts it into one canonical node table and one
-typed edge table.  It intentionally does *not* add the target occupation as an
-input feature, because that must be masked per training seed node.
+typed edge table. Target occupations remain in the canonical node table;
+preparation/training controls which occupations are visible to the model.
 """
 
 from dataclasses import dataclass
@@ -124,7 +124,7 @@ def make_numeric_features(nodes: pd.DataFrame, train_nodes: Optional[Iterable[st
     """Build normalised temporal attributes: birth, death, age and missing flags.
 
     If ``train_nodes`` is provided, mean/std are fit using only those nodes.
-    The target occupation is deliberately absent from this feature matrix.
+    Occupation is encoded separately because it has transductive masking rules.
     """
     birth = pd.to_numeric(nodes["birth_year"], errors="coerce").to_numpy(dtype=np.float32)
     death = pd.to_numeric(nodes["death_year"], errors="coerce").to_numpy(dtype=np.float32)
