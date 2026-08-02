@@ -74,9 +74,12 @@ python run.py train --model rgcn \
   --data artifacts/graph_data.pt \
   --output-dir runs/rgcn_level3 \
   --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --num-bases 30 \
+  --hidden-dim 128 --branch-dim 64 --num-bases 30 --rgcn-backend fast \
   --num-workers 4 --device cuda
 ```
+
+`fast` 使用 `FastRGCNConv`，速度快但显存更高；若发生 OOM，可改为
+`--rgcn-backend standard`，它较慢但更节省显存。
 
 ## 3. 训练 R-GAT
 

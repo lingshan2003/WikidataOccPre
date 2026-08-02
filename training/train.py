@@ -32,6 +32,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dropout", type=float, default=0.20)
     parser.add_argument("--attention-dropout", type=float, default=0.10)
     parser.add_argument("--num-bases", type=int, default=30, help="R-GCN basis decomposition count")
+    parser.add_argument(
+        "--rgcn-backend",
+        choices=["fast", "standard"],
+        default="fast",
+        help="FastRGCNConv trades more memory for speed; ignored by R-GAT",
+    )
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--patience", type=int, default=6)
@@ -229,6 +235,7 @@ def main() -> None:
         dropout=args.dropout,
         attention_dropout=args.attention_dropout,
         num_bases=args.num_bases,
+        rgcn_backend=args.rgcn_backend,
     ).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
@@ -247,7 +254,8 @@ def main() -> None:
     best_val_f1, best_state, stale_epochs = float("-inf"), None, 0
     history = []
     feature_schema = metadata["feature_schema"]
-    print(f"Model: {args.model}; device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}")
+    backend_info = f"; rgcn_backend: {args.rgcn_backend}" if args.model == "rgcn" else ""
+    print(f"Model: {args.model}{backend_info}; device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}")
 
     for epoch in range(1, args.epochs + 1):
         train_loss = train_epoch(model, train_loader, optimizer, device, feature_schema, class_weights)
@@ -299,6 +307,7 @@ def main() -> None:
             "dropout": args.dropout,
             "attention_dropout": args.attention_dropout,
             "num_bases": args.num_bases,
+            "rgcn_backend": args.rgcn_backend,
         },
         "selection_metric": args.early_stop_metric,
         "best_selection_metric": best_monitor,
