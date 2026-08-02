@@ -16,7 +16,7 @@ import pandas as pd
 import torch
 from torch_geometric.data import Data
 
-from extended_data import ExtendedGraphLoader, encode_categorical, make_numeric_features
+from .extended import ExtendedGraphLoader, encode_categorical, make_numeric_features
 
 
 def parse_args() -> argparse.Namespace:

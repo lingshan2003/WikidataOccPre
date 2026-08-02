@@ -16,7 +16,7 @@ import pandas as pd
 import torch
 from torch_geometric.loader import NeighborLoader
 
-from model import FeatureSpec, RelationalGATClassifier
+from models import FeatureSpec, build_model
 
 
 def parse_args() -> argparse.Namespace:
@@ -53,7 +53,7 @@ def load_node_ids(data_path: Path) -> List[str]:
     return pd.read_csv(nodes_path, usecols=["node_id"])["node_id"].astype(str).tolist()
 
 
-def build_model(checkpoint: Dict, device: torch.device) -> RelationalGATClassifier:
+def restore_model(checkpoint: Dict, device: torch.device):
     metadata = checkpoint["metadata"]
     specs = {
         name: FeatureSpec(
@@ -63,7 +63,11 @@ def build_model(checkpoint: Dict, device: torch.device) -> RelationalGATClassifi
         )
         for name, definition in metadata["feature_schema"].items()
     }
-    model = RelationalGATClassifier(
+    model_name = checkpoint.get("model_name", "rgat")
+    if model_name != "rgat":
+        raise ValueError("Attention export is available for RGAT only; RGCN has no alpha coefficients")
+    model = build_model(
+        model_name,
         num_relations=metadata["num_relations"],
         num_classes=metadata["num_classes"],
         feature_specs=specs,
@@ -91,7 +95,7 @@ def main() -> None:
         raise ValueError(f"node-index must be in [0, {data.num_nodes})")
 
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
-    model = build_model(checkpoint, device)
+    model = restore_model(checkpoint, device)
     loader = NeighborLoader(
         data,
         input_nodes=torch.tensor([query_index]),
@@ -103,7 +107,7 @@ def main() -> None:
     batch = next(iter(loader)).to(device)
     with torch.no_grad():
         logits, explanation = model(
-            {"country": batch.country, "temporal": batch.temporal},
+            {name: getattr(batch, name) for name in metadata["feature_schema"] if hasattr(batch, name)},
             batch.edge_index,
             batch.edge_type,
             return_attention_weights=True,

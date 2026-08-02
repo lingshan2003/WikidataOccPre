@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train the relation-aware GAT on a prepared ``graph_data.pt`` artifact."""
+"""Train a registered relational GNN on a prepared ``graph_data.pt`` artifact."""
 
 import argparse
 import copy
@@ -7,7 +7,7 @@ import csv
 import json
 import random
 from pathlib import Path
-from typing import Dict, Iterable, List, Sequence, Tuple
+from typing import Dict, List, Sequence, Tuple
 
 import numpy as np
 import torch
@@ -15,13 +15,14 @@ import torch.nn.functional as F
 from sklearn.metrics import accuracy_score, f1_score, precision_recall_fscore_support
 from torch_geometric.loader import NeighborLoader
 
-from model import FeatureSpec, RelationalGATClassifier
+from models import FeatureSpec, build_model
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", default="artifacts/graph_data.pt")
     parser.add_argument("--output-dir", default="runs/rgat_level3")
+    parser.add_argument("--model", choices=["rgcn", "rgat"], default="rgat")
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--num-neighbors", default="20,10", help="One fan-out per GNN layer")
@@ -30,9 +31,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--heads", type=int, default=4)
     parser.add_argument("--dropout", type=float, default=0.20)
     parser.add_argument("--attention-dropout", type=float, default=0.10)
+    parser.add_argument("--num-bases", type=int, default=30, help="R-GCN basis decomposition count")
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
-    parser.add_argument("--patience", type=int, default=10)
+    parser.add_argument("--patience", type=int, default=6)
+    parser.add_argument(
+        "--early-stop-metric",
+        choices=["val_loss", "macro_f1"],
+        default="val_loss",
+        help="Metric used to select the checkpoint and trigger early stopping",
+    )
+    parser.add_argument(
+        "--min-delta",
+        type=float,
+        default=0.002,
+        help="Minimum monitor improvement required to reset early-stopping patience",
+    )
+    parser.add_argument("--lr-patience", type=int, default=3, help="Bad val-loss epochs before halving LR")
+    parser.add_argument("--lr-factor", type=float, default=0.5, help="ReduceLROnPlateau factor")
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", default="auto", help="auto, cuda, cuda:0, or cpu")
@@ -80,18 +96,18 @@ def make_loader(data, mask: torch.Tensor, fanouts: Sequence[int], args: argparse
     )
 
 
-def batch_features(batch) -> Dict[str, torch.Tensor]:
-    return {"country": batch.country, "temporal": batch.temporal}
+def batch_features(batch, feature_schema: Dict) -> Dict[str, torch.Tensor]:
+    return {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
 
 
-def train_epoch(model, loader, optimizer, device, class_weights=None) -> float:
+def train_epoch(model, loader, optimizer, device, feature_schema, class_weights=None) -> float:
     model.train()
     total_loss = 0.0
     seed_count = 0
     for batch in loader:
         batch = batch.to(device)
         optimizer.zero_grad(set_to_none=True)
-        logits = model(batch_features(batch), batch.edge_index, batch.edge_type)
+        logits = model(batch_features(batch, feature_schema), batch.edge_index, batch.edge_type)
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
         loss = F.cross_entropy(seed_logits, seed_labels, weight=class_weights)
@@ -104,14 +120,14 @@ def train_epoch(model, loader, optimizer, device, class_weights=None) -> float:
 
 
 @torch.no_grad()
-def evaluate(model, loader, device) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
+def evaluate(model, loader, device, feature_schema) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
     model.eval()
     all_labels, all_predictions, all_confidences, all_node_ids = [], [], [], []
     total_loss = 0.0
     seed_count = 0
     for batch in loader:
         batch = batch.to(device)
-        logits = model(batch_features(batch), batch.edge_index, batch.edge_type)
+        logits = model(batch_features(batch, feature_schema), batch.edge_index, batch.edge_type)
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
         probabilities = seed_logits.softmax(dim=-1)
@@ -202,7 +218,8 @@ def main() -> None:
         )
         for name, definition in metadata["feature_schema"].items()
     }
-    model = RelationalGATClassifier(
+    model = build_model(
+        args.model,
         num_relations=metadata["num_relations"],
         num_classes=metadata["num_classes"],
         feature_specs=specs,
@@ -211,54 +228,98 @@ def main() -> None:
         heads=args.heads,
         dropout=args.dropout,
         attention_dropout=args.attention_dropout,
+        num_bases=args.num_bases,
     ).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer,
+        mode="min",
+        factor=args.lr_factor,
+        patience=args.lr_patience,
+    )
     class_weights = compute_class_weights(data, metadata["num_classes"], device) if args.class_weight else None
 
     train_loader = make_loader(data, data.train_mask, fanouts, args, shuffle=True)
     val_loader = make_loader(data, data.val_mask, fanouts, args, shuffle=False)
     test_loader = make_loader(data, data.test_mask, fanouts, args, shuffle=False)
-    best_state, best_val, stale_epochs = None, float("-inf"), 0
+    is_loss_monitor = args.early_stop_metric == "val_loss"
+    best_monitor = float("inf") if is_loss_monitor else float("-inf")
+    best_val_f1, best_state, stale_epochs = float("-inf"), None, 0
     history = []
-    print(f"Device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}")
+    feature_schema = metadata["feature_schema"]
+    print(f"Model: {args.model}; device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}")
 
     for epoch in range(1, args.epochs + 1):
-        train_loss = train_epoch(model, train_loader, optimizer, device, class_weights)
-        val_metrics, _ = evaluate(model, val_loader, device)
-        record = {"epoch": epoch, "train_loss": train_loss, **{f"val_{k}": v for k, v in val_metrics.items()}}
+        train_loss = train_epoch(model, train_loader, optimizer, device, feature_schema, class_weights)
+        val_metrics, _ = evaluate(model, val_loader, device, feature_schema)
+        scheduler.step(val_metrics["loss"])
+        monitor_value = val_metrics["loss"] if is_loss_monitor else val_metrics["macro_f1"]
+        record = {
+            "epoch": epoch,
+            "train_loss": train_loss,
+            "lr": optimizer.param_groups[0]["lr"],
+            "early_stop_metric": args.early_stop_metric,
+            "monitor_value": monitor_value,
+            **{f"val_{k}": v for k, v in val_metrics.items()},
+        }
         history.append(record)
         print(json.dumps(record, ensure_ascii=False))
-        if val_metrics["macro_f1"] > best_val:
-            best_val = val_metrics["macro_f1"]
+        best_val_f1 = max(best_val_f1, val_metrics["macro_f1"])
+        improved = (
+            monitor_value < best_monitor - args.min_delta
+            if is_loss_monitor
+            else monitor_value > best_monitor + args.min_delta
+        )
+        if improved:
+            best_monitor = monitor_value
             best_state = copy.deepcopy(model.state_dict())
             stale_epochs = 0
         else:
             stale_epochs += 1
             if stale_epochs >= args.patience:
-                print(f"Early stopping after {epoch} epochs.")
+                print(
+                    f"Early stopping after {epoch} epochs: "
+                    f"{args.early_stop_metric} did not improve by {args.min_delta} "
+                    f"for {args.patience} epochs."
+                )
                 break
 
     if best_state is None:
         raise RuntimeError("Training did not produce a model checkpoint")
     model.load_state_dict(best_state)
-    test_metrics, test_predictions = evaluate(model, test_loader, device)
+    test_metrics, test_predictions = evaluate(model, test_loader, device, feature_schema)
     checkpoint = {
         "state_dict": model.state_dict(),
         "metadata": metadata,
+        "model_name": args.model,
         "model_config": {
             "hidden_dim": args.hidden_dim,
             "branch_dim": args.branch_dim,
             "heads": args.heads,
             "dropout": args.dropout,
             "attention_dropout": args.attention_dropout,
+            "num_bases": args.num_bases,
         },
-        "best_val_macro_f1": best_val,
+        "selection_metric": args.early_stop_metric,
+        "best_selection_metric": best_monitor,
+        "best_val_macro_f1_seen": best_val_f1,
     }
     torch.save(checkpoint, output_dir / "best_model.pt")
     with (output_dir / "metrics.json").open("w", encoding="utf-8") as handle:
-        json.dump({"best_val_macro_f1": best_val, "test": test_metrics, "history": history}, handle, indent=2)
+        json.dump({
+            "selection_metric": args.early_stop_metric,
+            "best_selection_metric": best_monitor,
+            "best_val_macro_f1_seen": best_val_f1,
+            "test": test_metrics,
+            "history": history,
+        }, handle, indent=2)
     save_predictions(test_predictions, metadata, data_path, output_dir / "test_predictions.csv")
-    print(json.dumps({"best_val_macro_f1": best_val, "test": test_metrics}, ensure_ascii=False, indent=2))
+    print(json.dumps({
+        "selection_metric": args.early_stop_metric,
+        "best_selection_metric": best_monitor,
+        "best_val_macro_f1_seen": best_val_f1,
+        "test": test_metrics,
+    }, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

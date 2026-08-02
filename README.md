@@ -1,94 +1,137 @@
-# RGCN for Occupation Prediction
+# Wikidata Occupation Prediction
 
-This repository contains a Relational Graph Convolutional Network (RGCN) implementation for predicting occupations in knowledge graphs using multiple node features.
+基于人物知识图谱的职业分类实验。项目使用同一份已处理图数据，公平比较
+R-GCN、R-GAT，以及未来可加入的 CompGCN。
 
-## 🚀 Features
+## 唯一入口
 
-- **Multi-feature Support**: Combines occupation, work location, education background, gender, country and other features
-- **Modular Design**: Clean code structure, easy to maintain and extend
-- **GPU Optimization**: Automatic GPU detection and memory management
-- **Experiment Framework**: Systematic evaluation of different feature combinations
-
-## 📁 Project Structure
-
-```
-├── config.py          # Configuration file
-├── data_loader.py     # Data loading
-├── dataset.py         # Dataset class
-├── model.py           # RGCN model
-├── extended_data.py   # Q_R_Q_extended.csv preparation utilities
-├── RGAT_DESIGN.md     # relation-aware GAT experiment design
-├── trainer.py         # Training functions
-├── utils.py           # Utility functions
-├── main.py            # Main program
-├── test_modules.py    # Test script
-└── requirements.txt   # Dependencies
-```
-
-## 🛠️ Installation
+所有新实验只使用 `run.py`：
 
 ```bash
-git clone <repository-url>
-cd RGCN
-python3 -m venv .venv
+python run.py prepare [prepare options]
+python run.py train --model rgcn [training options]
+python run.py train --model rgat [training options]
+python run.py explain [explanation options]
+```
+
+旧根目录脚本仅为兼容保留；不要以 `main.py`、`train_rgat.py` 或旧
+`data_loader.py` 作为新实验入口。
+
+## 目录
+
+```text
+data/
+├── extended.py           # 原始扩展 CSV -> 人物表、关系表
+└── prepare.py            # 划分、特征、PyG graph_data.pt
+models/
+├── features.py           # 可扩展的类别/数值/向量属性编码与融合
+├── rgcn.py               # 当前 R-GCN baseline
+├── rgat.py               # 当前关系注意力模型
+└── __init__.py           # 模型注册表；未来注册 CompGCN 的唯一位置
+training/
+├── train.py              # 共享 NeighborLoader 训练、评估与早停
+└── explain.py            # R-GAT attention 候选边导出
+legacy/original_baseline/ # 原始不可复现实验代码，只供追溯
+run.py                    # 唯一命令入口
+```
+
+## 环境
+
+服务器上先安装与 NVIDIA 驱动兼容的 PyTorch CUDA wheel 和匹配的 PyG
+sampling wheels；随后安装项目其余依赖。具体组合见 PyG 官方 wheel 矩阵。
+
+```bash
 source .venv/bin/activate
-python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+python run.py --help
 ```
 
-On a CUDA server, install the PyTorch wheel matching the server's CUDA version
-from the official PyTorch instructions before installing the remaining entries
-in `requirements.txt`.
+## 1. 准备数据
 
-## 📊 Data Format
-
-- `Q_R_Q.txt`: Edge data `Q_node1 relation Q_node2`
-- `filtered_Q_attribute(60.8w).txt`: Node attributes (tab-separated)
-
-## 🎯 Usage
+原始 `Q_R_Q_extended.txt` 含人物—关系—人物边及端点属性。预处理会创建
+反向关系、稳定的节点级分层划分、Country 类别特征和出生/死亡时间特征。
+职业只作为监督标签，不会输入模型，因而第一版没有目标标签泄漏。
 
 ```bash
-# Run training
-python main.py
-
-# Test modules
-python test_modules.py
+python run.py prepare \
+  --input Q_R_Q_extended.txt \
+  --output-dir artifacts \
+  --target-level 3 \
+  --min-class-count 20 \
+  --seed 42
 ```
 
-The root `.venv` directory is intentionally ignored by Git. Recreate it on the
-server instead of uploading the local macOS environment.
+生成的核心文件是 `artifacts/graph_data.pt`；`nodes.csv` 用于将预测和解释
+映射回 Wikidata Q-ID。
 
-## ⚙️ Configuration
+## 2. 训练 R-GCN baseline
 
-Modify parameters in `config.py`:
-- `NUM_EPOCHS`: Number of training epochs
-- `BATCH_SIZE`: Batch size
-- `HIDDEN_DIM`: Hidden layer dimension
-- `LEARNING_RATE`: Learning rate
+R-GCN 和 R-GAT 使用完全相同的数据、邻居采样、优化器和早停规则，因此结果
+可直接比较。先运行它，得到真正的关系卷积基线。
 
-## 🧠 Model Architecture
+```bash
+python run.py train --model rgcn \
+  --data artifacts/graph_data.pt \
+  --output-dir runs/rgcn_level3 \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --num-bases 30 \
+  --num-workers 4 --device cuda
+```
 
-1. **Feature Embedding Layer**: Multi-feature embeddings
-2. **RGCN Layer**: Relational graph convolution
-3. **Classifier**: Occupation prediction
+## 3. 训练 R-GAT
 
-## Next-generation experiment
+```bash
+python run.py train --model rgat \
+  --data artifacts/graph_data.pt \
+  --output-dir runs/rgat_level3 \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --heads 4 \
+  --num-workers 4 --device cuda
+```
 
-The original `main.py` is a simple full-graph R-GCN baseline.  The new
-`RelationalGATClassifier` in `model.py` and `extended_data.py` prepare a
-relation-aware attention experiment over `Q_R_Q_extended.txt`.  It is designed
-for future categorical, numeric, and pre-computed vector attributes.  See
-[`RGAT_DESIGN.md`](RGAT_DESIGN.md) for the masking rule, reverse relations,
-neighbor sampling, and attention explanation protocol.
+训练默认以 `val_loss` 选 checkpoint：patience 为 6，最小有效改善为 0.002；
+验证 loss 连续 3 轮不改善时学习率减半。输出包括：
 
-## 📈 Results
+```text
+runs/<experiment>/best_model.pt
+runs/<experiment>/metrics.json
+runs/<experiment>/test_predictions.csv
+```
 
-Output metrics: Accuracy, Precision, Recall, F1-Score
+职业类别长尾时，可运行一个受控对照：在其余参数不变的前提下增加
+`--class-weight`，比较 Macro-F1、Weighted-F1 与 Accuracy。
 
-## 📦 Dependencies
+## 4. 导出 R-GAT 重要边候选
 
-- torch >= 1.9.0
-- torch-geometric >= 2.0.0
-- pandas >= 1.3.0
-- numpy >= 1.21.0
-- scikit-learn >= 1.0.0
+```bash
+python run.py explain \
+  --data artifacts/graph_data.pt \
+  --checkpoint runs/rgat_level3/best_model.pt \
+  --node-id Q1000023 \
+  --output-dir explanations \
+  --num-neighbors 15,10
+```
+
+输出包含该人物预测、特征融合 gate、两层 attention，以及指向该人物的 top
+attention 边。Attention 仅代表模型的注意力候选，不是因果重要性；后续应对
+top 边做删除实验，验证目标职业 logit 的下降。
+
+## 扩展 CompGCN
+
+在 `models/compgcn.py` 实现模型，接口保持：
+
+```python
+forward(features, edge_index, edge_type) -> logits
+```
+
+然后在 `models/__init__.py` 的 `MODEL_REGISTRY` 注册：
+
+```python
+"compgcn": RelationalCompGCNClassifier
+```
+
+之后无需改数据或训练代码，直接运行：
+
+```bash
+python run.py train --model compgcn ...
+```

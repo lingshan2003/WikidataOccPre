@@ -62,7 +62,7 @@ occupation from model inputs, so it is a leak-safe structural-and-attribute
 baseline.
 
 ```bash
-python prepare_data.py --input Q_R_Q_extended.txt --output-dir artifacts
+python run.py prepare --input Q_R_Q_extended.txt --output-dir artifacts
 ```
 
 ## Training command
@@ -70,13 +70,16 @@ python prepare_data.py --input Q_R_Q_extended.txt --output-dir artifacts
 After preparation, train a two-layer R-GAT with sampled two-hop neighborhoods:
 
 ```bash
-python train_rgat.py --data artifacts/graph_data.pt --output-dir runs/rgat_level3 \
+python run.py train --model rgat --data artifacts/graph_data.pt --output-dir runs/rgat_level3 \
   --num-neighbors 20,10 --batch-size 512 --epochs 50 --num-workers 4
 ```
 
-The training loop selects the checkpoint with the best validation macro-F1,
-then evaluates exactly once on the test nodes. It writes the checkpoint,
-per-epoch metrics, and test predictions to its run directory.
+The training loop defaults to validation-loss checkpoint selection and early
+stopping (patience 6, minimum loss improvement 0.002). It halves the learning
+rate after three bad validation-loss epochs, then evaluates exactly once on the
+test nodes. Pass `--early-stop-metric macro_f1` only when macro-F1 is the
+explicit selection objective; do not compare the resulting test score against a
+loss-selected run as if they used the same protocol.
 
 ## Attention export
 
@@ -85,7 +88,7 @@ writes all sampled edges, the top incoming edges for the queried person, and a
 prediction summary with feature-fusion gates:
 
 ```bash
-python explain_rgat.py --data artifacts/graph_data.pt \
+python run.py explain --data artifacts/graph_data.pt \
   --checkpoint runs/rgat_level3/best_model.pt --node-id Q1000023 \
   --output-dir explanations
 ```

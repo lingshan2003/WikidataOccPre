@@ -1,6 +1,7 @@
 .venv/
 artifacts/
 runs/
+explanations/
 __pycache__/
 *.py[cod]
 .pytest_cache/
