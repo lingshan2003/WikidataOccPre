@@ -65,6 +65,34 @@ baseline.
 python prepare_data.py --input Q_R_Q_extended.txt --output-dir artifacts
 ```
 
+## Training command
+
+After preparation, train a two-layer R-GAT with sampled two-hop neighborhoods:
+
+```bash
+python train_rgat.py --data artifacts/graph_data.pt --output-dir runs/rgat_level3 \
+  --num-neighbors 20,10 --batch-size 512 --epochs 50 --num-workers 4
+```
+
+The training loop selects the checkpoint with the best validation macro-F1,
+then evaluates exactly once on the test nodes. It writes the checkpoint,
+per-epoch metrics, and test predictions to its run directory.
+
+## Attention export
+
+Export R-GAT attention candidates for one person after training. The script
+writes all sampled edges, the top incoming edges for the queried person, and a
+prediction summary with feature-fusion gates:
+
+```bash
+python explain_rgat.py --data artifacts/graph_data.pt \
+  --checkpoint runs/rgat_level3/best_model.pt --node-id Q1000023 \
+  --output-dir explanations
+```
+
+Attention does not establish causal edge importance. Treat the top-edge CSV as
+the candidate set for a later deletion-faithfulness experiment.
+
 ## Sampling and explanation
 
 Use two-hop neighbor sampling, with loss calculated only on seed nodes. A
