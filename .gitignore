@@ -1,1 +1,6 @@
-/Q_R_Q_extended.txt
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Q_R_Q_extended.txt
