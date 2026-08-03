@@ -21,6 +21,16 @@ REQUIRED_COLUMNS = {
     "Node2_occ_level3", "Node1_Country", "Node2_Country",
 }
 
+# The export represents absent attributes with several literal strings rather
+# than CSV nulls.  They must be normalised before node canonicalisation:
+# otherwise an absent occupation can become both a supervised class and a
+# visible neighbour feature.
+MISSING_VALUE_TOKENS = frozenset({
+    "", "-", "missing", "unknown", "none", "null", "nan", "n/a", "na",
+    "not available", "not known", "not specified",
+})
+ATTRIBUTE_COLUMNS = tuple(REQUIRED_COLUMNS - {"Node1", "Relation", "Node2"})
+
 
 @dataclass
 class GraphTables:
@@ -38,6 +48,17 @@ def _first_present(values: pd.Series):
     return values.iloc[0] if not values.empty else np.nan
 
 
+def normalise_missing_attribute_values(values: pd.Series) -> pd.Series:
+    """Convert textual absence sentinels in an attribute column to ``pd.NA``.
+
+    Node IDs and relation names are deliberately excluded by the caller: a
+    string such as ``unknown`` is only treated as missing when it appears in
+    one of the endpoint attribute columns.
+    """
+    normalised_text = values.astype("string").str.strip().str.casefold()
+    return values.mask(normalised_text.isin(MISSING_VALUE_TOKENS), pd.NA)
+
+
 class ExtendedGraphLoader:
     """Read the current CSV export and create stable node and edge tables."""
 
@@ -51,6 +72,8 @@ class ExtendedGraphLoader:
             raise ValueError(f"Extended graph is missing columns: {sorted(missing)}")
 
         raw = raw.dropna(subset=["Node1", "Relation", "Node2"]).copy()
+        for column in ATTRIBUTE_COLUMNS:
+            raw[column] = normalise_missing_attribute_values(raw[column])
         node_one = self._endpoint_attributes(raw, "Node1")
         node_two = self._endpoint_attributes(raw, "Node2")
         candidates = pd.concat([node_one, node_two], ignore_index=True)

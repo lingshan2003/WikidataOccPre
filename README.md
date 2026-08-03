@@ -1,139 +1,190 @@
-# Wikidata Occupation Prediction
+# Wikidata 人物职业预测
 
-基于人物知识图谱的职业分类实验。项目使用同一份已处理图数据，公平比较
-R-GCN、R-GAT 和 CompGCN。
+这是一个基于 Wikidata 人物关系网络的应用型图学习项目。我们关心的问题是：
 
-## 唯一入口
+> 已知一个人与其他人的社会关系，以及部分相关人物已知的职业信息，能否预测该人物的职业？哪些关系对这种预测最有帮助？
 
-所有新实验只使用 `run.py`：
+项目首先将此问题建模为**多关系人物图上的节点职业分类**。现阶段关注的是职业和社会关系之间的预测关联，不将结果直接解释为因果关系或“职业继承”。
 
-```bash
-python run.py prepare [prepare options]
-python run.py train --model rgcn [training options]
-python run.py train --model rgat [training options]
-python run.py train --model compgcn [training options]
-python run.py explain [explanation options]
-python run.py link-prepare [link-preparation options]
-python run.py link-train [link-training options]
-```
+## 研究目标
 
-旧根目录脚本仅为兼容保留；不要以 `main.py`、`train_rgat.py` 或旧
-`data_loader.py` 作为新实验入口。
+1. **首要目标：提高职业预测性能。**
+   在职业 Level 1、Level 2、Level 3 三个粒度上预测人物职业，并报告 Accuracy、Macro-F1、Weighted-F1 等指标。
+2. **次要目标：识别有效社会关系。**
+   判断“关系类型”相较于仅有图结构是否带来预测价值，并进一步识别哪些关系类型、哪些具体边对预测更重要。
+3. **独立探索：职业 link prediction。**
+   在不改变主线节点分类任务的前提下，另建异构 `Person--Occupation` 图，尝试预测缺失的职业边。该分支仍在探索中。
 
-## 目录
+## 数据与图定义
+
+原始文件为 `Q_R_Q_extended.txt`。每一行是一条：
 
 ```text
-data/
-├── extended.py           # 原始扩展 CSV -> 人物表、关系表
-└── prepare.py            # 划分、特征、PyG graph_data.pt
-models/
-├── features.py           # 可扩展的类别/数值/向量属性编码与融合
-├── rgcn.py               # 当前 R-GCN baseline
-├── rgat.py               # 当前关系注意力模型
-├── compgcn.py             # 关系嵌入组合的 CompGCN
-└── __init__.py            # 模型注册表
-training/
-├── train.py              # 共享 NeighborLoader 训练、评估与早停
-└── explain.py            # R-GAT attention 候选边导出
-legacy/original_baseline/ # 原始不可复现实验代码，只供追溯
-link_prediction/          # 独立异构图职业 link-prediction 尝试
-run.py                    # 唯一命令入口
+Node1 (Person), Relation, Node2 (Person),
+Node1/Node2 的出生、死亡、国家、职业 Level 1/2/3 属性
 ```
 
-## 独立尝试：异构图职业 Link Prediction
+当前导出中所有图节点都是人物；因此主图是**同构的人物节点图**，但边带有多种关系类型，是一个多关系图。
 
-`link_prediction/` 不改变既有节点分类实验。它建立 `Person`、`Occupation`
-两种节点；全部 Person--Person 社会边保留，仅训练人物的
-`Person --has_occupation--> Occupation` 边作为消息传递图的一部分。验证和测试
-人物的职业边从图中移除，作为待预测链接。
+当前完整导出的典型规模为：
 
-```bash
-python run.py link-prepare --input Q_R_Q_extended.txt \
-  --output-dir link_artifacts/level3 --target-level 3 --min-class-count 20 --seed 42
-
-python run.py link-train --data link_artifacts/level3/hetero_graph.pt \
-  --output-dir link_runs/level3_hgt --epochs 50 --batch-size 512 \
-  --num-neighbors 15,10 --hidden-dim 128 --branch-dim 64 --heads 4 --device cuda
+```text
+人物节点：334,099
+原始人物—人物边：691,503
+加入反向边、去重后：1,383,006 条有向边
+关系类型：80（包含反向关系）
 ```
 
-第一版是 HGT encoder + DistMult decoder，报告 MRR、Hits@1、Hits@3、Hits@10。
-训练时会从采样消息图中移除当前监督的正职业边，避免通过目标边本身得到答案。
+预处理将边中心的原始 CSV 规范化为：
 
-## 环境
-
-服务器上先安装与 NVIDIA 驱动兼容的 PyTorch CUDA wheel 和匹配的 PyG
-sampling wheels；随后安装项目其余依赖。具体组合见 PyG 官方 wheel 矩阵。
-
-```bash
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python run.py --help
+```text
+Person 节点表 + 带 relation type 的 Person → Person 边表
 ```
 
-## 1. 准备数据
+每个原始关系均增加反向关系。例如 `parent_of` 会对应一个反向关系，使消息可以沿两个方向传播；图结构不会因职业标签的遮蔽而被删除。
 
-原始 `Q_R_Q_extended.txt` 含人物—关系—人物边及端点属性。预处理会创建
-反向关系、稳定的节点级分层划分、Country 类别特征和出生/死亡时间特征。
-职业是核心的 transductive 节点特征。预处理会分别建立 Level 1、2、3 三个
-职业 embedding：训练人物三层职业对邻居可见；验证/测试人物三层职业全局置为
-`unknown`；每次 forward 再将当前 seed 人物的三层职业同时置为 `unknown`。
-模型因此可使用已知亲友的完整职业层级，但永远看不到目标人物自身的任何职业层级。
+## 任务定义：层级职业节点分类
+
+职业标签分为三个层级：
+
+```text
+Level 1：粗粒度职业大类
+Level 2：中等粒度职业类别
+Level 3：细粒度职业类别
+```
+
+三个层级分别训练、分别评估。以 Level 3 为例：模型输出一个人物属于各个保留的 Level 3 职业类别的概率；默认 `min-class-count=20` 时，保留 682 个 Level 3 监督类别。低频职业和无标签人物仍保留为图中的邻居，只是不参与分类 loss 和评估。
+
+### 关键防泄漏协议
+
+职业既是预测目标，也是社会网络中极有价值的邻居信息。因此必须在“目标人物自身”与“其他已知人物”之间严格区分：
+
+```text
+训练人物：其 Level 1 / Level 2 / Level 3 职业可作为邻居节点特征
+验证人物：三层职业均为 unknown
+测试人物：三层职业均为 unknown
+当前 forward 的 seed 人物：三层职业同时临时 mask 为 unknown
+人物—人物关系边：始终保留
+```
+
+这意味着模型能够利用已知亲属、朋友或其他相关人物的完整职业层级，但永远不能读取被预测人物自己的 Level 1、Level 2 或 Level 3。
+
+若未来希望研究“已知目标人物 Level 1/2、预测其 Level 3”的任务，应将其单独定义为**条件式细粒度职业分类**；它不能与主任务混合报告，因为目标自身的上层职业会大幅缩小 Level 3 候选空间。
+
+## 当前节点特征
+
+主线节点分类模型当前输入：
+
+| 特征 | 类型 | 可见性 |
+| --- | --- | --- |
+| `occupation_level1` | 类别 embedding | 仅训练人物可见；seed 人物 mask |
+| `occupation_level2` | 类别 embedding | 仅训练人物可见；seed 人物 mask |
+| `occupation_level3` | 类别 embedding | 仅训练人物可见；seed 人物 mask |
+| `country` | 类别 embedding | 所有节点可见 |
+| `temporal` | 数值特征 | 出生年、死亡年、年龄及缺失标记；所有节点可见 |
+
+特征编码器为 schema-driven 设计：每种类别、数值或未来文本向量特征各自经过独立分支，随后由 feature gate 和融合 MLP 组成节点初始表示。未来加入文本 embedding、教育经历等属性时，无需改写各个 GNN 模型。
+
+## 数据预处理
+
+所有新实验从 `run.py` 进入。
 
 ```bash
 python run.py prepare \
   --input Q_R_Q_extended.txt \
-  --output-dir artifacts/level3 \
+  --output-dir artifacts/level3_hierarchy \
   --target-level 3 \
   --min-class-count 20 \
   --seed 42
 ```
 
-生成的核心文件是 `artifacts/graph_data.pt`；`nodes.csv` 用于将预测和解释
-映射回 Wikidata Q-ID。
+`--target-level` 改为 `1`、`2` 或 `3`，分别生成对应的监督任务。请为每一层使用独立输出目录，例如：
 
-旧版 `graph_data.pt` 不含三层职业特征，升级代码后必须重新执行 `prepare`，再重新
-训练所有模型。
-
-分别跑 Level 1/2/3 时，请使用不同的输出目录（如 `artifacts/level1`、
-`artifacts/level2`、`artifacts/level3`），并让所有待比较模型读取同一层级的
-同一份 artifact。
-
-训练默认输入邻居的 Level 1+2+3 职业。用 `--occupation-feature-levels 3`
-可运行仅使用邻居 Level 3 的对照；用 `none` 则完全不使用职业信息。无论选择
-哪些层级，当前 seed 人物的 L1/L2/L3 均不会作为输入。
-
-## 2. 训练 R-GCN baseline
-
-R-GCN 和 R-GAT 使用完全相同的数据、邻居采样、优化器和早停规则，因此结果
-可直接比较。先运行它，得到真正的关系卷积基线。
-
-```bash
-python run.py train --model rgcn \
-  --data artifacts/level3/graph_data.pt \
-  --output-dir runs/rgcn_level3 \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --num-bases 30 --rgcn-backend fast \
-  --occupation-feature-levels 1,2,3 \
-  --num-workers 4 --device cuda
+```text
+artifacts/level1_hierarchy/
+artifacts/level2_hierarchy/
+artifacts/level3_hierarchy/
 ```
 
-`fast` 使用 `FastRGCNConv`，速度快但显存更高；若发生 OOM，可改为
-`--rgcn-backend standard`，它较慢但更节省显存。
+预处理步骤如下：
 
-## 3. 训练 R-GAT
+1. 从每条边的两个端点属性构建唯一人物节点表，并导出属性冲突审计表；
+2. 保留所有人物和关系边，加入反向边并去重；
+3. 根据目标层级过滤可监督的职业类别；
+4. 以人物为单位、按职业分层划分 train / validation / test，默认比例为 70% / 10% / 20%；
+5. 按上述协议写入三层可遮蔽职业特征、Country 与时间特征；
+6. 保存可复现的 PyG artifact 与 CSV 审计文件。
+
+每个 artifact 的核心文件：
+
+```text
+graph_data.pt          # PyG 图、特征、掩码与 metadata
+nodes.csv              # 人物索引到 Wikidata Q-ID 的映射
+edges.csv              # 规范化后的关系边
+class_stats.csv        # 目标职业频数
+relation_stats.csv     # 关系频数
+split_summary.json     # 数据规模、划分和特征协议
+```
+
+> 同一层级内的模型比较必须读取同一份 `graph_data.pt`。目前每个层级按其目标标签独立分层划分；若要严格比较三个层级的同一批人物，需要额外固定共享的人物 split manifest。
+
+## 主训练管道
+
+训练采用两层 NeighborLoader 邻居采样。每个 batch 的前 `batch_size` 个节点是当前监督 seed，loss 只在这些 seed 人物上计算；其余采样节点提供邻居信息。
+
+```text
+输入：采样人物子图 + 关系类型 + 节点特征
+  ↓
+独立特征 embedding / 数值编码 → feature gate → 融合表示
+  ↓
+两层关系型消息传递
+  ↓
+职业分类器
+  ↓
+CrossEntropy（仅 seed 节点）
+```
+
+优化器为 AdamW；默认以 validation loss 选择 checkpoint 和早停，并使用梯度裁剪与 ReduceLROnPlateau。测试集仅在选择出最佳 checkpoint 后评估一次。
+
+### 可用模型
+
+| 模型 | 文件 | 用途 |
+| --- | --- | --- |
+| R-GCN | `models/rgcn.py` | 关系卷积基线；默认 FastRGCNConv 以速度换显存 |
+| R-GAT | `models/rgat.py` | 关系注意力模型；可导出 attention 候选边 |
+| CompGCN | `models/compgcn.py` | 组合邻居节点表示与 relation embedding 的关系模型 |
+
+三者共用相同数据、采样、优化器、特征编码和评估代码，因此可以进行公平的横向比较。
+
+### 训练示例
+
+默认输入邻居的完整 L1+L2+L3 职业层级：
 
 ```bash
 python run.py train --model rgat \
-  --data artifacts/level3/graph_data.pt \
-  --output-dir runs/rgat_level3 \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgat_hierarchy \
   --epochs 50 --batch-size 512 --num-neighbors 15,10 \
   --hidden-dim 128 --branch-dim 64 --heads 4 \
   --occupation-feature-levels 1,2,3 \
-  --num-workers 4 --device cuda
+  --num-workers 4 --patience 6 --seed 42 --device cuda
 ```
 
-训练默认以 `val_loss` 选 checkpoint：patience 为 6，最小有效改善为 0.002；
-验证 loss 连续 3 轮不改善时学习率减半。输出包括：
+只使用邻居 Level 3 的受控对照：
+
+```bash
+python run.py train --model rgat \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgat_neighbor_l3_only \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --heads 4 \
+  --occupation-feature-levels 3 \
+  --num-workers 4 --patience 6 --seed 42 --device cuda
+```
+
+`--occupation-feature-levels none` 可运行不使用职业邻居信息的结构与普通属性基线。R-GCN 使用 `--model rgcn --rgcn-backend fast`；CompGCN 使用 `--model compgcn --compgcn-composition mult`。
+
+训练输出：
 
 ```text
 runs/<experiment>/best_model.pt
@@ -141,39 +192,87 @@ runs/<experiment>/metrics.json
 runs/<experiment>/test_predictions.csv
 ```
 
-职业类别长尾时，可运行一个受控对照：在其余参数不变的前提下增加
-`--class-weight`，比较 Macro-F1、Weighted-F1 与 Accuracy。
+## 关系重要性与解释
 
-## 4. 导出 R-GAT 重要边候选
+项目的次要目标不是只导出一张 attention 表，而是评估关系的真实预测贡献。
+
+R-GAT 可先导出每个查询人物的 attention 候选边：
 
 ```bash
 python run.py explain \
-  --data artifacts/level3/graph_data.pt \
-  --checkpoint runs/rgat_level3/best_model.pt \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --checkpoint runs/level3_rgat_hierarchy/best_model.pt \
   --node-id Q1000023 \
   --output-dir explanations \
   --num-neighbors 15,10
 ```
 
-输出包含该人物预测、特征融合 gate、两层 attention，以及指向该人物的 top
-attention 边。Attention 仅代表模型的注意力候选，不是因果重要性；后续应对
-top 边做删除实验，验证目标职业 logit 的下降。
+attention alpha 只是模型机制的候选信号，并不等于社会科学意义上的影响。后续应优先做：
 
-## 5. 训练 CompGCN
+1. 关系类型消融：遮蔽一类关系后观察验证/测试性能下降；
+2. 关系类型置乱：保留图结构、打乱 relation type，检验关系语义是否有效；
+3. 个体边删除：移除高 attention 边后观察目标职业概率或 logit 是否下降；
+4. 按亲属、朋友、其他关系组分别报告贡献。
 
-CompGCN 保持“人物节点的职业分类”任务不变，但为每一种人物关系学习一个
-relation embedding；消息由邻居人物表示与关系表示组合而成。因此它可用于检验
-关系语义本身是否带来额外预测价值。它与 R-GCN/R-GAT 使用相同数据、划分、
-采样、优化器和默认早停规则，适合横向比较。
+这些分析支持“预测关联和潜在关系贡献”的表述；若要主张因果影响，还需关系语义清洗、时间顺序和额外识别策略。
 
-```bash
-python run.py train --model compgcn \
-  --data artifacts/level3/graph_data.pt \
-  --output-dir runs/compgcn_level3 \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --compgcn-composition mult \
-  --num-workers 4 --device cuda
+## 独立探索：异构图 Link Prediction
+
+`link_prediction/` 是不影响主线节点分类的一条独立尝试。它将职业显式建成节点：
+
+```text
+Person --各种社会关系--> Person
+Person --has_occupation--> Occupation
 ```
 
-`mult` 是默认的逐元素组合；`sub` 是一个受控结构消融。请先只跑 `mult`，
-其余超参数与已完成的 R-GCN/R-GAT 实验保持完全一致。
+训练人物的 `has_occupation` 边进入消息图；验证/测试人物的职业边被移除并作为待预测链接。第一版使用 HGT encoder + DistMult decoder，并报告 MRR、Hits@1、Hits@3、Hits@10。
+
+```bash
+python run.py link-prepare --input Q_R_Q_extended.txt \
+  --output-dir link_artifacts/level3 --target-level 3 --min-class-count 20 --seed 42
+
+python run.py link-train --data link_artifacts/level3/hetero_graph.pt \
+  --output-dir link_runs/level3_hgt --epochs 50 --batch-size 256 \
+  --num-neighbors 15,10 --hidden-dim 128 --branch-dim 64 --heads 4 --device cuda
+```
+
+该分支的评估目标与节点分类不同，不能将 BCE loss、MRR 或 Hits@k 直接与节点分类 CrossEntropy、Accuracy 混为同一指标。
+
+## 项目结构
+
+```text
+run.py                    # 唯一命令入口
+cli.py                    # prepare/train/explain/link 子命令路由
+data/
+├── extended.py           # 原始扩展 CSV → 规范节点表与关系边表
+└── prepare.py            # 节点分类 artifact、分割和层级职业掩码
+models/
+├── features.py           # 可扩展类别/数值/向量特征编码与融合
+├── rgcn.py               # R-GCN
+├── rgat.py               # R-GAT
+├── compgcn.py            # CompGCN
+└── __init__.py           # 模型注册表
+training/
+├── train.py              # 共享 NeighborLoader 训练、评估、早停
+└── explain.py            # R-GAT attention 候选边导出
+link_prediction/          # 独立异构职业 link-prediction 管道
+legacy/original_baseline/ # 师姐留下的原始 R-GCN 代码，仅供追溯
+RGAT_DESIGN.md            # R-GAT 与掩码协议的补充说明
+```
+
+## Legacy 代码
+
+`legacy/original_baseline/` 保存交接时的节点分类实现，包括原始数据读取、全图 R-GCN 和早期特征消融。它不再是新实验入口，原因包括：全图计算成本高、测试集被用于选择 checkpoint、处理和训练逻辑耦合等。
+
+新实验统一使用：
+
+```bash
+python run.py prepare ...
+python run.py train --model rgcn|rgat|compgcn ...
+python run.py explain ...
+python run.py link-prepare ...
+python run.py link-train ...
+```
+
+
+ssh -p 24191 root@connect.nmb1.seetacloud.com
