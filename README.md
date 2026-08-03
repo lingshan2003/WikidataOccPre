@@ -128,6 +128,29 @@ split_summary.json     # 数据规模、划分和特征协议
 
 > 同一层级内的模型比较必须读取同一份 `graph_data.pt`。目前每个层级按其目标标签独立分层划分；若要严格比较三个层级的同一批人物，需要额外固定共享的人物 split manifest。
 
+### 固定职业语义向量（可选实验）
+
+`occupation-embed` 不重新准备图、不改变 split；它只为训练人物可见的
+`(Level 1, Level 2, Level 3)` 职业组合生成固定的多语言语义向量。验证、测试
+以及当前 seed 人物一律使用单独可学习的 `unknown` 表示，因此不会读取目标自身的
+职业文本。
+
+先安装额外依赖并从同一个 categorical artifact 生成语义副本：
+
+```bash
+python -m pip install -r requirements.txt
+
+python run.py occupation-embed \
+  --data artifacts/pure_rel_occ/level3/graph_data.pt \
+  --output artifacts/pure_rel_occ/level3/graph_data_semantic.pt \
+  --model-name intfloat/multilingual-e5-base --device cuda
+```
+
+编码器使用固定模板：`passage: A person's occupation hierarchy is Level 1: ...`
+，并保存 prompt manifest、模型 revision 与 L2-normalised 向量表。训练语义版本时，
+使用 `--occupation-representation semantic`；它与随机职业 embedding 对照时不应
+同时读取 `occupation_level1/2/3`。
+
 ## 主训练管道
 
 训练采用两层 NeighborLoader 邻居采样。每个 batch 的前 `batch_size` 个节点是当前监督 seed，loss 只在这些 seed 人物上计算；其余采样节点提供邻居信息。
@@ -183,6 +206,34 @@ python run.py train --model rgat \
 ```
 
 `--occupation-feature-levels none` 可运行不使用职业邻居信息的结构与普通属性基线。R-GCN 使用 `--model rgcn --rgcn-backend fast`；CompGCN 使用 `--model compgcn --compgcn-composition mult`。
+
+纯关系职业语义的 Level 3 验证实验示例：
+
+```bash
+# 先重跑 categorical 对照；不跑 test，只以 validation Macro-F1 选 checkpoint。
+python run.py train --model rgcn \
+  --data artifacts/pure_rel_occ/level3/graph_data.pt \
+  --output-dir runs/pure_rel_occ/level3_rgcn_categorical_reselected \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --occupation-representation categorical --occupation-feature-levels 1,2,3 \
+  --auxiliary-features none --eval-mode sampled --early-stop-metric macro_f1 \
+  --min-delta 0.001 --patience 6 --num-workers 4 --seed 42 --device cuda --skip-test
+
+# 再跑唯一改变职业输入表示的 semantic 对照。
+python run.py train --model rgcn \
+  --data artifacts/pure_rel_occ/level3/graph_data_semantic.pt \
+  --output-dir runs/pure_rel_occ/level3_rgcn_semantic \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --occupation-representation semantic --auxiliary-features none \
+  --eval-mode sampled --early-stop-metric macro_f1 --min-delta 0.001 \
+  --patience 6 --num-workers 4 --seed 42 --device cuda --skip-test
+```
+
+`--skip-test` 仅保存 validation 最优 checkpoint，不写测试指标；锁定配置后移除它，
+对该设置执行一次最终测试。checkpoint 始终保存实际最优 validation 监控值，
+`--min-delta` 只影响早停 patience。
 
 训练输出：
 

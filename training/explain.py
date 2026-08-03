@@ -16,7 +16,7 @@ import pandas as pd
 import torch
 from torch_geometric.loader import NeighborLoader
 
-from models import FeatureSpec, build_model
+from models import build_feature_specs, build_model
 
 
 def parse_args() -> argparse.Namespace:
@@ -56,14 +56,7 @@ def load_node_ids(data_path: Path) -> List[str]:
 def restore_model(checkpoint: Dict, device: torch.device):
     metadata = checkpoint["metadata"]
     feature_schema = checkpoint.get("model_feature_schema", metadata["feature_schema"])
-    specs = {
-        name: FeatureSpec(
-            kind=definition["kind"],
-            cardinality=definition.get("cardinality"),
-            input_dim=definition.get("input_dim", 1),
-        )
-        for name, definition in feature_schema.items()
-    }
+    specs = build_feature_specs(feature_schema, metadata)
     model_name = checkpoint.get("model_name", "rgat")
     if model_name != "rgat":
         raise ValueError("Attention export is available for RGAT only; RGCN has no alpha coefficients")

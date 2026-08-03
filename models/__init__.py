@@ -3,7 +3,7 @@
 from typing import Mapping
 
 from .compgcn import RelationalCompGCNClassifier
-from .features import FeatureSpec
+from .features import FeatureSpec, build_feature_specs
 from .rgat import RelationalGATClassifier
 from .rgcn import RelationalGCNClassifier
 
@@ -24,6 +24,7 @@ def build_model(name: str, **kwargs):
 
 __all__ = [
     "FeatureSpec",
+    "build_feature_specs",
     "RelationalGATClassifier",
     "RelationalGCNClassifier",
     "RelationalCompGCNClassifier",

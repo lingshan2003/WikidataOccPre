@@ -15,7 +15,7 @@ import torch.nn.functional as F
 from sklearn.metrics import accuracy_score, f1_score, precision_recall_fscore_support
 from torch_geometric.loader import NeighborLoader
 
-from models import FeatureSpec, build_model
+from models import build_feature_specs, build_model
 
 
 def parse_args() -> argparse.Namespace:
@@ -71,6 +71,12 @@ def parse_args() -> argparse.Namespace:
         help="Comma-separated neighbour occupation levels to expose (1,2,3 or none)",
     )
     parser.add_argument(
+        "--occupation-representation",
+        choices=["categorical", "semantic"],
+        default="categorical",
+        help="Use trainable categorical occupations or fixed semantic occupation vectors",
+    )
+    parser.add_argument(
         "--auxiliary-features",
         default="country,temporal",
         help="Comma-separated non-occupation features to expose (country,temporal or none)",
@@ -80,6 +86,11 @@ def parse_args() -> argparse.Namespace:
         choices=["sampled", "full"],
         default="sampled",
         help="Use sampled neighbourhoods or deterministic full-graph inference for validation/test",
+    )
+    parser.add_argument(
+        "--skip-test",
+        action="store_true",
+        help="Save the validation-selected checkpoint without evaluating the test split",
     )
     return parser.parse_args()
 
@@ -166,14 +177,22 @@ def batch_features(batch, feature_schema: Dict, occupation_unknown_ids: Dict[str
 
 
 def select_feature_schema(
-    metadata: Dict, occupation_levels: Tuple[int, ...], auxiliary_features: Tuple[str, ...]
+    metadata: Dict,
+    occupation_levels: Tuple[int, ...],
+    auxiliary_features: Tuple[str, ...],
+    occupation_representation: str,
 ) -> Dict:
     """Keep exactly the requested observed occupations and ordinary attributes."""
     selected = {}
     for name, definition in metadata["feature_schema"].items():
         if name.startswith("occupation_level"):
+            if occupation_representation != "categorical":
+                continue
             level = int(name.removeprefix("occupation_level"))
             if level not in occupation_levels:
+                continue
+        elif name == "occupation_semantic":
+            if occupation_representation != "semantic":
                 continue
         elif name not in auxiliary_features:
             continue
@@ -181,6 +200,37 @@ def select_feature_schema(
     if not selected:
         raise ValueError("At least one feature must be selected")
     return selected
+
+
+def select_unknown_feature_ids(
+    metadata: Dict, occupation_levels: Tuple[int, ...], occupation_representation: str
+) -> Dict[str, int]:
+    if occupation_representation == "categorical":
+        return {
+            f"occupation_level{level}": int(metadata["occupation_unknown_ids"][f"occupation_level{level}"])
+            for level in occupation_levels
+        }
+    try:
+        return {"occupation_semantic": int(metadata["occupation_unknown_ids"]["occupation_semantic"])}
+    except KeyError as error:
+        raise ValueError(
+            "This artifact has no fixed semantic occupations; run `python run.py occupation-embed` first"
+        ) from error
+
+
+def semantic_provenance(metadata: Dict, occupation_representation: str) -> Dict:
+    """Small, explicit record for metrics/checkpoints of a semantic run."""
+    if occupation_representation != "semantic":
+        return {}
+    details = metadata.get("semantic_features", {}).get("occupation_semantic")
+    if not details:
+        raise ValueError("This semantic artifact is missing occupation semantic metadata")
+    return {
+        "semantic_model_name": details.get("model_name"),
+        "semantic_model_revision": details.get("resolved_revision"),
+        "semantic_prompt_fingerprint": details.get("prompt_fingerprint"),
+        "semantic_source_artifact": details.get("source_artifact"),
+    }
 
 
 def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unknown_ids, class_weights=None) -> float:
@@ -339,21 +389,19 @@ def main() -> None:
         raise ValueError(
             "Prepared graph predates hierarchical occupation masking; rerun `python run.py prepare` first"
         )
-
-    feature_schema = select_feature_schema(metadata, occupation_levels, auxiliary_features)
-    occupation_unknown_ids = {
-        f"occupation_level{level}": int(metadata["occupation_unknown_ids"][f"occupation_level{level}"])
-        for level in occupation_levels
-    }
-
-    specs = {
-        name: FeatureSpec(
-            kind=definition["kind"],
-            cardinality=definition.get("cardinality"),
-            input_dim=definition.get("input_dim", 1),
+    if args.occupation_representation == "semantic" and not hasattr(data, "occupation_semantic"):
+        raise ValueError(
+            "This artifact has no semantic occupation IDs; run `python run.py occupation-embed` first"
         )
-        for name, definition in feature_schema.items()
-    }
+
+    feature_schema = select_feature_schema(
+        metadata, occupation_levels, auxiliary_features, args.occupation_representation
+    )
+    occupation_unknown_ids = select_unknown_feature_ids(
+        metadata, occupation_levels, args.occupation_representation
+    )
+    representation_provenance = semantic_provenance(metadata, args.occupation_representation)
+    specs = build_feature_specs(feature_schema, metadata)
     model = build_model(
         args.model,
         num_relations=metadata["num_relations"],
@@ -383,6 +431,7 @@ def main() -> None:
     full_evaluation_data = copy.deepcopy(data).to(device) if args.eval_mode == "full" else None
     is_loss_monitor = args.early_stop_metric == "val_loss"
     best_monitor = float("inf") if is_loss_monitor else float("-inf")
+    best_patience_monitor = float("inf") if is_loss_monitor else float("-inf")
     best_val_f1, best_state, stale_epochs = float("-inf"), None, 0
     history = []
     if args.model == "rgcn":
@@ -391,10 +440,14 @@ def main() -> None:
         backend_info = f"; compgcn_composition: {args.compgcn_composition}"
     else:
         backend_info = ""
-    level_info = "+".join(str(level) for level in occupation_levels) if occupation_levels else "none"
+    level_info = (
+        "+".join(str(level) for level in occupation_levels)
+        if args.occupation_representation == "categorical" and occupation_levels
+        else args.occupation_representation
+    )
     auxiliary_info = "+".join(auxiliary_features) if auxiliary_features else "none"
     print(
-        f"Model: {args.model}{backend_info}; neighbour occupation levels: {level_info}; "
+        f"Model: {args.model}{backend_info}; occupation representation: {level_info}; "
         f"auxiliary features: {auxiliary_info}; eval mode: {args.eval_mode}; device: {device}; "
         f"train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}"
     )
@@ -422,14 +475,22 @@ def main() -> None:
         history.append(record)
         print(json.dumps(record, ensure_ascii=False))
         best_val_f1 = max(best_val_f1, val_metrics["macro_f1"])
-        improved = (
-            monitor_value < best_monitor - args.min_delta
+        checkpoint_improved = (
+            monitor_value < best_monitor
             if is_loss_monitor
-            else monitor_value > best_monitor + args.min_delta
+            else monitor_value > best_monitor
         )
-        if improved:
+        if checkpoint_improved:
             best_monitor = monitor_value
             best_state = copy.deepcopy(model.state_dict())
+
+        patience_improved = (
+            monitor_value < best_patience_monitor - args.min_delta
+            if is_loss_monitor
+            else monitor_value > best_patience_monitor + args.min_delta
+        )
+        if patience_improved:
+            best_patience_monitor = monitor_value
             stale_epochs = 0
         else:
             stale_epochs += 1
@@ -444,10 +505,10 @@ def main() -> None:
     if best_state is None:
         raise RuntimeError("Training did not produce a model checkpoint")
     model.load_state_dict(best_state)
-    if full_evaluation_data is None:
-        test_metrics, test_predictions = evaluate(
-            model, test_loader, device, feature_schema, occupation_unknown_ids
-        )
+    if args.skip_test:
+        test_metrics, test_predictions = None, None
+    elif full_evaluation_data is None:
+        test_metrics, test_predictions = evaluate(model, test_loader, device, feature_schema, occupation_unknown_ids)
     else:
         test_metrics, test_predictions = evaluate_full_graph(
             model, full_evaluation_data, full_evaluation_data.test_mask, feature_schema
@@ -467,6 +528,8 @@ def main() -> None:
             "rgcn_backend": args.rgcn_backend,
             "compgcn_composition": args.compgcn_composition,
             "occupation_feature_levels": list(occupation_levels),
+            "occupation_representation": args.occupation_representation,
+            **representation_provenance,
             "auxiliary_features": list(auxiliary_features),
             "eval_mode": args.eval_mode,
         },
@@ -478,6 +541,8 @@ def main() -> None:
     with (output_dir / "metrics.json").open("w", encoding="utf-8") as handle:
         json.dump({
             "run_config": vars(args),
+            "occupation_representation": args.occupation_representation,
+            "representation_provenance": representation_provenance,
             "model_feature_schema": feature_schema,
             "selection_metric": args.early_stop_metric,
             "best_selection_metric": best_monitor,
@@ -485,7 +550,8 @@ def main() -> None:
             "test": test_metrics,
             "history": history,
         }, handle, indent=2)
-    save_predictions(test_predictions, metadata, data_path, output_dir / "test_predictions.csv")
+    if test_predictions is not None:
+        save_predictions(test_predictions, metadata, data_path, output_dir / "test_predictions.csv")
     print(json.dumps({
         "selection_metric": args.early_stop_metric,
         "best_selection_metric": best_monitor,
