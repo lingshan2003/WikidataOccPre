@@ -65,6 +65,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", default="auto", help="auto, cuda, cuda:0, or cpu")
     parser.add_argument("--class-weight", action="store_true", help="Use inverse-frequency loss weights")
+    parser.add_argument(
+        "--occupation-feature-levels",
+        default="1,2,3",
+        help="Comma-separated neighbour occupation levels to expose (1,2,3 or none)",
+    )
     return parser.parse_args()
 
 
@@ -76,6 +81,18 @@ def parse_fanouts(value: str) -> List[int]:
     if not fanouts or any(item < -1 for item in fanouts):
         raise ValueError("Each fan-out must be -1 or a non-negative integer")
     return fanouts
+
+
+def parse_occupation_levels(value: str) -> Tuple[int, ...]:
+    if value.strip().lower() == "none":
+        return ()
+    try:
+        levels = tuple(sorted({int(item.strip()) for item in value.split(",")}))
+    except ValueError as error:
+        raise ValueError("occupation-feature-levels must look like '1,2,3', '3', or 'none'") from error
+    if not levels or any(level not in {1, 2, 3} for level in levels):
+        raise ValueError("occupation-feature-levels may contain only 1, 2, and 3")
+    return levels
 
 
 def set_seed(seed: int) -> None:
@@ -108,24 +125,39 @@ def make_loader(data, mask: torch.Tensor, fanouts: Sequence[int], args: argparse
     )
 
 
-def batch_features(batch, feature_schema: Dict, occupation_unknown_id: int) -> Dict[str, torch.Tensor]:
-    """Hide occupations of the seed people currently being predicted.
+def batch_features(batch, feature_schema: Dict, occupation_unknown_ids: Dict[str, int]) -> Dict[str, torch.Tensor]:
+    """Hide all selected occupation levels of seed people currently predicted.
 
     The prepared graph exposes known occupations for training people only.
     NeighborLoader places this forward pass's seed people in the first
     ``batch.batch_size`` rows, so cloning and masking those rows prevents a
-    target from seeing its own label while retaining its neighbours' labels.
+    target from seeing its own hierarchical occupation while retaining its
+    neighbours' observed hierarchical occupations.
     """
     features = {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
-    if "occupation" not in features:
-        raise ValueError("Prepared graph is missing the required transductive 'occupation' feature")
-    occupation = features["occupation"].clone()
-    occupation[:batch.batch_size] = occupation_unknown_id
-    features["occupation"] = occupation
+    selected_occupation_features = [name for name in occupation_unknown_ids if name in features]
+    for name in selected_occupation_features:
+        occupation = features[name].clone()
+        occupation[:batch.batch_size] = occupation_unknown_ids[name]
+        features[name] = occupation
     return features
 
 
-def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unknown_id, class_weights=None) -> float:
+def select_feature_schema(metadata: Dict, occupation_levels: Tuple[int, ...]) -> Dict:
+    """Keep ordinary attributes plus the requested observed-neighbour levels."""
+    selected = {}
+    for name, definition in metadata["feature_schema"].items():
+        if name.startswith("occupation_level"):
+            level = int(name.removeprefix("occupation_level"))
+            if level not in occupation_levels:
+                continue
+        selected[name] = definition
+    if not selected:
+        raise ValueError("At least one feature must be selected")
+    return selected
+
+
+def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unknown_ids, class_weights=None) -> float:
     model.train()
     total_loss = 0.0
     seed_count = 0
@@ -133,7 +165,7 @@ def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unk
         batch = batch.to(device)
         optimizer.zero_grad(set_to_none=True)
         logits = model(
-            batch_features(batch, feature_schema, occupation_unknown_id), batch.edge_index, batch.edge_type
+            batch_features(batch, feature_schema, occupation_unknown_ids), batch.edge_index, batch.edge_type
         )
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
@@ -147,7 +179,7 @@ def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unk
 
 
 @torch.no_grad()
-def evaluate(model, loader, device, feature_schema, occupation_unknown_id) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
+def evaluate(model, loader, device, feature_schema, occupation_unknown_ids) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
     model.eval()
     all_labels, all_predictions, all_confidences, all_node_ids = [], [], [], []
     total_loss = 0.0
@@ -155,7 +187,7 @@ def evaluate(model, loader, device, feature_schema, occupation_unknown_id) -> Tu
     for batch in loader:
         batch = batch.to(device)
         logits = model(
-            batch_features(batch, feature_schema, occupation_unknown_id), batch.edge_index, batch.edge_type
+            batch_features(batch, feature_schema, occupation_unknown_ids), batch.edge_index, batch.edge_type
         )
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
@@ -226,6 +258,7 @@ def save_predictions(predictions: Dict[str, np.ndarray], metadata: Dict, data_pa
 def main() -> None:
     args = parse_args()
     fanouts = parse_fanouts(args.num_neighbors)
+    occupation_levels = parse_occupation_levels(args.occupation_feature_levels)
     set_seed(args.seed)
     device = resolve_device(args.device)
     data_path = Path(args.data)
@@ -236,9 +269,20 @@ def main() -> None:
     data, metadata = bundle["data"], bundle["metadata"]
     if len(fanouts) != 2:
         raise ValueError("The current RelationalGATClassifier has two layers; use exactly two fan-outs")
-    required_attributes = ("occupation", "country", "temporal", "edge_type", "train_mask", "val_mask", "test_mask")
-    if not all(hasattr(data, key) for key in required_attributes) or "occupation_unknown_id" not in metadata:
-        raise ValueError("Prepared graph does not have the required features and masks")
+    required_attributes = (
+        "occupation_level1", "occupation_level2", "occupation_level3", "country", "temporal",
+        "edge_type", "train_mask", "val_mask", "test_mask",
+    )
+    if not all(hasattr(data, key) for key in required_attributes) or "occupation_unknown_ids" not in metadata:
+        raise ValueError(
+            "Prepared graph predates hierarchical occupation masking; rerun `python run.py prepare` first"
+        )
+
+    feature_schema = select_feature_schema(metadata, occupation_levels)
+    occupation_unknown_ids = {
+        f"occupation_level{level}": int(metadata["occupation_unknown_ids"][f"occupation_level{level}"])
+        for level in occupation_levels
+    }
 
     specs = {
         name: FeatureSpec(
@@ -246,7 +290,7 @@ def main() -> None:
             cardinality=definition.get("cardinality"),
             input_dim=definition.get("input_dim", 1),
         )
-        for name, definition in metadata["feature_schema"].items()
+        for name, definition in feature_schema.items()
     }
     model = build_model(
         args.model,
@@ -278,21 +322,23 @@ def main() -> None:
     best_monitor = float("inf") if is_loss_monitor else float("-inf")
     best_val_f1, best_state, stale_epochs = float("-inf"), None, 0
     history = []
-    feature_schema = metadata["feature_schema"]
-    occupation_unknown_id = int(metadata["occupation_unknown_id"])
     if args.model == "rgcn":
         backend_info = f"; rgcn_backend: {args.rgcn_backend}"
     elif args.model == "compgcn":
         backend_info = f"; compgcn_composition: {args.compgcn_composition}"
     else:
         backend_info = ""
-    print(f"Model: {args.model}{backend_info}; device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}")
+    level_info = "+".join(str(level) for level in occupation_levels) if occupation_levels else "none"
+    print(
+        f"Model: {args.model}{backend_info}; neighbour occupation levels: {level_info}; "
+        f"device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}"
+    )
 
     for epoch in range(1, args.epochs + 1):
         train_loss = train_epoch(
-            model, train_loader, optimizer, device, feature_schema, occupation_unknown_id, class_weights
+            model, train_loader, optimizer, device, feature_schema, occupation_unknown_ids, class_weights
         )
-        val_metrics, _ = evaluate(model, val_loader, device, feature_schema, occupation_unknown_id)
+        val_metrics, _ = evaluate(model, val_loader, device, feature_schema, occupation_unknown_ids)
         scheduler.step(val_metrics["loss"])
         monitor_value = val_metrics["loss"] if is_loss_monitor else val_metrics["macro_f1"]
         record = {
@@ -329,11 +375,12 @@ def main() -> None:
         raise RuntimeError("Training did not produce a model checkpoint")
     model.load_state_dict(best_state)
     test_metrics, test_predictions = evaluate(
-        model, test_loader, device, feature_schema, occupation_unknown_id
+        model, test_loader, device, feature_schema, occupation_unknown_ids
     )
     checkpoint = {
         "state_dict": model.state_dict(),
         "metadata": metadata,
+        "model_feature_schema": feature_schema,
         "model_name": args.model,
         "model_config": {
             "hidden_dim": args.hidden_dim,
@@ -344,6 +391,7 @@ def main() -> None:
             "num_bases": args.num_bases,
             "rgcn_backend": args.rgcn_backend,
             "compgcn_composition": args.compgcn_composition,
+            "occupation_feature_levels": list(occupation_levels),
         },
         "selection_metric": args.early_stop_metric,
         "best_selection_metric": best_monitor,

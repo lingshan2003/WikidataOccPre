@@ -74,9 +74,10 @@ python run.py --help
 
 原始 `Q_R_Q_extended.txt` 含人物—关系—人物边及端点属性。预处理会创建
 反向关系、稳定的节点级分层划分、Country 类别特征和出生/死亡时间特征。
-职业是核心的 transductive 节点特征：训练人物职业对邻居可见，验证/测试人物
-职业全局置为 `unknown`；每次 forward 再将当前 seed 人物职业置为 `unknown`。
-模型因此能使用已知亲友职业，但永远看不到目标人物自身答案。
+职业是核心的 transductive 节点特征。预处理会分别建立 Level 1、2、3 三个
+职业 embedding：训练人物三层职业对邻居可见；验证/测试人物三层职业全局置为
+`unknown`；每次 forward 再将当前 seed 人物的三层职业同时置为 `unknown`。
+模型因此可使用已知亲友的完整职业层级，但永远看不到目标人物自身的任何职业层级。
 
 ```bash
 python run.py prepare \
@@ -90,12 +91,16 @@ python run.py prepare \
 生成的核心文件是 `artifacts/graph_data.pt`；`nodes.csv` 用于将预测和解释
 映射回 Wikidata Q-ID。
 
-旧版 `graph_data.pt` 不含职业特征，升级代码后必须重新执行 `prepare`，再重新
+旧版 `graph_data.pt` 不含三层职业特征，升级代码后必须重新执行 `prepare`，再重新
 训练所有模型。
 
 分别跑 Level 1/2/3 时，请使用不同的输出目录（如 `artifacts/level1`、
 `artifacts/level2`、`artifacts/level3`），并让所有待比较模型读取同一层级的
 同一份 artifact。
+
+训练默认输入邻居的 Level 1+2+3 职业。用 `--occupation-feature-levels 3`
+可运行仅使用邻居 Level 3 的对照；用 `none` 则完全不使用职业信息。无论选择
+哪些层级，当前 seed 人物的 L1/L2/L3 均不会作为输入。
 
 ## 2. 训练 R-GCN baseline
 
@@ -108,6 +113,7 @@ python run.py train --model rgcn \
   --output-dir runs/rgcn_level3 \
   --epochs 50 --batch-size 512 --num-neighbors 15,10 \
   --hidden-dim 128 --branch-dim 64 --num-bases 30 --rgcn-backend fast \
+  --occupation-feature-levels 1,2,3 \
   --num-workers 4 --device cuda
 ```
 
@@ -122,6 +128,7 @@ python run.py train --model rgat \
   --output-dir runs/rgat_level3 \
   --epochs 50 --batch-size 512 --num-neighbors 15,10 \
   --hidden-dim 128 --branch-dim 64 --heads 4 \
+  --occupation-feature-levels 1,2,3 \
   --num-workers 4 --device cuda
 ```
 

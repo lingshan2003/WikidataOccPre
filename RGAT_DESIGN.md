@@ -23,13 +23,13 @@ when a future export has genuine text, such as biographies or descriptions.
 
 ## Safe target construction
 
-The level-3 occupation is the target. It must not be supplied as a feature for
-the seed nodes whose loss is evaluated:
+For the Level-3 task, the target person's full occupation hierarchy must not
+be supplied as a feature for seed nodes whose loss is evaluated:
 
-- training: replace each sampled seed's occupation input with an explicit
-  `UNKNOWN_OCCUPATION` ID;
-- validation/test: replace every held-out person's occupation input with that
-  ID throughout training and evaluation;
+- training: replace each sampled seed's Level-1, Level-2 and Level-3 inputs
+  with their explicit unknown IDs;
+- validation/test: replace every held-out person's three occupation levels with
+  unknown IDs throughout training and evaluation;
 - calculate validation/test labels from the unmasked canonical `nodes` table,
   never from the masked feature table.
 
@@ -45,21 +45,26 @@ relation-aware GAT stack.  New attributes are registered with `FeatureSpec`:
 
 ```python
 feature_specs = {
+    "occupation_level1": FeatureSpec(kind="categorical", cardinality=num_level1_occupations),
+    "occupation_level2": FeatureSpec(kind="categorical", cardinality=num_level2_occupations),
+    "occupation_level3": FeatureSpec(kind="categorical", cardinality=num_level3_occupations),
     "country": FeatureSpec(kind="categorical", cardinality=num_countries),
     "temporal": FeatureSpec(kind="numeric", input_dim=6),
     # Later: "biography": FeatureSpec(kind="vector", input_dim=768, optional=True),
 }
 ```
 
-The initial data tensors are `country` and `temporal`; occupation is excluded
-until the batch-level masking policy is implemented.
+The default data tensors are all three occupation levels plus `country` and
+`temporal`. Use `--occupation-feature-levels 3` for the Level-3-only neighbour
+occupation baseline. Do not provide the target person's own L1/L2 as a shortcut
+when the research task is social-neighbour occupation prediction.
 
 ## Preparation command
 
 Run the following once before training. It creates `artifacts/graph_data.pt`
-plus inspectable CSV/JSON audit artifacts. The default first experiment excludes
-occupation from model inputs, so it is a leak-safe structural-and-attribute
-baseline.
+plus inspectable CSV/JSON audit artifacts. The default experiment includes
+known training neighbours' three-level occupation information under the masking
+protocol above.
 
 ```bash
 python run.py prepare --input Q_R_Q_extended.txt --output-dir artifacts

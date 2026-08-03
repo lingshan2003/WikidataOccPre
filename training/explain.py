@@ -55,13 +55,14 @@ def load_node_ids(data_path: Path) -> List[str]:
 
 def restore_model(checkpoint: Dict, device: torch.device):
     metadata = checkpoint["metadata"]
+    feature_schema = checkpoint.get("model_feature_schema", metadata["feature_schema"])
     specs = {
         name: FeatureSpec(
             kind=definition["kind"],
             cardinality=definition.get("cardinality"),
             input_dim=definition.get("input_dim", 1),
         )
-        for name, definition in metadata["feature_schema"].items()
+        for name, definition in feature_schema.items()
     }
     model_name = checkpoint.get("model_name", "rgat")
     if model_name != "rgat":
@@ -74,7 +75,7 @@ def restore_model(checkpoint: Dict, device: torch.device):
         **checkpoint["model_config"],
     ).to(device)
     model.load_state_dict(checkpoint["state_dict"])
-    return model.eval()
+    return model.eval(), feature_schema
 
 
 def main() -> None:
@@ -95,7 +96,7 @@ def main() -> None:
         raise ValueError(f"node-index must be in [0, {data.num_nodes})")
 
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
-    model = restore_model(checkpoint, device)
+    model, feature_schema = restore_model(checkpoint, device)
     loader = NeighborLoader(
         data,
         input_nodes=torch.tensor([query_index]),
@@ -105,11 +106,13 @@ def main() -> None:
         num_workers=0,
     )
     batch = next(iter(loader)).to(device)
-    if "occupation" not in metadata["feature_schema"] or "occupation_unknown_id" not in metadata:
+    if "occupation_unknown_ids" not in metadata:
         raise ValueError("This checkpoint predates transductive occupation masking; regenerate data and retrain")
-    features = {name: getattr(batch, name) for name in metadata["feature_schema"] if hasattr(batch, name)}
-    features["occupation"] = features["occupation"].clone()
-    features["occupation"][:batch.batch_size] = int(metadata["occupation_unknown_id"])
+    features = {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
+    for name, unknown_id in metadata["occupation_unknown_ids"].items():
+        if name in features:
+            features[name] = features[name].clone()
+            features[name][:batch.batch_size] = int(unknown_id)
     with torch.no_grad():
         logits, explanation = model(
             features,
