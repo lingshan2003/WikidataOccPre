@@ -63,7 +63,10 @@ class GraphAudit:
     active_nodes_after_l1_filter: int
     relations_after_l1_filter: int
     target_classes_including_unknown: int
+    target_classes_retained: int
     target_unknown_nodes: int
+    supervised_nodes: int
+    ignored_rare_or_unknown_nodes: int
 
 
 class LegacyFastRGCN(nn.Module):
@@ -109,6 +112,15 @@ def parse_args() -> argparse.Namespace:
         help="Strict birth-year cutoff. Default >1951 approximately matches the screenshot scale.",
     )
     parser.add_argument("--target-level", type=int, choices=[1, 2, 3], default=3)
+    parser.add_argument(
+        "--min-class-count",
+        type=int,
+        default=20,
+        help=(
+            "Keep only target occupations with this many graph-node occurrences for loss/evaluation. "
+            "Use 1 for the fully unfiltered historical implementation."
+        ),
+    )
     parser.add_argument("--test-ratio", type=float, default=0.20)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--epochs", type=int, default=5)
@@ -141,8 +153,8 @@ def resolve_device(requested: str) -> torch.device:
 
 
 def to_local_graph(
-    nodes: pd.DataFrame, edges: pd.DataFrame, target_level: int
-) -> Tuple[pd.DataFrame, torch.Tensor, torch.Tensor, np.ndarray, int]:
+    nodes: pd.DataFrame, edges: pd.DataFrame, target_level: int, min_class_count: int
+) -> Tuple[pd.DataFrame, torch.Tensor, torch.Tensor, np.ndarray, np.ndarray, int, int, int]:
     """Use LabelEncoder-equivalent lexical IDs, as the old script did."""
     active_global_ids = np.unique(
         np.concatenate([edges["source_id"].to_numpy(), edges["target_id"].to_numpy()])
@@ -163,15 +175,31 @@ def to_local_graph(
     edge_type = torch.from_numpy(relation).long()
 
     label_name = f"occupation_level{target_level}"
-    raw_labels = active_nodes[label_name].fillna("unknown").astype(str).to_numpy()
-    label_names = sorted(set(raw_labels.tolist()) | {"unknown"})
+    raw_labels = active_nodes[label_name].fillna("unknown").astype(str)
+    counts = raw_labels.value_counts()
+    retained = sorted(counts[counts >= min_class_count].index.tolist())
+    # The unknown ID represents both deliberately hidden target occupations and
+    # labels excluded by the frequency threshold.  With --min-class-count 1,
+    # any literal missing L2/L3 value is again supervised exactly as in legacy.
+    label_names = ["unknown"] + [label for label in retained if label != "unknown"]
     label_to_id = {name: class_id for class_id, name in enumerate(label_names)}
-    labels = np.fromiter((label_to_id[name] for name in raw_labels), dtype=np.int64, count=len(raw_labels))
     unknown_id = label_to_id["unknown"]
-    return active_nodes, edge_index, edge_type, labels, unknown_id
+    supervised = raw_labels.isin(retained).to_numpy()
+    occupations = raw_labels.map(label_to_id).fillna(unknown_id).to_numpy(dtype=np.int64)
+    labels = occupations.copy()
+    return (
+        active_nodes,
+        edge_index,
+        edge_type,
+        occupations,
+        supervised,
+        unknown_id,
+        len(retained),
+        int((raw_labels == "unknown").sum()),
+    )
 
 
-def prepare_graph(input_path: str, born_after: float, target_level: int):
+def prepare_graph(input_path: str, born_after: float, target_level: int, min_class_count: int):
     """Replicate the legacy ordering: time-induced graph, then L1 edge filter."""
     tables = ExtendedGraphLoader(input_path).read()
     nodes = tables.nodes
@@ -193,8 +221,17 @@ def prepare_graph(input_path: str, born_after: float, target_level: int):
     if complete_l1_edges.empty:
         raise RuntimeError("No edges remain after the contemporary and Level-1 filters")
 
-    active_nodes, edge_index, edge_type, labels, unknown_id = to_local_graph(
-        nodes, complete_l1_edges, target_level
+    (
+        active_nodes,
+        edge_index,
+        edge_type,
+        occupations,
+        supervised,
+        unknown_id,
+        retained_class_count,
+        raw_unknown_count,
+    ) = to_local_graph(
+        nodes, complete_l1_edges, target_level, min_class_count
     )
     audit = GraphAudit(
         source_nodes=len(nodes),
@@ -204,10 +241,13 @@ def prepare_graph(input_path: str, born_after: float, target_level: int):
         directed_edges_after_l1_filter=len(complete_l1_edges),
         active_nodes_after_l1_filter=len(active_nodes),
         relations_after_l1_filter=int(edge_type.max().item() + 1),
-        target_classes_including_unknown=int(labels.max() + 1),
-        target_unknown_nodes=int((labels == unknown_id).sum()),
+        target_classes_including_unknown=int(occupations.max() + 1),
+        target_classes_retained=retained_class_count,
+        target_unknown_nodes=raw_unknown_count,
+        supervised_nodes=int(supervised.sum()),
+        ignored_rare_or_unknown_nodes=int((~supervised).sum()),
     )
-    return active_nodes, edge_index, edge_type, labels, unknown_id, audit
+    return active_nodes, edge_index, edge_type, occupations, supervised, unknown_id, audit
 
 
 def sample_batch(node_indices: np.ndarray, batch_size: int, rng: np.random.Generator) -> np.ndarray:
@@ -294,7 +334,13 @@ def evaluate(
     }
 
 
-def save_split(active_nodes: pd.DataFrame, test_nodes: Iterable[int], output_dir: Path) -> None:
+def save_split(
+    active_nodes: pd.DataFrame,
+    train_nodes: Iterable[int],
+    test_nodes: Iterable[int],
+    output_dir: Path,
+) -> None:
+    training = set(int(node) for node in train_nodes)
     held_out = set(int(node) for node in test_nodes)
     with (output_dir / "split_nodes.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["node_index", "node_id", "split"])
@@ -303,7 +349,7 @@ def save_split(active_nodes: pd.DataFrame, test_nodes: Iterable[int], output_dir
             writer.writerow({
                 "node_index": index,
                 "node_id": node_id,
-                "split": "test" if index in held_out else "train",
+                "split": "test" if index in held_out else "train" if index in training else "ignored",
             })
 
 
@@ -311,26 +357,28 @@ def main() -> None:
     args = parse_args()
     if not 0 < args.test_ratio < 1:
         raise ValueError("test-ratio must be between 0 and 1")
+    if args.min_class_count < 1:
+        raise ValueError("min-class-count must be at least 1")
     set_seed(args.seed)
     device = resolve_device(args.device)
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    active_nodes, edge_index, edge_type, labels_np, unknown_id, audit = prepare_graph(
-        args.input, args.born_after, args.target_level
+    active_nodes, edge_index, edge_type, occupations_np, supervised, unknown_id, audit = prepare_graph(
+        args.input, args.born_after, args.target_level, args.min_class_count
     )
     node_count = len(active_nodes)
     if node_count < args.batch_size:
         raise ValueError(f"Only {node_count} active nodes remain; lower --batch-size")
     rng = np.random.default_rng(args.seed)
-    all_nodes = np.arange(node_count, dtype=np.int64)
-    test_count = int(node_count * args.test_ratio)
-    test_nodes = np.sort(rng.choice(all_nodes, size=test_count, replace=False))
-    train_nodes = np.setdiff1d(all_nodes, test_nodes, assume_unique=True)
+    supervised_nodes = np.flatnonzero(supervised)
+    test_count = int(len(supervised_nodes) * args.test_ratio)
+    test_nodes = np.sort(rng.choice(supervised_nodes, size=test_count, replace=False))
+    train_nodes = np.setdiff1d(supervised_nodes, test_nodes, assume_unique=True)
     if len(train_nodes) < args.batch_size or len(test_nodes) < args.batch_size:
         raise ValueError("train/test split is smaller than --batch-size; lower the batch size")
 
-    labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)
+    labels = torch.as_tensor(occupations_np, dtype=torch.long, device=device)
     visible_occupations = labels.clone()
     visible_occupations[torch.as_tensor(test_nodes, device=device)] = unknown_id
     edge_index = edge_index.to(device)
@@ -390,7 +438,11 @@ def main() -> None:
         "deduplicated": False,
         "audit": asdict(audit),
         "run_config": vars(args),
-        "split": {"train_nodes": int(len(train_nodes)), "test_nodes": int(len(test_nodes))},
+        "split": {
+            "train_nodes": int(len(train_nodes)),
+            "test_nodes": int(len(test_nodes)),
+            "ignored_nodes": int((~supervised).sum()),
+        },
         "best_holdout_macro_f1_during_selection": best_score,
         "final_holdout": final_holdout,
         "history": history,
@@ -400,7 +452,7 @@ def main() -> None:
     with (output_dir / "graph_audit.json").open("w", encoding="utf-8") as handle:
         json.dump({"audit": asdict(audit), "run_config": vars(args)}, handle, ensure_ascii=False, indent=2)
     torch.save({"state_dict": model.state_dict(), "manifest": manifest}, output_dir / "best_model.pt")
-    save_split(active_nodes, test_nodes, output_dir)
+    save_split(active_nodes, train_nodes, test_nodes, output_dir)
     print(json.dumps({
         "best_holdout_macro_f1_during_selection": best_score,
         "final_holdout": final_holdout,
