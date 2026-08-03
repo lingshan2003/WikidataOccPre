@@ -70,6 +70,17 @@ def parse_args() -> argparse.Namespace:
         default="1,2,3",
         help="Comma-separated neighbour occupation levels to expose (1,2,3 or none)",
     )
+    parser.add_argument(
+        "--auxiliary-features",
+        default="country,temporal",
+        help="Comma-separated non-occupation features to expose (country,temporal or none)",
+    )
+    parser.add_argument(
+        "--eval-mode",
+        choices=["sampled", "full"],
+        default="sampled",
+        help="Use sampled neighbourhoods or deterministic full-graph inference for validation/test",
+    )
     return parser.parse_args()
 
 
@@ -93,6 +104,17 @@ def parse_occupation_levels(value: str) -> Tuple[int, ...]:
     if not levels or any(level not in {1, 2, 3} for level in levels):
         raise ValueError("occupation-feature-levels may contain only 1, 2, and 3")
     return levels
+
+
+def parse_auxiliary_features(value: str) -> Tuple[str, ...]:
+    """Parse the optional ordinary attributes independently of occupations."""
+    if value.strip().lower() == "none":
+        return ()
+    allowed = {"country", "temporal"}
+    features = tuple(sorted({item.strip() for item in value.split(",") if item.strip()}))
+    if not features or any(feature not in allowed for feature in features):
+        raise ValueError("auxiliary-features may contain country, temporal, or none")
+    return features
 
 
 def set_seed(seed: int) -> None:
@@ -143,14 +165,18 @@ def batch_features(batch, feature_schema: Dict, occupation_unknown_ids: Dict[str
     return features
 
 
-def select_feature_schema(metadata: Dict, occupation_levels: Tuple[int, ...]) -> Dict:
-    """Keep ordinary attributes plus the requested observed-neighbour levels."""
+def select_feature_schema(
+    metadata: Dict, occupation_levels: Tuple[int, ...], auxiliary_features: Tuple[str, ...]
+) -> Dict:
+    """Keep exactly the requested observed occupations and ordinary attributes."""
     selected = {}
     for name, definition in metadata["feature_schema"].items():
         if name.startswith("occupation_level"):
             level = int(name.removeprefix("occupation_level"))
             if level not in occupation_levels:
                 continue
+        elif name not in auxiliary_features:
+            continue
         selected[name] = definition
     if not selected:
         raise ValueError("At least one feature must be selected")
@@ -220,6 +246,41 @@ def evaluate(model, loader, device, feature_schema, occupation_unknown_ids) -> T
     }
 
 
+@torch.no_grad()
+def evaluate_full_graph(model, data, mask: torch.Tensor, feature_schema: Dict) -> Tuple[Dict[str, float], Dict[str, np.ndarray]]:
+    """Evaluate a split with one deterministic full-graph forward pass.
+
+    Prepared validation/test nodes already have every occupation level set to
+    ``__UNKNOWN__``. Unlike training seeds, they therefore need no additional
+    per-batch masking before full-graph inference.
+    """
+    model.eval()
+    features = {name: getattr(data, name) for name in feature_schema}
+    logits = model(features, data.edge_index, data.edge_type)
+    labels = data.y[mask]
+    seed_logits = logits[mask]
+    probabilities = seed_logits.softmax(dim=-1)
+    predictions = probabilities.argmax(dim=-1)
+    labels_np, predictions_np = labels.cpu().numpy(), predictions.cpu().numpy()
+    metrics = {
+        "loss": float(F.cross_entropy(seed_logits, labels).item()),
+        "accuracy": float(accuracy_score(labels_np, predictions_np)),
+        "macro_f1": float(f1_score(labels_np, predictions_np, average="macro", zero_division=0)),
+        "weighted_f1": float(f1_score(labels_np, predictions_np, average="weighted", zero_division=0)),
+    }
+    precision, recall, _, _ = precision_recall_fscore_support(
+        labels_np, predictions_np, average="macro", zero_division=0
+    )
+    metrics["macro_precision"] = float(precision)
+    metrics["macro_recall"] = float(recall)
+    return metrics, {
+        "node_id": mask.nonzero(as_tuple=False).view(-1).cpu().numpy(),
+        "label": labels_np,
+        "prediction": predictions_np,
+        "confidence": probabilities.max(dim=-1).values.cpu().numpy(),
+    }
+
+
 def compute_class_weights(data, num_classes: int, device: torch.device) -> torch.Tensor:
     counts = torch.bincount(data.y[data.train_mask], minlength=num_classes).float()
     weights = counts.sum() / (counts.clamp_min(1) * num_classes)
@@ -259,6 +320,7 @@ def main() -> None:
     args = parse_args()
     fanouts = parse_fanouts(args.num_neighbors)
     occupation_levels = parse_occupation_levels(args.occupation_feature_levels)
+    auxiliary_features = parse_auxiliary_features(args.auxiliary_features)
     set_seed(args.seed)
     device = resolve_device(args.device)
     data_path = Path(args.data)
@@ -278,7 +340,7 @@ def main() -> None:
             "Prepared graph predates hierarchical occupation masking; rerun `python run.py prepare` first"
         )
 
-    feature_schema = select_feature_schema(metadata, occupation_levels)
+    feature_schema = select_feature_schema(metadata, occupation_levels, auxiliary_features)
     occupation_unknown_ids = {
         f"occupation_level{level}": int(metadata["occupation_unknown_ids"][f"occupation_level{level}"])
         for level in occupation_levels
@@ -318,6 +380,7 @@ def main() -> None:
     train_loader = make_loader(data, data.train_mask, fanouts, args, shuffle=True)
     val_loader = make_loader(data, data.val_mask, fanouts, args, shuffle=False)
     test_loader = make_loader(data, data.test_mask, fanouts, args, shuffle=False)
+    full_evaluation_data = copy.deepcopy(data).to(device) if args.eval_mode == "full" else None
     is_loss_monitor = args.early_stop_metric == "val_loss"
     best_monitor = float("inf") if is_loss_monitor else float("-inf")
     best_val_f1, best_state, stale_epochs = float("-inf"), None, 0
@@ -329,16 +392,23 @@ def main() -> None:
     else:
         backend_info = ""
     level_info = "+".join(str(level) for level in occupation_levels) if occupation_levels else "none"
+    auxiliary_info = "+".join(auxiliary_features) if auxiliary_features else "none"
     print(
         f"Model: {args.model}{backend_info}; neighbour occupation levels: {level_info}; "
-        f"device: {device}; train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}"
+        f"auxiliary features: {auxiliary_info}; eval mode: {args.eval_mode}; device: {device}; "
+        f"train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}"
     )
 
     for epoch in range(1, args.epochs + 1):
         train_loss = train_epoch(
             model, train_loader, optimizer, device, feature_schema, occupation_unknown_ids, class_weights
         )
-        val_metrics, _ = evaluate(model, val_loader, device, feature_schema, occupation_unknown_ids)
+        if full_evaluation_data is None:
+            val_metrics, _ = evaluate(model, val_loader, device, feature_schema, occupation_unknown_ids)
+        else:
+            val_metrics, _ = evaluate_full_graph(
+                model, full_evaluation_data, full_evaluation_data.val_mask, feature_schema
+            )
         scheduler.step(val_metrics["loss"])
         monitor_value = val_metrics["loss"] if is_loss_monitor else val_metrics["macro_f1"]
         record = {
@@ -374,9 +444,14 @@ def main() -> None:
     if best_state is None:
         raise RuntimeError("Training did not produce a model checkpoint")
     model.load_state_dict(best_state)
-    test_metrics, test_predictions = evaluate(
-        model, test_loader, device, feature_schema, occupation_unknown_ids
-    )
+    if full_evaluation_data is None:
+        test_metrics, test_predictions = evaluate(
+            model, test_loader, device, feature_schema, occupation_unknown_ids
+        )
+    else:
+        test_metrics, test_predictions = evaluate_full_graph(
+            model, full_evaluation_data, full_evaluation_data.test_mask, feature_schema
+        )
     checkpoint = {
         "state_dict": model.state_dict(),
         "metadata": metadata,
@@ -392,6 +467,8 @@ def main() -> None:
             "rgcn_backend": args.rgcn_backend,
             "compgcn_composition": args.compgcn_composition,
             "occupation_feature_levels": list(occupation_levels),
+            "auxiliary_features": list(auxiliary_features),
+            "eval_mode": args.eval_mode,
         },
         "selection_metric": args.early_stop_metric,
         "best_selection_metric": best_monitor,
@@ -400,6 +477,8 @@ def main() -> None:
     torch.save(checkpoint, output_dir / "best_model.pt")
     with (output_dir / "metrics.json").open("w", encoding="utf-8") as handle:
         json.dump({
+            "run_config": vars(args),
+            "model_feature_schema": feature_schema,
             "selection_metric": args.early_stop_metric,
             "best_selection_metric": best_monitor,
             "best_val_macro_f1_seen": best_val_f1,
