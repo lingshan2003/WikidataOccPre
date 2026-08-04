@@ -19,7 +19,7 @@ class FeatureSpec:
     unknown_id: Optional[int] = None
 
     def validate(self) -> None:
-        if self.kind not in {"categorical", "numeric", "vector", "semantic_categorical"}:
+        if self.kind not in {"categorical", "numeric", "vector", "semantic_categorical", "constant"}:
             raise ValueError(f"Unknown feature kind: {self.kind}")
         if self.kind == "categorical" and (self.cardinality is None or self.cardinality < 2):
             raise ValueError("A categorical feature needs cardinality >= 2")
@@ -53,10 +53,18 @@ class NodeFeatureEncoder(nn.Module):
         self.feature_names = tuple(self.feature_specs)
         self.encoders = nn.ModuleDict()
         self.missing_vectors = nn.ParameterDict()
+        self.constant_vectors = nn.ParameterDict()
         for name, spec in self.feature_specs.items():
             spec.validate()
             if spec.kind == "categorical":
                 self.encoders[name] = nn.Embedding(spec.cardinality, branch_dim)
+            elif spec.kind == "constant":
+                # A shared learned value supplies no person-specific signal.
+                # With message passing, this makes a true structure-and-
+                # relation-only baseline possible without node IDs or ordinary
+                # attributes leaking into the comparison.
+                self.constant_vectors[name] = nn.Parameter(torch.empty(branch_dim))
+                nn.init.normal_(self.constant_vectors[name], std=0.02)
             elif spec.kind == "semantic_categorical":
                 # This table is a fixed external semantic prior. It is a buffer
                 # rather than a parameter, so optimizer steps cannot rewrite it.
@@ -91,7 +99,9 @@ class NodeFeatureEncoder(nn.Module):
         branches = []
         for name in self.feature_names:
             spec, value = self.feature_specs[name], features.get(name)
-            if value is None:
+            if spec.kind == "constant":
+                branch = self.constant_vectors[name].unsqueeze(0).expand(num_nodes, -1)
+            elif value is None:
                 if not spec.optional:
                     raise KeyError(f"Missing required feature '{name}'")
                 branch = self.missing_vectors[name].unsqueeze(0).expand(num_nodes, -1)

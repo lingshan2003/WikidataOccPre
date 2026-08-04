@@ -7,7 +7,7 @@ import csv
 import json
 import random
 from pathlib import Path
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
@@ -16,6 +16,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_recall_fscore_su
 from torch_geometric.loader import NeighborLoader
 
 from models import build_feature_specs, build_model
+from training.relation_controls import apply_relation_controls, parse_selection, resolve_ablation
 
 
 def parse_args() -> argparse.Namespace:
@@ -24,6 +25,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", default="runs/rgat_level3")
     parser.add_argument("--model", choices=["rgcn", "rgat", "compgcn"], default="rgat")
     parser.add_argument("--epochs", type=int, default=50)
+    parser.add_argument(
+        "--train-mode",
+        choices=["sampled", "full"],
+        default="sampled",
+        help="Use NeighborLoader mini-batches or a true full-graph forward/backward pass",
+    )
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--num-neighbors", default="20,10", help="One fan-out per GNN layer")
     parser.add_argument("--hidden-dim", type=int, default=128)
@@ -64,7 +71,35 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", default="auto", help="auto, cuda, cuda:0, or cpu")
-    parser.add_argument("--class-weight", action="store_true", help="Use inverse-frequency loss weights")
+    parser.add_argument(
+        "--class-weight",
+        action="store_true",
+        help="Legacy alias for --loss inverse_frequency; cannot be combined with another --loss",
+    )
+    parser.add_argument(
+        "--loss",
+        choices=["cross_entropy", "inverse_frequency", "class_balanced", "logit_adjusted"],
+        default="cross_entropy",
+        help="Long-tail training objective; default preserves the original cross-entropy protocol",
+    )
+    parser.add_argument(
+        "--class-balanced-beta",
+        type=float,
+        default=0.9999,
+        help="Effective-number beta for --loss class_balanced (must be in [0, 1))",
+    )
+    parser.add_argument(
+        "--logit-adjustment-tau",
+        type=float,
+        default=1.0,
+        help="Prior-strength tau for --loss logit_adjusted",
+    )
+    parser.add_argument(
+        "--train-root-sampling",
+        choices=["uniform", "class_balanced"],
+        default="uniform",
+        help="Sample training seed nodes uniformly or balance their target classes each epoch",
+    )
     parser.add_argument(
         "--occupation-feature-levels",
         default="1,2,3",
@@ -80,6 +115,27 @@ def parse_args() -> argparse.Namespace:
         "--auxiliary-features",
         default="country,temporal",
         help="Comma-separated non-occupation features to expose (country,temporal or none)",
+    )
+    parser.add_argument(
+        "--feature-mode",
+        choices=["selected", "structural"],
+        default="selected",
+        help="Use selected attributes, or one shared constant vector for a relation-and-structure-only baseline",
+    )
+    parser.add_argument(
+        "--drop-relation-groups",
+        default="none",
+        help="Comma-separated groups to remove: kinship, education_mentorship, professional_collaboration, influence_succession, religious, other, or none",
+    )
+    parser.add_argument(
+        "--drop-relations",
+        default="none",
+        help="Comma-separated original relation names to remove in both directions, or none",
+    )
+    parser.add_argument(
+        "--shuffle-relation-types",
+        action="store_true",
+        help="Permute relation IDs across retained edges while preserving topology and relation frequencies",
     )
     parser.add_argument(
         "--eval-mode",
@@ -144,7 +200,14 @@ def resolve_device(requested: str) -> torch.device:
     return device
 
 
-def make_loader(data, mask: torch.Tensor, fanouts: Sequence[int], args: argparse.Namespace, shuffle: bool):
+def make_loader(
+    data,
+    mask: torch.Tensor,
+    fanouts: Sequence[int],
+    args: argparse.Namespace,
+    shuffle: bool,
+    persistent_workers: bool = True,
+):
     workers = max(0, args.num_workers)
     return NeighborLoader(
         data,
@@ -153,9 +216,26 @@ def make_loader(data, mask: torch.Tensor, fanouts: Sequence[int], args: argparse
         batch_size=args.batch_size,
         shuffle=shuffle,
         num_workers=workers,
-        persistent_workers=workers > 0,
+        persistent_workers=workers > 0 and persistent_workers,
         pin_memory=torch.cuda.is_available(),
     )
+
+
+def feature_inputs(graph, feature_schema: Dict) -> Dict[str, torch.Tensor]:
+    """Collect model inputs and synthesize a shared structural baseline feature."""
+    features = {}
+    for name, definition in feature_schema.items():
+        if definition["kind"] == "constant":
+            features[name] = torch.zeros(
+                graph.num_nodes,
+                dtype=torch.long,
+                device=graph.edge_index.device,
+            )
+        elif hasattr(graph, name):
+            features[name] = getattr(graph, name)
+        else:
+            raise KeyError(f"Graph is missing required feature '{name}'")
+    return features
 
 
 def batch_features(batch, feature_schema: Dict, occupation_unknown_ids: Dict[str, int]) -> Dict[str, torch.Tensor]:
@@ -167,7 +247,7 @@ def batch_features(batch, feature_schema: Dict, occupation_unknown_ids: Dict[str
     target from seeing its own hierarchical occupation while retaining its
     neighbours' observed hierarchical occupations.
     """
-    features = {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
+    features = feature_inputs(batch, feature_schema)
     selected_occupation_features = [name for name in occupation_unknown_ids if name in features]
     for name in selected_occupation_features:
         occupation = features[name].clone()
@@ -181,8 +261,11 @@ def select_feature_schema(
     occupation_levels: Tuple[int, ...],
     auxiliary_features: Tuple[str, ...],
     occupation_representation: str,
+    feature_mode: str = "selected",
 ) -> Dict:
     """Keep exactly the requested observed occupations and ordinary attributes."""
+    if feature_mode == "structural":
+        return {"structural_constant": {"kind": "constant"}}
     selected = {}
     for name, definition in metadata["feature_schema"].items():
         if name.startswith("occupation_level"):
@@ -233,7 +316,34 @@ def semantic_provenance(metadata: Dict, occupation_representation: str) -> Dict:
     }
 
 
-def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unknown_ids, class_weights=None) -> float:
+def classification_loss(
+    logits: torch.Tensor,
+    labels: torch.Tensor,
+    loss_mode: str,
+    class_weights: Optional[torch.Tensor] = None,
+    log_priors: Optional[torch.Tensor] = None,
+    logit_adjustment_tau: float = 1.0,
+) -> torch.Tensor:
+    """Compute one explicit long-tail objective without changing evaluation metrics."""
+    if loss_mode == "logit_adjusted":
+        if log_priors is None:
+            raise ValueError("Log priors are required for logit-adjusted loss")
+        logits = logits + logit_adjustment_tau * log_priors.unsqueeze(0)
+    return F.cross_entropy(logits, labels, weight=class_weights)
+
+
+def train_epoch(
+    model,
+    loader,
+    optimizer,
+    device,
+    feature_schema,
+    occupation_unknown_ids,
+    loss_mode: str,
+    class_weights=None,
+    log_priors=None,
+    logit_adjustment_tau: float = 1.0,
+) -> float:
     model.train()
     total_loss = 0.0
     seed_count = 0
@@ -245,13 +355,50 @@ def train_epoch(model, loader, optimizer, device, feature_schema, occupation_unk
         )
         seed_logits = logits[:batch.batch_size]
         seed_labels = batch.y[:batch.batch_size]
-        loss = F.cross_entropy(seed_logits, seed_labels, weight=class_weights)
+        loss = classification_loss(
+            seed_logits,
+            seed_labels,
+            loss_mode,
+            class_weights,
+            log_priors,
+            logit_adjustment_tau,
+        )
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
         total_loss += loss.item() * batch.batch_size
         seed_count += batch.batch_size
     return total_loss / max(seed_count, 1)
+
+
+def train_full_graph_epoch(
+    model,
+    data,
+    optimizer,
+    feature_schema,
+    loss_mode: str,
+    class_weights=None,
+    log_priors=None,
+    logit_adjustment_tau: float = 1.0,
+) -> float:
+    """Run one true full-graph update for a leakage-safe non-occupation setup.
+
+    A single forward cannot selectively hide each training seed's occupation
+    while exposing that same occupation to every other training seed.  The
+    caller therefore rejects occupation inputs for this mode; this keeps the
+    full-batch experiment faithful instead of silently leaking targets.
+    """
+    model.train()
+    optimizer.zero_grad(set_to_none=True)
+    logits = model(feature_inputs(data, feature_schema), data.edge_index, data.edge_type)
+    labels = data.y[data.train_mask]
+    loss = classification_loss(
+        logits[data.train_mask], labels, loss_mode, class_weights, log_priors, logit_adjustment_tau
+    )
+    loss.backward()
+    torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+    optimizer.step()
+    return float(loss.item())
 
 
 @torch.no_grad()
@@ -305,7 +452,7 @@ def evaluate_full_graph(model, data, mask: torch.Tensor, feature_schema: Dict) -
     per-batch masking before full-graph inference.
     """
     model.eval()
-    features = {name: getattr(data, name) for name in feature_schema}
+    features = feature_inputs(data, feature_schema)
     logits = model(features, data.edge_index, data.edge_type)
     labels = data.y[mask]
     seed_logits = logits[mask]
@@ -331,10 +478,48 @@ def evaluate_full_graph(model, data, mask: torch.Tensor, feature_schema: Dict) -
     }
 
 
-def compute_class_weights(data, num_classes: int, device: torch.device) -> torch.Tensor:
-    counts = torch.bincount(data.y[data.train_mask], minlength=num_classes).float()
-    weights = counts.sum() / (counts.clamp_min(1) * num_classes)
-    return weights.to(device)
+def training_class_counts(data, num_classes: int) -> torch.Tensor:
+    """Count only supervised training people; held-out labels never set priors."""
+    return torch.bincount(data.y[data.train_mask], minlength=num_classes).float()
+
+
+def loss_components(
+    counts: torch.Tensor,
+    loss_mode: str,
+    class_balanced_beta: float,
+    device: torch.device,
+) -> Tuple[Optional[torch.Tensor], torch.Tensor]:
+    """Return optional class weights and log priors for the selected objective."""
+    if (counts <= 0).any():
+        raise ValueError("Every retained class must have at least one training example")
+    weights = None
+    if loss_mode == "inverse_frequency":
+        weights = counts.sum() / (counts * counts.numel())
+    elif loss_mode == "class_balanced":
+        if not 0 <= class_balanced_beta < 1:
+            raise ValueError("--class-balanced-beta must be in [0, 1)")
+        beta = torch.tensor(class_balanced_beta, dtype=counts.dtype)
+        weights = (1.0 - beta) / (1.0 - torch.pow(beta, counts))
+        weights = weights / weights.mean()
+    priors = counts / counts.sum()
+    return (
+        weights.to(device) if weights is not None else None,
+        priors.clamp_min(torch.finfo(priors.dtype).tiny).log().to(device),
+    )
+
+
+def class_balanced_train_nodes(data, num_classes: int, generator: torch.Generator) -> torch.Tensor:
+    """Draw one epoch of roots with each target class equally likely in expectation."""
+    train_nodes = data.train_mask.nonzero(as_tuple=False).view(-1)
+    labels = data.y[train_nodes]
+    counts = torch.bincount(labels, minlength=num_classes).float()
+    if (counts <= 0).any():
+        raise ValueError("Every retained class must have at least one training example")
+    node_weights = counts.reciprocal()[labels]
+    sampled_positions = torch.multinomial(
+        node_weights, num_samples=train_nodes.numel(), replacement=True, generator=generator
+    )
+    return train_nodes[sampled_positions]
 
 
 def save_predictions(predictions: Dict[str, np.ndarray], metadata: Dict, data_path: Path, output_path: Path) -> None:
@@ -371,6 +556,26 @@ def main() -> None:
     fanouts = parse_fanouts(args.num_neighbors)
     occupation_levels = parse_occupation_levels(args.occupation_feature_levels)
     auxiliary_features = parse_auxiliary_features(args.auxiliary_features)
+    drop_relation_groups = parse_selection(args.drop_relation_groups)
+    drop_relations = parse_selection(args.drop_relations)
+    if args.class_weight and args.loss != "cross_entropy":
+        raise ValueError("--class-weight is a legacy alias and cannot be combined with a non-default --loss")
+    loss_mode = "inverse_frequency" if args.class_weight else args.loss
+    uses_occupation_features = args.feature_mode == "selected" and (
+        (args.occupation_representation == "categorical" and bool(occupation_levels))
+        or args.occupation_representation == "semantic"
+    )
+    if args.train_mode == "full" and uses_occupation_features:
+        raise ValueError(
+            "True full-graph training cannot expose occupations without leaking each training seed's own "
+            "label. Use --occupation-feature-levels none (or --feature-mode structural)."
+        )
+    if args.train_mode == "full" and args.eval_mode != "full":
+        raise ValueError("True full-graph training requires --eval-mode full for a deterministic paired evaluation")
+    if args.train_mode == "full" and args.train_root_sampling != "uniform":
+        raise ValueError("--train-root-sampling applies only to sampled training")
+    if args.feature_mode == "structural" and args.occupation_representation != "categorical":
+        raise ValueError("--feature-mode structural does not use occupation representations; use categorical")
     set_seed(args.seed)
     device = resolve_device(args.device)
     data_path = Path(args.data)
@@ -378,7 +583,9 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     bundle = torch.load(data_path, map_location="cpu", weights_only=False)
-    data, metadata = bundle["data"], bundle["metadata"]
+    # All relation perturbations happen to an in-memory copy.  A server run
+    # must never overwrite the canonical artifact shared by comparisons.
+    data, metadata = copy.deepcopy(bundle["data"]), bundle["metadata"]
     if len(fanouts) != 2:
         raise ValueError("The current RelationalGATClassifier has two layers; use exactly two fan-outs")
     required_attributes = (
@@ -395,12 +602,25 @@ def main() -> None:
         )
 
     feature_schema = select_feature_schema(
-        metadata, occupation_levels, auxiliary_features, args.occupation_representation
+        metadata, occupation_levels, auxiliary_features, args.occupation_representation, args.feature_mode
     )
     occupation_unknown_ids = select_unknown_feature_ids(
         metadata, occupation_levels, args.occupation_representation
     )
     representation_provenance = semantic_provenance(metadata, args.occupation_representation)
+    relation_ids_to_drop, dropped_base_relations = resolve_ablation(
+        metadata["relation_to_id"], drop_relation_groups, drop_relations
+    )
+    relation_perturbation = apply_relation_controls(
+        data,
+        relation_ids_to_drop=relation_ids_to_drop,
+        shuffle_relation_types=args.shuffle_relation_types,
+        shuffle_seed=args.seed if args.shuffle_relation_types else None,
+    )
+    relation_perturbation.update({
+        "dropped_relation_groups": list(drop_relation_groups),
+        "dropped_base_relations": list(dropped_base_relations),
+    })
     specs = build_feature_specs(feature_schema, metadata)
     model = build_model(
         args.model,
@@ -423,12 +643,26 @@ def main() -> None:
         factor=args.lr_factor,
         patience=args.lr_patience,
     )
-    class_weights = compute_class_weights(data, metadata["num_classes"], device) if args.class_weight else None
+    class_counts = training_class_counts(data, metadata["num_classes"])
+    class_weights, log_priors = loss_components(
+        class_counts, loss_mode, args.class_balanced_beta, device
+    )
 
-    train_loader = make_loader(data, data.train_mask, fanouts, args, shuffle=True)
-    val_loader = make_loader(data, data.val_mask, fanouts, args, shuffle=False)
-    test_loader = make_loader(data, data.test_mask, fanouts, args, shuffle=False)
-    full_evaluation_data = copy.deepcopy(data).to(device) if args.eval_mode == "full" else None
+    train_loader = (
+        make_loader(data, data.train_mask, fanouts, args, shuffle=True)
+        if args.train_mode == "sampled" else None
+    )
+    val_loader = make_loader(data, data.val_mask, fanouts, args, shuffle=False) if args.eval_mode == "sampled" else None
+    test_loader = make_loader(data, data.test_mask, fanouts, args, shuffle=False) if args.eval_mode == "sampled" else None
+    if args.train_mode == "full":
+        # Reuse one device copy for train/validation/test to keep the full
+        # graph experiment within server memory.
+        full_training_data = copy.deepcopy(data).to(device)
+        full_evaluation_data = full_training_data
+    else:
+        full_training_data = None
+        full_evaluation_data = copy.deepcopy(data).to(device) if args.eval_mode == "full" else None
+    root_sampling_generator = torch.Generator().manual_seed(args.seed)
     is_loss_monitor = args.early_stop_metric == "val_loss"
     best_monitor = float("inf") if is_loss_monitor else float("-inf")
     best_patience_monitor = float("inf") if is_loss_monitor else float("-inf")
@@ -448,14 +682,46 @@ def main() -> None:
     auxiliary_info = "+".join(auxiliary_features) if auxiliary_features else "none"
     print(
         f"Model: {args.model}{backend_info}; occupation representation: {level_info}; "
-        f"auxiliary features: {auxiliary_info}; eval mode: {args.eval_mode}; device: {device}; "
+        f"auxiliary features: {auxiliary_info}; feature mode: {args.feature_mode}; "
+        f"loss: {loss_mode}; train mode: {args.train_mode}; root sampling: {args.train_root_sampling}; "
+        f"eval mode: {args.eval_mode}; device: {device}; "
         f"train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}"
     )
+    print(json.dumps({"relation_perturbation": relation_perturbation}, ensure_ascii=False))
 
     for epoch in range(1, args.epochs + 1):
-        train_loss = train_epoch(
-            model, train_loader, optimizer, device, feature_schema, occupation_unknown_ids, class_weights
-        )
+        if full_training_data is not None:
+            train_loss = train_full_graph_epoch(
+                model,
+                full_training_data,
+                optimizer,
+                feature_schema,
+                loss_mode,
+                class_weights,
+                log_priors,
+                args.logit_adjustment_tau,
+            )
+        else:
+            epoch_train_loader = train_loader
+            if args.train_root_sampling == "class_balanced":
+                sampled_roots = class_balanced_train_nodes(
+                    data, metadata["num_classes"], root_sampling_generator
+                )
+                epoch_train_loader = make_loader(
+                    data, sampled_roots, fanouts, args, shuffle=True, persistent_workers=False
+                )
+            train_loss = train_epoch(
+                model,
+                epoch_train_loader,
+                optimizer,
+                device,
+                feature_schema,
+                occupation_unknown_ids,
+                loss_mode,
+                class_weights,
+                log_priors,
+                args.logit_adjustment_tau,
+            )
         if full_evaluation_data is None:
             val_metrics, _ = evaluate(model, val_loader, device, feature_schema, occupation_unknown_ids)
         else:
@@ -531,11 +797,18 @@ def main() -> None:
             "occupation_representation": args.occupation_representation,
             **representation_provenance,
             "auxiliary_features": list(auxiliary_features),
+            "feature_mode": args.feature_mode,
+            "train_mode": args.train_mode,
+            "loss": loss_mode,
+            "class_balanced_beta": args.class_balanced_beta,
+            "logit_adjustment_tau": args.logit_adjustment_tau,
+            "train_root_sampling": args.train_root_sampling,
             "eval_mode": args.eval_mode,
         },
         "selection_metric": args.early_stop_metric,
         "best_selection_metric": best_monitor,
         "best_val_macro_f1_seen": best_val_f1,
+        "relation_perturbation": relation_perturbation,
     }
     torch.save(checkpoint, output_dir / "best_model.pt")
     with (output_dir / "metrics.json").open("w", encoding="utf-8") as handle:
@@ -547,6 +820,14 @@ def main() -> None:
             "selection_metric": args.early_stop_metric,
             "best_selection_metric": best_monitor,
             "best_val_macro_f1_seen": best_val_f1,
+            "loss": {
+                "mode": loss_mode,
+                "class_balanced_beta": args.class_balanced_beta,
+                "logit_adjustment_tau": args.logit_adjustment_tau,
+                "train_root_sampling": args.train_root_sampling,
+                "train_mode": args.train_mode,
+            },
+            "relation_perturbation": relation_perturbation,
             "test": test_metrics,
             "history": history,
         }, handle, indent=2)

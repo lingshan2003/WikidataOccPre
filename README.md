@@ -6,6 +6,8 @@
 
 项目首先将此问题建模为**多关系人物图上的节点职业分类**。现阶段关注的是职业和社会关系之间的预测关联，不将结果直接解释为因果关系或“职业继承”。
 
+已实施实验及其结论见 [EXPERIMENTS_TRIED.md](EXPERIMENTS_TRIED.md)。
+
 ## 研究目标
 
 1. **首要目标：提高职业预测性能。**
@@ -234,6 +236,101 @@ python run.py train --model rgcn \
 `--skip-test` 仅保存 validation 最优 checkpoint，不写测试指标；锁定配置后移除它，
 对该设置执行一次最终测试。checkpoint 始终保存实际最优 validation 监控值，
 `--min-delta` 只影响早停 patience。
+
+### 下一轮优先实验（已支持，待服务器运行）
+
+以下开关只修改运行时内存中的图，绝不改写输入的 `graph_data.pt`。实际删除的
+关系、删边前后数量和置乱 seed 会写入 `metrics.json` 与 checkpoint；所有探索先加
+`--skip-test`，锁定配置后才去掉它运行一次测试集。
+
+**1. 纯关系/结构基线。** `structural` 为所有人物提供同一个可学习常量，不使用
+职业、国家、时间或节点 ID。因此模型只能利用图拓扑和 relation type：
+
+```bash
+python run.py train --model compgcn \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_compgcn_structural \
+  --feature-mode structural --occupation-feature-levels none --auxiliary-features none \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --num-workers 4 --seed 42 --device cuda --skip-test
+```
+
+**2. 关系语义置乱与消融。** `--shuffle-relation-types` 保留每条边的位置和每种
+relation 的频数，但按 `--seed` 随机重新分配 relation ID。它应与完全相同、但不带
+该开关的基线配对。`--drop-relation-groups` 会同时删除关系的正向与反向边；可用组为
+`kinship`、`education_mentorship`、`professional_collaboration`、
+`influence_succession`、`religious`、`other`。也可以用 `--drop-relations father,mother`
+指定原始关系名。
+
+```bash
+# 关系类型是否提供超越纯拓扑的信号？
+python run.py train --model rgcn \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgcn_relation_shuffled \
+  --occupation-feature-levels 1,2,3 --auxiliary-features none \
+  --shuffle-relation-types --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --num-workers 4 --seed 42 --device cuda --skip-test
+
+# 对每个组分别运行；这里是亲属关系消融。
+python run.py train --model rgcn \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgcn_without_kinship \
+  --occupation-feature-levels 1,2,3 --auxiliary-features none \
+  --drop-relation-groups kinship --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --num-workers 4 --seed 42 --device cuda --skip-test
+```
+
+对置乱模型导出 attention 时，程序会重放同一置乱；但其 relation 标签已经不对应
+原始语义，因此不能用它做关系解释。
+
+**3. L3 长尾训练。** 以下三种策略先逐一与同一基线比较，避免无法归因。它们均只用
+训练 split 的类别频数，验证和测试标签从不参与权重或先验计算：
+若以 Macro-F1 为比较重点，所有配对运行（包括普通 CrossEntropy 基线）都应加入
+`--early-stop-metric macro_f1 --min-delta 0.001`。
+
+```bash
+# 有效样本数（class-balanced）损失
+python run.py train --model rgcn --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgcn_class_balanced --loss class_balanced \
+  --class-balanced-beta 0.9999 --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --early-stop-metric macro_f1 --min-delta 0.001 \
+  --num-workers 4 --seed 42 --device cuda --skip-test
+
+# logit-adjusted cross entropy（先验强度 tau）
+python run.py train --model rgcn --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgcn_logit_adjusted --loss logit_adjusted \
+  --logit-adjustment-tau 1.0 --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --early-stop-metric macro_f1 --min-delta 0.001 \
+  --num-workers 4 --seed 42 --device cuda --skip-test
+
+# 每个 epoch 对训练 seed 作类别均衡的有放回采样
+python run.py train --model rgcn --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgcn_balanced_roots --train-root-sampling class_balanced \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 --hidden-dim 128 --branch-dim 64 \
+  --rgcn-backend fast --early-stop-metric macro_f1 --min-delta 0.001 \
+  --num-workers 4 --seed 42 --device cuda --skip-test
+```
+
+旧的 `--class-weight` 仍可用，等价于 `--loss inverse_frequency`；不要和其他
+`--loss` 选项混用。
+
+**4. 真正的 full-batch 训练。** `--train-mode full` 在每个 epoch 对整图执行一次
+forward/backward，并强制 `--eval-mode full`。为严格防泄漏，它不允许职业特征：一次
+全图前向无法同时对每个训练人物遮蔽“自身职业”又把它暴露给其他训练 seed。优先尝试
+CompGCN；FastRGCN 的全图计算已知可能 OOM。
+
+```bash
+python run.py train --model compgcn \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_compgcn_full_structural \
+  --train-mode full --eval-mode full --feature-mode structural \
+  --occupation-feature-levels none --auxiliary-features none --num-neighbors=-1,-1 \
+  --epochs 50 --hidden-dim 128 --branch-dim 64 --seed 42 --device cuda --skip-test
+```
 
 训练输出：
 

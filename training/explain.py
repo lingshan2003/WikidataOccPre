@@ -17,6 +17,8 @@ import torch
 from torch_geometric.loader import NeighborLoader
 
 from models import build_feature_specs, build_model
+from training.relation_controls import apply_relation_controls
+from training.train import feature_inputs
 
 
 def parse_args() -> argparse.Namespace:
@@ -89,6 +91,17 @@ def main() -> None:
         raise ValueError(f"node-index must be in [0, {data.num_nodes})")
 
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+    relation_perturbation = checkpoint.get("relation_perturbation")
+    if relation_perturbation:
+        # Replay the exact in-memory graph transformation used for training.
+        # This matters for ablated checkpoints; shuffled relation labels are
+        # deliberately not interpretable as the source graph's semantics.
+        apply_relation_controls(
+            data,
+            relation_ids_to_drop=relation_perturbation.get("dropped_relation_ids", ()),
+            shuffle_relation_types=relation_perturbation.get("relation_type_shuffle", False),
+            shuffle_seed=relation_perturbation.get("relation_type_shuffle_seed"),
+        )
     model, feature_schema = restore_model(checkpoint, device)
     loader = NeighborLoader(
         data,
@@ -101,7 +114,7 @@ def main() -> None:
     batch = next(iter(loader)).to(device)
     if "occupation_unknown_ids" not in metadata:
         raise ValueError("This checkpoint predates transductive occupation masking; regenerate data and retrain")
-    features = {name: getattr(batch, name) for name in feature_schema if hasattr(batch, name)}
+    features = feature_inputs(batch, feature_schema)
     for name, unknown_id in metadata["occupation_unknown_ids"].items():
         if name in features:
             features[name] = features[name].clone()
@@ -170,6 +183,8 @@ def main() -> None:
         "incoming_attention_edges": len(target_edges),
         "note": "Attention ranks candidates only; run edge deletion tests before causal claims.",
     }
+    if relation_perturbation and relation_perturbation.get("relation_type_shuffle"):
+        summary["note"] += " Relation IDs were shuffled for this checkpoint, so exported relation labels are model assignments rather than source semantics."
     with (output_dir / f"{stem}_summary.json").open("w", encoding="utf-8") as handle:
         json.dump(summary, handle, ensure_ascii=False, indent=2)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
