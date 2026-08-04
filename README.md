@@ -390,6 +390,57 @@ runs/<experiment>/metrics.json
 runs/<experiment>/test_predictions.csv
 ```
 
+### 汇报用三 seed 重跑矩阵
+
+`scripts/run_report_experiments.sh` 将历史尝试整理为五个可解释的问题，共 18 个条件：
+模型架构、职业输入、关系语义/删边控制、长尾优化和邻域覆盖。每个条件固定同一 Level 3
+artifact 并运行 seed `42/43/44`，输出统一放在 `runs_report/level3/<condition>/seed_<seed>/`。
+它不会使用 `--skip-test`，因为该矩阵用于最终报告；每个 seed 都只按 validation 选
+checkpoint，再测试一次。
+
+先只打印全部 54 条命令，检查路径和 semantic artifact：
+
+```bash
+bash scripts/run_report_experiments.sh plan all
+```
+
+按组执行，便于从服务器断点重跑；已有 `metrics.json` 的 seed 会自动跳过：
+
+```bash
+bash scripts/run_report_experiments.sh run architecture
+bash scripts/run_report_experiments.sh run features
+bash scripts/run_report_experiments.sh run relations
+bash scripts/run_report_experiments.sh run longtail
+bash scripts/run_report_experiments.sh run coverage
+```
+
+全部完成后汇总每个条件的逐 seed 指标、均值与样本标准差：
+
+```bash
+python scripts/summarize_report_runs.py --root runs_report/level3
+```
+
+它会生成：
+
+```text
+runs_report/level3/report_seed_metrics.csv  # 每个 condition × seed 的最终 test 指标
+runs_report/level3/report_summary.csv       # 每个 condition 的 mean/std，按 Macro-F1 排序
+```
+
+语义职业条件要求预先存在 semantic artifact；默认路径为
+`artifacts/level3_hierarchy/graph_data_semantic.pt`。路径不同可在运行脚本前设置
+`RGCN_REPORT_SEMANTIC_DATA`。同样可通过 `RGCN_REPORT_DATA` 和
+`RGCN_REPORT_OUTPUT_ROOT` 覆盖普通 artifact 和输出目录。
+
+若尚未生成这个 artifact，先在服务器执行一次：
+
+```bash
+python run.py occupation-embed \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output artifacts/level3_hierarchy/graph_data_semantic.pt \
+  --model-name intfloat/multilingual-e5-base --device cuda
+```
+
 ## 关系重要性与解释
 
 项目的次要目标不是只导出一张 attention 表，而是评估关系的真实预测贡献。
