@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from typing import Dict, Iterable, Mapping, Sequence, Set, Tuple
 
+import numpy as np
 import torch
 
 
@@ -104,13 +105,77 @@ def resolve_ablation(
     return relation_ids, tuple(sorted(selected_bases))
 
 
+def relation_pair_keys(data, relation_to_id: Mapping[str, int]) -> np.ndarray:
+    """Encode each generated forward/reverse relation pair as one integer key.
+
+    The key contains the base relation plus the unordered endpoint pair, so
+    deleting a selected key always removes its two directed counterparts.  It
+    also collapses duplicate source records that become identical after the
+    preparation step's reverse-edge addition.
+    """
+    relation_ids = data.edge_type.detach().cpu().numpy().astype(np.int64, copy=False)
+    source, target = data.edge_index.detach().cpu().numpy().astype(np.int64, copy=False)
+    max_relation_id = max(relation_to_id.values())
+    base_names = sorted({base_relation_name(name) for name in relation_to_id})
+    base_to_id = {name: index for index, name in enumerate(base_names)}
+    relation_to_base = np.full(max_relation_id + 1, -1, dtype=np.int64)
+    for relation, relation_id in relation_to_id.items():
+        relation_to_base[int(relation_id)] = base_to_id[base_relation_name(relation)]
+    if relation_ids.size and (relation_ids.min() < 0 or relation_ids.max() >= len(relation_to_base)):
+        raise ValueError("edge_type contains a relation ID absent from metadata")
+    base_ids = relation_to_base[relation_ids]
+    if (base_ids < 0).any():
+        raise ValueError("edge_type contains a relation ID absent from metadata")
+    low, high = np.minimum(source, target), np.maximum(source, target)
+    node_count = int(data.num_nodes)
+    return ((base_ids * node_count) + low) * node_count + high
+
+
+def count_relation_pairs(data, relation_ids: Iterable[int], relation_to_id: Mapping[str, int]) -> int:
+    """Count undirected/base-relation edge pairs represented by selected IDs."""
+    selected = np.array(sorted({int(relation_id) for relation_id in relation_ids}), dtype=np.int64)
+    if selected.size == 0:
+        return 0
+    edge_relation_ids = data.edge_type.detach().cpu().numpy()
+    return int(np.unique(relation_pair_keys(data, relation_to_id)[np.isin(edge_relation_ids, selected)]).size)
+
+
+def _drop_random_relation_pairs(
+    data,
+    relation_to_id: Mapping[str, int],
+    pair_count: int,
+    seed: int,
+) -> Tuple[int, int]:
+    """Uniformly remove whole relation pairs while keeping generated reverses aligned."""
+    if pair_count < 0:
+        raise ValueError("random edge-pair drop count must be non-negative")
+    keys = relation_pair_keys(data, relation_to_id)
+    unique_keys = np.unique(keys)
+    if pair_count > len(unique_keys):
+        raise ValueError(
+            f"Cannot remove {pair_count} relation pairs: graph has only {len(unique_keys)} pairs"
+        )
+    if pair_count == 0:
+        return 0, int(len(unique_keys))
+    rng = np.random.default_rng(seed)
+    dropped_keys = rng.choice(unique_keys, size=pair_count, replace=False)
+    keep = ~np.isin(keys, dropped_keys)
+    keep_tensor = torch.from_numpy(keep).to(device=data.edge_type.device)
+    data.edge_index = data.edge_index[:, keep_tensor]
+    data.edge_type = data.edge_type[keep_tensor]
+    return int(pair_count), int(len(unique_keys))
+
+
 def apply_relation_controls(
     data,
     relation_ids_to_drop: Iterable[int] = (),
+    relation_to_id: Mapping[str, int] | None = None,
+    random_edge_drop_pairs: int = 0,
+    random_edge_drop_seed: int | None = None,
     shuffle_relation_types: bool = False,
     shuffle_seed: int | None = None,
 ) -> Dict[str, object]:
-    """Remove selected directed relation IDs, then optionally permute types.
+    """Remove selected relation edges, then optionally random-drop or shuffle.
 
     A global permutation preserves the frequency of every remaining relation
     type and the graph topology exactly, while breaking their correspondence.
@@ -126,6 +191,18 @@ def apply_relation_controls(
         data.edge_type = data.edge_type[keep]
     edge_count_after_ablation = int(data.edge_type.numel())
 
+    if random_edge_drop_pairs and relation_to_id is None:
+        raise ValueError("relation_to_id metadata is required for random edge-pair deletion")
+    if random_edge_drop_pairs and random_edge_drop_seed is None:
+        raise ValueError("A random-drop seed is required when deleting random relation pairs")
+    dropped_random_pairs, available_relation_pairs = _drop_random_relation_pairs(
+        data,
+        relation_to_id,
+        int(random_edge_drop_pairs),
+        int(random_edge_drop_seed),
+    ) if random_edge_drop_pairs else (0, None)
+    edge_count_after_random_drop = int(data.edge_type.numel())
+
     if shuffle_relation_types:
         if shuffle_seed is None:
             raise ValueError("A shuffle seed is required when relation types are shuffled")
@@ -138,6 +215,10 @@ def apply_relation_controls(
         "dropped_relation_ids": list(drop_ids),
         "edge_count_before": edge_count_before,
         "edge_count_after_ablation": edge_count_after_ablation,
+        "random_edge_drop_pairs": dropped_random_pairs,
+        "random_edge_drop_available_pairs": available_relation_pairs,
+        "random_edge_drop_seed": int(random_edge_drop_seed) if random_edge_drop_pairs else None,
+        "edge_count_after_random_drop": edge_count_after_random_drop,
         "relation_type_shuffle": bool(shuffle_relation_types),
         "relation_type_shuffle_seed": int(shuffle_seed) if shuffle_relation_types else None,
     }

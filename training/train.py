@@ -16,7 +16,12 @@ from sklearn.metrics import accuracy_score, f1_score, precision_recall_fscore_su
 from torch_geometric.loader import NeighborLoader
 
 from models import build_feature_specs, build_model
-from training.relation_controls import apply_relation_controls, parse_selection, resolve_ablation
+from training.relation_controls import (
+    apply_relation_controls,
+    count_relation_pairs,
+    parse_selection,
+    resolve_ablation,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -136,6 +141,18 @@ def parse_args() -> argparse.Namespace:
         "--shuffle-relation-types",
         action="store_true",
         help="Permute relation IDs across retained edges while preserving topology and relation frequencies",
+    )
+    random_drop = parser.add_mutually_exclusive_group()
+    random_drop.add_argument(
+        "--random-edge-drop-pairs",
+        type=int,
+        default=None,
+        help="Uniformly remove this many base-relation/undirected edge pairs (and both directed counterparts)",
+    )
+    random_drop.add_argument(
+        "--match-random-drop-to-relation-groups",
+        default=None,
+        help="Remove a uniform random set of as many relation pairs as the named groups contain; e.g. kinship",
     )
     parser.add_argument(
         "--eval-mode",
@@ -558,6 +575,10 @@ def main() -> None:
     auxiliary_features = parse_auxiliary_features(args.auxiliary_features)
     drop_relation_groups = parse_selection(args.drop_relation_groups)
     drop_relations = parse_selection(args.drop_relations)
+    random_match_groups = (
+        parse_selection(args.match_random_drop_to_relation_groups)
+        if args.match_random_drop_to_relation_groups is not None else ()
+    )
     if args.class_weight and args.loss != "cross_entropy":
         raise ValueError("--class-weight is a legacy alias and cannot be combined with a non-default --loss")
     loss_mode = "inverse_frequency" if args.class_weight else args.loss
@@ -576,6 +597,16 @@ def main() -> None:
         raise ValueError("--train-root-sampling applies only to sampled training")
     if args.feature_mode == "structural" and args.occupation_representation != "categorical":
         raise ValueError("--feature-mode structural does not use occupation representations; use categorical")
+    if args.random_edge_drop_pairs is not None and args.random_edge_drop_pairs < 0:
+        raise ValueError("--random-edge-drop-pairs must be non-negative")
+    if (args.random_edge_drop_pairs is not None or random_match_groups) and (
+        drop_relation_groups or drop_relations
+    ):
+        raise ValueError(
+            "Random edge-drop controls are standalone comparisons; do not combine them with --drop-relation-groups or --drop-relations"
+        )
+    if (args.random_edge_drop_pairs is not None or random_match_groups) and args.shuffle_relation_types:
+        raise ValueError("Random edge-drop controls should not be combined with --shuffle-relation-types")
     set_seed(args.seed)
     device = resolve_device(args.device)
     data_path = Path(args.data)
@@ -611,15 +642,30 @@ def main() -> None:
     relation_ids_to_drop, dropped_base_relations = resolve_ablation(
         metadata["relation_to_id"], drop_relation_groups, drop_relations
     )
+    matched_base_relations: Tuple[str, ...] = ()
+    if random_match_groups:
+        matching_relation_ids, matched_base_relations = resolve_ablation(
+            metadata["relation_to_id"], random_match_groups, ()
+        )
+        random_edge_drop_pairs = count_relation_pairs(
+            data, matching_relation_ids, metadata["relation_to_id"]
+        )
+    else:
+        random_edge_drop_pairs = args.random_edge_drop_pairs or 0
     relation_perturbation = apply_relation_controls(
         data,
         relation_ids_to_drop=relation_ids_to_drop,
+        relation_to_id=metadata["relation_to_id"],
+        random_edge_drop_pairs=random_edge_drop_pairs,
+        random_edge_drop_seed=args.seed if random_edge_drop_pairs else None,
         shuffle_relation_types=args.shuffle_relation_types,
         shuffle_seed=args.seed if args.shuffle_relation_types else None,
     )
     relation_perturbation.update({
         "dropped_relation_groups": list(drop_relation_groups),
         "dropped_base_relations": list(dropped_base_relations),
+        "random_drop_matched_relation_groups": list(random_match_groups),
+        "random_drop_matched_base_relations": list(matched_base_relations),
     })
     specs = build_feature_specs(feature_schema, metadata)
     model = build_model(

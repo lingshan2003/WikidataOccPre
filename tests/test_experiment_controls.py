@@ -7,15 +7,19 @@ start a GNN training job.
 import copy
 import unittest
 
+import numpy as np
 import torch
 import torch.nn as nn
 from torch_geometric.data import Data
 
 from models import build_model
 from models.features import NodeFeatureEncoder, build_feature_specs
+from training.diagnose import degree_arrays, relation_homophily, visible_occupation_coverage
 from training.relation_controls import (
     apply_relation_controls,
     available_relation_groups,
+    count_relation_pairs,
+    relation_pair_keys,
     resolve_ablation,
 )
 from training.train import (
@@ -110,6 +114,58 @@ class ExperimentControlTests(unittest.TestCase):
         self.assertEqual(sorted(first.edge_type.tolist()), sorted(original.edge_type.tolist()))
         self.assertTrue(torch.equal(first.edge_type, second.edge_type))
         self.assertTrue(manifest["relation_type_shuffle"])
+
+    def test_random_pair_deletion_keeps_forward_reverse_edges_together(self):
+        relation_to_id = {
+            "father": 0,
+            "father__rev": 1,
+            "student_of": 2,
+            "student_of__rev": 3,
+        }
+        graph = Data(
+            edge_index=torch.tensor([[0, 1, 1, 2], [1, 0, 2, 1]]),
+            edge_type=torch.tensor([0, 1, 2, 3]),
+            num_nodes=3,
+        )
+        father_ids, _ = resolve_ablation(relation_to_id, ("kinship",), ())
+        self.assertEqual(count_relation_pairs(graph, father_ids, relation_to_id), 1)
+        original_keys = relation_pair_keys(graph, relation_to_id)
+        manifest = apply_relation_controls(
+            graph,
+            relation_to_id=relation_to_id,
+            random_edge_drop_pairs=1,
+            random_edge_drop_seed=42,
+        )
+        retained_keys = relation_pair_keys(graph, relation_to_id)
+        for key in np.unique(original_keys):
+            original_count = int((original_keys == key).sum())
+            retained_count = int((retained_keys == key).sum())
+            self.assertIn(retained_count, {0, original_count})
+        self.assertEqual(manifest["random_edge_drop_pairs"], 1)
+        self.assertEqual(graph.edge_index.size(1), 2)
+
+    def test_diagnostics_measure_neighbours_coverage_and_relation_homophily(self):
+        relation_to_id = {"father": 0, "father__rev": 1, "student_of": 2, "student_of__rev": 3}
+        graph = Data(
+            edge_index=torch.tensor([[0, 1, 1, 2], [1, 0, 2, 1]]),
+            edge_type=torch.tensor([0, 1, 2, 3]),
+            y=torch.tensor([0, 0, 1]),
+            num_nodes=3,
+        )
+        _, _, neighbour_degree = degree_arrays(graph.edge_index, graph.num_nodes)
+        self.assertEqual(neighbour_degree.tolist(), [1, 2, 1])
+        direct, within_two_hops = visible_occupation_coverage(
+            graph.edge_index, np.array([True, False, False]), graph.num_nodes
+        )
+        self.assertEqual(direct.tolist(), [False, 1, False])
+        self.assertTrue(within_two_hops[2])
+        report = relation_homophily(
+            graph, relation_to_id, np.array([True, True, True]), min_support=1
+        )
+        father = report.loc[report["relation"] == "father"].iloc[0]
+        student = report.loc[report["relation"] == "student_of"].iloc[0]
+        self.assertEqual(father["same_label_rate"], 1.0)
+        self.assertEqual(student["same_label_rate"], 0.0)
 
     def test_long_tail_losses_and_root_sampling_use_train_labels_only(self):
         counts = torch.tensor([8.0, 2.0])

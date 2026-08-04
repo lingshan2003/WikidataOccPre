@@ -47,9 +47,10 @@
 以下能力已经进入训练入口，但尚无服务器实验结果；因此它们不应算作成功或失败尝试：
 
 - 不输入职业、国家、时间或节点 ID 的纯关系/结构基线（共享常量节点特征）；
-- relation type 全局置乱（保留拓扑和 relation 频数）以及按关系组或关系名的消融；
+- relation type 全局置乱（保留拓扑和 relation 频数）、按关系组或关系名的消融，以及与关系组删边数量匹配的随机关系对删边对照；
 - L3 长尾的有效样本数 class-balanced loss、logit-adjusted loss 与 class-balanced seed sampling；
 - 真正的 full-batch 全图训练。该模式为避免职业泄漏，当前只支持不输入职业特征的设置。
+- 图稀疏度、连通分量、可见训练职业邻居覆盖、relation-level 职业同配性和按覆盖分桶性能的离线诊断。
 
 ## 尚未实施，不应算作失败尝试
 

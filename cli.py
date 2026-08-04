@@ -7,7 +7,7 @@ import sys
 def main() -> None:
     parser = argparse.ArgumentParser(prog="run.py", description="Occupation GNN experiment runner")
     parser.add_argument(
-        "command", choices=["prepare", "occupation-embed", "train", "explain", "link-prepare", "link-train"], help="Workflow to run"
+        "command", choices=["prepare", "occupation-embed", "train", "explain", "diagnose", "link-prepare", "link-train"], help="Workflow to run"
     )
     parser.add_argument("args", nargs=argparse.REMAINDER, help="Arguments passed to that workflow")
     parsed = parser.parse_args()
@@ -17,6 +17,8 @@ def main() -> None:
         from data.occupation_semantics import main as command_main
     elif parsed.command == "train":
         from training.train import main as command_main
+    elif parsed.command == "diagnose":
+        from training.diagnose import main as command_main
     elif parsed.command == "link-prepare":
         from link_prediction.prepare import main as command_main
     elif parsed.command == "link-train":

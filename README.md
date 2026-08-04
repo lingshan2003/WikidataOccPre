@@ -282,8 +282,58 @@ python run.py train --model rgcn \
   --num-workers 4 --seed 42 --device cuda --skip-test
 ```
 
+亲属消融删掉的边数可能远大于其他关系组，因此还必须与**等数量随机删边**配对。
+`--match-random-drop-to-relation-groups kinship` 先统计亲属关系包含的“原始关系 +
+无向人物对”数量，再从全图均匀抽取相同数量的关系对；每一对的正向和反向边一起删除。
+这保留了“删边规模”而不保留亲属语义：
+
+```bash
+python run.py train --model rgcn \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgcn_random_drop_matched_kinship \
+  --occupation-feature-levels 1,2,3 --auxiliary-features none \
+  --match-random-drop-to-relation-groups kinship \
+  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
+  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
+  --early-stop-metric macro_f1 --min-delta 0.001 \
+  --num-workers 4 --seed 42 --device cuda --skip-test
+```
+
+若亲属消融明显差于这个随机删边对照，才有较强证据表明亲属边的价值超出单纯的图
+连通性。`--random-edge-drop-pairs N` 也可用于手工指定要删除的关系对数量。随机删边
+与关系消融或 relation type 置乱是独立对照，命令行不允许把它们混合。
+
 对置乱模型导出 attention 时，程序会重放同一置乱；但其 relation 标签已经不对应
 原始语义，因此不能用它做关系解释。
+
+### 数据诊断：稀疏度、职业可见性与关系同配性
+
+`diagnose` 不训练模型。它默认仅使用训练人物的真实职业标签来估计 relation-level
+同配性，避免用验证/测试标签来描述训练时可见信号；并输出每个人的不同邻居数、连通
+分量、可见训练职业邻居数及两跳覆盖。传入一次最终测试的预测 CSV 后，还会按这些分桶
+报告 Accuracy 和 Macro-F1。
+
+```bash
+# 图和标签信号本身的诊断（可在训练前运行）
+python run.py diagnose \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir diagnostics/level3_graph
+
+# 需要先完成一次不带 --skip-test 的最终运行，才会生成 test_predictions.csv。
+python run.py diagnose \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --predictions runs/level3_rgcn_baseline_macro/test_predictions.csv \
+  --output-dir diagnostics/level3_baseline
+```
+
+输出包括：
+
+```text
+summary.json              # 点边比、连通分量、各 split 的直接/两跳职业覆盖
+node_diagnostics.csv      # 每个节点的不同邻居数、分量大小和职业邻居覆盖
+relation_homophily.csv    # 每种关系的职业相同率、相对独立基线 lift、互信息
+prediction_strata.csv     # 可选：按度/职业邻居覆盖分桶的 Accuracy、Macro-F1
+```
 
 **3. L3 长尾训练。** 以下三种策略先逐一与同一基线比较，避免无法归因。它们均只用
 训练 split 的类别频数，验证和测试标签从不参与权重或先验计算：
