@@ -55,6 +55,9 @@ class ExperimentControlTests(unittest.TestCase):
         relation_to_id = {"father": 0, "father__rev": 1, "child": 2, "child__rev": 3}
         selected = parse_matrix_relations("father,father__rev", relation_to_id)
         self.assertEqual(selected, {0: "father", 1: "father__rev"})
+        self.assertEqual(parse_matrix_relations("all", relation_to_id), {
+            0: "father", 1: "father__rev", 2: "child", 3: "child__rev",
+        })
         graph = Data(y=torch.tensor([0, -1, 1]), num_nodes=3)
         self.assertEqual(prediction_nodes(graph, "labeled").tolist(), [True, False, True])
 

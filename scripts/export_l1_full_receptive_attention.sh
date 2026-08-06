@@ -10,8 +10,9 @@ cd "$PROJECT_DIR"
 MODE="${1:-plan}"
 DATA_PATH="${RGCN_L1_DATA:-artifacts/level1_hierarchy/graph_data.pt}"
 OUTPUT_ROOT="${RGCN_L1_REPORT_ROOT:-runs_report/level1}"
-OUTPUT_DIR="${RGCN_L1_FULL_ATTENTION_OUTPUT:-$OUTPUT_ROOT/rgat_l1_full_receptive_attention}"
+OUTPUT_DIR="${RGCN_L1_FULL_ATTENTION_OUTPUT:-$OUTPUT_ROOT/rgat_l1_full_receptive_attention_all_relations}"
 BATCH_SIZE="${RGCN_L1_FULL_ATTENTION_BATCH_SIZE:-32}"
+MATRIX_RELATIONS="${RGCN_L1_FULL_ATTENTION_RELATIONS:-all}"
 SEEDS=(42 43 44)
 
 usage() {
@@ -27,8 +28,9 @@ message-passing layer (-1 for one-layer checkpoints; -1,-1 for two-layer).
 Environment overrides:
   RGCN_L1_DATA=artifacts/level1_hierarchy/graph_data.pt
   RGCN_L1_REPORT_ROOT=runs_report/level1
-  RGCN_L1_FULL_ATTENTION_OUTPUT=runs_report/level1/rgat_l1_full_receptive_attention
+  RGCN_L1_FULL_ATTENTION_OUTPUT=runs_report/level1/rgat_l1_full_receptive_attention_all_relations
   RGCN_L1_FULL_ATTENTION_BATCH_SIZE=32
+  RGCN_L1_FULL_ATTENTION_RELATIONS=all  # all exact directed relations (default)
 EOF
 }
 
@@ -53,7 +55,7 @@ command=(
   --num-neighbors full
   --batch-size "$BATCH_SIZE"
   --num-workers 0
-  --occupation-matrix-relations child,spouse,sibling,father,mother
+  --occupation-matrix-relations "$MATRIX_RELATIONS"
   --matrix-min-edge-count 10
   --device cuda
 )

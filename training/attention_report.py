@@ -63,7 +63,8 @@ def parse_args() -> argparse.Namespace:
         default="none",
         help=(
             "Comma-separated directed relation labels for L1 source-to-target attention matrices, "
-            "or none. Names are used exactly as stored: 'father' does not also select 'father__rev'."
+            "'all' for every exact directed relation, or none. Names are used exactly as stored: "
+            "'father' does not also select 'father__rev'."
         ),
     )
     parser.add_argument(
@@ -105,11 +106,17 @@ def parse_matrix_relations(value: str, relation_to_id: Mapping[str, int]) -> Dic
     matrix must retain that direction rather than silently merge both types,
     because the source/target L1 axes would otherwise become ambiguous.
     """
-    if value.strip().casefold() == "none":
+    selected = value.strip().casefold()
+    if selected == "none":
         return {}
+    if selected == "all":
+        # Keep every original and generated reverse relation separate.  This
+        # makes one expensive full-receptive-field pass reusable for any later
+        # source-L1/target-L1 relation selection.
+        return {int(relation_id): relation for relation, relation_id in relation_to_id.items()}
     names = tuple(dict.fromkeys(item.strip() for item in value.split(",") if item.strip()))
     if not names:
-        raise ValueError("--occupation-matrix-relations must be relation names or 'none'")
+        raise ValueError("--occupation-matrix-relations must be relation names, 'all', or 'none'")
     unknown = [name for name in names if name not in relation_to_id]
     if unknown:
         available = ", ".join(sorted(relation_to_id))
@@ -258,16 +265,28 @@ def collect_checkpoint_attention(
     )
     id_to_relation = {int(index): relation for relation, index in metadata["relation_to_id"].items()}
     id_to_label = {int(index): label for label, index in metadata["label_to_id"].items()}
-    totals: Dict[Tuple[int, int], List[float]] = defaultdict(lambda: [0.0, 0.0])
-    # Key: message layer, directed relation, neighbour/source L1, target L1.
-    # Values are [head-averaged attention sum, typed edge count].
-    l1_pair_totals: Dict[Tuple[int, int, int, int], List[float]] = defaultdict(lambda: [0.0, 0.0])
+    class_count = int(metadata["num_classes"])
+    relation_slots = max(int(relation_id) for relation_id in metadata["relation_to_id"].values()) + 1
+    # Accumulate on device instead of keeping a Python dictionary for every
+    # batch.  This matters when --occupation-matrix-relations=all: a complete
+    # report has relation_slots × L1² cells, but that tensor is still tiny.
+    relation_score_sums = torch.zeros((num_layers, relation_slots), dtype=torch.float64, device=device)
+    relation_edge_counts = torch.zeros((num_layers, relation_slots), dtype=torch.long, device=device)
+    matrix_relation_lookup = None
+    l1_pair_score_sums = None
+    l1_pair_edge_counts = None
+    if matrix_relation_ids:
+        matrix_relation_lookup = torch.zeros(relation_slots, dtype=torch.bool, device=device)
+        matrix_relation_lookup[list(matrix_relation_ids)] = True
+        l1_pair_score_sums = torch.zeros(
+            (num_layers, relation_slots, class_count, class_count), dtype=torch.float64, device=device
+        )
+        l1_pair_edge_counts = torch.zeros(
+            (num_layers, relation_slots, class_count, class_count), dtype=torch.long, device=device
+        )
     synthetic_target_edges: Dict[int, int] = defaultdict(int)
     target_l1_counts = torch.zeros(metadata["num_classes"], dtype=torch.long)
     roots_seen = 0
-    matrix_relation_tensor = torch.tensor(
-        sorted(matrix_relation_ids), dtype=data.edge_type.dtype, device=device
-    ) if matrix_relation_ids else None
     for batch in loader:
         batch = batch.to(device)
         logits, explanation = model(
@@ -292,51 +311,47 @@ def collect_checkpoint_attention(
             usable = is_prediction_target & is_typed_relation
             if not bool(usable.any()):
                 continue
-            for relation_id in relation_ids[usable].unique(sorted=True).tolist():
-                relation_mask = usable & (relation_ids == relation_id)
-                total = totals[(layer, int(relation_id))]
-                total[0] += float(scores[relation_mask].sum().item())
-                total[1] += float(relation_mask.sum().item())
+            usable_relation_ids = relation_ids[usable].long()
+            relation_score_sums[layer - 1].scatter_add_(
+                0, usable_relation_ids, scores[usable].to(dtype=torch.float64)
+            )
+            relation_edge_counts[layer - 1].scatter_add_(
+                0, usable_relation_ids, torch.ones_like(usable_relation_ids, dtype=torch.long)
+            )
 
-            if matrix_relation_tensor is None:
+            if matrix_relation_lookup is None:
                 continue
             source_l1 = batch.y[edge_index[0]]
             target_l1 = batch.y[edge_index[1]]
             l1_pair_mask = (
                 usable
-                & torch.isin(relation_ids, matrix_relation_tensor)
+                & matrix_relation_lookup[relation_ids.clamp_min(0)]
                 & (source_l1 >= 0)
                 & (target_l1 >= 0)
             )
             if not bool(l1_pair_mask.any()):
                 continue
-            # At most (#relations × #L1²) unique keys occur per batch, so
-            # collecting on-device first avoids an expensive Python loop over
-            # individual attention edges.
-            class_count = int(metadata["num_classes"])
+            # Flatten (relation, source L1, target L1) and scatter into a
+            # fixed on-device tensor.  Unlike a Python dictionary update per
+            # unique cell and batch, its runtime does not grow sharply when
+            # all directed relations are requested.
             encoded = (
                 relation_ids[l1_pair_mask].long() * class_count * class_count
                 + source_l1[l1_pair_mask].long() * class_count
                 + target_l1[l1_pair_mask].long()
             )
-            unique_encoded, inverse = encoded.unique(sorted=True, return_inverse=True)
-            score_sums = torch.zeros(unique_encoded.numel(), dtype=scores.dtype, device=device)
-            score_sums.scatter_add_(0, inverse, scores[l1_pair_mask])
-            edge_counts = torch.bincount(inverse, minlength=unique_encoded.numel())
-            for encoded_key, score_sum, edge_count in zip(
-                unique_encoded.tolist(), score_sums.tolist(), edge_counts.tolist()
-            ):
-                relation_id = encoded_key // (class_count * class_count)
-                remainder = encoded_key % (class_count * class_count)
-                source_label_id = remainder // class_count
-                target_label_id = remainder % class_count
-                total = l1_pair_totals[(layer, relation_id, source_label_id, target_label_id)]
-                total[0] += float(score_sum)
-                total[1] += float(edge_count)
+            l1_pair_score_sums[layer - 1].view(-1).scatter_add_(
+                0, encoded, scores[l1_pair_mask].to(dtype=torch.float64)
+            )
+            l1_pair_edge_counts[layer - 1].view(-1).scatter_add_(
+                0, encoded, torch.ones_like(encoded, dtype=torch.long)
+            )
 
     experiment, seed = checkpoint_identity(path)
     records = []
-    for (layer, relation_id), (score_sum, edge_count) in sorted(totals.items()):
+    for layer_index, relation_id in relation_edge_counts.nonzero(as_tuple=False).tolist():
+        score_sum = float(relation_score_sums[layer_index, relation_id].item())
+        edge_count = int(relation_edge_counts[layer_index, relation_id].item())
         records.append({
             "experiment": experiment,
             "seed": seed,
@@ -344,34 +359,37 @@ def collect_checkpoint_attention(
             "split": split,
             "num_layers": num_layers,
             "fanouts": ",".join(str(value) for value in fanouts),
-            "message_passing_layer": layer,
+            "message_passing_layer": layer_index + 1,
             "relation_id": relation_id,
             "relation": id_to_relation[relation_id],
-            "edge_count": int(edge_count),
+            "edge_count": edge_count,
             "attention_mean": score_sum / edge_count,
         })
     l1_pair_records = []
-    for (layer, relation_id, source_label_id, target_label_id), (score_sum, edge_count) in sorted(l1_pair_totals.items()):
-        target_count = int(target_l1_counts[target_label_id])
-        l1_pair_records.append({
-            "experiment": experiment,
-            "seed": seed,
-            "checkpoint": str(path),
-            "split": split,
-            "num_layers": num_layers,
-            "fanouts": ",".join(str(value) for value in fanouts),
-            "message_passing_layer": layer,
-            "relation_id": relation_id,
-            "relation": id_to_relation[relation_id],
-            "source_l1_id": source_label_id,
-            "source_l1": id_to_label[source_label_id],
-            "target_l1_id": target_label_id,
-            "target_l1": id_to_label[target_label_id],
-            "edge_count": int(edge_count),
-            "target_l1_count": target_count,
-            "attention_mean": score_sum / edge_count,
-            "attention_mass_per_target": score_sum / max(target_count, 1),
-        })
+    if l1_pair_edge_counts is not None and l1_pair_score_sums is not None:
+        for layer_index, relation_id, source_label_id, target_label_id in l1_pair_edge_counts.nonzero(as_tuple=False).tolist():
+            score_sum = float(l1_pair_score_sums[layer_index, relation_id, source_label_id, target_label_id].item())
+            edge_count = int(l1_pair_edge_counts[layer_index, relation_id, source_label_id, target_label_id].item())
+            target_count = int(target_l1_counts[target_label_id])
+            l1_pair_records.append({
+                "experiment": experiment,
+                "seed": seed,
+                "checkpoint": str(path),
+                "split": split,
+                "num_layers": num_layers,
+                "fanouts": ",".join(str(value) for value in fanouts),
+                "message_passing_layer": layer_index + 1,
+                "relation_id": relation_id,
+                "relation": id_to_relation[relation_id],
+                "source_l1_id": source_label_id,
+                "source_l1": id_to_label[source_label_id],
+                "target_l1_id": target_label_id,
+                "target_l1": id_to_label[target_label_id],
+                "edge_count": edge_count,
+                "target_l1_count": target_count,
+                "attention_mean": score_sum / edge_count,
+                "attention_mass_per_target": score_sum / max(target_count, 1),
+            })
     run_info = {
         "checkpoint": str(path),
         "experiment": experiment,
