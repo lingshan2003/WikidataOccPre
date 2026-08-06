@@ -6,6 +6,7 @@ start a GNN training job.
 
 import copy
 import unittest
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -15,6 +16,7 @@ from torch_geometric.data import Data
 from models import build_model
 from models.features import NodeFeatureEncoder, build_feature_specs
 from training.diagnose import degree_arrays, relation_homophily, visible_occupation_coverage
+from training.attention_report import fanouts_for_checkpoint, parse_matrix_relations, prediction_nodes
 from training.relation_controls import (
     apply_relation_controls,
     available_relation_groups,
@@ -44,6 +46,18 @@ class TinyFullGraphModel(nn.Module):
 
 
 class ExperimentControlTests(unittest.TestCase):
+    def test_full_attention_fanouts_follow_each_checkpoint_depth(self):
+        missing_checkpoint = Path("/tmp/no-such-rgat-checkpoint.pt")
+        self.assertEqual(fanouts_for_checkpoint(missing_checkpoint, "full", 1), [-1])
+        self.assertEqual(fanouts_for_checkpoint(missing_checkpoint, "full", 2), [-1, -1])
+
+    def test_l1_matrix_relations_preserve_generated_reverse_direction(self):
+        relation_to_id = {"father": 0, "father__rev": 1, "child": 2, "child__rev": 3}
+        selected = parse_matrix_relations("father,father__rev", relation_to_id)
+        self.assertEqual(selected, {0: "father", 1: "father__rev"})
+        graph = Data(y=torch.tensor([0, -1, 1]), num_nodes=3)
+        self.assertEqual(prediction_nodes(graph, "labeled").tolist(), [True, False, True])
+
     def test_structural_mode_is_one_shared_non_person_specific_feature(self):
         schema = select_feature_schema({}, (), (), "categorical", feature_mode="structural")
         specs = build_feature_specs(schema, {})

@@ -227,6 +227,18 @@ attention alpha 先求均值、再在边上求均值，最后报告三条 seed �
 `edges.csv` 中核实并明确选择父→子的那一个有向标签。测试节点的真实 L1 仅用于导出后的
 分组，模型输入仍保持 unknown 掩码。
 
+若要让每个有 L1 标签的人都轮流成为预测 root，并在其完整一/二跳感受野中导出注意力，
+不需要重训。以下脚本对一跳 checkpoint 自动使用 `-1`，对两跳 checkpoint 自动使用
+`-1,-1`；每个 root 的自身职业仍会在该 batch 中 mask：
+
+```bash
+bash scripts/export_l1_full_receptive_attention.sh plan
+bash scripts/export_l1_full_receptive_attention.sh run
+```
+
+输出位于 `runs_report/level1/rgat_l1_full_receptive_attention/`。两跳全邻域子图可能比训练时
+大得多；若显存不足，可先设置 `RGCN_L1_FULL_ATTENTION_BATCH_SIZE=8` 后再运行。
+
 只使用邻居 Level 3 的受控对照：
 
 ```bash

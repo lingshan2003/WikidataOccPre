@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Aggregate test-node RGAT attention by relation across one or more checkpoints.
+"""Aggregate prediction-root RGAT attention by relation across checkpoints.
 
 The reported value is the mean of head-averaged attention coefficients for
 typed *incoming* edges whose destination is a requested prediction node.  It
@@ -44,16 +44,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument(
         "--split",
-        choices=["train", "val", "test", "all"],
+        choices=["train", "val", "test", "labeled", "all"],
         default="test",
-        help="Prediction roots to include; test is the default report population",
+        help="Prediction roots: one split, labeled (all nodes with a retained class), or all graph nodes",
     )
     parser.add_argument(
         "--num-neighbors",
         default="auto",
         help=(
-            "Comma-separated analysis fan-outs, or auto to reuse each run's metrics.json value. "
-            "Auto falls back to 20 per model layer if the run config is unavailable."
+            "Comma-separated analysis fan-outs; auto reuses each run's metrics.json; "
+            "full uses -1 for every layer; auto falls back to 20 per model layer if unavailable."
         ),
     )
     parser.add_argument("--batch-size", type=int, default=512)
@@ -89,7 +89,7 @@ def parse_fanouts(value: str, num_layers: int) -> List[int]:
     try:
         fanouts = [int(item.strip()) for item in value.split(",")]
     except ValueError as error:
-        raise ValueError("--num-neighbors must look like '15,10' or 'auto'") from error
+        raise ValueError("--num-neighbors must look like '15,10', 'auto', or 'full'") from error
     if len(fanouts) != num_layers or any(item < -1 for item in fanouts):
         raise ValueError(
             f"The checkpoint has {num_layers} message-passing layers, so --num-neighbors must provide "
@@ -151,6 +151,8 @@ def model_depth(checkpoint: Mapping[str, object]) -> int:
 
 
 def fanouts_for_checkpoint(path: Path, requested: str, num_layers: int) -> List[int]:
+    if requested == "full":
+        return [-1] * num_layers
     if requested != "auto":
         return parse_fanouts(requested, num_layers)
     metrics_path = path.parent / "metrics.json"
@@ -174,6 +176,11 @@ def checkpoint_identity(path: Path) -> Tuple[str, str]:
 def prediction_nodes(data, split: str) -> torch.Tensor:
     if split == "all":
         return torch.arange(data.num_nodes, dtype=torch.long)
+    if split == "labeled":
+        # Every retained L1 class is supervised in exactly one of train/val/test.
+        # Selecting y>=0 includes all analysable people but avoids spending a
+        # full-neighbourhood forward on unsupervised/rare-label graph nodes.
+        return data.y >= 0
     mask_name = f"{split}_mask"
     if not hasattr(data, mask_name):
         raise ValueError(f"Prepared graph lacks {mask_name}")
@@ -493,7 +500,7 @@ def write_markdown_table(path: Path, rows: Sequence[Mapping[str, object]], colum
     lines = [
         "# L1 RGAT relation attention summary",
         "",
-        "每个值为三条 seed 运行中，测试集预测节点入边的 head-average attention 均值 ± seed 标准差。",
+        "每个值为三条 seed 运行中，指定预测 root 入边的 head-average attention 均值 ± seed 标准差。",
         "`layer1`/`layer2` 表示消息传递层，不应解释为因果效应。",
         "",
         "| " + " | ".join(headers) + " |",
@@ -536,7 +543,7 @@ def write_l1_pair_matrices(
     lines = [
         "# L1 relation attention matrices",
         "",
-        "Rows are source/neighbour true L1 labels; columns are target/test-person true L1 labels.",
+        "Rows are source/neighbour true L1 labels; columns are target/prediction-root true L1 labels.",
         "Each displayed value is mean head-averaged incoming attention ± seed standard deviation; `n` is the mean number of typed edges across seed runs.",
         "A dash means no labelled edge was observed. A cell with fewer than the configured minimum support is masked as `low n`.",
         "The labels are exact directed graph relations: `father` and `father__rev` must be interpreted separately.",
@@ -662,7 +669,7 @@ def main() -> None:
         "data": str(Path(args.data).resolve()),
         "split": args.split,
         "definition": (
-            "Mean head-averaged RGAT alpha over typed incoming edges whose destination is a prediction root; "
+            "Mean head-averaged RGAT alpha over typed incoming edges whose destination is a selected prediction root; "
             "synthetic self-loops are excluded."
         ),
         "l1_relation_matrix": {
@@ -670,7 +677,7 @@ def main() -> None:
             "relations": matrix_relation_ids,
             "definition": (
                 "For each exact directed relation, source L1 and target L1 cell, mean head-averaged RGAT "
-                "alpha over typed incoming test-target edges. Source/target true labels are used only for post-hoc grouping."
+                "alpha over typed incoming prediction-root edges. Source/target true labels are used only for post-hoc grouping."
             ) if matrix_relation_ids else None,
             "minimum_edge_count_for_markdown": args.matrix_min_edge_count if matrix_relation_ids else None,
         },
