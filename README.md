@@ -244,6 +244,46 @@ bash scripts/export_l1_full_receptive_attention.sh run
 全部关系的 L1 矩阵。两跳全邻域子图可能比训练时大得多；若显存不足，可先设置
 `RGCN_L1_FULL_ATTENTION_BATCH_SIZE=8` 后再运行。
 
+### L1 全关系 root-level attention 与 two-hop rollout
+
+当研究问题是“模型如何使用已知训练人物的职业和关系”时，使用 test roots，而不是把
+训练 root 与 test root 混在同一份 attention 汇总中。test/validation 人物的职业输入已经是
+`UNKNOWN`，因此可以安全地将训练人物职业保留为可见 source，并用一次 `eval()` 全图前向
+导出 alpha；这不会把 test root 的答案传入模型。
+
+先训练只暴露邻居 L1 的一层、两层 RGAT 对照：
+
+```bash
+bash scripts/run_l1_only_rgat_attention.sh plan
+bash scripts/run_l1_only_rgat_attention.sh run
+```
+
+随后导出现有 hierarchy RGAT 和新增 L1-only RGAT 的所有精确有向关系、所有有序两跳关系对，
+并以 root 为聚类单位计算 bootstrap 区间：
+
+```bash
+bash scripts/export_l1_root_attention.sh plan
+RGCN_L1_ATTENTION_BATCH_SIZE=32 bash scripts/export_l1_root_attention.sh run
+```
+
+默认 `full-graph` 只接受 validation/test roots；若服务器无法容纳全图推理，可改用完整
+`-1,-1` 感受野 batch，二者均在 manifest 中记录：
+
+```bash
+RGCN_L1_ATTENTION_FORWARD_MODE=full-neighborhood \
+RGCN_L1_ATTENTION_BATCH_SIZE=8 \
+bash scripts/export_l1_root_attention.sh run
+```
+
+主要输出为：
+
+- `direct/root_attention_roster_by_seed.csv.gz`：每个 root/layer 的完整 alpha mass、typed mass 与 self-loop 诊断；
+- `direct/root_direct_attention_sparse_by_seed.csv.gz`：root × 精确关系 × source L1 × 可见性状态的 attention mass；
+- `rollout/root_two_hop_rollout_sparse_by_seed.csv.gz`：root × `(r1,r2)` × source L1 × 可见性状态的 raw two-hop attention-path score；
+- 两份 `*_bootstrap.csv`：对 root 有放回重抽样的均值和 95% 区间。
+
+`attention_mass` 和 rollout score 都是模型机制描述；它们不是删边后的预测影响，更不是历史社会因果。稀疏文件保留所有关系维度，后续可选择特定关系进行删边或职业置换反事实。
+
 只使用邻居 Level 3 的受控对照：
 
 ```bash

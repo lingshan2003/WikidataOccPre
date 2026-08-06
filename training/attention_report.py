@@ -9,21 +9,26 @@ is a model-mechanism summary, not a causal relation-effect estimate.
 import argparse
 import copy
 import csv
+import gzip
+import hashlib
 import glob
 import json
 import re
+import subprocess
+import sys
 from collections import defaultdict
 from pathlib import Path
 from statistics import mean, stdev
 from typing import Dict, Iterable, List, Mapping, Sequence, Tuple
 
 import torch
+import torch_geometric
 from torch_geometric.loader import NeighborLoader
 
 from models import build_feature_specs, build_model
 from training.attention_utils import attention_relation_ids
 from training.relation_controls import apply_relation_controls
-from training.train import batch_features
+from training.train import batch_features, feature_inputs
 
 
 def parse_args() -> argparse.Namespace:
@@ -58,6 +63,23 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument(
+        "--forward-mode",
+        choices=["full-graph", "full-neighborhood"],
+        default="full-neighborhood",
+        help=(
+            "full-graph runs one inference over the whole graph and is valid only for val/test roots whose "
+            "occupation inputs are already UNKNOWN; full-neighborhood replays complete (-1) sampled receptive fields."
+        ),
+    )
+    parser.add_argument(
+        "--root-level-output",
+        action="store_true",
+        help=(
+            "Write sparse root-level relation/source-L1 attention masses and a root roster for bootstrap analysis. "
+            "This can be large for all relations."
+        ),
+    )
     parser.add_argument(
         "--occupation-matrix-relations",
         default="none",
@@ -229,6 +251,96 @@ def replay_relation_perturbation(data, metadata: Mapping[str, object], checkpoin
     )
 
 
+def root_indices(data, split: str) -> torch.Tensor:
+    """Resolve any supported root selector to an explicit CPU index tensor."""
+    selected = prediction_nodes(data, split)
+    if selected.dtype == torch.bool:
+        return selected.nonzero(as_tuple=False).view(-1).cpu()
+    return selected.cpu()
+
+
+def validate_full_graph_root_mask(
+    data,
+    root_ids: torch.Tensor,
+    split: str,
+    feature_schema: Mapping[str, object],
+    occupation_unknown_ids: Mapping[str, int],
+) -> None:
+    """Reject a full-graph export when a requested root can see its occupation.
+
+    A single full-graph feature matrix cannot hide each training root while
+    simultaneously exposing it as a known neighbour for other training roots.
+    Test and validation roots are safe because preparation has already masked
+    their occupation inputs globally.  This guard turns that research protocol
+    into an executable invariant instead of a convention in a notebook.
+    """
+    if split not in {"val", "test"}:
+        raise ValueError(
+            "--forward-mode full-graph is valid only with --split val or --split test. "
+            "Training/labeled roots need root-specific masking, so use --forward-mode full-neighborhood instead."
+        )
+    for feature_name, unknown_id in occupation_unknown_ids.items():
+        if feature_name not in feature_schema or not hasattr(data, feature_name):
+            continue
+        values = getattr(data, feature_name)[root_ids]
+        if bool(values.ne(int(unknown_id)).any()):
+            visible = int(values.ne(int(unknown_id)).sum().item())
+            raise RuntimeError(
+                f"{visible} requested {split} roots expose {feature_name}; refusing full-graph attention export "
+                "because alpha would be conditioned on a root's own occupation."
+            )
+
+
+def source_visibility_codes(
+    graph,
+    source_indices: torch.Tensor,
+    feature_schema: Mapping[str, object],
+    occupation_unknown_ids: Mapping[str, int],
+) -> torch.Tensor:
+    """Classify whether a source's true L1 is an input the model can see.
+
+    0 = visible_train; 1 = hidden_validation_or_test; 2 = missing_or_unknown.
+    The last category also covers rare/unretained labels because no retained L1
+    value is available for post-hoc grouping.
+    """
+    labels = graph.y[source_indices]
+    result = torch.ones_like(labels, dtype=torch.long)
+    result[labels < 0] = 2
+    if "occupation_level1" not in feature_schema or not hasattr(graph, "occupation_level1"):
+        return result
+    unknown_id = occupation_unknown_ids.get("occupation_level1")
+    if unknown_id is None:
+        return result
+    observed = getattr(graph, "occupation_level1")[source_indices].ne(int(unknown_id))
+    visible = (labels >= 0) & graph.train_mask[source_indices] & observed
+    result[visible] = 0
+    return result
+
+
+def _head_alpha(alpha: torch.Tensor) -> torch.Tensor:
+    """Return alpha as [edge, head], including the one-head PyG representation."""
+    return alpha.unsqueeze(-1) if alpha.dim() == 1 else alpha
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def git_revision() -> str | None:
+    """Return the checked-out source revision when this runs inside the repository."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, check=True, text=True
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return result.stdout.strip() or None
+
+
 @torch.no_grad()
 def collect_checkpoint_attention(
     path: Path,
@@ -240,7 +352,15 @@ def collect_checkpoint_attention(
     batch_size: int,
     num_workers: int,
     device: torch.device,
-) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], Dict[str, object]]:
+    forward_mode: str = "full-neighborhood",
+    root_level_output: bool = False,
+) -> Tuple[
+    List[Dict[str, object]],
+    List[Dict[str, object]],
+    List[Dict[str, object]],
+    List[Dict[str, object]],
+    Dict[str, object],
+]:
     checkpoint = torch.load(path, map_location="cpu", weights_only=False)
     model, feature_schema, metadata = restore_rgat(checkpoint, device)
     if metadata["relation_to_id"] != base_metadata["relation_to_id"]:
@@ -253,16 +373,11 @@ def collect_checkpoint_attention(
     fanouts = fanouts_for_checkpoint(path, requested_fanouts, num_layers)
     data = copy.deepcopy(base_data)
     replay_relation_perturbation(data, metadata, checkpoint)
-    loader = NeighborLoader(
-        data,
-        input_nodes=prediction_nodes(data, split),
-        num_neighbors=fanouts,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=max(0, num_workers),
-        persistent_workers=num_workers > 0,
-        pin_memory=device.type == "cuda",
-    )
+    root_ids = root_indices(data, split)
+    if forward_mode == "full-graph":
+        validate_full_graph_root_mask(data, root_ids, split, feature_schema, metadata["occupation_unknown_ids"])
+    elif forward_mode != "full-neighborhood":
+        raise ValueError(f"Unknown forward mode: {forward_mode}")
     id_to_relation = {int(index): relation for relation, index in metadata["relation_to_id"].items()}
     id_to_label = {int(index): label for label, index in metadata["label_to_id"].items()}
     class_count = int(metadata["num_classes"])
@@ -287,28 +402,114 @@ def collect_checkpoint_attention(
     synthetic_target_edges: Dict[int, int] = defaultdict(int)
     target_l1_counts = torch.zeros(metadata["num_classes"], dtype=torch.long)
     roots_seen = 0
-    for batch in loader:
-        batch = batch.to(device)
-        logits, explanation = model(
-            batch_features(batch, feature_schema, metadata["occupation_unknown_ids"]),
-            batch.edge_index,
-            batch.edge_type,
-            return_attention_weights=True,
+    root_records: List[Dict[str, object]] = []
+    roster_records: List[Dict[str, object]] = []
+    head_count = 0
+    fanout_description = "full-graph" if forward_mode == "full-graph" else ",".join(str(value) for value in fanouts)
+    experiment, seed = checkpoint_identity(path)
+
+    def batches():
+        if forward_mode == "full-graph":
+            graph = data.to(device)
+            local_roots = root_ids.to(device)
+            global_ids = torch.arange(graph.num_nodes, dtype=torch.long, device=device)
+            logits, explanation = model(
+                feature_inputs(graph, feature_schema),
+                graph.edge_index,
+                graph.edge_type,
+                return_attention_weights=True,
+            )
+            del logits
+            yield graph, local_roots, global_ids, explanation
+            return
+
+        loader = NeighborLoader(
+            data,
+            input_nodes=prediction_nodes(data, split),
+            num_neighbors=fanouts,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=max(0, num_workers),
+            persistent_workers=num_workers > 0,
+            pin_memory=device.type == "cuda",
         )
-        del logits
-        roots_seen += int(batch.batch_size)
-        root_l1 = batch.y[:batch.batch_size].detach().cpu()
+        for batch in loader:
+            batch = batch.to(device)
+            local_roots = torch.arange(batch.batch_size, dtype=torch.long, device=device)
+            logits, explanation = model(
+                batch_features(batch, feature_schema, metadata["occupation_unknown_ids"]),
+                batch.edge_index,
+                batch.edge_type,
+                return_attention_weights=True,
+            )
+            del logits
+            yield batch, local_roots, batch.n_id, explanation
+
+    for batch, local_roots, global_ids, explanation in batches():
+        root_count = int(local_roots.numel())
+        roots_seen += root_count
+        root_l1 = batch.y[local_roots].detach().cpu()
         target_l1_counts += torch.bincount(root_l1[root_l1 >= 0], minlength=metadata["num_classes"])
+        root_slot = torch.full((batch.num_nodes,), -1, dtype=torch.long, device=device)
+        root_slot[local_roots] = torch.arange(root_count, dtype=torch.long, device=device)
+        global_root_ids = global_ids[local_roots].detach().cpu().tolist()
+        root_label_ids = batch.y[local_roots].detach().cpu().tolist()
         for layer_info in explanation["attention_layers"]:
             layer = int(layer_info["layer"]) + 1
             edge_index = layer_info["edge_index"]
             relation_ids = attention_relation_ids(layer_info)
-            alpha = layer_info["alpha"]
-            scores = alpha if alpha.dim() == 1 else alpha.mean(dim=-1)
-            is_prediction_target = edge_index[1] < batch.batch_size
+            head_alpha = _head_alpha(layer_info["alpha"])
+            head_count = max(head_count, int(head_alpha.size(1)))
+            scores = head_alpha.mean(dim=-1)
+            target_slots = root_slot[edge_index[1]]
+            is_prediction_target = target_slots >= 0
             is_typed_relation = relation_ids >= 0
             synthetic_target_edges[layer] += int((is_prediction_target & ~is_typed_relation).sum().item())
             usable = is_prediction_target & is_typed_relation
+
+            if root_level_output:
+                root_slots = target_slots[is_prediction_target]
+                total_counts = torch.bincount(root_slots, minlength=root_count)
+                typed_slots = target_slots[usable]
+                typed_counts = torch.bincount(typed_slots, minlength=root_count)
+                synthetic = is_prediction_target & ~is_typed_relation
+                synthetic_slots = target_slots[synthetic]
+                synthetic_counts = torch.bincount(synthetic_slots, minlength=root_count)
+
+                total_head_mass = torch.zeros((root_count, head_alpha.size(1)), dtype=head_alpha.dtype, device=device)
+                total_head_mass.index_add_(0, root_slots, head_alpha[is_prediction_target])
+                typed_head_mass = torch.zeros_like(total_head_mass)
+                typed_head_mass.index_add_(0, typed_slots, head_alpha[usable])
+                synthetic_head_mass = torch.zeros_like(total_head_mass)
+                if int(synthetic_slots.numel()):
+                    synthetic_head_mass.index_add_(0, synthetic_slots, head_alpha[synthetic])
+
+                for slot, (root_index, target_label_id) in enumerate(zip(global_root_ids, root_label_ids)):
+                    record = {
+                        "experiment": experiment,
+                        "seed": seed,
+                        "checkpoint": str(path),
+                        "split": split,
+                        "forward_mode": forward_mode,
+                        "num_layers": num_layers,
+                        "fanouts": fanout_description,
+                        "message_passing_layer": layer,
+                        "root_index": int(root_index),
+                        "target_l1_id": int(target_label_id),
+                        "target_l1": id_to_label.get(int(target_label_id), "__UNLABELED__"),
+                        "total_incoming_attention_edges": int(total_counts[slot].item()),
+                        "typed_incoming_attention_edges": int(typed_counts[slot].item()),
+                        "synthetic_self_loop_edges": int(synthetic_counts[slot].item()),
+                        "total_attention_mass": float(total_head_mass[slot].mean().item()),
+                        "typed_attention_mass": float(typed_head_mass[slot].mean().item()),
+                        "synthetic_self_loop_mass": float(synthetic_head_mass[slot].mean().item()),
+                    }
+                    for head in range(head_alpha.size(1)):
+                        record[f"total_attention_mass_head_{head}"] = float(total_head_mass[slot, head].item())
+                        record[f"typed_attention_mass_head_{head}"] = float(typed_head_mass[slot, head].item())
+                        record[f"synthetic_self_loop_mass_head_{head}"] = float(synthetic_head_mass[slot, head].item())
+                    roster_records.append(record)
+
             if not bool(usable.any()):
                 continue
             usable_relation_ids = relation_ids[usable].long()
@@ -319,35 +520,95 @@ def collect_checkpoint_attention(
                 0, usable_relation_ids, torch.ones_like(usable_relation_ids, dtype=torch.long)
             )
 
-            if matrix_relation_lookup is None:
-                continue
-            source_l1 = batch.y[edge_index[0]]
-            target_l1 = batch.y[edge_index[1]]
-            l1_pair_mask = (
-                usable
-                & matrix_relation_lookup[relation_ids.clamp_min(0)]
-                & (source_l1 >= 0)
-                & (target_l1 >= 0)
-            )
-            if not bool(l1_pair_mask.any()):
-                continue
-            # Flatten (relation, source L1, target L1) and scatter into a
-            # fixed on-device tensor.  Unlike a Python dictionary update per
-            # unique cell and batch, its runtime does not grow sharply when
-            # all directed relations are requested.
-            encoded = (
-                relation_ids[l1_pair_mask].long() * class_count * class_count
-                + source_l1[l1_pair_mask].long() * class_count
-                + target_l1[l1_pair_mask].long()
-            )
-            l1_pair_score_sums[layer - 1].view(-1).scatter_add_(
-                0, encoded, scores[l1_pair_mask].to(dtype=torch.float64)
-            )
-            l1_pair_edge_counts[layer - 1].view(-1).scatter_add_(
-                0, encoded, torch.ones_like(encoded, dtype=torch.long)
-            )
+            if matrix_relation_lookup is not None:
+                source_l1 = batch.y[edge_index[0]]
+                target_l1 = batch.y[edge_index[1]]
+                l1_pair_mask = (
+                    usable
+                    & matrix_relation_lookup[relation_ids.clamp_min(0)]
+                    & (source_l1 >= 0)
+                    & (target_l1 >= 0)
+                )
+                if bool(l1_pair_mask.any()):
+                    # Flatten (relation, source L1, target L1) and scatter into a
+                    # fixed on-device tensor.  Unlike a Python dictionary update per
+                    # unique cell and batch, its runtime does not grow sharply when
+                    # all directed relations are requested.
+                    encoded = (
+                        relation_ids[l1_pair_mask].long() * class_count * class_count
+                        + source_l1[l1_pair_mask].long() * class_count
+                        + target_l1[l1_pair_mask].long()
+                    )
+                    l1_pair_score_sums[layer - 1].view(-1).scatter_add_(
+                        0, encoded, scores[l1_pair_mask].to(dtype=torch.float64)
+                    )
+                    l1_pair_edge_counts[layer - 1].view(-1).scatter_add_(
+                        0, encoded, torch.ones_like(encoded, dtype=torch.long)
+                    )
 
-    experiment, seed = checkpoint_identity(path)
+            if root_level_output:
+                source_l1 = batch.y[edge_index[0]]
+                source_visibility = source_visibility_codes(
+                    batch, edge_index[0], feature_schema, metadata["occupation_unknown_ids"]
+                )
+                source_slots = source_l1.clone().long()
+                source_slots[source_slots < 0] = class_count
+                encoded_root = (
+                    (((target_slots[usable].long() * relation_slots + usable_relation_ids) * (class_count + 1)
+                      + source_slots[usable]) * 3)
+                    + source_visibility[usable]
+                )
+                unique, inverse = torch.unique(encoded_root, sorted=True, return_inverse=True)
+                group_count = torch.bincount(inverse, minlength=unique.numel())
+                group_mass = torch.zeros(unique.numel(), dtype=torch.float64, device=device)
+                group_mass.scatter_add_(0, inverse, scores[usable].to(dtype=torch.float64))
+                group_head_mass = torch.zeros(
+                    (unique.numel(), head_alpha.size(1)), dtype=torch.float64, device=device
+                )
+                group_head_mass.index_add_(0, inverse, head_alpha[usable].to(dtype=torch.float64))
+                for encoded_value, edge_count, mass, per_head in zip(
+                    unique.tolist(), group_count.tolist(), group_mass.tolist(), group_head_mass.tolist()
+                ):
+                    visibility_id = encoded_value % 3
+                    decoded = encoded_value // 3
+                    source_label_id = decoded % (class_count + 1)
+                    decoded //= class_count + 1
+                    relation_id = decoded % relation_slots
+                    slot = decoded // relation_slots
+                    total_candidates = int(total_counts[slot].item())
+                    source_l1_id = -1 if source_label_id == class_count else int(source_label_id)
+                    record = {
+                        "experiment": experiment,
+                        "seed": seed,
+                        "checkpoint": str(path),
+                        "split": split,
+                        "forward_mode": forward_mode,
+                        "num_layers": num_layers,
+                        "fanouts": fanout_description,
+                        "message_passing_layer": layer,
+                        "root_index": int(global_root_ids[slot]),
+                        "target_l1_id": int(root_label_ids[slot]),
+                        "target_l1": id_to_label.get(int(root_label_ids[slot]), "__UNLABELED__"),
+                        "relation_id": int(relation_id),
+                        "relation": id_to_relation[int(relation_id)],
+                        "source_l1_id": source_l1_id,
+                        "source_l1": id_to_label.get(source_l1_id, "__UNLABELED__"),
+                        "source_visibility": (
+                            "visible_train" if visibility_id == 0 else
+                            "hidden_validation_or_test" if visibility_id == 1 else "missing_or_unknown"
+                        ),
+                        "candidate_edge_count": int(edge_count),
+                        "total_incoming_attention_edges": total_candidates,
+                        "attention_mass": float(mass),
+                        "opportunity": float(edge_count / total_candidates) if total_candidates else 0.0,
+                        "attention_mass_minus_opportunity": (
+                            float(mass - edge_count / total_candidates) if total_candidates else float(mass)
+                        ),
+                    }
+                    for head, value in enumerate(per_head):
+                        record[f"attention_mass_head_{head}"] = float(value)
+                    root_records.append(record)
+
     records = []
     for layer_index, relation_id in relation_edge_counts.nonzero(as_tuple=False).tolist():
         score_sum = float(relation_score_sums[layer_index, relation_id].item())
@@ -392,17 +653,20 @@ def collect_checkpoint_attention(
             })
     run_info = {
         "checkpoint": str(path),
+        "checkpoint_sha256": sha256_file(path),
         "experiment": experiment,
         "seed": seed,
         "num_layers": num_layers,
         "fanouts": fanouts,
+        "forward_mode": forward_mode,
         "prediction_roots": roots_seen,
         "prediction_roots_by_l1": {
             id_to_label[label_id]: int(count) for label_id, count in enumerate(target_l1_counts.tolist())
         },
         "synthetic_self_loop_target_edges": {str(layer): count for layer, count in synthetic_target_edges.items()},
+        "attention_head_count": head_count,
     }
-    return records, l1_pair_records, run_info
+    return records, l1_pair_records, root_records, roster_records, run_info
 
 
 def summarise_seed_records(records: Iterable[Mapping[str, object]]) -> List[Dict[str, object]]:
@@ -480,10 +744,19 @@ def summarise_l1_pair_records(records: Iterable[Mapping[str, object]]) -> List[D
 
 
 def write_csv(path: Path, records: Sequence[Mapping[str, object]], fieldnames: Sequence[str]) -> None:
-    with path.open("w", newline="", encoding="utf-8") as handle:
+    opener = gzip.open if path.suffix == ".gz" else open
+    with opener(path, "wt", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(records)
+
+
+def root_output_fields(records: Sequence[Mapping[str, object]], preferred: Sequence[str]) -> List[str]:
+    """Keep stable metadata columns first while retaining dynamically sized head columns."""
+    observed = {key for record in records for key in record}
+    fields = [field for field in preferred if field in observed]
+    fields.extend(sorted(observed - set(fields)))
+    return fields
 
 
 def wide_table(summary_records: Sequence[Mapping[str, object]]) -> Tuple[List[Dict[str, object]], List[str]]:
@@ -612,10 +885,12 @@ def main() -> None:
 
     all_records: List[Dict[str, object]] = []
     all_l1_pair_records: List[Dict[str, object]] = []
+    all_root_records: List[Dict[str, object]] = []
+    all_roster_records: List[Dict[str, object]] = []
     run_info = []
     for index, path in enumerate(paths, start=1):
         print(f"[{index}/{len(paths)}] collecting attention: {path}", flush=True)
-        records, l1_pair_records, info = collect_checkpoint_attention(
+        records, l1_pair_records, root_records, roster_records, info = collect_checkpoint_attention(
             path,
             base_data,
             base_metadata,
@@ -625,11 +900,15 @@ def main() -> None:
             args.batch_size,
             args.num_workers,
             device,
+            args.forward_mode,
+            args.root_level_output,
         )
         if not records:
             raise RuntimeError(f"No typed incoming edges were collected from {path}")
         all_records.extend(records)
         all_l1_pair_records.extend(l1_pair_records)
+        all_root_records.extend(root_records)
+        all_roster_records.extend(roster_records)
         run_info.append(info)
         if device.type == "cuda":
             torch.cuda.empty_cache()
@@ -682,10 +961,38 @@ def main() -> None:
             args.matrix_min_edge_count,
         )
         matrix_paths = [l1_pair_raw_path, l1_pair_summary_path, l1_pair_markdown_path]
+    root_paths = []
+    if args.root_level_output:
+        if not all_roster_records:
+            raise RuntimeError("--root-level-output requested but no prediction roots were collected")
+        roster_path = output_dir / "root_attention_roster_by_seed.csv.gz"
+        root_path = output_dir / "root_direct_attention_sparse_by_seed.csv.gz"
+        roster_preferred = [
+            "experiment", "seed", "checkpoint", "split", "forward_mode", "num_layers", "fanouts",
+            "message_passing_layer", "root_index", "target_l1_id", "target_l1",
+            "total_incoming_attention_edges", "typed_incoming_attention_edges", "synthetic_self_loop_edges",
+            "total_attention_mass", "typed_attention_mass", "synthetic_self_loop_mass",
+        ]
+        root_preferred = [
+            "experiment", "seed", "checkpoint", "split", "forward_mode", "num_layers", "fanouts",
+            "message_passing_layer", "root_index", "target_l1_id", "target_l1", "relation_id", "relation",
+            "source_l1_id", "source_l1", "source_visibility", "candidate_edge_count",
+            "total_incoming_attention_edges", "attention_mass", "opportunity", "attention_mass_minus_opportunity",
+        ]
+        write_csv(roster_path, all_roster_records, root_output_fields(all_roster_records, roster_preferred))
+        write_csv(root_path, all_root_records, root_output_fields(all_root_records, root_preferred))
+        root_paths = [roster_path, root_path]
     manifest_path = output_dir / "attention_report_manifest.json"
     manifest_path.write_text(json.dumps({
         "data": str(Path(args.data).resolve()),
+        "data_sha256": sha256_file(Path(args.data)),
         "split": args.split,
+        "forward_mode": args.forward_mode,
+        "code_git_revision": git_revision(),
+        "python": sys.version,
+        "torch": torch.__version__,
+        "torch_geometric": torch_geometric.__version__,
+        "cuda": torch.version.cuda,
         "definition": (
             "Mean head-averaged RGAT alpha over typed incoming edges whose destination is a selected prediction root; "
             "synthetic self-loops are excluded."
@@ -699,10 +1006,26 @@ def main() -> None:
             ) if matrix_relation_ids else None,
             "minimum_edge_count_for_markdown": args.matrix_min_edge_count if matrix_relation_ids else None,
         },
+        "root_level_direct_attention": {
+            "enabled": args.root_level_output,
+            "sparse_path": str(root_paths[1]) if root_paths else None,
+            "roster_path": str(root_paths[0]) if root_paths else None,
+            "definition": (
+                "One sparse row per prediction root, message-passing layer, exact directed relation, "
+                "source true L1 label, and source visibility state. attention_mass sums head-averaged alpha "
+                "within that root/group. opportunity is candidate_edge_count divided by all incoming attention "
+                "edges for that root/layer, including synthetic self-loops."
+            ) if args.root_level_output else None,
+            "source_visibility": {
+                "visible_train": "Retained-L1 training source whose occupation_level1 feature is visible to the checkpoint.",
+                "hidden_validation_or_test": "Retained-L1 source whose occupation_level1 is unknown to the checkpoint.",
+                "missing_or_unknown": "Source without a retained true L1 label.",
+            } if args.root_level_output else None,
+        },
         "runs": run_info,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Wrote:")
-    for path in (raw_path, summary_path, table_path, markdown_path, *matrix_paths, manifest_path):
+    for path in (raw_path, summary_path, table_path, markdown_path, *matrix_paths, *root_paths, manifest_path):
         print(path)
 
 
