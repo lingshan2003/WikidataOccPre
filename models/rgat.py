@@ -24,8 +24,8 @@ class RelationalGATClassifier(nn.Module):
         super().__init__()
         if RGATConv is None:
             raise ImportError("RGATConv requires a current torch-geometric installation")
-        if num_layers != 2:
-            raise ValueError("Current sampled training uses exactly two message-passing layers")
+        if num_layers < 1:
+            raise ValueError("num_layers must be at least one")
         self.feature_encoder = NodeFeatureEncoder(feature_specs, branch_dim, hidden_dim, dropout)
         self.convs = nn.ModuleList(
             RGATConv(hidden_dim, hidden_dim, num_relations, heads=heads, concat=False, dropout=attention_dropout)
@@ -42,7 +42,18 @@ class RelationalGATClassifier(nn.Module):
         for index, (conv, norm) in enumerate(zip(self.convs, self.norms)):
             if return_attention_weights:
                 updated, (attention_edge_index, alpha) = conv(h, edge_index, edge_type, return_attention_weights=True)
-                attention_layers.append({"layer": index, "edge_index": attention_edge_index, "edge_type": edge_type, "alpha": alpha})
+                # ``RGATConv`` may append synthetic self loops before returning
+                # its attention edge index.  Keep the original typed edges too,
+                # so downstream exports can exclude synthetic loops instead of
+                # accidentally assigning them a relation ID.
+                attention_layers.append({
+                    "layer": index,
+                    "edge_index": attention_edge_index,
+                    "edge_type": edge_type,
+                    "input_edge_index": edge_index,
+                    "input_edge_type": edge_type,
+                    "alpha": alpha,
+                })
             else:
                 updated = conv(h, edge_index, edge_type)
             h = norm(h + self.dropout(F.gelu(updated)))

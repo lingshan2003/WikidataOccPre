@@ -18,6 +18,7 @@ from torch_geometric.loader import NeighborLoader
 
 from models import build_feature_specs, build_model
 from training.relation_controls import apply_relation_controls
+from training.attention_utils import attention_relation_ids
 from training.train import feature_inputs
 
 
@@ -29,7 +30,11 @@ def parse_args() -> argparse.Namespace:
     group.add_argument("--node-id", help="Wikidata Q-id from artifacts/nodes.csv")
     group.add_argument("--node-index", type=int, help="Integer node index in graph_data.pt")
     parser.add_argument("--output-dir", default="explanations")
-    parser.add_argument("--num-neighbors", default="20,10")
+    parser.add_argument(
+        "--num-neighbors",
+        default=None,
+        help="Comma-separated fan-outs; defaults to the checkpoint's depth with fan-out 20",
+    )
     parser.add_argument("--top-k", type=int, default=30)
     parser.add_argument("--device", default="auto")
     return parser.parse_args()
@@ -41,10 +46,13 @@ def resolve_device(requested: str) -> torch.device:
     return torch.device(requested)
 
 
-def parse_fanouts(value: str) -> List[int]:
+def parse_fanouts(value: str, num_layers: int) -> List[int]:
     fanouts = [int(item.strip()) for item in value.split(",")]
-    if len(fanouts) != 2 or any(item < -1 for item in fanouts):
-        raise ValueError("The two-layer model needs exactly two fan-outs, e.g. 20,10")
+    if len(fanouts) != num_layers or any(item < -1 for item in fanouts):
+        raise ValueError(
+            f"The {num_layers}-layer model needs exactly {num_layers} fan-outs, e.g. "
+            + ",".join(["20"] * num_layers)
+        )
     return fanouts
 
 
@@ -106,10 +114,13 @@ def main() -> None:
             shuffle_seed=relation_perturbation.get("relation_type_shuffle_seed"),
         )
     model, feature_schema = restore_model(checkpoint, device)
+    num_layers = int(checkpoint.get("model_config", {}).get("num_layers", 2))
+    default_fanouts = "20,10" if num_layers == 2 else ",".join(["20"] * num_layers)
+    fanouts = parse_fanouts(args.num_neighbors or default_fanouts, num_layers)
     loader = NeighborLoader(
         data,
         input_nodes=torch.tensor([query_index]),
-        num_neighbors=parse_fanouts(args.num_neighbors),
+        num_neighbors=fanouts,
         batch_size=1,
         shuffle=False,
         num_workers=0,
@@ -140,7 +151,7 @@ def main() -> None:
     for layer_info in explanation["attention_layers"]:
         edge_index = layer_info["edge_index"].cpu()
         alpha = layer_info["alpha"].mean(dim=-1).cpu()
-        edge_types = layer_info["edge_type"].cpu()
+        edge_types = attention_relation_ids(layer_info).cpu()
         for edge, score, relation_id in zip(edge_index.t(), alpha, edge_types):
             source_index, destination_index = (int(edge[0]), int(edge[1]))
             source_global = int(global_ids[source_index])
@@ -150,7 +161,7 @@ def main() -> None:
                 "source_index": source_global,
                 "source_id": node_ids[source_global],
                 "relation_id": int(relation_id),
-                "relation": id_to_relation[int(relation_id)],
+                "relation": id_to_relation.get(int(relation_id), "__self_loop__"),
                 "target_index": destination_global,
                 "target_id": node_ids[destination_global],
                 "attention_mean": float(score),

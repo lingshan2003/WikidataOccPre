@@ -38,6 +38,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--num-neighbors", default="20,10", help="One fan-out per GNN layer")
+    parser.add_argument(
+        "--num-layers",
+        type=int,
+        default=2,
+        help="Number of message-passing layers; RGAT supports one or more layers",
+    )
     parser.add_argument("--hidden-dim", type=int, default=128)
     parser.add_argument("--branch-dim", type=int, default=64)
     parser.add_argument("--heads", type=int, default=4)
@@ -617,8 +623,15 @@ def main() -> None:
     # All relation perturbations happen to an in-memory copy.  A server run
     # must never overwrite the canonical artifact shared by comparisons.
     data, metadata = copy.deepcopy(bundle["data"]), bundle["metadata"]
-    if len(fanouts) != 2:
-        raise ValueError("The current RelationalGATClassifier has two layers; use exactly two fan-outs")
+    if args.num_layers < 1:
+        raise ValueError("--num-layers must be at least one")
+    if len(fanouts) != args.num_layers:
+        raise ValueError(
+            f"--num-neighbors has {len(fanouts)} fan-outs but --num-layers is {args.num_layers}; "
+            "provide exactly one fan-out per message-passing layer"
+        )
+    if args.model != "rgat" and args.num_layers != 2:
+        raise ValueError("Only RGAT currently supports --num-layers other than 2")
     required_attributes = (
         "occupation_level1", "occupation_level2", "occupation_level3", "country", "temporal",
         "edge_type", "train_mask", "val_mask", "test_mask",
@@ -675,6 +688,7 @@ def main() -> None:
         feature_specs=specs,
         hidden_dim=args.hidden_dim,
         branch_dim=args.branch_dim,
+        num_layers=args.num_layers,
         heads=args.heads,
         dropout=args.dropout,
         attention_dropout=args.attention_dropout,
@@ -833,6 +847,7 @@ def main() -> None:
         "model_config": {
             "hidden_dim": args.hidden_dim,
             "branch_dim": args.branch_dim,
+            "num_layers": args.num_layers,
             "heads": args.heads,
             "dropout": args.dropout,
             "attention_dropout": args.attention_dropout,

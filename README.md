@@ -195,6 +195,30 @@ python run.py train --model rgat \
   --num-workers 4 --patience 6 --seed 42 --device cuda
 ```
 
+### L1 一跳 R-GAT 与关系权重表
+
+`--num-layers` 必须与 `--num-neighbors` 的 fan-out 数一致。下面的 L1
+对照只保留一层消息传递，因此每个预测只聚合一跳邻居；它与已有的
+`runs_report/level1/rgat_baseline` 两层（两跳）结果使用相同的超参数和三条 seed。
+
+```bash
+bash scripts/run_l1_rgat_attention.sh plan
+bash scripts/run_l1_rgat_attention.sh run
+```
+
+`run` 会训练 `rgat_one_hop/seed_{42,43,44}`，读取已有
+`rgat_baseline/seed_{42,43,44}/best_model.pt`，并写入：
+
+```text
+runs_report/level1/rgat_l1_relation_attention/relation_attention_table.md
+runs_report/level1/rgat_l1_relation_attention/relation_attention_table.csv
+```
+
+表格按测试集预测人物的**入边**汇总：每条关系的值是 RGAT 所有 head 的
+attention alpha 先求均值、再在边上求均值，最后报告三条 seed 的均值 ± 标准差。
+二跳模型会分别给出 `layer1` 和 `layer2` 两列；一跳模型只有 `layer1`。合成 self-loop
+不计入任何真实关系。attention 是机制描述，不能直接当作关系的因果效应。
+
 只使用邻居 Level 3 的受控对照：
 
 ```bash
@@ -503,7 +527,10 @@ models/
 └── __init__.py           # 模型注册表
 training/
 ├── train.py              # 共享 NeighborLoader 训练、评估、早停
-└── explain.py            # R-GAT attention 候选边导出
+├── explain.py            # 单个人的 R-GAT attention 候选边导出
+└── attention_report.py   # 多 checkpoint 的按关系 attention 汇总表
+scripts/
+└── run_l1_rgat_attention.sh  # L1 一跳训练 + 与两跳基线的关系权重对照
 link_prediction/          # 独立异构职业 link-prediction 管道
 legacy/original_baseline/ # 师姐留下的原始 R-GCN 代码，仅供追溯
 RGAT_DESIGN.md            # R-GAT 与掩码协议的补充说明
