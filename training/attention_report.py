@@ -58,6 +58,20 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument(
+        "--occupation-matrix-relations",
+        default="none",
+        help=(
+            "Comma-separated directed relation labels for L1 source-to-target attention matrices, "
+            "or none. Names are used exactly as stored: 'father' does not also select 'father__rev'."
+        ),
+    )
+    parser.add_argument(
+        "--matrix-min-edge-count",
+        type=int,
+        default=10,
+        help="Hide a source-L1/target-L1 matrix cell in Markdown when its mean edge support is below this value",
+    )
     parser.add_argument("--device", default="auto")
     return parser.parse_args()
 
@@ -82,6 +96,28 @@ def parse_fanouts(value: str, num_layers: int) -> List[int]:
             f"{num_layers} values (received {value!r})"
         )
     return fanouts
+
+
+def parse_matrix_relations(value: str, relation_to_id: Mapping[str, int]) -> Dict[int, str]:
+    """Resolve exact directed relation names for a Figure-5-style L1 matrix.
+
+    Prepared graphs deliberately add ``__rev`` edges for message passing.  A
+    matrix must retain that direction rather than silently merge both types,
+    because the source/target L1 axes would otherwise become ambiguous.
+    """
+    if value.strip().casefold() == "none":
+        return {}
+    names = tuple(dict.fromkeys(item.strip() for item in value.split(",") if item.strip()))
+    if not names:
+        raise ValueError("--occupation-matrix-relations must be relation names or 'none'")
+    unknown = [name for name in names if name not in relation_to_id]
+    if unknown:
+        available = ", ".join(sorted(relation_to_id))
+        raise ValueError(
+            f"Unknown directed relation names: {unknown}. Use an exact label from relation_to_id, "
+            f"including '__rev' when needed. Available: {available}"
+        )
+    return {int(relation_to_id[name]): name for name in names}
 
 
 def checkpoint_paths(paths: Sequence[str], patterns: Sequence[str]) -> List[Path]:
@@ -184,12 +220,13 @@ def collect_checkpoint_attention(
     path: Path,
     base_data,
     base_metadata: Mapping[str, object],
+    matrix_relation_ids: Mapping[int, str],
     split: str,
     requested_fanouts: str,
     batch_size: int,
     num_workers: int,
     device: torch.device,
-) -> Tuple[List[Dict[str, object]], Dict[str, object]]:
+) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], Dict[str, object]]:
     checkpoint = torch.load(path, map_location="cpu", weights_only=False)
     model, feature_schema, metadata = restore_rgat(checkpoint, device)
     if metadata["relation_to_id"] != base_metadata["relation_to_id"]:
@@ -213,9 +250,17 @@ def collect_checkpoint_attention(
         pin_memory=device.type == "cuda",
     )
     id_to_relation = {int(index): relation for relation, index in metadata["relation_to_id"].items()}
+    id_to_label = {int(index): label for label, index in metadata["label_to_id"].items()}
     totals: Dict[Tuple[int, int], List[float]] = defaultdict(lambda: [0.0, 0.0])
+    # Key: message layer, directed relation, neighbour/source L1, target L1.
+    # Values are [head-averaged attention sum, typed edge count].
+    l1_pair_totals: Dict[Tuple[int, int, int, int], List[float]] = defaultdict(lambda: [0.0, 0.0])
     synthetic_target_edges: Dict[int, int] = defaultdict(int)
+    target_l1_counts = torch.zeros(metadata["num_classes"], dtype=torch.long)
     roots_seen = 0
+    matrix_relation_tensor = torch.tensor(
+        sorted(matrix_relation_ids), dtype=data.edge_type.dtype, device=device
+    ) if matrix_relation_ids else None
     for batch in loader:
         batch = batch.to(device)
         logits, explanation = model(
@@ -226,6 +271,8 @@ def collect_checkpoint_attention(
         )
         del logits
         roots_seen += int(batch.batch_size)
+        root_l1 = batch.y[:batch.batch_size].detach().cpu()
+        target_l1_counts += torch.bincount(root_l1[root_l1 >= 0], minlength=metadata["num_classes"])
         for layer_info in explanation["attention_layers"]:
             layer = int(layer_info["layer"]) + 1
             edge_index = layer_info["edge_index"]
@@ -244,6 +291,42 @@ def collect_checkpoint_attention(
                 total[0] += float(scores[relation_mask].sum().item())
                 total[1] += float(relation_mask.sum().item())
 
+            if matrix_relation_tensor is None:
+                continue
+            source_l1 = batch.y[edge_index[0]]
+            target_l1 = batch.y[edge_index[1]]
+            l1_pair_mask = (
+                usable
+                & torch.isin(relation_ids, matrix_relation_tensor)
+                & (source_l1 >= 0)
+                & (target_l1 >= 0)
+            )
+            if not bool(l1_pair_mask.any()):
+                continue
+            # At most (#relations × #L1²) unique keys occur per batch, so
+            # collecting on-device first avoids an expensive Python loop over
+            # individual attention edges.
+            class_count = int(metadata["num_classes"])
+            encoded = (
+                relation_ids[l1_pair_mask].long() * class_count * class_count
+                + source_l1[l1_pair_mask].long() * class_count
+                + target_l1[l1_pair_mask].long()
+            )
+            unique_encoded, inverse = encoded.unique(sorted=True, return_inverse=True)
+            score_sums = torch.zeros(unique_encoded.numel(), dtype=scores.dtype, device=device)
+            score_sums.scatter_add_(0, inverse, scores[l1_pair_mask])
+            edge_counts = torch.bincount(inverse, minlength=unique_encoded.numel())
+            for encoded_key, score_sum, edge_count in zip(
+                unique_encoded.tolist(), score_sums.tolist(), edge_counts.tolist()
+            ):
+                relation_id = encoded_key // (class_count * class_count)
+                remainder = encoded_key % (class_count * class_count)
+                source_label_id = remainder // class_count
+                target_label_id = remainder % class_count
+                total = l1_pair_totals[(layer, relation_id, source_label_id, target_label_id)]
+                total[0] += float(score_sum)
+                total[1] += float(edge_count)
+
     experiment, seed = checkpoint_identity(path)
     records = []
     for (layer, relation_id), (score_sum, edge_count) in sorted(totals.items()):
@@ -260,6 +343,28 @@ def collect_checkpoint_attention(
             "edge_count": int(edge_count),
             "attention_mean": score_sum / edge_count,
         })
+    l1_pair_records = []
+    for (layer, relation_id, source_label_id, target_label_id), (score_sum, edge_count) in sorted(l1_pair_totals.items()):
+        target_count = int(target_l1_counts[target_label_id])
+        l1_pair_records.append({
+            "experiment": experiment,
+            "seed": seed,
+            "checkpoint": str(path),
+            "split": split,
+            "num_layers": num_layers,
+            "fanouts": ",".join(str(value) for value in fanouts),
+            "message_passing_layer": layer,
+            "relation_id": relation_id,
+            "relation": id_to_relation[relation_id],
+            "source_l1_id": source_label_id,
+            "source_l1": id_to_label[source_label_id],
+            "target_l1_id": target_label_id,
+            "target_l1": id_to_label[target_label_id],
+            "edge_count": int(edge_count),
+            "target_l1_count": target_count,
+            "attention_mean": score_sum / edge_count,
+            "attention_mass_per_target": score_sum / max(target_count, 1),
+        })
     run_info = {
         "checkpoint": str(path),
         "experiment": experiment,
@@ -267,9 +372,12 @@ def collect_checkpoint_attention(
         "num_layers": num_layers,
         "fanouts": fanouts,
         "prediction_roots": roots_seen,
+        "prediction_roots_by_l1": {
+            id_to_label[label_id]: int(count) for label_id, count in enumerate(target_l1_counts.tolist())
+        },
         "synthetic_self_loop_target_edges": {str(layer): count for layer, count in synthetic_target_edges.items()},
     }
-    return records, run_info
+    return records, l1_pair_records, run_info
 
 
 def summarise_seed_records(records: Iterable[Mapping[str, object]]) -> List[Dict[str, object]]:
@@ -298,6 +406,50 @@ def summarise_seed_records(records: Iterable[Mapping[str, object]]) -> List[Dict
             "edge_count_mean": mean(edge_counts),
             "attention_mean": mean(values),
             "attention_std": stdev(values) if len(values) > 1 else 0.0,
+        })
+    return summaries
+
+
+def summarise_l1_pair_records(records: Iterable[Mapping[str, object]]) -> List[Dict[str, object]]:
+    """Average a Figure-5-style source-L1/target-L1 cell across seed runs."""
+    grouped: Dict[Tuple[str, int, int, int, str, int, str, int, str], List[Mapping[str, object]]] = defaultdict(list)
+    for record in records:
+        key = (
+            str(record["experiment"]),
+            int(record["num_layers"]),
+            int(record["message_passing_layer"]),
+            int(record["relation_id"]),
+            str(record["relation"]),
+            int(record["source_l1_id"]),
+            str(record["source_l1"]),
+            int(record["target_l1_id"]),
+            str(record["target_l1"]),
+        )
+        grouped[key].append(record)
+    summaries = []
+    for key, rows in sorted(grouped.items(), key=lambda item: (item[0][3], item[0][5], item[0][7], item[0][0], item[0][2])):
+        attention_values = [float(row["attention_mean"]) for row in rows]
+        mass_values = [float(row["attention_mass_per_target"]) for row in rows]
+        edge_counts = [int(row["edge_count"]) for row in rows]
+        target_counts = [int(row["target_l1_count"]) for row in rows]
+        summaries.append({
+            "experiment": key[0],
+            "num_layers": key[1],
+            "message_passing_layer": key[2],
+            "relation_id": key[3],
+            "relation": key[4],
+            "source_l1_id": key[5],
+            "source_l1": key[6],
+            "target_l1_id": key[7],
+            "target_l1": key[8],
+            "seed_runs": len(rows),
+            "seeds": ",".join(str(row["seed"]) for row in rows if str(row["seed"])),
+            "edge_count_mean": mean(edge_counts),
+            "target_l1_count_mean": mean(target_counts),
+            "attention_mean": mean(attention_values),
+            "attention_std": stdev(attention_values) if len(attention_values) > 1 else 0.0,
+            "attention_mass_per_target": mean(mass_values),
+            "attention_mass_per_target_std": stdev(mass_values) if len(mass_values) > 1 else 0.0,
         })
     return summaries
 
@@ -357,23 +509,92 @@ def write_markdown_table(path: Path, rows: Sequence[Mapping[str, object]], colum
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def write_l1_pair_matrices(
+    path: Path,
+    summary_records: Sequence[Mapping[str, object]],
+    id_to_label: Mapping[int, str],
+    min_edge_count: int,
+) -> None:
+    """Write one source-L1 by target-L1 matrix per relation/model/layer.
+
+    The matrices deliberately use the exact directed relation label in the
+    graph.  For example, ``father`` and ``father__rev`` are different panels;
+    this preserves the source-to-target semantics needed for inheritance work.
+    """
+    labels = [(int(label_id), id_to_label[int(label_id)]) for label_id in sorted(id_to_label)]
+    grouped: Dict[Tuple[str, int, int, int, str], Dict[Tuple[int, int], Mapping[str, object]]] = {}
+    for record in summary_records:
+        group_key = (
+            str(record["experiment"]),
+            int(record["num_layers"]),
+            int(record["message_passing_layer"]),
+            int(record["relation_id"]),
+            str(record["relation"]),
+        )
+        grouped.setdefault(group_key, {})[(int(record["source_l1_id"]), int(record["target_l1_id"]))] = record
+
+    lines = [
+        "# L1 relation attention matrices",
+        "",
+        "Rows are source/neighbour true L1 labels; columns are target/test-person true L1 labels.",
+        "Each displayed value is mean head-averaged incoming attention ± seed standard deviation; `n` is the mean number of typed edges across seed runs.",
+        "A dash means no labelled edge was observed. A cell with fewer than the configured minimum support is masked as `low n`.",
+        "The labels are exact directed graph relations: `father` and `father__rev` must be interpreted separately.",
+        "",
+    ]
+    for group_key, cells in sorted(grouped.items(), key=lambda item: (item[0][0], item[0][2], item[0][3])):
+        experiment, num_layers, layer, _, relation = group_key
+        lines.extend([
+            f"## {experiment} - {num_layers}-hop model, Layer {layer}, relation `{relation}`",
+            "",
+            "| Source L1 \\ Target L1 | " + " | ".join(label for _, label in labels) + " |",
+            "| --- | " + " | ".join(["---"] * len(labels)) + " |",
+        ])
+        for source_id, source_label in labels:
+            values = [source_label]
+            for target_id, _ in labels:
+                cell = cells.get((source_id, target_id))
+                if cell is None:
+                    values.append("—")
+                    continue
+                edge_count = float(cell["edge_count_mean"])
+                if edge_count < min_edge_count:
+                    values.append(f"low n ({edge_count:.0f})")
+                    continue
+                values.append(
+                    f"{float(cell['attention_mean']):.6f} ± {float(cell['attention_std']):.6f}<br>n={edge_count:.0f}"
+                )
+            lines.append("| " + " | ".join(values) + " |")
+        lines.append("")
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def main() -> None:
     args = parse_args()
+    if args.matrix_min_edge_count < 1:
+        raise ValueError("--matrix-min-edge-count must be at least one")
     paths = checkpoint_paths(args.checkpoint, args.checkpoint_glob)
     device = resolve_device(args.device)
     bundle = torch.load(Path(args.data), map_location="cpu", weights_only=False)
     base_data, base_metadata = bundle["data"], bundle["metadata"]
+    matrix_relation_ids = parse_matrix_relations(args.occupation_matrix_relations, base_metadata["relation_to_id"])
+    if matrix_relation_ids and base_metadata.get("target_column") != "occupation_level1":
+        raise ValueError(
+            "--occupation-matrix-relations is an L1 analysis and requires an artifact prepared with --target-level 1"
+        )
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     all_records: List[Dict[str, object]] = []
+    all_l1_pair_records: List[Dict[str, object]] = []
     run_info = []
     for index, path in enumerate(paths, start=1):
         print(f"[{index}/{len(paths)}] collecting attention: {path}", flush=True)
-        records, info = collect_checkpoint_attention(
+        records, l1_pair_records, info = collect_checkpoint_attention(
             path,
             base_data,
             base_metadata,
+            matrix_relation_ids,
             args.split,
             args.num_neighbors,
             args.batch_size,
@@ -383,6 +604,7 @@ def main() -> None:
         if not records:
             raise RuntimeError(f"No typed incoming edges were collected from {path}")
         all_records.extend(records)
+        all_l1_pair_records.extend(l1_pair_records)
         run_info.append(info)
         if device.type == "cuda":
             torch.cuda.empty_cache()
@@ -405,6 +627,36 @@ def main() -> None:
     write_csv(summary_path, summary_records, summary_fields)
     write_csv(table_path, table_rows, table_fields)
     write_markdown_table(markdown_path, table_rows, table_fields)
+    matrix_paths = []
+    if matrix_relation_ids:
+        if not all_l1_pair_records:
+            selected = ", ".join(matrix_relation_ids.values())
+            raise RuntimeError(f"No labelled L1 attention edges were collected for the selected relations: {selected}")
+        l1_pair_summary = summarise_l1_pair_records(all_l1_pair_records)
+        l1_pair_raw_fields = [
+            "experiment", "seed", "checkpoint", "split", "num_layers", "fanouts", "message_passing_layer",
+            "relation_id", "relation", "source_l1_id", "source_l1", "target_l1_id", "target_l1",
+            "edge_count", "target_l1_count", "attention_mean", "attention_mass_per_target",
+        ]
+        l1_pair_summary_fields = [
+            "experiment", "num_layers", "message_passing_layer", "relation_id", "relation",
+            "source_l1_id", "source_l1", "target_l1_id", "target_l1", "seed_runs", "seeds",
+            "edge_count_mean", "target_l1_count_mean", "attention_mean", "attention_std",
+            "attention_mass_per_target", "attention_mass_per_target_std",
+        ]
+        l1_pair_raw_path = output_dir / "l1_relation_attention_by_seed.csv"
+        l1_pair_summary_path = output_dir / "l1_relation_attention_summary.csv"
+        l1_pair_markdown_path = output_dir / "l1_relation_attention_matrices.md"
+        write_csv(l1_pair_raw_path, all_l1_pair_records, l1_pair_raw_fields)
+        write_csv(l1_pair_summary_path, l1_pair_summary, l1_pair_summary_fields)
+        id_to_label = {int(index): label for label, index in base_metadata["label_to_id"].items()}
+        write_l1_pair_matrices(
+            l1_pair_markdown_path,
+            l1_pair_summary,
+            id_to_label,
+            args.matrix_min_edge_count,
+        )
+        matrix_paths = [l1_pair_raw_path, l1_pair_summary_path, l1_pair_markdown_path]
     manifest_path = output_dir / "attention_report_manifest.json"
     manifest_path.write_text(json.dumps({
         "data": str(Path(args.data).resolve()),
@@ -413,10 +665,19 @@ def main() -> None:
             "Mean head-averaged RGAT alpha over typed incoming edges whose destination is a prediction root; "
             "synthetic self-loops are excluded."
         ),
+        "l1_relation_matrix": {
+            "enabled": bool(matrix_relation_ids),
+            "relations": matrix_relation_ids,
+            "definition": (
+                "For each exact directed relation, source L1 and target L1 cell, mean head-averaged RGAT "
+                "alpha over typed incoming test-target edges. Source/target true labels are used only for post-hoc grouping."
+            ) if matrix_relation_ids else None,
+            "minimum_edge_count_for_markdown": args.matrix_min_edge_count if matrix_relation_ids else None,
+        },
         "runs": run_info,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Wrote:")
-    for path in (raw_path, summary_path, table_path, markdown_path, manifest_path):
+    for path in (raw_path, summary_path, table_path, markdown_path, *matrix_paths, manifest_path):
         print(path)
 
 

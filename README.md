@@ -212,12 +212,20 @@ bash scripts/run_l1_rgat_attention.sh run
 ```text
 runs_report/level1/rgat_l1_relation_attention/relation_attention_table.md
 runs_report/level1/rgat_l1_relation_attention/relation_attention_table.csv
+runs_report/level1/rgat_l1_relation_attention/l1_relation_attention_matrices.md
+runs_report/level1/rgat_l1_relation_attention/l1_relation_attention_summary.csv
 ```
 
 表格按测试集预测人物的**入边**汇总：每条关系的值是 RGAT 所有 head 的
 attention alpha 先求均值、再在边上求均值，最后报告三条 seed 的均值 ± 标准差。
 二跳模型会分别给出 `layer1` 和 `layer2` 两列；一跳模型只有 `layer1`。合成 self-loop
 不计入任何真实关系。attention 是机制描述，不能直接当作关系的因果效应。
+
+`l1_relation_attention_matrices.md` 仿照 OCI 的 Fig. 5：每个**有向**关系一张矩阵，行是
+邻居的真实 L1，列是测试目标的真实 L1，单元格是该类入边的 mean attention ± 三 seed
+标准差及边数。`father` 与 `father__rev` 不会被合并；若研究父到子的职业延续，必须先在
+`edges.csv` 中核实并明确选择父→子的那一个有向标签。测试节点的真实 L1 仅用于导出后的
+分组，模型输入仍保持 unknown 掩码。
 
 只使用邻居 Level 3 的受控对照：
 

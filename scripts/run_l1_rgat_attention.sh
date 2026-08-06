@@ -88,13 +88,15 @@ attention_command=(
   --num-neighbors auto
   --batch-size 512
   --num-workers 0
+  --occupation-matrix-relations child,spouse,sibling,father,mother
+  --matrix-min-edge-count 10
   --device cuda
 )
 
 if [[ "$MODE" == "plan" ]]; then
   printf '%-18s' 'attention_report'
   show_command "${attention_command[@]}"
-  echo "Run mode trains three one-hop seeds, then writes relation_attention_table.md/.csv."
+  echo "Run mode trains three one-hop seeds, then writes overall and L1-pair relation-attention tables."
 else
   for seed in "${SEEDS[@]}"; do
     baseline="$OUTPUT_ROOT/rgat_baseline/seed_$seed/best_model.pt"
