@@ -9,7 +9,7 @@ def main() -> None:
     parser.add_argument(
         "command", choices=[
             "prepare", "occupation-embed", "train", "explain", "attention-report", "attention-rollout-report",
-            "attention-bootstrap", "diagnose", "link-prepare", "link-train",
+            "message-contribution-report", "attention-bootstrap", "diagnose", "link-prepare", "link-train",
         ], help="Workflow to run"
     )
     parser.add_argument("args", nargs=argparse.REMAINDER, help="Arguments passed to that workflow")
@@ -26,6 +26,8 @@ def main() -> None:
         from training.attention_report import main as command_main
     elif parsed.command == "attention-rollout-report":
         from training.attention_rollout import main as command_main
+    elif parsed.command == "message-contribution-report":
+        from training.message_contribution import main as command_main
     elif parsed.command == "attention-bootstrap":
         from training.attention_bootstrap import main as command_main
     elif parsed.command == "link-prepare":

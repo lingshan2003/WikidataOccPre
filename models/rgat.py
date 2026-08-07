@@ -41,6 +41,10 @@ class RelationalGATClassifier(nn.Module):
         attention_layers = []
         for index, (conv, norm) in enumerate(zip(self.convs, self.norms)):
             if return_attention_weights:
+                # Keep the exact state that RGATConv receives.  Alpha alone is
+                # only an allocation coefficient; value-aware analysis needs
+                # the corresponding relation-transformed source state W_r h_j.
+                input_node_state = h
                 updated, (attention_edge_index, alpha) = conv(h, edge_index, edge_type, return_attention_weights=True)
                 # ``RGATConv`` may append synthetic self loops before returning
                 # its attention edge index.  Keep the original typed edges too,
@@ -52,6 +56,7 @@ class RelationalGATClassifier(nn.Module):
                     "edge_type": edge_type,
                     "input_edge_index": edge_index,
                     "input_edge_type": edge_type,
+                    "input_node_state": input_node_state,
                     "alpha": alpha,
                 })
             else:
