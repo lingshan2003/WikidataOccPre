@@ -227,6 +227,10 @@ attention alpha 先求均值、再在边上求均值，最后报告三条 seed �
 `edges.csv` 中核实并明确选择父→子的那一个有向标签。测试节点的真实 L1 仅用于导出后的
 分组，模型输入仍保持 unknown 掩码。
 
+该旧口径由 `run.py attention-edge-report` 独立保留。节点级原始 attention mass 使用
+`run.py attention-node-report` 导出；两个入口共享 checkpoint 和采样工具，但不共享聚合指标。
+旧命令名 `attention-report` 仅作为 edge report 的兼容别名。
+
 将 `--occupation-matrix-relations` 设为 `all` 时，导出会一次性保存全部精确有向关系的
 `relation × source L1 × target L1` 立方体（包括每种关系的 `__rev`）；之后应从 CSV 本地筛选，
 无需为了新增关系再跑完整图。
@@ -281,6 +285,18 @@ bash scripts/export_l1_root_attention.sh run
 - `direct/root_direct_attention_sparse_by_seed.csv.gz`：root × 精确关系 × source L1 × 可见性状态的 attention mass；
 - `rollout/root_two_hop_rollout_sparse_by_seed.csv.gz`：root × `(r1,r2)` × source L1 × 可见性状态的 raw two-hop attention-path score；
 - 两份 `*_bootstrap.csv`：对 root 有放回重抽样的均值和 95% 区间。
+
+已有 root-level direct export 可进一步生成一跳模型的节点优先 L1 pair 权重表：
+
+```bash
+python scripts/build_rgat_one_hop_node_weight_table.py \
+  --input-dir runs_report/level1/rgat_l1_root_attention_all_relations/direct \
+  --output-dir runs_report/level1/rgat_l1_root_attention_all_relations/direct/node_weight_tables
+```
+
+脚本会先在每个 test target 内合并同一 `source L1 × relation × target L1` 的全部边和
+`source_visibility` 类别，再对拥有该 pair 的 target 求平均。汇总表同时报告涉及节点数、
+覆盖率，以及该 pair 在所有同类 target 总 attention budget 中的占比。
 
 `attention_mass` 和 rollout score 都是模型机制描述；它们不是删边后的预测影响，更不是历史社会因果。稀疏文件保留所有关系维度，后续可选择特定关系进行删边或职业置换反事实。
 
@@ -593,7 +609,10 @@ models/
 training/
 ├── train.py              # 共享 NeighborLoader 训练、评估、早停
 ├── explain.py            # 单个人的 R-GAT attention 候选边导出
-└── attention_report.py   # 多 checkpoint 的按关系 attention 汇总表
+├── attention_common.py   # attention 报告共享的 checkpoint/采样工具
+├── attention_edge_report.py # 保留原有以边为观测的关系 attention 汇总
+├── attention_node_report.py # 节点内 attention mass 原始导出（不做跨节点指标）
+└── attention_report.py   # edge report 的旧命令兼容入口
 scripts/
 └── run_l1_rgat_attention.sh  # L1 一跳训练 + 与两跳基线的关系权重对照
 link_prediction/          # 独立异构职业 link-prediction 管道

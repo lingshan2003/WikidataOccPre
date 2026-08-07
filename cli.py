@@ -8,8 +8,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="run.py", description="Occupation GNN experiment runner")
     parser.add_argument(
         "command", choices=[
-            "prepare", "occupation-embed", "train", "explain", "attention-report", "attention-rollout-report",
-            "message-contribution-report", "attention-bootstrap", "diagnose", "link-prepare", "link-train",
+            "prepare", "occupation-embed", "train", "explain", "attention-report", "attention-edge-report",
+            "attention-node-report", "attention-rollout-report", "message-contribution-report",
+            "attention-bootstrap", "diagnose", "link-prepare", "link-train",
         ], help="Workflow to run"
     )
     parser.add_argument("args", nargs=argparse.REMAINDER, help="Arguments passed to that workflow")
@@ -22,8 +23,10 @@ def main() -> None:
         from training.train import main as command_main
     elif parsed.command == "diagnose":
         from training.diagnose import main as command_main
-    elif parsed.command == "attention-report":
-        from training.attention_report import main as command_main
+    elif parsed.command in {"attention-report", "attention-edge-report"}:
+        from training.attention_edge_report import main as command_main
+    elif parsed.command == "attention-node-report":
+        from training.attention_node_report import main as command_main
     elif parsed.command == "attention-rollout-report":
         from training.attention_rollout import main as command_main
     elif parsed.command == "message-contribution-report":

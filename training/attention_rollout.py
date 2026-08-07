@@ -8,6 +8,8 @@ value transforms, residual paths, GELU and LayerNorm remain outside the
 reported product.
 """
 
+from __future__ import annotations
+
 import argparse
 import copy
 import csv
@@ -22,8 +24,7 @@ import torch
 import torch_geometric
 from torch_geometric.loader import NeighborLoader
 
-from training.attention_report import (
-    _head_alpha,
+from training.attention_common import (
     checkpoint_identity,
     checkpoint_paths,
     fanouts_for_checkpoint,
@@ -34,7 +35,8 @@ from training.attention_report import (
     resolve_device,
     restore_rgat,
     root_indices,
-    root_output_fields,
+    head_alpha,
+    output_fields,
     sha256_file,
     source_visibility_codes,
     validate_full_graph_root_mask,
@@ -139,8 +141,8 @@ def _rollout_for_batch(
     layer1, layer2 = layers
     edge1, edge2 = layer1["edge_index"], layer2["edge_index"]
     relation1, relation2 = attention_relation_ids(layer1), attention_relation_ids(layer2)
-    score1 = _head_alpha(layer1["alpha"]).mean(dim=-1)
-    score2 = _head_alpha(layer2["alpha"]).mean(dim=-1)
+    score1 = head_alpha(layer1["alpha"]).mean(dim=-1)
+    score2 = head_alpha(layer2["alpha"]).mean(dim=-1)
 
     root_slot = torch.full((batch.num_nodes,), -1, dtype=torch.long, device=edge1.device)
     root_slot[local_roots] = torch.arange(local_roots.numel(), device=edge1.device)
@@ -416,8 +418,8 @@ def main() -> None:
         "experiment", "seed", "checkpoint", "split", "forward_mode", "fanouts", "root_index",
         "target_l1_id", "target_l1", "total_typed_path_count", "typed_rollout_mass",
     ]
-    write_csv(sparse_path, all_rows, root_output_fields(all_rows, row_preferred))
-    write_csv(roster_path, all_roster, root_output_fields(all_roster, roster_preferred))
+    write_csv(sparse_path, all_rows, output_fields(all_rows, row_preferred))
+    write_csv(roster_path, all_roster, output_fields(all_roster, roster_preferred))
     _write_rollout_summary(summary_path, all_rows)
     manifest_path = output_dir / "attention_rollout_manifest.json"
     manifest_path.write_text(json.dumps({

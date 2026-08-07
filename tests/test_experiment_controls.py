@@ -16,7 +16,8 @@ from torch_geometric.data import Data
 from models import build_model
 from models.features import NodeFeatureEncoder, build_feature_specs
 from training.diagnose import degree_arrays, relation_homophily, visible_occupation_coverage
-from training.attention_report import fanouts_for_checkpoint, parse_matrix_relations, prediction_nodes
+from training.attention_common import fanouts_for_checkpoint, prediction_nodes
+from training.attention_edge_report import parse_matrix_relations
 from training.relation_controls import (
     apply_relation_controls,
     available_relation_groups,

@@ -24,7 +24,7 @@ import torch
 import torch_geometric
 from torch_geometric.loader import NeighborLoader
 
-from training.attention_report import (
+from training.attention_common import (
     checkpoint_identity,
     checkpoint_paths,
     fanouts_for_checkpoint,
@@ -34,7 +34,7 @@ from training.attention_report import (
     resolve_device,
     restore_rgat,
     root_indices,
-    root_output_fields,
+    output_fields,
     sha256_file,
     source_visibility_codes,
     validate_full_graph_root_mask,
@@ -442,8 +442,8 @@ def main() -> None:
         "total_incoming_attention_edges", "message_contribution_l2", "absolute_message_l2_sum",
         "message_contribution_l2_share",
     ]
-    write_csv(roster_path, all_roster, root_output_fields(all_roster, roster_preferred))
-    write_csv(sparse_path, all_sparse, root_output_fields(all_sparse, sparse_preferred))
+    write_csv(roster_path, all_roster, output_fields(all_roster, roster_preferred))
+    write_csv(sparse_path, all_sparse, output_fields(all_sparse, sparse_preferred))
     manifest_path = output_dir / "message_contribution_manifest.json"
     manifest_path.write_text(json.dumps({
         "data": str(Path(args.data).resolve()),

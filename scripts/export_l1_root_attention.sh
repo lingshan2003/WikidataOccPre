@@ -52,7 +52,7 @@ show_command() {
 }
 
 direct_command=(
-  python run.py attention-report
+  python run.py attention-node-report
   --data "$DATA_PATH"
   --checkpoint-glob "$OUTPUT_ROOT/rgat_one_hop/seed_*/best_model.pt"
   --checkpoint-glob "$OUTPUT_ROOT/rgat_baseline/seed_*/best_model.pt"
@@ -64,9 +64,6 @@ direct_command=(
   --num-neighbors full
   --batch-size "$BATCH_SIZE"
   --num-workers 0
-  --occupation-matrix-relations all
-  --matrix-min-edge-count 10
-  --root-level-output
   --device cuda
 )
 

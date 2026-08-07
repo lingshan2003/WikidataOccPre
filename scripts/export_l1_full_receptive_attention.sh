@@ -46,7 +46,7 @@ show_command() {
 }
 
 command=(
-  python run.py attention-report
+  python run.py attention-edge-report
   --data "$DATA_PATH"
   --checkpoint-glob "$OUTPUT_ROOT/rgat_one_hop/seed_*/best_model.pt"
   --checkpoint-glob "$OUTPUT_ROOT/rgat_baseline/seed_*/best_model.pt"

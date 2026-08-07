@@ -1,11 +1,14 @@
 """Synthetic correctness tests for root-aware RGAT attention analysis."""
 
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 
 import torch
 from torch_geometric.data import Data
 
-from training.attention_report import source_visibility_codes, validate_full_graph_root_mask
+from training.attention_common import source_visibility_codes, validate_full_graph_root_mask
+from training.attention_node_report import collect_checkpoint_node_attention
 from training.attention_rollout import _rollout_for_batch
 
 
@@ -45,6 +48,67 @@ class RootAttentionAnalysisTests(unittest.TestCase):
             {"occupation_level1": 0},
         )
         self.assertEqual(codes.tolist(), [0, 1, 2])
+
+    def test_node_report_sums_matching_edges_inside_each_target(self):
+        graph = Data(
+            edge_index=torch.tensor([[0, 1], [2, 2]]),
+            edge_type=torch.tensor([0, 0]),
+            y=torch.tensor([0, 0, 1]),
+            num_nodes=3,
+        )
+        graph.train_mask = torch.tensor([True, True, False])
+        graph.val_mask = torch.tensor([False, False, False])
+        graph.test_mask = torch.tensor([False, False, True])
+
+        metadata = {
+            "relation_to_id": {"child": 0},
+            "label_to_id": {"Culture": 0, "Science": 1},
+            "num_classes": 2,
+            "occupation_unknown_ids": {},
+        }
+        checkpoint = {"metadata": metadata, "model_config": {"num_layers": 1}}
+        explanation = {
+            "attention_layers": [{
+                "layer": 0,
+                "edge_index": graph.edge_index,
+                "input_edge_index": graph.edge_index,
+                "edge_type": graph.edge_type,
+                "input_edge_type": graph.edge_type,
+                "alpha": torch.tensor([[0.2, 0.4], [0.3, 0.5]]),
+            }]
+        }
+
+        class FakeModel:
+            convs = [object()]
+
+            def __call__(self, *_args, **_kwargs):
+                return torch.empty(0), explanation
+
+        with patch(
+            "training.attention_node_report.torch.load", return_value=checkpoint
+        ), patch(
+            "training.attention_node_report.restore_rgat",
+            return_value=(FakeModel(), {}, metadata),
+        ), patch(
+            "training.attention_node_report.sha256_file", return_value="synthetic"
+        ):
+            sparse, roster, _ = collect_checkpoint_node_attention(
+                Path("synthetic.pt"),
+                graph,
+                metadata,
+                split="test",
+                requested_fanouts="full",
+                batch_size=1,
+                num_workers=0,
+                device=torch.device("cpu"),
+                forward_mode="full-graph",
+            )
+
+        self.assertEqual(len(roster), 1)
+        self.assertAlmostEqual(roster[0]["total_attention_mass"], 0.7)
+        self.assertEqual(len(sparse), 1)
+        self.assertEqual(sparse[0]["candidate_edge_count"], 2)
+        self.assertAlmostEqual(sparse[0]["attention_mass"], 0.7)
 
     def test_rollout_multiplies_paths_and_keeps_relation_pairs_separate(self):
         graph = self._graph()
