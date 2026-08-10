@@ -300,6 +300,37 @@ python scripts/build_rgat_one_hop_node_weight_table.py \
 
 `attention_mass` 和 rollout score 都是模型机制描述；它们不是删边后的预测影响，更不是历史社会因果。稀疏文件保留所有关系维度，后续可选择特定关系进行删边或职业置换反事实。
 
+### 一跳 R-GAT 的 `gradient × attention` 预测归因
+
+下面的脚本不重训模型；它在冻结的 `rgat_one_hop` 三个 checkpoint 上，对每个 test root 的最终预测 margin 求导。对于入边 `e` 和 head `h`，导出：
+
+```text
+gradient_x_attention(e, h)
+  = alpha(e, h) * d(prediction_score) / d(alpha(e, h))
+```
+
+默认 `prediction_score` 是模型预测类别相对其他类别的 logit margin。稀疏输出保留每个 root 内的 `source L1 × exact directed relation × target L1 × source visibility` 分组，并同时写入 `attention_mass`；因此可分别观察 attention 分配和该分配的局部预测相关性。每个组先在 root 内合并边，之后用已有的 root bootstrap 将未出现的组重建为零：
+
+```bash
+bash scripts/export_rgat_one_hop_gradient_x_attention.sh plan
+bash scripts/export_rgat_one_hop_gradient_x_attention.sh run
+```
+
+默认使用完整一跳邻域的 batch 前向/反向传播；显存不足时先降低 `RGCN_L1_GRADIENT_BATCH_SIZE`，例如：
+
+```bash
+RGCN_L1_GRADIENT_BATCH_SIZE=4 \
+  bash scripts/export_rgat_one_hop_gradient_x_attention.sh run
+```
+
+输出位于 `runs_report/level1/rgat_l1_root_attention_all_relations/gradient_x_attention/rgat_one_hop/`：
+
+- `root_gradient_x_attention_sparse_by_seed.csv.gz`：root 级关系组的带符号 `gradient_x_attention`、绝对值和 `attention_mass`；
+- `root_gradient_x_attention_roster_by_seed.csv.gz`：每个 root 的 prediction margin、预测类别、正确性和完整性检查；
+- `root_gradient_x_attention_bootstrap.csv`：按 root 聚类的各 seed bootstrap 均值和区间。
+
+这是 post-softmax alpha 的局部 gradient × input 归因，不能解释为独立删边后的效果：同一目标人的 alpha 总和受 softmax 约束。应保留符号，并对排名靠前的关系组另做“屏蔽该组后重新归一化”的预测 margin 验证；它同样不是社会关系的因果效应。
+
 只使用邻居 Level 3 的受控对照：
 
 ```bash

@@ -10,6 +10,7 @@ def main() -> None:
         "command", choices=[
             "prepare", "occupation-embed", "train", "explain", "attention-report", "attention-edge-report",
             "attention-node-report", "attention-rollout-report", "message-contribution-report",
+            "gradient-attribution-report",
             "attention-bootstrap", "diagnose", "link-prepare", "link-train",
         ], help="Workflow to run"
     )
@@ -31,6 +32,8 @@ def main() -> None:
         from training.attention_rollout import main as command_main
     elif parsed.command == "message-contribution-report":
         from training.message_contribution import main as command_main
+    elif parsed.command == "gradient-attribution-report":
+        from training.gradient_attribution import main as command_main
     elif parsed.command == "attention-bootstrap":
         from training.attention_bootstrap import main as command_main
     elif parsed.command == "link-prepare":
