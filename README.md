@@ -331,7 +331,7 @@ RGCN_L1_GRADIENT_BATCH_SIZE=4 \
 
 这是 post-softmax alpha 的局部 gradient × input 归因，不能解释为独立删边后的效果：同一目标人的 alpha 总和受 softmax 约束。应保留符号，并对排名靠前的关系组另做“屏蔽该组后重新归一化”的预测 margin 验证；它同样不是社会关系的因果效应。
 
-根目录的 `rgat_l1_attention_message_heatmaps.ipynb` 统一生成这些归因图，以及 raw attention、raw absolute-message 和两种 complete-budget share 图。选择项目 `.venv` 内核并运行全部单元；默认输入为 `runs_report/level1/rgat_l1_root_attention_all_relations/labeled`，输出写入其 `figures/notebook_heatmaps/` 子目录。每项均输出精确亲属关系和亲属/非亲属两种 SVG/PNG 热图及单元格 CSV。
+根目录的 `rgat_l1_attention_message_heatmaps.ipynb` 在单独的单元中依次显示这些归因图，以及 raw attention、raw absolute-message 和两种 complete-budget share 图。选择项目 `.venv` 内核；每个数据源只需先运行一次“准备数据”单元，之后可按需运行任一精确亲属关系或亲属/非亲属绘图单元。默认输入为 `runs_report/level1/rgat_l1_root_attention_all_relations/labeled`，不写入 SVG、PNG 或单元格 CSV。
 
 只使用邻居 Level 3 的受控对照：
 
