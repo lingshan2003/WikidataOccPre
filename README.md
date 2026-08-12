@@ -1,95 +1,82 @@
 # Wikidata 人物职业预测
 
-这是一个基于 Wikidata 人物关系网络的应用型图学习项目。我们关心的问题是：
+基于 Wikidata 人物关系网络的多关系图学习项目。项目以人物为节点、社会关系为带类型的边，在职业 Level 1/2/3 三个粒度上预测人物职业，并分析模型使用了哪些关系与邻居信息。
 
-> 已知一个人与其他人的社会关系，以及部分相关人物已知的职业信息，能否预测该人物的职业？哪些关系对这种预测最有帮助？
+当前主线任务是**多关系人物图上的节点分类**；`link_prediction/` 是独立的异构图链接预测探索。项目研究的是职业与社会关系之间的预测关联，不把 attention、归因值或删边结果直接解释为社会因果关系。
 
-项目首先将此问题建模为**多关系人物图上的节点职业分类**。现阶段关注的是职业和社会关系之间的预测关联，不将结果直接解释为因果关系或“职业继承”。
+## 目录
 
-已实施实验及其结论见 [EXPERIMENTS_TRIED.md](EXPERIMENTS_TRIED.md)。
+- [任务与数据](#任务与数据)
+- [环境安装](#环境安装)
+- [快速开始](#快速开始)
+- [模型与训练协议](#模型与训练协议)
+- [实验控制与分析](#实验控制与分析)
+- [命令索引](#命令索引)
+- [项目结构](#项目结构)
+- [测试与复现](#测试与复现)
 
-## 研究目标
+## 任务与数据
 
-1. **首要目标：提高职业预测性能。**
-   在职业 Level 1、Level 2、Level 3 三个粒度上预测人物职业，并报告 Accuracy、Macro-F1、Weighted-F1 等指标。
-2. **次要目标：识别有效社会关系。**
-   判断“关系类型”相较于仅有图结构是否带来预测价值，并进一步识别哪些关系类型、哪些具体边对预测更重要。
-3. **独立探索：职业 link prediction。**
-   在不改变主线节点分类任务的前提下，另建异构 `Person--Occupation` 图，尝试预测缺失的职业边。该分支仍在探索中。
+原始数据文件为根目录下的 `Q_R_Q_extended.txt`。它实际是一个以边为行的 CSV 表，每行包含：
 
-## 数据与图定义
+- 两个人物的 Wikidata Q-ID；
+- 两人之间的关系；
+- 两端人物的出生、死亡、国家和三层职业属性。
 
-原始文件为 `Q_R_Q_extended.txt`。每一行是一条：
-
-```text
-Node1 (Person), Relation, Node2 (Person),
-Node1/Node2 的出生、死亡、国家、职业 Level 1/2/3 属性
-```
-
-当前导出中所有图节点都是人物；因此主图是**同构的人物节点图**，但边带有多种关系类型，是一个多关系图。
+预处理会把重复的端点属性规范化为唯一人物表，审计冲突属性，为每条关系增加 `__rev` 反向关系，并保存 PyTorch Geometric 图对象。
 
 当前完整导出的典型规模为：
 
-```text
-人物节点：334,099
-原始人物—人物边：691,503
-加入反向边、去重后：1,383,006 条有向边
-关系类型：80（包含反向关系）
+| 项目 | 数量 |
+| --- | ---: |
+| 人物节点 | 334,099 |
+| 原始人物关系边 | 691,503 |
+| 加反向边并去重后的有向边 | 1,383,006 |
+| 有向关系类型 | 80 |
+| Level 3 类别（`min-class-count=20`） | 682 |
+
+这些数字来自当前本地 artifact；更换数据后应以新生成的 `split_summary.json` 为准。
+
+### 标签层级
+
+- Level 1：粗粒度职业大类；
+- Level 2：中等粒度职业类别；
+- Level 3：细粒度职业类别。
+
+三个层级分别准备数据、训练和评估。低频职业与无标签人物仍保留为图中的邻居，但其 `y=-1`，不参与分类损失和指标计算。
+
+### 防止目标泄漏
+
+职业既是预测目标，也是邻居信息，因此代码执行以下协议：
+
+- 训练人物的 L1/L2/L3 职业可作为其他人物的邻居特征；
+- 验证和测试人物的三层职业始终编码为 `__UNKNOWN__`；
+- 每次 sampled forward 中，当前 seed 人物的三层职业会再次临时 mask；
+- 人物关系边不会因职业标签被 mask 而删除；
+- 验证和测试标签只用于计算指标，不能作为模型输入。
+
+因此，本项目的默认任务不是“已知目标人物上层职业后预测其细粒度职业”。如需研究该任务，应单独定义条件式分类实验，不能与当前结果混报。
+
+## 环境安装
+
+建议使用 Python 3.9 或更高版本，并在独立虚拟环境中安装依赖：
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-预处理将边中心的原始 CSV 规范化为：
+服务器使用 CUDA 时，建议先按 [PyTorch 官方安装说明](https://pytorch.org/get-started/locally/) 安装与 CUDA 匹配的 PyTorch，再安装 `requirements.txt` 中的其余依赖。
 
-```text
-Person 节点表 + 带 relation type 的 Person → Person 边表
-```
+`sentence-transformers` 只在 `occupation-embed` 工作流中使用，Matplotlib 只用于分析 notebook；主训练流程不需要下载语言模型。原始数据、预处理产物、模型 checkpoint 和分析报告均被 Git 忽略，不会随仓库提供。
 
-每个原始关系均增加反向关系。例如 `parent_of` 会对应一个反向关系，使消息可以沿两个方向传播；图结构不会因职业标签的遮蔽而被删除。
+## 快速开始
 
-## 任务定义：层级职业节点分类
+### 1. 准备图数据
 
-职业标签分为三个层级：
-
-```text
-Level 1：粗粒度职业大类
-Level 2：中等粒度职业类别
-Level 3：细粒度职业类别
-```
-
-三个层级分别训练、分别评估。以 Level 3 为例：模型输出一个人物属于各个保留的 Level 3 职业类别的概率；默认 `min-class-count=20` 时，保留 682 个 Level 3 监督类别。低频职业和无标签人物仍保留为图中的邻居，只是不参与分类 loss 和评估。
-
-### 关键防泄漏协议
-
-职业既是预测目标，也是社会网络中极有价值的邻居信息。因此必须在“目标人物自身”与“其他已知人物”之间严格区分：
-
-```text
-训练人物：其 Level 1 / Level 2 / Level 3 职业可作为邻居节点特征
-验证人物：三层职业均为 unknown
-测试人物：三层职业均为 unknown
-当前 forward 的 seed 人物：三层职业同时临时 mask 为 unknown
-人物—人物关系边：始终保留
-```
-
-这意味着模型能够利用已知亲属、朋友或其他相关人物的完整职业层级，但永远不能读取被预测人物自己的 Level 1、Level 2 或 Level 3。
-
-若未来希望研究“已知目标人物 Level 1/2、预测其 Level 3”的任务，应将其单独定义为**条件式细粒度职业分类**；它不能与主任务混合报告，因为目标自身的上层职业会大幅缩小 Level 3 候选空间。
-
-## 当前节点特征
-
-主线节点分类模型当前输入：
-
-| 特征 | 类型 | 可见性 |
-| --- | --- | --- |
-| `occupation_level1` | 类别 embedding | 仅训练人物可见；seed 人物 mask |
-| `occupation_level2` | 类别 embedding | 仅训练人物可见；seed 人物 mask |
-| `occupation_level3` | 类别 embedding | 仅训练人物可见；seed 人物 mask |
-| `country` | 类别 embedding | 所有节点可见 |
-| `temporal` | 数值特征 | 出生年、死亡年、年龄及缺失标记；所有节点可见 |
-
-特征编码器为 schema-driven 设计：每种类别、数值或未来文本向量特征各自经过独立分支，随后由 feature gate 和融合 MLP 组成节点初始表示。未来加入文本 embedding、教育经历等属性时，无需改写各个 GNN 模型。
-
-## 数据预处理
-
-所有新实验从 `run.py` 进入。
+把 `Q_R_Q_extended.txt` 放在项目根目录，然后为目标层级生成独立 artifact：
 
 ```bash
 python run.py prepare \
@@ -100,193 +87,163 @@ python run.py prepare \
   --seed 42
 ```
 
-`--target-level` 改为 `1`、`2` 或 `3`，分别生成对应的监督任务。请为每一层使用独立输出目录，例如：
+主要输出如下：
 
-```text
-artifacts/level1_hierarchy/
-artifacts/level2_hierarchy/
-artifacts/level3_hierarchy/
-```
+| 文件 | 内容 |
+| --- | --- |
+| `graph_data.pt` | PyG 图、特征、标签、split mask 与 metadata |
+| `nodes.csv` | 节点索引与 Wikidata Q-ID、规范化属性 |
+| `edges.csv` | 有向关系边及 relation ID |
+| `attribute_conflicts.csv` | 同一人物重复属性的冲突审计 |
+| `class_stats.csv` | 目标职业频数 |
+| `relation_stats.csv` | 关系频数 |
+| `split_summary.json` | 数据规模、划分与预处理配置 |
 
-预处理步骤如下：
+同一层级的模型比较必须读取同一份 `graph_data.pt`。Level 1/2/3 默认各自按目标标签分层划分；若要跨层级比较完全相同的人物集合，需要另行固定共享 split。
 
-1. 从每条边的两个端点属性构建唯一人物节点表，并导出属性冲突审计表；
-2. 保留所有人物和关系边，加入反向边并去重；
-3. 根据目标层级过滤可监督的职业类别；
-4. 以人物为单位、按职业分层划分 train / validation / test，默认比例为 70% / 10% / 20%；
-5. 按上述协议写入三层可遮蔽职业特征、Country 与时间特征；
-6. 保存可复现的 PyG artifact 与 CSV 审计文件。
-
-每个 artifact 的核心文件：
-
-```text
-graph_data.pt          # PyG 图、特征、掩码与 metadata
-nodes.csv              # 人物索引到 Wikidata Q-ID 的映射
-edges.csv              # 规范化后的关系边
-class_stats.csv        # 目标职业频数
-relation_stats.csv     # 关系频数
-split_summary.json     # 数据规模、划分和特征协议
-```
-
-> 同一层级内的模型比较必须读取同一份 `graph_data.pt`。目前每个层级按其目标标签独立分层划分；若要严格比较三个层级的同一批人物，需要额外固定共享的人物 split manifest。
-
-### 固定职业语义向量（可选实验）
-
-`occupation-embed` 不重新准备图、不改变 split；它只为训练人物可见的
-`(Level 1, Level 2, Level 3)` 职业组合生成固定的多语言语义向量。验证、测试
-以及当前 seed 人物一律使用单独可学习的 `unknown` 表示，因此不会读取目标自身的
-职业文本。
-
-先安装额外依赖并从同一个 categorical artifact 生成语义副本：
+### 2. 训练模型
 
 ```bash
-python -m pip install -r requirements.txt
-
-python run.py occupation-embed \
-  --data artifacts/pure_rel_occ/level3/graph_data.pt \
-  --output artifacts/pure_rel_occ/level3/graph_data_semantic.pt \
-  --model-name intfloat/multilingual-e5-base --device cuda
+python run.py train \
+  --model rgat \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir runs/level3_rgat \
+  --epochs 50 \
+  --batch-size 512 \
+  --num-layers 2 \
+  --num-neighbors 15,10 \
+  --hidden-dim 128 \
+  --branch-dim 64 \
+  --heads 4 \
+  --seed 42 \
+  --device auto
 ```
 
-编码器使用固定模板：`passage: A person's occupation hierarchy is Level 1: ...`
-，并保存 prompt manifest、模型 revision 与 L2-normalised 向量表。训练语义版本时，
-使用 `--occupation-representation semantic`；它与随机职业 embedding 对照时不应
-同时读取 `occupation_level1/2/3`。
+把 `--model` 改为 `rgcn` 或 `compgcn` 即可使用相同数据与训练协议比较模型。sampled 模式下，`--num-neighbors` 的 fan-out 数必须与 `--num-layers` 一致。
 
-## 主训练管道
+训练目录包含：
 
-训练采用两层 NeighborLoader 邻居采样。每个 batch 的前 `batch_size` 个节点是当前监督 seed，loss 只在这些 seed 人物上计算；其余采样节点提供邻居信息。
+- `best_model.pt`：验证集选择出的 checkpoint 与完整配置；
+- `metrics.json`：训练历史、选择指标、图扰动配置和最终指标；
+- `test_predictions.csv`：测试预测；使用 `--skip-test` 时不生成。
 
-```text
-输入：采样人物子图 + 关系类型 + 节点特征
-  ↓
-独立特征 embedding / 数值编码 → feature gate → 融合表示
-  ↓
-两层关系型消息传递
-  ↓
-职业分类器
-  ↓
-CrossEntropy（仅 seed 节点）
+默认以 validation loss 选择 checkpoint，采用 AdamW、梯度裁剪、`ReduceLROnPlateau` 和早停。测试集仅在最佳 checkpoint 确定后评估一次。探索配置时可加 `--skip-test`，锁定配置后再执行一次最终测试。
+
+`--train-mode full` 只适用于不暴露职业输入的实验（可保留普通属性，或使用 `--feature-mode structural`），因为单次全图 forward 无法逐个隐藏训练 seed 自身的职业；确定性的验证/测试全图推理可使用 `--eval-mode full`。
+
+### 3. 运行测试
+
+```bash
+python -m unittest discover -s tests -v
 ```
 
-优化器为 AdamW；默认以 validation loss 选择 checkpoint 和早停，并使用梯度裁剪与 ReduceLROnPlateau。测试集仅在选择出最佳 checkpoint 后评估一次。
+## 模型与训练协议
+
+### 节点特征
+
+| 特征 | 编码 | 默认可见性 |
+| --- | --- | --- |
+| `occupation_level1/2/3` | 独立类别 embedding | 仅训练人物可见，当前 seed 再 mask |
+| `country` | 类别 embedding | 所有节点可见 |
+| `temporal` | 出生年、死亡年、年龄及缺失标记 | 所有节点可见 |
+
+`NodeFeatureEncoder` 按 schema 为每类特征建立独立分支，经 feature gate 和融合层生成初始节点表示。可用以下参数控制输入：
+
+- `--occupation-feature-levels 1,2,3`：默认层级职业输入；
+- `--occupation-feature-levels 3`：只使用邻居 Level 3；
+- `--occupation-feature-levels none`：不使用职业特征；
+- `--auxiliary-features country,temporal` 或 `none`；
+- `--feature-mode structural`：所有人物共享一个常量特征，只保留拓扑和 relation type。
 
 ### 可用模型
 
-| 模型 | 文件 | 用途 |
+| 模型 | 实现 | 说明 |
 | --- | --- | --- |
-| R-GCN | `models/rgcn.py` | 关系卷积基线；默认 FastRGCNConv 以速度换显存 |
-| R-GAT | `models/rgat.py` | 关系注意力模型；可导出 attention 候选边 |
-| CompGCN | `models/compgcn.py` | 组合邻居节点表示与 relation embedding 的关系模型 |
+| R-GCN | `models/rgcn.py` | `FastRGCNConv`/`RGCNConv` 关系卷积基线 |
+| R-GAT | `models/rgat.py` | 多头关系注意力，可导出 attention 与归因 |
+| CompGCN | `models/compgcn.py` | 组合源节点状态与 relation embedding |
 
-三者共用相同数据、采样、优化器、特征编码和评估代码，因此可以进行公平的横向比较。
+三种模型共用数据、特征编码、采样、优化、checkpoint 选择和指标实现。主指标包括 Accuracy、Macro-F1、Weighted-F1、Macro-Precision 与 Macro-Recall。
 
-### 训练示例
+### 固定职业语义向量
 
-默认输入邻居的完整 L1+L2+L3 职业层级：
+`occupation-embed` 从已准备的 categorical artifact 生成新文件，不覆盖输入，也不改变 split：
 
 ```bash
-python run.py train --model rgat \
+python run.py occupation-embed \
   --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgat_hierarchy \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --heads 4 \
-  --occupation-feature-levels 1,2,3 \
-  --num-workers 4 --patience 6 --seed 42 --device cuda
+  --output artifacts/level3_hierarchy/graph_data_semantic.pt \
+  --model-name intfloat/multilingual-e5-base \
+  --device auto
+
+python run.py train \
+  --model rgcn \
+  --data artifacts/level3_hierarchy/graph_data_semantic.pt \
+  --output-dir runs/level3_rgcn_semantic \
+  --occupation-representation semantic \
+  --seed 42
 ```
 
-### L1 一跳 R-GAT 与关系权重表
+只有训练人物可见的职业组合会被编码；validation、test 和当前 seed 使用共享 unknown 表示。模型 revision、prompt 指纹和来源 artifact 会写入 metadata/checkpoint。
 
-`--num-layers` 必须与 `--num-neighbors` 的 fan-out 数一致。下面的 L1
-对照只保留一层消息传递，因此每个预测只聚合一跳邻居；它与已有的
-`runs_report/level1/rgat_baseline` 两层（两跳）结果使用相同的超参数和三条 seed。
+## 实验控制与分析
+
+### 关系和长尾控制
+
+`train` 已支持以下受控实验：
+
+- `--shuffle-relation-types`：保留拓扑和 relation 频数，随机重分配 relation ID；
+- `--drop-relation-groups`：按语义组删除正向与反向关系；
+- `--drop-relations`：删除指定原始关系及其反向边；
+- `--match-random-drop-to-relation-groups`：匹配关系组规模的随机关系对删除；
+- `--loss inverse_frequency|class_balanced|logit_adjusted`：长尾损失；
+- `--train-root-sampling class_balanced`：类别均衡的训练 seed 采样。
+
+所有运行时图扰动只作用于内存副本，不覆盖 `graph_data.pt`；实际删边数量、关系选择和随机 seed 会记录到输出配置。
+
+### 图与预测诊断
 
 ```bash
-bash scripts/run_l1_rgat_attention.sh plan
-bash scripts/run_l1_rgat_attention.sh run
+python run.py diagnose \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --output-dir diagnostics/level3
+
+python run.py diagnose \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --predictions runs/level3_rgat/test_predictions.csv \
+  --output-dir diagnostics/level3_rgat
 ```
 
-`run` 会训练 `rgat_one_hop/seed_{42,43,44}`，读取已有
-`rgat_baseline/seed_{42,43,44}/best_model.pt`，并写入：
+该命令只读取 artifact 和可选预测文件，导出图覆盖、连通性、职业可见性、关系同配性及按覆盖度分组的预测指标，不训练或改写模型。
 
-```text
-runs_report/level1/rgat_l1_relation_attention/relation_attention_table.md
-runs_report/level1/rgat_l1_relation_attention/relation_attention_table.csv
-runs_report/level1/rgat_l1_relation_attention/l1_relation_attention_matrices.md
-runs_report/level1/rgat_l1_relation_attention/l1_relation_attention_summary.csv
-```
+### R-GAT 解释与关系分析
 
-表格按测试集预测人物的**入边**汇总：每条关系的值是 RGAT 所有 head 的
-attention alpha 先求均值、再在边上求均值，最后报告三条 seed 的均值 ± 标准差。
-二跳模型会分别给出 `layer1` 和 `layer2` 两列；一跳模型只有 `layer1`。合成 self-loop
-不计入任何真实关系。attention 是机制描述，不能直接当作关系的因果效应。
-
-`l1_relation_attention_matrices.md` 仿照 OCI 的 Fig. 5：每个**有向**关系一张矩阵，行是
-邻居的真实 L1，列是测试目标的真实 L1，单元格是该类入边的 mean attention ± 三 seed
-标准差及边数。`father` 与 `father__rev` 不会被合并；若研究父到子的职业延续，必须先在
-`edges.csv` 中核实并明确选择父→子的那一个有向标签。测试节点的真实 L1 仅用于导出后的
-分组，模型输入仍保持 unknown 掩码。
-
-该旧口径由 `run.py attention-edge-report` 独立保留。节点级原始 attention mass 使用
-`run.py attention-node-report` 导出；两个入口共享 checkpoint 和采样工具，但不共享聚合指标。
-旧命令名 `attention-report` 仅作为 edge report 的兼容别名。
-
-将 `--occupation-matrix-relations` 设为 `all` 时，导出会一次性保存全部精确有向关系的
-`relation × source L1 × target L1` 立方体（包括每种关系的 `__rev`）；之后应从 CSV 本地筛选，
-无需为了新增关系再跑完整图。
-
-若要让每个有 L1 标签的人都轮流成为预测 root，并在其完整一/二跳感受野中导出注意力，
-不需要重训。以下脚本对一跳 checkpoint 自动使用 `-1`，对两跳 checkpoint 自动使用
-`-1,-1`；每个 root 的自身职业仍会在该 batch 中 mask：
+单节点候选边导出：
 
 ```bash
-bash scripts/export_l1_full_receptive_attention.sh plan
-bash scripts/export_l1_full_receptive_attention.sh run
+python run.py explain \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --checkpoint runs/level3_rgat/best_model.pt \
+  --node-id Q1000023 \
+  --output-dir explanations/Q1000023
 ```
 
-默认输出位于 `runs_report/level1/rgat_l1_full_receptive_attention_all_relations/`，并一次性导出
-全部关系的 L1 矩阵。两跳全邻域子图可能比训练时大得多；若显存不足，可先设置
-`RGCN_L1_FULL_ATTENTION_BATCH_SIZE=8` 后再运行。
+批量分析入口的统计单位不同，使用时不要混淆：
 
-### L1 全关系 root-level attention 与 two-hop rollout
+| 命令 | 输出含义 |
+| --- | --- |
+| `attention-edge-report` | 以边为观测的 head 平均 attention |
+| `attention-node-report` | 每个预测 root 内按关系/source L1 分组的原始 attention mass |
+| `attention-rollout-report` | 两层 RGAT 的 typed two-hop attention product 候选分数 |
+| `message-contribution-report` | `alpha × relation value vector` 的节点级消息幅值 |
+| `gradient-attribution-report` | 对预测分数的 signed `alpha × gradient` 局部归因 |
+| `relation-pair-ablation-report` | 指定职业—关系—职业 motif 与匹配随机对照的删边影响 |
+| `relation-pair-sweep-report` | 一跳 RGAT 中所有实际 relation pair 的快速条件反事实扫描 |
+| `attention-bootstrap` | 以预测 root 为重抽样单位的置信区间 |
 
-当研究问题是“模型如何使用已知训练人物的职业和关系”时，使用 test roots，而不是把
-训练 root 与 test root 混在同一份 attention 汇总中。test/validation 人物的职业输入已经是
-`UNKNOWN`，因此可以安全地将训练人物职业保留为可见 source，并用一次 `eval()` 全图前向
-导出 alpha；这不会把 test root 的答案传入模型。
+`attention-report` 仅是 `attention-edge-report` 的兼容别名。所有关系名均按精确方向解释；例如 `child` 与 `child__rev` 不得自动合并。attention、rollout、message 和 gradient 是模型机制或局部敏感性描述，不能单独证明边删除效应，更不能证明社会因果关系；优先用配对扰动实验验证候选关系。
 
-先训练只暴露邻居 L1 的一层、两层 RGAT 对照：
-
-```bash
-bash scripts/run_l1_only_rgat_attention.sh plan
-bash scripts/run_l1_only_rgat_attention.sh run
-```
-
-随后导出现有 hierarchy RGAT 和新增 L1-only RGAT 的所有精确有向关系、所有有序两跳关系对，
-并以 root 为聚类单位计算 bootstrap 区间：
-
-```bash
-bash scripts/export_l1_root_attention.sh plan
-RGCN_L1_ATTENTION_BATCH_SIZE=32 bash scripts/export_l1_root_attention.sh run
-```
-
-默认 `full-graph` 只接受 validation/test roots；若服务器无法容纳全图推理，可改用完整
-`-1,-1` 感受野 batch，二者均在 manifest 中记录：
-
-```bash
-RGCN_L1_ATTENTION_FORWARD_MODE=full-neighborhood \
-RGCN_L1_ATTENTION_BATCH_SIZE=8 \
-bash scripts/export_l1_root_attention.sh run
-```
-
-主要输出为：
-
-- `direct/root_attention_roster_by_seed.csv.gz`：每个 root/layer 的完整 alpha mass、typed mass 与 self-loop 诊断；
-- `direct/root_direct_attention_sparse_by_seed.csv.gz`：root × 精确关系 × source L1 × 可见性状态的 attention mass；
-- `rollout/root_two_hop_rollout_sparse_by_seed.csv.gz`：root × `(r1,r2)` × source L1 × 可见性状态的 raw two-hop attention-path score；
-- 两份 `*_bootstrap.csv`：对 root 有放回重抽样的均值和 95% 区间。
-
-已有 root-level direct export 可进一步生成一跳模型的节点优先 L1 pair 权重表：
+一跳节点权重表可从 `attention-node-report` 的输出构建：
 
 ```bash
 python scripts/build_rgat_one_hop_node_weight_table.py \
@@ -294,378 +251,78 @@ python scripts/build_rgat_one_hop_node_weight_table.py \
   --output-dir runs_report/level1/rgat_l1_root_attention_all_relations/direct/node_weight_tables
 ```
 
-脚本会先在每个 test target 内合并同一 `source L1 × relation × target L1` 的全部边和
-`source_visibility` 类别，再对拥有该 pair 的 target 求平均。汇总表同时报告涉及节点数、
-覆盖率，以及该 pair 在所有同类 target 总 attention budget 中的占比。
+其中 `mean_a` 是“拥有该 pair 的目标节点内，匹配入边 attention mass 之和的节点平均”；`n` 是涉及的目标节点数，不是边数。`coverage` 和 `attention_share_of_Ot_budget` 应同时用于识别高权重但极低覆盖的稀有 pair。
 
-`attention_mass` 和 rollout score 都是模型机制描述；它们不是删边后的预测影响，更不是历史社会因果。稀疏文件保留所有关系维度，后续可选择特定关系进行删边或职业置换反事实。
+`scripts/` 中的 L1 工作流均支持 `plan`（打印计划）和 `run`（执行）模式。详细参数与可覆盖环境变量直接查看对应脚本顶部的帮助文本。分析 notebook 位于 `notebooks/rgat_l1_attention_message_heatmaps.ipynb`，用于读取已有 CSV 并生成 `visualization/` 下的热力图。
 
-### 一跳 R-GAT 的 `gradient × attention` 预测归因
+### 独立的链接预测探索
 
-下面的脚本不重训模型；它在冻结的 `rgat_one_hop` 三个 checkpoint 上，对每个 test root 的最终预测 margin 求导。对于入边 `e` 和 head `h`，导出：
-
-```text
-gradient_x_attention(e, h)
-  = alpha(e, h) * d(prediction_score) / d(alpha(e, h))
-```
-
-默认 `prediction_score` 是模型预测类别相对其他类别的 logit margin。稀疏输出保留每个 root 内的 `source L1 × exact directed relation × target L1 × source visibility` 分组，并同时写入 `attention_mass`；因此可分别观察 attention 分配和该分配的局部预测相关性。每个组先在 root 内合并边，之后用已有的 root bootstrap 将未出现的组重建为零：
+该分支构建 `Person --has_occupation--> Occupation` 异构图，使用 HGT 编码节点并以点积预测职业边：
 
 ```bash
-bash scripts/export_rgat_one_hop_gradient_x_attention.sh plan
-bash scripts/export_rgat_one_hop_gradient_x_attention.sh run
+python run.py link-prepare \
+  --input Q_R_Q_extended.txt \
+  --output-dir link_artifacts/level3 \
+  --target-level 3 \
+  --min-class-count 20 \
+  --seed 42
+
+python run.py link-train \
+  --data link_artifacts/level3/hetero_graph.pt \
+  --output-dir link_runs/level3_hgt \
+  --device auto
 ```
 
-默认使用完整一跳邻域的 batch 前向/反向传播；显存不足时先降低 `RGCN_L1_GRADIENT_BATCH_SIZE`，例如：
+链接预测与主线节点分类回答不同问题，结果不应直接横向比较。
+
+## 命令索引
+
+统一入口为：
 
 ```bash
-RGCN_L1_GRADIENT_BATCH_SIZE=4 \
-  bash scripts/export_rgat_one_hop_gradient_x_attention.sh run
+python run.py <command> --help
 ```
 
-输出位于 `runs_report/level1/rgat_l1_root_attention_all_relations/gradient_x_attention/rgat_one_hop/`：
-
-- `root_gradient_x_attention_sparse_by_seed.csv.gz`：root 级关系组的带符号 `gradient_x_attention`、绝对值和 `attention_mass`；
-- `root_gradient_x_attention_roster_by_seed.csv.gz`：每个 root 的 prediction margin、预测类别、正确性和完整性检查；
-- `root_gradient_x_attention_bootstrap.csv`：按 root 聚类的各 seed bootstrap 均值和区间。
-
-这是 post-softmax alpha 的局部 gradient × input 归因，不能解释为独立删边后的效果：同一目标人的 alpha 总和受 softmax 约束。应保留符号，并对排名靠前的关系组另做“屏蔽该组后重新归一化”的预测 margin 验证；它同样不是社会关系的因果效应。
-
-根目录的 `rgat_l1_attention_message_heatmaps.ipynb` 在单独的单元中依次显示这些归因图，以及 raw attention、raw absolute-message 和两种 complete-budget share 图。选择项目 `.venv` 内核；每个数据源只需先运行一次“准备数据”单元，之后可按需运行任一精确亲属关系或亲属/非亲属绘图单元。默认输入为 `runs_report/level1/rgat_l1_root_attention_all_relations/labeled`，不写入 SVG、PNG 或单元格 CSV。
-
-只使用邻居 Level 3 的受控对照：
-
-```bash
-python run.py train --model rgat \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgat_neighbor_l3_only \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --heads 4 \
-  --occupation-feature-levels 3 \
-  --num-workers 4 --patience 6 --seed 42 --device cuda
-```
-
-`--occupation-feature-levels none` 可运行不使用职业邻居信息的结构与普通属性基线。R-GCN 使用 `--model rgcn --rgcn-backend fast`；CompGCN 使用 `--model compgcn --compgcn-composition mult`。
-
-纯关系职业语义的 Level 3 验证实验示例：
-
-```bash
-# 先重跑 categorical 对照；不跑 test，只以 validation Macro-F1 选 checkpoint。
-python run.py train --model rgcn \
-  --data artifacts/pure_rel_occ/level3/graph_data.pt \
-  --output-dir runs/pure_rel_occ/level3_rgcn_categorical_reselected \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --occupation-representation categorical --occupation-feature-levels 1,2,3 \
-  --auxiliary-features none --eval-mode sampled --early-stop-metric macro_f1 \
-  --min-delta 0.001 --patience 6 --num-workers 4 --seed 42 --device cuda --skip-test
-
-# 再跑唯一改变职业输入表示的 semantic 对照。
-python run.py train --model rgcn \
-  --data artifacts/pure_rel_occ/level3/graph_data_semantic.pt \
-  --output-dir runs/pure_rel_occ/level3_rgcn_semantic \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --occupation-representation semantic --auxiliary-features none \
-  --eval-mode sampled --early-stop-metric macro_f1 --min-delta 0.001 \
-  --patience 6 --num-workers 4 --seed 42 --device cuda --skip-test
-```
-
-`--skip-test` 仅保存 validation 最优 checkpoint，不写测试指标；锁定配置后移除它，
-对该设置执行一次最终测试。checkpoint 始终保存实际最优 validation 监控值，
-`--min-delta` 只影响早停 patience。
-
-### 下一轮优先实验（已支持，待服务器运行）
-
-以下开关只修改运行时内存中的图，绝不改写输入的 `graph_data.pt`。实际删除的
-关系、删边前后数量和置乱 seed 会写入 `metrics.json` 与 checkpoint；所有探索先加
-`--skip-test`，锁定配置后才去掉它运行一次测试集。
-
-**1. 纯关系/结构基线。** `structural` 为所有人物提供同一个可学习常量，不使用
-职业、国家、时间或节点 ID。因此模型只能利用图拓扑和 relation type：
-
-```bash
-python run.py train --model compgcn \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_compgcn_structural \
-  --feature-mode structural --occupation-feature-levels none --auxiliary-features none \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --num-workers 4 --seed 42 --device cuda --skip-test
-```
-
-**2. 关系语义置乱与消融。** `--shuffle-relation-types` 保留每条边的位置和每种
-relation 的频数，但按 `--seed` 随机重新分配 relation ID。它应与完全相同、但不带
-该开关的基线配对。`--drop-relation-groups` 会同时删除关系的正向与反向边；可用组为
-`kinship`、`education_mentorship`、`professional_collaboration`、
-`influence_succession`、`religious`、`other`。也可以用 `--drop-relations father,mother`
-指定原始关系名。
-
-```bash
-# 关系类型是否提供超越纯拓扑的信号？
-python run.py train --model rgcn \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgcn_relation_shuffled \
-  --occupation-feature-levels 1,2,3 --auxiliary-features none \
-  --shuffle-relation-types --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --num-workers 4 --seed 42 --device cuda --skip-test
-
-# 对每个组分别运行；这里是亲属关系消融。
-python run.py train --model rgcn \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgcn_without_kinship \
-  --occupation-feature-levels 1,2,3 --auxiliary-features none \
-  --drop-relation-groups kinship --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --num-workers 4 --seed 42 --device cuda --skip-test
-```
-
-亲属消融删掉的边数可能远大于其他关系组，因此还必须与**等数量随机删边**配对。
-`--match-random-drop-to-relation-groups kinship` 先统计亲属关系包含的“原始关系 +
-无向人物对”数量，再从全图均匀抽取相同数量的关系对；每一对的正向和反向边一起删除。
-这保留了“删边规模”而不保留亲属语义：
-
-```bash
-python run.py train --model rgcn \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgcn_random_drop_matched_kinship \
-  --occupation-feature-levels 1,2,3 --auxiliary-features none \
-  --match-random-drop-to-relation-groups kinship \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --early-stop-metric macro_f1 --min-delta 0.001 \
-  --num-workers 4 --seed 42 --device cuda --skip-test
-```
-
-若亲属消融明显差于这个随机删边对照，才有较强证据表明亲属边的价值超出单纯的图
-连通性。`--random-edge-drop-pairs N` 也可用于手工指定要删除的关系对数量。随机删边
-与关系消融或 relation type 置乱是独立对照，命令行不允许把它们混合。
-
-对置乱模型导出 attention 时，程序会重放同一置乱；但其 relation 标签已经不对应
-原始语义，因此不能用它做关系解释。
-
-### 数据诊断：稀疏度、职业可见性与关系同配性
-
-`diagnose` 不训练模型。它默认仅使用训练人物的真实职业标签来估计 relation-level
-同配性，避免用验证/测试标签来描述训练时可见信号；并输出每个人的不同邻居数、连通
-分量、可见训练职业邻居数及两跳覆盖。传入一次最终测试的预测 CSV 后，还会按这些分桶
-报告 Accuracy 和 Macro-F1。
-
-```bash
-# 图和标签信号本身的诊断（可在训练前运行）
-python run.py diagnose \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir diagnostics/level3_graph
-
-# 需要先完成一次不带 --skip-test 的最终运行，才会生成 test_predictions.csv。
-python run.py diagnose \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --predictions runs/level3_rgcn_baseline_macro/test_predictions.csv \
-  --output-dir diagnostics/level3_baseline
-```
-
-输出包括：
-
-```text
-summary.json              # 点边比、连通分量、各 split 的直接/两跳职业覆盖
-node_diagnostics.csv      # 每个节点的不同邻居数、分量大小和职业邻居覆盖
-relation_homophily.csv    # 每种关系的职业相同率、相对独立基线 lift、互信息
-prediction_strata.csv     # 可选：按度/职业邻居覆盖分桶的 Accuracy、Macro-F1
-```
-
-**3. L3 长尾训练。** 以下三种策略先逐一与同一基线比较，避免无法归因。它们均只用
-训练 split 的类别频数，验证和测试标签从不参与权重或先验计算：
-若以 Macro-F1 为比较重点，所有配对运行（包括普通 CrossEntropy 基线）都应加入
-`--early-stop-metric macro_f1 --min-delta 0.001`。
-
-```bash
-# 有效样本数（class-balanced）损失
-python run.py train --model rgcn --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgcn_class_balanced --loss class_balanced \
-  --class-balanced-beta 0.9999 --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --early-stop-metric macro_f1 --min-delta 0.001 \
-  --num-workers 4 --seed 42 --device cuda --skip-test
-
-# logit-adjusted cross entropy（先验强度 tau）
-python run.py train --model rgcn --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgcn_logit_adjusted --loss logit_adjusted \
-  --logit-adjustment-tau 1.0 --epochs 50 --batch-size 512 --num-neighbors 15,10 \
-  --hidden-dim 128 --branch-dim 64 --rgcn-backend fast \
-  --early-stop-metric macro_f1 --min-delta 0.001 \
-  --num-workers 4 --seed 42 --device cuda --skip-test
-
-# 每个 epoch 对训练 seed 作类别均衡的有放回采样
-python run.py train --model rgcn --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_rgcn_balanced_roots --train-root-sampling class_balanced \
-  --epochs 50 --batch-size 512 --num-neighbors 15,10 --hidden-dim 128 --branch-dim 64 \
-  --rgcn-backend fast --early-stop-metric macro_f1 --min-delta 0.001 \
-  --num-workers 4 --seed 42 --device cuda --skip-test
-```
-
-旧的 `--class-weight` 仍可用，等价于 `--loss inverse_frequency`；不要和其他
-`--loss` 选项混用。
-
-**4. 真正的 full-batch 训练。** `--train-mode full` 在每个 epoch 对整图执行一次
-forward/backward，并强制 `--eval-mode full`。为严格防泄漏，它不允许职业特征：一次
-全图前向无法同时对每个训练人物遮蔽“自身职业”又把它暴露给其他训练 seed。优先尝试
-CompGCN；FastRGCN 的全图计算已知可能 OOM。
-
-```bash
-python run.py train --model compgcn \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output-dir runs/level3_compgcn_full_structural \
-  --train-mode full --eval-mode full --feature-mode structural \
-  --occupation-feature-levels none --auxiliary-features none --num-neighbors=-1,-1 \
-  --epochs 50 --hidden-dim 128 --branch-dim 64 --seed 42 --device cuda --skip-test
-```
-
-训练输出：
-
-```text
-runs/<experiment>/best_model.pt
-runs/<experiment>/metrics.json
-runs/<experiment>/test_predictions.csv
-```
-
-### 汇报用三 seed 重跑矩阵
-
-`scripts/run_report_experiments.sh` 将历史尝试整理为五个可解释的问题，共 18 个条件：
-模型架构、职业输入、关系语义/删边控制、长尾优化和邻域覆盖。每个条件固定同一 Level 3
-artifact 并运行 seed `42/43/44`，输出统一放在 `runs_report/level3/<condition>/seed_<seed>/`。
-它不会使用 `--skip-test`，因为该矩阵用于最终报告；每个 seed 都只按 validation 选
-checkpoint，再测试一次。
-
-先只打印全部 54 条命令，检查路径和 semantic artifact：
-
-```bash
-bash scripts/run_report_experiments.sh plan all
-```
-
-按组执行，便于从服务器断点重跑；已有 `metrics.json` 的 seed 会自动跳过：
-
-```bash
-bash scripts/run_report_experiments.sh run architecture
-bash scripts/run_report_experiments.sh run features
-bash scripts/run_report_experiments.sh run relations
-bash scripts/run_report_experiments.sh run longtail
-bash scripts/run_report_experiments.sh run coverage
-```
-
-全部完成后汇总每个条件的逐 seed 指标、均值与样本标准差：
-
-```bash
-python scripts/summarize_report_runs.py --root runs_report/level3
-```
-
-它会生成：
-
-```text
-runs_report/level3/report_seed_metrics.csv  # 每个 condition × seed 的最终 test 指标
-runs_report/level3/report_summary.csv       # 每个 condition 的 mean/std，按 Macro-F1 排序
-```
-
-语义职业条件要求预先存在 semantic artifact；默认路径为
-`artifacts/level3_hierarchy/graph_data_semantic.pt`。路径不同可在运行脚本前设置
-`RGCN_REPORT_SEMANTIC_DATA`。同样可通过 `RGCN_REPORT_DATA` 和
-`RGCN_REPORT_OUTPUT_ROOT` 覆盖普通 artifact 和输出目录。
-
-若尚未生成这个 artifact，先在服务器执行一次：
-
-```bash
-python run.py occupation-embed \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --output artifacts/level3_hierarchy/graph_data_semantic.pt \
-  --model-name intfloat/multilingual-e5-base --device cuda
-```
-
-## 关系重要性与解释
-
-项目的次要目标不是只导出一张 attention 表，而是评估关系的真实预测贡献。
-
-R-GAT 可先导出每个查询人物的 attention 候选边：
-
-```bash
-python run.py explain \
-  --data artifacts/level3_hierarchy/graph_data.pt \
-  --checkpoint runs/level3_rgat_hierarchy/best_model.pt \
-  --node-id Q1000023 \
-  --output-dir explanations \
-  --num-neighbors 15,10
-```
-
-attention alpha 只是模型机制的候选信号，并不等于社会科学意义上的影响。后续应优先做：
-
-1. 关系类型消融：遮蔽一类关系后观察验证/测试性能下降；
-2. 关系类型置乱：保留图结构、打乱 relation type，检验关系语义是否有效；
-3. 个体边删除：移除高 attention 边后观察目标职业概率或 logit 是否下降；
-4. 按亲属、朋友、其他关系组分别报告贡献。
-
-这些分析支持“预测关联和潜在关系贡献”的表述；若要主张因果影响，还需关系语义清洗、时间顺序和额外识别策略。
-
-## 独立探索：异构图 Link Prediction
-
-`link_prediction/` 是不影响主线节点分类的一条独立尝试。它将职业显式建成节点：
-
-```text
-Person --各种社会关系--> Person
-Person --has_occupation--> Occupation
-```
-
-训练人物的 `has_occupation` 边进入消息图；验证/测试人物的职业边被移除并作为待预测链接。第一版使用 HGT encoder + DistMult decoder，并报告 MRR、Hits@1、Hits@3、Hits@10。
-
-```bash
-python run.py link-prepare --input Q_R_Q_extended.txt \
-  --output-dir link_artifacts/level3 --target-level 3 --min-class-count 20 --seed 42
-
-python run.py link-train --data link_artifacts/level3/hetero_graph.pt \
-  --output-dir link_runs/level3_hgt --epochs 50 --batch-size 256 \
-  --num-neighbors 15,10 --hidden-dim 128 --branch-dim 64 --heads 4 --device cuda
-```
-
-该分支的评估目标与节点分类不同，不能将 BCE loss、MRR 或 Hits@k 直接与节点分类 CrossEntropy、Accuracy 混为同一指标。
+| 类别 | 命令 |
+| --- | --- |
+| 数据 | `prepare`, `occupation-embed`, `link-prepare` |
+| 训练 | `train`, `link-train` |
+| 诊断/个例 | `diagnose`, `explain` |
+| Attention | `attention-edge-report`, `attention-node-report`, `attention-rollout-report` |
+| 归因/扰动 | `message-contribution-report`, `gradient-attribution-report`, `relation-pair-ablation-report`, `relation-pair-sweep-report` |
+| 统计 | `attention-bootstrap` |
 
 ## 项目结构
 
 ```text
-run.py                    # 唯一命令入口
-cli.py                    # prepare/train/explain/link 子命令路由
-data/
-├── extended.py           # 原始扩展 CSV → 规范节点表与关系边表
-└── prepare.py            # 节点分类 artifact、分割和层级职业掩码
-models/
-├── features.py           # 可扩展类别/数值/向量特征编码与融合
-├── rgcn.py               # R-GCN
-├── rgat.py               # R-GAT
-├── compgcn.py            # CompGCN
-└── __init__.py           # 模型注册表
-training/
-├── train.py              # 共享 NeighborLoader 训练、评估、早停
-├── explain.py            # 单个人的 R-GAT attention 候选边导出
-├── attention_common.py   # attention 报告共享的 checkpoint/采样工具
-├── attention_edge_report.py # 保留原有以边为观测的关系 attention 汇总
-├── attention_node_report.py # 节点内 attention mass 原始导出（不做跨节点指标）
-└── attention_report.py   # edge report 的旧命令兼容入口
-scripts/
-└── run_l1_rgat_attention.sh  # L1 一跳训练 + 与两跳基线的关系权重对照
-link_prediction/          # 独立异构职业 link-prediction 管道
-legacy/original_baseline/ # 师姐留下的原始 R-GCN 代码，仅供追溯
-RGAT_DESIGN.md            # R-GAT 与掩码协议的补充说明
+RGCN/
+├── run.py                    # 统一命令入口
+├── cli.py                    # 子命令路由
+├── requirements.txt          # Python 依赖
+├── data/                     # 原始表规范化、图准备、职业语义特征
+├── models/                   # 特征编码器与 R-GCN/R-GAT/CompGCN
+├── training/                 # 训练、诊断、attention、归因与扰动分析
+├── link_prediction/          # 独立异构图链接预测分支
+├── scripts/                  # 可复现实验与报告脚本
+├── notebooks/                # 交互式结果分析
+├── tests/                    # 合成图回归测试
+└── legacy/                   # 仅供历史对照的旧基线
 ```
 
-## Legacy 代码
+运行时目录不会提交到 Git：
 
-`legacy/original_baseline/` 保存交接时的节点分类实现，包括原始数据读取、全图 R-GCN 和早期特征消融。它不再是新实验入口，原因包括：全图计算成本高、测试集被用于选择 checkpoint、处理和训练逻辑耦合等。
+- `artifacts/`、`link_artifacts/`：预处理数据；
+- `runs/`、`link_runs/`、`runs_report/`：checkpoint、指标与批量报告；
+- `diagnostics/`、`explanations/`：诊断和个例解释；
+- `visualization/`：notebook 生成的图片。
 
-新实验统一使用：
+`legacy/original_baseline/` 是项目接收时的旧实现，依赖当前仓库未提供的数据，并在 mini-batch 中重复做全图卷积。它只用于来源历史对照；新实验请使用 `python run.py train --model rgcn`。
 
-```bash
-python run.py prepare ...
-python run.py train --model rgcn|rgat|compgcn ...
-python run.py explain ...
-python run.py link-prepare ...
-python run.py link-train ...
-```
+## 测试与复现
 
-
-ssh -p 24191 root@connect.nmb1.seetacloud.com
+- 修改数据处理、mask、采样、attention 或反事实逻辑后，至少运行完整 `unittest`；
+- 正式模型比较应固定 artifact、split、seed 列表、模型选择指标和测试协议；
+- 对比多个模型时不得混用 validation loss 与 Macro-F1 选择出的 checkpoint；
+- 探索阶段使用 `--skip-test`，避免反复查看测试集；
+- 报告关系结论时保留方向、root 覆盖数、多个 seed 的离散程度与匹配随机对照；
+- 生成文件中的 manifest、checkpoint 配置和 `metrics.json` 是复现实验的主要依据。

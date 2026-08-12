@@ -1,11 +1,15 @@
 .venv/
 artifacts/
+link_artifacts/
 runs/
+link_runs/
+runs_report/
 explanations/
+diagnostics/
+visualization/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ipynb_checkpoints/
 .DS_Store
 Q_R_Q_extended.txt
-runs_report/
-visulization
