@@ -253,7 +253,17 @@ python scripts/build_rgat_one_hop_node_weight_table.py \
 
 其中 `mean_a` 是“拥有该 pair 的目标节点内，匹配入边 attention mass 之和的节点平均”；`n` 是涉及的目标节点数，不是边数。`coverage` 和 `attention_share_of_Ot_budget` 应同时用于识别高权重但极低覆盖的稀有 pair。
 
-`scripts/` 中的 L1 工作流均支持 `plan`（打印计划）和 `run`（执行）模式。详细参数与可覆盖环境变量直接查看对应脚本顶部的帮助文本。分析 notebook 位于 `notebooks/rgat_l1_attention_message_heatmaps.ipynb`，用于读取已有 CSV 并生成 `visualization/` 下的热力图。
+分析 notebook 位于 `notebooks/rgat_l1_attention_message_heatmaps.ipynb`，用于读取已有 CSV 并生成 `visualization/` 下的热力图。底层分析均通过上表中的 `run.py` 子命令调用，不再保留绑定特定 L1 checkpoint 和固定目录的一次性 shell 包装。
+
+正式三 seed 实验矩阵保留统一批处理入口：
+
+```bash
+bash scripts/run_report_experiments.sh plan all
+bash scripts/run_report_experiments.sh run all
+python scripts/summarize_report_runs.py --root runs_report/level3
+```
+
+第二个参数也可单独选择 `architecture`、`features`、`relations`、`longtail` 或 `coverage`；`run` 会跳过已经生成 `metrics.json` 的 seed 目录。
 
 ### 独立的链接预测探索
 
