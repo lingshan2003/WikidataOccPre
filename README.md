@@ -244,6 +244,61 @@ bash scripts/run_tie_audit_experiments.sh run summarize
 分析，但明日的性能汇总不会重新训练或用它推理。所有结果表示模型依赖，不能解释为现实
 职业因果效应。
 
+### 出生队列异质性审计
+
+时间审计以**出生年**而不是死亡年或“人生曾与某时期重叠”分期：每人只属于一个互斥
+队列，避免把早生而晚逝的人误放进较晚的历史时期。默认采用宽口径历史时期，配置位于
+`config/birth_cohorts_historical_eras_v1.json`；原来的细分方案保留在
+`config/birth_cohorts_v1.json`，两者修改后都会记录内容哈希。根据当前 Level 1 节点表的
+实际分布，默认划分及测试集规模为：
+
+| 出生队列 | 全部有职业标签节点 | 测试节点 |
+| --- | ---: | ---: |
+| Ancient History（至公元 500 年） | 5,273 | 1,037 |
+| Post-Classical History（501–1500） | 21,298 | 4,090 |
+| Mid-Modern Period（1501–1800） | 52,649 | 10,181 |
+| Contemporary Period（1801 年后） | 241,782 | 47,271 |
+| 出生年缺失（透明报告，不纳入假设比较） | 13,097 | 2,388 |
+
+先对已完成的完整图与全局关系删边模型做无训练的队列分层。这需要服务器保留所有 30 个
+运行的 `test_predictions.csv`：
+
+```bash
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_birth_cohort_tie_audit_experiments.sh run summarize-global
+```
+
+该报告在每个队列内按模型和 seed 配对，并计算：
+
+\[
+S_{g,t}=F1_{\mathrm{random\ matched}\ g,t}-F1_{\mathrm{drop}\ g,t}.
+\]
+
+其中 (g\) 为 inherited/acquired，(t\) 为出生队列。正值越大，说明在该队列中，删除
+该关系组的损失越超出等量随机删边。
+
+最早两段存在职业类别稀疏问题；例如 Ancient 的测试集中 `Sports/Games` 只有 1 人。因此
+分期结果应同时保存每类支持数；该段应以 Accuracy、Weighted-F1 和逐节点 bootstrap 为主，
+Macro-F1 仅作带有类别稀疏警告的补充报告。不能把同一已训练模型的固定测试集再切成
+五折并称为交叉验证：其余四折已经属于原训练集。若要估计 split 不确定性，需重新生成
+五个互斥训练/验证/测试 split，并在每折重新训练；这应作为后续稳健性分析。
+
+第二条实验线是队列定向消融：只删除**与该出生队列人物相连**的指定关系对；匹配随机
+对照也只从与同一队列相连的所有关系对中抽取相同数量。因此它同时控制删边数量与队列
+暴露机会。默认配置会运行 4 队列 × 2 模型 × 4 条件 × 3 seed = 96 次新训练，但仍复用
+既有六个完整图基线：
+
+```bash
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_birth_cohort_tie_audit_experiments.sh run matrix
+
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_birth_cohort_tie_audit_experiments.sh run summarize-targeted
+```
+
+两种分析检验的是“按出生队列分层的模型关系依赖”。当前 Wikidata 图是静态的，关系本身
+没有发生时间，故不能据此宣称某个历史时期的关系造成了职业结果。
+
 ### 图与预测诊断
 
 ```bash

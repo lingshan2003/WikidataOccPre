@@ -21,7 +21,9 @@ from training.relation_controls import (
     count_relation_pairs,
     parse_selection,
     resolve_ablation,
+    select_relation_pairs,
 )
+from training.birth_cohorts import load_artifact_birth_cohorts, load_birth_cohort_config
 from training.tie_taxonomy import (
     DEFAULT_TIE_TAXONOMY_PATH,
     load_tie_taxonomy,
@@ -181,6 +183,19 @@ def parse_args() -> argparse.Namespace:
         "--match-random-drop-to-tie-groups",
         default=None,
         help="Remove a uniform random set of as many relation pairs as inherited or acquired contains",
+    )
+    parser.add_argument(
+        "--edge-cohort-config",
+        default=None,
+        help=(
+            "Optional versioned birth-cohort JSON. With a tie ablation or matched random control, "
+            "restrict deletion candidates to relation pairs incident to this cohort."
+        ),
+    )
+    parser.add_argument(
+        "--edge-cohort-id",
+        default=None,
+        help="Birth-cohort ID from --edge-cohort-config whose incident relation pairs are eligible for deletion",
     )
     parser.add_argument(
         "--eval-mode",
@@ -645,6 +660,15 @@ def main() -> None:
         raise ValueError("--drop-tie-groups cannot be combined with --drop-relation-groups or --drop-relations")
     if random_drop_requested and args.shuffle_relation_types:
         raise ValueError("Random edge-drop controls should not be combined with --shuffle-relation-types")
+    if bool(args.edge_cohort_config) != bool(args.edge_cohort_id):
+        raise ValueError("--edge-cohort-config and --edge-cohort-id must be supplied together")
+    if args.edge_cohort_config and not (drop_tie_groups or random_match_tie_groups):
+        raise ValueError(
+            "Cohort-restricted edge deletion currently supports --drop-tie-groups or "
+            "--match-random-drop-to-tie-groups only"
+        )
+    if args.edge_cohort_config and (len(drop_tie_groups) > 1 or len(random_match_tie_groups) > 1):
+        raise ValueError("Cohort-restricted edge deletion accepts exactly one tie group per run")
     set_seed(args.seed)
     device = resolve_device(args.device)
     data_path = Path(args.data)
@@ -656,6 +680,24 @@ def main() -> None:
     # must never overwrite the canonical artifact shared by comparisons.
     data, metadata = copy.deepcopy(bundle["data"]), bundle["metadata"]
     tie_taxonomy = load_tie_taxonomy(args.tie_taxonomy, metadata["relation_to_id"])
+    cohort_node_mask = None
+    cohort_manifest = None
+    if args.edge_cohort_config:
+        cohort_config = load_birth_cohort_config(args.edge_cohort_config)
+        selected_cohort = cohort_config.cohort(args.edge_cohort_id)
+        cohort_nodes = load_artifact_birth_cohorts(data_path, cohort_config, expected_nodes=data.num_nodes)
+        cohort_node_mask = (cohort_nodes["birth_cohort"] == selected_cohort.identifier).to_numpy(dtype=bool)
+        if not cohort_node_mask.any():
+            raise ValueError(
+                f"Birth cohort {selected_cohort.identifier!r} has no nodes in {data_path.parent / 'nodes.csv'}"
+            )
+        cohort_manifest = {
+            **cohort_config.manifest(),
+            "selected_cohort_id": selected_cohort.identifier,
+            "selected_cohort_label": selected_cohort.label,
+            "selected_cohort_node_count": int(cohort_node_mask.sum()),
+            "edge_scope": "incident_to_selected_cohort",
+        }
     if args.num_layers < 1:
         raise ValueError("--num-layers must be at least one")
     if len(fanouts) != args.num_layers:
@@ -685,10 +727,22 @@ def main() -> None:
         metadata, occupation_levels, args.occupation_representation
     )
     representation_provenance = semantic_provenance(metadata, args.occupation_representation)
+    relation_pair_keys_to_drop = None
+    random_edge_drop_candidate_pair_keys = None
     if drop_tie_groups:
         relation_ids_to_drop, dropped_base_relations = resolve_tie_ablation(
             tie_taxonomy, drop_tie_groups, metadata["relation_to_id"]
         )
+        if cohort_node_mask is not None:
+            relation_pair_keys_to_drop = select_relation_pairs(
+                data, relation_ids_to_drop, metadata["relation_to_id"], cohort_node_mask
+            )
+            if not len(relation_pair_keys_to_drop):
+                raise ValueError(
+                    f"No {drop_tie_groups[0]} relation pairs are incident to cohort {args.edge_cohort_id!r}; "
+                    "refusing a no-op cohort ablation"
+                )
+            relation_ids_to_drop = ()
     else:
         relation_ids_to_drop, dropped_base_relations = resolve_ablation(
             metadata["relation_to_id"], drop_relation_groups, drop_relations
@@ -699,8 +753,18 @@ def main() -> None:
             tie_taxonomy, random_match_tie_groups, metadata["relation_to_id"]
         )
         random_edge_drop_pairs = count_relation_pairs(
-            data, matching_relation_ids, metadata["relation_to_id"]
+            data, matching_relation_ids, metadata["relation_to_id"], cohort_node_mask
         )
+        if cohort_node_mask is not None and not random_edge_drop_pairs:
+            raise ValueError(
+                f"No {random_match_tie_groups[0]} relation pairs are incident to cohort {args.edge_cohort_id!r}; "
+                "refusing a no-op matched random control"
+            )
+        if cohort_node_mask is not None:
+            all_relation_ids = tuple(int(value) for value in metadata["relation_to_id"].values())
+            random_edge_drop_candidate_pair_keys = select_relation_pairs(
+                data, all_relation_ids, metadata["relation_to_id"], cohort_node_mask
+            )
     elif random_match_groups:
         matching_relation_ids, matched_base_relations = resolve_ablation(
             metadata["relation_to_id"], random_match_groups, ()
@@ -713,9 +777,11 @@ def main() -> None:
     relation_perturbation = apply_relation_controls(
         data,
         relation_ids_to_drop=relation_ids_to_drop,
+        relation_pair_keys_to_drop=relation_pair_keys_to_drop,
         relation_to_id=metadata["relation_to_id"],
         random_edge_drop_pairs=random_edge_drop_pairs,
         random_edge_drop_seed=args.seed if random_edge_drop_pairs else None,
+        random_edge_drop_candidate_pair_keys=random_edge_drop_candidate_pair_keys,
         shuffle_relation_types=args.shuffle_relation_types,
         shuffle_seed=args.seed if args.shuffle_relation_types else None,
     )
@@ -729,6 +795,7 @@ def main() -> None:
         "random_drop_matched_base_relations": list(matched_base_relations),
         "dropped_tie_groups": list(drop_tie_groups),
         "random_drop_matched_tie_groups": list(random_match_tie_groups),
+        "edge_cohort": cohort_manifest,
     })
     specs = build_feature_specs(feature_schema, metadata)
     model = build_model(

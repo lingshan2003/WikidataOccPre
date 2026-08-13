@@ -9,7 +9,7 @@ is never changed.
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Mapping, Sequence, Set, Tuple
+from typing import Dict, Iterable, Mapping, Optional, Sequence, Set, Tuple
 
 import numpy as np
 import torch
@@ -131,13 +131,56 @@ def relation_pair_keys(data, relation_to_id: Mapping[str, int]) -> np.ndarray:
     return ((base_ids * node_count) + low) * node_count + high
 
 
-def count_relation_pairs(data, relation_ids: Iterable[int], relation_to_id: Mapping[str, int]) -> int:
-    """Count undirected/base-relation edge pairs represented by selected IDs."""
+def select_relation_pairs(
+    data,
+    relation_ids: Iterable[int],
+    relation_to_id: Mapping[str, int],
+    incident_node_mask: Optional[np.ndarray] = None,
+) -> np.ndarray:
+    """Return selected base-relation/undirected pairs, optionally incident to nodes.
+
+    The optional node selector is defined on original node indices.  Since a
+    relation pair retains the same endpoint pair in both generated directions,
+    selecting either endpoint preserves paired deletion of forward and reverse
+    message edges.
+    """
     selected = np.array(sorted({int(relation_id) for relation_id in relation_ids}), dtype=np.int64)
     if selected.size == 0:
-        return 0
+        return np.empty(0, dtype=np.int64)
     edge_relation_ids = data.edge_type.detach().cpu().numpy()
-    return int(np.unique(relation_pair_keys(data, relation_to_id)[np.isin(edge_relation_ids, selected)]).size)
+    keep = np.isin(edge_relation_ids, selected)
+    if incident_node_mask is not None:
+        node_mask = np.asarray(incident_node_mask, dtype=bool)
+        if node_mask.ndim != 1 or len(node_mask) != int(data.num_nodes):
+            raise ValueError("incident_node_mask must be a Boolean vector with one entry per graph node")
+        source, target = data.edge_index.detach().cpu().numpy().astype(np.int64, copy=False)
+        keep &= node_mask[source] | node_mask[target]
+    return np.unique(relation_pair_keys(data, relation_to_id)[keep])
+
+
+def count_relation_pairs(
+    data,
+    relation_ids: Iterable[int],
+    relation_to_id: Mapping[str, int],
+    incident_node_mask: Optional[np.ndarray] = None,
+) -> int:
+    """Count relation pairs represented by selected types, optionally incident to nodes."""
+    return int(len(select_relation_pairs(data, relation_ids, relation_to_id, incident_node_mask)))
+
+
+def _drop_relation_pairs(data, relation_to_id: Mapping[str, int], pair_keys_to_drop: np.ndarray) -> int:
+    """Delete whole relation pairs and return their actual unique count."""
+    selected_keys = np.unique(np.asarray(pair_keys_to_drop, dtype=np.int64))
+    if not len(selected_keys):
+        return 0
+    keys = relation_pair_keys(data, relation_to_id)
+    present = np.isin(keys, selected_keys)
+    if int(np.unique(keys[present]).size) != len(selected_keys):
+        raise ValueError("Requested relation pair deletion contains pairs absent from this graph")
+    keep_tensor = torch.from_numpy(~present).to(device=data.edge_type.device)
+    data.edge_index = data.edge_index[:, keep_tensor]
+    data.edge_type = data.edge_type[keep_tensor]
+    return int(len(selected_keys))
 
 
 def _drop_random_relation_pairs(
@@ -145,33 +188,40 @@ def _drop_random_relation_pairs(
     relation_to_id: Mapping[str, int],
     pair_count: int,
     seed: int,
+    candidate_pair_keys: Optional[np.ndarray] = None,
 ) -> Tuple[int, int]:
     """Uniformly remove whole relation pairs while keeping generated reverses aligned."""
     if pair_count < 0:
         raise ValueError("random edge-pair drop count must be non-negative")
     keys = relation_pair_keys(data, relation_to_id)
     unique_keys = np.unique(keys)
-    if pair_count > len(unique_keys):
+    if candidate_pair_keys is not None:
+        candidate_keys = np.unique(np.asarray(candidate_pair_keys, dtype=np.int64))
+        candidate_keys = candidate_keys[np.isin(candidate_keys, unique_keys)]
+        if len(candidate_keys) != len(np.unique(np.asarray(candidate_pair_keys, dtype=np.int64))):
+            raise ValueError("Random-drop candidate relation pairs contain pairs absent from this graph")
+    else:
+        candidate_keys = unique_keys
+    if pair_count > len(candidate_keys):
         raise ValueError(
-            f"Cannot remove {pair_count} relation pairs: graph has only {len(unique_keys)} pairs"
+            f"Cannot remove {pair_count} relation pairs: candidate set has only {len(candidate_keys)} pairs"
         )
     if pair_count == 0:
-        return 0, int(len(unique_keys))
+        return 0, int(len(candidate_keys))
     rng = np.random.default_rng(seed)
-    dropped_keys = rng.choice(unique_keys, size=pair_count, replace=False)
-    keep = ~np.isin(keys, dropped_keys)
-    keep_tensor = torch.from_numpy(keep).to(device=data.edge_type.device)
-    data.edge_index = data.edge_index[:, keep_tensor]
-    data.edge_type = data.edge_type[keep_tensor]
-    return int(pair_count), int(len(unique_keys))
+    dropped_keys = rng.choice(candidate_keys, size=pair_count, replace=False)
+    _drop_relation_pairs(data, relation_to_id, dropped_keys)
+    return int(pair_count), int(len(candidate_keys))
 
 
 def apply_relation_controls(
     data,
     relation_ids_to_drop: Iterable[int] = (),
+    relation_pair_keys_to_drop: Optional[np.ndarray] = None,
     relation_to_id: Mapping[str, int] | None = None,
     random_edge_drop_pairs: int = 0,
     random_edge_drop_seed: int | None = None,
+    random_edge_drop_candidate_pair_keys: Optional[np.ndarray] = None,
     shuffle_relation_types: bool = False,
     shuffle_seed: int | None = None,
 ) -> Dict[str, object]:
@@ -183,12 +233,19 @@ def apply_relation_controls(
     transformation for attention export.
     """
     drop_ids = tuple(sorted({int(relation_id) for relation_id in relation_ids_to_drop}))
+    if relation_pair_keys_to_drop is not None and drop_ids:
+        raise ValueError("Use either relation IDs or relation-pair keys for an ablation, not both")
+    if relation_pair_keys_to_drop is not None and relation_to_id is None:
+        raise ValueError("relation_to_id metadata is required for relation-pair deletion")
     edge_count_before = int(data.edge_type.numel())
     if drop_ids:
         drop_tensor = torch.tensor(drop_ids, dtype=data.edge_type.dtype, device=data.edge_type.device)
         keep = ~torch.isin(data.edge_type, drop_tensor)
         data.edge_index = data.edge_index[:, keep]
         data.edge_type = data.edge_type[keep]
+    dropped_relation_pair_count = _drop_relation_pairs(
+        data, relation_to_id, relation_pair_keys_to_drop
+    ) if relation_pair_keys_to_drop is not None else 0
     edge_count_after_ablation = int(data.edge_type.numel())
 
     if random_edge_drop_pairs and relation_to_id is None:
@@ -200,6 +257,7 @@ def apply_relation_controls(
         relation_to_id,
         int(random_edge_drop_pairs),
         int(random_edge_drop_seed),
+        random_edge_drop_candidate_pair_keys,
     ) if random_edge_drop_pairs else (0, None)
     edge_count_after_random_drop = int(data.edge_type.numel())
 
@@ -213,6 +271,7 @@ def apply_relation_controls(
 
     return {
         "dropped_relation_ids": list(drop_ids),
+        "dropped_relation_pair_count": dropped_relation_pair_count,
         "edge_count_before": edge_count_before,
         "edge_count_after_ablation": edge_count_after_ablation,
         "random_edge_drop_pairs": dropped_random_pairs,

@@ -24,6 +24,7 @@ from training.relation_controls import (
     count_relation_pairs,
     relation_pair_keys,
     resolve_ablation,
+    select_relation_pairs,
 )
 from training.train import (
     class_balanced_train_nodes,
@@ -161,6 +162,49 @@ class ExperimentControlTests(unittest.TestCase):
             self.assertIn(retained_count, {0, original_count})
         self.assertEqual(manifest["random_edge_drop_pairs"], 1)
         self.assertEqual(graph.edge_index.size(1), 2)
+
+    def test_cohort_incident_pair_controls_restrict_both_ablation_and_random_candidates(self):
+        relation_to_id = {
+            "father": 0,
+            "father__rev": 1,
+            "student_of": 2,
+            "student_of__rev": 3,
+        }
+        original = Data(
+            edge_index=torch.tensor([[0, 1, 0, 2, 2, 3], [1, 0, 2, 0, 3, 2]]),
+            edge_type=torch.tensor([0, 1, 2, 3, 0, 1]),
+            num_nodes=4,
+        )
+        cohort_nodes = np.array([True, False, False, False])
+        father_ids, _ = resolve_ablation(relation_to_id, ("kinship",), ())
+        selected = select_relation_pairs(original, father_ids, relation_to_id, cohort_nodes)
+        self.assertEqual(len(selected), 1)
+        graph = copy.deepcopy(original)
+        manifest = apply_relation_controls(
+            graph,
+            relation_to_id=relation_to_id,
+            relation_pair_keys_to_drop=selected,
+        )
+        self.assertEqual(manifest["dropped_relation_pair_count"], 1)
+        self.assertEqual(graph.edge_type.tolist(), [2, 3, 0, 1])
+
+        candidates = select_relation_pairs(
+            original, relation_to_id.values(), relation_to_id, cohort_nodes
+        )
+        self.assertEqual(len(candidates), 2)  # father and student_of pairs incident to node 0
+        graph = copy.deepcopy(original)
+        manifest = apply_relation_controls(
+            graph,
+            relation_to_id=relation_to_id,
+            random_edge_drop_pairs=1,
+            random_edge_drop_seed=42,
+            random_edge_drop_candidate_pair_keys=candidates,
+        )
+        self.assertEqual(manifest["random_edge_drop_available_pairs"], 2)
+        self.assertEqual(graph.edge_index.size(1), 4)
+        retained = relation_pair_keys(graph, relation_to_id)
+        for key in np.unique(relation_pair_keys(original, relation_to_id)):
+            self.assertIn(int((retained == key).sum()), {0, 2})
 
     def test_diagnostics_measure_neighbours_coverage_and_relation_homophily(self):
         relation_to_id = {"father": 0, "father__rev": 1, "student_of": 2, "student_of__rev": 3}

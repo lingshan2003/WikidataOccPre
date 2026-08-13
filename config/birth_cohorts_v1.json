@@ -1,0 +1,37 @@
+{
+  "name": "historical_birth_cohorts_v1",
+  "version": 1,
+  "description": "Editable birth-cohort bins for the inherited/acquired tie audit. Bins are mutually exclusive and exhaustive for valid numeric birth years. Missing birth years are retained in a transparent 'missing_birth_year' reporting stratum but excluded from the cohort hypothesis comparison.",
+  "time_field": "birth_year",
+  "missing_policy": "exclude_from_stratified_results",
+  "bins": [
+    {
+      "id": "pre_1800",
+      "label": "Before 1800",
+      "end": 1799
+    },
+    {
+      "id": "nineteenth_century",
+      "label": "1800-1899",
+      "start": 1800,
+      "end": 1899
+    },
+    {
+      "id": "early_twentieth_century",
+      "label": "1900-1945",
+      "start": 1900,
+      "end": 1945
+    },
+    {
+      "id": "postwar_twentieth_century",
+      "label": "1946-1979",
+      "start": 1946,
+      "end": 1979
+    },
+    {
+      "id": "contemporary_1980_plus",
+      "label": "1980 onward",
+      "start": 1980
+    }
+  ]
+}

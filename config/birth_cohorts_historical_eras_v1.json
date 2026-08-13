@@ -1,0 +1,31 @@
+{
+  "name": "historical_eras_by_birth_year_v1",
+  "version": 1,
+  "description": "Broad, editable historical eras for the inherited/acquired tie audit. Conventional birth-year boundaries are used only as an operational cohort definition: Ancient through 500 CE, Post-Classical 501-1500, Mid-Modern 1501-1800, and Contemporary from 1801. Bins are mutually exclusive and exhaustive for valid numeric birth years; missing birth years are reported separately and excluded from cohort hypothesis comparisons.",
+  "time_field": "birth_year",
+  "missing_policy": "exclude_from_stratified_results",
+  "bins": [
+    {
+      "id": "ancient_history",
+      "label": "Ancient History (through 500 CE)",
+      "end": 500
+    },
+    {
+      "id": "post_classical_history",
+      "label": "Post-Classical History (501-1500)",
+      "start": 501,
+      "end": 1500
+    },
+    {
+      "id": "mid_modern_period",
+      "label": "Mid-Modern Period (1501-1800)",
+      "start": 1501,
+      "end": 1800
+    },
+    {
+      "id": "contemporary_period",
+      "label": "Contemporary Period (1801 onward)",
+      "start": 1801
+    }
+  ]
+}
