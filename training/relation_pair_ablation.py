@@ -47,6 +47,11 @@ from training.attention_common import (
     write_csv,
 )
 from training.train import batch_features, feature_inputs
+from training.tie_taxonomy import (
+    DEFAULT_TIE_TAXONOMY_PATH,
+    TieTaxonomy,
+    load_tie_taxonomy,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -85,6 +90,11 @@ def parse_args() -> argparse.Namespace:
         help="Optional deterministic sample cap before motif eligibility filtering; useful for a quick pilot.",
     )
     parser.add_argument("--analysis-seed", type=int, default=20260811)
+    parser.add_argument(
+        "--tie-taxonomy",
+        default=str(DEFAULT_TIE_TAXONOMY_PATH),
+        help="Versioned inherited/acquired taxonomy JSON recorded with this local explanation",
+    )
     parser.add_argument("--device", default="auto")
     return parser.parse_args()
 
@@ -264,6 +274,7 @@ def collect_checkpoint_relation_pair_ablation(
     path: Path,
     base_data,
     base_metadata: Mapping[str, object],
+    tie_taxonomy: TieTaxonomy,
     split: str,
     source_l1: str,
     relation: str,
@@ -284,6 +295,13 @@ def collect_checkpoint_relation_pair_ablation(
     model, feature_schema, metadata = restore_rgat(checkpoint, device)
     if metadata["relation_to_id"] != base_metadata["relation_to_id"]:
         raise ValueError(f"Checkpoint relation mapping differs from --data: {path}")
+    perturbation = checkpoint.get("relation_perturbation")
+    recorded_taxonomy = perturbation.get("tie_taxonomy") if isinstance(perturbation, Mapping) else None
+    if recorded_taxonomy is not None and recorded_taxonomy.get("sha256") != tie_taxonomy.sha256:
+        raise ValueError(
+            f"Checkpoint tie taxonomy differs from --tie-taxonomy: {path}. "
+            "Use the taxonomy recorded by the checkpoint or retrain the condition."
+        )
     if model_depth(checkpoint) != 1 or len(model.convs) != 1:
         raise ValueError(
             "relation-pair-ablation-report currently requires an exactly one-layer RGAT checkpoint; "
@@ -404,6 +422,7 @@ def collect_checkpoint_relation_pair_ablation(
                 "source_visibility": "visible_train",
                 "relation_id": relation_id,
                 "relation": relation,
+                "tie_group": tie_taxonomy.group_for_base_relation(relation),
                 "pair_edge_count": int(pair_counts[slot].item()),
                 "matched_control_candidate_edge_count": int(control_candidate_counts[slot].item()),
                 "has_matched_control": matched,
@@ -441,11 +460,13 @@ def collect_checkpoint_relation_pair_ablation(
         "forward_mode": forward_mode,
         "source_l1": source_l1,
         "relation": relation,
+        "tie_group": tie_taxonomy.group_for_base_relation(relation),
         "target_l1": target_l1,
         "input_root_n": input_roots_seen,
         "target_l1_root_n": target_roots_seen,
         "motif_eligible_root_n": motif_roots_seen,
         "matched_control_root_n": len(matched_records),
+        "tie_taxonomy_sha256": tie_taxonomy.sha256,
         "base_predicts_target_root_n": len(base_target_records),
         "mean_pair_margin_drop": _finite_mean([float(record["pair_margin_drop"]) for record in records]),
         "median_pair_margin_drop": _finite_median([float(record["pair_margin_drop"]) for record in records]),
@@ -509,6 +530,7 @@ def main() -> None:
     device = resolve_device(args.device)
     bundle = torch.load(Path(args.data), map_location="cpu", weights_only=False)
     base_data, base_metadata = bundle["data"], bundle["metadata"]
+    tie_taxonomy = load_tie_taxonomy(args.tie_taxonomy, base_metadata["relation_to_id"])
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -521,6 +543,7 @@ def main() -> None:
             path,
             base_data,
             base_metadata,
+            tie_taxonomy,
             args.split,
             args.source_l1,
             args.relation,
@@ -551,7 +574,7 @@ def main() -> None:
     preferred_root_fields = [
         "experiment", "seed", "checkpoint", "split", "forward_mode", "fanouts", "analysis_seed",
         "control_draws_requested", "root_index", "source_l1_id", "source_l1", "source_visibility",
-        "relation_id", "relation", "target_l1_id", "target_l1", "pair_edge_count",
+        "relation_id", "relation", "tie_group", "target_l1_id", "target_l1", "pair_edge_count",
         "matched_control_candidate_edge_count", "has_matched_control", "base_target_margin",
         "pair_removed_target_margin", "pair_margin_drop", "base_prediction_l1_id",
         "pair_removed_prediction_l1_id", "base_predicts_target", "pair_removed_predicts_target",
@@ -574,6 +597,7 @@ def main() -> None:
         "control_draws": args.control_draws,
         "max_roots": args.max_roots,
         "analysis_seed": args.analysis_seed,
+        "tie_taxonomy": tie_taxonomy.manifest(),
         "code_git_revision": git_revision(),
         "python": sys.version,
         "torch": torch.__version__,

@@ -1,0 +1,15 @@
+{
+  "name": "blood_family_vs_nonblood_v1",
+  "version": 1,
+  "description": "Operational taxonomy for auditing model reliance. Inherited contains blood-family relation labels; acquired resolves to every other base relation present in the prepared artifact.",
+  "groups": {
+    "inherited": [
+      "father",
+      "mother",
+      "child",
+      "sibling",
+      "relative"
+    ],
+    "acquired": "all_remaining"
+  }
+}

@@ -13,6 +13,7 @@ from training.relation_pair_ablation import (
     collect_checkpoint_relation_pair_ablation,
     target_margin,
 )
+from training.tie_taxonomy import TieTaxonomy
 
 
 class RelationPairAblationTests(unittest.TestCase):
@@ -80,6 +81,14 @@ class RelationPairAblationTests(unittest.TestCase):
         graph = self._graph()
         metadata = self._metadata()
         checkpoint = {"metadata": metadata, "model_config": {"num_layers": 1}}
+        taxonomy = TieTaxonomy(
+            name="synthetic",
+            version=1,
+            path=Path("synthetic.json"),
+            sha256="synthetic",
+            inherited=("child",),
+            acquired=("spouse",),
+        )
 
         class FakeModel:
             convs = [object()]
@@ -102,6 +111,7 @@ class RelationPairAblationTests(unittest.TestCase):
                 Path("seed_42/best_model.pt"),
                 graph,
                 metadata,
+                taxonomy,
                 split="test",
                 source_l1="Leadership",
                 relation="child",
@@ -118,6 +128,7 @@ class RelationPairAblationTests(unittest.TestCase):
 
         self.assertEqual(len(records), 1)
         self.assertEqual(records[0]["pair_edge_count"], 1)
+        self.assertEqual(records[0]["tie_group"], "inherited")
         self.assertTrue(records[0]["has_matched_control"])
         self.assertAlmostEqual(records[0]["pair_margin_drop"], 10.0)
         self.assertAlmostEqual(records[0]["control_mean_margin_drop"], 0.0)

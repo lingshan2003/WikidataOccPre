@@ -49,6 +49,11 @@ from training.attention_utils import attention_relation_ids
 from training.message_contribution import relation_value_vectors
 from training.relation_pair_ablation import _batches, _selected_root_ids
 from training.train import batch_features, feature_inputs
+from training.tie_taxonomy import (
+    DEFAULT_TIE_TAXONOMY_PATH,
+    TieTaxonomy,
+    load_tie_taxonomy,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -81,6 +86,11 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=1e-5,
         help="Maximum reconstruction error versus the base model logits; set negative to disable the safety check.",
+    )
+    parser.add_argument(
+        "--tie-taxonomy",
+        default=str(DEFAULT_TIE_TAXONOMY_PATH),
+        help="Versioned inherited/acquired taxonomy JSON used to label all motif outputs",
     )
     parser.add_argument("--device", default="auto")
     return parser.parse_args()
@@ -275,7 +285,7 @@ def _summary_rows(
         key = (
             record["experiment"], record["seed"], record["checkpoint"], record["split"],
             record["source_l1_id"], record["source_l1"], record["relation_id"], record["relation"],
-            record["target_l1_id"], record["target_l1"],
+            record["tie_group"], record["target_l1_id"], record["target_l1"],
         )
         grouped[key].append(record)
     output = []
@@ -293,12 +303,13 @@ def _summary_rows(
             "source_l1": key[5],
             "relation_id": key[6],
             "relation": key[7],
-            "target_l1_id": key[8],
-            "target_l1": key[9],
+            "tie_group": key[8],
+            "target_l1_id": key[9],
+            "target_l1": key[10],
             "motif_eligible_root_n": len(rows),
-            "target_l1_root_n": int(target_root_count.get(int(key[8]), 0)),
+            "target_l1_root_n": int(target_root_count.get(int(key[9]), 0)),
             "coverage_of_target_l1": (
-                len(rows) / target_root_count[int(key[8])] if target_root_count.get(int(key[8]), 0) else None
+                len(rows) / target_root_count[int(key[9])] if target_root_count.get(int(key[9]), 0) else None
             ),
             "matched_control_root_n": len(matched),
             "mean_pair_edge_count": _finite_mean([float(row["pair_edge_count"]) for row in rows]),
@@ -326,6 +337,7 @@ def collect_checkpoint_relation_pair_sweep(
     path: Path,
     base_data,
     base_metadata: Mapping[str, object],
+    tie_taxonomy: TieTaxonomy,
     split: str,
     requested_fanouts: str,
     batch_size: int,
@@ -343,6 +355,13 @@ def collect_checkpoint_relation_pair_sweep(
     model, feature_schema, metadata = restore_rgat(checkpoint, device)
     if metadata["relation_to_id"] != base_metadata["relation_to_id"]:
         raise ValueError(f"Checkpoint relation mapping differs from --data: {path}")
+    perturbation = checkpoint.get("relation_perturbation")
+    recorded_taxonomy = perturbation.get("tie_taxonomy") if isinstance(perturbation, Mapping) else None
+    if recorded_taxonomy is not None and recorded_taxonomy.get("sha256") != tie_taxonomy.sha256:
+        raise ValueError(
+            f"Checkpoint tie taxonomy differs from --tie-taxonomy: {path}. "
+            "Use the taxonomy recorded by the checkpoint or retrain the condition."
+        )
     _validate_fast_counterfactual_configuration(model, checkpoint)
     data = copy.deepcopy(base_data)
     replay_relation_perturbation(data, metadata, checkpoint)
@@ -452,6 +471,7 @@ def collect_checkpoint_relation_pair_sweep(
                 "source_visibility": "visible_train",
                 "relation_id": int(relation_id),
                 "relation": id_to_relation[int(relation_id)],
+                "tie_group": tie_taxonomy.group_for_base_relation(id_to_relation[int(relation_id)]),
                 "target_l1_id": target_label_id,
                 "target_l1": id_to_label[target_label_id],
                 "pair_edge_count": int(group_edges.numel()),
@@ -488,21 +508,94 @@ def collect_checkpoint_relation_pair_sweep(
         "input_root_n": int(roots.numel()),
         "root_motif_group_n": len(records),
         "max_reconstruction_error": max_reconstruction_error,
+        "tie_taxonomy_sha256": tie_taxonomy.sha256,
     }
     return records, dict(target_root_count), run_info
+
+
+def _tie_group_summary_rows(records: Sequence[Mapping[str, object]]) -> List[Dict[str, object]]:
+    """Pool root-level counterfactuals by inherited/acquired category per seed."""
+    grouped: Dict[Tuple[object, ...], List[Mapping[str, object]]] = defaultdict(list)
+    for record in records:
+        key = (
+            record["experiment"], record["seed"], record["checkpoint"], record["split"],
+            record["tie_group"],
+        )
+        grouped[key].append(record)
+    output: List[Dict[str, object]] = []
+    for key, rows in sorted(grouped.items()):
+        matched = [row for row in rows if row["has_matched_control"]]
+        base_target = [row for row in rows if row["base_predicts_target"]]
+        output.append({
+            "experiment": key[0],
+            "seed": key[1],
+            "checkpoint": key[2],
+            "split": key[3],
+            "tie_group": key[4],
+            "motif_eligible_root_n": len(rows),
+            "matched_control_root_n": len(matched),
+            "mean_pair_edge_count": _finite_mean([float(row["pair_edge_count"]) for row in rows]),
+            "mean_pair_margin_drop": _finite_mean([float(row["pair_margin_drop"]) for row in rows]),
+            "median_pair_margin_drop": _finite_median([float(row["pair_margin_drop"]) for row in rows]),
+            "base_predicts_target_root_n": len(base_target),
+            "pair_flip_away_rate": _finite_mean([float(row["pair_flips_away_from_target"]) for row in base_target]),
+            "mean_control_margin_drop": _finite_mean([float(row["control_mean_margin_drop"]) for row in matched]),
+            "mean_pair_minus_control_margin_drop": _finite_mean([
+                float(row["pair_minus_control_margin_drop"]) for row in matched
+            ]),
+            "median_pair_minus_control_margin_drop": _finite_median([
+                float(row["pair_minus_control_margin_drop"]) for row in matched
+            ]),
+            "mean_control_flip_away_rate": _finite_mean([
+                float(row["control_flip_away_rate"])
+                for row in matched if row["control_flip_away_rate"] is not None
+            ]),
+        })
+    return output
 
 
 def _across_seed_summary(seed_summaries: Sequence[Mapping[str, object]]) -> List[Dict[str, object]]:
     groups: Dict[Tuple[object, ...], List[Mapping[str, object]]] = defaultdict(list)
     for row in seed_summaries:
-        key = (row["source_l1_id"], row["source_l1"], row["relation_id"], row["relation"], row["target_l1_id"], row["target_l1"])
+        key = (
+            row["experiment"], row["source_l1_id"], row["source_l1"], row["relation_id"], row["relation"],
+            row["tie_group"], row["target_l1_id"], row["target_l1"],
+        )
         groups[key].append(row)
     output = []
     fields = ("mean_pair_margin_drop", "mean_control_margin_drop", "mean_pair_minus_control_margin_drop", "pair_flip_away_rate")
     for key, rows in sorted(groups.items()):
         record = {
-            "source_l1_id": key[0], "source_l1": key[1], "relation_id": key[2], "relation": key[3],
-            "target_l1_id": key[4], "target_l1": key[5], "seed_n": len(rows),
+            "experiment": key[0],
+            "source_l1_id": key[1], "source_l1": key[2], "relation_id": key[3], "relation": key[4],
+            "tie_group": key[5], "target_l1_id": key[6], "target_l1": key[7], "seed_n": len(rows),
+            "motif_eligible_root_n": int(sum(int(row["motif_eligible_root_n"]) for row in rows)),
+            "matched_control_root_n": int(sum(int(row["matched_control_root_n"]) for row in rows)),
+        }
+        for field in fields:
+            values = [float(row[field]) for row in rows if row.get(field) is not None]
+            record[f"{field}_seed_mean"] = float(np.mean(values)) if values else None
+            record[f"{field}_seed_std"] = float(np.std(values, ddof=0)) if values else None
+        output.append(record)
+    return output
+
+
+def _across_seed_tie_group_summary(
+    seed_summaries: Sequence[Mapping[str, object]],
+) -> List[Dict[str, object]]:
+    groups: Dict[Tuple[object, object], List[Mapping[str, object]]] = defaultdict(list)
+    for row in seed_summaries:
+        groups[(row["experiment"], row["tie_group"])].append(row)
+    output: List[Dict[str, object]] = []
+    fields = (
+        "mean_pair_edge_count", "mean_pair_margin_drop", "mean_control_margin_drop",
+        "mean_pair_minus_control_margin_drop", "pair_flip_away_rate",
+    )
+    for (experiment, tie_group), rows in sorted(groups.items()):
+        record: Dict[str, object] = {
+            "experiment": experiment,
+            "tie_group": tie_group,
+            "seed_n": len(rows),
             "motif_eligible_root_n": int(sum(int(row["motif_eligible_root_n"]) for row in rows)),
             "matched_control_root_n": int(sum(int(row["matched_control_root_n"]) for row in rows)),
         }
@@ -522,33 +615,39 @@ def main() -> None:
     device = resolve_device(args.device)
     bundle = torch.load(Path(args.data), map_location="cpu", weights_only=False)
     base_data, base_metadata = bundle["data"], bundle["metadata"]
+    tie_taxonomy = load_tie_taxonomy(args.tie_taxonomy, base_metadata["relation_to_id"])
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     all_records: List[Dict[str, object]] = []
     seed_summaries: List[Dict[str, object]] = []
+    tie_group_seed_summaries: List[Dict[str, object]] = []
     run_info: List[Dict[str, object]] = []
     for index, path in enumerate(paths, start=1):
         print(f"[{index}/{len(paths)}] all observed relation-pair counterfactuals: {path}", flush=True)
         records, target_counts, info = collect_checkpoint_relation_pair_sweep(
-            path, base_data, base_metadata, args.split, args.num_neighbors, args.batch_size, args.num_workers,
+            path, base_data, base_metadata, tie_taxonomy, args.split, args.num_neighbors, args.batch_size, args.num_workers,
             device, args.forward_mode, args.control_draws, args.max_roots, args.analysis_seed, args.verify_atol,
         )
         if not records:
             raise RuntimeError("No visible-source L1 relation motifs were found for the requested roots")
         all_records.extend(records)
         seed_summaries.extend(_summary_rows(records, target_counts, args.min_summary_roots))
+        tie_group_seed_summaries.extend(_tie_group_summary_rows(records))
         run_info.append(info)
         if device.type == "cuda":
             torch.cuda.empty_cache()
     across_seed = _across_seed_summary(seed_summaries)
+    tie_group_across_seed = _across_seed_tie_group_summary(tie_group_seed_summaries)
 
     roots_path = output_dir / "relation_pair_sweep_roots_by_seed.csv.gz"
     by_seed_path = output_dir / "relation_pair_sweep_summary_by_seed.csv"
     across_seed_path = output_dir / "relation_pair_sweep_summary_across_seeds.csv"
+    tie_group_by_seed_path = output_dir / "relation_pair_sweep_tie_group_summary_by_seed.csv"
+    tie_group_across_seed_path = output_dir / "relation_pair_sweep_tie_group_summary_across_seeds.csv"
     root_fields = [
         "experiment", "seed", "checkpoint", "split", "forward_mode", "fanouts", "analysis_seed", "control_draws",
-        "root_index", "source_l1_id", "source_l1", "source_visibility", "relation_id", "relation",
+        "root_index", "source_l1_id", "source_l1", "source_visibility", "relation_id", "relation", "tie_group",
         "target_l1_id", "target_l1", "pair_edge_count", "matched_control_candidate_edge_count",
         "has_matched_control", "base_target_margin", "pair_removed_target_margin", "pair_margin_drop",
         "base_prediction_l1_id", "pair_removed_prediction_l1_id", "base_predicts_target",
@@ -564,6 +663,14 @@ def main() -> None:
         write_csv(across_seed_path, across_seed, list(across_seed[0].keys()))
     else:
         write_csv(across_seed_path, [], [])
+    if tie_group_seed_summaries:
+        write_csv(tie_group_by_seed_path, tie_group_seed_summaries, list(tie_group_seed_summaries[0].keys()))
+    else:
+        write_csv(tie_group_by_seed_path, [], [])
+    if tie_group_across_seed:
+        write_csv(tie_group_across_seed_path, tie_group_across_seed, list(tie_group_across_seed[0].keys()))
+    else:
+        write_csv(tie_group_across_seed_path, [], [])
     manifest_path = output_dir / "relation_pair_sweep_manifest.json"
     manifest_path.write_text(json.dumps({
         "data": str(Path(args.data).resolve()),
@@ -575,6 +682,7 @@ def main() -> None:
         "analysis_seed": args.analysis_seed,
         "min_summary_roots": args.min_summary_roots,
         "verify_atol": args.verify_atol,
+        "tie_taxonomy": tie_taxonomy.manifest(),
         "code_git_revision": git_revision(),
         "python": sys.version,
         "torch": torch.__version__,
@@ -598,10 +706,15 @@ def main() -> None:
         "roots_path": str(roots_path),
         "summary_by_seed_path": str(by_seed_path),
         "summary_across_seeds_path": str(across_seed_path),
+        "tie_group_summary_by_seed_path": str(tie_group_by_seed_path),
+        "tie_group_summary_across_seeds_path": str(tie_group_across_seed_path),
         "runs": run_info,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Wrote:")
-    for path in (roots_path, by_seed_path, across_seed_path, manifest_path):
+    for path in (
+        roots_path, by_seed_path, across_seed_path, tie_group_by_seed_path,
+        tie_group_across_seed_path, manifest_path,
+    ):
         print(f"  {path}")
 
 

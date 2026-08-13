@@ -22,6 +22,13 @@ from training.relation_controls import (
     parse_selection,
     resolve_ablation,
 )
+from training.tie_taxonomy import (
+    DEFAULT_TIE_TAXONOMY_PATH,
+    load_tie_taxonomy,
+    parse_tie_group_selection,
+    resolve_tie_ablation,
+    sha256_file,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -144,6 +151,16 @@ def parse_args() -> argparse.Namespace:
         help="Comma-separated original relation names to remove in both directions, or none",
     )
     parser.add_argument(
+        "--tie-taxonomy",
+        default=str(DEFAULT_TIE_TAXONOMY_PATH),
+        help="Versioned inherited/acquired taxonomy JSON used for audit provenance and --drop-tie-groups",
+    )
+    parser.add_argument(
+        "--drop-tie-groups",
+        default="none",
+        help="Comma-separated inherited/acquired categories to remove in both directions, or none",
+    )
+    parser.add_argument(
         "--shuffle-relation-types",
         action="store_true",
         help="Permute relation IDs across retained edges while preserving topology and relation frequencies",
@@ -159,6 +176,11 @@ def parse_args() -> argparse.Namespace:
         "--match-random-drop-to-relation-groups",
         default=None,
         help="Remove a uniform random set of as many relation pairs as the named groups contain; e.g. kinship",
+    )
+    random_drop.add_argument(
+        "--match-random-drop-to-tie-groups",
+        default=None,
+        help="Remove a uniform random set of as many relation pairs as inherited or acquired contains",
     )
     parser.add_argument(
         "--eval-mode",
@@ -581,9 +603,14 @@ def main() -> None:
     auxiliary_features = parse_auxiliary_features(args.auxiliary_features)
     drop_relation_groups = parse_selection(args.drop_relation_groups)
     drop_relations = parse_selection(args.drop_relations)
+    drop_tie_groups = parse_tie_group_selection(args.drop_tie_groups)
     random_match_groups = (
         parse_selection(args.match_random_drop_to_relation_groups)
         if args.match_random_drop_to_relation_groups is not None else ()
+    )
+    random_match_tie_groups = (
+        parse_tie_group_selection(args.match_random_drop_to_tie_groups)
+        if args.match_random_drop_to_tie_groups is not None else ()
     )
     if args.class_weight and args.loss != "cross_entropy":
         raise ValueError("--class-weight is a legacy alias and cannot be combined with a non-default --loss")
@@ -605,13 +632,18 @@ def main() -> None:
         raise ValueError("--feature-mode structural does not use occupation representations; use categorical")
     if args.random_edge_drop_pairs is not None and args.random_edge_drop_pairs < 0:
         raise ValueError("--random-edge-drop-pairs must be non-negative")
-    if (args.random_edge_drop_pairs is not None or random_match_groups) and (
-        drop_relation_groups or drop_relations
+    random_drop_requested = bool(
+        args.random_edge_drop_pairs is not None or random_match_groups or random_match_tie_groups
+    )
+    if random_drop_requested and (
+        drop_relation_groups or drop_relations or drop_tie_groups
     ):
         raise ValueError(
-            "Random edge-drop controls are standalone comparisons; do not combine them with --drop-relation-groups or --drop-relations"
+            "Random edge-drop controls are standalone comparisons; do not combine them with relation or tie ablations"
         )
-    if (args.random_edge_drop_pairs is not None or random_match_groups) and args.shuffle_relation_types:
+    if drop_tie_groups and (drop_relation_groups or drop_relations):
+        raise ValueError("--drop-tie-groups cannot be combined with --drop-relation-groups or --drop-relations")
+    if random_drop_requested and args.shuffle_relation_types:
         raise ValueError("Random edge-drop controls should not be combined with --shuffle-relation-types")
     set_seed(args.seed)
     device = resolve_device(args.device)
@@ -623,6 +655,7 @@ def main() -> None:
     # All relation perturbations happen to an in-memory copy.  A server run
     # must never overwrite the canonical artifact shared by comparisons.
     data, metadata = copy.deepcopy(bundle["data"]), bundle["metadata"]
+    tie_taxonomy = load_tie_taxonomy(args.tie_taxonomy, metadata["relation_to_id"])
     if args.num_layers < 1:
         raise ValueError("--num-layers must be at least one")
     if len(fanouts) != args.num_layers:
@@ -652,11 +685,23 @@ def main() -> None:
         metadata, occupation_levels, args.occupation_representation
     )
     representation_provenance = semantic_provenance(metadata, args.occupation_representation)
-    relation_ids_to_drop, dropped_base_relations = resolve_ablation(
-        metadata["relation_to_id"], drop_relation_groups, drop_relations
-    )
+    if drop_tie_groups:
+        relation_ids_to_drop, dropped_base_relations = resolve_tie_ablation(
+            tie_taxonomy, drop_tie_groups, metadata["relation_to_id"]
+        )
+    else:
+        relation_ids_to_drop, dropped_base_relations = resolve_ablation(
+            metadata["relation_to_id"], drop_relation_groups, drop_relations
+        )
     matched_base_relations: Tuple[str, ...] = ()
-    if random_match_groups:
+    if random_match_tie_groups:
+        matching_relation_ids, matched_base_relations = resolve_tie_ablation(
+            tie_taxonomy, random_match_tie_groups, metadata["relation_to_id"]
+        )
+        random_edge_drop_pairs = count_relation_pairs(
+            data, matching_relation_ids, metadata["relation_to_id"]
+        )
+    elif random_match_groups:
         matching_relation_ids, matched_base_relations = resolve_ablation(
             metadata["relation_to_id"], random_match_groups, ()
         )
@@ -675,10 +720,15 @@ def main() -> None:
         shuffle_seed=args.seed if args.shuffle_relation_types else None,
     )
     relation_perturbation.update({
+        "data": str(data_path.resolve()),
+        "data_sha256": sha256_file(data_path),
+        "tie_taxonomy": tie_taxonomy.manifest(),
         "dropped_relation_groups": list(drop_relation_groups),
         "dropped_base_relations": list(dropped_base_relations),
         "random_drop_matched_relation_groups": list(random_match_groups),
         "random_drop_matched_base_relations": list(matched_base_relations),
+        "dropped_tie_groups": list(drop_tie_groups),
+        "random_drop_matched_tie_groups": list(random_match_tie_groups),
     })
     specs = build_feature_specs(feature_schema, metadata)
     model = build_model(
@@ -746,6 +796,10 @@ def main() -> None:
         f"loss: {loss_mode}; train mode: {args.train_mode}; root sampling: {args.train_root_sampling}; "
         f"eval mode: {args.eval_mode}; device: {device}; "
         f"train/val/test: {int(data.train_mask.sum())}/{int(data.val_mask.sum())}/{int(data.test_mask.sum())}"
+    )
+    print(
+        f"Tie taxonomy: {tie_taxonomy.name} v{tie_taxonomy.version} "
+        f"({tie_taxonomy.sha256[:12]}); inherited={','.join(tie_taxonomy.inherited)}"
     )
     print(json.dumps({"relation_perturbation": relation_perturbation}, ensure_ascii=False))
 

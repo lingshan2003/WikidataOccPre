@@ -201,6 +201,49 @@ python run.py train \
 
 所有运行时图扰动只作用于内存副本，不覆盖 `graph_data.pt`；实际删边数量、关系选择和随机 seed 会记录到输出配置。
 
+### 血缘家庭与后天社会关系审计
+
+关系分类是可版本化的 JSON 入口。`config/tie_taxonomy_v1.json` 保留严格的
+血缘家庭定义；明日 Level 1 审计使用
+`config/tie_taxonomy_ascribed_family_v1.json`，将
+`father`、`mother`、`child`、`sibling`、`relative`、`stepparent`、`godparent`、
+`kinship_to_subject` 归入 `inherited`。其余当前 artifact 中的基础关系自动归入
+`acquired`，但这里表示“其余社会关系”，并不宣称每一条关系都由主角自由选择。
+配置只写基础关系名，生成的 `__rev` 反向边会自动获得相同类别。训练和报告会保存
+配置内容哈希与完整解析结果，因此修改 JSON 后的结果不会与旧分类混淆。
+
+```bash
+# 删除一类关系，或删除相同数量的随机关系对作为图密度对照。
+python run.py train --model rgcn --data artifacts/level1_hierarchy/graph_data.pt \
+  --output-dir runs/level1_without_inherited --tie-taxonomy config/tie_taxonomy_ascribed_family_v1.json \
+  --drop-tie-groups inherited
+
+python run.py train --model rgcn --data artifacts/level1_hierarchy/graph_data.pt \
+  --output-dir runs/level1_random_matched_inherited --tie-taxonomy config/tie_taxonomy_ascribed_family_v1.json \
+  --match-random-drop-to-tie-groups inherited
+```
+
+`diagnose --tie-taxonomy ...` 会额外导出 `tie_group_edge_summary.csv`、
+`tie_group_homophily.csv`，并在节点报告中加入两类可见训练职业邻居计数与
+`inherited_only`、`acquired_only`、`both`、`neither` 暴露分层。为锁定的 Level 1
+正式矩阵使用：
+
+```bash
+bash scripts/run_tie_audit_experiments.sh plan
+bash scripts/run_tie_audit_experiments.sh run matrix
+bash scripts/run_tie_audit_experiments.sh run diagnose
+bash scripts/run_tie_audit_experiments.sh run summarize
+```
+
+明日矩阵复用现有的 R-GCN/R-GAT 三 seed 完整图基线，绝不重跑这六个大实验；只在
+相同的邻居职业特征协议下运行两类删边及其等规模随机对照（2 模型 × 4 条件 × 3 seed
+= 24 次训练）。汇总按同一模型、同一 seed 与旧基线配对，报告指标差的均值和标准差。
+如果服务器上每个配对实验都保留了 `test_predictions.csv`，汇总会自动报告 Macro-F1
+差异的 paired test-node bootstrap 95% 区间；若缺少任一预测文件，则明确退回仅报告
+同 seed 的均值和标准差。`best_model.pt` 会在报告中登记路径以便日后复现或做局部机制
+分析，但明日的性能汇总不会重新训练或用它推理。所有结果表示模型依赖，不能解释为现实
+职业因果效应。
+
 ### 图与预测诊断
 
 ```bash

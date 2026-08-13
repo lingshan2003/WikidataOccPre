@@ -10,6 +10,7 @@ from training.relation_pair_sweep import (
     _base_head_aggregates,
     _counterfactual_root_logits,
     _logits_from_head_aggregate,
+    _tie_group_summary_rows,
 )
 
 
@@ -79,6 +80,32 @@ class RelationPairSweepTests(unittest.TestCase):
         )
         direct = model(features, torch.empty((2, 0), dtype=torch.long), torch.empty(0, dtype=torch.long))
         self.assertTrue(torch.allclose(analytical, direct[1], atol=1e-6, rtol=1e-6))
+
+    def test_tie_group_summary_pools_root_level_records_without_mixing_groups(self):
+        shared = {
+            "experiment": "rgat_one_hop",
+            "seed": "42",
+            "checkpoint": "model.pt",
+            "split": "test",
+            "pair_edge_count": 1,
+            "pair_margin_drop": 0.4,
+            "base_predicts_target": True,
+            "pair_flips_away_from_target": False,
+            "has_matched_control": True,
+            "control_mean_margin_drop": 0.1,
+            "pair_minus_control_margin_drop": 0.3,
+            "control_flip_away_rate": 0.0,
+        }
+        records = [
+            {**shared, "tie_group": "inherited"},
+            {**shared, "tie_group": "inherited", "pair_margin_drop": 0.6},
+            {**shared, "tie_group": "acquired", "pair_margin_drop": 0.2},
+        ]
+        summary = _tie_group_summary_rows(records)
+        self.assertEqual([row["tie_group"] for row in summary], ["acquired", "inherited"])
+        inherited = summary[1]
+        self.assertEqual(inherited["motif_eligible_root_n"], 2)
+        self.assertAlmostEqual(inherited["mean_pair_margin_drop"], 0.5)
 
 
 if __name__ == "__main__":

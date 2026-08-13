@@ -9,7 +9,7 @@ the graph artifact.
 import argparse
 import json
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Tuple
+from typing import Dict, Iterable, List, Mapping, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -19,6 +19,11 @@ from scipy.sparse.csgraph import connected_components
 from sklearn.metrics import accuracy_score, f1_score, mutual_info_score, normalized_mutual_info_score
 
 from training.relation_controls import RELATION_GROUPS, base_relation_name, relation_pair_keys
+from training.tie_taxonomy import (
+    DEFAULT_TIE_TAXONOMY_PATH,
+    TieTaxonomy,
+    load_tie_taxonomy,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -36,6 +41,11 @@ def parse_args() -> argparse.Namespace:
         help="Use only visible training labels (recommended) or all retained labels for relation homophily",
     )
     parser.add_argument("--min-relation-support", type=int, default=20)
+    parser.add_argument(
+        "--tie-taxonomy",
+        default=str(DEFAULT_TIE_TAXONOMY_PATH),
+        help="Versioned inherited/acquired taxonomy JSON used for tie-group audits",
+    )
     return parser.parse_args()
 
 
@@ -112,6 +122,7 @@ def relation_homophily(
     relation_to_id: Mapping[str, int],
     label_mask: np.ndarray,
     min_support: int,
+    tie_taxonomy: Optional[TieTaxonomy] = None,
 ) -> pd.DataFrame:
     """Estimate label agreement and mutual information per base relation.
 
@@ -150,6 +161,7 @@ def relation_homophily(
         records.append({
             "relation": relation,
             "relation_group": group_for_relation(relation),
+            "tie_group": tie_taxonomy.group_for_base_relation(relation) if tie_taxonomy else None,
             "labeled_train_pairs": int(indices.size),
             "same_label_rate": same_label_rate,
             "independent_same_label_rate": independent_same_label_rate,
@@ -162,9 +174,125 @@ def relation_homophily(
         ["same_label_lift", "labeled_train_pairs"], ascending=[False, False]
     ).reset_index(drop=True) if records else pd.DataFrame(columns=[
         "relation", "relation_group", "labeled_train_pairs", "same_label_rate",
-        "independent_same_label_rate", "same_label_lift", "mutual_information",
+        "tie_group", "independent_same_label_rate", "same_label_lift", "mutual_information",
         "normalized_mutual_information",
     ])
+
+
+def _tie_groups_for_edges(
+    edge_relation_ids: np.ndarray,
+    relation_to_id: Mapping[str, int],
+    tie_taxonomy: TieTaxonomy,
+) -> np.ndarray:
+    """Return the inherited/acquired label for each directed edge relation ID."""
+    max_relation_id = max(relation_to_id.values())
+    by_relation_id = np.full(max_relation_id + 1, "", dtype=object)
+    for relation, relation_id in relation_to_id.items():
+        by_relation_id[int(relation_id)] = tie_taxonomy.group_for_base_relation(relation)
+    if edge_relation_ids.size and (
+        edge_relation_ids.min() < 0 or edge_relation_ids.max() >= len(by_relation_id)
+    ):
+        raise ValueError("edge_type contains a relation ID absent from metadata")
+    result = by_relation_id[edge_relation_ids]
+    if np.any(result == ""):
+        raise ValueError("Tie taxonomy did not cover every edge relation ID")
+    return result
+
+
+def tie_group_coverage(
+    data,
+    relation_to_id: Mapping[str, int],
+    tie_taxonomy: TieTaxonomy,
+    visible_train_nodes: np.ndarray,
+) -> Tuple[Dict[str, np.ndarray], pd.DataFrame]:
+    """Audit direct inherited/acquired messages and visible training neighbours.
+
+    Counts retain the graph's directed message semantics.  The accompanying
+    relation-pair count collapses generated reverse edges, so density controls
+    can be checked against the same unit that training removes at random.
+    """
+    source, target = data.edge_index.detach().cpu().numpy().astype(np.int64, copy=False)
+    relation_ids = data.edge_type.detach().cpu().numpy().astype(np.int64, copy=False)
+    groups = _tie_groups_for_edges(relation_ids, relation_to_id, tie_taxonomy)
+    pair_keys = relation_pair_keys(data, relation_to_id)
+    num_nodes = int(data.num_nodes)
+    columns: Dict[str, np.ndarray] = {}
+    records: List[Dict[str, object]] = []
+    for group in ("inherited", "acquired"):
+        edge_mask = groups == group
+        visible_mask = edge_mask & visible_train_nodes[source]
+        direct_count = np.bincount(target[edge_mask], minlength=num_nodes)
+        visible_count = np.bincount(target[visible_mask], minlength=num_nodes)
+        columns[f"{group}_direct_messages"] = direct_count.astype(np.int64, copy=False)
+        columns[f"{group}_visible_train_occupation_messages"] = visible_count.astype(np.int64, copy=False)
+        incident_nodes = (
+            np.unique(np.concatenate([source[edge_mask], target[edge_mask]]))
+            if edge_mask.any() else np.empty(0, dtype=np.int64)
+        )
+        records.append({
+            "tie_group": group,
+            "directed_edges": int(edge_mask.sum()),
+            "relation_pairs": int(np.unique(pair_keys[edge_mask]).size),
+            "distinct_incident_nodes": int(incident_nodes.size),
+            "nodes_with_direct_message": int((direct_count > 0).sum()),
+            "visible_train_source_messages": int(visible_mask.sum()),
+            "nodes_with_visible_train_occupation_message": int((visible_count > 0).sum()),
+        })
+    inherited_visible = columns["inherited_visible_train_occupation_messages"] > 0
+    acquired_visible = columns["acquired_visible_train_occupation_messages"] > 0
+    exposure = np.full(num_nodes, "neither", dtype=object)
+    exposure[inherited_visible & ~acquired_visible] = "inherited_only"
+    exposure[~inherited_visible & acquired_visible] = "acquired_only"
+    exposure[inherited_visible & acquired_visible] = "both"
+    columns["tie_exposure"] = exposure
+    return columns, pd.DataFrame(records)
+
+
+def tie_group_homophily(
+    data,
+    relation_to_id: Mapping[str, int],
+    tie_taxonomy: TieTaxonomy,
+    label_mask: np.ndarray,
+    min_support: int,
+) -> pd.DataFrame:
+    """Estimate train-label agreement for each complete tie category."""
+    source, target = data.edge_index.detach().cpu().numpy().astype(np.int64, copy=False)
+    relation_ids = data.edge_type.detach().cpu().numpy().astype(np.int64, copy=False)
+    labels = data.y.detach().cpu().numpy().astype(np.int64, copy=False)
+    groups = _tie_groups_for_edges(relation_ids, relation_to_id, tie_taxonomy)
+    pair_keys = relation_pair_keys(data, relation_to_id)
+    global_labels = labels[label_mask & (labels >= 0)]
+    if global_labels.size == 0:
+        raise ValueError("No retained labels are available for tie-group homophily analysis")
+    _, global_counts = np.unique(global_labels, return_counts=True)
+    independent_same_label_rate = float(np.square(global_counts / global_counts.sum()).sum())
+    valid = label_mask[source] & label_mask[target] & (labels[source] >= 0) & (labels[target] >= 0)
+    records: List[Dict[str, object]] = []
+    for group in ("inherited", "acquired"):
+        indices = np.flatnonzero(valid & (groups == group))
+        if indices.size:
+            _, first = np.unique(pair_keys[indices], return_index=True)
+            indices = indices[first]
+        source_labels, target_labels = labels[source[indices]], labels[target[indices]]
+        record: Dict[str, object] = {
+            "tie_group": group,
+            "labeled_train_pairs": int(indices.size),
+            "independent_same_label_rate": independent_same_label_rate,
+            "same_label_rate": None,
+            "same_label_lift": None,
+            "mutual_information": None,
+            "normalized_mutual_information": None,
+        }
+        if indices.size >= min_support:
+            same_label_rate = float(np.mean(source_labels == target_labels))
+            record.update({
+                "same_label_rate": same_label_rate,
+                "same_label_lift": same_label_rate / independent_same_label_rate,
+                "mutual_information": float(mutual_info_score(source_labels, target_labels)),
+                "normalized_mutual_information": float(normalized_mutual_info_score(source_labels, target_labels)),
+            })
+        records.append(record)
+    return pd.DataFrame(records)
 
 
 def value_bucket(values: np.ndarray, kind: str) -> np.ndarray:
@@ -206,6 +334,7 @@ def prediction_strata(predictions: pd.DataFrame, node_report: pd.DataFrame) -> p
         "within_two_hops_of_visible_train_occupation": report[
             "within_two_hops_of_visible_train_occupation"
         ].map({True: "yes", False: "no"}).to_numpy(),
+        "tie_exposure": report["tie_exposure"].to_numpy(),
     }.items():
         grouped = report.assign(_bucket=bucket).groupby("_bucket", sort=True)
         for bucket_name, rows in grouped:
@@ -237,6 +366,10 @@ def split_coverage_summary(node_report: pd.DataFrame) -> Dict[str, Dict[str, flo
             "share_within_two_hops_of_visible_training_occupation": float(
                 rows["within_two_hops_of_visible_train_occupation"].mean()
             ),
+            **{
+                f"share_tie_exposure_{exposure}": float((rows["tie_exposure"] == exposure).mean())
+                for exposure in ("neither", "inherited_only", "acquired_only", "both")
+            },
         }
     return result
 
@@ -255,6 +388,7 @@ def main() -> None:
         raise ValueError("Artifact is missing the target occupation feature required for coverage diagnostics")
     if target_feature not in metadata.get("occupation_unknown_ids", {}):
         raise ValueError("Artifact is missing occupation unknown-ID metadata")
+    tie_taxonomy = load_tie_taxonomy(args.tie_taxonomy, metadata["relation_to_id"])
 
     num_nodes = int(data.num_nodes)
     out_degree, in_degree, neighbour_degree = degree_arrays(data.edge_index, num_nodes)
@@ -267,6 +401,9 @@ def main() -> None:
     )
     visible_neighbours, within_two_hops = visible_occupation_coverage(
         data.edge_index, visible_train_nodes, num_nodes
+    )
+    tie_columns, tie_edge_summary = tie_group_coverage(
+        data, metadata["relation_to_id"], tie_taxonomy, visible_train_nodes
     )
     split = np.full(num_nodes, "unlabeled", dtype=object)
     split[data.train_mask.detach().cpu().numpy()] = "train"
@@ -282,18 +419,24 @@ def main() -> None:
         "component_size": component_size,
         "visible_train_occupation_neighbours": visible_neighbours,
         "within_two_hops_of_visible_train_occupation": within_two_hops,
+        **tie_columns,
     })
     label_mask = data.train_mask.detach().cpu().numpy()
     if args.homophily_label_split == "all":
         label_mask = data.y.detach().cpu().numpy() >= 0
     homophily = relation_homophily(
-        data, metadata["relation_to_id"], label_mask, args.min_relation_support
+        data, metadata["relation_to_id"], label_mask, args.min_relation_support, tie_taxonomy
+    )
+    tie_homophily = tie_group_homophily(
+        data, metadata["relation_to_id"], tie_taxonomy, label_mask, args.min_relation_support
     )
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     node_report.to_csv(output_dir / "node_diagnostics.csv", index=False)
     homophily.to_csv(output_dir / "relation_homophily.csv", index=False)
+    tie_edge_summary.to_csv(output_dir / "tie_group_edge_summary.csv", index=False)
+    tie_homophily.to_csv(output_dir / "tie_group_homophily.csv", index=False)
     summary = {
         "data": str(args.data),
         "target_column": target_feature,
@@ -305,9 +448,12 @@ def main() -> None:
         "largest_component_share": float(component_size.max() / num_nodes),
         "connected_components": int(np.unique(component_id).size),
         "visible_training_occupation_nodes": int(visible_train_nodes.sum()),
+        "tie_taxonomy": tie_taxonomy.manifest(),
         "homophily_label_split": args.homophily_label_split,
         "min_relation_support": args.min_relation_support,
         "split_coverage": split_coverage_summary(node_report),
+        "tie_group_edge_summary": str(output_dir / "tie_group_edge_summary.csv"),
+        "tie_group_homophily": str(output_dir / "tie_group_homophily.csv"),
     }
     with (output_dir / "summary.json").open("w", encoding="utf-8") as handle:
         json.dump(summary, handle, ensure_ascii=False, indent=2)
