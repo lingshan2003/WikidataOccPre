@@ -244,60 +244,61 @@ bash scripts/run_tie_audit_experiments.sh run summarize
 分析，但明日的性能汇总不会重新训练或用它推理。所有结果表示模型依赖，不能解释为现实
 职业因果效应。
 
-### 出生队列异质性审计
+### 生命时期异质性审计
 
-时间审计以**出生年**而不是死亡年或“人生曾与某时期重叠”分期：每人只属于一个互斥
-队列，避免把早生而晚逝的人误放进较晚的历史时期。默认采用宽口径历史时期，配置位于
-`config/birth_cohorts_historical_eras_v1.json`；原来的细分方案保留在
-`config/birth_cohorts_v1.json`，两者修改后都会记录内容哈希。根据当前 Level 1 节点表的
-实际分布，默认划分及测试集规模为：
+时间审计按**生命区间与历史时期相交**分期，而不是按出生年唯一分箱。设人物生命区间为
+`[birth_year, death_year]`，时期为 `[start, end]`；两者相交时，该人物进入该时期图。因此
+跨越时期边界而仍存活的人会进入多个时期 artifact。默认配置为
+`config/historical_life_periods_v2.json`，其内容哈希与日期规则都会写进 artifact 和报告。
+双日期时使用完整生命区间；仅出生日期时进入出生所在时期，仅死亡日期时进入死亡所在时期。
+只有两种日期都缺失、或死亡早于出生的人不进入时期图；不会凭空外推未观测的存活年份。
 
-| 出生队列 | 全部有职业标签节点 | 测试节点 |
-| --- | ---: | ---: |
-| Ancient History（至公元 500 年） | 5,273 | 1,037 |
-| Post-Classical History（501–1500） | 21,298 | 4,090 |
-| Mid-Modern Period（1501–1800） | 52,649 | 10,181 |
-| Contemporary Period（1801 年后） | 241,782 | 47,271 |
-| 出生年缺失（透明报告，不纳入假设比较） | 13,097 | 2,388 |
+正式的时期比较必须使用**独立时期诱导子图**，而不是在完整图上只删去与某时期节点相连
+的一部分边。对每一个时期，代码严格执行：
 
-先对已完成的完整图与全局关系删边模型做无训练的队列分层。这需要服务器保留所有 30 个
-运行的 `test_predictions.csv`：
+1. 选出生命区间与该时期相交的全部有效日期节点；
+2. 仅保留两个端点都属于该时期的边；两个端点未共同处于该时期的边不进入该图；
+3. 在该时期图内重新建立国家、时间和职业特征，并对该时期的监督标签重新做固定的
+   70/10/20 分层 split；
+4. 在这个 artifact 上新训练 `full` 基线，再训练删除 inherited、其等量随机对照、删除
+   acquired、其等量随机对照。
 
-```bash
-RGCN_PYTHON_BIN=.venv/bin/python \
-  bash scripts/run_birth_cohort_tie_audit_experiments.sh run summarize-global
-```
-
-该报告在每个队列内按模型和 seed 配对，并计算：
-
-\[
-S_{g,t}=F1_{\mathrm{random\ matched}\ g,t}-F1_{\mathrm{drop}\ g,t}.
-\]
-
-其中 (g\) 为 inherited/acquired，(t\) 为出生队列。正值越大，说明在该队列中，删除
-该关系组的损失越超出等量随机删边。
-
-最早两段存在职业类别稀疏问题；例如 Ancient 的测试集中 `Sports/Games` 只有 1 人。因此
-分期结果应同时保存每类支持数；该段应以 Accuracy、Weighted-F1 和逐节点 bootstrap 为主，
-Macro-F1 仅作带有类别稀疏警告的补充报告。不能把同一已训练模型的固定测试集再切成
-五折并称为交叉验证：其余四折已经属于原训练集。若要估计 split 不确定性，需重新生成
-五个互斥训练/验证/测试 split，并在每折重新训练；这应作为后续稳健性分析。
-
-第二条实验线是队列定向消融：只删除**与该出生队列人物相连**的指定关系对；匹配随机
-对照也只从与同一队列相连的所有关系对中抽取相同数量。因此它同时控制删边数量与队列
-暴露机会。默认配置会运行 4 队列 × 2 模型 × 4 条件 × 3 seed = 96 次新训练，但仍复用
-既有六个完整图基线：
+因此旧的六次完整图 R-GCN/R-GAT 基线**不能**用于这个问题。默认矩阵为 4 个时期 × 2 个
+模型 × 5 个条件 × 3 个模型 seed = **120 次新训练**；其中 24 次是时期内 `full` 基线。
+每个 artifact 会保存源数据哈希、生命周期时期配置哈希、日期完整性计数、节点同时属于几个
+时期的计数、时期内节点/边数、跨时期删边数、局部罕见职业的处理和实际 split 大小。某职业
+在一个时期中少于 3 人时，会在该时期中设为 `y=-1`（仍保留为图节点，但不进入三路监督
+split）；这一点会明确列在 `split_summary.json`。
 
 ```bash
+# 只打印 120 个任务，不训练。
 RGCN_PYTHON_BIN=.venv/bin/python \
-  bash scripts/run_birth_cohort_tie_audit_experiments.sh run matrix
+  bash scripts/run_period_induced_tie_audit_experiments.sh plan all
 
+# 第一步：只新建/核验四个时期 artifact；不训练 GNN。
 RGCN_PYTHON_BIN=.venv/bin/python \
-  bash scripts/run_birth_cohort_tie_audit_experiments.sh run summarize-targeted
+  bash scripts/run_period_induced_tie_audit_experiments.sh run prepare
+
+# 第二步：训练时期内 full 基线与四个消融/随机对照。可中断后直接重跑以续跑。
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_period_induced_tie_audit_experiments.sh run matrix
+
+# 第三步：仅汇总。它拒绝数据 artifact、时期配置、taxonomy 或测试节点不一致的比较。
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_period_induced_tie_audit_experiments.sh run summarize
 ```
 
-两种分析检验的是“按出生队列分层的模型关系依赖”。当前 Wikidata 图是静态的，关系本身
-没有发生时间，故不能据此宣称某个历史时期的关系造成了职业结果。
+汇总目录 `period_induced_summary/` 的 `period_induced_condition_summary.csv` 同时给出
+Accuracy、Macro-F1、Weighted-F1 的完整时期基线、各条件结果、同 seed 差值和 Macro-F1 的
+测试节点 bootstrap 区间；`period_induced_relation_specificity_by_seed.csv` 给出
+`F1(random matched) - F1(drop tie group)`。这些结论仍只表示模型依赖。Wikidata 图是静态的，
+关系本身没有发生时间，不能据此宣称某个历史时期的关系造成职业结果。
+
+此前 `birth_cohort_tie_audit/` 的 96 次结果保留为**完整图上的局部出生队列节点删边敏感性分析**：
+它训练时仍使用全局节点、全局边和全局 split，随后只对指定时期节点相连的部分关系边做干预。
+它不能作为“时期内关系依赖”的主结果，也不能与本节的独立时期 baseline 混报。对已经完成的
+全局模型 `test_predictions.csv` 做出生时期筛选同样可以作为描述性的全局模型分层，但不替代
+上述重新建图、重新 split、重新训练的实验。
 
 ### 图与预测诊断
 

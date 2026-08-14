@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Birth-cohort-specific inherited/acquired relation audit.
+# Legacy complete-graph, cohort-incident inherited/acquired intervention.
 #
-# The existing complete-graph Level-1 baselines are reused.  For each editable
-# birth cohort, this runs four cohort-incident interventions (two tie groups
-# and their equal-size cohort-incident random-pair controls) across R-GCN and
-# R-GAT, seeds 42/43/44: 4 cohorts x 2 models x 4 conditions x 3 seeds = 96
-# new runs with the default configuration.
+# This intentionally reuses complete-graph baselines and changes only relation
+# pairs incident to a selected cohort.  It does NOT construct a period graph,
+# does NOT remove all cross-period edges, and does NOT make a fresh split.  Use
+# run_period_induced_tie_audit_experiments.sh for the primary historical-period
+# experiment.
 
 set -euo pipefail
 
@@ -48,10 +48,12 @@ Usage:
   bash scripts/run_birth_cohort_tie_audit_experiments.sh plan [all|matrix|summarize-global|summarize-targeted]
   bash scripts/run_birth_cohort_tie_audit_experiments.sh run  [all|matrix|summarize-global|summarize-targeted]
 
-This script never reruns the six complete-graph baselines.  For each cohort it
-deletes only relation pairs incident to people born in that cohort.  Its random
-control deletes the same number of random relation pairs from the same
-cohort-incident candidate set, controlling both edge quantity and exposure.
+Legacy global-graph local-intervention sensitivity analysis. This script never
+reruns the six complete-graph baselines. For each cohort it deletes only
+relation pairs incident to people born in that cohort; all other global nodes,
+edges, and the original global split remain. Its random control deletes the
+same number of random relation pairs from the same cohort-incident candidate
+set. It must not be reported as an independent within-period graph experiment.
 
 Environment overrides:
   RGCN_PYTHON_BIN=.venv/bin/python

@@ -1,0 +1,17 @@
+{
+  "name": "historical_life_period_overlap_with_known_endpoints_v2",
+  "version": 2,
+  "description": "Editable historical periods for the inherited/acquired audit. A person with both dates belongs to every period intersecting the closed life interval birth_year through death_year. When exactly one date is known, the person belongs to the one period containing that known birth or death endpoint; no additional years are inferred. Only both-date-missing records and death-before-birth records are excluded.",
+  "membership_rule": "life_interval_or_known_endpoint_in_period",
+  "birth_field": "birth_year",
+  "death_field": "death_year",
+  "missing_date_policy": "exclude_if_both_dates_missing",
+  "partial_date_policy": "include_known_endpoint_periods",
+  "invalid_interval_policy": "exclude_if_death_before_birth",
+  "periods": [
+    {"id": "ancient_history", "label": "Ancient History (through 500 CE)", "end": 500},
+    {"id": "post_classical_history", "label": "Post-Classical History (501-1500)", "start": 501, "end": 1500},
+    {"id": "mid_modern_period", "label": "Mid-Modern Period (1501-1800)", "start": 1501, "end": 1800},
+    {"id": "contemporary_period", "label": "Contemporary Period (1801 onward)", "start": 1801}
+  ]
+}

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Stratify completed Level-1 tie-audit predictions by editable birth cohorts.
+"""Summarise legacy complete-graph cohort-stratified tie-audit predictions.
 
-This analysis never trains or re-evaluates a GNN.  It joins each completed
-run's ``test_predictions.csv`` to the ``nodes.csv`` paired with the canonical
-graph artifact, then repeats the existing same-model/same-seed comparisons
-inside each birth cohort.  The final relation-specific statistic is:
+This analysis never trains or re-evaluates a GNN. It joins each completed
+*complete-graph* run's ``test_predictions.csv`` to the canonical ``nodes.csv``
+and repeats same-model/same-seed comparisons inside each birth cohort. When
+``--targeted-root`` is used, it summarises a cohort-incident edge intervention,
+not an independently induced within-period graph. Use
+``summarize_period_induced_tie_audit.py`` for the latter. The final
+relation-specific statistic is:
 
     Macro-F1(random matched to group) - Macro-F1(drop group)
 
