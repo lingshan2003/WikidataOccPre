@@ -22,6 +22,13 @@ OUTPUT_ROOT="${RGCN_PERIOD_AUDIT_OUTPUT_ROOT:-runs_report/level1/life_period_ind
 TAXONOMY_PATH="${RGCN_TIE_AUDIT_TAXONOMY:-config/tie_taxonomy_ascribed_family_v1.json}"
 LIFE_PERIOD_CONFIG="${RGCN_LIFE_PERIOD_CONFIG:-config/historical_life_periods_v2.json}"
 SPLIT_SEED="${RGCN_PERIOD_SPLIT_SEED:-20260814}"
+OCCUPATION_FEATURE_LEVELS="${RGCN_PERIOD_OCCUPATION_FEATURE_LEVELS:-1,2,3}"
+EXPECTED_TARGET_COLUMN="${RGCN_PERIOD_EXPECT_TARGET_COLUMN:-occupation_level1}"
+# Set to 1 only when replacing the already-known invalid random controls from
+# the pre-exact-edge implementation.  The runner then moves each old seed
+# directory aside rather than overwriting it.
+ARCHIVE_LEGACY_RANDOM_CONTROLS="${RGCN_ARCHIVE_LEGACY_RANDOM_CONTROLS:-0}"
+BOOTSTRAP_DRAWS="${RGCN_PERIOD_BOOTSTRAP_DRAWS:-2000}"
 SEEDS=(42 43 44)
 MODELS=(rgcn rgat)
 
@@ -37,7 +44,7 @@ COMMON_ARGS=(
   --patience 6
   --num-workers 4
   --device cuda
-  --occupation-feature-levels 1,2,3
+  --occupation-feature-levels "$OCCUPATION_FEATURE_LEVELS"
   --auxiliary-features none
   --tie-taxonomy "$TAXONOMY_PATH"
 )
@@ -65,6 +72,10 @@ Environment overrides:
   RGCN_PERIOD_AUDIT_OUTPUT_ROOT=runs_report/level1/life_period_induced_tie_audit_v2
   RGCN_LIFE_PERIOD_CONFIG=config/historical_life_periods_v2.json
   RGCN_PERIOD_SPLIT_SEED=20260814
+  RGCN_PERIOD_OCCUPATION_FEATURE_LEVELS=1,2,3
+  RGCN_PERIOD_EXPECT_TARGET_COLUMN=occupation_level1
+  RGCN_ARCHIVE_LEGACY_RANDOM_CONTROLS=1  # archive invalid old random controls before rerunning them
+  RGCN_PERIOD_BOOTSTRAP_DRAWS=0          # fast metric-only summary; 2000 is the CI default
 EOF
 }
 
@@ -108,6 +119,17 @@ require_preparation_inputs() {
   require_file "$SOURCE_DATA"
   require_file "$TAXONOMY_PATH"
   require_file "$LIFE_PERIOD_CONFIG"
+  if [[ -n "$EXPECTED_TARGET_COLUMN" ]]; then
+    "$PYTHON_BIN" -c '
+import sys
+import torch
+path, expected = sys.argv[1:]
+bundle = torch.load(path, map_location="cpu", weights_only=False)
+actual = bundle.get("metadata", {}).get("target_column")
+if actual != expected:
+    raise ValueError(f"Source target_column={actual!r}; expected {expected!r}")
+' "$SOURCE_DATA" "$EXPECTED_TARGET_COLUMN"
+  fi
 }
 
 require_prepared_artifacts() {
@@ -134,10 +156,10 @@ validate_matrix_artifacts() {
 import sys
 import torch
 from training.life_periods import load_life_period_config
-from training.relation_controls import count_relation_pairs
+from training.relation_controls import count_edge_instance_pairs
 from training.tie_taxonomy import load_tie_taxonomy, resolve_tie_ablation
 
-data_path, taxonomy_path, cohort_path, period_id = sys.argv[1:]
+data_path, taxonomy_path, cohort_path, period_id, expected_target_column = sys.argv[1:]
 bundle = torch.load(data_path, map_location="cpu", weights_only=False)
 data, metadata = bundle["data"], bundle["metadata"]
 details = metadata.get("period_induced_artifact", {})
@@ -148,17 +170,22 @@ if details.get("life_period_config", {}).get("sha256") != config.sha256:
     raise ValueError("artifact period configuration hash differs from requested config")
 if details.get("selected_life_period", {}).get("id") != period_id:
     raise ValueError("artifact period ID differs from its directory/request")
+if expected_target_column and metadata.get("target_column") != expected_target_column:
+    raise ValueError(
+        f"{period_id}: artifact target_column={metadata.get('target_column')!r}; "
+        f"expected {expected_target_column!r}"
+    )
 taxonomy = load_tie_taxonomy(taxonomy_path, metadata["relation_to_id"])
-all_pairs = count_relation_pairs(data, metadata["relation_to_id"].values(), metadata["relation_to_id"])
+all_pairs = count_edge_instance_pairs(data, metadata["relation_to_id"].values(), metadata["relation_to_id"])
 for group in ("inherited", "acquired"):
     relation_ids, _ = resolve_tie_ablation(taxonomy, (group,), metadata["relation_to_id"])
-    pairs = count_relation_pairs(data, relation_ids, metadata["relation_to_id"])
+    pairs = count_edge_instance_pairs(data, relation_ids, metadata["relation_to_id"])
     if pairs == 0:
-        raise ValueError(f"{period_id}: no {group} relation pairs in the induced graph")
+        raise ValueError(f"{period_id}: no {group} original-edge/reverse pairs in the induced graph")
     if pairs > all_pairs:
-        raise ValueError(f"{period_id}: {group} pair count exceeds random-control candidate set")
-print(f"[validated] {period_id}: relation_pairs(all={all_pairs})")
-' "$ARTIFACT_ROOT/$period/graph_data.pt" "$TAXONOMY_PATH" "$LIFE_PERIOD_CONFIG" "$period"
+        raise ValueError(f"{period_id}: {group} edge-instance pair count exceeds random-control candidate set")
+print(f"[validated] {period_id}: edge_instance_pairs(all={all_pairs})")
+' "$ARTIFACT_ROOT/$period/graph_data.pt" "$TAXONOMY_PATH" "$LIFE_PERIOD_CONFIG" "$period" "$EXPECTED_TARGET_COLUMN"
   done < <(load_periods)
 }
 
@@ -207,8 +234,37 @@ run_condition() {
       continue
     fi
     if [[ -f "$output_dir/metrics.json" ]]; then
-      echo "[skip] $experiment seed=$seed already has metrics.json"
-      continue
+      if [[ "$condition" == random_matched_* ]]; then
+        if "$PYTHON_BIN" -c '
+import json
+import sys
+payload = json.load(open(sys.argv[1], encoding="utf-8"))
+perturbation = payload.get("relation_perturbation", {})
+valid = (
+    perturbation.get("random_control_unit") == "original_edge_instance_plus_generated_reverse"
+    and int(perturbation.get("random_edge_instance_pairs", 0)) > 0
+)
+raise SystemExit(0 if valid else 1)
+' "$output_dir/metrics.json"; then
+          echo "[skip] $experiment seed=$seed already has exact-edge metrics.json"
+          continue
+        fi
+        if [[ "$ARCHIVE_LEGACY_RANDOM_CONTROLS" != "1" ]]; then
+          echo "Legacy unequal-edge random control found: $output_dir" >&2
+          echo "Set RGCN_ARCHIVE_LEGACY_RANDOM_CONTROLS=1 to move it aside recoverably and rerun." >&2
+          exit 1
+        fi
+        local archive_dir="${output_dir}.legacy_unequal_edge_control"
+        if [[ -e "$archive_dir" ]]; then
+          echo "Refusing to overwrite prior archived legacy control: $archive_dir" >&2
+          exit 1
+        fi
+        mv "$output_dir" "$archive_dir"
+        echo "[archive] $experiment seed=$seed -> ${archive_dir##*/}"
+      else
+        echo "[skip] $experiment seed=$seed already has metrics.json"
+        continue
+      fi
     fi
     mkdir -p "$output_dir"
     printf '%q ' "${command[@]}" > "$output_dir/command.sh"
@@ -240,7 +296,9 @@ summarize() {
     --artifact-root "$ARTIFACT_ROOT"
     --life-periods "$LIFE_PERIOD_CONFIG"
     --tie-taxonomy "$TAXONOMY_PATH"
-    --bootstrap-draws 2000
+    --occupation-feature-levels "$OCCUPATION_FEATURE_LEVELS"
+    --expected-target-column "$EXPECTED_TARGET_COLUMN"
+    --bootstrap-draws "$BOOTSTRAP_DRAWS"
     --bootstrap-seed 20260814
   )
   if [[ "$MODE" == "plan" ]]; then

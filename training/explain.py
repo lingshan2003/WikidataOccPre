@@ -109,6 +109,7 @@ def main() -> None:
             relation_ids_to_drop=relation_perturbation.get("dropped_relation_ids", ()),
             relation_to_id=metadata["relation_to_id"],
             random_edge_drop_pairs=relation_perturbation.get("random_edge_drop_pairs", 0),
+            random_edge_instance_pairs=relation_perturbation.get("random_edge_instance_pairs", 0),
             random_edge_drop_seed=relation_perturbation.get("random_edge_drop_seed"),
             shuffle_relation_types=relation_perturbation.get("relation_type_shuffle", False),
             shuffle_seed=relation_perturbation.get("relation_type_shuffle_seed"),

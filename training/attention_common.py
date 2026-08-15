@@ -142,6 +142,7 @@ def replay_relation_perturbation(
         relation_ids_to_drop=manifest.get("dropped_relation_ids", ()),
         relation_to_id=metadata["relation_to_id"],
         random_edge_drop_pairs=manifest.get("random_edge_drop_pairs", 0),
+        random_edge_instance_pairs=manifest.get("random_edge_instance_pairs", 0),
         random_edge_drop_seed=manifest.get("random_edge_drop_seed"),
         shuffle_relation_types=manifest.get("relation_type_shuffle", False),
         shuffle_seed=manifest.get("relation_type_shuffle_seed"),

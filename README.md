@@ -195,7 +195,7 @@ python run.py train \
 - `--shuffle-relation-types`：保留拓扑和 relation 频数，随机重分配 relation ID；
 - `--drop-relation-groups`：按语义组删除正向与反向关系；
 - `--drop-relations`：删除指定原始关系及其反向边；
-- `--match-random-drop-to-relation-groups`：匹配关系组规模的随机关系对删除；
+- `--match-random-drop-to-relation-groups`：按关系组的实际有向消息边数做随机删边；每个抽样单元是一条原始边及其生成反向边；
 - `--loss inverse_frequency|class_balanced|logit_adjusted`：长尾损失；
 - `--train-root-sampling class_balanced`：类别均衡的训练 seed 采样。
 
@@ -213,7 +213,7 @@ python run.py train \
 配置内容哈希与完整解析结果，因此修改 JSON 后的结果不会与旧分类混淆。
 
 ```bash
-# 删除一类关系，或删除相同数量的随机关系对作为图密度对照。
+# 删除一类关系，或删除相同数量的随机有向消息边作为图密度对照；随机删边始终成对保留原始边与其反向边。
 python run.py train --model rgcn --data artifacts/level1_hierarchy/graph_data.pt \
   --output-dir runs/level1_without_inherited --tie-taxonomy config/tie_taxonomy_ascribed_family_v1.json \
   --drop-tie-groups inherited
@@ -260,7 +260,7 @@ bash scripts/run_tie_audit_experiments.sh run summarize
 2. 仅保留两个端点都属于该时期的边；两个端点未共同处于该时期的边不进入该图；
 3. 在该时期图内重新建立国家、时间和职业特征，并对该时期的监督标签重新做固定的
    70/10/20 分层 split；
-4. 在这个 artifact 上新训练 `full` 基线，再训练删除 inherited、其等量随机对照、删除
+4. 在这个 artifact 上新训练 `full` 基线，再训练删除 inherited、其实际有向删边量严格匹配的随机对照、删除
    acquired、其等量随机对照。
 
 因此旧的六次完整图 R-GCN/R-GAT 基线**不能**用于这个问题。默认矩阵为 4 个时期 × 2 个

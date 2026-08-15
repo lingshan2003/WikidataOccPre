@@ -18,6 +18,7 @@ from torch_geometric.loader import NeighborLoader
 from models import build_feature_specs, build_model
 from training.relation_controls import (
     apply_relation_controls,
+    count_edge_instance_pairs,
     count_relation_pairs,
     parse_selection,
     resolve_ablation,
@@ -172,17 +173,35 @@ def parse_args() -> argparse.Namespace:
         "--random-edge-drop-pairs",
         type=int,
         default=None,
-        help="Uniformly remove this many base-relation/undirected edge pairs (and both directed counterparts)",
+        help=(
+            "Legacy: uniformly remove this many base-relation/unordered-endpoint pairs. "
+            "Use --random-edge-instance-pairs for an exact directed-edge count."
+        ),
+    )
+    random_drop.add_argument(
+        "--random-edge-instance-pairs",
+        type=int,
+        default=None,
+        help=(
+            "Remove this many original edge instances and their generated reverse edges. "
+            "Each unit is exactly two directed message edges."
+        ),
     )
     random_drop.add_argument(
         "--match-random-drop-to-relation-groups",
         default=None,
-        help="Remove a uniform random set of as many relation pairs as the named groups contain; e.g. kinship",
+        help=(
+            "Remove a uniform random set of original-edge/reverse units matching the named groups' "
+            "directed-edge count; e.g. kinship"
+        ),
     )
     random_drop.add_argument(
         "--match-random-drop-to-tie-groups",
         default=None,
-        help="Remove a uniform random set of as many relation pairs as inherited or acquired contains",
+        help=(
+            "Remove a uniform random set of original-edge/reverse units matching inherited or acquired's "
+            "directed-edge count"
+        ),
     )
     parser.add_argument(
         "--edge-cohort-config",
@@ -647,8 +666,11 @@ def main() -> None:
         raise ValueError("--feature-mode structural does not use occupation representations; use categorical")
     if args.random_edge_drop_pairs is not None and args.random_edge_drop_pairs < 0:
         raise ValueError("--random-edge-drop-pairs must be non-negative")
+    if args.random_edge_instance_pairs is not None and args.random_edge_instance_pairs < 0:
+        raise ValueError("--random-edge-instance-pairs must be non-negative")
     random_drop_requested = bool(
-        args.random_edge_drop_pairs is not None or random_match_groups or random_match_tie_groups
+        args.random_edge_drop_pairs is not None or args.random_edge_instance_pairs is not None
+        or random_match_groups or random_match_tie_groups
     )
     if random_drop_requested and (
         drop_relation_groups or drop_relations or drop_tie_groups
@@ -729,6 +751,7 @@ def main() -> None:
     representation_provenance = semantic_provenance(metadata, args.occupation_representation)
     relation_pair_keys_to_drop = None
     random_edge_drop_candidate_pair_keys = None
+    random_edge_instance_pairs = 0
     if drop_tie_groups:
         relation_ids_to_drop, dropped_base_relations = resolve_tie_ablation(
             tie_taxonomy, drop_tie_groups, metadata["relation_to_id"]
@@ -752,13 +775,26 @@ def main() -> None:
         matching_relation_ids, matched_base_relations = resolve_tie_ablation(
             tie_taxonomy, random_match_tie_groups, metadata["relation_to_id"]
         )
-        random_edge_drop_pairs = count_relation_pairs(
-            data, matching_relation_ids, metadata["relation_to_id"], cohort_node_mask
-        )
+        if cohort_node_mask is not None:
+            # Cohort-local controls retain their historical incident-pair
+            # semantics; the exact global density control below has no cohort
+            # restriction and pairs every original edge instance with its rev.
+            random_edge_drop_pairs = count_relation_pairs(
+                data, matching_relation_ids, metadata["relation_to_id"], cohort_node_mask
+            )
+        else:
+            random_edge_drop_pairs = 0
+            random_edge_instance_pairs = count_edge_instance_pairs(
+                data, matching_relation_ids, metadata["relation_to_id"]
+            )
         if cohort_node_mask is not None and not random_edge_drop_pairs:
             raise ValueError(
                 f"No {random_match_tie_groups[0]} relation pairs are incident to cohort {args.edge_cohort_id!r}; "
                 "refusing a no-op matched random control"
+            )
+        if cohort_node_mask is None and not random_edge_instance_pairs:
+            raise ValueError(
+                f"No {random_match_tie_groups[0]} edge instances exist in this graph; refusing a no-op matched random control"
             )
         if cohort_node_mask is not None:
             all_relation_ids = tuple(int(value) for value in metadata["relation_to_id"].values())
@@ -769,18 +805,21 @@ def main() -> None:
         matching_relation_ids, matched_base_relations = resolve_ablation(
             metadata["relation_to_id"], random_match_groups, ()
         )
-        random_edge_drop_pairs = count_relation_pairs(
+        random_edge_drop_pairs = 0
+        random_edge_instance_pairs = count_edge_instance_pairs(
             data, matching_relation_ids, metadata["relation_to_id"]
         )
     else:
         random_edge_drop_pairs = args.random_edge_drop_pairs or 0
+        random_edge_instance_pairs = args.random_edge_instance_pairs or 0
     relation_perturbation = apply_relation_controls(
         data,
         relation_ids_to_drop=relation_ids_to_drop,
         relation_pair_keys_to_drop=relation_pair_keys_to_drop,
         relation_to_id=metadata["relation_to_id"],
         random_edge_drop_pairs=random_edge_drop_pairs,
-        random_edge_drop_seed=args.seed if random_edge_drop_pairs else None,
+        random_edge_instance_pairs=random_edge_instance_pairs,
+        random_edge_drop_seed=args.seed if (random_edge_drop_pairs or random_edge_instance_pairs) else None,
         random_edge_drop_candidate_pair_keys=random_edge_drop_candidate_pair_keys,
         shuffle_relation_types=args.shuffle_relation_types,
         shuffle_seed=args.seed if args.shuffle_relation_types else None,

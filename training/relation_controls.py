@@ -168,6 +168,117 @@ def count_relation_pairs(
     return int(len(select_relation_pairs(data, relation_ids, relation_to_id, incident_node_mask)))
 
 
+def edge_instance_pairs(data, relation_to_id: Mapping[str, int]) -> np.ndarray:
+    """Return one original directed edge instance paired with its generated reverse.
+
+    ``relation_pair_keys`` intentionally merges a base relation and an
+    *unordered* endpoint pair.  That is useful for the legacy cohort-local
+    control, but not for a density-matched deletion: a symmetric source export
+    can contain both ``A -relative-> B`` and ``B -relative-> A``.  After
+    reverse-edge construction those are two distinct original facts and four
+    directed message edges, not one four-edge deletion unit.
+
+    This function therefore defines the atomic unit for the global random
+    density control as one non-``__rev`` edge occurrence plus exactly one
+    generated ``__rev`` counterpart.  Every returned row has two edge indices,
+    so deleting ``k`` rows always deletes exactly ``2k`` directed message
+    edges without leaving a reverse edge behind.
+    """
+    edge_type = data.edge_type.detach().cpu().numpy().astype(np.int64, copy=False)
+    source, target = data.edge_index.detach().cpu().numpy().astype(np.int64, copy=False)
+    if len(edge_type) != len(source) or len(edge_type) != len(target):
+        raise ValueError("edge_index and edge_type have inconsistent lengths")
+
+    id_to_relation = {int(identifier): str(name) for name, identifier in relation_to_id.items()}
+    if len(id_to_relation) != len(relation_to_id):
+        raise ValueError("relation_to_id must map every relation name to a unique ID")
+    forward_ids = []
+    reverse_id_by_forward_id: Dict[int, int] = {}
+    for relation, identifier in relation_to_id.items():
+        relation_id = int(identifier)
+        if relation.endswith("__rev"):
+            base = base_relation_name(relation)
+            if base not in relation_to_id:
+                raise ValueError(f"Generated reverse relation {relation!r} has no base relation")
+            continue
+        reverse_name = f"{relation}__rev"
+        if reverse_name not in relation_to_id:
+            raise ValueError(f"Base relation {relation!r} has no generated reverse relation {reverse_name!r}")
+        forward_ids.append(relation_id)
+        reverse_id_by_forward_id[relation_id] = int(relation_to_id[reverse_name])
+
+    known_ids = np.fromiter(id_to_relation, dtype=np.int64, count=len(id_to_relation))
+    if edge_type.size and not np.isin(edge_type, known_ids).all():
+        raise ValueError("edge_type contains a relation ID absent from metadata")
+    is_forward = np.isin(edge_type, np.asarray(forward_ids, dtype=np.int64))
+    forward_indices = np.flatnonzero(is_forward)
+    if len(forward_indices) * 2 != len(edge_type):
+        raise ValueError(
+            "Prepared graph does not contain exactly one generated reverse edge for every base-relation edge"
+        )
+
+    # A graph prepared by data.prepare has exact directed triples de-duplicated.
+    # Use a vectorised signature rather than relying on dataframe/edge order;
+    # it also makes the reverse-pair contract explicit for period artifacts.
+    node_count = int(data.num_nodes)
+    if node_count <= 0:
+        raise ValueError("num_nodes must be positive when relation edges exist")
+    max_relation_id = max(id_to_relation)
+    signatures = ((edge_type * node_count) + source) * node_count + target
+    order = np.argsort(signatures, kind="stable")
+    sorted_signatures = signatures[order]
+    if len(sorted_signatures) > 1 and np.any(sorted_signatures[1:] == sorted_signatures[:-1]):
+        raise ValueError(
+            "Prepared graph contains duplicate directed triples; rebuild it with exact edge de-duplication "
+            "before using exact random edge-instance controls"
+        )
+
+    reverse_lookup = np.full(max_relation_id + 1, -1, dtype=np.int64)
+    for forward_id, reverse_id in reverse_id_by_forward_id.items():
+        reverse_lookup[forward_id] = reverse_id
+    forward_relation_ids = edge_type[forward_indices]
+    reverse_relation_ids = reverse_lookup[forward_relation_ids]
+    if (reverse_relation_ids < 0).any():
+        raise ValueError("Could not resolve a generated reverse relation ID")
+    wanted = ((reverse_relation_ids * node_count) + target[forward_indices]) * node_count + source[forward_indices]
+    reverse_positions = np.searchsorted(sorted_signatures, wanted)
+    valid = reverse_positions < len(sorted_signatures)
+    if valid.any():
+        valid[valid] = sorted_signatures[reverse_positions[valid]] == wanted[valid]
+    if not valid.all():
+        missing = int((~valid).sum())
+        raise ValueError(f"{missing} base-relation edge instances lack their generated reverse counterpart")
+    reverse_indices = order[reverse_positions]
+    pairs = np.column_stack((forward_indices, reverse_indices)).astype(np.int64, copy=False)
+    if np.unique(pairs).size != int(data.edge_type.numel()):
+        raise ValueError("Generated reverse edge instances are not a one-to-one pairing")
+    return pairs
+
+
+def select_edge_instance_pairs(
+    data,
+    relation_ids: Iterable[int],
+    relation_to_id: Mapping[str, int],
+) -> np.ndarray:
+    """Select atomic forward/reverse edge instances represented by relation IDs."""
+    selected_ids = np.asarray(sorted({int(value) for value in relation_ids}), dtype=np.int64)
+    if not len(selected_ids):
+        return np.empty((0, 2), dtype=np.int64)
+    pairs = edge_instance_pairs(data, relation_to_id)
+    edge_type = data.edge_type.detach().cpu().numpy().astype(np.int64, copy=False)
+    selected = np.isin(edge_type[pairs[:, 0]], selected_ids) | np.isin(edge_type[pairs[:, 1]], selected_ids)
+    return pairs[selected]
+
+
+def count_edge_instance_pairs(
+    data,
+    relation_ids: Iterable[int],
+    relation_to_id: Mapping[str, int],
+) -> int:
+    """Count two-message atomic units represented by a relation selection."""
+    return int(len(select_edge_instance_pairs(data, relation_ids, relation_to_id)))
+
+
 def _drop_relation_pairs(data, relation_to_id: Mapping[str, int], pair_keys_to_drop: np.ndarray) -> int:
     """Delete whole relation pairs and return their actual unique count."""
     selected_keys = np.unique(np.asarray(pair_keys_to_drop, dtype=np.int64))
@@ -214,12 +325,42 @@ def _drop_random_relation_pairs(
     return int(pair_count), int(len(candidate_keys))
 
 
+def _drop_random_edge_instance_pairs(
+    data,
+    relation_to_id: Mapping[str, int],
+    pair_count: int,
+    seed: int,
+) -> Tuple[int, int]:
+    """Randomly remove whole original-edge/generated-reverse units exactly."""
+    if pair_count < 0:
+        raise ValueError("random edge-instance pair count must be non-negative")
+    pairs = edge_instance_pairs(data, relation_to_id)
+    if pair_count > len(pairs):
+        raise ValueError(
+            f"Cannot remove {pair_count} edge-instance pairs: candidate set has only {len(pairs)} pairs"
+        )
+    if pair_count == 0:
+        return 0, int(len(pairs))
+    rng = np.random.default_rng(seed)
+    selected_pair_rows = rng.choice(len(pairs), size=pair_count, replace=False)
+    edge_indices = pairs[selected_pair_rows].reshape(-1)
+    keep = np.ones(int(data.edge_type.numel()), dtype=bool)
+    keep[edge_indices] = False
+    if int((~keep).sum()) != 2 * int(pair_count):
+        raise RuntimeError("Exact edge-instance control would not remove two messages per selected pair")
+    keep_tensor = torch.from_numpy(keep).to(device=data.edge_type.device)
+    data.edge_index = data.edge_index[:, keep_tensor]
+    data.edge_type = data.edge_type[keep_tensor]
+    return int(pair_count), int(len(pairs))
+
+
 def apply_relation_controls(
     data,
     relation_ids_to_drop: Iterable[int] = (),
     relation_pair_keys_to_drop: Optional[np.ndarray] = None,
     relation_to_id: Mapping[str, int] | None = None,
     random_edge_drop_pairs: int = 0,
+    random_edge_instance_pairs: int = 0,
     random_edge_drop_seed: int | None = None,
     random_edge_drop_candidate_pair_keys: Optional[np.ndarray] = None,
     shuffle_relation_types: bool = False,
@@ -233,6 +374,10 @@ def apply_relation_controls(
     transformation for attention export.
     """
     drop_ids = tuple(sorted({int(relation_id) for relation_id in relation_ids_to_drop}))
+    if random_edge_drop_pairs and random_edge_instance_pairs:
+        raise ValueError("Use either legacy relation-pair or exact edge-instance random deletion, not both")
+    if random_edge_instance_pairs and drop_ids:
+        raise ValueError("Exact edge-instance random deletion is a standalone control, not a post-ablation")
     if relation_pair_keys_to_drop is not None and drop_ids:
         raise ValueError("Use either relation IDs or relation-pair keys for an ablation, not both")
     if relation_pair_keys_to_drop is not None and relation_to_id is None:
@@ -248,9 +393,9 @@ def apply_relation_controls(
     ) if relation_pair_keys_to_drop is not None else 0
     edge_count_after_ablation = int(data.edge_type.numel())
 
-    if random_edge_drop_pairs and relation_to_id is None:
+    if (random_edge_drop_pairs or random_edge_instance_pairs) and relation_to_id is None:
         raise ValueError("relation_to_id metadata is required for random edge-pair deletion")
-    if random_edge_drop_pairs and random_edge_drop_seed is None:
+    if (random_edge_drop_pairs or random_edge_instance_pairs) and random_edge_drop_seed is None:
         raise ValueError("A random-drop seed is required when deleting random relation pairs")
     dropped_random_pairs, available_relation_pairs = _drop_random_relation_pairs(
         data,
@@ -259,6 +404,12 @@ def apply_relation_controls(
         int(random_edge_drop_seed),
         random_edge_drop_candidate_pair_keys,
     ) if random_edge_drop_pairs else (0, None)
+    dropped_random_instance_pairs, available_edge_instance_pairs = _drop_random_edge_instance_pairs(
+        data,
+        relation_to_id,
+        int(random_edge_instance_pairs),
+        int(random_edge_drop_seed),
+    ) if random_edge_instance_pairs else (0, None)
     edge_count_after_random_drop = int(data.edge_type.numel())
 
     if shuffle_relation_types:
@@ -276,7 +427,13 @@ def apply_relation_controls(
         "edge_count_after_ablation": edge_count_after_ablation,
         "random_edge_drop_pairs": dropped_random_pairs,
         "random_edge_drop_available_pairs": available_relation_pairs,
-        "random_edge_drop_seed": int(random_edge_drop_seed) if random_edge_drop_pairs else None,
+        "random_edge_instance_pairs": dropped_random_instance_pairs,
+        "random_edge_instance_pair_candidates": available_edge_instance_pairs,
+        "random_control_unit": (
+            "base_relation_unordered_endpoint_pair" if random_edge_drop_pairs
+            else ("original_edge_instance_plus_generated_reverse" if random_edge_instance_pairs else None)
+        ),
+        "random_edge_drop_seed": int(random_edge_drop_seed) if (random_edge_drop_pairs or random_edge_instance_pairs) else None,
         "edge_count_after_random_drop": edge_count_after_random_drop,
         "relation_type_shuffle": bool(shuffle_relation_types),
         "relation_type_shuffle_seed": int(shuffle_seed) if shuffle_relation_types else None,

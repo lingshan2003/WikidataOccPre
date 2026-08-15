@@ -41,6 +41,7 @@ CONDITIONS = (
 )
 METRICS = ("accuracy", "macro_f1", "weighted_f1", "macro_precision", "macro_recall")
 EDGE_POLICY = "retain_only_edges_with_both_endpoints_in_selected_life_period"
+EXACT_RANDOM_CONTROL_UNIT = "original_edge_instance_plus_generated_reverse"
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +50,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--artifact-root", default="artifacts/level1_life_period_induced_v2")
     parser.add_argument("--life-periods", default="config/historical_life_periods_v2.json")
     parser.add_argument("--tie-taxonomy", default="config/tie_taxonomy_ascribed_family_v1.json")
+    parser.add_argument(
+        "--occupation-feature-levels",
+        default="1,2,3",
+        help="Exact occupation_feature_levels value required in every run's protocol",
+    )
+    parser.add_argument(
+        "--expected-target-column",
+        default="occupation_level1",
+        help="Expected artifact target_column; use an empty string to skip this guard",
+    )
     parser.add_argument("--output-dir", default=None)
     parser.add_argument("--bootstrap-draws", type=int, default=2000)
     parser.add_argument("--bootstrap-seed", type=int, default=20260814)
@@ -87,6 +98,7 @@ def load_period_artifact(
     period,
     life_period_config,
     taxonomy_path: str | Path,
+    expected_target_column: str | None = None,
 ) -> Dict[str, object]:
     data_path = artifact_root / period.identifier / "graph_data.pt"
     if not data_path.is_file():
@@ -105,6 +117,11 @@ def load_period_artifact(
         raise ValueError(f"Period artifact life-period config hash differs: {data_path}")
     if details.get("edge_policy") != EDGE_POLICY:
         raise ValueError(f"Period artifact does not use the required induced-edge policy: {data_path}")
+    if expected_target_column and metadata.get("target_column") != expected_target_column:
+        raise ValueError(
+            f"Period artifact target_column={metadata.get('target_column')!r}; "
+            f"expected {expected_target_column!r}: {data_path}"
+        )
     if not all(hasattr(data, field) for field in ("train_mask", "val_mask", "test_mask", "y")):
         raise ValueError(f"Period artifact lacks fresh split masks: {data_path}")
     masks = data.train_mask | data.val_mask | data.test_mask
@@ -143,11 +160,13 @@ def _metrics(payload: Mapping[str, object], path: Path) -> Dict[str, float]:
     return {metric: float(test[metric]) for metric in METRICS}
 
 
-def _validate_protocol(config: Mapping[str, object], path: Path, model: str, seed: str) -> None:
+def _validate_protocol(
+    config: Mapping[str, object], path: Path, model: str, seed: str, occupation_feature_levels: str
+) -> None:
     expected = {
         "model": model,
         "seed": int(seed),
-        "occupation_feature_levels": "1,2,3",
+        "occupation_feature_levels": occupation_feature_levels,
         "auxiliary_features": "none",
         "feature_mode": "selected",
         "occupation_representation": "categorical",
@@ -264,16 +283,20 @@ def load_records(
     taxonomy_path: str | Path,
     bootstrap_draws: int,
     bootstrap_seed: int,
+    occupation_feature_levels: str = "1,2,3",
+    expected_target_column: str | None = "occupation_level1",
 ) -> List[Dict[str, object]]:
     records: List[Dict[str, object]] = []
     for period in life_period_config.periods:
-        artifact = load_period_artifact(artifact_root, period, life_period_config, taxonomy_path)
+        artifact = load_period_artifact(
+            artifact_root, period, life_period_config, taxonomy_path, expected_target_column
+        )
         artifact_path = Path(str(artifact["artifact_path"]))
         bundle = torch.load(artifact_path, map_location="cpu", weights_only=False)
         expected_test = torch.where(bundle["data"].test_mask)[0].detach().cpu().tolist()
         for model in MODELS:
             for seed in SEEDS:
-                per_condition: Dict[str, Tuple[Mapping[str, object], Path, np.ndarray, np.ndarray]] = {}
+                per_condition: Dict[str, Tuple[Mapping[str, object], Path, np.ndarray, np.ndarray, Mapping[str, object]]] = {}
                 for condition in CONDITIONS:
                     run_dir = root / f"{model}__period_{period.identifier}__{condition}" / f"seed_{seed}"
                     metrics_path, prediction_path = run_dir / "metrics.json", run_dir / "test_predictions.csv"
@@ -283,10 +306,10 @@ def load_records(
                     config = payload.get("run_config")
                     if not isinstance(config, Mapping):
                         raise ValueError(f"Missing run_config: {metrics_path}")
-                    _validate_protocol(config, metrics_path, model, seed)
+                    _validate_protocol(config, metrics_path, model, seed, occupation_feature_levels)
                     perturbation = _validate_perturbation(payload, metrics_path, artifact, condition)
                     nodes, true, prediction = _load_predictions(prediction_path, expected_test)
-                    per_condition[condition] = (payload, prediction_path, true, prediction)
+                    per_condition[condition] = (payload, prediction_path, true, prediction, perturbation)
                     records.append({
                         "model": model,
                         "seed": seed,
@@ -297,11 +320,12 @@ def load_records(
                         "test_predictions_path": str(prediction_path),
                         "actual_directed_edges_removed": int(perturbation["edge_count_before"]) - int(perturbation["edge_count_after_random_drop"]),
                         "dropped_relation_pair_count": perturbation.get("dropped_relation_pair_count"),
-                        "random_edge_drop_pairs": perturbation.get("random_edge_drop_pairs"),
+                        "random_edge_instance_pairs": perturbation.get("random_edge_instance_pairs"),
+                        "random_control_unit": perturbation.get("random_control_unit"),
                         **_metrics(payload, metrics_path),
                     })
                 baseline_true, baseline_prediction = per_condition["full"][2], per_condition["full"][3]
-                for condition, (_, _, current_true, current_prediction) in per_condition.items():
+                for condition, (_, _, current_true, current_prediction, _) in per_condition.items():
                     if not np.array_equal(baseline_true, current_true):
                         raise ValueError(f"True labels differ from baseline for {model}/{period.identifier}/{seed}/{condition}")
                     # Stash per-seed paired bootstrap samples only in memory; CSVs
@@ -313,6 +337,29 @@ def load_records(
                                 bootstrap_draws, bootstrap_seed + int(seed),
                             ) if condition != "full" else np.zeros(bootstrap_draws, dtype=float)
                             break
+                for tie_group, direct_condition, random_condition in (
+                    ("inherited", "without_inherited", "random_matched_inherited"),
+                    ("acquired", "without_acquired", "random_matched_acquired"),
+                ):
+                    direct = per_condition[direct_condition][4]
+                    random = per_condition[random_condition][4]
+                    direct_removed = int(direct["edge_count_before"]) - int(direct["edge_count_after_random_drop"])
+                    random_removed = int(random["edge_count_before"]) - int(random["edge_count_after_random_drop"])
+                    if direct_removed != random_removed:
+                        raise ValueError(
+                            f"Exact random control mismatch for {model}/{period.identifier}/seed_{seed}/{tie_group}: "
+                            f"direct={direct_removed} directed edges, random={random_removed}"
+                        )
+                    if random.get("random_control_unit") != EXACT_RANDOM_CONTROL_UNIT:
+                        raise ValueError(
+                            f"Random control does not use exact original-edge/reverse units: "
+                            f"{model}/{period.identifier}/seed_{seed}/{tie_group}"
+                        )
+                    if int(random.get("random_edge_instance_pairs", -1)) * 2 != random_removed:
+                        raise ValueError(
+                            f"Random control does not record exactly two directed edges per selected unit: "
+                            f"{model}/{period.identifier}/seed_{seed}/{tie_group}"
+                        )
     return records
 
 
@@ -397,7 +444,14 @@ def main() -> None:
         raise FileNotFoundError("Both --root and --artifact-root must be existing directories")
     life_period_config = load_life_period_config(args.life_periods)
     records = load_records(
-        root, artifact_root, life_period_config, args.tie_taxonomy, args.bootstrap_draws, args.bootstrap_seed
+        root,
+        artifact_root,
+        life_period_config,
+        args.tie_taxonomy,
+        args.bootstrap_draws,
+        args.bootstrap_seed,
+        args.occupation_feature_levels,
+        args.expected_target_column or None,
     )
     source_hashes = {row["source_data_sha256"] for row in records}
     if len(source_hashes) != 1 or None in source_hashes:
@@ -421,6 +475,8 @@ def main() -> None:
         "tie_taxonomy_sha256": sha256_file(Path(args.tie_taxonomy)),
         "artifact_root": str(artifact_root.resolve()),
         "run_root": str(root.resolve()),
+        "occupation_feature_levels": args.occupation_feature_levels,
+        "expected_target_column": args.expected_target_column or None,
         "bootstrap_draws": args.bootstrap_draws,
         "bootstrap_seed": args.bootstrap_seed,
     }, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -90,7 +90,11 @@ class PeriodInducedSummaryTests(unittest.TestCase):
                                 "edge_count_before": 10,
                                 "edge_count_after_random_drop": 10 if condition == "full" else 8,
                                 "dropped_relation_pair_count": 1 if direct else 0,
-                                "random_edge_drop_pairs": 1 if random else 0,
+                                "random_edge_drop_pairs": 0,
+                                "random_edge_instance_pairs": 1 if random else 0,
+                                "random_control_unit": (
+                                    "original_edge_instance_plus_generated_reverse" if random else None
+                                ),
                             },
                             "test": {metric: 0.80 if condition == "full" else 0.70 for metric in period_summary.METRICS},
                         }
@@ -122,6 +126,15 @@ class PeriodInducedSummaryTests(unittest.TestCase):
             direct = next(row for row in summaries if row["condition"] == "without_inherited")
             self.assertAlmostEqual(direct["accuracy_delta_mean"], -0.1)
             self.assertTrue(direct["bootstrap_available"])
+
+            unequal = run_root / "rgcn__period_early__random_matched_inherited" / "seed_42" / "metrics.json"
+            payload = json.loads(unequal.read_text(encoding="utf-8"))
+            payload["relation_perturbation"]["edge_count_after_random_drop"] = 7
+            unequal.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Exact random control mismatch"):
+                period_summary.load_records(run_root, artifact_root, config, taxonomy_path, 0, 7)
+            payload["relation_perturbation"]["edge_count_after_random_drop"] = 8
+            unequal.write_text(json.dumps(payload), encoding="utf-8")
 
             bad = run_root / "rgcn__period_early__full" / "seed_42" / "metrics.json"
             payload = json.loads(bad.read_text(encoding="utf-8"))

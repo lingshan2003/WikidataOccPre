@@ -21,7 +21,9 @@ from training.attention_edge_report import parse_matrix_relations
 from training.relation_controls import (
     apply_relation_controls,
     available_relation_groups,
+    count_edge_instance_pairs,
     count_relation_pairs,
+    edge_instance_pairs,
     relation_pair_keys,
     resolve_ablation,
     select_relation_pairs,
@@ -162,6 +164,49 @@ class ExperimentControlTests(unittest.TestCase):
             self.assertIn(retained_count, {0, original_count})
         self.assertEqual(manifest["random_edge_drop_pairs"], 1)
         self.assertEqual(graph.edge_index.size(1), 2)
+
+    def test_exact_random_control_matches_directed_edge_count_by_edge_instance(self):
+        relation_to_id = {
+            "father": 0,
+            "father__rev": 1,
+            "student_of": 2,
+            "student_of__rev": 3,
+        }
+        # The two father source facts point in opposite directions.  The
+        # legacy unordered-endpoint key collapses them, whereas the correct
+        # density-control unit is two original-edge/reverse pairs.
+        original = Data(
+            edge_index=torch.tensor([[0, 1, 1, 0, 1, 2], [1, 0, 0, 1, 2, 1]]),
+            edge_type=torch.tensor([0, 1, 0, 1, 2, 3]),
+            num_nodes=3,
+        )
+        father_ids, _ = resolve_ablation(relation_to_id, ("kinship",), ())
+        self.assertEqual(count_relation_pairs(original, father_ids, relation_to_id), 1)
+        self.assertEqual(count_edge_instance_pairs(original, father_ids, relation_to_id), 2)
+        self.assertEqual(tuple(edge_instance_pairs(original, relation_to_id).shape), (3, 2))
+
+        direct = copy.deepcopy(original)
+        direct_manifest = apply_relation_controls(direct, relation_ids_to_drop=father_ids)
+        self.assertEqual(direct.edge_type.numel(), 2)
+
+        random = copy.deepcopy(original)
+        random_manifest = apply_relation_controls(
+            random,
+            relation_to_id=relation_to_id,
+            random_edge_instance_pairs=2,
+            random_edge_drop_seed=42,
+        )
+        self.assertEqual(random.edge_type.numel(), 2)
+        self.assertEqual(
+            direct_manifest["edge_count_before"] - direct_manifest["edge_count_after_random_drop"],
+            random_manifest["edge_count_before"] - random_manifest["edge_count_after_random_drop"],
+        )
+        self.assertEqual(random_manifest["random_edge_instance_pairs"], 2)
+        self.assertEqual(
+            random_manifest["random_control_unit"], "original_edge_instance_plus_generated_reverse"
+        )
+        # No source edge survives without exactly one generated reverse edge.
+        self.assertEqual(tuple(edge_instance_pairs(random, relation_to_id).shape), (1, 2))
 
     def test_cohort_incident_pair_controls_restrict_both_ablation_and_random_candidates(self):
         relation_to_id = {
