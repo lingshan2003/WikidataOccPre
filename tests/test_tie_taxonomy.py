@@ -5,7 +5,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from training.tie_taxonomy import load_tie_taxonomy, parse_tie_group_selection, resolve_tie_ablation
+from training.tie_taxonomy import (
+    load_relation_taxonomy,
+    load_tie_taxonomy,
+    parse_relation_taxonomy_group_selection,
+    parse_tie_group_selection,
+    resolve_relation_taxonomy_ablation,
+    resolve_tie_ablation,
+)
 
 
 RELATION_TO_ID = {
@@ -84,6 +91,43 @@ class TieTaxonomyTests(unittest.TestCase):
         self.assertEqual(parse_tie_group_selection("acquired,inherited"), ("acquired", "inherited"))
         with self.assertRaisesRegex(ValueError, "Unknown tie groups"):
             parse_tie_group_selection("kinship")
+
+    def test_multigroup_taxonomy_resolves_residual_and_both_directions(self):
+        path = self.write_taxonomy({
+            "name": "acquired-subgroups-valid",
+            "version": 1,
+            "groups": {
+                "inherited": ["father"],
+                "education": ["student_of"],
+                "other_acquired": "all_remaining",
+            },
+        })
+        taxonomy = load_relation_taxonomy(path, RELATION_TO_ID)
+        self.assertEqual(taxonomy.groups["other_acquired"], ("spouse",))
+        ids, bases = resolve_relation_taxonomy_ablation(taxonomy, ("education",), RELATION_TO_ID)
+        self.assertEqual(ids, {2, 3})
+        self.assertEqual(bases, ("student_of",))
+        self.assertEqual(taxonomy.group_for_base_relation("spouse__rev"), "other_acquired")
+        self.assertEqual(parse_relation_taxonomy_group_selection("education,other_acquired"),
+                         ("education", "other_acquired"))
+
+    def test_multigroup_taxonomy_allows_an_artifact_empty_residual_but_rejects_overlap(self):
+        empty = self.write_taxonomy({
+            "name": "empty",
+            "version": 1,
+            "groups": {"inherited": ["father"], "education": ["student_of"], "intimate": ["spouse"],
+                       "residual": "all_remaining"},
+        })
+        taxonomy = load_relation_taxonomy(empty, RELATION_TO_ID)
+        self.assertEqual(taxonomy.groups["residual"], ())
+        overlap = self.write_taxonomy({
+            "name": "overlap",
+            "version": 1,
+            "groups": {"inherited": ["father"], "education": ["student_of", "spouse"],
+                       "intimate": ["spouse"]},
+        })
+        with self.assertRaisesRegex(ValueError, "overlap"):
+            load_relation_taxonomy(overlap, RELATION_TO_ID)
 
 
 if __name__ == "__main__":

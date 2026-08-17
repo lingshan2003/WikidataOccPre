@@ -1,0 +1,54 @@
+{
+  "name": "ascribed_family_and_acquired_social_subgroups_v1",
+  "version": 1,
+  "description": "A complete, mutually exclusive refinement of the ascribed-family versus remaining-social-ties audit. inherited preserves the original ascribed-family definition. The five primary acquired groups are intimate_partnership, education_mentorship, professional_collaboration, influence_succession, and religious_ordination. other_acquired is an explicit residual bucket for low-support or semantically heterogeneous acquired labels; it is retained for completeness but is not in the default period matrix. Groups describe Wikidata relation labels, not causal mechanisms or voluntary choices.",
+  "groups": {
+    "inherited": [
+      "father",
+      "mother",
+      "child",
+      "sibling",
+      "relative",
+      "stepparent",
+      "godparent",
+      "kinship_to_subject"
+    ],
+    "intimate_partnership": [
+      "spouse",
+      "unmarried_partner",
+      "significant_person"
+    ],
+    "education_mentorship": [
+      "student_of",
+      "doctoral_advisor",
+      "student",
+      "doctoral_student",
+      "trained_by",
+      "head_coach"
+    ],
+    "professional_collaboration": [
+      "employer",
+      "partner_in_business_or_sport",
+      "partnership_with",
+      "co-driver",
+      "copyright_representative",
+      "director/manager",
+      "owner_of",
+      "owned_by",
+      "sponsor"
+    ],
+    "influence_succession": [
+      "influenced_by",
+      "inspired_by",
+      "interested_in",
+      "follow",
+      "followed_by",
+      "replaces",
+      "replaced_by"
+    ],
+    "religious_ordination": [
+      "consecrator"
+    ],
+    "other_acquired": "all_remaining"
+  }
+}

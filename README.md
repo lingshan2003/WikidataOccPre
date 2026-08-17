@@ -294,6 +294,48 @@ Accuracy、Macro-F1、Weighted-F1 的完整时期基线、各条件结果、同 
 `F1(random matched) - F1(drop tie group)`。这些结论仍只表示模型依赖。Wikidata 图是静态的，
 关系本身没有发生时间，不能据此宣称某个历史时期的关系造成职业结果。
 
+### Acquired ties 的细分审计（R-GCN）
+
+在二元审计确认 `acquired` 的重要性后，使用
+`config/tie_taxonomy_acquired_subgroups_v1.json` 将其互斥细分为五个预设主组：
+`intimate_partnership`（配偶/伴侣）、`education_mentorship`、
+`professional_collaboration`、`influence_succession` 和
+`religious_ordination`。`other_acquired` 是完整性保留的低频、异质残余桶，不默认进入主分析；
+需要探索时可用环境变量显式加入。`inherited` 与此前 ascribed-family 定义完全一致。taxonomy
+对 artifact 的全部基础关系做一次且仅一次覆盖，并把配置哈希及实际解析的成员写进每一次运行。
+
+每一个子组都做两种同 seed 的反事实：直接删除该组的正、反向消息边，及从同一图均匀删除**完全相同数量**的
+“原始边实例 + 生成反向边”单元。汇总中的 `random_minus_direct`（Macro-F1）即
+`F1(等量随机删边) - F1(删子组)`；只有它为正，才支持该子组的影响超过一般图密度损失的模型依赖解释。
+
+完整图复用已完成的 Level-1 R-GCN full baseline，不重训它；默认是
+5 子组 ×（直接/随机）× 3 seeds = **30** 次新训练：
+
+```bash
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_acquired_subgroup_ablation_experiments.sh plan matrix
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_acquired_subgroup_ablation_experiments.sh run matrix
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_acquired_subgroup_ablation_experiments.sh run summarize
+```
+
+时期结果继续使用独立诱导的时期图及其已完成的 R-GCN `full` baseline，绝不使用完整图的 cohort-local
+实验替代。默认是 4 时期 × 5 子组 ×（直接/随机）× 3 seeds = **120** 次新训练：
+
+```bash
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_period_induced_acquired_subgroup_experiments.sh plan matrix
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_period_induced_acquired_subgroup_experiments.sh run matrix
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_period_induced_acquired_subgroup_experiments.sh run summarize
+```
+
+两类汇总都输出 condition 指标、同 seed 的 `direct_minus_full`、`random_minus_full`、
+`random_minus_direct` 以及可用时的 paired test-node bootstrap 区间；它们会拒绝 taxonomy、图 artifact、
+随机删边数量不一致的比较，并在同时保存 prediction 文件时校验测试节点和真标签完全一致。
+
 此前 `birth_cohort_tie_audit/` 的 96 次结果保留为**完整图上的局部出生队列节点删边敏感性分析**：
 它训练时仍使用全局节点、全局边和全局 split，随后只对指定时期节点相连的部分关系边做干预。
 它不能作为“时期内关系依赖”的主结果，也不能与本节的独立时期 baseline 混报。对已经完成的

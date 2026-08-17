@@ -27,8 +27,12 @@ from training.relation_controls import (
 from training.birth_cohorts import load_artifact_birth_cohorts, load_birth_cohort_config
 from training.tie_taxonomy import (
     DEFAULT_TIE_TAXONOMY_PATH,
+    RelationTaxonomy,
+    load_relation_taxonomy,
     load_tie_taxonomy,
+    parse_relation_taxonomy_group_selection,
     parse_tie_group_selection,
+    resolve_relation_taxonomy_ablation,
     resolve_tie_ablation,
     sha256_file,
 )
@@ -164,6 +168,21 @@ def parse_args() -> argparse.Namespace:
         help="Comma-separated inherited/acquired categories to remove in both directions, or none",
     )
     parser.add_argument(
+        "--relation-taxonomy",
+        default=None,
+        help=(
+            "Optional versioned multi-group relation taxonomy JSON. Required by "
+            "--drop-relation-taxonomy-groups and --match-random-drop-to-relation-taxonomy-groups."
+        ),
+    )
+    parser.add_argument(
+        "--drop-relation-taxonomy-groups",
+        default="none",
+        help=(
+            "Comma-separated groups from --relation-taxonomy to remove in both directions, or none"
+        ),
+    )
+    parser.add_argument(
         "--shuffle-relation-types",
         action="store_true",
         help="Permute relation IDs across retained edges while preserving topology and relation frequencies",
@@ -201,6 +220,14 @@ def parse_args() -> argparse.Namespace:
         help=(
             "Remove a uniform random set of original-edge/reverse units matching inherited or acquired's "
             "directed-edge count"
+        ),
+    )
+    random_drop.add_argument(
+        "--match-random-drop-to-relation-taxonomy-groups",
+        default=None,
+        help=(
+            "Remove a uniform random set of original-edge/reverse units matching the named "
+            "--relation-taxonomy groups' directed-edge count"
         ),
     )
     parser.add_argument(
@@ -638,6 +665,9 @@ def main() -> None:
     drop_relation_groups = parse_selection(args.drop_relation_groups)
     drop_relations = parse_selection(args.drop_relations)
     drop_tie_groups = parse_tie_group_selection(args.drop_tie_groups)
+    drop_relation_taxonomy_groups = parse_relation_taxonomy_group_selection(
+        args.drop_relation_taxonomy_groups
+    )
     random_match_groups = (
         parse_selection(args.match_random_drop_to_relation_groups)
         if args.match_random_drop_to_relation_groups is not None else ()
@@ -645,6 +675,10 @@ def main() -> None:
     random_match_tie_groups = (
         parse_tie_group_selection(args.match_random_drop_to_tie_groups)
         if args.match_random_drop_to_tie_groups is not None else ()
+    )
+    random_match_relation_taxonomy_groups = (
+        parse_relation_taxonomy_group_selection(args.match_random_drop_to_relation_taxonomy_groups)
+        if args.match_random_drop_to_relation_taxonomy_groups is not None else ()
     )
     if args.class_weight and args.loss != "cross_entropy":
         raise ValueError("--class-weight is a legacy alias and cannot be combined with a non-default --loss")
@@ -670,16 +704,28 @@ def main() -> None:
         raise ValueError("--random-edge-instance-pairs must be non-negative")
     random_drop_requested = bool(
         args.random_edge_drop_pairs is not None or args.random_edge_instance_pairs is not None
-        or random_match_groups or random_match_tie_groups
+        or random_match_groups or random_match_tie_groups or random_match_relation_taxonomy_groups
     )
     if random_drop_requested and (
-        drop_relation_groups or drop_relations or drop_tie_groups
+        drop_relation_groups or drop_relations or drop_tie_groups or drop_relation_taxonomy_groups
     ):
         raise ValueError(
             "Random edge-drop controls are standalone comparisons; do not combine them with relation or tie ablations"
         )
-    if drop_tie_groups and (drop_relation_groups or drop_relations):
-        raise ValueError("--drop-tie-groups cannot be combined with --drop-relation-groups or --drop-relations")
+    if drop_tie_groups and (drop_relation_groups or drop_relations or drop_relation_taxonomy_groups):
+        raise ValueError(
+            "--drop-tie-groups cannot be combined with --drop-relation-groups, --drop-relations, "
+            "or --drop-relation-taxonomy-groups"
+        )
+    if drop_relation_taxonomy_groups and (drop_relation_groups or drop_relations):
+        raise ValueError(
+            "--drop-relation-taxonomy-groups cannot be combined with --drop-relation-groups or --drop-relations"
+        )
+    if (drop_relation_taxonomy_groups or random_match_relation_taxonomy_groups) and not args.relation_taxonomy:
+        raise ValueError(
+            "--relation-taxonomy is required with --drop-relation-taxonomy-groups or "
+            "--match-random-drop-to-relation-taxonomy-groups"
+        )
     if random_drop_requested and args.shuffle_relation_types:
         raise ValueError("Random edge-drop controls should not be combined with --shuffle-relation-types")
     if bool(args.edge_cohort_config) != bool(args.edge_cohort_id):
@@ -702,6 +748,10 @@ def main() -> None:
     # must never overwrite the canonical artifact shared by comparisons.
     data, metadata = copy.deepcopy(bundle["data"]), bundle["metadata"]
     tie_taxonomy = load_tie_taxonomy(args.tie_taxonomy, metadata["relation_to_id"])
+    relation_taxonomy: Optional[RelationTaxonomy] = (
+        load_relation_taxonomy(args.relation_taxonomy, metadata["relation_to_id"])
+        if args.relation_taxonomy else None
+    )
     cohort_node_mask = None
     cohort_manifest = None
     if args.edge_cohort_config:
@@ -764,8 +814,17 @@ def main() -> None:
                 raise ValueError(
                     f"No {drop_tie_groups[0]} relation pairs are incident to cohort {args.edge_cohort_id!r}; "
                     "refusing a no-op cohort ablation"
-                )
+            )
             relation_ids_to_drop = ()
+    elif drop_relation_taxonomy_groups:
+        if relation_taxonomy is None:
+            raise RuntimeError("Relation taxonomy validation should have rejected this missing configuration")
+        relation_ids_to_drop, dropped_base_relations = resolve_relation_taxonomy_ablation(
+            relation_taxonomy, drop_relation_taxonomy_groups, metadata["relation_to_id"]
+        )
+        if not relation_ids_to_drop:
+            selected = ",".join(drop_relation_taxonomy_groups)
+            raise ValueError(f"No relations exist for relation taxonomy group(s) {selected}; refusing a no-op")
     else:
         relation_ids_to_drop, dropped_base_relations = resolve_ablation(
             metadata["relation_to_id"], drop_relation_groups, drop_relations
@@ -801,6 +860,19 @@ def main() -> None:
             random_edge_drop_candidate_pair_keys = select_relation_pairs(
                 data, all_relation_ids, metadata["relation_to_id"], cohort_node_mask
             )
+    elif random_match_relation_taxonomy_groups:
+        if relation_taxonomy is None:
+            raise RuntimeError("Relation taxonomy validation should have rejected this missing configuration")
+        matching_relation_ids, matched_base_relations = resolve_relation_taxonomy_ablation(
+            relation_taxonomy, random_match_relation_taxonomy_groups, metadata["relation_to_id"]
+        )
+        random_edge_drop_pairs = 0
+        random_edge_instance_pairs = count_edge_instance_pairs(
+            data, matching_relation_ids, metadata["relation_to_id"]
+        )
+        if not random_edge_instance_pairs:
+            selected = ",".join(random_match_relation_taxonomy_groups)
+            raise ValueError(f"No edge instances exist for relation taxonomy group(s) {selected}; refusing a no-op")
     elif random_match_groups:
         matching_relation_ids, matched_base_relations = resolve_ablation(
             metadata["relation_to_id"], random_match_groups, ()
@@ -828,12 +900,15 @@ def main() -> None:
         "data": str(data_path.resolve()),
         "data_sha256": sha256_file(data_path),
         "tie_taxonomy": tie_taxonomy.manifest(),
+        "relation_taxonomy": relation_taxonomy.manifest() if relation_taxonomy else None,
         "dropped_relation_groups": list(drop_relation_groups),
         "dropped_base_relations": list(dropped_base_relations),
         "random_drop_matched_relation_groups": list(random_match_groups),
         "random_drop_matched_base_relations": list(matched_base_relations),
         "dropped_tie_groups": list(drop_tie_groups),
         "random_drop_matched_tie_groups": list(random_match_tie_groups),
+        "dropped_relation_taxonomy_groups": list(drop_relation_taxonomy_groups),
+        "random_drop_matched_relation_taxonomy_groups": list(random_match_relation_taxonomy_groups),
         "edge_cohort": cohort_manifest,
     })
     specs = build_feature_specs(feature_schema, metadata)
@@ -907,6 +982,11 @@ def main() -> None:
         f"Tie taxonomy: {tie_taxonomy.name} v{tie_taxonomy.version} "
         f"({tie_taxonomy.sha256[:12]}); inherited={','.join(tie_taxonomy.inherited)}"
     )
+    if relation_taxonomy is not None:
+        print(
+            f"Relation taxonomy: {relation_taxonomy.name} v{relation_taxonomy.version} "
+            f"({relation_taxonomy.sha256[:12]}); groups={','.join(sorted(relation_taxonomy.groups))}"
+        )
     print(json.dumps({"relation_perturbation": relation_perturbation}, ensure_ascii=False))
 
     for epoch in range(1, args.epochs + 1):
