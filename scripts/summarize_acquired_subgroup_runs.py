@@ -13,6 +13,7 @@ import argparse
 import csv
 import hashlib
 import json
+import sys
 from collections import defaultdict
 from pathlib import Path
 from statistics import mean, stdev
@@ -20,6 +21,13 @@ from typing import Dict, Iterable, List, Mapping, Sequence, Tuple
 
 import numpy as np
 from sklearn.metrics import f1_score
+
+# ``python scripts/summarize_acquired_subgroup_runs.py`` sets sys.path[0] to
+# the scripts directory rather than the repository root.  Make this report
+# runnable from the supplied bash launchers without requiring PYTHONPATH.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from training.life_periods import load_life_period_config
 
