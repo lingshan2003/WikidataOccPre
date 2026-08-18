@@ -406,6 +406,59 @@ python scripts/summarize_report_runs.py --root runs_report/level3
 
 第二个参数也可单独选择 `architecture`、`features`、`relations`、`longtail` 或 `coverage`；`run` 会跳过已经生成 `metrics.json` 的 seed 目录。
 
+### GraphMask 消息与关系重要性
+
+项目提供论文 [Interpreting Graph Neural Networks for NLP With Differentiable Edge
+Masking](https://arxiv.org/abs/2010.00577) 的 amortized GraphMask 适配。它冻结已经训练好的
+RGAT、RGCN 或 CompGCN，只在训练人物上拟合逐层 Hard-Concrete 消息门和替代基线；验证人物
+用于选择满足保真约束的最稀疏 probe，测试人物只用于最终报告。
+
+GraphMask 仍需要在服务器上进行一次轻量的第二阶段训练，并不是只加载原模型权重做一次推理：
+
+```bash
+python run.py graphmask-train \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --checkpoint runs/level3_rgat/best_model.pt \
+  --output-dir runs_graphmask/level3_rgat/seed_42 \
+  --num-neighbors auto \
+  --seed 42 \
+  --device cuda
+
+python run.py graphmask-report \
+  --data artifacts/level3_hierarchy/graph_data.pt \
+  --checkpoint runs/level3_rgat/best_model.pt \
+  --probe runs_graphmask/level3_rgat/seed_42/graphmask_probe.pt \
+  --output-dir runs_graphmask/level3_rgat/seed_42/test_report \
+  --split test \
+  --num-neighbors auto \
+  --top-k 50 \
+  --device cuda
+```
+
+`graphmask-train` 默认使用 `KL(original || masked) <= 0.03` 的约束进行优化，并在验证集
+macro-F1 相对差异不超过 5% 的候选中选择消息保留率最低者。如果没有候选满足门槛，命令会
+失败并保留 `training_history.json`，不会静默输出低保真的解释。`auto` 会从原 checkpoint 的
+训练配置恢复 fanout；`full` 会对每个 root 使用完整 L-hop 邻域，计算成本更高。
+
+报告文件的统计口径如下：
+
+| 文件 | 含义 |
+| --- | --- |
+| `relations_directed.csv` | 按层和精确方向关系（如 `child`、`child__rev`）汇总 |
+| `relations_base.csv` | 去掉 `__rev` 后合并正反向的原始关系汇总 |
+| `root_top_edges.csv.gz` | 每个预测人物、每层 keep probability 最高的 Top-K 消息边 |
+| `test_metrics.json` | 原模型/掩码模型指标、预测一致率、KL 和逐层保留率 |
+| `manifest.json` | 数据、原 checkpoint、probe、fanout、采样种子和 Git 版本 |
+
+关系表同时给出 observation 数、root 覆盖数、平均非零概率、hard retention rate 和 retained
+share。不能仅凭罕见关系的高保留率判断其全局重要性。有限 fanout 的结果解释的是 manifest
+记录的固定采样计算图；正式实验应为每个原模型 checkpoint 使用多个 `--seed` 独立训练 probe。
+
+GraphMask 衡量的是冻结模型对消息和关系的预测依赖。它不能证明某种社会关系导致了职业，
+也不能把被保留边直接解释为现实世界因果机制。核心实现改写自
+[MichSchli/GraphMask](https://github.com/MichSchli/GraphMask) 的 MIT 许可代码，来源与许可证见
+`training/graphmask/NOTICE.md`。
+
 ### 独立的链接预测探索
 
 该分支构建 `Person --has_occupation--> Occupation` 异构图，使用 HGT 编码节点并以点积预测职业边：
@@ -440,7 +493,7 @@ python run.py <command> --help
 | 训练 | `train`, `link-train` |
 | 诊断/个例 | `diagnose`, `explain` |
 | Attention | `attention-edge-report`, `attention-node-report`, `attention-rollout-report` |
-| 归因/扰动 | `message-contribution-report`, `gradient-attribution-report`, `relation-pair-ablation-report`, `relation-pair-sweep-report` |
+| 归因/扰动 | `message-contribution-report`, `gradient-attribution-report`, `relation-pair-ablation-report`, `relation-pair-sweep-report`, `graphmask-train`, `graphmask-report` |
 | 统计 | `attention-bootstrap` |
 
 ## 项目结构
