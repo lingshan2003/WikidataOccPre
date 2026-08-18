@@ -435,6 +435,19 @@ python run.py graphmask-report \
   --device cuda
 ```
 
+如果只分析每个 baseline 的 seed 42，可用可恢复的批处理脚本依次运行 L1/L2/L3 的
+RGCN、RGAT 和 CompGCN。它会自动跳过已有 probe 和完整报告，并为每个阶段单独保存日志：
+
+```bash
+bash scripts/run_graphmask_baselines.sh plan
+mkdir -p runs_graphmask
+nohup bash scripts/run_graphmask_baselines.sh run \
+  > runs_graphmask/graphmask_baselines.nohup.log 2>&1 &
+```
+
+执行状态汇总到 `runs_graphmask/graphmask_baseline_summary.tsv`；失败项写入
+`runs_graphmask/graphmask_baseline_failures.tsv`，再次执行同一命令会续跑未完成项。
+
 `graphmask-train` 默认使用 `KL(original || masked) <= 0.03` 的约束进行优化，并在验证集
 macro-F1 相对差异不超过 5% 的候选中选择消息保留率最低者。如果没有候选满足门槛，命令会
 失败并保留 `training_history.json`，不会静默输出低保真的解释。`auto` 会从原 checkpoint 的
