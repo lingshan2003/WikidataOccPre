@@ -8,7 +8,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="run.py", description="Occupation GNN experiment runner")
     parser.add_argument(
         "command", choices=[
-            "prepare", "occupation-embed", "train", "explain", "attention-report", "attention-edge-report",
+            "prepare", "collapse-ties", "occupation-embed", "train", "explain", "attention-report", "attention-edge-report",
             "attention-node-report", "attention-rollout-report", "message-contribution-report",
             "gradient-attribution-report", "relation-pair-ablation-report", "relation-pair-sweep-report",
             "attention-bootstrap", "graphmask-train", "graphmask-report", "diagnose", "link-prepare", "link-train",
@@ -18,6 +18,8 @@ def main() -> None:
     parsed = parser.parse_args()
     if parsed.command == "prepare":
         from data.prepare import main as command_main
+    elif parsed.command == "collapse-ties":
+        from data.collapse_ties import main as command_main
     elif parsed.command == "occupation-embed":
         from data.occupation_semantics import main as command_main
     elif parsed.command == "train":

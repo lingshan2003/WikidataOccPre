@@ -408,6 +408,19 @@ python scripts/summarize_report_runs.py --root runs_report/level3
 
 ### GraphMask 消息与关系重要性
 
+若要先把准备好的关系词表压缩为 inherited/acquired 两个基础类别，同时保留正反消息方向，
+可生成独立 artifact（不会覆盖原数据）：
+
+```bash
+python run.py collapse-ties \
+  --data artifacts/level2_hierarchy/graph_data.pt \
+  --tie-taxonomy config/tie_taxonomy_ascribed_family_v1.json \
+  --output-dir artifacts/level2_binary_ties_ascribed_v1
+```
+
+输出内部包含四个有向 relation ID（两类基础关系及各自的 `__rev`），GraphMask 的
+`relations_base.csv` 则每层只包含 `inherited_ties` 和 `acquired_ties` 两行。
+
 项目提供论文 [Interpreting Graph Neural Networks for NLP With Differentiable Edge
 Masking](https://arxiv.org/abs/2010.00577) 的 amortized GraphMask 适配。它冻结已经训练好的
 RGAT、RGCN 或 CompGCN，只在训练人物上拟合逐层 Hard-Concrete 消息门和替代基线；验证人物
