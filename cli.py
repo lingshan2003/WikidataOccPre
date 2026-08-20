@@ -11,7 +11,7 @@ def main() -> None:
             "prepare", "collapse-ties", "collapse-relations", "occupation-embed", "train", "explain", "attention-report", "attention-edge-report",
             "attention-node-report", "attention-rollout-report", "message-contribution-report",
             "gradient-attribution-report", "relation-pair-ablation-report", "relation-pair-sweep-report",
-            "attention-bootstrap", "graphmask-train", "graphmask-report", "diagnose", "link-prepare", "link-train",
+            "attention-bootstrap", "graphmask-train", "graphmask-report", "graphmask-occupation-pair-report", "diagnose", "link-prepare", "link-train",
         ], help="Workflow to run"
     )
     parser.add_argument("args", nargs=argparse.REMAINDER, help="Arguments passed to that workflow")
@@ -48,6 +48,8 @@ def main() -> None:
         from training.graphmask_train import main as command_main
     elif parsed.command == "graphmask-report":
         from training.graphmask_report import main as command_main
+    elif parsed.command == "graphmask-occupation-pair-report":
+        from training.graphmask_occupation_pair_report import main as command_main
     elif parsed.command == "link-prepare":
         from link_prediction.prepare import main as command_main
     elif parsed.command == "link-train":

@@ -553,6 +553,42 @@ macro-F1 相对差异不超过 5% 的候选中选择消息保留率最低者。�
 share。不能仅凭罕见关系的高保留率判断其全局重要性。有限 fanout 的结果解释的是 manifest
 记录的固定采样计算图；正式实验应为每个原模型 checkpoint 使用多个 `--seed` 独立训练 probe。
 
+#### L1 RGAT 的职业—关系—职业 GraphMask 报告
+
+已有 L1 RGAT probe 可以直接重新用于 (O_s,R,O_t) 分析，不需要再次训练模型或 GraphMask。
+`root_top_edges.csv.gz` 只有 Top-K，不能用于完整计数；应在服务器运行一次专用只读报告：
+
+```bash
+python run.py graphmask-occupation-pair-report \
+  --data artifacts/level1_hierarchy/graph_data.pt \
+  --checkpoint runs_report/level1/rgat_baseline/seed_42/best_model.pt \
+  --probe runs_graphmask/level1_rgat/seed_42/graphmask_probe.pt \
+  --output-dir runs_graphmask/level1_rgat/seed_42/occupation_pair_report \
+  --split test \
+  --num-neighbors auto \
+  --batch-size 1 \
+  --min-node-support 100 \
+  --bootstrap-replicates 0 \
+  --device cuda:0
+```
+
+该命令只统计每层直接进入预测 test node 的精确有向关系消息。主表
+`occupation_pairs_all_test.csv` 使用全部有真实 L1 的测试节点；
+`occupation_pairs_correct_only.csv` 只使用原模型预测正确的节点；
+`occupation_pairs_by_visibility.csv` 将模型可见的训练来源职业与事后才知道真值的验证/测试来源分开。
+未知来源职业只出现在逐节点审计文件，不进入已知职业的归一化分母。
+
+正式解读使用两个互补指标：`retained_share_of_Ot_budget` 表示一个
+\((O_s,R,O_t)\) cell 占同层目标职业全部 hard-retained 消息的比例；
+`retention_lift_within_R_Ot` 比较该来源职业的 retained share 与原始消息供给 share，值大于 1
+表示在固定 \(R,O_t\) 下高于平均保留倾向。两者必须与候选消息数、hard-retained 数、
+`hard_retention_rate` 和 node coverage 一同报告。`occupation_pairs_ranked.csv` 只纳入至少覆盖
+100 个候选测试节点的 cell，完整的未筛选结果仍保存在两张 cohort 主表中。
+
+逐节点稀疏审计文件 `root_direct_graphmask_pairs.csv.gz` 可能较大；若本地只做总体表格分析，
+下载两张 cohort 表、visibility 表、ranked 表、`target_budgets.csv`、`metrics.json` 和
+`manifest.json` 即可。
+
 GraphMask 衡量的是冻结模型对消息和关系的预测依赖。它不能证明某种社会关系导致了职业，
 也不能把被保留边直接解释为现实世界因果机制。核心实现改写自
 [MichSchli/GraphMask](https://github.com/MichSchli/GraphMask) 的 MIT 许可代码，来源与许可证见
