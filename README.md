@@ -421,6 +421,79 @@ python run.py collapse-ties \
 输出内部包含四个有向 relation ID（两类基础关系及各自的 `__rev`），GraphMask 的
 `relations_base.csv` 则每层只包含 `inherited_ties` 和 `acquired_ties` 两行。
 
+若要继续把 acquired ties 拆成项目既有的语义子类，应从**原始 L2 artifact** 生成另一份数据，
+不要以已经二元化的数据为输入：
+
+```bash
+python run.py collapse-relations \
+  --data artifacts/level2_hierarchy/graph_data.pt \
+  --relation-taxonomy config/tie_taxonomy_acquired_subgroups_v1.json \
+  --output-dir artifacts/level2_acquired_subgroups_v1
+```
+
+该命令把每条细关系直接改为其父类名称：`inherited`、`intimate_partnership`、
+`education_mentorship`、`professional_collaboration`、`influence_succession`、
+`religious_ordination` 或 `other_acquired`。消息方向不合并，因此 artifact 包含 7 个基础关系及
+各自的 `__rev`，共 14 个 relation ID。输出的 `collapsed_tie_taxonomy.json` 可直接传给训练命令；
+`relation_collapse_manifest.json` 记录原始关系到父类的完整映射、数据哈希和去重数量。
+
+L2 occupation 输入、L2 预测的两层 R-GCN 应使用有限邻域并在验证/测试时继续 sampled inference，
+避免全图 FastRGCNConv 的显存峰值：
+
+```bash
+python run.py train \
+  --data artifacts/level2_acquired_subgroups_v1/graph_data.pt \
+  --output-dir runs_report/level2/rgcn_acquired_subgroups/seed_42 \
+  --model rgcn \
+  --rgcn-backend fast \
+  --epochs 50 \
+  --batch-size 512 \
+  --num-layers 2 \
+  --num-neighbors 15,10 \
+  --eval-mode sampled \
+  --hidden-dim 128 \
+  --branch-dim 64 \
+  --num-bases 14 \
+  --occupation-feature-levels 2 \
+  --auxiliary-features none \
+  --tie-taxonomy artifacts/level2_acquired_subgroups_v1/collapsed_tie_taxonomy.json \
+  --early-stop-metric macro_f1 \
+  --min-delta 0.001 \
+  --patience 6 \
+  --num-workers 4 \
+  --seed 42 \
+  --device cuda:0
+```
+
+随后 GraphMask 使用 checkpoint 中保存的 `15,10` fanout：
+
+```bash
+python run.py graphmask-train \
+  --data artifacts/level2_acquired_subgroups_v1/graph_data.pt \
+  --checkpoint runs_report/level2/rgcn_acquired_subgroups/seed_42/best_model.pt \
+  --output-dir runs_graphmask/level2_rgcn_acquired_subgroups/seed_42 \
+  --num-neighbors auto \
+  --batch-size 32 \
+  --num-workers 0 \
+  --epochs-per-layer 3 \
+  --seed 42 \
+  --device cuda:0
+
+python run.py graphmask-report \
+  --data artifacts/level2_acquired_subgroups_v1/graph_data.pt \
+  --checkpoint runs_report/level2/rgcn_acquired_subgroups/seed_42/best_model.pt \
+  --probe runs_graphmask/level2_rgcn_acquired_subgroups/seed_42/graphmask_probe.pt \
+  --output-dir runs_graphmask/level2_rgcn_acquired_subgroups/seed_42/test_report \
+  --split test \
+  --num-neighbors auto \
+  --top-k 50 \
+  --device cuda:0
+```
+
+最终以 `test_report/relations_base.csv` 为主表，逐层比较 7 个基础关系的
+`hard_retention_rate` 和 `retained_edge_share`，并同时报告 `message_observations`；
+`other_acquired` 是残余桶，应单列而不与语义明确的五个 acquired 主组混为一个结论。
+
 项目提供论文 [Interpreting Graph Neural Networks for NLP With Differentiable Edge
 Masking](https://arxiv.org/abs/2010.00577) 的 amortized GraphMask 适配。它冻结已经训练好的
 RGAT、RGCN 或 CompGCN，只在训练人物上拟合逐层 Hard-Concrete 消息门和替代基线；验证人物
