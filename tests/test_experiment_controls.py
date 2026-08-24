@@ -16,7 +16,7 @@ from torch_geometric.data import Data
 from models import build_model
 from models.features import NodeFeatureEncoder, build_feature_specs
 from training.diagnose import degree_arrays, relation_homophily, visible_occupation_coverage
-from training.attention_common import fanouts_for_checkpoint, prediction_nodes
+from training.attention_common import fanouts_for_checkpoint, prediction_nodes, replay_relation_perturbation
 from training.attention_edge_report import parse_matrix_relations
 from training.relation_controls import (
     apply_relation_controls,
@@ -81,7 +81,7 @@ class ExperimentControlTests(unittest.TestCase):
         edge_index = torch.tensor([[0, 1, 2, 0], [1, 2, 0, 2]])
         edge_type = torch.tensor([0, 1, 0, 1])
         features = {"structural_constant": torch.zeros(3, dtype=torch.long)}
-        for name in ("rgcn", "rgat", "compgcn"):
+        for name in ("mlp", "rgcn", "rgat", "compgcn"):
             model = build_model(
                 name,
                 num_relations=2,
@@ -94,6 +94,52 @@ class ExperimentControlTests(unittest.TestCase):
             )
             logits = model(features, edge_index, edge_type)
             self.assertEqual(tuple(logits.shape), (3, 2))
+
+    def test_typed_degree_preserving_rewiring_keeps_reverse_pairs_and_degrees(self):
+        relation_to_id = {"father": 0, "father__rev": 1}
+        forward_source = torch.tensor([0, 1, 2, 3])
+        forward_target = torch.tensor([4, 5, 6, 7])
+        graph = Data(
+            edge_index=torch.stack((
+                torch.cat((forward_source, forward_target)),
+                torch.cat((forward_target, forward_source)),
+            )),
+            edge_type=torch.tensor([0, 0, 0, 0, 1, 1, 1, 1]),
+            num_nodes=8,
+        )
+        before_edges = graph.edge_index.clone()
+        replay_graph = copy.deepcopy(graph)
+        before_degrees = {
+            relation: (
+                torch.bincount(graph.edge_index[0, graph.edge_type == relation], minlength=8),
+                torch.bincount(graph.edge_index[1, graph.edge_type == relation], minlength=8),
+            )
+            for relation in (0, 1)
+        }
+        manifest = apply_relation_controls(
+            graph,
+            relation_to_id=relation_to_id,
+            degree_preserving_rewire_relation_ids=(0, 1),
+            degree_preserving_rewire_swaps_per_edge=20,
+            degree_preserving_rewire_seed=42,
+        )
+        self.assertEqual(graph.edge_index.size(1), 8)
+        self.assertGreater(manifest["degree_preserving_rewire_accepted_swaps"], 0)
+        self.assertFalse(torch.equal(before_edges, graph.edge_index))
+        for relation in (0, 1):
+            after = (
+                torch.bincount(graph.edge_index[0, graph.edge_type == relation], minlength=8),
+                torch.bincount(graph.edge_index[1, graph.edge_type == relation], minlength=8),
+            )
+            self.assertTrue(torch.equal(before_degrees[relation][0], after[0]))
+            self.assertTrue(torch.equal(before_degrees[relation][1], after[1]))
+        self.assertEqual(edge_instance_pairs(graph, relation_to_id).shape, (4, 2))
+        replay_relation_perturbation(
+            replay_graph,
+            {"relation_to_id": relation_to_id},
+            {"relation_perturbation": manifest},
+        )
+        self.assertTrue(torch.equal(graph.edge_index, replay_graph.edge_index))
 
     def test_relation_group_ablation_removes_both_directions(self):
         relation_to_id = {

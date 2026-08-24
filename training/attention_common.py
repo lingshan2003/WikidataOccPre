@@ -146,6 +146,13 @@ def replay_relation_perturbation(
         random_edge_drop_seed=manifest.get("random_edge_drop_seed"),
         shuffle_relation_types=manifest.get("relation_type_shuffle", False),
         shuffle_seed=manifest.get("relation_type_shuffle_seed"),
+        degree_preserving_rewire_relation_ids=manifest.get(
+            "degree_preserving_rewire_relation_ids", ()
+        ),
+        degree_preserving_rewire_swaps_per_edge=manifest.get(
+            "degree_preserving_rewire_swaps_per_edge", 0.0
+        ) or 0.0,
+        degree_preserving_rewire_seed=manifest.get("degree_preserving_rewire_seed"),
     )
 
 

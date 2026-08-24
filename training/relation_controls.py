@@ -354,6 +354,83 @@ def _drop_random_edge_instance_pairs(
     return int(pair_count), int(len(pairs))
 
 
+def _degree_preserving_rewire_edge_instance_pairs(
+    data,
+    relation_to_id: Mapping[str, int],
+    relation_ids: Iterable[int],
+    swaps_per_edge: float,
+    seed: int,
+) -> Dict[str, int | float]:
+    """Swap targets between same-relation facts while preserving typed degrees.
+
+    A proposal ``a-r->b, c-r->d`` becomes ``a-r->d, c-r->b``.  The paired
+    generated reverse messages are updated at the same time.  Performing swaps
+    independently for each base relation preserves every node's in/out degree
+    for every directed relation, the relation frequencies, and the exact edge
+    count.  Self loops and duplicate directed triples are rejected.
+    """
+    if swaps_per_edge < 0:
+        raise ValueError("degree-preserving rewiring swaps-per-edge must be non-negative")
+    selected_ids = {int(value) for value in relation_ids}
+    pairs = edge_instance_pairs(data, relation_to_id)
+    edge_type = data.edge_type.detach().cpu().numpy().astype(np.int64, copy=False)
+    edge_index = data.edge_index.detach().cpu().numpy().astype(np.int64, copy=True)
+    selected_rows = np.flatnonzero(
+        np.isin(edge_type[pairs[:, 0]], np.asarray(sorted(selected_ids), dtype=np.int64))
+        | np.isin(edge_type[pairs[:, 1]], np.asarray(sorted(selected_ids), dtype=np.int64))
+    )
+    if not len(selected_rows):
+        raise ValueError("No original edge instances match the requested rewiring relations")
+    rng = np.random.default_rng(seed)
+    attempts = accepted = 0
+    for forward_relation_id in sorted(set(edge_type[pairs[selected_rows, 0]].tolist())):
+        rows = selected_rows[edge_type[pairs[selected_rows, 0]] == forward_relation_id]
+        if len(rows) < 2:
+            continue
+        forward_indices = pairs[rows, 0]
+        reverse_indices = pairs[rows, 1]
+        sources = edge_index[0, forward_indices].copy()
+        targets = edge_index[1, forward_indices].copy()
+        occupied = {(int(source), int(target)) for source, target in zip(sources, targets)}
+        relation_attempts = int(round(float(swaps_per_edge) * len(rows)))
+        attempts += relation_attempts
+        for _ in range(relation_attempts):
+            first, second = rng.choice(len(rows), size=2, replace=False)
+            source_a, target_a = int(sources[first]), int(targets[first])
+            source_c, target_c = int(sources[second]), int(targets[second])
+            if source_a == source_c or target_a == target_c:
+                continue
+            proposed_a, proposed_c = (source_a, target_c), (source_c, target_a)
+            if source_a == target_c or source_c == target_a:
+                continue
+            if proposed_a == proposed_c:
+                continue
+            occupied.remove((source_a, target_a))
+            occupied.remove((source_c, target_c))
+            if proposed_a in occupied or proposed_c in occupied:
+                occupied.add((source_a, target_a))
+                occupied.add((source_c, target_c))
+                continue
+            occupied.add(proposed_a)
+            occupied.add(proposed_c)
+            targets[first], targets[second] = target_c, target_a
+            accepted += 1
+
+        edge_index[1, forward_indices] = targets
+        edge_index[0, reverse_indices] = targets
+        edge_index[1, reverse_indices] = sources
+
+    data.edge_index = torch.as_tensor(
+        edge_index, dtype=data.edge_index.dtype, device=data.edge_index.device
+    )
+    return {
+        "degree_preserving_rewire_selected_edge_instances": int(len(selected_rows)),
+        "degree_preserving_rewire_attempted_swaps": int(attempts),
+        "degree_preserving_rewire_accepted_swaps": int(accepted),
+        "degree_preserving_rewire_acceptance_rate": float(accepted / attempts) if attempts else 0.0,
+    }
+
+
 def apply_relation_controls(
     data,
     relation_ids_to_drop: Iterable[int] = (),
@@ -365,6 +442,9 @@ def apply_relation_controls(
     random_edge_drop_candidate_pair_keys: Optional[np.ndarray] = None,
     shuffle_relation_types: bool = False,
     shuffle_seed: int | None = None,
+    degree_preserving_rewire_relation_ids: Iterable[int] = (),
+    degree_preserving_rewire_swaps_per_edge: float = 0.0,
+    degree_preserving_rewire_seed: int | None = None,
 ) -> Dict[str, object]:
     """Remove selected relation edges, then optionally random-drop or shuffle.
 
@@ -374,6 +454,7 @@ def apply_relation_controls(
     transformation for attention export.
     """
     drop_ids = tuple(sorted({int(relation_id) for relation_id in relation_ids_to_drop}))
+    rewire_ids = tuple(sorted({int(relation_id) for relation_id in degree_preserving_rewire_relation_ids}))
     if random_edge_drop_pairs and random_edge_instance_pairs:
         raise ValueError("Use either legacy relation-pair or exact edge-instance random deletion, not both")
     if random_edge_instance_pairs and drop_ids:
@@ -382,6 +463,12 @@ def apply_relation_controls(
         raise ValueError("Use either relation IDs or relation-pair keys for an ablation, not both")
     if relation_pair_keys_to_drop is not None and relation_to_id is None:
         raise ValueError("relation_to_id metadata is required for relation-pair deletion")
+    if rewire_ids and (drop_ids or relation_pair_keys_to_drop is not None or random_edge_drop_pairs or random_edge_instance_pairs or shuffle_relation_types):
+        raise ValueError("Degree-preserving rewiring is a standalone graph control")
+    if rewire_ids and relation_to_id is None:
+        raise ValueError("relation_to_id metadata is required for degree-preserving rewiring")
+    if rewire_ids and degree_preserving_rewire_seed is None:
+        raise ValueError("A seed is required for degree-preserving rewiring")
     edge_count_before = int(data.edge_type.numel())
     if drop_ids:
         drop_tensor = torch.tensor(drop_ids, dtype=data.edge_type.dtype, device=data.edge_type.device)
@@ -412,6 +499,19 @@ def apply_relation_controls(
     ) if random_edge_instance_pairs else (0, None)
     edge_count_after_random_drop = int(data.edge_type.numel())
 
+    rewiring = _degree_preserving_rewire_edge_instance_pairs(
+        data,
+        relation_to_id,
+        rewire_ids,
+        float(degree_preserving_rewire_swaps_per_edge),
+        int(degree_preserving_rewire_seed),
+    ) if rewire_ids else {
+        "degree_preserving_rewire_selected_edge_instances": 0,
+        "degree_preserving_rewire_attempted_swaps": 0,
+        "degree_preserving_rewire_accepted_swaps": 0,
+        "degree_preserving_rewire_acceptance_rate": 0.0,
+    }
+
     if shuffle_relation_types:
         if shuffle_seed is None:
             raise ValueError("A shuffle seed is required when relation types are shuffled")
@@ -437,4 +537,8 @@ def apply_relation_controls(
         "edge_count_after_random_drop": edge_count_after_random_drop,
         "relation_type_shuffle": bool(shuffle_relation_types),
         "relation_type_shuffle_seed": int(shuffle_seed) if shuffle_relation_types else None,
+        "degree_preserving_rewire_relation_ids": list(rewire_ids),
+        "degree_preserving_rewire_swaps_per_edge": float(degree_preserving_rewire_swaps_per_edge) if rewire_ids else None,
+        "degree_preserving_rewire_seed": int(degree_preserving_rewire_seed) if rewire_ids else None,
+        **rewiring,
     }

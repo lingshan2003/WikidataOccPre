@@ -162,8 +162,9 @@ python -m unittest discover -s tests -v
 | R-GCN | `models/rgcn.py` | `FastRGCNConv`/`RGCNConv` 关系卷积基线 |
 | R-GAT | `models/rgat.py` | 多头关系注意力，可导出 attention 与归因 |
 | CompGCN | `models/compgcn.py` | 组合源节点状态与 relation embedding |
+| MLP | `models/mlp.py` | 共用人物特征编码器但不读取任何边，用于消息传递放大审计 |
 
-三种模型共用数据、特征编码、采样、优化、checkpoint 选择和指标实现。主指标包括 Accuracy、Macro-F1、Weighted-F1、Macro-Precision 与 Macro-Recall。
+四种模型共用数据、特征编码、采样、优化、checkpoint 选择和指标实现。MLP 仅用于无消息传递对照；主指标包括 Accuracy、Macro-F1、Weighted-F1、Macro-Precision 与 Macro-Recall。
 
 ### 固定职业语义向量
 
@@ -356,6 +357,47 @@ python run.py diagnose \
 ```
 
 该命令只读取 artifact 和可选预测文件，导出图覆盖、连通性、职业可见性、关系同配性及按覆盖度分组的预测指标，不训练或改写模型。
+
+### GCN 是否放大关系信息特权
+
+第三条研究问题使用独立的 Level-1 实验链，不把总体删边损失或 GraphMask 保留率直接当作
+不平等指标。主分组 `kin_information_access` 表示测试人物是否至少收到一条来自训练人物、
+因而对模型可见的 inherited-tie 职业消息；该分组始终从未扰动的规范图计算，不能随实验条件
+重新定义。主比较为共用人物特征编码器的 R-GCN 与不读取边的 MLP：两者都使用人物自身的
+`country`、`temporal`，并遵守当前 seed 的职业 mask；只有 R-GCN 能聚合邻域消息。
+
+```bash
+# 先检查将运行的命令和路径，不训练。
+RGCN_PYTHON_BIN=.venv/bin/python \
+  bash scripts/run_inequality_audit_experiments.sh plan all
+
+# 服务器可恢复的一键实验。中断后运行相同命令会跳过完整产物。
+RGCN_PYTHON_BIN=.venv/bin/python \
+  nohup bash scripts/run_inequality_audit_experiments.sh run all \
+    > runs_report/level1/inequality_audit.nohup.log 2>&1 &
+```
+
+默认矩阵为 3 seeds × 5 个训练条件：`mlp_baseline`、`rgcn_full`、重新训练的
+`rgcn_without_inherited`、等有向消息边数的 `rgcn_random_matched_inherited`，以及
+`rgcn_rewired_inherited`。最后一项在每个基础关系内部交换目标端点，同时严格保留每个节点
+在每种有向关系上的入度、出度、关系频数和总边数。预测阶段还会在冻结的 full checkpoint
+上运行一次 `rgcn_full_inference_without_inherited`，它与重新训练删边回答不同问题。
+
+汇总目录 `runs_report/level1/inequality_audit/summary/` 包含：
+
+| 文件 | 含义 |
+| --- | --- |
+| `run_metrics.csv` | 每个 condition/seed 的总体指标、亲属信息访问误差差距和 JS 放大量 |
+| `group_metrics.csv` | 按 kin access、tie exposure、inherited 消息量/度数分层的 Accuracy、Macro-F1、NLL、Brier、ECE |
+| `class_directional_amplification.csv` | 每个职业的真实与预测组间 log-odds 以及方向性放大量 |
+| `paired_comparisons_by_seed.csv` | 同 seed R-GCN−MLP 及各干预−full 的配对差值和主比较 bootstrap 区间 |
+| `paired_comparison_summary.csv` | 三个模型 seed 的均值和标准差 |
+
+`message_passing_error_gap_amplification > 0` 表示相对 MLP，R-GCN 扩大了“无亲属职业信息”
+人物相对于“有亲属职业信息”人物的错误率差距；
+`message_passing_soft_distribution_amplification > 0` 表示 R-GCN 进一步扩大了两组之间的
+预测职业分布差异。结论是模型层面的关系信息特权审计；在没有外部职业声望/收入映射和人口
+属性前，不把它写成现实社会经济不平等的因果效应。
 
 ### R-GAT 解释与关系分析
 

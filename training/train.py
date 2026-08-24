@@ -42,7 +42,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", default="artifacts/graph_data.pt")
     parser.add_argument("--output-dir", default="runs/rgat_level3")
-    parser.add_argument("--model", choices=["rgcn", "rgat", "compgcn"], default="rgat")
+    parser.add_argument("--model", choices=["mlp", "rgcn", "rgat", "compgcn"], default="rgat")
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument(
         "--train-mode",
@@ -166,6 +166,20 @@ def parse_args() -> argparse.Namespace:
         "--drop-tie-groups",
         default="none",
         help="Comma-separated inherited/acquired categories to remove in both directions, or none",
+    )
+    parser.add_argument(
+        "--degree-preserving-rewire-tie-groups",
+        default="none",
+        help=(
+            "Rewire inherited or acquired facts with same-relation target swaps while preserving every "
+            "node's typed in/out degree. This is a standalone topology control."
+        ),
+    )
+    parser.add_argument(
+        "--rewire-swaps-per-edge",
+        type=float,
+        default=5.0,
+        help="Attempted same-relation target swaps per selected original edge instance",
     )
     parser.add_argument(
         "--relation-taxonomy",
@@ -665,6 +679,7 @@ def main() -> None:
     drop_relation_groups = parse_selection(args.drop_relation_groups)
     drop_relations = parse_selection(args.drop_relations)
     drop_tie_groups = parse_tie_group_selection(args.drop_tie_groups)
+    rewire_tie_groups = parse_tie_group_selection(args.degree_preserving_rewire_tie_groups)
     drop_relation_taxonomy_groups = parse_relation_taxonomy_group_selection(
         args.drop_relation_taxonomy_groups
     )
@@ -728,6 +743,15 @@ def main() -> None:
         )
     if random_drop_requested and args.shuffle_relation_types:
         raise ValueError("Random edge-drop controls should not be combined with --shuffle-relation-types")
+    if args.rewire_swaps_per_edge < 0:
+        raise ValueError("--rewire-swaps-per-edge must be non-negative")
+    if rewire_tie_groups and (
+        random_drop_requested or drop_relation_groups or drop_relations or drop_tie_groups
+        or drop_relation_taxonomy_groups or args.shuffle_relation_types
+    ):
+        raise ValueError("--degree-preserving-rewire-tie-groups is a standalone graph control")
+    if len(rewire_tie_groups) > 1:
+        raise ValueError("Degree-preserving rewiring accepts exactly one tie group per run")
     if bool(args.edge_cohort_config) != bool(args.edge_cohort_id):
         raise ValueError("--edge-cohort-config and --edge-cohort-id must be supplied together")
     if args.edge_cohort_config and not (drop_tie_groups or random_match_tie_groups):
@@ -777,8 +801,8 @@ def main() -> None:
             f"--num-neighbors has {len(fanouts)} fan-outs but --num-layers is {args.num_layers}; "
             "provide exactly one fan-out per message-passing layer"
         )
-    if args.model != "rgat" and args.num_layers != 2:
-        raise ValueError("Only RGAT currently supports --num-layers other than 2")
+    if args.model in {"rgcn", "compgcn"} and args.num_layers != 2:
+        raise ValueError("RGCN and CompGCN currently require exactly two layers")
     required_attributes = (
         "occupation_level1", "occupation_level2", "occupation_level3", "country", "temporal",
         "edge_type", "train_mask", "val_mask", "test_mask",
@@ -802,6 +826,12 @@ def main() -> None:
     relation_pair_keys_to_drop = None
     random_edge_drop_candidate_pair_keys = None
     random_edge_instance_pairs = 0
+    rewire_relation_ids = ()
+    rewired_base_relations: Tuple[str, ...] = ()
+    if rewire_tie_groups:
+        rewire_relation_ids, rewired_base_relations = resolve_tie_ablation(
+            tie_taxonomy, rewire_tie_groups, metadata["relation_to_id"]
+        )
     if drop_tie_groups:
         relation_ids_to_drop, dropped_base_relations = resolve_tie_ablation(
             tie_taxonomy, drop_tie_groups, metadata["relation_to_id"]
@@ -895,6 +925,9 @@ def main() -> None:
         random_edge_drop_candidate_pair_keys=random_edge_drop_candidate_pair_keys,
         shuffle_relation_types=args.shuffle_relation_types,
         shuffle_seed=args.seed if args.shuffle_relation_types else None,
+        degree_preserving_rewire_relation_ids=rewire_relation_ids,
+        degree_preserving_rewire_swaps_per_edge=args.rewire_swaps_per_edge,
+        degree_preserving_rewire_seed=args.seed if rewire_relation_ids else None,
     )
     relation_perturbation.update({
         "data": str(data_path.resolve()),
@@ -910,6 +943,8 @@ def main() -> None:
         "dropped_relation_taxonomy_groups": list(drop_relation_taxonomy_groups),
         "random_drop_matched_relation_taxonomy_groups": list(random_match_relation_taxonomy_groups),
         "edge_cohort": cohort_manifest,
+        "degree_preserving_rewired_tie_groups": list(rewire_tie_groups),
+        "degree_preserving_rewired_base_relations": list(rewired_base_relations),
     })
     specs = build_feature_specs(feature_schema, metadata)
     model = build_model(

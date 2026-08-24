@@ -44,6 +44,7 @@ GRAPHMASK_BATCH_SIZE="${RGCN_PERIOD_GRAPHMASK_BATCH_SIZE:-32}"
 # DataLoader workers exit cleanly.
 GRAPHMASK_NUM_WORKERS="${RGCN_PERIOD_GRAPHMASK_NUM_WORKERS:-0}"
 GRAPHMASK_EPOCHS_PER_LAYER="${RGCN_PERIOD_GRAPHMASK_EPOCHS_PER_LAYER:-3}"
+GRAPHMASK_BETA="${RGCN_PERIOD_GRAPHMASK_BETA:-0.03}"
 GRAPHMASK_TOP_K="${RGCN_PERIOD_GRAPHMASK_TOP_K:-50}"
 OCCUPATION_FEATURE_LEVELS="${RGCN_PERIOD_OCCUPATION_FEATURE_LEVELS:-1,2,3}"
 
@@ -83,6 +84,7 @@ Useful overrides:
   RGCN_PYTHON_BIN=.venv/bin/python
   RGCN_PERIOD_RELATION_DEVICE=cuda:0
   RGCN_PERIOD_GRAPHMASK_NUM_NEIGHBORS=auto  # use checkpoint fan-outs instead
+  RGCN_PERIOD_GRAPHMASK_BETA=0.05           # relax KL, not the 5% F1 fidelity rule
   RGCN_PERIOD_RELATION_ARTIFACT_ROOT=artifacts/my_period_relation_artifacts
   RGCN_PERIOD_RELATION_MODEL_ROOT=runs_report/level1/my_period_models
   RGCN_PERIOD_RELATION_GRAPHMASK_ROOT=runs_graphmask/level1/my_period_graphmask
@@ -472,6 +474,7 @@ build_graphmask_train_command() {
     --batch-size "$GRAPHMASK_BATCH_SIZE" \
     --num-workers "$GRAPHMASK_NUM_WORKERS" \
     --epochs-per-layer "$GRAPHMASK_EPOCHS_PER_LAYER" \
+    --beta "$GRAPHMASK_BETA" \
     --seed "$MODEL_SEED" \
     --device "$DEVICE"
   )
@@ -724,7 +727,7 @@ plan_jobs() {
 
 if [[ "$MODE" == "plan" ]]; then
   echo "Period relation GraphMask matrix: 4 periods × 3 independently trained two-layer R-GATs × seed $MODEL_SEED."
-  echo "Training fan-outs=$TRAIN_NUM_NEIGHBORS; GraphMask neighbourhoods=$GRAPHMASK_NUM_NEIGHBORS."
+  echo "Training fan-outs=$TRAIN_NUM_NEIGHBORS; GraphMask neighbourhoods=$GRAPHMASK_NUM_NEIGHBORS; beta=$GRAPHMASK_BETA."
   if selected prepare; then plan_period_preparation; fi
   if selected collapse; then plan_collapses; fi
   if selected train || selected graphmask; then plan_jobs; fi
@@ -749,7 +752,7 @@ if selected train || selected graphmask; then
   require_relation_artifacts
   ensure_status_files
   echo "Starting period relation matrix at $(date '+%F %T')"
-  echo "device=$DEVICE model_seed=$MODEL_SEED train_fanouts=$TRAIN_NUM_NEIGHBORS graphmask_fanouts=$GRAPHMASK_NUM_NEIGHBORS"
+  echo "device=$DEVICE model_seed=$MODEL_SEED train_fanouts=$TRAIN_NUM_NEIGHBORS graphmask_fanouts=$GRAPHMASK_NUM_NEIGHBORS graphmask_beta=$GRAPHMASK_BETA"
   while IFS= read -r period; do
     [[ -n "$period" ]] || continue
     for representation in "${REPRESENTATIONS[@]}"; do

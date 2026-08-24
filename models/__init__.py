@@ -4,10 +4,12 @@ from typing import Mapping
 
 from .compgcn import RelationalCompGCNClassifier
 from .features import FeatureSpec, build_feature_specs
+from .mlp import NodeMLPClassifier
 from .rgat import RelationalGATClassifier
 from .rgcn import RelationalGCNClassifier
 
 MODEL_REGISTRY = {
+    "mlp": NodeMLPClassifier,
     "rgat": RelationalGATClassifier,
     "rgcn": RelationalGCNClassifier,
     "compgcn": RelationalCompGCNClassifier,
@@ -29,5 +31,6 @@ __all__ = [
     "RelationalGCNClassifier",
     "RelationalCompGCNClassifier",
     "MODEL_REGISTRY",
+    "NodeMLPClassifier",
     "build_model",
 ]
