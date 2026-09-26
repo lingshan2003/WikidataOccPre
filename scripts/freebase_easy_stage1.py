@@ -10,26 +10,33 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
 import subprocess
 import sys
 import time
+from typing import BinaryIO, Iterator
 import zipfile
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--zip", type=Path, required=True, help="Freebase Easy ZIP")
+    source_group = parser.add_mutually_exclusive_group(required=True)
+    source_group.add_argument("--zip", type=Path, help="Freebase Easy ZIP")
+    source_group.add_argument("--facts", type=Path, help="Extracted facts.txt")
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--member", default="facts.txt", help="ZIP member to scan")
+    parser.add_argument(
+        "--member", default="facts.txt",
+        help="ZIP member to scan; a bare filename is also found inside a ZIP subdirectory",
+    )
     parser.add_argument(
         "--max-lines", type=int, default=100_000,
         help="Stop after this many facts for a format probe (default: 100000)",
     )
     parser.add_argument(
-        "--full", action="store_true", help="Scan the complete facts.txt member"
+        "--full", action="store_true", help="Scan the complete facts.txt"
     )
     parser.add_argument("--type-predicate", default="is-a")
     parser.add_argument("--person-type", default="Person")
@@ -75,16 +82,37 @@ def unique_sort(source: Path, target: Path, scratch_dir: Path) -> int:
         return sum(1 for _ in handle)
 
 
+@contextmanager
+def facts_stream(source: Path, member: str, is_zip: bool) -> Iterator[tuple[BinaryIO, str | None, int]]:
+    if not is_zip:
+        with source.open("rb") as stream:
+            yield stream, None, source.stat().st_size
+        return
+    with zipfile.ZipFile(source) as archive:
+        try:
+            info = archive.getinfo(member)
+        except KeyError as exc:
+            matches = [
+                item for item in archive.infolist()
+                if not item.is_dir() and Path(item.filename).name == member
+            ] if "/" not in member else []
+            if len(matches) != 1:
+                raise SystemExit(
+                    f"ZIP member {member!r} not found uniquely; "
+                    f"matches: {[item.filename for item in matches]}; "
+                    f"available: {archive.namelist()}"
+                ) from exc
+            info = matches[0]
+        with archive.open(info) as stream:
+            yield stream, info.filename, info.file_size
+
+
 def main() -> None:
     args = parse_args()
-    source = args.zip.expanduser().resolve()
+    source = (args.zip or args.facts).expanduser().resolve()
     output = args.output_dir.expanduser().resolve()
     if not source.is_file():
-        raise SystemExit(f"ZIP does not exist: {source}")
-    if output.exists():
-        raise SystemExit(f"Output directory already exists; choose a new one: {output}")
-    output.mkdir(parents=True)
-
+        raise SystemExit(f"Input file does not exist: {source}")
     expected_predicate = token(args.type_predicate.encode("utf-8"))
     expected_person = token(args.person_type.encode("utf-8"))
     predicate_counts: Counter[bytes] = Counter()
@@ -95,14 +123,11 @@ def main() -> None:
     started = time.monotonic()
     candidate_path = output / "person_candidates_unsorted.txt"
 
-    with zipfile.ZipFile(source) as archive:
-        try:
-            member_info = archive.getinfo(args.member)
-        except KeyError as exc:
-            raise SystemExit(
-                f"ZIP member {args.member!r} missing; available: {archive.namelist()}"
-            ) from exc
-        with archive.open(member_info) as facts, candidate_path.open("wb") as candidates:
+    with facts_stream(source, args.member, args.zip is not None) as (facts, member_name, total_bytes):
+        if output.exists() and (not output.is_dir() or any(output.iterdir())):
+            raise SystemExit(f"Output directory is not empty; choose a new one: {output}")
+        output.mkdir(parents=True, exist_ok=True)
+        with candidate_path.open("wb") as candidates:
             for raw in facts:
                 if not args.full and lines >= args.max_lines:
                     break
@@ -147,11 +172,12 @@ def main() -> None:
         "\n".join(sample_rows) + ("\n" if sample_rows else ""), encoding="utf-8"
     )
     summary = {
-        "status": "complete_scan" if args.full or uncompressed_bytes == member_info.file_size else "sample_only",
-        "source_zip": str(source),
-        "zip_bytes": source.stat().st_size,
-        "member": args.member,
-        "member_uncompressed_bytes": member_info.file_size,
+        "status": "complete_scan" if args.full or uncompressed_bytes == total_bytes else "sample_only",
+        "source_zip": str(source) if args.zip else None,
+        "source_facts": str(source) if args.facts else None,
+        "zip_bytes": source.stat().st_size if args.zip else None,
+        "member": member_name,
+        "member_uncompressed_bytes": total_bytes,
         "requested_max_lines": None if args.full else args.max_lines,
         "lines_scanned": lines,
         "uncompressed_bytes_scanned": uncompressed_bytes,
