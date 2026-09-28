@@ -1,0 +1,2247 @@
+{
+  "Influenced By": [
+    {
+      "line": 121472102,
+      "subject": "Henry James",
+      "object": "Edgar Allan Poe"
+    },
+    {
+      "line": 141359276,
+      "subject": "J. Neil Schulman",
+      "object": "Milton Friedman"
+    },
+    {
+      "line": 203013621,
+      "subject": "Oskar Klein",
+      "object": "Svante Arrhenius"
+    },
+    {
+      "line": 224766570,
+      "subject": "Richard Dawkins",
+      "object": "Robert Trivers"
+    },
+    {
+      "line": 116152262,
+      "subject": "Guram Dochanashvili",
+      "object": "Miguel de Cervantes"
+    },
+    {
+      "line": 153717807,
+      "subject": "Klaus Rifbjerg",
+      "object": "Johannes V. Jensen"
+    },
+    {
+      "line": 115869092,
+      "subject": "Guillaume Apollinaire",
+      "object": "Alfred Jarry"
+    },
+    {
+      "line": 121369366,
+      "subject": "Henri Matisse",
+      "object": "Paul Gauguin"
+    },
+    {
+      "line": 140985520,
+      "subject": "Ivan Illich",
+      "object": "Jacques Ellul"
+    },
+    {
+      "line": 253659830,
+      "subject": "Stella Adler",
+      "object": "Constantin Stanislavski"
+    },
+    {
+      "line": 186831558,
+      "subject": "Mukul Dey",
+      "object": "Bertha Jaques"
+    },
+    {
+      "line": 22721337,
+      "subject": "Addie Wagenknecht",
+      "object": "Eve"
+    },
+    {
+      "line": 49164317,
+      "subject": "Brad Stine (Actor)",
+      "object": "Bill Hicks"
+    },
+    {
+      "line": 220994509,
+      "subject": "Ray Kurzweil",
+      "object": "Bertrand Russell"
+    },
+    {
+      "line": 147322040,
+      "subject": "Joseph DeCamp",
+      "object": "Frank Duveneck"
+    },
+    {
+      "line": 107787749,
+      "subject": "Garret Schuelke",
+      "object": "François Villon"
+    },
+    {
+      "line": 146301583,
+      "subject": "John Locke",
+      "object": "Aristotle"
+    },
+    {
+      "line": 121452958,
+      "subject": "Henry Giroux",
+      "object": "Zygmunt Bauman"
+    },
+    {
+      "line": 144475619,
+      "subject": "Jerry Seinfeld",
+      "object": "Michael Gough"
+    },
+    {
+      "line": 180440677,
+      "subject": "Michel Henry",
+      "object": "Jean Hyppolite"
+    },
+    {
+      "line": 25611073,
+      "subject": "Alexandre Kojève",
+      "object": "Werner Heisenberg"
+    },
+    {
+      "line": 173761609,
+      "subject": "Manuel De Landa",
+      "object": "Fernand Braudel"
+    },
+    {
+      "line": 31952739,
+      "subject": "Anton LaVey",
+      "object": "Aleister Crowley"
+    },
+    {
+      "line": 193084976,
+      "subject": "Nick Land",
+      "object": "Friedrich Nietzsche"
+    },
+    {
+      "line": 57061689,
+      "subject": "Cat Cora",
+      "object": "Barbara Tropp"
+    },
+    {
+      "line": 51239648,
+      "subject": "Bruce Nauman",
+      "object": "H. C. Westermann"
+    },
+    {
+      "line": 110479717,
+      "subject": "Gina Yashere",
+      "object": "Richard Pryor"
+    },
+    {
+      "line": 60525090,
+      "subject": "China Miéville",
+      "object": "Michael Moorcock"
+    },
+    {
+      "line": 240899534,
+      "subject": "Sheila Fell",
+      "object": "L. S. Lowry"
+    },
+    {
+      "line": 253824051,
+      "subject": "Stephen Baxter",
+      "object": "H. G. Wells"
+    }
+  ],
+  "kp_lw/philosopher/influenced_by": [
+    {
+      "line": 147019156,
+      "subject": "Jonathan Dancy",
+      "object": "W. D. Ross"
+    },
+    {
+      "line": 189209752,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Augustine of Hippo"
+    },
+    {
+      "line": 184503567,
+      "subject": "Mookie Tenembaum",
+      "object": "Charles Darwin"
+    },
+    {
+      "line": 226738634,
+      "subject": "Roberto Torretti",
+      "object": "Ludwig Wittgenstein"
+    },
+    {
+      "line": 234248948,
+      "subject": "Sayyid Ghulam Hussain Shah Bukhari",
+      "object": "Ahmad Sirhindi"
+    },
+    {
+      "line": 23134767,
+      "subject": "Ady Jean-Gardy",
+      "object": "Martin Heidegger"
+    },
+    {
+      "line": 23134768,
+      "subject": "Ady Jean-Gardy",
+      "object": "Rosa Luxemburg"
+    },
+    {
+      "line": 189209755,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Blaise Pascal"
+    },
+    {
+      "line": 211177490,
+      "subject": "Pierre Abélard",
+      "object": "Boethius"
+    },
+    {
+      "line": 71693186,
+      "subject": "Damaris Cudworth Masham",
+      "object": "Nicolas Steno"
+    },
+    {
+      "line": 224826303,
+      "subject": "Richard J. Bernstein",
+      "object": "Plato"
+    },
+    {
+      "line": 189209774,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Louis Lavelle"
+    },
+    {
+      "line": 289785029,
+      "subject": "Traian Brăileanu",
+      "object": "Émile Durkheim"
+    },
+    {
+      "line": 224826295,
+      "subject": "Richard J. Bernstein",
+      "object": "Hannah Arendt"
+    },
+    {
+      "line": 184503565,
+      "subject": "Mookie Tenembaum",
+      "object": "Adam Smith"
+    },
+    {
+      "line": 221051999,
+      "subject": "Raymond Geuss",
+      "object": "Friedrich Nietzsche"
+    },
+    {
+      "line": 189209780,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Peter Kropotkin"
+    },
+    {
+      "line": 148422447,
+      "subject": "Julius Evola",
+      "object": "Oscar Wilde"
+    },
+    {
+      "line": 148422436,
+      "subject": "Julius Evola",
+      "object": "Ernst Jünger"
+    },
+    {
+      "line": 133311120,
+      "subject": "Idriss Aberkane",
+      "object": "Ahmad al-Alawi"
+    },
+    {
+      "line": 189209777,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Max Stirner"
+    },
+    {
+      "line": 189209757,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Carl Jung"
+    },
+    {
+      "line": 71693172,
+      "subject": "Damaris Cudworth Masham",
+      "object": "Baruch Spinoza"
+    },
+    {
+      "line": 211177491,
+      "subject": "Pierre Abélard",
+      "object": "Porphyry"
+    },
+    {
+      "line": 189209768,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Jean-Marie Guyau"
+    },
+    {
+      "line": 123401629,
+      "subject": "Hipparchia of Maroneia",
+      "object": "Crates of Thebes"
+    },
+    {
+      "line": 235457532,
+      "subject": "Sean Dorrance Kelly",
+      "object": "Maurice Merleau-Ponty"
+    },
+    {
+      "line": 167807647,
+      "subject": "Louis Gabriel Ambroise de Bonald",
+      "object": "Plato"
+    },
+    {
+      "line": 189209782,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Plato"
+    },
+    {
+      "line": 71693179,
+      "subject": "Damaris Cudworth Masham",
+      "object": "Giordano Bruno"
+    }
+  ],
+  "Spouse (or domestic partner)": [
+    {
+      "line": 139101562,
+      "subject": "Irene Mountbatten, Marchioness of Carisbrooke",
+      "object": "Alexander Mountbatten, 1st Marquess of Carisbrooke"
+    },
+    {
+      "line": 87779988,
+      "subject": "Einars Repše",
+      "object": "Diāna Vagale"
+    },
+    {
+      "line": 33611731,
+      "subject": "Arnaldo Del Piave",
+      "object": "Enrica Bonaccorti"
+    },
+    {
+      "line": 61588310,
+      "subject": "Christopher Perkins",
+      "object": "Agnes Berry Shaw"
+    },
+    {
+      "line": 66947542,
+      "subject": "Constance Impallaria",
+      "object": "George Albee"
+    },
+    {
+      "line": 144994468,
+      "subject": "Jim Alers",
+      "object": "Melisa Alers"
+    },
+    {
+      "line": 176020499,
+      "subject": "Masaya Takahashi",
+      "object": "Yachiyo Fujii"
+    },
+    {
+      "line": 174958366,
+      "subject": "Mariya Gromova",
+      "object": "Ilya Gromov"
+    },
+    {
+      "line": 175411948,
+      "subject": "Marshall Sutton",
+      "object": "Joleigh Sutton"
+    },
+    {
+      "line": 72819309,
+      "subject": "Daphna Cardinale",
+      "object": "Alexander Cardinale"
+    },
+    {
+      "line": 172100273,
+      "subject": "Mahnoor Baloch",
+      "object": "Hamid Siddiqui"
+    },
+    {
+      "line": 116201133,
+      "subject": "Gustav Goslar",
+      "object": "Ida Goslar"
+    },
+    {
+      "line": 31134039,
+      "subject": "Anne Clinton (Woman)",
+      "object": "Winston Groom"
+    },
+    {
+      "line": 167889033,
+      "subject": "Louise Martini",
+      "object": "Heinz Wilhelm Schwarz"
+    },
+    {
+      "line": 93465331,
+      "subject": "Erkki Pohjanheimo",
+      "object": "Mervi Pohjanheimo"
+    },
+    {
+      "line": 289336031,
+      "subject": "Tova Traesnaes",
+      "object": "Louis A. Littleton"
+    },
+    {
+      "line": 152356809,
+      "subject": "Kibariye (Music Artist)",
+      "object": "Tunay Ürek"
+    },
+    {
+      "line": 31681346,
+      "subject": "Anthi Gounari",
+      "object": "Kostas Hatzoglou"
+    },
+    {
+      "line": 301541108,
+      "subject": "Virginia Vincent (Woman)",
+      "object": "Bill Vincent"
+    },
+    {
+      "line": 263021095,
+      "subject": "Tan Da",
+      "object": "m/0w2vklq"
+    },
+    {
+      "line": 174275241,
+      "subject": "Marcus Bachmann",
+      "object": "Michele Bachmann"
+    },
+    {
+      "line": 288003466,
+      "subject": "Tommy Chong",
+      "object": "Maxine Sneed"
+    },
+    {
+      "line": 142613640,
+      "subject": "James Sobieski",
+      "object": "Carol Sobieski"
+    },
+    {
+      "line": 257354580,
+      "subject": "Sumitro Djojohadikusumo",
+      "object": "Dora Sigar"
+    },
+    {
+      "line": 195767027,
+      "subject": "Norizan Salleh",
+      "object": "Ridzwan Zakaria"
+    },
+    {
+      "line": 88861300,
+      "subject": "Eleuterio Peña",
+      "object": "Nicolasa Peña"
+    },
+    {
+      "line": 152879786,
+      "subject": "Kimberly Biel",
+      "object": "Jonathan Edward Biel"
+    },
+    {
+      "line": 103946790,
+      "subject": "Frances Fox Piven",
+      "object": "Herman Piven"
+    },
+    {
+      "line": 158952796,
+      "subject": "Laura Beatrice Berton",
+      "object": "Frank Berton"
+    },
+    {
+      "line": 107868049,
+      "subject": "Gary Lohman",
+      "object": "Diane Dunham"
+    }
+  ],
+  "Interviewer": [
+    {
+      "line": 151149454,
+      "subject": "Kazushi Ono",
+      "object": "Simon Holledge (Writer)"
+    }
+  ],
+  "Demonstration medal won": [
+    {
+      "line": 29995510,
+      "subject": "Andrea Schöpp",
+      "object": "Christiane Scheibel"
+    },
+    {
+      "line": 145511006,
+      "subject": "Jodie Sutton",
+      "object": "Melissa Soligo"
+    },
+    {
+      "line": 184045613,
+      "subject": "Monika Wagner",
+      "object": "Sabine Hutt"
+    },
+    {
+      "line": 29995513,
+      "subject": "Andrea Schöpp",
+      "object": "Stephanie Mayer (Olympic athlete)"
+    },
+    {
+      "line": 31150255,
+      "subject": "Anne Jøtun",
+      "object": "Dordi Nordby"
+    },
+    {
+      "line": 178486755,
+      "subject": "Melissa Soligo",
+      "object": "Elaine Dagg-Jackson"
+    },
+    {
+      "line": 174632166,
+      "subject": "Marianne Aspelin",
+      "object": "Hanne Woods"
+    },
+    {
+      "line": 31150258,
+      "subject": "Anne Jøtun",
+      "object": "Mette Halvorsen"
+    },
+    {
+      "line": 117834715,
+      "subject": "Hanne Woods",
+      "object": "Dordi Nordby"
+    },
+    {
+      "line": 253804282,
+      "subject": "Stephanie Mayer (Olympic athlete)",
+      "object": "Sabine Hutt"
+    },
+    {
+      "line": 184045614,
+      "subject": "Monika Wagner",
+      "object": "Stephanie Mayer (Olympic athlete)"
+    },
+    {
+      "line": 150684927,
+      "subject": "Karri Wilms",
+      "object": "Julie Skinner"
+    },
+    {
+      "line": 179769517,
+      "subject": "Mette Halvorsen",
+      "object": "Anne Jøtun"
+    },
+    {
+      "line": 145511005,
+      "subject": "Jodie Sutton",
+      "object": "Karri Wilms"
+    },
+    {
+      "line": 231130284,
+      "subject": "Sabine Hutt",
+      "object": "Christiane Scheibel"
+    }
+  ],
+  "Sibling": [
+    {
+      "line": 141019420,
+      "subject": "Ivana Mayans",
+      "object": "Flavia Hervás"
+    },
+    {
+      "line": 157354171,
+      "subject": "Lady Essex Rich (Deceased Person) #2",
+      "object": "Anne Rich"
+    },
+    {
+      "line": 32150110,
+      "subject": "Anya Bowden",
+      "object": "Daniel Bowden (Man)"
+    },
+    {
+      "line": 56827766,
+      "subject": "Casey E. Lewis",
+      "object": "Zane Lewis (Singer)"
+    },
+    {
+      "line": 311363025,
+      "subject": "William Portanova",
+      "object": "Josè Maria Portanova"
+    },
+    {
+      "line": 360791669,
+      "subject": "Édouard Baer",
+      "object": "Pauline Baer"
+    },
+    {
+      "line": 89162445,
+      "subject": "Ella Baff",
+      "object": "Regina Baff"
+    },
+    {
+      "line": 193149469,
+      "subject": "Nico Miura",
+      "object": "Dani Jayden"
+    },
+    {
+      "line": 120830757,
+      "subject": "Helen Slater",
+      "object": "David Slater (Lawyer)"
+    },
+    {
+      "line": 226790632,
+      "subject": "Robin Vogel",
+      "object": "Sanne Vogel (Actor)"
+    },
+    {
+      "line": 110128250,
+      "subject": "Gia Scala",
+      "object": "Tina Scala"
+    },
+    {
+      "line": 233776322,
+      "subject": "Satyadev Detha",
+      "object": "Mahendra Detha"
+    },
+    {
+      "line": 180350983,
+      "subject": "Michael Stasko",
+      "object": "Sasha Stasko"
+    },
+    {
+      "line": 180251424,
+      "subject": "Michael Makinen",
+      "object": "Shawn Makinen"
+    },
+    {
+      "line": 142273711,
+      "subject": "Jamarr Farmer",
+      "object": "Joey Farmer"
+    },
+    {
+      "line": 25923764,
+      "subject": "Alice-Jacqueline Luzgart",
+      "object": "Fanny Luzgart"
+    },
+    {
+      "line": 30884482,
+      "subject": "Anis Ibrahim",
+      "object": "Shabir Ibrahim Kaskar"
+    },
+    {
+      "line": 220221136,
+      "subject": "Ralph Soldati",
+      "object": "Wolfango Soldati"
+    },
+    {
+      "line": 31745425,
+      "subject": "Anthony Lennon",
+      "object": "Aaron Lennon"
+    },
+    {
+      "line": 147497242,
+      "subject": "Josh Wilson (Person)",
+      "object": "Kion Wilson"
+    },
+    {
+      "line": 174438499,
+      "subject": "Margo Timmins",
+      "object": "Cali Timmins"
+    },
+    {
+      "line": 213636128,
+      "subject": "Pooja Kumar",
+      "object": "Paraag Kumar"
+    },
+    {
+      "line": 151646311,
+      "subject": "Kelsi Winter Chartrand",
+      "object": "Sienna Noelle Peeples Chartrand"
+    },
+    {
+      "line": 144195557,
+      "subject": "Jennifer Beals",
+      "object": "Gregory Beals"
+    },
+    {
+      "line": 76002868,
+      "subject": "Deidre Spears",
+      "object": "Marcus Spears"
+    },
+    {
+      "line": 125319634,
+      "subject": "Horace Mann Bond II",
+      "object": "Jeffrey Alvin Bond"
+    },
+    {
+      "line": 314662826,
+      "subject": "Yam Yin",
+      "object": "Shi-Kwan Yen"
+    },
+    {
+      "line": 147544601,
+      "subject": "Josie Ho",
+      "object": "Mario Ho Yau Kwan"
+    },
+    {
+      "line": 28239300,
+      "subject": "Ambadiang Francoise",
+      "object": "Joseph Amassan Galita"
+    },
+    {
+      "line": 209536971,
+      "subject": "Peter Resetarits",
+      "object": "Willi Resetarits"
+    }
+  ],
+  "Artist supported": [
+    {
+      "line": 115038750,
+      "subject": "Greg Brown",
+      "object": "Radoslav Lorković"
+    },
+    {
+      "line": 288371066,
+      "subject": "Tony MacAlpine",
+      "object": "Steve Vai"
+    },
+    {
+      "line": 71876803,
+      "subject": "Dan Wilde (Folk Artist)",
+      "object": "Martin Taylor"
+    },
+    {
+      "line": 101704642,
+      "subject": "Florian Opahle",
+      "object": "Greg Lake"
+    },
+    {
+      "line": 327198015,
+      "subject": "kid static",
+      "object": "Kae Hope Ranoa"
+    },
+    {
+      "line": 224684106,
+      "subject": "Rich Jones",
+      "object": "Neil Leyton"
+    },
+    {
+      "line": 48424004,
+      "subject": "Borja Penalba",
+      "object": "Obrint Pas"
+    },
+    {
+      "line": 147173944,
+      "subject": "Jordi Armengol",
+      "object": "Lluís Llach"
+    },
+    {
+      "line": 120331901,
+      "subject": "Heather Trost",
+      "object": "Beirut (Indie rock Artist)"
+    },
+    {
+      "line": 219121863,
+      "subject": "RJ Thompson",
+      "object": "Midge Ure"
+    },
+    {
+      "line": 349531480,
+      "subject": "m/0nhtg1j",
+      "object": "Dennis Brown"
+    },
+    {
+      "line": 141824556,
+      "subject": "Jackson Taylor",
+      "object": "m/0fr2gd1"
+    },
+    {
+      "line": 254139412,
+      "subject": "Steve Stevens",
+      "object": "William Michael Albert Broad"
+    },
+    {
+      "line": 226346651,
+      "subject": "Robert Ahwai",
+      "object": "Chris Rea"
+    },
+    {
+      "line": 262880035,
+      "subject": "Tall Tall Trees (Music Artist)",
+      "object": "Kishi Bashi"
+    }
+  ],
+  "Celebrity rival": [
+    {
+      "line": 115259285,
+      "subject": "Grigori Rasputin",
+      "object": "Alexander Guchkov"
+    },
+    {
+      "line": 27982234,
+      "subject": "Alyssa Milano",
+      "object": "Shannen Doherty"
+    },
+    {
+      "line": 107361531,
+      "subject": "Gallagher",
+      "object": "Ron Gallagher"
+    },
+    {
+      "line": 258886552,
+      "subject": "Susan Krakower",
+      "object": "Dylan Ratigan"
+    },
+    {
+      "line": 292201947,
+      "subject": "Tupac Shakur",
+      "object": "Sean Combs"
+    },
+    {
+      "line": 54411387,
+      "subject": "Camilla, Duchess of Cornwall",
+      "object": "Diana, Princess of Wales"
+    },
+    {
+      "line": 115259291,
+      "subject": "Grigori Rasputin",
+      "object": "Sergei Trufanov"
+    },
+    {
+      "line": 62816416,
+      "subject": "Claude Kelly",
+      "object": "Tim White (Pop Artist)"
+    },
+    {
+      "line": 70681217,
+      "subject": "Cyndi Lauper",
+      "object": "Madonna"
+    },
+    {
+      "line": 206201321,
+      "subject": "Paris Hilton",
+      "object": "Shanna Moakler"
+    },
+    {
+      "line": 139498690,
+      "subject": "Isabelle Huppert",
+      "object": "Isabelle Adjani"
+    },
+    {
+      "line": 249428117,
+      "subject": "Sophie Anderton",
+      "object": "Jasmine Lennard"
+    },
+    {
+      "line": 240141957,
+      "subject": "Shanna Moakler",
+      "object": "Paris Hilton"
+    },
+    {
+      "line": 94493598,
+      "subject": "Eugene Botkin",
+      "object": "Grigori Rasputin"
+    },
+    {
+      "line": 327078576,
+      "subject": "iJustine",
+      "object": "Yves Bole"
+    }
+  ],
+  "Matches Lost": [
+    {
+      "line": 301550249,
+      "subject": "Virginie Razzano",
+      "object": "Karin Knapp"
+    },
+    {
+      "line": 174221829,
+      "subject": "Marcin Matkowski",
+      "object": "Horia Tecău"
+    },
+    {
+      "line": 181112570,
+      "subject": "Mike Bryan",
+      "object": "Vasek Pospisil"
+    },
+    {
+      "line": 239771105,
+      "subject": "Shahar Pe'er",
+      "object": "Sania Mirza"
+    },
+    {
+      "line": 64249238,
+      "subject": "Colin Fleming",
+      "object": "Scott Lipsky"
+    },
+    {
+      "line": 253612821,
+      "subject": "Stefanie Vögele",
+      "object": "Casey Dellacqua"
+    },
+    {
+      "line": 29945230,
+      "subject": "Andre Begemann",
+      "object": "Máximo González"
+    },
+    {
+      "line": 150678317,
+      "subject": "Karolína Plíšková",
+      "object": "Janette Husárová"
+    },
+    {
+      "line": 48396458,
+      "subject": "Boris Becker",
+      "object": "Sergi Bruguera"
+    },
+    {
+      "line": 219377844,
+      "subject": "Radek Štěpánek",
+      "object": "Ernests Gulbis"
+    },
+    {
+      "line": 80091946,
+      "subject": "Divij Sharan",
+      "object": "Rohan Bopanna"
+    },
+    {
+      "line": 169463426,
+      "subject": "Lu Yen-hsun",
+      "object": "Julien Benneteau"
+    },
+    {
+      "line": 142928103,
+      "subject": "Janette Husárová",
+      "object": "Eric Butorac"
+    },
+    {
+      "line": 34480228,
+      "subject": "Ashleigh Barty",
+      "object": "Hsieh Su-wei"
+    },
+    {
+      "line": 191451841,
+      "subject": "Nenad Zimonjić",
+      "object": "Florin Mergea"
+    }
+  ],
+  "kp_lw/philosophy_influencer/influencee": [
+    {
+      "line": 109003768,
+      "subject": "Georges I. Gurdjieff and Thomas De Hartmann",
+      "object": "Julius Evola"
+    },
+    {
+      "line": 134622309,
+      "subject": "Immanuel Kant",
+      "object": "Ady Jean-Gardy"
+    },
+    {
+      "line": 23022416,
+      "subject": "Adrienne Rich",
+      "object": "Claudia Card"
+    },
+    {
+      "line": 311279520,
+      "subject": "William James",
+      "object": "Richard J. Bernstein"
+    },
+    {
+      "line": 141950339,
+      "subject": "Jacques-Bénigne Bossuet",
+      "object": "Damaris Cudworth Masham"
+    },
+    {
+      "line": 139509388,
+      "subject": "Isaiah Berlin",
+      "object": "Dimitris Dimitrakos"
+    },
+    {
+      "line": 79269029,
+      "subject": "Diogenes of Sinope",
+      "object": "Mookie Tenembaum"
+    },
+    {
+      "line": 146545181,
+      "subject": "John Stuart Mill",
+      "object": "Roger Crisp (Author)"
+    },
+    {
+      "line": 143823877,
+      "subject": "Jean-Marie Guyau",
+      "object": "Mário Ferreira dos Santos"
+    },
+    {
+      "line": 242754629,
+      "subject": "Sigmund Freud",
+      "object": "Richard J. Bernstein"
+    },
+    {
+      "line": 228496381,
+      "subject": "Rosa Luxemburg",
+      "object": "Ady Jean-Gardy"
+    },
+    {
+      "line": 167820375,
+      "subject": "Louis Lavelle",
+      "object": "Mário Ferreira dos Santos"
+    },
+    {
+      "line": 176965660,
+      "subject": "Max Scheler",
+      "object": "Yvanka B. Raynova"
+    },
+    {
+      "line": 203082471,
+      "subject": "Oswald Spengler",
+      "object": "Mário Ferreira dos Santos"
+    },
+    {
+      "line": 150592316,
+      "subject": "Karl Marx",
+      "object": "Mário Ferreira dos Santos"
+    },
+    {
+      "line": 221041113,
+      "subject": "Raymond Aron",
+      "object": "Dimitris Dimitrakos"
+    },
+    {
+      "line": 108894836,
+      "subject": "George Orwell",
+      "object": "Mookie Tenembaum"
+    },
+    {
+      "line": 150592318,
+      "subject": "Karl Marx",
+      "object": "Richard J. Bernstein"
+    },
+    {
+      "line": 192944239,
+      "subject": "Niccolò Machiavelli",
+      "object": "Philip Pettit"
+    },
+    {
+      "line": 33384923,
+      "subject": "Aristotle",
+      "object": "Roberto Torretti"
+    },
+    {
+      "line": 33384924,
+      "subject": "Aristotle",
+      "object": "Traian Brăileanu"
+    },
+    {
+      "line": 66688105,
+      "subject": "Confucius",
+      "object": "Damaris Cudworth Masham"
+    },
+    {
+      "line": 105379259,
+      "subject": "Friedrich Nietzsche",
+      "object": "Julius Evola"
+    },
+    {
+      "line": 85759308,
+      "subject": "E. H. Carr",
+      "object": "Robert Gilpin"
+    },
+    {
+      "line": 202976375,
+      "subject": "Oscar Wilde",
+      "object": "Julius Evola"
+    },
+    {
+      "line": 158139442,
+      "subject": "Laozi",
+      "object": "Julius Evola"
+    },
+    {
+      "line": 193033617,
+      "subject": "Nicholas of Cusa",
+      "object": "Mário Ferreira dos Santos"
+    },
+    {
+      "line": 93545394,
+      "subject": "Ernst Cassirer",
+      "object": "Mário Ferreira dos Santos"
+    },
+    {
+      "line": 121667283,
+      "subject": "Herbert Marcuse",
+      "object": "Raymond Geuss"
+    },
+    {
+      "line": 223320644,
+      "subject": "René Descartes",
+      "object": "Mário Ferreira dos Santos"
+    }
+  ],
+  "Group": [
+    {
+      "line": 208419624,
+      "subject": "Peng Chun Chang",
+      "object": "Charles Malik"
+    },
+    {
+      "line": 317665147,
+      "subject": "Yung Berg",
+      "object": "Serena Williams"
+    },
+    {
+      "line": 157885678,
+      "subject": "Lana Wachowski",
+      "object": "Andy Wachowski"
+    },
+    {
+      "line": 191346186,
+      "subject": "Nekama",
+      "object": "Alexander Bogen"
+    },
+    {
+      "line": 72472025,
+      "subject": "Daniel Hayhurst",
+      "object": "Reuben Sutherland"
+    },
+    {
+      "line": 145984278,
+      "subject": "John Cleese (Person)",
+      "object": "Michael Palin"
+    },
+    {
+      "line": 59247445,
+      "subject": "Charlie Fox (Person)",
+      "object": "Alex Merchan (Person)"
+    },
+    {
+      "line": 25445070,
+      "subject": "Alex Merchan (Person)",
+      "object": "Kiefer Piccio"
+    },
+    {
+      "line": 147005681,
+      "subject": "Jonathan Alonso (Blogger)",
+      "object": "Search Engine Marketing"
+    },
+    {
+      "line": 61100732,
+      "subject": "Chris Miller (Actor) #3",
+      "object": "Phil Lord"
+    },
+    {
+      "line": 314067593,
+      "subject": "Wu Yingyin",
+      "object": "Yao Lee"
+    },
+    {
+      "line": 146431710,
+      "subject": "John Peters Humphrey",
+      "object": "William Hodgson (Diplomat)"
+    },
+    {
+      "line": 39826369,
+      "subject": "Bashir al-Najafi",
+      "object": "Muhammad al-Fayadh"
+    },
+    {
+      "line": 59026290,
+      "subject": "Charles Dukes, 1st Baron Dukeston",
+      "object": "René Cassin"
+    },
+    {
+      "line": 265240011,
+      "subject": "Terry Jones (Historian)",
+      "object": "Eric Idle"
+    }
+  ],
+  "Peer": [
+    {
+      "line": 235564369,
+      "subject": "Sears Cook Walker",
+      "object": "Ezra Otis Kendall"
+    },
+    {
+      "line": 210016547,
+      "subject": "Philip Johnson",
+      "object": "Richard Foster (Architect)"
+    },
+    {
+      "line": 311259737,
+      "subject": "William Holman Hunt",
+      "object": "Elizabeth Siddal"
+    },
+    {
+      "line": 121358960,
+      "subject": "Henri Bergson",
+      "object": "T. S. Eliot"
+    },
+    {
+      "line": 42681217,
+      "subject": "Berthold Lubetkin",
+      "object": "Denys Lasdun"
+    },
+    {
+      "line": 28153312,
+      "subject": "Amartya Sen",
+      "object": "Seymour Martin Lipset"
+    },
+    {
+      "line": 96561255,
+      "subject": "F. Scott Fitzgerald",
+      "object": "Edmund Wilson"
+    },
+    {
+      "line": 170255928,
+      "subject": "Luther E. Vann",
+      "object": "Vaughnette Goode-Walker"
+    },
+    {
+      "line": 284816976,
+      "subject": "Thomas Martin (Author) #5",
+      "object": "George H. Dawson"
+    },
+    {
+      "line": 146470671,
+      "subject": "John Rickman",
+      "object": "W. H. R. Rivers"
+    },
+    {
+      "line": 105383632,
+      "subject": "Friedrich Wilhelm Joseph Schelling",
+      "object": "Friedrich Hölderlin"
+    },
+    {
+      "line": 31927096,
+      "subject": "Antoine Lavoisier",
+      "object": "Pierre-Simon Laplace"
+    },
+    {
+      "line": 71894279,
+      "subject": "Dana Ivey",
+      "object": "Kevin Collins (Actor) #1"
+    },
+    {
+      "line": 121363521,
+      "subject": "Henri Ebrard",
+      "object": "Marcel Dourgnon"
+    },
+    {
+      "line": 25140426,
+      "subject": "Albrecht Dürer",
+      "object": "Titian"
+    },
+    {
+      "line": 311279479,
+      "subject": "William James",
+      "object": "James Mark Baldwin"
+    },
+    {
+      "line": 146374922,
+      "subject": "John Morrison (Architectural structure owner)",
+      "object": "Bill Flynn (Man) #1"
+    },
+    {
+      "line": 284733349,
+      "subject": "Thomas Edison",
+      "object": "Edward Goodrich Acheson"
+    },
+    {
+      "line": 148291831,
+      "subject": "Julian Franklyn",
+      "object": "Peter Dewhurst"
+    },
+    {
+      "line": 90791866,
+      "subject": "Enrico Fermi",
+      "object": "Felix Bloch"
+    },
+    {
+      "line": 228239777,
+      "subject": "Ronald Fisher",
+      "object": "John Maynard Keynes"
+    },
+    {
+      "line": 160941976,
+      "subject": "Leonardo Rodríguez",
+      "object": "Russell Grigg"
+    },
+    {
+      "line": 134072224,
+      "subject": "Ikujiro Nonaka",
+      "object": "Hirotaka Takeuchi"
+    },
+    {
+      "line": 30556117,
+      "subject": "Angelica Kauffman",
+      "object": "Joshua Reynolds"
+    },
+    {
+      "line": 122030515,
+      "subject": "Hermann Speck von Sternburg",
+      "object": "Theodore Roosevelt"
+    },
+    {
+      "line": 59151205,
+      "subject": "Charles Sanders Peirce",
+      "object": "Oliver Wendell Holmes, Jr."
+    },
+    {
+      "line": 108940388,
+      "subject": "George Sugarman",
+      "object": "Ronald Bladen"
+    },
+    {
+      "line": 181051098,
+      "subject": "Mihail Celarianu",
+      "object": "Constantin Virgil Gheorghiu"
+    },
+    {
+      "line": 123436131,
+      "subject": "Hiran Chatterjee",
+      "object": "Soham Chakraborty"
+    },
+    {
+      "line": 172787481,
+      "subject": "Malcolm Young",
+      "object": "Bon Scott"
+    }
+  ],
+  "Academic advisor": [
+    {
+      "line": 296089449,
+      "subject": "Ulisse Dini",
+      "object": "Enrico Betti"
+    },
+    {
+      "line": 74025153,
+      "subject": "David Ungar",
+      "object": "David Patterson"
+    },
+    {
+      "line": 145852699,
+      "subject": "John Albery",
+      "object": "Ronnie Bell"
+    },
+    {
+      "line": 108699273,
+      "subject": "Georg Mierdel",
+      "object": "Rudolf Seeliger"
+    },
+    {
+      "line": 104419605,
+      "subject": "François Labourie",
+      "object": "Marcel Berger"
+    },
+    {
+      "line": 238116518,
+      "subject": "Sergei Sobolev",
+      "object": "Vladimir Smirnov (Mathematician)"
+    },
+    {
+      "line": 117916946,
+      "subject": "Hans-Egon Richert",
+      "object": "Max Deuring"
+    },
+    {
+      "line": 167828178,
+      "subject": "Louis Nicolas Vauquelin",
+      "object": "Antoine François, comte de Fourcroy"
+    },
+    {
+      "line": 175543037,
+      "subject": "Martin Julian Buerger",
+      "object": "Waldemar Lindgren"
+    },
+    {
+      "line": 223314966,
+      "subject": "Renzo L. Ricca",
+      "object": "Keith Moffatt"
+    },
+    {
+      "line": 291730648,
+      "subject": "Trygve Haavelmo",
+      "object": "Ragnar Frisch"
+    },
+    {
+      "line": 24862512,
+      "subject": "Alan Bundy",
+      "object": "Reuben Goodstein"
+    },
+    {
+      "line": 35500255,
+      "subject": "Aubrey J. Kempner",
+      "object": "Edmund Landau"
+    },
+    {
+      "line": 73955652,
+      "subject": "David R. Liu",
+      "object": "Peter G. Schultz"
+    },
+    {
+      "line": 210096543,
+      "subject": "Phillip Colella",
+      "object": "Alexandre Chorin"
+    },
+    {
+      "line": 115105660,
+      "subject": "Gregorio Ricci-Curbastro",
+      "object": "Enrico Betti"
+    },
+    {
+      "line": 42612666,
+      "subject": "Bernhard Schrader",
+      "object": "Friedrich Nerdel"
+    },
+    {
+      "line": 311244661,
+      "subject": "William Harvey",
+      "object": "Hieronymus Fabricius"
+    },
+    {
+      "line": 160855621,
+      "subject": "Leo Goodman",
+      "object": "John Tukey"
+    },
+    {
+      "line": 61559934,
+      "subject": "Christopher Hacon",
+      "object": "Robert Lazarsfeld"
+    },
+    {
+      "line": 253591084,
+      "subject": "Stefan Kaufmann (Professor)",
+      "object": "Stanley Peters"
+    },
+    {
+      "line": 145279699,
+      "subject": "Jinkyu Yang",
+      "object": "Fu-Kuo Chang"
+    },
+    {
+      "line": 87407217,
+      "subject": "Edwin Klebs",
+      "object": "Rudolf Virchow"
+    },
+    {
+      "line": 237472803,
+      "subject": "Semen Altshuler",
+      "object": "Igor Tamm"
+    },
+    {
+      "line": 224836195,
+      "subject": "Richard Kayne",
+      "object": "John R. Ross"
+    },
+    {
+      "line": 232566584,
+      "subject": "Samuel S. Wagstaff, Jr.",
+      "object": "Oscar S. Rothaus"
+    },
+    {
+      "line": 232536284,
+      "subject": "Samuel Goudsmit",
+      "object": "Paul Ehrenfest"
+    },
+    {
+      "line": 300904179,
+      "subject": "Vijay Kumar Patodi",
+      "object": "M. S. Narasimhan"
+    },
+    {
+      "line": 241828234,
+      "subject": "Shou-Wu Zhang",
+      "object": "Lucien Szpiro"
+    },
+    {
+      "line": 287510167,
+      "subject": "Todd P. Olson",
+      "object": "Thomas E. Crow"
+    }
+  ],
+  "Celebrity friend": [
+    {
+      "line": 293326500,
+      "subject": "Tyga",
+      "object": "Demetrice Nguyen"
+    },
+    {
+      "line": 145720227,
+      "subject": "Joey Luthman",
+      "object": "Zach Mills"
+    },
+    {
+      "line": 228717638,
+      "subject": "Rosie O'Donnell",
+      "object": "Sylvia Drescher"
+    },
+    {
+      "line": 173710874,
+      "subject": "Mantas Malukas",
+      "object": "Banksy"
+    },
+    {
+      "line": 226277962,
+      "subject": "Rob Machado",
+      "object": "Kelly Slater"
+    },
+    {
+      "line": 151628608,
+      "subject": "Kelly Slater",
+      "object": "Eddie Vedder"
+    },
+    {
+      "line": 176839767,
+      "subject": "Maurice Coster",
+      "object": "Anne Frank"
+    },
+    {
+      "line": 144192583,
+      "subject": "Jennifer Aniston",
+      "object": "Matt LeBlanc"
+    },
+    {
+      "line": 247058955,
+      "subject": "Sol Kimel",
+      "object": "Anne Frank"
+    },
+    {
+      "line": 180511517,
+      "subject": "Michelle Phillips",
+      "object": "Abigail Folger"
+    },
+    {
+      "line": 176714407,
+      "subject": "Matthew Perry",
+      "object": "Lisa Kudrow"
+    },
+    {
+      "line": 180203871,
+      "subject": "Michael Jackson",
+      "object": "Al Sharpton"
+    },
+    {
+      "line": 241136059,
+      "subject": "Shia LaBeouf",
+      "object": "Channing Tatum"
+    },
+    {
+      "line": 223166570,
+      "subject": "Remy Thorne",
+      "object": "Joey Luthman"
+    },
+    {
+      "line": 22598803,
+      "subject": "Adam Lambert",
+      "object": "Anna Kendrick"
+    },
+    {
+      "line": 89693500,
+      "subject": "Emily Blunt",
+      "object": "David Krumholtz"
+    },
+    {
+      "line": 261489825,
+      "subject": "T. R. Knight",
+      "object": "Katherine Heigl"
+    },
+    {
+      "line": 147340722,
+      "subject": "Joseph Gordon-Levitt",
+      "object": "Michelle Trachtenberg"
+    },
+    {
+      "line": 149461910,
+      "subject": "Justin Timberlake",
+      "object": "Trace Ayala"
+    },
+    {
+      "line": 25718299,
+      "subject": "Alfred Hitchcock",
+      "object": "Laraine Day"
+    },
+    {
+      "line": 262937652,
+      "subject": "Tamara Ecclestone",
+      "object": "James Stunt"
+    },
+    {
+      "line": 144223715,
+      "subject": "Jennifer Lopez",
+      "object": "Tom Cruise"
+    },
+    {
+      "line": 241100314,
+      "subject": "Sheryl Crow",
+      "object": "Barack Obama"
+    },
+    {
+      "line": 116341654,
+      "subject": "Gwyneth Paltrow",
+      "object": "Maya Rudolph"
+    },
+    {
+      "line": 35114699,
+      "subject": "Athan Grace (Actor)",
+      "object": "Justin Bieber"
+    },
+    {
+      "line": 163748570,
+      "subject": "Lil' Kim",
+      "object": "The Notorious B.I.G."
+    },
+    {
+      "line": 163193787,
+      "subject": "Life of Franz Liszt",
+      "object": "George Sand"
+    },
+    {
+      "line": 37261600,
+      "subject": "Baby",
+      "object": "Nicki Minaj"
+    },
+    {
+      "line": 89811683,
+      "subject": "Emmy Rossum",
+      "object": "Leighton Meester"
+    },
+    {
+      "line": 89731221,
+      "subject": "Emir Kusturica",
+      "object": "Johnny Depp"
+    }
+  ],
+  "Episode segment": [
+    {
+      "line": 56373949,
+      "subject": "Carol Cleveland",
+      "object": "Eric Idle"
+    },
+    {
+      "line": 56373950,
+      "subject": "Carol Cleveland",
+      "object": "John Cleese"
+    },
+    {
+      "line": 56373951,
+      "subject": "Carol Cleveland",
+      "object": "Michael Palin"
+    },
+    {
+      "line": 56373952,
+      "subject": "Carol Cleveland",
+      "object": "Mormon Tabernacle Choir"
+    },
+    {
+      "line": 56373953,
+      "subject": "Carol Cleveland",
+      "object": "Terry Jones (Historian)"
+    },
+    {
+      "line": 265239974,
+      "subject": "Terry Jones (Historian)",
+      "object": "Michael Palin"
+    },
+    {
+      "line": 93298592,
+      "subject": "Eric Idle",
+      "object": "John Cleese"
+    },
+    {
+      "line": 93298593,
+      "subject": "Eric Idle",
+      "object": "Michael Palin"
+    },
+    {
+      "line": 180292471,
+      "subject": "Michael Palin",
+      "object": "Carol Cleveland"
+    },
+    {
+      "line": 93298595,
+      "subject": "Eric Idle",
+      "object": "Terry Jones (Historian)"
+    },
+    {
+      "line": 150812672,
+      "subject": "Kate Micucci",
+      "object": "Riki Lindhome"
+    },
+    {
+      "line": 265239973,
+      "subject": "Terry Jones (Historian)",
+      "object": "John Cleese"
+    },
+    {
+      "line": 185093428,
+      "subject": "Mormon Tabernacle Choir",
+      "object": "Terry Jones (Historian)"
+    },
+    {
+      "line": 145984028,
+      "subject": "John Cleese",
+      "object": "Mormon Tabernacle Choir"
+    },
+    {
+      "line": 265239972,
+      "subject": "Terry Jones (Historian)",
+      "object": "Eric Idle"
+    }
+  ],
+  "Children": [
+    {
+      "line": 25898301,
+      "subject": "Alice Prinsep",
+      "object": "Rachel Gurney (Deceased Person)"
+    },
+    {
+      "line": 176669402,
+      "subject": "Matthew Axline,Sr.",
+      "object": "Matthew Axline"
+    },
+    {
+      "line": 116209115,
+      "subject": "Gustav von Below auf Rutzau und Schlatau",
+      "object": "Marie von Below"
+    },
+    {
+      "line": 253846190,
+      "subject": "Stephen Fincher",
+      "object": "John Austin Fincher"
+    },
+    {
+      "line": 87218657,
+      "subject": "Eduardo Lozano",
+      "object": "Florencia Lozano"
+    },
+    {
+      "line": 44362085,
+      "subject": "Billy Wild (Man)",
+      "object": "Miranda Lindley"
+    },
+    {
+      "line": 108814135,
+      "subject": "George Griffin Sr.",
+      "object": "George Griffin (Football Player)"
+    },
+    {
+      "line": 288366366,
+      "subject": "Tony La Russa",
+      "object": "Devon La Russa"
+    },
+    {
+      "line": 180256831,
+      "subject": "Michael Mathiesen (Writer)",
+      "object": "Marissa Mathiesen"
+    },
+    {
+      "line": 174910767,
+      "subject": "Marion Westmore",
+      "object": "McKenzie Westmore"
+    },
+    {
+      "line": 89266147,
+      "subject": "Elliott White Springs",
+      "object": "Anne Kingsley Springs Close"
+    },
+    {
+      "line": 254203091,
+      "subject": "Steven Pressley",
+      "object": "Aaron Pressley"
+    },
+    {
+      "line": 144469643,
+      "subject": "Jerry Osborne (Man)",
+      "object": "Kevin Osborne (Man)"
+    },
+    {
+      "line": 174555036,
+      "subject": "Maria Pia Caruso",
+      "object": "Daniele Sinigallia"
+    },
+    {
+      "line": 235024676,
+      "subject": "Scott Marques",
+      "object": "Ashlynn Rose"
+    },
+    {
+      "line": 81243949,
+      "subject": "Don Bradman",
+      "object": "Shirley Bradman"
+    },
+    {
+      "line": 199907037,
+      "subject": "Olivia Selby",
+      "object": "Jaxon Duff Gwillim"
+    },
+    {
+      "line": 172096859,
+      "subject": "Mahmud Tarzi",
+      "object": "Soraya Tarzi"
+    },
+    {
+      "line": 174538193,
+      "subject": "Maria Luisa of Spain",
+      "object": "Archduke Alexander Leopold of Austria"
+    },
+    {
+      "line": 157767019,
+      "subject": "Lamar Roemer",
+      "object": "LB Roemer"
+    },
+    {
+      "line": 253827715,
+      "subject": "Stephen Breyer",
+      "object": "Chloe Breyer"
+    },
+    {
+      "line": 25687265,
+      "subject": "Alfonso \"Benji\" Burke II",
+      "object": "Amber Burke"
+    },
+    {
+      "line": 306756688,
+      "subject": "Wendy Fields",
+      "object": "Nick Fields"
+    },
+    {
+      "line": 146390010,
+      "subject": "John Nicholas Brown I",
+      "object": "John Nicholas Brown II"
+    },
+    {
+      "line": 189718833,
+      "subject": "Nachman of Breslov",
+      "object": "Miriam Nachman"
+    },
+    {
+      "line": 39295795,
+      "subject": "Barbara Sher",
+      "object": "Melissa Morgan (Woman)"
+    },
+    {
+      "line": 121706067,
+      "subject": "Herdis Maddin",
+      "object": "Janet Maddin (Woman)"
+    },
+    {
+      "line": 177310405,
+      "subject": "Mazell Robertson",
+      "object": "Oscar Robertson"
+    },
+    {
+      "line": 110556803,
+      "subject": "Giovanni Battista Vivaldi",
+      "object": "Francesco Gaetano Vivaldi"
+    },
+    {
+      "line": 21521105,
+      "subject": "Abe Tuvim",
+      "object": "Judy Holliday"
+    }
+  ],
+  "President": [
+    {
+      "line": 146578230,
+      "subject": "John Tyler",
+      "object": "William Henry Harrison"
+    },
+    {
+      "line": 145946985,
+      "subject": "John C. Calhoun",
+      "object": "Andrew Jackson"
+    },
+    {
+      "line": 24699104,
+      "subject": "Al Gore",
+      "object": "Bill Clinton"
+    },
+    {
+      "line": 25015409,
+      "subject": "Alben W. Barkley",
+      "object": "Harry S. Truman"
+    },
+    {
+      "line": 234747095,
+      "subject": "Schuyler Colfax",
+      "object": "Ulysses S. Grant"
+    },
+    {
+      "line": 303989704,
+      "subject": "Walter Mondale",
+      "object": "Jimmy Carter"
+    },
+    {
+      "line": 59013286,
+      "subject": "Charles Curtis",
+      "object": "Herbert Hoover"
+    },
+    {
+      "line": 126692358,
+      "subject": "Hubert Humphrey",
+      "object": "Lyndon B. Johnson"
+    },
+    {
+      "line": 311368913,
+      "subject": "William R. King",
+      "object": "Franklin Pierce"
+    },
+    {
+      "line": 284786171,
+      "subject": "Thomas Jefferson",
+      "object": "John Adams"
+    },
+    {
+      "line": 71858649,
+      "subject": "Dan Quayle",
+      "object": "George H. W. Bush"
+    },
+    {
+      "line": 181496572,
+      "subject": "Millard Fillmore",
+      "object": "Zachary Taylor"
+    },
+    {
+      "line": 284848498,
+      "subject": "Thomas R. Marshall",
+      "object": "Woodrow Wilson"
+    },
+    {
+      "line": 88444259,
+      "subject": "Elbridge Gerry",
+      "object": "James Madison"
+    },
+    {
+      "line": 283148984,
+      "subject": "Theodore Roosevelt",
+      "object": "William McKinley"
+    }
+  ],
+  "Martial Art Instructor(s)": [
+    {
+      "line": 23009934,
+      "subject": "Adriano Directo Emperado",
+      "object": "William Kwai Sun Chow"
+    },
+    {
+      "line": 86915419,
+      "subject": "Ed Parker",
+      "object": "William Kwai Sun Chow"
+    },
+    {
+      "line": 224358033,
+      "subject": "Reylson Gracie",
+      "object": "Carlos Gracie"
+    },
+    {
+      "line": 151503822,
+      "subject": "Keinosuke Enoeda",
+      "object": "Masatoshi Nakayama"
+    },
+    {
+      "line": 151683453,
+      "subject": "Ken Craig",
+      "object": "Martin Marcus (Martial Artist)"
+    },
+    {
+      "line": 96373098,
+      "subject": "Eyal Yanilov",
+      "object": "Imi Lichtenfeld"
+    },
+    {
+      "line": 82410954,
+      "subject": "Donnie Williams",
+      "object": "Byong Yu"
+    },
+    {
+      "line": 73242748,
+      "subject": "Darren Levine",
+      "object": "Imi Lichtenfeld"
+    },
+    {
+      "line": 253586362,
+      "subject": "Stefan Fischer (Martial Artist)",
+      "object": "Keith R. Kernspecht"
+    },
+    {
+      "line": 301102695,
+      "subject": "Vincent Cruz",
+      "object": "Hidetaka Nishiyama"
+    },
+    {
+      "line": 104192587,
+      "subject": "Frank Landers",
+      "object": "Adriano Directo Emperado"
+    },
+    {
+      "line": 145656621,
+      "subject": "Joe Williams (Martial Artist)",
+      "object": "Rafael Cordeiro"
+    },
+    {
+      "line": 55450605,
+      "subject": "Caol Uno",
+      "object": "Rumina Sato"
+    },
+    {
+      "line": 93397269,
+      "subject": "Erik Estrada",
+      "object": "Frank Landers"
+    },
+    {
+      "line": 106807167,
+      "subject": "Fábio Leopoldo",
+      "object": "Ryan Gracie"
+    },
+    {
+      "line": 311297016,
+      "subject": "William Kwai Sun Chow",
+      "object": "James Mitose"
+    },
+    {
+      "line": 182054679,
+      "subject": "Minoru Suzuki",
+      "object": "Karl Gotch"
+    },
+    {
+      "line": 233677485,
+      "subject": "Satoshi Takahashi (Person)",
+      "object": "Masatoshi Nakayama"
+    },
+    {
+      "line": 61092415,
+      "subject": "Chris Maden",
+      "object": "Chang Kyun Yu"
+    },
+    {
+      "line": 240395282,
+      "subject": "Shawn Williams (Martial Artist)",
+      "object": "Renzo Gracie"
+    },
+    {
+      "line": 61092417,
+      "subject": "Chris Maden",
+      "object": "Ken Craig"
+    },
+    {
+      "line": 153556443,
+      "subject": "Kisshomaru Ueshiba",
+      "object": "Morihei Ueshiba"
+    },
+    {
+      "line": 90832837,
+      "subject": "Enson Inoue",
+      "object": "Satoru Sayama"
+    },
+    {
+      "line": 160372400,
+      "subject": "Lee Marvin",
+      "object": "Bruce Lee"
+    },
+    {
+      "line": 232749923,
+      "subject": "Sanae Kikuta",
+      "object": "Satoru Sayama"
+    },
+    {
+      "line": 315267198,
+      "subject": "Yip Man",
+      "object": "Ng Chung-sok"
+    },
+    {
+      "line": 71499837,
+      "subject": "Daijiro Matsui",
+      "object": "Nobuhiko Takada"
+    },
+    {
+      "line": 242235911,
+      "subject": "Shuji Maruyama",
+      "object": "Koichi Tohei"
+    },
+    {
+      "line": 145978724,
+      "subject": "John Chow-Hoon",
+      "object": "Seishiro Okazaki"
+    },
+    {
+      "line": 229139971,
+      "subject": "Royce Gracie",
+      "object": "Hélio Gracie"
+    }
+  ],
+  "Tribute of": [
+    {
+      "line": 147136410,
+      "subject": "Jorane",
+      "object": "Anne Sylvestre"
+    },
+    {
+      "line": 167102866,
+      "subject": "Lordi",
+      "object": "Mana (Hard rock Artist)"
+    },
+    {
+      "line": 180204148,
+      "subject": "Michael Jackson",
+      "object": "Calvin Hard (m/012ng6m2)"
+    },
+    {
+      "line": 301103865,
+      "subject": "Vincent Delerm",
+      "object": "Anne Sylvestre"
+    },
+    {
+      "line": 349518788,
+      "subject": "m/0nhqkjk",
+      "object": "Anne Sylvestre"
+    }
+  ],
+  "Romantic relationship (with celebrities)": [
+    {
+      "line": 93645119,
+      "subject": "Erykah Badu",
+      "object": "Common"
+    },
+    {
+      "line": 226417324,
+      "subject": "Robert De Niro",
+      "object": "Toukie Smith"
+    },
+    {
+      "line": 93519949,
+      "subject": "Ernesto Argüello",
+      "object": "Eva Longoria"
+    },
+    {
+      "line": 300640879,
+      "subject": "Victoria Principal",
+      "object": "Bernard Cornfeld"
+    },
+    {
+      "line": 144206758,
+      "subject": "Jennifer Esposito",
+      "object": "Louis Dowler"
+    },
+    {
+      "line": 21382746,
+      "subject": "Aayush Sharma",
+      "object": "Arpita Khan"
+    },
+    {
+      "line": 288847431,
+      "subject": "Tori Patton",
+      "object": "Zachary Roloff"
+    },
+    {
+      "line": 47269150,
+      "subject": "Bob Hope",
+      "object": "Barbara Payton"
+    },
+    {
+      "line": 144222012,
+      "subject": "Jennifer Lawrence",
+      "object": "Nicholas Hoult"
+    },
+    {
+      "line": 241100458,
+      "subject": "Sheryl Crow",
+      "object": "Owen Wilson"
+    },
+    {
+      "line": 104192812,
+      "subject": "Frank Langella",
+      "object": "Whoopi Goldberg"
+    },
+    {
+      "line": 150062576,
+      "subject": "Kaley Cuoco",
+      "object": "Johnny Galecki"
+    },
+    {
+      "line": 87376083,
+      "subject": "Edward VII",
+      "object": "Catherine Walters"
+    },
+    {
+      "line": 117782231,
+      "subject": "Hank Baskett",
+      "object": "Kendra Wilkinson"
+    },
+    {
+      "line": 287866828,
+      "subject": "Tom Richards (Martial Artist)",
+      "object": "Danniella Westbrook"
+    },
+    {
+      "line": 50154410,
+      "subject": "Brian Hallisay",
+      "object": "Jennifer Love Hewitt"
+    },
+    {
+      "line": 146204966,
+      "subject": "John Holmes (Pornographic actor)",
+      "object": "Misty Dawn (Pornographic actor)"
+    },
+    {
+      "line": 117211510,
+      "subject": "Halle Berry",
+      "object": "Gabriel Aubry"
+    },
+    {
+      "line": 288201926,
+      "subject": "Toni Collette",
+      "object": "Jonathan Rhys Meyers"
+    },
+    {
+      "line": 146338806,
+      "subject": "John Mayer",
+      "object": "Jennifer Aniston"
+    },
+    {
+      "line": 58243065,
+      "subject": "Chad Kroeger",
+      "object": "Avril Lavigne"
+    },
+    {
+      "line": 34484033,
+      "subject": "Ashley Alexandra Dupré",
+      "object": "Eliot Spitzer"
+    },
+    {
+      "line": 311935446,
+      "subject": "Winona Ryder",
+      "object": "Dave Pirner"
+    },
+    {
+      "line": 54301121,
+      "subject": "Cam Gigandet",
+      "object": "Dominique Geisendorff"
+    },
+    {
+      "line": 296237626,
+      "subject": "Uma Thurman",
+      "object": "Robert De Niro"
+    },
+    {
+      "line": 311935455,
+      "subject": "Winona Ryder",
+      "object": "Matt Damon"
+    },
+    {
+      "line": 173425697,
+      "subject": "Mandy Moore",
+      "object": "Billy Crawford"
+    },
+    {
+      "line": 232878137,
+      "subject": "Sandra Gonzalez (Celebrity)",
+      "object": "Criss Angel"
+    },
+    {
+      "line": 59346070,
+      "subject": "Charmaine Sinclair",
+      "object": "Robert De Niro"
+    },
+    {
+      "line": 141327535,
+      "subject": "J. D. Souther",
+      "object": "Stevie Nicks"
+    }
+  ]
+}
