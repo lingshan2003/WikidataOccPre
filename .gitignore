@@ -14,3 +14,5 @@ __pycache__/
 .DS_Store
 Q_R_Q_extended.txt
 runs_graphmask
+external_data/
+Q_R_Q_extended.tar.gz
