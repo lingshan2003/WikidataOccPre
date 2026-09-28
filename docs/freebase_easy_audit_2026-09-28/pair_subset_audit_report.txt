@@ -1,0 +1,133 @@
+{
+  "status": "complete_subset_scan",
+  "pairs": "/mnt/network_data/personal_workspace/siruilai/wy/WikidataOccPre/external_data/freebase_easy/person_pairs_raw_v1/person_name_pairs.tsv",
+  "config": "/mnt/network_data/personal_workspace/siruilai/wy/WikidataOccPre/config/freebase_easy_relation_candidates_v1.json",
+  "raw_name_pair_rows_read": 1728197,
+  "malformed_rows": 0,
+  "all_predicates_seen": 163,
+  "configured_predicates": 20,
+  "configured_predicates_with_rows": 20,
+  "candidate_rows_written": 1030427,
+  "president_rows_written": 49,
+  "elapsed_seconds": 7.04,
+  "notes": [
+    "Counts use name-matched provisional Person records; no MID or human-identity check was applied.",
+    "Candidate rows are for auditing and are not a frozen training-graph whitelist.",
+    "Cross-predicate overlaps compare exact subject/object names; reverse counts compare swapped names."
+  ]
+}
+predicate       audit_tier      facts   unique_directed_pairs   duplicate_directed_facts        self_pairs        reciprocal_unordered_pairs      unique_participants
+Children        priority        381997  381997  0       102     42      441344
+Sibling priority        307322  307322  0       0       153661  153055
+Spouse (or domestic partner)    priority        302788  302788  0       0       151394  269910
+Influenced By   priority        23430   23430   0       3       256     9465
+Academic advisor        priority        5816    5816    0       1       4       7215
+Peer    priority        2778    2778    0       0       1389    1582
+Romantic relationship (with celebrities)        priority        1552    1552    0       0       776       1104
+Celebrity friend        priority        1362    1362    0       0       681     661
+Matches Lost    semantic_review 1242    1242    0       1       21      473
+Artist supported        semantic_review 659     659     0       3       14      877
+Group   semantic_review 592     592     0       0       296     241
+kp_lw/philosopher/influenced_by priority        250     250     0       0       0       207
+kp_lw/philosophy_influencer/influencee  priority        250     250     0       0       0       207
+Martial Art Instructor(s)       priority        152     152     0       0       0       175
+Celebrity rival semantic_review 90      90      0       0       45      75
+Demonstration medal won semantic_review 60      60      0       0       30      15
+President       semantic_review 49      49      0       0       0       76
+Episode segment semantic_review 32      32      0       0       16      8
+Tribute of      semantic_review 5       5       0       0       0       8
+Interviewer     semantic_review 1       1       0       0       0       2
+predicate_a     predicate_b     same_direction_pairs    reverse_direction_pairs
+Academic advisor        Children        0       6
+Academic advisor        Influenced By   251     8
+Academic advisor        Peer    7       7
+Academic advisor        Sibling 2       2
+Artist supported        Celebrity friend        5       5
+Artist supported        Children        1       0
+Artist supported        Influenced By   2       1
+Artist supported        Sibling 4       4
+Artist supported        Spouse (or domestic partner)    6       6
+Celebrity friend        Celebrity rival 2       2
+Celebrity friend        Influenced By   8       8
+Celebrity friend        Peer    10      10
+Celebrity friend        Romantic relationship (with celebrities)        14      14
+Celebrity friend        Spouse (or domestic partner)    10      10
+Celebrity rival Influenced By   2       2
+Celebrity rival Romantic relationship (with celebrities)        2       2
+Celebrity rival Sibling 2       2
+Children        Influenced By   0       51
+Children        Martial Art Instructor(s)       0       7
+Children        Sibling 72      72
+Children        Spouse (or domestic partner)    31      31
+Episode segment Group   8       8
+Group   Matches Lost    2       2
+Group   Peer    2       2
+Group   Sibling 28      28
+Group   Spouse (or domestic partner)    4       4
+Influenced By   Martial Art Instructor(s)       4       0
+Influenced By   Peer    220     220
+Influenced By   Romantic relationship (with celebrities)        2       2
+Influenced By   Sibling 11      11
+Influenced By   Spouse (or domestic partner)    30      30
+Influenced By   kp_lw/philosopher/influenced_by 53      0
+Influenced By   kp_lw/philosophy_influencer/influencee  0       53
+Martial Art Instructor(s)       Sibling 2       2
+Martial Art Instructor(s)       Spouse (or domestic partner)    1       1
+Matches Lost    Sibling 2       2
+Peer    President       1       1
+Peer    Romantic relationship (with celebrities)        6       6
+Peer    Sibling 22      22
+Peer    Spouse (or domestic partner)    34      34
+Romantic relationship (with celebrities)        Spouse (or domestic partner)    390     390
+Sibling Spouse (or domestic partner)    52      52
+kp_lw/philosopher/influenced_by kp_lw/philosophy_influencer/influencee  0       250
+source_line     subject_name    predicate       object_name
+21329869        Aaron Burr      President       Thomas Jefferson
+22870120        Adlai Stevenson I       President       Grover Cleveland
+24699104        Al Gore President       Bill Clinton
+25015409        Alben W. Barkley        President       Harry S. Truman
+30109968        Andrew Johnson  President       Abraham Lincoln
+54274879        Calvin Coolidge President       Warren G. Harding
+59013286        Charles Curtis  President       Herbert Hoover
+59049364        Charles G. Dawes        President       Calvin Coolidge
+59176637        Charles W. Fairbanks    President       Theodore Roosevelt
+59948626        Chester A. Arthur       President       James A. Garfield
+71858649        Dan Quayle      President       George H. W. Bush
+72444836        Daniel D. Tompkins      President       James Monroe
+78267279        Dick Cheney     President       George W. Bush
+88444259        Elbridge Gerry  President       James Madison
+107787305       Garret Hobart   President       William McKinley
+108761895       George Clinton (US Vice President)      President       James Madison
+108761896       George Clinton (US Vice President)      President       Thomas Jefferson
+108818948       George H. W. Bush       President       Ronald Reagan
+108866280       George M. Dallas        President       James K. Polk
+109113300       Gerald Ford     President       Richard Nixon
+117843521       Hannibal Hamlin President       Abraham Lincoln
+118858307       Harry S. Truman President       Franklin D. Roosevelt
+121405646       Henry A. Wallace        President       Franklin D. Roosevelt
+121545257       Henry Wilson    President       Ulysses S. Grant
+126692358       Hubert Humphrey President       Lyndon B. Johnson
+142602176       James S. Sherman        President       William Howard Taft
+145537264       Joe Biden       President       Barack Obama
+145848000       John Adams      President       George Washington
+145946633       John C. Breckinridge    President       James Buchanan
+145946985       John C. Calhoun President       Andrew Jackson
+145946986       John C. Calhoun President       John Quincy Adams
+146385008       John Nance Garner       President       Franklin D. Roosevelt
+146578230       John Tyler      President       William Henry Harrison
+162456401       Levi P. Morton  President       Benjamin Harrison
+170416765       Lyndon B. Johnson       President       John F. Kennedy
+175594700       Martin Van Buren        President       Andrew Jackson
+181496572       Millard Fillmore        President       Zachary Taylor
+191406122       Nelson Rockefeller      President       Gerald Ford
+224867714       Richard Mentor Johnson  President       Martin Van Buren
+224877313       Richard Nixon   President       Dwight D. Eisenhower
+234747095       Schuyler Colfax President       Ulysses S. Grant
+251356570       Spiro Agnew     President       Richard Nixon
+283148984       Theodore Roosevelt      President       William McKinley
+284675517       Thomas A. Hendricks     President       Grover Cleveland
+284786171       Thomas Jefferson        President       John Adams
+284848498       Thomas R. Marshall      President       Woodrow Wilson
+303989704       Walter Mondale  President       Jimmy Carter
+311094698       William A. Wheeler      President       Rutherford B. Hayes
+311368913       William R. King President       Franklin Pierce
