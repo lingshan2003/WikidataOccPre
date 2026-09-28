@@ -37,11 +37,13 @@ def display(value: bytes) -> str:
 
 
 def link_name(subject: bytes) -> bytes | None:
-    # Observed subject syntax: :d:000000...:human-readable name
-    if not subject.startswith(b":d:"):
+    # The dump contains both plain names and :d:<digits>:<name> subjects.
+    if not subject:
         return None
+    if not subject.startswith(b":d:"):
+        return subject
     separator = subject.find(b":", 3)
-    if separator < 0 or not subject[3:separator].isdigit():
+    if separator < 0 or not subject[3:separator].isdigit() or separator == len(subject) - 1:
         return None
     return subject[separator + 1:]
 
@@ -86,6 +88,7 @@ def main() -> None:
     first_mid: dict[bytes, bytes] = {}
     ambiguous: dict[bytes, set[bytes]] = {}
     link_rows = matched_link_rows = malformed_link_rows = unexpected_subjects = 0
+    plain_subject_rows = prefixed_subject_rows = 0
     unexpected_mid_uris = repeated_name_mid_rows = 0
     unexpected_subject_examples: list[str] = []
     unexpected_mid_examples: list[str] = []
@@ -99,6 +102,10 @@ def main() -> None:
             if len(fields) != 4 or fields[1] != b"freebase-entity":
                 malformed_link_rows += 1
                 continue
+            if fields[0].startswith(b":d:"):
+                prefixed_subject_rows += 1
+            else:
+                plain_subject_rows += 1
             name = link_name(fields[0])
             if name is None:
                 unexpected_subjects += 1
@@ -160,6 +167,8 @@ def main() -> None:
         "target_distinct_names": len(targets),
         "link_rows_read": link_rows,
         "malformed_link_rows": malformed_link_rows,
+        "plain_link_subject_rows": plain_subject_rows,
+        "prefixed_link_subject_rows": prefixed_subject_rows,
         "unexpected_link_subject_rows": unexpected_subjects,
         "unexpected_link_subject_examples": unexpected_subject_examples,
         "target_rows_with_recognized_mid": matched_link_rows,
