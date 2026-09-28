@@ -10,6 +10,7 @@ CPU only. No facts.txt scan.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 from pathlib import Path
 import sys
@@ -18,6 +19,7 @@ import time
 
 PAIR_HEADER = b"source_line\tsubject_name\tpredicate\tobject_name"
 URI_PREFIXES = (b"<http://rdf.freebase.com/ns/", b"<https://rdf.freebase.com/ns/")
+ID_PREFIXES = (b"m.", b"g.", b"m/", b"g/")
 
 
 def parse_args() -> argparse.Namespace:
@@ -52,7 +54,7 @@ def link_mid(obj: bytes) -> bytes | None:
     for prefix in URI_PREFIXES:
         if obj.startswith(prefix) and obj.endswith(b">"):
             mid = obj[len(prefix):-1]
-            if mid.startswith((b"m.", b"g.")):
+            if mid.startswith(ID_PREFIXES):
                 return mid
     return None
 
@@ -90,6 +92,7 @@ def main() -> None:
     link_rows = matched_link_rows = malformed_link_rows = unexpected_subjects = 0
     plain_subject_rows = prefixed_subject_rows = 0
     unexpected_mid_uris = repeated_name_mid_rows = 0
+    matched_id_format_counts: Counter[str] = Counter()
     unexpected_subject_examples: list[str] = []
     unexpected_mid_examples: list[str] = []
     with links_path.open("rb") as links:
@@ -121,6 +124,7 @@ def main() -> None:
                     unexpected_mid_examples.append(display(fields[2][:200]))
                 continue
             matched_link_rows += 1
+            matched_id_format_counts[display(mid[:2])] += 1
             original = first_mid.get(name)
             if original is None:
                 first_mid[name] = mid
@@ -172,6 +176,7 @@ def main() -> None:
         "unexpected_link_subject_rows": unexpected_subjects,
         "unexpected_link_subject_examples": unexpected_subject_examples,
         "target_rows_with_recognized_mid": matched_link_rows,
+        "matched_id_format_counts": dict(sorted(matched_id_format_counts.items())),
         "target_rows_with_unexpected_mid_uri": unexpected_mid_uris,
         "unexpected_mid_uri_examples": unexpected_mid_examples,
         "repeated_name_mid_rows": repeated_name_mid_rows,
