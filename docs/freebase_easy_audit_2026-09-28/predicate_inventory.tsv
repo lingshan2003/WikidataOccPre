@@ -1,0 +1,1920 @@
+predicate	all_facts	person_subject_facts	name_matched_person_pair_facts	pair_fraction_of_all_facts
+Children	382502	382104	381997	0.998680
+is-a	130848376	15865180	365307	0.002792
+Sibling	314446	307375	307322	0.977344
+Spouse (or domestic partner)	303040	302902	302788	0.999168
+Profession	3090256	3084516	208576	0.067495
+kg/object_profile/prominent_type	30686682	3391293	80363	0.002619
+Influenced By	25443	23716	23430	0.920882
+Member of	240093	239880	11914	0.049622
+Film crewed	146675	146669	11387	0.077634
+Leader of	42777	42776	7690	0.179770
+Academic advisor	5826	5821	5816	0.998284
+Place of birth	1056984	1055498	3410	0.003226
+Peer	3128	2901	2778	0.888107
+Recording performance	206703	1631	1582	0.007653
+Romantic relationship (with celebrities)	1584	1567	1552	0.979798
+Person	368691	1441	1441	0.003908
+Celebrity friend	1434	1398	1362	0.949791
+Matches Lost	1242	1242	1242	1.000000
+Employment history	101624	101530	1049	0.010322
+Place of death	253661	253466	888	0.003501
+Hockey Position(s)	6812	6812	762	0.111861
+Artist supported	1028	1027	659	0.641051
+Record Label	92056	52581	612	0.006648
+Group	596	594	592	0.993289
+Named after	26809	565	492	0.018352
+kp_lw/philosopher/influenced_by	259	254	250	0.965251
+kp_lw/philosophy_influencer/influencee	259	255	250	0.965251
+Family	17758	16723	203	0.011431
+Player statistics	93916	199	199	0.002119
+Sport played	210870	210863	195	0.000925
+Instrument Played	29121	29093	188	0.006456
+Organization founded	45459	41077	181	0.003982
+Martial Art Instructor(s)	152	152	152	1.000000
+Governance of	54092	54091	114	0.002108
+Film performance	1379811	1377854	110	0.000080
+Celebrity rival	96	93	90	0.937500
+Place Musical Career Began	55855	26008	78	0.001396
+Title	10643	8079	78	0.007329
+Architectural Style	40651	584	64	0.001574
+Demonstration medal won	60	60	60	1.000000
+Ethnicity	52255	51162	54	0.001033
+Starring TV role	137762	137713	50	0.000363
+President	49	49	49	1.000000
+People with this hobby	230	50	48	0.208696
+People involved	1750	43	43	0.024571
+Character Created By	22550	38	37	0.001641
+Team	36563	4692	34	0.000930
+Episode segment	32	32	32	1.000000
+Religious Leadership	2633	2625	31	0.011774
+People who have had this role	1733	31	31	0.017888
+TV program produced	34494	33451	28	0.000812
+Ensemble Conducted	1015	1000	26	0.025616
+Directed by	248149	25	25	0.000101
+Player	935	23	23	0.024599
+Demonstration event competed in	20	20	20	1.000000
+Author	1917794	20	19	0.000010
+Produced by	153615	20	19	0.000124
+Member	9179	40	18	0.001961
+Royal line	2732	2732	17	0.006223
+People with this interest	37	18	17	0.459459
+Film Executive Produced	61062	61057	15	0.000246
+Screenplay by	140827	14	14	0.000099
+Music by	111408	15	14	0.000126
+Religion	55473	55308	13	0.000234
+Artist	1217645	17	12	0.000010
+Blog	1511	1497	12	0.007942
+Research area	1104	1104	12	0.010870
+TV episode performance	463314	462968	11	0.000024
+Position(s)	138996	138936	11	0.000079
+Cinematography	108395	11	11	0.000101
+Edited by	99728	11	11	0.000110
+Based On	5629	11	11	0.001954
+TV regular appearance	21033	20647	10	0.000475
+Married To	4820	34	8	0.001660
+kp_lw/philosopher/main_interests	206	186	8	0.038835
+Award Won	187693	162839	6	0.000032
+Place of burial	78506	78426	6	0.000076
+Industry	55634	148	6	0.000108
+Educational institution	27041	6	5	0.000185
+Associated period or movement	5945	5928	5	0.000841
+Tribute of	16	5	5	0.312500
+Recorded by	12429860	8	4	0.000000
+Film appeared in	85942	78506	4	0.000047
+topic_server/webref_cluster_members_type	28665	130	4	0.000140
+Government Position Held	20551	20423	4	0.000195
+Cover artist	2463	4	4	0.001624
+Focus	2169	10	4	0.001844
+Team coached	981	981	4	0.004077
+Music video performance	368	280	4	0.010870
+Partner	28	4	4	0.142857
+Honorary Degrees	4	4	4	1.000000
+Composer	562645	3	3	0.000005
+Lyricist	205817	3	3	0.000015
+Developer	69803	6	3	0.000043
+Costume design by	47321	3	3	0.000063
+Event Competed In	26225	26223	3	0.000114
+Website category	18432	17	3	0.000163
+Invention	6101	5916	3	0.000492
+Partner In Firm	55	55	3	0.054545
+Publisher	319428	12	2	0.000006
+Director	133118	2	2	0.000015
+Story by	42996	2	2	0.000047
+Art direction by	42723	2	2	0.000047
+Album Contribution	21515	19804	2	0.000093
+Theater Role	16706	16677	2	0.000120
+Brand	15700	64	2	0.000127
+Place founded	11896	31	2	0.000168
+Parent	8808	50	2	0.000227
+Romantically involved with	7926	52	2	0.000252
+Parent Industry	6163	7	2	0.000325
+Website owner	3457	12	2	0.000579
+Sponsorship	3304	15	2	0.000605
+Choreographer	1071	2	2	0.001867
+Chefs	1057	2	2	0.001892
+Subdiscipline of	750	4	2	0.002667
+Producer(s)	669	4	2	0.002990
+Creator Of Strip	316	2	2	0.006329
+Sport Association	152	151	2	0.013158
+Subject	277213	15	1	0.000004
+Featured artist	217724	1	1	0.000005
+Label	211281	101	1	0.000005
+Engineer	122031	1	1	0.000008
+Appears In Book	59809	73	1	0.000017
+Content	45297	21711	1	0.000022
+Production design by	37520	1	1	0.000027
+Place	25868	1	1	0.000039
+Set Decoration by	25671	1	1	0.000039
+Casting director	21931	1	1	0.000046
+Specie	10849	13	1	0.000092
+Project	9722	7682	1	0.000103
+TV Program (recurring writer)	9313	9313	1	0.000107
+Occupation	9238	49	1	0.000108
+Episode appearance	7983	6069	1	0.000125
+Play Designed	6343	6343	1	0.000158
+Editor	5081	1	1	0.000197
+Belongs to organization	2997	44	1	0.000334
+Medical Specialty	2642	275	1	0.000379
+Organization acquired	2608	5	1	0.000383
+Created By	2079	1	1	0.000481
+Organization advised	1809	1807	1	0.000553
+Building occupied	1666	35	1	0.000600
+Spoken by character (if from fictional work)	1299	1	1	0.000770
+Contributing author to	1171	1128	1	0.000854
+Employer	1136	19	1	0.000880
+Visiting scholars, fellows, etc.	977	1	1	0.001024
+Candidate	952	1	1	0.001050
+Dedication	769	732	1	0.001300
+Judge	768	1	1	0.001302
+Musical Director	568	1	1	0.001761
+Position	535	534	1	0.001869
+Match	464	445	1	0.002155
+Court or title	378	378	1	0.002646
+Languages Designed	332	209	1	0.003012
+Sport coached	286	286	1	0.003497
+People with this family name	266	2	1	0.003759
+Part of professional field	165	3	1	0.006061
+Religion Founded	122	105	1	0.008197
+Stage Director	101	1	1	0.009901
+Product Endorsed	84	77	1	0.011905
+Exhibition curated	61	53	1	0.016393
+Music video production crewed	47	47	1	0.021277
+Interviewer	34	1	1	0.029412
+Production staff	9	1	1	0.111111
+Release	25637164	46	0	0.000000
+Recording	16239524	46	0	0.000000
+Track #	16100161	45	0	0.000000
+music/release_track/disc_number	15182463	43	0	0.000000
+music/release_track/number_on_disc	15182460	43	0	0.000000
+Contained by	11171806	336	0	0.000000
+Length	10390211	11	0	0.000000
+Canonical version	2908061	0	0	0.000000
+Gender	2335812	2276152	0	0.000000
+Recording of Composition	2037475	0	0	0.000000
+Date of birth	1924970	1915175	0	0.000000
+Higher classification	1459632	1	0	0.000000
+Series	1449261	10	0	0.000000
+Credited A	1396563	5	0	0.000000
+Episode number	1365139	5	0	0.000000
+Season	1353732	4	0	0.000000
+Release of	1315010	4	0	0.000000
+Initial release date	1221069	29	0	0.000000
+Original air date	1185920	3	0	0.000000
+Season number	1177904	4	0	0.000000
+Release Date	1148443	5	0	0.000000
+Genre	1146776	108	0	0.000000
+Region	1127621	4	0	0.000000
+Longitude	1094379	0	0	0.000000
+Collection category	1093518	0	0	0.000000
+Release type	1086732	10	0	0.000000
+Publication date	1081805	1	0	0.000000
+Format	1063430	4	0	0.000000
+Primary release	1037961	4	0	0.000000
+Country of nationality	1008637	1007350	0	0.000000
+Edition Of	987559	1	0	0.000000
+topic_server/population_number	957835	56	0	0.000000
+TVRage Episode ID	829720	6	0	0.000000
+Stanford OPAC	794364	0	0	0.000000
+Previous episode	791482	0	0	0.000000
+Name ID	780181	775674	0	0.000000
+Catalog Number	723214	3	0	0.000000
+Date of death	712479	710994	0	0.000000
+ISBN-13	698736	0	0	0.000000
+ISBN	692557	0	0	0.000000
+Label section	656185	0	0	0.000000
+Place of publication	580520	0	0	0.000000
+Language	537668	12504	0	0.000000
+GTIN	486682	2	0	0.000000
+ISRC	482700	0	0	0.000000
+LCCN	448793	0	0	0.000000
+Netflix Genre	441035	0	0	0.000000
+Producer	421838	0	0	0.000000
+Country of origin	356796	31	0	0.000000
+Album content type	342384	2	0	0.000000
+Award Nominations	339884	315141	0	0.000000
+Film	337770	9	0	0.000000
+Height	319768	317519	0	0.000000
+OpenLibrary ID	312892	0	0	0.000000
+Therapeutic equivalent	307762	0	0	0.000000
+University of Michigan OPAC	288329	0	0	0.000000
+Area	268604	9	0	0.000000
+Wisconsin-Madison OPAC	264738	0	0	0.000000
+Time zone(s)	263680	11	0	0.000000
+ISBN (Old Property)	258226	0	0	0.000000
+Cornell OPAC	256099	0	0	0.000000
+Penn State OPAC	249637	0	0	0.000000
+Runtime	243202	19	0	0.000000
+Kind of composition	239215	0	0	0.000000
+Musical Genre	238098	132308	0	0.000000
+Title ID	235625	341	0	0.000000
+Open Library ID	232545	227669	0	0.000000
+University of Chicago OPAC	220320	0	0	0.000000
+Population	214242	10	0	0.000000
+Rank	203664	11	0	0.000000
+Vote Value	190307	0	0	0.000000
+LCC	188710	0	0	0.000000
+Northwestern OPAC	184616	0	0	0.000000
+Vote	180630	22	0	0.000000
+Author/editor	176541	0	0	0.000000
+Binding/format	171238	0	0	0.000000
+Weight	169971	168317	0	0.000000
+GNIS ID	167301	2	0	0.000000
+ISFDB ID	160804	22	0	0.000000
+Date founded	160773	179	0	0.000000
+Start date	160028	30	0	0.000000
+Scientific name	139325	2	0	0.000000
+Gene	123395	0	0	0.000000
+Symbol	121616	0	0	0.000000
+Genome	121613	0	0	0.000000
+NCBI ID	121381	0	0	0.000000
+Country	115940	22308	0	0.000000
+Running Time	112831	0	0	0.000000
+Film festival	111792	19	0	0.000000
+School district	110920	1	0	0.000000
+NCES School ID (US)	107583	1	0	0.000000
+Locus	102025	0	0	0.000000
+90-Day Vacant Residential Addresses	98374	1	0	0.000000
+Estimated Number of Mortgages	98374	1	0	0.000000
+Household Count	98373	1	0	0.000000
+Total Residential Addresses	98373	1	0	0.000000
+Estimated Number of Foreclosures	98372	1	0	0.000000
+Party	98177	97321	0	0.000000
+Location(s)	90847	11	0	0.000000
+Alternate Symbol	87256	0	0	0.000000
+Date of first publication	86310	8	0	0.000000
+Writer	85454	0	0	0.000000
+Postal Code	83755	0	0	0.000000
+ISWC	79070	1	0	0.000000
+ITIS Taxon S/N	77326	1	0	0.000000
+End date	75324	9	0	0.000000
+Company traded	74484	0	0	0.000000
+Netflix ID	73731	0	0	0.000000
+Production number	70006	1	0	0.000000
+Opened	69730	2	0	0.000000
+Active as Musical Artist (start)	68754	2967	0	0.000000
+GEOID	66163	0	0	0.000000
+Status	65845	8	0	0.000000
+Total Count of Addresses - Business	65738	0	0	0.000000
+Total Count of Addresses - Residential	65738	0	0	0.000000
+Total Count of Addresses in AMS - Other	65738	0	0	0.000000
+Total Count of Vacant Addresses - Business	65738	0	0	0.000000
+Total Count of Vacant Addresses - Other	65738	0	0	0.000000
+Total Count of Vacant Addresses - Residential	65738	0	0	0.000000
+Game	64958	1899	0	0.000000
+Color	64157	9	0	0.000000
+Manufacturer	63739	0	0	0.000000
+Air date of first episode	63122	14	0	0.000000
+Active ingredient	61605	0	0	0.000000
+Original language	60088	14	0	0.000000
+Designation as Natural or Cultural Site	60006	4	0	0.000000
+Platform	57703	0	0	0.000000
+Category	57448	2	0	0.000000
+Dewey decimal number	57357	0	0	0.000000
+Instance of recurring event	54207	1	0	0.000000
+NDC Product ID	51788	0	0	0.000000
+Available in	51771	0	0	0.000000
+Label date	51771	0	0	0.000000
+Label link	51771	0	0	0.000000
+Manufactured form of	51771	0	0	0.000000
+Cause of death	50882	50869	0	0.000000
+Chromosome	50353	0	0	0.000000
+NCBI Taxon ID	50253	0	0	0.000000
+School type	50080	9	0	0.000000
+Discovery Date	49600	0	0	0.000000
+Marketing start date	49296	0	0	0.000000
+Discontinued	49196	0	0	0.000000
+Type of Issue	48169	0	0	0.000000
+Food	48144	0	0	0.000000
+Copyright date	48074	4	0	0.000000
+Issuer	47977	0	0	0.000000
+Delete guid	47601	6	0	0.000000
+Lowest grade taught	46423	0	0	0.000000
+From	45258	1	0	0.000000
+Program	45211	976	0	0.000000
+Distributor	45081	10	0	0.000000
+Circulation Area	44794	0	0	0.000000
+Active ingredient moiety	42197	0	0	0.000000
+Postal code	41290	48	0	0.000000
+Original episode running time	40232	9	0	0.000000
+Production company	39046	2	0	0.000000
+Part of series	38966	0	0	0.000000
+Absolute magnitude	38778	0	0	0.000000
+Member of Asteroid Group	38335	0	0	0.000000
+Sport	36943	1441	0	0.000000
+Package	36540	0	0	0.000000
+TheTVDB.com ID	35823	3	0	0.000000
+Art Form	34398	20371	0	0.000000
+Basin country	33746	1	0	0.000000
+End Base	33318	0	0	0.000000
+Start Base	33317	0	0	0.000000
+Annotation	33307	0	0	0.000000
+Build	33307	0	0	0.000000
+QuotationsBook ID	33245	759	0	0.000000
+Festival	32519	0	0	0.000000
+Strand	32438	0	0	0.000000
+State/Province/Region	31767	8	0	0.000000
+Broader Group	31748	0	0	0.000000
+post	31412	0	0	0.000000
+Adjoins	30620	2	0	0.000000
+Legal status	30620	0	0	0.000000
+FDA application number	30355	0	0	0.000000
+Generic drug	30279	0	0	0.000000
+Route of administration	29545	0	0	0.000000
+Trailer	29344	8	0	0.000000
+Gameplay mode	29273	4	0	0.000000
+County	29123	1	0	0.000000
+Service	29123	29064	0	0.000000
+County Place ID	29102	1	0	0.000000
+Founded	28850	9	0	0.000000
+OCLC number	28345	1	0	0.000000
+Participated in conflict	28143	28121	0	0.000000
+Discoverer	27005	0	0	0.000000
+Mean elevation	26952	0	0	0.000000
+Synonym Term	26894	0	0	0.000000
+Brand name	26368	0	0	0.000000
+Routed drug	26124	0	0	0.000000
+Included in event	25880	1	0	0.000000
+Number of episodes	25462	8	0	0.000000
+Air date of final episode	25354	5	0	0.000000
+Currently in production	24832	6	0	0.000000
+Active moiety	24678	0	0	0.000000
+Rated	24260	0	0	0.000000
+TVRage Series ID	24229	4	0	0.000000
+Size	24227	210	0	0.000000
+Shape	23709	0	0	0.000000
+Identifier	23563	0	0	0.000000
+Parent organization	23557	3	0	0.000000
+Scoring	23517	0	0	0.000000
+Imprint	23084	0	0	0.000000
+Data Source	22668	0	0	0.000000
+Group Type	22668	0	0	0.000000
+Formulation of	22416	0	0	0.000000
+Orbit Eccentricity	21879	0	0	0.000000
+Description	21854	0	0	0.000000
+Orbit	21553	0	0	0.000000
+Elevation	21034	0	0	0.000000
+Star system	20754	0	0	0.000000
+Delineates location	20723	0	0	0.000000
+Launched	20485	0	0	0.000000
+Inclination	20176	0	0	0.000000
+Area Served	20087	4	0	0.000000
+Highest grade taught	19846	0	0	0.000000
+Appears in ranked list	19710	1247	0	0.000000
+Band	19619	0	0	0.000000
+Length overall	19047	0	0	0.000000
+Discovery Site	18967	0	0	0.000000
+Mouth	18881	0	0	0.000000
+LEAID (US)	18791	0	0	0.000000
+Discovery Organization	18181	0	0	0.000000
+Near travel destination	18166	5	0	0.000000
+Dosage form	17674	0	0	0.000000
+Drug category	17674	0	0	0.000000
+Left guid	17619	2	0	0.000000
+Right guid	17619	2	0	0.000000
+topic	17374	0	0	0.000000
+Program creator	17189	1	0	0.000000
+Geographic scope	17094	17	0	0.000000
+Recorded as album	16840	3	0	0.000000
+Date written	16619	2	0	0.000000
+In shopping center	16561	1	0	0.000000
+Rotten Tomato ID	16419	2	0	0.000000
+Number of seasons	16222	4	0	0.000000
+Medium	15750	0	0	0.000000
+Structural Height	15679	0	0	0.000000
+Architect	15626	0	0	0.000000
+Date Established	15250	0	0	0.000000
+Military Conflict	15192	0	0	0.000000
+Emissions	14810	0	0	0.000000
+Next in series	14736	0	0	0.000000
+Active as Musical Artist (end)	14701	609	0	0.000000
+Second level division of	14500	1	0	0.000000
+Adapted From	14454	3	0	0.000000
+FDA OTC monograph part	14023	0	0	0.000000
+Published In	13877	7	0	0.000000
+Sector	13803	50	0	0.000000
+Mountain range	13621	0	0	0.000000
+Career Start	13616	13614	0	0.000000
+Keel laid	13431	0	0	0.000000
+Category of	13310	0	0	0.000000
+Artwork owned	12971	135	0	0.000000
+Part of	12667	4	0	0.000000
+Nearby airport	12638	3	0	0.000000
+Owner	12572	2	0	0.000000
+Major city	12550	0	0	0.000000
+THOMAS ID	12412	12411	0	0.000000
+time/event/next_in_series	12331	0	0	0.000000
+time/event/previous_in_series	12331	0	0	0.000000
+Date Completed	12226	2	0	0.000000
+Transit Line	12220	0	0	0.000000
+Comparable Aircraft	12074	0	0	0.000000
+Date Begun	12011	0	0	0.000000
+Date Opened	11700	1	0	0.000000
+Language Family	11308	0	0	0.000000
+License	10989	0	0	0.000000
+Language spoken	10669	14	0	0.000000
+Appears In These Fictional Universe	10643	23	0	0.000000
+ICAO	10466	1	0	0.000000
+Tagline	10309	0	0	0.000000
+Prominence	10172	0	0	0.000000
+URI	10172	0	0	0.000000
+Code	10162	0	0	0.000000
+Library System	10030	0	0	0.000000
+Ideology	9942	0	0	0.000000
+Non-profit organization	9912	0	0	0.000000
+Origin	9880	1	0	0.000000
+Software	9845	0	0	0.000000
+Average Molar Mass	9762	0	0	0.000000
+Neighborhood of	9660	0	0	0.000000
+Author(s)	9573	0	0	0.000000
+Play	9558	2	0	0.000000
+Admin Vote	9538	0	0	0.000000
+Parent Classification	9474	0	0	0.000000
+IATA	9466	1	0	0.000000
+Legal structure	9350	19	0	0.000000
+Film Series	9225	0	0	0.000000
+NCES Code (USA)	9193	0	0	0.000000
+Annual Visits	9191	0	0	0.000000
+Collection Size	9190	0	0	0.000000
+Annual Circulation	9187	0	0	0.000000
+Presenting Organization	9175	0	0	0.000000
+Central Library	9113	0	0	0.000000
+avg pts	8991	0	0	0.000000
+Ship builder	8891	0	0	0.000000
+Magazine	8886	1	0	0.000000
+ISO 639-3 Code	8877	0	0	0.000000
+Date of first occurrence	8863	1	0	0.000000
+Play Appears In	8844	24	0	0.000000
+Constellation	8712	0	0	0.000000
+Date of election	8679	0	0	0.000000
+Formed	8672	0	0	0.000000
+ISSN (print)	8670	1	0	0.000000
+uri	8503	7495	0	0.000000
+Designer	8441	0	0	0.000000
+Routed drug of	8376	0	0	0.000000
+Producing Company	8362	1	0	0.000000
+Number of undergraduates	8359	2	0	0.000000
+Capital	8262	1	0	0.000000
+Sequel	8214	0	0	0.000000
+City	8198	0	0	0.000000
+Made by company	8180	2	0	0.000000
+Surface elevation	8158	0	0	0.000000
+Play produced	8108	8108	0	0.000000
+Wingspan	7974	0	0	0.000000
+Related model	7914	0	0	0.000000
+Mouth Elevation	7868	1	0	0.000000
+Patent	7823	2343	0	0.000000
+Ship Class	7814	0	0	0.000000
+Notable filming location	7785	0	0	0.000000
+Software Genre	7723	0	0	0.000000
+Theater production venue relationship	7722	1	0	0.000000
+Main Country	7685	0	0	0.000000
+Structure (SMILES)	7684	0	0	0.000000
+Draught	7388	0	0	0.000000
+Award categories	7358	0	0	0.000000
+Performed At	7257	0	0	0.000000
+ISO 3166-2 Code	7189	1	0	0.000000
+Number of faculty	7183	3	0	0.000000
+Date Closed	7109	0	0	0.000000
+Date completed	7028	0	0	0.000000
+Discipline	6968	0	0	0.000000
+Part of game series	6963	0	0	0.000000
+Cuisine	6884	106	0	0.000000
+Used To Treat	6823	0	0	0.000000
+FIPS 10-4 Region Code	6737	1	0	0.000000
+Ceased Operations	6713	10	0	0.000000
+Coterminous with	6490	0	0	0.000000
+Arena/Stadium	6481	5	0	0.000000
+Symptom of	6432	0	0	0.000000
+Maximum Speed	6357	0	0	0.000000
+Vintage	6313	0	0	0.000000
+Formula	6286	0	0	0.000000
+Surface area	6280	0	0	0.000000
+Location	6276	22	0	0.000000
+Maiden flight	6258	0	0	0.000000
+Venue	6207	3	0	0.000000
+General election	6178	0	0	0.000000
+Wine	6178	0	0	0.000000
+Home venue for	6113	0	0	0.000000
+League	6101	0	0	0.000000
+Power or Ability	6060	11	0	0.000000
+Project focus	6044	6	0	0.000000
+Island Group	5928	0	0	0.000000
+Olympic game contested	5847	26	0	0.000000
+Venture Investment	5825	458	0	0.000000
+Noble rank	5790	107	0	0.000000
+Total Enrollment	5720	2	0	0.000000
+Film format	5690	0	0	0.000000
+Make	5682	0	0	0.000000
+Partially contained by	5611	0	0	0.000000
+Martial Art(s)	5460	5459	0	0.000000
+Organization type	5423	26	0	0.000000
+Programming language used	5416	0	0	0.000000
+Aviation ID	5352	0	0	0.000000
+Building Function	5341	0	0	0.000000
+Apparent Magnitude	5302	0	0	0.000000
+Hub	5248	0	0	0.000000
+Parent aircraft model	5169	0	0	0.000000
+Narrower Term	5100	0	0	0.000000
+Ca ID	5099	0	0	0.000000
+Affiliation	5060	0	0	0.000000
+Organism type	5041	32	0	0.000000
+Automotive Class	5040	0	0	0.000000
+Metacritic film ID	4962	0	0	0.000000
+Event	4952	0	0	0.000000
+Translation Of	4923	2	0	0.000000
+HUD ID	4763	1	0	0.000000
+Floors	4658	0	0	0.000000
+Organisation	4635	1	0	0.000000
+Aggregate Group	4598	0	0	0.000000
+Discipline or subject	4580	0	0	0.000000
+Weight division	4565	4565	0	0.000000
+Parent Disease	4526	0	0	0.000000
+Date of First Performance	4521	0	0	0.000000
+Sport Team Location	4485	5	0	0.000000
+Target language	4441	0	0	0.000000
+Olympic game contested in	4413	0	0	0.000000
+Jurisdiction of agency's government	4378	1	0	0.000000
+Specialization Of	4348	23	0	0.000000
+Basin area	4312	0	0	0.000000
+Date Discontinued	4255	0	0	0.000000
+Entrez gene id	4246	0	0	0.000000
+Flavor	4245	0	0	0.000000
+Film dubbing performance	4198	4198	0	0.000000
+Body Of Water	4186	0	0	0.000000
+Size or Type	4131	0	0	0.000000
+Date of Birth	4115	10	0	0.000000
+Trailer Addict ID	4090	0	0	0.000000
+Mascot	4081	2	0	0.000000
+Currently used by religion(s)	4068	1	0	0.000000
+Patent expiry date	4020	0	0	0.000000
+Career End	3907	3907	0	0.000000
+Champion	3905	0	0	0.000000
+Tournament	3896	0	0	0.000000
+Source of exchange	3872	0	0	0.000000
+Introduced	3868	1	0	0.000000
+Brewery / brand	3798	0	0	0.000000
+Serf area	3763	1	0	0.000000
+Parent Institution	3707	2	0	0.000000
+Body Of Water Spanned	3681	0	0	0.000000
+ISO setting	3637	0	0	0.000000
+Locale	3621	0	0	0.000000
+Source	3599	2	0	0.000000
+To	3598	1	0	0.000000
+Summary	3593	0	0	0.000000
+Lake Type	3587	0	0	0.000000
+Max. depth	3582	0	0	0.000000
+Terminus For Line	3576	0	0	0.000000
+Type of place of worship	3518	0	0	0.000000
+Song	3498	5	0	0.000000
+Department	3497	3497	0	0.000000
+Aircraft type	3464	1	0	0.000000
+Character	3438	4	0	0.000000
+Winner	3400	1	0	0.000000
+Bridge Type	3376	0	0	0.000000
+Number of postgraduates	3349	2	0	0.000000
+Compatible with dietary restriction	3334	0	0	0.000000
+Art Subject	3330	1	0	0.000000
+Uncertainty	3309	0	0	0.000000
+Governing Body	3300	0	0	0.000000
+Medium Format	3294	0	0	0.000000
+Website launched	3271	6	0	0.000000
+Max. length	3267	0	0	0.000000
+Seating capacity	3262	0	0	0.000000
+HUD Section 8 Area	3246	0	0	0.000000
+Extension	3236	0	0	0.000000
+Listing	3201	0	0	0.000000
+Alcohol by volume	3186	0	0	0.000000
+Isotope of	3176	0	0	0.000000
+Mass number	3176	0	0	0.000000
+GEOnet feature ID	3164	1	0	0.000000
+Pharmacological class	3163	0	0	0.000000
+Wine Producer	3132	0	0	0.000000
+Mountain type	3110	0	0	0.000000
+Competition	3107	2945	0	0.000000
+Key	3091	0	0	0.000000
+Date dissolved	3090	3	0	0.000000
+Sex	3082	20	0	0.000000
+Tennis Titles	3055	3055	0	0.000000
+PubChem ID	3053	0	0	0.000000
+Latest Release Date	3027	0	0	0.000000
+Belongs to Order	3020	3020	0	0.000000
+Place of origin	2991	0	0	0.000000
+Shoot	2991	2991	0	0.000000
+Read By	2988	0	0	0.000000
+Instance of recurring competition	2984	0	0	0.000000
+Container	2955	0	0	0.000000
+Written By	2953	0	0	0.000000
+Aircraft Fleet Composition	2946	3	0	0.000000
+From region	2936	0	0	0.000000
+Total Length	2914	0	0	0.000000
+Max. width	2887	0	0	0.000000
+Wine Type	2862	0	0	0.000000
+Affected area	2820	0	0	0.000000
+Hall of fame induction	2801	2522	0	0.000000
+Support	2794	0	0	0.000000
+TV program	2764	27	0	0.000000
+Art Genre	2741	0	0	0.000000
+Outflow location	2739	0	0	0.000000
+Year Turned Pro	2728	2726	0	0.000000
+Disease with this Risk Factor	2727	6	0	0.000000
+Product line	2716	0	0	0.000000
+Total fatalities	2707	2	0	0.000000
+Part of fictional universe	2697	0	0	0.000000
+Period or Movement	2694	0	0	0.000000
+Batting Style	2693	2693	0	0.000000
+Beam	2681	0	0	0.000000
+Zoo	2676	0	0	0.000000
+School or Movement	2662	1290	0	0.000000
+Character ID	2660	34	0	0.000000
+Jurisdiction	2653	2	0	0.000000
+Number of employees	2647	9	0	0.000000
+TV episodes produced	2608	2548	0	0.000000
+Transit System	2592	0	0	0.000000
+Unit size designation	2589	1	0	0.000000
+Child Classification	2583	0	0	0.000000
+Current frequency	2579	0	0	0.000000
+Section 8 Area ID	2575	0	0	0.000000
+Density	2567	0	0	0.000000
+Number Of Items	2554	0	0	0.000000
+Date Published	2549	0	0	0.000000
+Date Founded	2542	1	0	0.000000
+County Seat	2533	0	0	0.000000
+Opera appears in	2505	6	0	0.000000
+Wine Region	2505	0	0	0.000000
+Parent genre	2498	3	0	0.000000
+Artwork	2493	3	0	0.000000
+footballdb ID	2462	2462	0	0.000000
+Company	2446	12	0	0.000000
+Stable (Y/N)	2446	0	0	0.000000
+Opening Date	2443	1	0	0.000000
+On celestial object	2436	0	0	0.000000
+Armed force	2430	0	0	0.000000
+Slogan	2420	6	0	0.000000
+Temperament	2417	0	0	0.000000
+Inflow source(s)	2412	0	0	0.000000
+Institution	2346	0	0	0.000000
+NAICS 2007 code	2339	3	0	0.000000
+Successor	2329	0	0	0.000000
+Court	2322	2	0	0.000000
+Structure Owned	2309	755	0	0.000000
+IATA airline designator	2291	0	0	0.000000
+Mean depth	2285	0	0	0.000000
+Drafted	2278	2278	0	0.000000
+Canonical drug	2253	0	0	0.000000
+Publication Frequency	2241	0	0	0.000000
+Winner(s)	2239	0	0	0.000000
+ICAO Airline designator	2221	0	0	0.000000
+Engine Type	2201	0	0	0.000000
+Half-life	2189	0	0	0.000000
+Beds	2170	0	0	0.000000
+Pregnancy category	2169	0	0	0.000000
+Us game engine	2167	0	0	0.000000
+Rushing	2143	2143	0	0.000000
+Arrangements	2135	0	0	0.000000
+Range	2115	0	0	0.000000
+IUCN Category	2113	0	0	0.000000
+Park	2113	0	0	0.000000
+Width	2093	0	0	0.000000
+Election	2092	0	0	0.000000
+Location served	2078	0	0	0.000000
+Patent Number	2050	0	0	0.000000
+Typical ingredient	2027	0	0	0.000000
+Type of competition	2026	0	0	0.000000
+Average Media Length	2015	0	0	0.000000
+Architecture Firm	2012	0	0	0.000000
+Athletics brand	2010	0	0	0.000000
+Championship	1943	0	0	0.000000
+Mode Of Transit	1921	0	0	0.000000
+Release date	1918	0	0	0.000000
+Type of museum	1918	2	0	0.000000
+Wine Sub-region	1918	0	0	0.000000
+Cancellation date	1917	0	0	0.000000
+Condition	1915	1912	0	0.000000
+Type of planetographic feature	1908	0	0	0.000000
+Type of disaster	1905	1	0	0.000000
+Longest Span	1903	0	0	0.000000
+More general ingredient	1868	0	0	0.000000
+Wickets	1849	0	0	0.000000
+Place of Birth	1846	47	0	0.000000
+Appellation	1812	0	0	0.000000
+Geographic distribution	1807	3	0	0.000000
+Video game	1807	0	0	0.000000
+Company ID	1804	49	0	0.000000
+Supported Storage Type	1792	0	0	0.000000
+Date of invention	1788	0	0	0.000000
+Mode Of Writing	1779	1	0	0.000000
+Hulu show ID	1774	1	0	0.000000
+Shore length	1769	0	0	0.000000
+Bowling Style	1764	1764	0	0.000000
+Technique	1749	1749	0	0.000000
+Hour (end)	1740	0	0	0.000000
+Video Type	1727	0	0	0.000000
+Theme Song For	1719	6	0	0.000000
+Average discharge	1695	1	0	0.000000
+Percentage alcohol	1695	0	0	0.000000
+Non Vintage (NV)	1683	0	0	0.000000
+Facility ID	1673	0	0	0.000000
+Crew	1662	1	0	0.000000
+School	1641	1	0	0.000000
+Translator	1634	0	0	0.000000
+Interior illustration by	1624	0	0	0.000000
+Stream Format	1609	0	0	0.000000
+Regular Featured Appearance	1602	2	0	0.000000
+Closed	1599	0	0	0.000000
+Boiling point	1593	0	0	0.000000
+Space Mission	1586	1586	0	0.000000
+Date of first ascent	1581	0	0	0.000000
+Coating	1569	0	0	0.000000
+Symbol mark	1567	0	0	0.000000
+Focus city for	1559	0	0	0.000000
+Office	1543	0	0	0.000000
+Stream Bitrate	1537	0	0	0.000000
+Librettist	1531	0	0	0.000000
+Website owned new	1528	235	0	0.000000
+Holding	1512	1381	0	0.000000
+Playlist Format	1504	0	0	0.000000
+Passengers	1502	1	0	0.000000
+Found in fictional universe	1499	2	0	0.000000
+Melting point	1495	0	0	0.000000
+Operator	1495	0	0	0.000000
+Breed of	1476	0	0	0.000000
+Exhibition type(s)	1458	1	0	0.000000
+Related Term	1444	0	0	0.000000
+Setting	1435	0	0	0.000000
+Featured in film	1427	0	0	0.000000
+Branding	1410	0	0	0.000000
+Construction Started	1397	0	0	0.000000
+Mechanism of action	1374	0	0	0.000000
+First ascent	1368	1368	0	0.000000
+Disease or condition caused	1367	2	0	0.000000
+InChI Key	1363	0	0	0.000000
+Killed in disaster	1351	1339	0	0.000000
+Periodical edited	1343	1343	0	0.000000
+Associated medical specialty	1329	0	0	0.000000
+Form of Government	1326	0	0	0.000000
+Pace	1319	1319	0	0.000000
+Website status	1303	7	0	0.000000
+Orbital Period	1287	0	0	0.000000
+TV episode crewed	1274	1274	0	0.000000
+Spoken in country	1272	0	0	0.000000
+Part of multipart episode	1270	0	0	0.000000
+ATC Code	1251	0	0	0.000000
+Survivors	1249	1	0	0.000000
+Runner-up	1241	0	0	0.000000
+Writing System	1236	0	0	0.000000
+Building Complex	1224	0	0	0.000000
+Language Paradigm	1216	6	0	0.000000
+Ride Type	1212	0	0	0.000000
+topic_server/schemastaging_corresponding_entities_type	1192	0	0	0.000000
+Fruit Source	1169	0	0	0.000000
+First level division of	1167	0	0	0.000000
+Included in group(s)	1165	1	0	0.000000
+Average Orbital Speed	1156	0	0	0.000000
+Year	1153	0	0	0.000000
+Facility	1151	0	0	0.000000
+Supporting tour	1143	0	0	0.000000
+Presented by	1139	5	0	0.000000
+Parent cause of death	1126	0	0	0.000000
+Part of Series	1124	0	0	0.000000
+Held at	1119	0	0	0.000000
+Journal publication	1111	2	0	0.000000
+Kingdom	1100	1096	0	0.000000
+Conference	1099	1	0	0.000000
+Retired	1088	0	0	0.000000
+Operated by	1052	0	0	0.000000
+Year first lit	1052	0	0	0.000000
+Effective resolution	1046	0	0	0.000000
+COSPAR Id	1045	0	0	0.000000
+Cruise Speed	1039	0	0	0.000000
+Energy per 100g	1036	0	0	0.000000
+Fighter	1022	0	0	0.000000
+Drugbank	1021	0	0	0.000000
+LCD screen dimensions	1021	0	0	0.000000
+Production Start	1021	14	0	0.000000
+Transit service type	1021	0	0	0.000000
+Distributed through	1011	0	0	0.000000
+Taken by	1002	0	0	0.000000
+Accommodation type	995	0	0	0.000000
+Part of Brand	994	0	0	0.000000
+Format Creator	984	0	0	0.000000
+Measurement	980	980	0	0.000000
+Destruction Date	977	0	0	0.000000
+thread type	976	0	0	0.000000
+Percent new oak	975	0	0	0.000000
+Vineyard	967	0	0	0.000000
+link	961	0	0	0.000000
+CBSA ID	953	0	0	0.000000
+Previous in narrative	952	0	0	0.000000
+Place lived	948	7	0	0.000000
+UIC classification	948	0	0	0.000000
+Date of burial	944	944	0	0.000000
+USDA Equivalent	935	0	0	0.000000
+Clearance Below	933	0	0	0.000000
+Primary language	929	0	0	0.000000
+LCD screen resolution	917	0	0	0.000000
+Number of holes	915	0	0	0.000000
+Year Built	915	0	0	0.000000
+Dissipated	912	0	0	0.000000
+Par	911	0	0	0.000000
+Previous teams	911	911	0	0.000000
+Patent office	910	0	0	0.000000
+Appears In Story	908	3	0	0.000000
+Catchment area	908	0	0	0.000000
+Story Specific Appearance	901	4	0	0.000000
+Issue Date	896	0	0	0.000000
+IMO / LR identification number	885	0	0	0.000000
+Designed by	884	0	0	0.000000
+District (if district-related)	880	0	0	0.000000
+item id	880	0	0	0.000000
+Height with antenna/spire	879	0	0	0.000000
+Universe	878	0	0	0.000000
+Associated Invention	876	0	0	0.000000
+Application Date	871	0	0	0.000000
+feed	870	0	0	0.000000
+Poll end date	857	0	0	0.000000
+Spun-off from	857	0	0	0.000000
+Tour operators	857	0	0	0.000000
+Number polled	856	0	0	0.000000
+Poll start date	856	0	0	0.000000
+Type of people polled	856	0	0	0.000000
+Margin of error	854	0	0	0.000000
+Number Of Issues	852	0	0	0.000000
+Division	835	0	0	0.000000
+Max Speed	834	0	0	0.000000
+Date	822	0	0	0.000000
+Handed	818	818	0	0.000000
+Book edition illustrated	812	807	0	0.000000
+Automated date	811	0	0	0.000000
+Compressed Format	806	0	0	0.000000
+Party (if partisan)	805	0	0	0.000000
+Area affected	801	1	0	0.000000
+Access	800	0	0	0.000000
+Built by	797	0	0	0.000000
+Type of dish	795	1	0	0.000000
+Callsign meaning	793	0	0	0.000000
+Inversions	789	0	0	0.000000
+Track Length	786	0	0	0.000000
+Feature	785	0	0	0.000000
+Vehicle Category	781	0	0	0.000000
+Draft	779	0	0	0.000000
+Result	777	0	0	0.000000
+Legislature	772	1	0	0.000000
+Fraternity and sorority	770	3	0	0.000000
+Roller Coaster DataBase ID	768	0	0	0.000000
+Max. Length	764	0	0	0.000000
+Broader Term	750	0	0	0.000000
+Date Written	750	0	0	0.000000
+Condition This May Prevent	744	0	0	0.000000
+Tail number	744	0	0	0.000000
+Digital zoom	742	0	0	0.000000
+Launch Date	742	0	0	0.000000
+Type	742	0	0	0.000000
+Latest Version	737	0	0	0.000000
+Material	737	0	0	0.000000
+Imprint of	734	3	0	0.000000
+Involved in merger	731	2	0	0.000000
+Climate	725	12	0	0.000000
+Date of first performance	720	0	0	0.000000
+Book edition series	718	0	0	0.000000
+First Released	716	0	0	0.000000
+Olympics participated in	715	0	0	0.000000
+Ha possessed (fictional object)	714	11	0	0.000000
+Total injuries	711	1	0	0.000000
+Origin Elevation	709	0	0	0.000000
+Displacement	706	0	0	0.000000
+Fandango ID	699	0	0	0.000000
+Height Restriction	697	0	0	0.000000
+ODI Stumps	690	690	0	0.000000
+Country Of Origin	687	0	0	0.000000
+Aircraft	682	1	0	0.000000
+Contained By (Fictional Places)	680	0	0	0.000000
+Total height	670	0	0	0.000000
+USDA ID	668	0	0	0.000000
+Callsign	658	0	0	0.000000
+Day Of Year	656	0	0	0.000000
+Supplier	653	7	0	0.000000
+Parent Company	643	1	0	0.000000
+Reference form	640	0	0	0.000000
+Setting type	638	0	0	0.000000
+Incompatible with dietary restriction	636	0	0	0.000000
+Official Language	634	0	0	0.000000
+Long list nominations	632	632	0	0.000000
+Asset owned	627	77	0	0.000000
+Duration	625	0	0	0.000000
+Construction	611	0	0	0.000000
+Marketing end date	608	0	0	0.000000
+Parent Website	607	1	0	0.000000
+Number of performances	599	0	0	0.000000
+Vitamin_C_per_100g_in_mg	596	0	0	0.000000
+Orchestrator	593	0	0	0.000000
+Organization Membership	592	0	0	0.000000
+Education	586	9	0	0.000000
+Coaching history	563	563	0	0.000000
+Airport Served	560	0	0	0.000000
+Government	560	0	0	0.000000
+Addressee	553	1	0	0.000000
+Actual completion date	552	0	0	0.000000
+Flight destination	552	0	0	0.000000
+Part Of Series	550	0	0	0.000000
+Filming location	549	0	0	0.000000
+Sensor type	549	0	0	0.000000
+Flight origin	540	0	0	0.000000
+Home Team	538	0	0	0.000000
+Away Team	537	0	0	0.000000
+Week	534	0	0	0.000000
+Belongs to Series	532	0	0	0.000000
+House ID	530	530	0	0.000000
+Award	529	0	0	0.000000
+Bordering constellation	526	0	0	0.000000
+Used On	523	0	0	0.000000
+Highway system	521	0	0	0.000000
+Date Of First Strip	519	2	0	0.000000
+Source Of Milk	519	0	0	0.000000
+First TV appearance	516	0	0	0.000000
+Completions	512	0	0	0.000000
+IUPAC ID	510	0	0	0.000000
+Last eruption	509	0	0	0.000000
+Tournament contested in	509	0	0	0.000000
+Capacity (riders per hour)	508	0	0	0.000000
+Chemical series	507	0	0	0.000000
+Reason for ceasing operation	504	4	0	0.000000
+Body this is a component of	502	0	0	0.000000
+Part of larger project	500	1	0	0.000000
+Parent brand	497	0	0	0.000000
+Space program	497	0	0	0.000000
+Physiologic effect	491	0	0	0.000000
+Ship type (ex: oil tanker, destroyer)	491	0	0	0.000000
+Medical condition	488	23	0	0.000000
+Place Recorded	486	0	0	0.000000
+Space Agency	484	484	0	0.000000
+ONS code	483	0	0	0.000000
+Propulsion	480	0	0	0.000000
+Travel destination served	478	0	0	0.000000
+Nickname	476	4	0	0.000000
+Drop	474	0	0	0.000000
+Spin	474	0	0	0.000000
+Attendance	473	0	0	0.000000
+Calendar	472	0	0	0.000000
+Network	464	0	0	0.000000
+Mass	462	0	0	0.000000
+Beer style	458	0	0	0.000000
+Advisory	456	0	0	0.000000
+Part of conference series	454	0	0	0.000000
+Synonym scientific name	454	1	0	0.000000
+Field	453	1	0	0.000000
+Date of final occurrence	448	0	0	0.000000
+Game Included	448	0	0	0.000000
+Retail floor space	448	0	0	0.000000
+Appears in universe	447	0	0	0.000000
+Orientation Sensor	443	0	0	0.000000
+Date Recorded	441	0	0	0.000000
+Currency Used	440	0	0	0.000000
+Religion(s) That Worship This Deity	438	30	0	0.000000
+Vocal Range	433	431	0	0.000000
+Restaurant in Hotel	431	0	0	0.000000
+G code	429	0	0	0.000000
+Type of Organization	428	0	0	0.000000
+Inception	427	0	0	0.000000
+member of language family	420	0	0	0.000000
+DPReview Detail ID	418	0	0	0.000000
+Sensor resolution	414	0	0	0.000000
+Team Owned	414	258	0	0.000000
+Fuel Used	411	0	0	0.000000
+Part of general election	411	0	0	0.000000
+Gauge (mm)	410	0	0	0.000000
+Follow-on election	407	0	0	0.000000
+Last perihelion	406	0	0	0.000000
+Motto	406	1	0	0.000000
+Opera	406	0	0	0.000000
+Survived disaster	405	404	0	0.000000
+Spin offs	403	1	0	0.000000
+Concert	402	104	0	0.000000
+Updated	402	0	0	0.000000
+Number of islands (approx.)	399	0	0	0.000000
+Number of drops	391	0	0	0.000000
+Number of Events	377	0	0	0.000000
+Protocol Used	376	0	0	0.000000
+Related Industry	376	3	0	0.000000
+Test Stumps	375	375	0	0.000000
+Subcategory of	374	0	0	0.000000
+Wide Focal Length	374	0	0	0.000000
+Tele Focal Length	373	0	0	0.000000
+Cover Appearance	372	1	0	0.000000
+Day	370	0	0	0.000000
+Semi-major Axis	370	0	0	0.000000
+Used by	370	0	0	0.000000
+Percent of population	368	0	0	0.000000
+Place(s) composed	366	0	0	0.000000
+Adjectival form	365	1	0	0.000000
+Exhibition displayed in	365	1	0	0.000000
+Theme	364	0	0	0.000000
+Speech or presentation	361	361	0	0.000000
+District seat	357	0	0	0.000000
+Ingredient	357	0	0	0.000000
+Musical composition about this topic	357	56	0	0.000000
+Classification	356	0	0	0.000000
+Contractor	356	0	0	0.000000
+TV Segment Performances	356	355	0	0.000000
+Associated With	352	1	0	0.000000
+Planet	352	0	0	0.000000
+Appears in these work	349	0	0	0.000000
+Diameter	348	0	0	0.000000
+Festivals sponsored	347	1	0	0.000000
+Orbit period	347	0	0	0.000000
+Parent product line	347	0	0	0.000000
+Horsepower	345	0	0	0.000000
+Mall ID	344	0	0	0.000000
+Number of Guest Rooms	344	0	0	0.000000
+Domain Type	343	0	0	0.000000
+Launch Mass	343	0	0	0.000000
+Torque	343	0	0	0.000000
+G-force	342	0	0	0.000000
+Supported Architecture	341	0	0	0.000000
+Degree	340	0	0	0.000000
+Featured in religion	338	0	0	0.000000
+Appeared in comic strip	336	1	0	0.000000
+Primary Universe	336	1	0	0.000000
+ISSN (electronic)	335	0	0	0.000000
+Processor supported	335	0	0	0.000000
+Fictional universe	333	0	0	0.000000
+Sponsor	333	0	0	0.000000
+Year discovered	333	0	0	0.000000
+Established	332	1	0	0.000000
+Destroyed By	329	0	0	0.000000
+National anthem of	329	0	0	0.000000
+Total storms	329	0	0	0.000000
+Official symbol of	328	0	0	0.000000
+Holiday Category	327	0	0	0.000000
+Number of Animals	326	0	0	0.000000
+Third level division of	324	1	0	0.000000
+Date began	321	1	0	0.000000
+Governmental body (if any)	321	1	0	0.000000
+Standalone	321	0	0	0.000000
+System	321	0	0	0.000000
+Internet TLD	317	0	0	0.000000
+Maximum speed	317	0	0	0.000000
+ISO 639-1 Code	316	0	0	0.000000
+Current team head coached	315	315	0	0.000000
+Top elevation	315	0	0	0.000000
+Work cited	314	0	0	0.000000
+Breed	313	1	0	0.000000
+Higher Classification	310	0	0	0.000000
+Launch Vehicle	308	0	0	0.000000
+Animal owned	306	234	0	0.000000
+Featured in Fictional Universe	305	0	0	0.000000
+Part Of Line	305	0	0	0.000000
+Editor of this edition	303	0	0	0.000000
+Member of Asteroid Family	303	0	0	0.000000
+Skiable area	303	0	0	0.000000
+First storm formed	302	0	0	0.000000
+Founding school	300	1	0	0.000000
+Later known a	299	1	0	0.000000
+Last storm dissipated	298	0	0	0.000000
+Minimum age	298	0	0	0.000000
+Vertical Resolution	298	0	0	0.000000
+Closing date	294	0	0	0.000000
+Natural abundance (Earth)	294	0	0	0.000000
+Work Reviewed	294	1	0	0.000000
+Tower shape	292	0	0	0.000000
+type of writing	292	0	0	0.000000
+Volume	290	0	0	0.000000
+Place built	287	0	0	0.000000
+Glacier Type	286	0	0	0.000000
+geographic distribution	286	0	0	0.000000
+Intro	285	1	0	0.000000
+Structure Count	285	284	0	0.000000
+Alliance	283	0	0	0.000000
+Calling Code	280	0	0	0.000000
+Parent O	279	0	0	0.000000
+Committee of	278	2	0	0.000000
+Opposite-gender equivalent	274	7	0	0.000000
+Serialized Work	274	0	0	0.000000
+Appears in poem	273	11	0	0.000000
+Citation	266	0	0	0.000000
+Price range	266	0	0	0.000000
+Religious order	266	0	0	0.000000
+Test Matches Refereed	266	266	0	0.000000
+Created by	265	0	0	0.000000
+First broadcast	264	1	0	0.000000
+Major storms (cat. 3 or higher)	262	0	0	0.000000
+Hybrid	260	0	0	0.000000
+Measurement System	259	0	0	0.000000
+Catches	258	0	0	0.000000
+Base elevation	257	0	0	0.000000
+Performed by	256	0	0	0.000000
+Site	256	1	0	0.000000
+Date of Translation	255	1	0	0.000000
+Highest winds	255	0	0	0.000000
+Model	254	0	0	0.000000
+Sport used for	254	0	0	0.000000
+Athlete	253	0	0	0.000000
+Emulated Computer	252	0	0	0.000000
+Closest city	251	0	0	0.000000
+Temperature	251	0	0	0.000000
+ISO Alpha 2	250	0	0	0.000000
+Registry	250	0	0	0.000000
+ISO Numeric	247	0	0	0.000000
+Currency Code	246	0	0	0.000000
+Number of spans	246	0	0	0.000000
+Casualties	244	0	0	0.000000
+ISO Alpha 3	242	0	0	0.000000
+Place of cremation	242	242	0	0.000000
+Planned completion date	242	1	0	0.000000
+Spectral Type	241	0	0	0.000000
+Alternate Of Primary Line	240	0	0	0.000000
+FIPS Code	240	0	0	0.000000
+Side effect of	239	0	0	0.000000
+Issue Number	238	0	0	0.000000
+Parent Model	238	0	0	0.000000
+Place of first performance	238	0	0	0.000000
+Official website	236	0	0	0.000000
+Fictional Organization Founder	235	1	0	0.000000
+Type of infectious agent	235	0	0	0.000000
+Included by these event	234	0	0	0.000000
+Radius	234	0	0	0.000000
+Rosetta Project Code	234	0	0	0.000000
+Parent category	232	1	0	0.000000
+Transit Agency	232	0	0	0.000000
+"The Word"	231	1	0	0.000000
+Local transportation	230	5	0	0.000000
+Ceremony	229	0	0	0.000000
+Registered with	229	0	0	0.000000
+Distance	228	0	0	0.000000
+Light shedder	227	0	0	0.000000
+Minimum playing time	227	0	0	0.000000
+Expansion For	226	0	0	0.000000
+Floor Space	226	0	0	0.000000
+Discovery Technique	224	0	0	0.000000
+Near-Earth Object Classification	224	0	0	0.000000
+Follows diet	222	218	0	0.000000
+category	221	0	0	0.000000
+ISO Short Name	220	0	0	0.000000
+Founder	219	0	0	0.000000
+Place exported to	217	0	0	0.000000
+Started	216	4	0	0.000000
+Absolute Magnitude	215	0	0	0.000000
+Processor	215	0	0	0.000000
+ODI Matches Refereed	214	214	0	0.000000
+Production End	213	3	0	0.000000
+Date Of Publication	212	0	0	0.000000
+Engineering Firm	212	0	0	0.000000
+Judges/Jury	211	0	0	0.000000
+Parent Organization in fiction	211	1	0	0.000000
+Number Of Stages	210	0	0	0.000000
+Opera production venue relationship	210	0	0	0.000000
+FIFA Code	209	0	0	0.000000
+Star System	209	0	0	0.000000
+Religious Text Of	208	2	0	0.000000
+IOC Code	207	0	0	0.000000
+Maiden Flight	207	0	0	0.000000
+Designated minority	203	0	0	0.000000
+Rocket Function	203	0	0	0.000000
+Injuries	202	0	0	0.000000
+Prefix Symbol	202	0	0	0.000000
+Established in	200	0	0	0.000000
+Kingdom(s) ruled	198	2	0	0.000000
+Structure (InChI)	198	0	0	0.000000
+Number of seats	197	0	0	0.000000
+Parent Language	197	1	0	0.000000
+ISO 639-2 Code	196	0	0	0.000000
+Net migration	194	0	0	0.000000
+Orientation	194	0	0	0.000000
+Senate ID	193	193	0	0.000000
+First Appearance	192	1	0	0.000000
+Religious practice of	192	1	0	0.000000
+DOI	191	0	0	0.000000
+Olympic game used in	191	0	0	0.000000
+Number of runs	190	0	0	0.000000
+Influenced by	189	0	0	0.000000
+Episode	188	0	0	0.000000
+Primarily contained by	187	0	0	0.000000
+Final TV Appearance	186	0	0	0.000000
+Spirit type	185	0	0	0.000000
+Stage of	185	0	0	0.000000
+Decay mode	184	0	0	0.000000
+Force Deployment	184	0	0	0.000000
+Member of (OLD)	184	0	0	0.000000
+Computer	182	0	0	0.000000
+Uncompressed Format	182	0	0	0.000000
+Guitar Played	181	181	0	0.000000
+Date ended	180	1	0	0.000000
+TVGuide ID	180	0	0	0.000000
+term	179	0	0	0.000000
+Accommodation	178	1	0	0.000000
+Offset from UTC	175	0	0	0.000000
+Size of armed forces	175	0	0	0.000000
+Used by armed force	175	0	0	0.000000
+Date Of Last Strip	174	2	0	0.000000
+Belief Of	173	0	0	0.000000
+Subsidiary department of	173	0	0	0.000000
+Specialization of	172	0	0	0.000000
+kp_lw/philosopher/region	172	152	0	0.000000
+Derived from	171	0	0	0.000000
+Magnetic moment	171	0	0	0.000000
+Number of cards	171	0	0	0.000000
+Opera Role	170	170	0	0.000000
+Viewfinder type	170	0	0	0.000000
+Apple movie trailer ID	169	0	0	0.000000
+Permit type	169	0	0	0.000000
+Rating system	169	0	0	0.000000
+Hotel	168	0	0	0.000000
+Country Formerly Used	167	0	0	0.000000
+Provider	167	0	0	0.000000
+Train Configuration	167	0	0	0.000000
+Touchdown on Longest Reception	166	0	0	0.000000
+Celebrities	165	0	0	0.000000
+Script	165	0	0	0.000000
+All Rounder	162	162	0	0.000000
+Fatalities	162	0	0	0.000000
+Posting	162	139	0	0.000000
+Time zone abbreviation (standard)	162	0	0	0.000000
+Time zone name (standard)	162	0	0	0.000000
+Date formed	160	0	0	0.000000
+Notable Figure	160	0	0	0.000000
+Parent rock type	156	0	0	0.000000
+Comment	155	0	0	0.000000
+Party to case	155	73	0	0.000000
+Intro topic	151	0	0	0.000000
+Newspaper	151	0	0	0.000000
+Verse Form	151	0	0	0.000000
+Part of Cancer Center	150	0	0	0.000000
+Next perihelion (predicted)	146	0	0	0.000000
+Peripheral supported	146	0	0	0.000000
+Strongest storm	146	0	0	0.000000
+Transversed By Road	146	0	0	0.000000
+meteorology/tropical_cyclone/strongest_storm_of	146	0	0	0.000000
+Location used	145	0	0	0.000000
+Atomic number	144	0	0	0.000000
+Film Rating System	143	0	0	0.000000
+Original Broadcast Rating	143	0	0	0.000000
+Airport type	142	0	0	0.000000
+Ink	142	0	0	0.000000
+Final broadcast	141	1	0	0.000000
+Length at waterline	141	0	0	0.000000
+Oxidizer	140	0	0	0.000000
+Processor Family	140	0	0	0.000000
+Superior court	140	0	0	0.000000
+Pencil	139	0	0	0.000000
+Product number	137	0	0	0.000000
+Assistant Referee	136	0	0	0.000000
+Runway information	136	0	0	0.000000
+Sold in (countries)	136	0	0	0.000000
+Air date	134	0	0	0.000000
+ISO 15924 code	134	0	0	0.000000
+Sport team	134	0	0	0.000000
+Theme area	134	0	0	0.000000
+Thrust (vacuum)	134	0	0	0.000000
+Isp (vacuum)	133	0	0	0.000000
+Fuel	132	0	0	0.000000
+Current Team	131	131	0	0.000000
+Railway	131	0	0	0.000000
+Is Part Of	130	1	0	0.000000
+Amazon.com ASIN	129	0	0	0.000000
+Guidebook	129	0	0	0.000000
+Chamber pressure	128	0	0	0.000000
+Ranked by	128	1	0	0.000000
+Songs	127	0	0	0.000000
+Attributes/Properties	126	0	0	0.000000
+Used in	124	0	0	0.000000
+Manufactured by	123	0	0	0.000000
+Isp (sea level)	122	0	0	0.000000
+Referee	122	0	0	0.000000
+Calendar System	121	0	0	0.000000
+Minimum Unaccompanied Age	121	0	0	0.000000
+Thrust (sea level)	121	0	0	0.000000
+Film Collection	119	0	0	0.000000
+Periapsis	119	0	0	0.000000
+Mean of propulsion	118	0	0	0.000000
+Periodic table block	118	0	0	0.000000
+Apoapsis	117	0	0	0.000000
+Super-forms	117	0	0	0.000000
+Current Team Coached	115	110	0	0.000000
+MIME Type	115	0	0	0.000000
+Drinking establishment type	113	0	0	0.000000
+Height of longest drop	113	0	0	0.000000
+Ruled to	112	1	0	0.000000
+Higher rank	111	0	0	0.000000
+Voice Type	111	111	0	0.000000
+updated	110	0	0	0.000000
+Van der Waals radius	109	0	0	0.000000
+Eligibility exclusion criterion	108	0	0	0.000000
+Coat of Arm used	106	77	0	0.000000
+ISO 15924 alpha	106	0	0	0.000000
+Meteorite Mass	106	0	0	0.000000
+Number of staff	106	0	0	0.000000
+Club with this interest	105	4	0	0.000000
+Electron Configuration	105	0	0	0.000000
+Number of Nations	105	0	0	0.000000
+Provides service	105	0	0	0.000000
+Ionization Energy	104	0	0	0.000000
+Origin(s)	104	0	0	0.000000
+Dry mass	103	0	0	0.000000
+Stance	103	103	0	0.000000
+Successor agency	103	0	0	0.000000
+Typical age (minimum)	103	0	0	0.000000
+Max. Width	102	0	0	0.000000
+Melting Point	102	0	0	0.000000
+Typical age (maximum)	102	0	0	0.000000
+Chef-lieu	101	0	0	0.000000
+Code Insee	101	0	0	0.000000
+Electronegativity (Pauling scale)	101	0	0	0.000000
+Trial	100	0	0	0.000000
+Boiling Point	99	0	0	0.000000
+First edition	99	0	0	0.000000
+Sequence	99	0	0	0.000000
+Concert Tour	98	0	0	0.000000
+Fictional Creature Specie	98	0	0	0.000000
+Number of runways	98	0	0	0.000000
+Play direction	98	0	0	0.000000
+Former Name	97	2	0	0.000000
+BJCP Style Category	96	0	0	0.000000
+Drinking Establishment	95	0	0	0.000000
+IBU scale	95	0	0	0.000000
+Legal entanglement	95	95	0	0.000000
+biology/organism_classification/higher_classification_closure	95	0	0	0.000000
+biology/organism_classification/lower_classification_closure	95	0	0	0.000000
+Deck type	94	0	0	0.000000
+Government For	94	1	0	0.000000
+Historically used by religion	94	0	0	0.000000
+Design	93	0	0	0.000000
+Version Number	93	0	0	0.000000
+Eligibility inclusion criterion	92	0	0	0.000000
+Locomotive class	92	0	0	0.000000
+Military combatant	92	0	0	0.000000
+ABN	90	0	0	0.000000
+Region of origin	90	0	0	0.000000
+Abbreviation	89	0	0	0.000000
+Art Series on the Subject	89	13	0	0.000000
+Number of members	89	0	0	0.000000
+Date of cremation	88	88	0	0.000000
+Hull material	88	0	0	0.000000
+Letter	88	0	0	0.000000
+Related Event	88	0	0	0.000000
+kp_lw/philosopher/school	88	79	0	0.000000
+Discovered	87	86	0	0.000000
+Endurance	87	0	0	0.000000
+Topped out	87	0	0	0.000000
+Soundtracks	86	1	0	0.000000
+Rank or Role	85	1	0	0.000000
+Region where grown	85	0	0	0.000000
+Years	85	0	0	0.000000
+Conductor	84	0	0	0.000000
+Disciplinary Action	84	0	0	0.000000
+Installment Number	84	0	0	0.000000
+Ruled from	84	1	0	0.000000
+Sister Model	84	0	0	0.000000
+Wet mass	84	0	0	0.000000
+Multi-event tournament participated in	83	0	0	0.000000
+Key Designer	82	0	0	0.000000
+Meteorite discovery date	82	0	0	0.000000
+Number of Competitors	82	0	0	0.000000
+Rating	82	0	0	0.000000
+Syndicate	82	0	0	0.000000
+source	82	0	0	0.000000
+Engine Family	80	0	0	0.000000
+ISO 639-5 Code	80	0	0	0.000000
+From date	79	79	0	0.000000
+Certification	78	53	0	0.000000
+Corresponding type	78	3	0	0.000000
+Launch site	78	0	0	0.000000
+Parent material class	78	0	0	0.000000
+Preceded by	78	2	0	0.000000
+Space Time	78	78	0	0.000000
+Began approximately	77	0	0	0.000000
+Launch Site	77	0	0	0.000000
+Notable Guest	77	0	0	0.000000
+Composition	76	0	0	0.000000
+Government designation	76	0	0	0.000000
+Medical School Affiliation	76	0	0	0.000000
+Series editor	75	0	0	0.000000
+kp_lw/philosopher/era	75	67	0	0.000000
+Abused by	74	0	0	0.000000
+Number of chapters	74	1	0	0.000000
+Specific conferences about this	74	6	0	0.000000
+"The Word" topic	73	1	0	0.000000
+Compatible computer	73	0	0	0.000000
+Owned By	73	0	0	0.000000
+SI Base Unit	73	0	0	0.000000
+To date	73	73	0	0.000000
+Branched From	72	0	0	0.000000
+Landscape Architect	72	0	0	0.000000
+Covalent radius	71	0	0	0.000000
+Discovering Country	71	0	0	0.000000
+Dry Mass	71	0	0	0.000000
+First brewed	71	0	0	0.000000
+Opera Produced	71	71	0	0.000000
+Parent class	71	0	0	0.000000
+Year inaugurated	71	0	0	0.000000
+Administrative headquarters	70	0	0	0.000000
+Product lines	70	3	0	0.000000
+Image ratio (W:H)	69	0	0	0.000000
+Meteorite fall date	69	0	0	0.000000
+Annual Visitors	68	0	0	0.000000
+Generation Number	68	0	0	0.000000
+Keyword	68	0	0	0.000000
+Texture	68	0	0	0.000000
+Color Code	67	0	0	0.000000
+Part Of Story Arc	67	0	0	0.000000
+Wine style	67	0	0	0.000000
+Acknowledged people	66	0	0	0.000000
+Chivalric Rank	66	0	0	0.000000
+Contained By	66	0	0	0.000000
+Distillery	66	0	0	0.000000
+Featured Location	66	0	0	0.000000
+Number of Species	65	0	0	0.000000
+Sacred Site	65	0	0	0.000000
+Comprehensive	64	0	0	0.000000
+Edition	64	0	0	0.000000
+Number Of Nations	64	0	0	0.000000
+Designation	63	0	0	0.000000
+Type of Cancer Center	63	0	0	0.000000
+Assignee	62	0	0	0.000000
+Opposite gender equivalent	62	0	0	0.000000
+Ski Area	62	0	0	0.000000
+Distance In Meters	61	0	0	0.000000
+Game subject	61	0	0	0.000000
+Month Number	61	0	0	0.000000
+Number of doctoral candidates	61	0	0	0.000000
+Number of schools	61	0	0	0.000000
+Personal appearance	61	0	0	0.000000
+Team Stats	61	0	0	0.000000
+Declination	59	0	0	0.000000
+Number Of Events	59	0	0	0.000000
+author	59	0	0	0.000000
+Original gravity	58	0	0	0.000000
+Type of conference	58	0	0	0.000000
+Version of	58	0	0	0.000000
+Fermentation base	57	0	0	0.000000
+First Issue	57	0	0	0.000000
+Martial Art	57	2	0	0.000000
+Solubility	57	0	0	0.000000
+Circulation	56	0	0	0.000000
+Cover Pencil	56	0	0	0.000000
+Protocol Provider	56	0	0	0.000000
+Right Ascension	56	0	0	0.000000
+UN/LOCODE	56	0	0	0.000000
+Building	55	0	0	0.000000
+Date created	55	0	0	0.000000
+Railway terminating here	55	0	0	0.000000
+Served By	55	0	0	0.000000
+Decision	54	0	0	0.000000
+Category Of	53	0	0	0.000000
+Number of chambers	53	0	0	0.000000
+Order of Chivalry	53	0	0	0.000000
+Peripheral class supported	53	0	0	0.000000
+Terminus	53	0	0	0.000000
+Weight class	53	0	0	0.000000
+Eligibile gender	52	0	0	0.000000
+Included classification	52	0	0	0.000000
+parent writing system	52	0	0	0.000000
+Host City	51	0	0	0.000000
+Number Of Athletes	51	0	0	0.000000
+Number of passengers	51	0	0	0.000000
+Speed on orbit	51	0	0	0.000000
+Alcohol content	50	0	0	0.000000
+Reason for final TV appearance	50	0	0	0.000000
+Version-specific name	49	0	0	0.000000
+DNA Codon	48	0	0	0.000000
+Engine cycle	48	0	0	0.000000
+Extended From	48	0	0	0.000000
+Meteorite composition	48	0	0	0.000000
+sports/sports_team/rivalry	48	0	0	0.000000
+sports/team_rivalry/team	48	0	0	0.000000
+Vice President Number	47	47	0	0.000000
+Volume In Cubic Meters	47	0	0	0.000000
+Dish	46	0	0	0.000000
+Loan	46	46	0	0.000000
+Metallic	46	0	0	0.000000
+Transmission route	46	0	0	0.000000
+time/event/participant	46	0	0	0.000000
+time/participant/event	46	0	0	0.000000
+Belongs To Combatant Group	45	0	0	0.000000
+Meteorological service	45	0	0	0.000000
+Part of recipe collection	45	0	0	0.000000
+As Of Date	44	0	0	0.000000
+Clear Coat	44	0	0	0.000000
+Date last awarded	44	0	0	0.000000
+Peripheral Class	44	0	0	0.000000
+Plant Disease Triangle	44	0	0	0.000000
+President number	44	44	0	0.000000
+RNA Codon	44	0	0	0.000000
+Music video genre	43	2	0	0.000000
+Optical Zoom	43	0	0	0.000000
+Work Excerpted	43	0	0	0.000000
+Audio books read	42	42	0	0.000000
+Game Modded	42	0	0	0.000000
+Lowest Pressure	42	0	0	0.000000
+Number of Career Appearances	42	42	0	0.000000
+Related	42	0	0	0.000000
+Beaufort Force	41	0	0	0.000000
+DST offset from UTC	41	0	0	0.000000
+Ended approximately	41	0	0	0.000000
+Reason for loss	41	1	0	0.000000
+Altitude	40	0	0	0.000000
+Award announcements	40	0	0	0.000000
+Next issue	40	0	0	0.000000
+Railways of this type	40	0	0	0.000000
+Time zone name (DST)	40	0	0	0.000000
+Game contested a demonstration	39	0	0	0.000000
+Opera Designed	39	39	0	0.000000
+Part Of Holiday Period	39	0	0	0.000000
+Preparation time	39	0	0	0.000000
+Primary Region	39	0	0	0.000000
+Ski Area Owned	39	1	0	0.000000
+Time zone abbreviation (DST)	39	0	0	0.000000
+Day DST begin	38	0	0	0.000000
+Day DST end	38	0	0	0.000000
+Nomination announcements	38	0	0	0.000000
+Number Of Days In Month	38	0	0	0.000000
+Number of Career Goals	38	38	0	0.000000
+Olympics bid on	38	0	0	0.000000
+Orbiting	38	0	0	0.000000
+Regency seat	38	0	0	0.000000
+Atomic radius	37	0	0	0.000000
+Cover Ink	37	0	0	0.000000
+Electron per shell	37	0	0	0.000000
+Horizontal Size	37	0	0	0.000000
+Name of collection activity	37	0	0	0.000000
+Oxidizer/fuel ratio	37	0	0	0.000000
+Parent Symptom	37	0	0	0.000000
+Round match ended	37	0	0	0.000000
+First Year With Current Team	36	36	0	0.000000
+Interviewee	36	0	0	0.000000
+Number built	36	0	0	0.000000
+Particle	36	0	0	0.000000
+Time In Seconds	36	0	0	0.000000
+Used in recipe	36	0	0	0.000000
+Weightmass In Kilograms	36	0	0	0.000000
+Continues	35	0	0	0.000000
+Captain	34	0	0	0.000000
+Destroyed by disaster	34	0	0	0.000000
+Month	34	0	0	0.000000
+Radiant	34	0	0	0.000000
+Subject in these music video	34	5	0	0.000000
+Aging Time	33	0	0	0.000000
+Airline	33	1	0	0.000000
+Announced	33	0	0	0.000000
+Completed unfinished work	33	33	0	0.000000
+Electric charge	33	0	0	0.000000
+Highest Singles Ranking	33	33	0	0.000000
+ICAO designator	33	0	0	0.000000
+Manufactured At	33	0	0	0.000000
+Parent modulation	33	0	0	0.000000
+Website ended	33	1	0	0.000000
+Coat of Arm	32	0	0	0.000000
+Daily Riders	32	0	0	0.000000
+Layout Engine	32	0	0	0.000000
+Number of stores	32	0	0	0.000000
+Observatory	32	0	0	0.000000
+Size In Bytes	32	0	0	0.000000
+capital	32	0	0	0.000000
+Admiralty number	31	0	0	0.000000
+ClinicalTrials.gov Identifier	31	0	0	0.000000
+Cooking time	31	0	0	0.000000
+Destroyer	31	0	0	0.000000
+Direct fatalities	31	0	0	0.000000
+Instrument	31	1	0	0.000000
+Administrative Capital	30	0	0	0.000000
+Credited to	30	0	0	0.000000
+Found at site	30	0	0	0.000000
+Is Member Of	30	1	0	0.000000
+Waypoint type	30	0	0	0.000000
+ARLHS number	29	0	0	0.000000
+Age statement	29	0	0	0.000000
+Constitution	29	0	0	0.000000
+Judicial Capital	29	0	0	0.000000
+Land area	29	0	0	0.000000
+Legislative Capital	29	0	0	0.000000
+Metropolitan Division Code	29	0	0	0.000000
+Number of aircraft movements	29	0	0	0.000000
+Pasteurized	29	0	0	0.000000
+Teachers	29	0	0	0.000000
+Accepted gender	28	0	0	0.000000
+Accidents	28	0	0	0.000000
+BJCP ID	28	0	0	0.000000
+Edition of	28	0	0	0.000000
+Medium genre equivalent	28	1	0	0.000000
+Observation ends	28	0	0	0.000000
+Planned number of rounds	28	0	0	0.000000
+Type of trial	28	0	0	0.000000
+Color filter array type	27	0	0	0.000000
+Parent method	27	0	0	0.000000
+Platform supported	27	0	0	0.000000
+Profession represented	27	0	0	0.000000
+Style	27	0	0	0.000000
+Work on web browser	27	0	0	0.000000
+Final Issue	26	0	0	0.000000
+Government formed by	26	0	0	0.000000
+Groups	26	26	0	0.000000
+Health authority	26	0	0	0.000000
+Protocol	26	0	0	0.000000
+Source of meteor shower	26	0	0	0.000000
+Supporter	26	0	0	0.000000
+TV series	26	0	0	0.000000
+USBG name	26	0	0	0.000000
+Bicycle type	25	0	0	0.000000
+Camera sensor manufacturer	25	0	0	0.000000
+Component	25	0	0	0.000000
+Date established	25	0	0	0.000000
+Destination	25	0	0	0.000000
+Magic	25	0	0	0.000000
+Minimum age for eligibility	25	0	0	0.000000
+Tennis Grip	25	25	0	0.000000
+Career Averages	24	24	0	0.000000
+Damaged by disaster	24	0	0	0.000000
+Date lost	24	0	0	0.000000
+Higher Order	24	1	0	0.000000
+Housed in	24	0	0	0.000000
+In force from	24	0	0	0.000000
+Officer	24	0	0	0.000000
+Phase	24	0	0	0.000000
+Proposed by	24	0	0	0.000000
+Proposed on	24	0	0	0.000000
+Sub-division of	24	0	0	0.000000
+Translation Used	24	0	0	0.000000
+Turnout	24	0	0	0.000000
+Used in product	24	0	0	0.000000
+Cover Color	23	0	0	0.000000
+Currency	23	0	0	0.000000
+Disease(s)	23	0	0	0.000000
+Expected total enrollment	23	0	0	0.000000
+Fictional object destroyed	23	0	0	0.000000
+Operates government service	23	0	0	0.000000
+Orbital Order	23	0	0	0.000000
+Parent award	23	0	0	0.000000
+Recipe	23	0	0	0.000000
+Appears in Fictional Universe	22	0	0	0.000000
+Creation Date	22	0	0	0.000000
+Date of interview	22	1	0	0.000000
+League System	22	0	0	0.000000
+Maximum playing time	22	0	0	0.000000
+Meteorite discovery location	22	0	0	0.000000
+Participation in Relay	22	22	0	0.000000
+Primary outcome	22	0	0	0.000000
+U Indian Reservation	22	0	0	0.000000
+Weave	22	0	0	0.000000
+Wheel configuration	22	0	0	0.000000
+Adherent	21	0	0	0.000000
+Bottler	21	0	0	0.000000
+Date discontinued	21	0	0	0.000000
+Fleet size	21	0	0	0.000000
+Focal height of light	21	0	0	0.000000
+Highest Doubles Ranking	21	21	0	0.000000
+Lift type	21	0	0	0.000000
+Listing Agency	21	0	0	0.000000
+Live Recording	21	0	0	0.000000
+Major junctions1	21	0	0	0.000000
+Number of International Appearances	21	21	0	0.000000
+Application Number	20	0	0	0.000000
+Dimension measured	20	0	0	0.000000
+Enrollment	20	0	0	0.000000
+Expansion ratio	20	0	0	0.000000
+Frequency	20	0	0	0.000000
+Host	20	0	0	0.000000
+Instance of	20	0	0	0.000000
+Meter	20	0	0	0.000000
+Number of International Goals	20	20	0	0.000000
+Official charity	20	0	0	0.000000
+Part of network	20	0	0	0.000000
+Predecessor Engine	20	0	0	0.000000
+Purchased player	20	0	0	0.000000
+Ratification completed on	20	0	0	0.000000
+Resulting head of government	20	0	0	0.000000
+Weather Service	20	0	0	0.000000
+kp_lw/wine_grape_variety/origin	20	0	0	0.000000
+Blender	19	0	0	0.000000
+From organism	19	0	0	0.000000
+Match Type	19	0	0	0.000000
+NGA number	19	0	0	0.000000
+Orbit Type	19	0	0	0.000000
+Post-nominal letter	19	0	0	0.000000
+Ran on railway	19	0	0	0.000000
+Reach	19	19	0	0.000000
+Type of telescope	19	0	0	0.000000
+Affiliated disease	18	0	0	0.000000
+Career Losses (singles)	18	18	0	0.000000
+Career Wins (singles)	18	18	0	0.000000
+Elector	18	0	0	0.000000
+Energy in Joules	18	0	0	0.000000
+Image stabilization	18	0	0	0.000000
+Maximum Altitude	18	0	0	0.000000
+Number Of Adherents	18	0	0	0.000000
+Olympic game	18	0	0	0.000000
+Precipitation cloud?	18	0	0	0.000000
+Pressure in pascals	18	0	0	0.000000
+Single letter abbreviation	18	0	0	0.000000
+Star	18	0	0	0.000000
+TV episode segment	18	0	0	0.000000
+Three letter abbreviation	18	0	0	0.000000
+Generation	17	0	0	0.000000
+Higher level	17	0	0	0.000000
+PDB id	17	0	0	0.000000
+Premier	17	0	0	0.000000
+Secondary outcome	17	0	0	0.000000
+Fiber	16	0	0	0.000000
+First flight	16	0	0	0.000000
+Founding Asteroid Family Member	16	0	0	0.000000
+Metropolitan area	16	0	0	0.000000
+Minimum Wind Speed (sustained)	16	0	0	0.000000
+Number of anchors	16	0	0	0.000000
+Subclass of	16	0	0	0.000000
+Aging	15	0	0	0.000000
+Area In Square Meters	15	0	0	0.000000
+Calcium (mg/l)	15	0	0	0.000000
+Chloride (mg/l)	15	0	0	0.000000
+Computer Line	15	0	0	0.000000
+Events produced	15	0	0	0.000000
+Incorrectly attributed to	15	0	0	0.000000
+Lighthouse having color ranges	15	0	0	0.000000
+Minimum Altitude	15	0	0	0.000000
+Order of chivalry	15	0	0	0.000000
+Organism	15	0	0	0.000000
+Reference	15	0	0	0.000000
+Rocket	15	0	0	0.000000
+Used from date	15	0	0	0.000000
+Variation of	15	0	0	0.000000
+Career Losses (doubles)	14	14	0	0.000000
+Career Wins (doubles)	14	14	0	0.000000
+City Limits	14	0	0	0.000000
+Defense date	14	0	0	0.000000
+Flash (secs lit)	14	0	0	0.000000
+Formation	14	0	0	0.000000
+Governing body	14	0	0	0.000000
+Highway MPG	14	0	0	0.000000
+Interaction	14	0	0	0.000000
+Luminosity	14	0	0	0.000000
+Manufacturing Plant	14	0	0	0.000000
+Maximum Wind Speed (sustained)	14	0	0	0.000000
+Maximum age for eligibility	14	0	0	0.000000
+Orbit type	14	0	0	0.000000
+Playwright	14	0	0	0.000000
+Signs	14	0	0	0.000000
+pH	14	0	0	0.000000
+Alternative Month Number	13	0	0	0.000000
+Attributes: Power or Ability	13	0	0	0.000000
+Construction completed	13	0	0	0.000000
+Contains fictional setting	13	0	0	0.000000
+Coordinates	13	0	0	0.000000
+Formed during period	13	0	0	0.000000
+Galaxy shape	13	0	0	0.000000
+Light attribute	13	0	0	0.000000
+Market share	13	1	0	0.000000
+Max speed	13	0	0	0.000000
+Minimum Wind Speed	13	0	0	0.000000
+Number of destinations	13	0	0	0.000000
+Potassium (mg/l)	13	0	0	0.000000
+Rate in bits per second	13	0	0	0.000000
+Released	13	0	0	0.000000
+Subcommittee of	13	0	0	0.000000
+TV Rating System	13	0	0	0.000000
+Ticket	13	0	0	0.000000
+Used to date	13	0	0	0.000000
+Visitors	13	0	0	0.000000
+Wave Height	13	0	0	0.000000
+used from	13	0	0	0.000000
+Appearance	12	0	0	0.000000
+Cloud Family	12	0	0	0.000000
+Complex function	12	0	0	0.000000
+Indirect fatalities	12	0	0	0.000000
+Institution reference	12	0	0	0.000000
+Maximum Wind Speed	12	0	0	0.000000
+Mean Wind Speed	12	0	0	0.000000
+Month Name	12	0	0	0.000000
+Notable structures damaged	12	0	0	0.000000
+Oil produced	12	0	0	0.000000
+Premiere production	12	0	0	0.000000
+Primary use	12	0	0	0.000000
+Pubchem	12	0	0	0.000000
+Running mate	12	0	0	0.000000
+Sodium (mg/l)	12	0	0	0.000000
+Used in fictional universe	12	0	0	0.000000
+Balls	11	11	0	0.000000
+Controlling Country	11	0	0	0.000000
+Electoral college	11	0	0	0.000000
+Emulator	11	0	0	0.000000
+Frequent flyer program	11	0	0	0.000000
+Input Method	11	0	0	0.000000
+Number Of Tennis Titles	11	11	0	0.000000
+Superceded by	11	0	0	0.000000
+Cover Letter	10	0	0	0.000000
+Directionality	10	0	0	0.000000
+Infectious Disease	10	0	0	0.000000
+Last Flight	10	0	0	0.000000
+Market	10	0	0	0.000000
+Nitrate (mg/l)	10	0	0	0.000000
+Number of pistons	10	0	0	0.000000
+Payment system	10	0	0	0.000000
+Power In Watts	10	0	0	0.000000
+Promoted by	10	0	0	0.000000
+Rotation Rate	10	0	0	0.000000
+Supercategory	10	0	0	0.000000
+Wicket Number	10	10	0	0.000000
+Asteroid Group Founding Member	9	0	0	0.000000
+Contraindication for	9	0	0	0.000000
+Controlling Space Agency	9	0	0	0.000000
+Demonstration event	9	0	0	0.000000
+Epoch	9	0	0	0.000000
+Floride (mg/l)	9	0	0	0.000000
+Major Rank	9	0	0	0.000000
+Minimum Accompanied Age	9	0	0	0.000000
+Notable people killed	9	0	0	0.000000
+Output Power	9	0	0	0.000000
+Powerplant	9	0	0	0.000000
+Sequence Number	9	0	0	0.000000
+Silica (mg/l)	9	0	0	0.000000
+Speeds	9	0	0	0.000000
+Spoken by character specie	9	0	0	0.000000
+Throttle ratio	9	0	0	0.000000
+Thrust	9	0	0	0.000000
+Career Wins	8	8	0	0.000000
+Catalogue Web Link	8	0	0	0.000000
+Celestial object	8	0	0	0.000000
+Completed	8	0	0	0.000000
+Date manufactured	8	0	0	0.000000
+Developed by	8	0	0	0.000000
+Frequency in hertz	8	0	0	0.000000
+Galactic group	8	0	0	0.000000
+Generic (Y/N)	8	0	0	0.000000
+Number Of Forward Gears	8	0	0	0.000000
+Olympics contested a demonstration	8	0	0	0.000000
+Parent test	8	0	0	0.000000
+Power	8	0	0	0.000000
+Primary Publisher	8	0	0	0.000000
+Shape format	8	0	0	0.000000
+Speed in meters per second	8	0	0	0.000000
+Team One	8	0	0	0.000000
+Wine type	8	0	0	0.000000
+Airport	7	0	0	0.000000
+Angle in radians	7	0	0	0.000000
+Available vote	7	0	0	0.000000
+Avg. class size	7	0	0	0.000000
+Commanded by rank	7	0	0	0.000000
+Cruise speed	7	0	0	0.000000
+Dissolved	7	0	0	0.000000
+Exterior Color	7	0	0	0.000000
+First issued	7	0	0	0.000000
+Geographical scope	7	0	0	0.000000
+Guest personal appearance	7	0	0	0.000000
+Infusion	7	0	0	0.000000
+Marshalled Coats of Arms	7	0	0	0.000000
+Minimum width	7	0	0	0.000000
+Number of pages	7	0	0	0.000000
+Phase, At STP	7	0	0	0.000000
+Rise to prominence	7	0	0	0.000000
+Usage ceased	7	0	0	0.000000
+Capital city	6	0	0	0.000000
+Career Losses	6	6	0	0.000000
+Champions	6	0	0	0.000000
+Charge in coulombs	6	0	0	0.000000
+Compatible power system	6	0	0	0.000000
+Date designed	6	0	0	0.000000
+Earliest fossil record	6	0	0	0.000000
+Engine	6	0	0	0.000000
+First Batting Team	6	0	0	0.000000
+Force in newtons	6	0	0	0.000000
+Hipparcos ID	6	0	0	0.000000
+ISO 15924 numeric	6	0	0	0.000000
+Mission statement	6	0	0	0.000000
+NORAD Number	6	0	0	0.000000
+Numbered pages	6	0	0	0.000000
+Operational platform	6	0	0	0.000000
+Piston configuration	6	0	0	0.000000
+Sub Units	6	0	0	0.000000
+Tincture	6	0	0	0.000000
+Unratified Amendment	6	0	0	0.000000
+Amount	5	0	0	0.000000
+Electricity produced	5	0	0	0.000000
+Court sitting here	4	0	0	0.000000
+Magnification	4	0	0	0.000000
+Maidens	4	4	0	0.000000
+IEC 60086 Name	3	0	0	0.000000
+Synchronous satellite	3	0	0	0.000000
+Drinking establishment	2	1	0	0.000000
+Exchange operator	2	0	0	0.000000
+Game Scores	2	0	0	0.000000
+Major axis	2	0	0	0.000000
+Keeping	1	0	0	0.000000
+Leg Byes	1	0	0	0.000000
+Roster	1	0	0	0.000000
+Wins	1	0	0	0.000000

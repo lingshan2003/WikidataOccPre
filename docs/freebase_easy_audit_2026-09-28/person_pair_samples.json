@@ -1,0 +1,3088 @@
+{
+  "Children": [
+    {
+      "line": 360897899,
+      "subject": "Ömer Muzaffer Bey",
+      "object": "Emin Bülent Serdaroğlu"
+    },
+    {
+      "line": 72426800,
+      "subject": "Daniel Bildt",
+      "object": "Carl Bildt"
+    },
+    {
+      "line": 157904889,
+      "subject": "Lance Norris",
+      "object": "Raymond Richard Norris"
+    },
+    {
+      "line": 157904075,
+      "subject": "Lance McAdams",
+      "object": "Daniel McAdams"
+    },
+    {
+      "line": 33929791,
+      "subject": "Arthur  Cohen",
+      "object": "Ben Cohen (Man)"
+    }
+  ],
+  "is-a": [
+    {
+      "line": 174257210,
+      "subject": "Marco Trentini",
+      "object": "Art Director"
+    },
+    {
+      "line": 157358764,
+      "subject": "Lady G",
+      "object": "Musician"
+    },
+    {
+      "line": 317671827,
+      "subject": "Yunus Emre Yurtseven",
+      "object": "Art Director"
+    },
+    {
+      "line": 197126908,
+      "subject": "Ntsikelelo McCall",
+      "object": "Art Director"
+    },
+    {
+      "line": 116251365,
+      "subject": "Gutta (Music Artist)",
+      "object": "Musician"
+    }
+  ],
+  "Sibling": [
+    {
+      "line": 121464126,
+      "subject": "Henry Howard (Dramatist)",
+      "object": "Charles Howard, 2nd Earl of Berkshire"
+    },
+    {
+      "line": 55924738,
+      "subject": "Carey Bren",
+      "object": "Ashley Bren"
+    },
+    {
+      "line": 84156771,
+      "subject": "Drew Walters (Person)",
+      "object": "Addison Walters"
+    },
+    {
+      "line": 94481104,
+      "subject": "Eudoxia Aleksandrovna",
+      "object": "Daniel of Moscow"
+    },
+    {
+      "line": 176818346,
+      "subject": "Maura Robinson",
+      "object": "Chad Robinson (Person)"
+    }
+  ],
+  "Spouse (or domestic partner)": [
+    {
+      "line": 147404147,
+      "subject": "Joseph Schildkraut",
+      "object": "Leonora C. Rogers"
+    },
+    {
+      "line": 79160889,
+      "subject": "Dinah Shearing",
+      "object": "Rodney Milgate"
+    },
+    {
+      "line": 239494059,
+      "subject": "Seymour Beard",
+      "object": "Edna Best"
+    },
+    {
+      "line": 174803947,
+      "subject": "Marina Ladynina",
+      "object": "Ivan Lyubeznov"
+    },
+    {
+      "line": 175075674,
+      "subject": "Mark Kruzan",
+      "object": "Amy Brown (Woman) #2"
+    }
+  ],
+  "Profession": [
+    {
+      "line": 141894931,
+      "subject": "Jacoby Shaddix",
+      "object": "Musician"
+    },
+    {
+      "line": 115087839,
+      "subject": "Gregg \"Hobie\" Hubbard",
+      "object": "Musician"
+    },
+    {
+      "line": 176015974,
+      "subject": "Masataka Murota",
+      "object": "Musician"
+    },
+    {
+      "line": 149929785,
+      "subject": "Kai Johnny Mosaker",
+      "object": "Musician"
+    },
+    {
+      "line": 209504885,
+      "subject": "Peter Mårdklint",
+      "object": "Musician"
+    }
+  ],
+  "kg/object_profile/prominent_type": [
+    {
+      "line": 30774981,
+      "subject": "Anibal Miranda",
+      "object": "Musician"
+    },
+    {
+      "line": 42350833,
+      "subject": "Benny Dancy",
+      "object": "Musician"
+    },
+    {
+      "line": 288353417,
+      "subject": "Tony Grant (Trumpeter)",
+      "object": "Musician"
+    },
+    {
+      "line": 254032616,
+      "subject": "Steve Austin (Singer) #13",
+      "object": "Musician"
+    },
+    {
+      "line": 33337247,
+      "subject": "Ariel Rodríguez (Singer)",
+      "object": "Musician"
+    }
+  ],
+  "Influenced By": [
+    {
+      "line": 150592240,
+      "subject": "Karl Marx",
+      "object": "Geoffrey Chaucer"
+    },
+    {
+      "line": 263051716,
+      "subject": "Tang Junyi",
+      "object": "Georg Wilhelm Friedrich Hegel"
+    },
+    {
+      "line": 229988810,
+      "subject": "Russell Brand",
+      "object": "Eddie Murphy"
+    },
+    {
+      "line": 142530568,
+      "subject": "James Mark Baldwin",
+      "object": "Charles Darwin"
+    },
+    {
+      "line": 217929903,
+      "subject": "Pär Lagerkvist",
+      "object": "August Strindberg"
+    }
+  ],
+  "Member of": [
+    {
+      "line": 115070621,
+      "subject": "Greg Paulus (Music Composer)",
+      "object": "Beirut (Indie rock Artist)"
+    },
+    {
+      "line": 51368889,
+      "subject": "Bryan Atkinson (Music Artist)",
+      "object": "The Soul Brothers"
+    },
+    {
+      "line": 265260059,
+      "subject": "Terry Wapram",
+      "object": "Iron Maiden"
+    },
+    {
+      "line": 245353370,
+      "subject": "Slide (Songwriter)",
+      "object": "Rogue Audio"
+    },
+    {
+      "line": 183065264,
+      "subject": "Mixmonster",
+      "object": "Radio Trip"
+    }
+  ],
+  "Film crewed": [
+    {
+      "line": 31216504,
+      "subject": "Annick Chartier",
+      "object": "Makeup Artist"
+    },
+    {
+      "line": 104130729,
+      "subject": "Frank Barlow (Film crewmember)",
+      "object": "Sound Trainee"
+    },
+    {
+      "line": 225004568,
+      "subject": "Rick Baker",
+      "object": "Makeup Artist"
+    },
+    {
+      "line": 29962574,
+      "subject": "Andrea Allroggen",
+      "object": "Makeup Artist"
+    },
+    {
+      "line": 137340699,
+      "subject": "Insiang Piñero",
+      "object": "Makeup Artist"
+    }
+  ],
+  "Leader of": [
+    {
+      "line": 24903528,
+      "subject": "Alan N Harris",
+      "object": "Alan N Harris"
+    },
+    {
+      "line": 61575218,
+      "subject": "Christopher Loughlin",
+      "object": "Christopher Loughlin"
+    },
+    {
+      "line": 56747981,
+      "subject": "Cary T. Fu",
+      "object": "Cary T. Fu"
+    },
+    {
+      "line": 25548689,
+      "subject": "Alexander R Lussow",
+      "object": "Alexander R Lussow"
+    },
+    {
+      "line": 82983303,
+      "subject": "Douglas W Busk",
+      "object": "Douglas W Busk"
+    }
+  ],
+  "Academic advisor": [
+    {
+      "line": 238136449,
+      "subject": "Sergio Albeverio",
+      "object": "Markus Fierz"
+    },
+    {
+      "line": 224921862,
+      "subject": "Richard Stone (Economist)",
+      "object": "Colin Clark (Academic)"
+    },
+    {
+      "line": 148716916,
+      "subject": "Jung-Yong Lee",
+      "object": "Peter Peumans"
+    },
+    {
+      "line": 149930708,
+      "subject": "Kai Li",
+      "object": "Alan Perlis"
+    },
+    {
+      "line": 191654551,
+      "subject": "Nettie Stevens",
+      "object": "Thomas Hunt Morgan"
+    }
+  ],
+  "Place of birth": [
+    {
+      "line": 147037565,
+      "subject": "Jonathan Kale",
+      "object": "Boston"
+    },
+    {
+      "line": 147387216,
+      "subject": "Joseph P. Hoar",
+      "object": "Boston"
+    },
+    {
+      "line": 51226351,
+      "subject": "Bruce Hunter (Professional Athlete)",
+      "object": "Boston"
+    },
+    {
+      "line": 142479287,
+      "subject": "James Ingersoll",
+      "object": "Boston"
+    },
+    {
+      "line": 81323025,
+      "subject": "Don Parsons",
+      "object": "Boston"
+    }
+  ],
+  "Peer": [
+    {
+      "line": 253913778,
+      "subject": "Stephen Wolfram",
+      "object": "Rudy Rucker"
+    },
+    {
+      "line": 224362408,
+      "subject": "Reyner Banham",
+      "object": "Hubert de Cronin Hastings"
+    },
+    {
+      "line": 116287854,
+      "subject": "Guy Rosolato",
+      "object": "Jean Laplanche"
+    },
+    {
+      "line": 284707056,
+      "subject": "Thomas Carlyle",
+      "object": "Harriet Martineau"
+    },
+    {
+      "line": 96560318,
+      "subject": "F. R. S. Yorke",
+      "object": "Marcel Breuer"
+    }
+  ],
+  "Recording performance": [
+    {
+      "line": 301211489,
+      "subject": "Viola (Musical instrument)",
+      "object": "Lucy Farrell"
+    },
+    {
+      "line": 301211947,
+      "subject": "Viola (Musical instrument)",
+      "object": "Tom Rosenthal (Viola Player)"
+    },
+    {
+      "line": 301210808,
+      "subject": "Viola (Musical instrument)",
+      "object": "Arlindo Penteado"
+    },
+    {
+      "line": 301211384,
+      "subject": "Viola (Musical instrument)",
+      "object": "Katherine McGillivray"
+    },
+    {
+      "line": 301211596,
+      "subject": "Viola (Musical instrument)",
+      "object": "Michel Rouilly"
+    }
+  ],
+  "Romantic relationship (with celebrities)": [
+    {
+      "line": 142868297,
+      "subject": "Jane Krakowski",
+      "object": "Marc Singer (Director)"
+    },
+    {
+      "line": 313253454,
+      "subject": "Woody Allen",
+      "object": "Stacey Nelkin"
+    },
+    {
+      "line": 30082215,
+      "subject": "Andrew Divoff",
+      "object": "Marina Drujko"
+    },
+    {
+      "line": 144475638,
+      "subject": "Jerry Seinfeld",
+      "object": "Shoshanna Lonstein Gruss"
+    },
+    {
+      "line": 142619483,
+      "subject": "James Stillman Rockefeller",
+      "object": "Margaret Wise Brown"
+    }
+  ],
+  "Person": [
+    {
+      "line": 48670585,
+      "subject": "Boston",
+      "object": "TJ Norris"
+    },
+    {
+      "line": 48670280,
+      "subject": "Boston",
+      "object": "Michael Bloomberg"
+    },
+    {
+      "line": 48670362,
+      "subject": "Boston",
+      "object": "Patricia Avery (Actor)"
+    },
+    {
+      "line": 48670479,
+      "subject": "Boston",
+      "object": "Robert L. Bacon"
+    },
+    {
+      "line": 48670428,
+      "subject": "Boston",
+      "object": "Ray Nazarro"
+    }
+  ],
+  "Celebrity friend": [
+    {
+      "line": 108814832,
+      "subject": "George Grosz",
+      "object": "Roelof Paul Citroen"
+    },
+    {
+      "line": 227681560,
+      "subject": "Rohan Marley",
+      "object": "MC Hammer"
+    },
+    {
+      "line": 224952506,
+      "subject": "Richard Zven Kruspe",
+      "object": "Christoph Schneider"
+    },
+    {
+      "line": 73853950,
+      "subject": "David Krumholtz",
+      "object": "Anne Hathaway"
+    },
+    {
+      "line": 50010246,
+      "subject": "Brenda Song",
+      "object": "Miley Cyrus"
+    }
+  ],
+  "Matches Lost": [
+    {
+      "line": 238134102,
+      "subject": "Sergi Bruguera",
+      "object": "Andriy Medvedev"
+    },
+    {
+      "line": 149536714,
+      "subject": "Jérémy Chardy",
+      "object": "Bruno Soares"
+    },
+    {
+      "line": 299991913,
+      "subject": "Venus Williams",
+      "object": "Kristina Barrois"
+    },
+    {
+      "line": 226448108,
+      "subject": "Robert Farah Maksoud",
+      "object": "Rohan Bopanna"
+    },
+    {
+      "line": 146427878,
+      "subject": "John Peers",
+      "object": "Mike Bryan"
+    }
+  ],
+  "Employment history": [
+    {
+      "line": 145685014,
+      "subject": "Joel M. Podolny",
+      "object": "University Yale"
+    },
+    {
+      "line": 116206427,
+      "subject": "Gustav Ranis",
+      "object": "University Yale"
+    },
+    {
+      "line": 207222800,
+      "subject": "Patricia Goldman-Rakic",
+      "object": "University Yale"
+    },
+    {
+      "line": 126693595,
+      "subject": "Hubert Le Sueur",
+      "object": "Giambologna"
+    },
+    {
+      "line": 146622222,
+      "subject": "John Whittier Treat",
+      "object": "University Yale"
+    }
+  ],
+  "Place of death": [
+    {
+      "line": 311248230,
+      "subject": "William Henderson (Cricket Player)",
+      "object": "Sandton"
+    },
+    {
+      "line": 284687808,
+      "subject": "Thomas Barbour",
+      "object": "Boston"
+    },
+    {
+      "line": 104618676,
+      "subject": "Freddie Maguire",
+      "object": "Boston"
+    },
+    {
+      "line": 181252986,
+      "subject": "Mikhail Danilov",
+      "object": "Boston"
+    },
+    {
+      "line": 284708414,
+      "subject": "Thomas Cass",
+      "object": "Boston"
+    }
+  ],
+  "Hockey Position(s)": [
+    {
+      "line": 104712666,
+      "subject": "Fredrik Norrena",
+      "object": "Goaltender"
+    },
+    {
+      "line": 113521681,
+      "subject": "Gord McRae",
+      "object": "Goaltender"
+    },
+    {
+      "line": 50081109,
+      "subject": "Brett Leonhardt",
+      "object": "Goaltender"
+    },
+    {
+      "line": 71806307,
+      "subject": "Dan Bouchard",
+      "object": "Goaltender"
+    },
+    {
+      "line": 85356249,
+      "subject": "Dustin Slade",
+      "object": "Goaltender"
+    }
+  ],
+  "Artist supported": [
+    {
+      "line": 180067769,
+      "subject": "Michael Beckett",
+      "object": "Schneider TM"
+    },
+    {
+      "line": 161122797,
+      "subject": "Les Fradkin",
+      "object": "David Peel"
+    },
+    {
+      "line": 143432960,
+      "subject": "Jay-Z",
+      "object": "DJ DX"
+    },
+    {
+      "line": 71876800,
+      "subject": "Dan Wilde (Folk Artist)",
+      "object": "Karima Francis"
+    },
+    {
+      "line": 72660198,
+      "subject": "Danny Eisenberg",
+      "object": "Tift Merritt"
+    }
+  ],
+  "Record Label": [
+    {
+      "line": 155202228,
+      "subject": "Kylie Minogue",
+      "object": "Warner Music Group"
+    },
+    {
+      "line": 148714579,
+      "subject": "Jung Yong-hwa",
+      "object": "Warner Music Group"
+    },
+    {
+      "line": 243304540,
+      "subject": "Silvia Olari (Rhythm and blues Artist)",
+      "object": "Warner Music Group"
+    },
+    {
+      "line": 147104555,
+      "subject": "Joni Mitchell",
+      "object": "Warner Music Group"
+    },
+    {
+      "line": 199814856,
+      "subject": "Olga Tañón",
+      "object": "Warner Music Group"
+    }
+  ],
+  "Group": [
+    {
+      "line": 311234308,
+      "subject": "William H. Masters",
+      "object": "Virginia E. Johnson"
+    },
+    {
+      "line": 72626691,
+      "subject": "Dannette Key",
+      "object": "Gymnastics mom"
+    },
+    {
+      "line": 59107601,
+      "subject": "Charles Malik",
+      "object": "John Peters Humphrey"
+    },
+    {
+      "line": 114071845,
+      "subject": "Graham Chapman",
+      "object": "Terry Gilliam"
+    },
+    {
+      "line": 114071846,
+      "subject": "Graham Chapman",
+      "object": "Terry Jones (Historian)"
+    }
+  ],
+  "Named after": [
+    {
+      "line": 30109959,
+      "subject": "Andrew Johnson",
+      "object": "Andrew Jackson"
+    },
+    {
+      "line": 175555426,
+      "subject": "Martin Luther King III",
+      "object": "Martin Luther King, Jr."
+    },
+    {
+      "line": 160807270,
+      "subject": "Lennon Murphy",
+      "object": "John Lennon"
+    },
+    {
+      "line": 207204945,
+      "subject": "Patrice O'Neal",
+      "object": "Patrice Lumumba"
+    },
+    {
+      "line": 183016821,
+      "subject": "Mitt Romney",
+      "object": "Milton Romney"
+    }
+  ],
+  "kp_lw/philosopher/influenced_by": [
+    {
+      "line": 148422440,
+      "subject": "Julius Evola",
+      "object": "Giambattista Vico"
+    },
+    {
+      "line": 189209777,
+      "subject": "Mário Ferreira dos Santos",
+      "object": "Max Stirner"
+    },
+    {
+      "line": 71693184,
+      "subject": "Damaris Cudworth Masham",
+      "object": "Nicholas of Cusa"
+    },
+    {
+      "line": 180253985,
+      "subject": "Michael Marder",
+      "object": "Immanuel Kant"
+    },
+    {
+      "line": 224826303,
+      "subject": "Richard J. Bernstein",
+      "object": "Plato"
+    }
+  ],
+  "kp_lw/philosophy_influencer/influencee": [
+    {
+      "line": 105379262,
+      "subject": "Friedrich Nietzsche",
+      "object": "Raymond Geuss"
+    },
+    {
+      "line": 139509388,
+      "subject": "Isaiah Berlin",
+      "object": "Dimitris Dimitrakos"
+    },
+    {
+      "line": 146461618,
+      "subject": "John Rawls",
+      "object": "Thomas Pogge"
+    },
+    {
+      "line": 24761979,
+      "subject": "Al-Farabi",
+      "object": "Maimonides"
+    },
+    {
+      "line": 175534733,
+      "subject": "Martin Heidegger",
+      "object": "Michael Marder"
+    }
+  ],
+  "Family": [
+    {
+      "line": 231123449,
+      "subject": "Sabika bint Ibrahim Al Khalifa",
+      "object": "House of Khalifa"
+    },
+    {
+      "line": 108863095,
+      "subject": "George Louis, Prince of Nassau-Dillenburg",
+      "object": "House of Nassau"
+    },
+    {
+      "line": 145786217,
+      "subject": "Johann VII, Count of Nassau-Siegen",
+      "object": "House of Nassau"
+    },
+    {
+      "line": 326892096,
+      "subject": "g/1z2crzx69",
+      "object": "House of Nassau"
+    },
+    {
+      "line": 146107308,
+      "subject": "John Francis Desideratus, Prince of Nassau-Siegen",
+      "object": "House of Nassau"
+    }
+  ],
+  "Player statistics": [
+    {
+      "line": 259347489,
+      "subject": "Sweden national football team",
+      "object": "Erton Fejzullahu"
+    },
+    {
+      "line": 76573455,
+      "subject": "Denmark national football team",
+      "object": "Simon Poulsen"
+    },
+    {
+      "line": 70774105,
+      "subject": "Czech Republic national football team",
+      "object": "Tomáš Vaclík"
+    },
+    {
+      "line": 213198696,
+      "subject": "Poland national football team",
+      "object": "Grzegorz Wojtkowiak"
+    },
+    {
+      "line": 76573429,
+      "subject": "Denmark national football team",
+      "object": "Jores Okore"
+    }
+  ],
+  "Sport played": [
+    {
+      "line": 117494880,
+      "subject": "Han Choi",
+      "object": "Swimming"
+    },
+    {
+      "line": 162634065,
+      "subject": "Lianna Swan",
+      "object": "Swimming"
+    },
+    {
+      "line": 32007680,
+      "subject": "Antonio Leon",
+      "object": "Swimming"
+    },
+    {
+      "line": 53774262,
+      "subject": "Caitlin Leverenz",
+      "object": "Swimming"
+    },
+    {
+      "line": 89403978,
+      "subject": "Elvira Fischer (Olympic athlete)",
+      "object": "Swimming"
+    }
+  ],
+  "Instrument Played": [
+    {
+      "line": 146582377,
+      "subject": "John Valentine (Violist)",
+      "object": "Viola (Musical instrument)"
+    },
+    {
+      "line": 144241769,
+      "subject": "Jennifer Stumm",
+      "object": "Viola (Musical instrument)"
+    },
+    {
+      "line": 285723221,
+      "subject": "Tibor Serly",
+      "object": "Viola (Musical instrument)"
+    },
+    {
+      "line": 163810223,
+      "subject": "Lillian Fuchs",
+      "object": "Viola (Musical instrument)"
+    },
+    {
+      "line": 44313165,
+      "subject": "Billy Currie",
+      "object": "Viola (Musical instrument)"
+    }
+  ],
+  "Organization founded": [
+    {
+      "line": 121679550,
+      "subject": "Herbert Yates",
+      "object": "Republic Pictures"
+    },
+    {
+      "line": 21712328,
+      "subject": "Abraham Pierson",
+      "object": "University Yale"
+    },
+    {
+      "line": 116982619,
+      "subject": "Haim Saban",
+      "object": "Saban Entertainment"
+    },
+    {
+      "line": 224900639,
+      "subject": "Richard Rogers",
+      "object": "Rogers Stirk Harbour & Partners"
+    },
+    {
+      "line": 229063568,
+      "subject": "Roy O. Disney",
+      "object": "Walt Disney Animation Studios"
+    }
+  ],
+  "Martial Art Instructor(s)": [
+    {
+      "line": 208189263,
+      "subject": "Pedro Sauer",
+      "object": "Rickson Gracie"
+    },
+    {
+      "line": 93409200,
+      "subject": "Erik Paulson",
+      "object": "Dan Inosanto"
+    },
+    {
+      "line": 73242747,
+      "subject": "Darren Levine",
+      "object": "Eyal Yanilov"
+    },
+    {
+      "line": 174269737,
+      "subject": "Marcos Torregrosa",
+      "object": "Cassio Werneck"
+    },
+    {
+      "line": 106807165,
+      "subject": "Fábio Leopoldo",
+      "object": "Daniel Gracie"
+    }
+  ],
+  "Governance of": [
+    {
+      "line": 226671962,
+      "subject": "Robert W. Matschullat",
+      "object": "Morgan Stanley"
+    },
+    {
+      "line": 59123817,
+      "subject": "Charles Noski",
+      "object": "Morgan Stanley"
+    },
+    {
+      "line": 51215898,
+      "subject": "Bruce Downey",
+      "object": "Cardinal Health"
+    },
+    {
+      "line": 118647359,
+      "subject": "Harold C. Simmons",
+      "object": "Annette C Simmons"
+    },
+    {
+      "line": 109119212,
+      "subject": "Gerald L. Baliles",
+      "object": "PBS"
+    }
+  ],
+  "Film performance": [
+    {
+      "line": 181390510,
+      "subject": "Miles Teller",
+      "object": "Whiplash (Documentary Film)"
+    },
+    {
+      "line": 35873616,
+      "subject": "Austin Stowell",
+      "object": "Whiplash (Documentary Film)"
+    },
+    {
+      "line": 158283913,
+      "subject": "Larry Smith (Actor)",
+      "object": "Deadly Outbreak"
+    },
+    {
+      "line": 149432608,
+      "subject": "Justin Chan (Actor)",
+      "object": "Jarum Halus"
+    },
+    {
+      "line": 193087280,
+      "subject": "Nick Maccarone",
+      "object": "Fortune House"
+    }
+  ],
+  "Celebrity rival": [
+    {
+      "line": 263652950,
+      "subject": "Taylor Stein",
+      "object": "William P. Lauder"
+    },
+    {
+      "line": 311351492,
+      "subject": "William P. Lauder",
+      "object": "Taylor Stein"
+    },
+    {
+      "line": 30569427,
+      "subject": "Angelina Jolie",
+      "object": "Jennifer Aniston"
+    },
+    {
+      "line": 108923150,
+      "subject": "George Sand",
+      "object": "Charles Baudelaire"
+    },
+    {
+      "line": 145537235,
+      "subject": "Joe Biden",
+      "object": "Sarah Palin"
+    }
+  ],
+  "Place Musical Career Began": [
+    {
+      "line": 6801274,
+      "subject": "7L & Esoteric",
+      "object": "Boston"
+    },
+    {
+      "line": 21362103,
+      "subject": "Aaron Turner",
+      "object": "Boston"
+    },
+    {
+      "line": 319895626,
+      "subject": "dj BC",
+      "object": "Boston"
+    },
+    {
+      "line": 180073997,
+      "subject": "Michael Bivins",
+      "object": "Boston"
+    },
+    {
+      "line": 44133274,
+      "subject": "Bill Chase",
+      "object": "Boston"
+    }
+  ],
+  "Title": [
+    {
+      "line": 24861643,
+      "subject": "Alan Brodrick, 2nd Viscount Midleton",
+      "object": "Viscount Midleton"
+    },
+    {
+      "line": 257314238,
+      "subject": "Sultan Ali Shah",
+      "object": "Sultan of Terengganu"
+    },
+    {
+      "line": 139492048,
+      "subject": "Isabella, Countess of Brienne",
+      "object": "Duke of Athens"
+    },
+    {
+      "line": 169515368,
+      "subject": "Lucas Dillon, 6th Viscount Dillon",
+      "object": "Viscount Dillon"
+    },
+    {
+      "line": 247012189,
+      "subject": "Sohier, Count of Enghien",
+      "object": "Duke of Athens"
+    }
+  ],
+  "Architectural Style": [
+    {
+      "line": 145940605,
+      "subject": "John Burnet (Architect)",
+      "object": "Neoclassical architecture"
+    },
+    {
+      "line": 143804959,
+      "subject": "Jean-François Thomas de Thomon",
+      "object": "Neoclassical architecture"
+    },
+    {
+      "line": 146236449,
+      "subject": "John James Burnet",
+      "object": "Neoclassical architecture"
+    },
+    {
+      "line": 59001538,
+      "subject": "Charles Cameron",
+      "object": "Neoclassical architecture"
+    },
+    {
+      "line": 181259863,
+      "subject": "Mikhail Pavlovich Malakhov",
+      "object": "Neoclassical architecture"
+    }
+  ],
+  "Demonstration medal won": [
+    {
+      "line": 88410271,
+      "subject": "Elaine Dagg-Jackson",
+      "object": "Karri Wilms"
+    },
+    {
+      "line": 253804281,
+      "subject": "Stephanie Mayer (Olympic athlete)",
+      "object": "Monika Wagner"
+    },
+    {
+      "line": 61288511,
+      "subject": "Christiane Scheibel",
+      "object": "Andrea Schöpp"
+    },
+    {
+      "line": 174632167,
+      "subject": "Marianne Aspelin",
+      "object": "Mette Halvorsen"
+    },
+    {
+      "line": 148360578,
+      "subject": "Julie Skinner",
+      "object": "Karri Wilms"
+    }
+  ],
+  "Ethnicity": [
+    {
+      "line": 220111611,
+      "subject": "Rajendranath Zutshi",
+      "object": "Kashmiri Pandit"
+    },
+    {
+      "line": 205432053,
+      "subject": "Pamposh Bhat",
+      "object": "Kashmiri Pandit"
+    },
+    {
+      "line": 150431677,
+      "subject": "Karan Razdan",
+      "object": "Kashmiri Pandit"
+    },
+    {
+      "line": 33827893,
+      "subject": "Arshile Gorky",
+      "object": "Armenian American"
+    },
+    {
+      "line": 59801889,
+      "subject": "Cher",
+      "object": "Armenian American"
+    }
+  ],
+  "Starring TV role": [
+    {
+      "line": 190427922,
+      "subject": "Natalie Martinez",
+      "object": "Fashion House"
+    },
+    {
+      "line": 57753525,
+      "subject": "Celine Lim",
+      "object": "Star Circle Quest"
+    },
+    {
+      "line": 154674130,
+      "subject": "Krista Allen",
+      "object": "Project Greenlight"
+    },
+    {
+      "line": 185028624,
+      "subject": "Morgan Fairchild",
+      "object": "Fashion House"
+    },
+    {
+      "line": 191294538,
+      "subject": "Neil Buchanan",
+      "object": "ZZZap!"
+    }
+  ],
+  "President": [
+    {
+      "line": 78267279,
+      "subject": "Dick Cheney",
+      "object": "George W. Bush"
+    },
+    {
+      "line": 22870120,
+      "subject": "Adlai Stevenson I",
+      "object": "Grover Cleveland"
+    },
+    {
+      "line": 126692358,
+      "subject": "Hubert Humphrey",
+      "object": "Lyndon B. Johnson"
+    },
+    {
+      "line": 121405646,
+      "subject": "Henry A. Wallace",
+      "object": "Franklin D. Roosevelt"
+    },
+    {
+      "line": 145946986,
+      "subject": "John C. Calhoun",
+      "object": "John Quincy Adams"
+    }
+  ],
+  "People with this hobby": [
+    {
+      "line": 235507396,
+      "subject": "Search Engine Optimization",
+      "object": "Tony Edward"
+    },
+    {
+      "line": 67332839,
+      "subject": "Cooking",
+      "object": "Erin Davis (m/012w22zs)"
+    },
+    {
+      "line": 67332840,
+      "subject": "Cooking",
+      "object": "Joana Petrova"
+    },
+    {
+      "line": 331292537,
+      "subject": "m/0121q1hj",
+      "object": "Running"
+    },
+    {
+      "line": 331292534,
+      "subject": "m/0121q1hj",
+      "object": "Digital economy"
+    }
+  ],
+  "People involved": [
+    {
+      "line": 174245482,
+      "subject": "Marco McMillian (Event)",
+      "object": "Marco McMillian (Deceased Person)"
+    },
+    {
+      "line": 75247799,
+      "subject": "Death of Blair Peach",
+      "object": "Blair Peach"
+    },
+    {
+      "line": 187075050,
+      "subject": "Murder of Nicola Furlong",
+      "object": "Nicola Furlong (Deceased Person)"
+    },
+    {
+      "line": 187073682,
+      "subject": "Murder of Darrell Lunsford",
+      "object": "Darrell Lunsford (Deceased Person)"
+    },
+    {
+      "line": 147373312,
+      "subject": "Joseph Maraachli case",
+      "object": "Joseph Maraachli"
+    }
+  ],
+  "Character Created By": [
+    {
+      "line": 180423277,
+      "subject": "Michał Wołodyjowski",
+      "object": "Henryk Sienkiewicz"
+    },
+    {
+      "line": 32991204,
+      "subject": "Archie Andrews",
+      "object": "Bob Montana"
+    },
+    {
+      "line": 170503023,
+      "subject": "Lysis",
+      "object": "Chris Morris (Novelist)"
+    },
+    {
+      "line": 76615820,
+      "subject": "Dennis Rickman",
+      "object": "Louise Berridge"
+    },
+    {
+      "line": 104555637,
+      "subject": "Fred Dagg",
+      "object": "John Clarke"
+    }
+  ],
+  "Team": [
+    {
+      "line": 150460860,
+      "subject": "Karel Brückner",
+      "object": "Czech Republic national football team"
+    },
+    {
+      "line": 185297027,
+      "subject": "Morten Olsen",
+      "object": "Denmark national football team"
+    },
+    {
+      "line": 310925554,
+      "subject": "Wilhelm Friberg",
+      "object": "Sweden national football team"
+    },
+    {
+      "line": 158296775,
+      "subject": "Lars Arnesson",
+      "object": "Sweden national football team"
+    },
+    {
+      "line": 229215182,
+      "subject": "Ruben Gelbord",
+      "object": "Sweden national football team"
+    }
+  ],
+  "Episode segment": [
+    {
+      "line": 180292475,
+      "subject": "Michael Palin",
+      "object": "Terry Jones (Historian)"
+    },
+    {
+      "line": 150812672,
+      "subject": "Kate Micucci",
+      "object": "Riki Lindhome"
+    },
+    {
+      "line": 56373951,
+      "subject": "Carol Cleveland",
+      "object": "Michael Palin"
+    },
+    {
+      "line": 265239973,
+      "subject": "Terry Jones (Historian)",
+      "object": "John Cleese"
+    },
+    {
+      "line": 185093426,
+      "subject": "Mormon Tabernacle Choir",
+      "object": "John Cleese"
+    }
+  ],
+  "Religious Leadership": [
+    {
+      "line": 259967566,
+      "subject": "Swithin Fernando",
+      "object": "Bishop of Colombo"
+    },
+    {
+      "line": 39861457,
+      "subject": "Basil Batty",
+      "object": "Bishop of Fulham"
+    },
+    {
+      "line": 50179527,
+      "subject": "Brian Masters (Religious Leader)",
+      "object": "Bishop of Fulham"
+    },
+    {
+      "line": 141540520,
+      "subject": "Jabez Gnanapragasam",
+      "object": "Bishop of Colombo"
+    },
+    {
+      "line": 145907467,
+      "subject": "John Bickersteth",
+      "object": "Bishop of Warrington"
+    }
+  ],
+  "People who have had this role": [
+    {
+      "line": 71942698,
+      "subject": "Dance Captain",
+      "object": "Victoria Clark"
+    },
+    {
+      "line": 163470148,
+      "subject": "Lighting Designer",
+      "object": "Garin Marschall"
+    },
+    {
+      "line": 163470152,
+      "subject": "Lighting Designer",
+      "object": "Sarah Lurie"
+    },
+    {
+      "line": 68008498,
+      "subject": "Costume designer",
+      "object": "Emilio Sosa"
+    },
+    {
+      "line": 71942687,
+      "subject": "Dance Captain",
+      "object": "Ben Gunderson"
+    }
+  ],
+  "TV program produced": [
+    {
+      "line": 61102290,
+      "subject": "Chris Moore",
+      "object": "Project Greenlight"
+    },
+    {
+      "line": 47313336,
+      "subject": "Bob Osher",
+      "object": "Project Greenlight"
+    },
+    {
+      "line": 39294719,
+      "subject": "Barbara Schneeweiss",
+      "object": "Project Greenlight"
+    },
+    {
+      "line": 220475709,
+      "subject": "Randy Sacks",
+      "object": "Project Greenlight"
+    },
+    {
+      "line": 173986329,
+      "subject": "Marc Joubert",
+      "object": "Project Greenlight"
+    }
+  ],
+  "Ensemble Conducted": [
+    {
+      "line": 87187105,
+      "subject": "Edo de Waart",
+      "object": "Nederlands Blazers Ensemble"
+    },
+    {
+      "line": 151541318,
+      "subject": "Keith Lockhart",
+      "object": "Boston Pops Orchestra"
+    },
+    {
+      "line": 318504330,
+      "subject": "Zoltán Kocsis",
+      "object": "Budapest Festival Orchestra"
+    },
+    {
+      "line": 141070413,
+      "subject": "Iván Fischer",
+      "object": "Budapest Festival Orchestra"
+    },
+    {
+      "line": 147266196,
+      "subject": "Josef Pasternack",
+      "object": "Boston Pops Orchestra"
+    }
+  ],
+  "Directed by": [
+    {
+      "line": 31224063,
+      "subject": "Annie Bergin",
+      "object": "Tim Middlewick"
+    },
+    {
+      "line": 45167912,
+      "subject": "Black Is White (Silent Film)",
+      "object": "Charles Giblyn"
+    },
+    {
+      "line": 147557725,
+      "subject": "Josue Diaz",
+      "object": "Edson Claros"
+    },
+    {
+      "line": 189976582,
+      "subject": "Nalstoxic",
+      "object": "Nalstoxic"
+    },
+    {
+      "line": 80385026,
+      "subject": "Do Not Disturb (Horror Film)",
+      "object": "BC Furtney"
+    }
+  ],
+  "Player": [
+    {
+      "line": 76573400,
+      "subject": "Denmark national football team",
+      "object": "Mikkel Beckmann"
+    },
+    {
+      "line": 76573409,
+      "subject": "Denmark national football team",
+      "object": "Thomas Kahlenberg"
+    },
+    {
+      "line": 76573406,
+      "subject": "Denmark national football team",
+      "object": "Stephan Andersen"
+    },
+    {
+      "line": 76573392,
+      "subject": "Denmark national football team",
+      "object": "Daniel Jensen"
+    },
+    {
+      "line": 76573393,
+      "subject": "Denmark national football team",
+      "object": "Dennis Rommedahl"
+    }
+  ],
+  "Demonstration event competed in": [
+    {
+      "line": 31150251,
+      "subject": "Anne Jøtun",
+      "object": "Dordi Nordby"
+    },
+    {
+      "line": 82636431,
+      "subject": "Dordi Nordby",
+      "object": "Mette Halvorsen"
+    },
+    {
+      "line": 117834710,
+      "subject": "Hanne Woods",
+      "object": "Anne Jøtun"
+    },
+    {
+      "line": 117834713,
+      "subject": "Hanne Woods",
+      "object": "Mette Halvorsen"
+    },
+    {
+      "line": 82636428,
+      "subject": "Dordi Nordby",
+      "object": "Anne Jøtun"
+    }
+  ],
+  "Author": [
+    {
+      "line": 104276072,
+      "subject": "Frankenstein",
+      "object": "Mary Shelley"
+    },
+    {
+      "line": 141846867,
+      "subject": "Jacob",
+      "object": "Alexander Kielland"
+    },
+    {
+      "line": 39825465,
+      "subject": "Bashir (Fictional Organisation Founder)",
+      "object": "Janet Morris"
+    },
+    {
+      "line": 39862488,
+      "subject": "Basil Dearden",
+      "object": "Ronald Millar (Writer)"
+    },
+    {
+      "line": 227529228,
+      "subject": "Roderick L. Evans",
+      "object": "Roderick L. Evans"
+    }
+  ],
+  "Produced by": [
+    {
+      "line": 103458366,
+      "subject": "Fortune House",
+      "object": "Julianna Gelinas"
+    },
+    {
+      "line": 143195004,
+      "subject": "Jarum Halus",
+      "object": "Eleanor Low"
+    },
+    {
+      "line": 125870146,
+      "subject": "House Calls",
+      "object": "Gerry Flahive"
+    },
+    {
+      "line": 103458364,
+      "subject": "Fortune House",
+      "object": "Amber LaFrance"
+    },
+    {
+      "line": 74929402,
+      "subject": "Deadly Outbreak",
+      "object": "Harel Goldstein"
+    }
+  ],
+  "Member": [
+    {
+      "line": 313972009,
+      "subject": "Writers Guild of America",
+      "object": "Howie Masters"
+    },
+    {
+      "line": 260114299,
+      "subject": "Symbionese Liberation Army",
+      "object": "Patty Hearst"
+    },
+    {
+      "line": 153870383,
+      "subject": "Knights Templar",
+      "object": "Geoffroi de Charney"
+    },
+    {
+      "line": 153870384,
+      "subject": "Knights Templar",
+      "object": "Jacques de Molay"
+    },
+    {
+      "line": 260114298,
+      "subject": "Symbionese Liberation Army",
+      "object": "Nancy Ling Perry"
+    }
+  ],
+  "Royal line": [
+    {
+      "line": 21511641,
+      "subject": "Abdullah ibn Ahmad Al-Khalifa",
+      "object": "House of Khalifa"
+    },
+    {
+      "line": 22914766,
+      "subject": "Adolf, King of Germany",
+      "object": "House of Nassau"
+    },
+    {
+      "line": 186788449,
+      "subject": "Muhammad ibn Khalifa Al-Khalifa",
+      "object": "House of Khalifa"
+    },
+    {
+      "line": 139438276,
+      "subject": "Isa bin Salman Al Khalifa",
+      "object": "House of Khalifa"
+    },
+    {
+      "line": 117364057,
+      "subject": "Hamad ibn Isa Al Khalifa",
+      "object": "House of Khalifa"
+    }
+  ],
+  "People with this interest": [
+    {
+      "line": 146548252,
+      "subject": "John Sutcliffe (Web Designer)",
+      "object": "Wordpress Developer"
+    },
+    {
+      "line": 146548251,
+      "subject": "John Sutcliffe (Web Designer)",
+      "object": "Niche blogging"
+    },
+    {
+      "line": 300436915,
+      "subject": "Vibhor Agarwal (m/012vq58j)",
+      "object": "Surfing on Internet (m/0zsfbtb)"
+    },
+    {
+      "line": 152126921,
+      "subject": "Kevin Stirtz",
+      "object": "Kevin Stirtz"
+    },
+    {
+      "line": 146548250,
+      "subject": "John Sutcliffe (Web Designer)",
+      "object": "Google Search"
+    }
+  ],
+  "Film Executive Produced": [
+    {
+      "line": 260097174,
+      "subject": "Sylvia Sweeney",
+      "object": "House Calls"
+    },
+    {
+      "line": 72658310,
+      "subject": "Danny Dimbort",
+      "object": "Deadly Outbreak"
+    },
+    {
+      "line": 209506368,
+      "subject": "Peter Nelson (XXVIII)",
+      "object": "Burnt Forest"
+    },
+    {
+      "line": 180284398,
+      "subject": "Michael O'Farrell (Actor) #1",
+      "object": "Fortune House"
+    },
+    {
+      "line": 143279692,
+      "subject": "Jason Reitman",
+      "object": "Whiplash (Documentary Film)"
+    }
+  ],
+  "Screenplay by": [
+    {
+      "line": 125870148,
+      "subject": "House Calls",
+      "object": "Ian McLeod (Director)"
+    },
+    {
+      "line": 274540571,
+      "subject": "The New Women",
+      "object": "Sun Shiyi (Film writer)"
+    },
+    {
+      "line": 150036268,
+      "subject": "Kalavathi (World cinema Film)",
+      "object": "Sundara Vathiyar"
+    },
+    {
+      "line": 74929407,
+      "subject": "Deadly Outbreak",
+      "object": "Harel Goldstein"
+    },
+    {
+      "line": 87835175,
+      "subject": "Einstein and Eddington (Historical drama Film)",
+      "object": "Peter Moffat"
+    }
+  ],
+  "Music by": [
+    {
+      "line": 150605430,
+      "subject": "Karl T. Hirsch (Short Film)",
+      "object": "Jane Fontana"
+    },
+    {
+      "line": 125870144,
+      "subject": "House Calls",
+      "object": "Claude Desjardins (Drummer)"
+    },
+    {
+      "line": 150036266,
+      "subject": "Kalavathi (World cinema Film)",
+      "object": "M. S. Gnanamani"
+    },
+    {
+      "line": 134619543,
+      "subject": "Immadi Pulikeshi",
+      "object": "G. K. Venkatesh"
+    },
+    {
+      "line": 124577368,
+      "subject": "Hombres de esta tierra",
+      "object": "Gregorio Pardo (Film music contributor)"
+    }
+  ],
+  "Religion": [
+    {
+      "line": 72470431,
+      "subject": "Daniel Hamburg",
+      "object": "Adi Da"
+    },
+    {
+      "line": 324187212,
+      "subject": "g/122t6938",
+      "object": "Finnish Orthodox Church"
+    },
+    {
+      "line": 359840462,
+      "subject": "nmarasigan",
+      "object": "Jesus Christ"
+    },
+    {
+      "line": 150124901,
+      "subject": "Kalu Rinpoche",
+      "object": "Karma Kagyu"
+    },
+    {
+      "line": 210069488,
+      "subject": "Philippe Lachance",
+      "object": "Musician"
+    }
+  ],
+  "Artist": [
+    {
+      "line": 25661610,
+      "subject": "Alf",
+      "object": "Alison Moyet"
+    },
+    {
+      "line": 254039840,
+      "subject": "Steve Blevins (m/012fmdcc)",
+      "object": "Steve Blevins (Blues-rock Artist)"
+    },
+    {
+      "line": 246225710,
+      "subject": "Snoop Dogg",
+      "object": "Snoop Dogg"
+    },
+    {
+      "line": 147557720,
+      "subject": "Josue Diaz",
+      "object": "Baby Fresh"
+    },
+    {
+      "line": 147557721,
+      "subject": "Josue Diaz",
+      "object": "Jay Goddi"
+    }
+  ],
+  "Blog": [
+    {
+      "line": 22606282,
+      "subject": "Adam Mershon",
+      "object": "Adam Mershon"
+    },
+    {
+      "line": 174244246,
+      "subject": "Marco Maltraversi",
+      "object": "Search Engine Optimization"
+    },
+    {
+      "line": 333166751,
+      "subject": "m/012vjz2b",
+      "object": "m/012vjz2b"
+    },
+    {
+      "line": 110860684,
+      "subject": "Giuseppe Anzalone",
+      "object": "Giuseppe Anzalone"
+    },
+    {
+      "line": 119916476,
+      "subject": "Health Care",
+      "object": "m/0130mc09"
+    }
+  ],
+  "Research area": [
+    {
+      "line": 59153394,
+      "subject": "Charles Scott Sherrington",
+      "object": "Neurology"
+    },
+    {
+      "line": 175030103,
+      "subject": "Mark E. Perry",
+      "object": "John Cage"
+    },
+    {
+      "line": 239490773,
+      "subject": "Seyed Masoud Noori",
+      "object": "Law"
+    },
+    {
+      "line": 118733112,
+      "subject": "Harriet Daggett",
+      "object": "Law"
+    },
+    {
+      "line": 175030105,
+      "subject": "Mark E. Perry",
+      "object": "Lejaren Hiller"
+    }
+  ],
+  "TV episode performance": [
+    {
+      "line": 27275870,
+      "subject": "Allisyn Ashley Arm",
+      "object": "Hilda Trujillo"
+    },
+    {
+      "line": 195817789,
+      "subject": "Norman Jewison",
+      "object": "Norman Jewison"
+    },
+    {
+      "line": 49430113,
+      "subject": "Brandon Mychal Smith",
+      "object": "Hilda Trujillo"
+    },
+    {
+      "line": 106912567,
+      "subject": "G. Hannelius",
+      "object": "Hilda Trujillo"
+    },
+    {
+      "line": 76326095,
+      "subject": "Demi Lovato",
+      "object": "Hilda Trujillo"
+    }
+  ],
+  "Position(s)": [
+    {
+      "line": 120695475,
+      "subject": "Heiko Schaffartzik",
+      "object": "Point forward"
+    },
+    {
+      "line": 34105885,
+      "subject": "Artūras Jomantas",
+      "object": "Point forward"
+    },
+    {
+      "line": 159923629,
+      "subject": "LeBron James",
+      "object": "Point forward"
+    },
+    {
+      "line": 120621170,
+      "subject": "Hedo Türkoğlu",
+      "object": "Point forward"
+    },
+    {
+      "line": 104228021,
+      "subject": "Frank Reddout",
+      "object": "Point forward"
+    }
+  ],
+  "Cinematography": [
+    {
+      "line": 45167910,
+      "subject": "Black Is White (Silent Film)",
+      "object": "John Stumar"
+    },
+    {
+      "line": 124577361,
+      "subject": "Hombres de esta tierra",
+      "object": "Gregorio Pardo (Film music contributor)"
+    },
+    {
+      "line": 52385952,
+      "subject": "Burnt Forest",
+      "object": "Yahaya Suberu"
+    },
+    {
+      "line": 125870136,
+      "subject": "House Calls",
+      "object": "Michael Grippo (Cinematographer) #1"
+    },
+    {
+      "line": 103458345,
+      "subject": "Fortune House",
+      "object": "Timothy Nuttall"
+    }
+  ],
+  "Edited by": [
+    {
+      "line": 52385956,
+      "subject": "Burnt Forest",
+      "object": "Mkaiwawi Mwakaba"
+    },
+    {
+      "line": 134619539,
+      "subject": "Immadi Pulikeshi",
+      "object": "S. A. John"
+    },
+    {
+      "line": 74929392,
+      "subject": "Deadly Outbreak",
+      "object": "Alain Jakubowicz"
+    },
+    {
+      "line": 150605423,
+      "subject": "Karl T. Hirsch (Short Film)",
+      "object": "Jeremy Wagener"
+    },
+    {
+      "line": 150605424,
+      "subject": "Karl T. Hirsch (Short Film)",
+      "object": "Karl T. Hirsch"
+    }
+  ],
+  "Based On": [
+    {
+      "line": 33929756,
+      "subject": "Arthur",
+      "object": "Arthur"
+    },
+    {
+      "line": 282873706,
+      "subject": "Theagenes (Soldier)",
+      "object": "Theagenes of Thebes"
+    },
+    {
+      "line": 33929758,
+      "subject": "Arthur",
+      "object": "Lucius Artorius Castus"
+    },
+    {
+      "line": 142898476,
+      "subject": "Janek Wiśniewski",
+      "object": "Zbigniew Godlewski"
+    },
+    {
+      "line": 98558940,
+      "subject": "Fatz Geronimo",
+      "object": "Fats Domino"
+    }
+  ],
+  "TV regular appearance": [
+    {
+      "line": 149691848,
+      "subject": "KC Concepcion",
+      "object": "Star Circle Quest"
+    },
+    {
+      "line": 31135473,
+      "subject": "Anne Curtis",
+      "object": "Star Circle Quest"
+    },
+    {
+      "line": 51734357,
+      "subject": "Bugoy Cariño",
+      "object": "Star Circle Quest"
+    },
+    {
+      "line": 190336060,
+      "subject": "Nash Aguas",
+      "object": "Star Circle Quest"
+    },
+    {
+      "line": 99212265,
+      "subject": "Felicia Barton",
+      "object": "Jasmine Murray"
+    }
+  ],
+  "Married To": [
+    {
+      "line": 174775261,
+      "subject": "Marilyn Monroe",
+      "object": "Elizabeth I of England"
+    },
+    {
+      "line": 300170944,
+      "subject": "Veronica (Fictional Character) #1",
+      "object": "Archie Andrews"
+    },
+    {
+      "line": 43148692,
+      "subject": "Betty Cooper",
+      "object": "Archie Andrews"
+    },
+    {
+      "line": 253791045,
+      "subject": "Stephanie Allen (Fictional Character)",
+      "object": "Johnny Allen (TV Character)"
+    },
+    {
+      "line": 146691081,
+      "subject": "Johnny Allen (TV Character)",
+      "object": "Stephanie Allen (Fictional Character)"
+    }
+  ],
+  "kp_lw/philosopher/main_interests": [
+    {
+      "line": 30067664,
+      "subject": "Andrew Brook",
+      "object": "Immanuel Kant"
+    },
+    {
+      "line": 71878558,
+      "subject": "Dan Zahavi",
+      "object": "Edmund Husserl"
+    },
+    {
+      "line": 123181084,
+      "subject": "Hilail Gildin",
+      "object": "Plato"
+    },
+    {
+      "line": 184503589,
+      "subject": "Mookie Tenembaum",
+      "object": "Law"
+    },
+    {
+      "line": 284844019,
+      "subject": "Thomas Pogge",
+      "object": "Immanuel Kant"
+    }
+  ],
+  "Award Won": [
+    {
+      "line": 106021451,
+      "subject": "Fu-Sheng Chiu",
+      "object": "Nicola Carraro"
+    },
+    {
+      "line": 117812035,
+      "subject": "Hanna-Elisabeth Müller",
+      "object": "Ada Sari"
+    },
+    {
+      "line": 180338598,
+      "subject": "Michael Senftleben",
+      "object": "Nicola Carraro"
+    },
+    {
+      "line": 150947381,
+      "subject": "Katie Couric",
+      "object": "Edward R. Murrow"
+    },
+    {
+      "line": 164349927,
+      "subject": "Lisa Heller (m/012z869p)",
+      "object": "Musician"
+    }
+  ],
+  "Place of burial": [
+    {
+      "line": 221098853,
+      "subject": "Raziye Sultan (Deceased Person)",
+      "object": "Mahidevran Sultan"
+    },
+    {
+      "line": 30232512,
+      "subject": "André Clot",
+      "object": "Mahidevran Sultan"
+    },
+    {
+      "line": 36610535,
+      "subject": "Ayesha Begum (Deceased Person)",
+      "object": "Mahidevran Sultan"
+    },
+    {
+      "line": 146484175,
+      "subject": "John Rous",
+      "object": "Portsmouth Cathedral"
+    },
+    {
+      "line": 174673865,
+      "subject": "Marie Bennigsen-Broxup",
+      "object": "Mahidevran Sultan"
+    }
+  ],
+  "Industry": [
+    {
+      "line": 50220708,
+      "subject": "Brian White & Associates, P.C.",
+      "object": "Law"
+    },
+    {
+      "line": 55842485,
+      "subject": "Cardinal Health",
+      "object": "Health Care"
+    },
+    {
+      "line": 163557375,
+      "subject": "Lijorocky Vadakedath Joseph",
+      "object": "Search Engine Marketing"
+    },
+    {
+      "line": 240385315,
+      "subject": "Shawn Harding",
+      "object": "Search Engine Marketing"
+    },
+    {
+      "line": 199273378,
+      "subject": "Ohlthaver & List",
+      "object": "Information technology"
+    }
+  ],
+  "Educational institution": [
+    {
+      "line": 85978929,
+      "subject": "EUI",
+      "object": "EUI"
+    },
+    {
+      "line": 181665299,
+      "subject": "Milwaukee School of Engineering",
+      "object": "Milwaukee School of Engineering"
+    },
+    {
+      "line": 213552404,
+      "subject": "Pompeu Fabra University",
+      "object": "Pompeu Fabra University"
+    },
+    {
+      "line": 297491415,
+      "subject": "University Yale",
+      "object": "University Yale"
+    },
+    {
+      "line": 297553812,
+      "subject": "University of the Highlands and Islands",
+      "object": "University of the Highlands and Islands"
+    }
+  ],
+  "Associated period or movement": [
+    {
+      "line": 61323242,
+      "subject": "Christina Sophia Capetillo",
+      "object": "CREW*31"
+    },
+    {
+      "line": 120814992,
+      "subject": "Helen K. Garber",
+      "object": "Digital photography"
+    },
+    {
+      "line": 174235365,
+      "subject": "Marco Casagrande",
+      "object": "CREW*31"
+    },
+    {
+      "line": 175643570,
+      "subject": "Marty Metalgod Ross",
+      "object": "CREW*31"
+    },
+    {
+      "line": 221604378,
+      "subject": "Rebecca Arthy",
+      "object": "CREW*31"
+    }
+  ],
+  "Tribute of": [
+    {
+      "line": 147136410,
+      "subject": "Jorane",
+      "object": "Anne Sylvestre"
+    },
+    {
+      "line": 167102866,
+      "subject": "Lordi",
+      "object": "Mana (Hard rock Artist)"
+    },
+    {
+      "line": 180204148,
+      "subject": "Michael Jackson",
+      "object": "Calvin Hard (m/012ng6m2)"
+    },
+    {
+      "line": 301103865,
+      "subject": "Vincent Delerm",
+      "object": "Anne Sylvestre"
+    },
+    {
+      "line": 349518788,
+      "subject": "m/0nhqkjk",
+      "object": "Anne Sylvestre"
+    }
+  ],
+  "Recorded by": [
+    {
+      "line": 23707968,
+      "subject": "Agape",
+      "object": "Azumi Asakura"
+    },
+    {
+      "line": 23707969,
+      "subject": "Agape",
+      "object": "Yurina Hase"
+    },
+    {
+      "line": 161042036,
+      "subject": "Les Amis",
+      "object": "Henri Tachan (Music Composer)"
+    },
+    {
+      "line": 287901544,
+      "subject": "Tom Waits",
+      "object": "David Babin"
+    }
+  ],
+  "Film appeared in": [
+    {
+      "line": 61065015,
+      "subject": "Chris Hardwick",
+      "object": "Karl T. Hirsch (Short Film)"
+    },
+    {
+      "line": 67422586,
+      "subject": "Coolio",
+      "object": "Karl T. Hirsch (Short Film)"
+    },
+    {
+      "line": 146041269,
+      "subject": "John Doe (Alternative country Artist)",
+      "object": "Karl T. Hirsch (Short Film)"
+    },
+    {
+      "line": 263631945,
+      "subject": "Taye Diggs",
+      "object": "Karl T. Hirsch (Short Film)"
+    }
+  ],
+  "topic_server/webref_cluster_members_type": [
+    {
+      "line": 115767170,
+      "subject": "Guess Who (Music Artist)",
+      "object": "Musician"
+    },
+    {
+      "line": 137146754,
+      "subject": "Inna",
+      "object": "Musician"
+    },
+    {
+      "line": 143158564,
+      "subject": "Jared Leto",
+      "object": "Musician"
+    },
+    {
+      "line": 183194638,
+      "subject": "Moby",
+      "object": "Musician"
+    }
+  ],
+  "Government Position Held": [
+    {
+      "line": 78269166,
+      "subject": "Dick Costolo",
+      "object": "National Security Telecommunications Advisory Committee"
+    },
+    {
+      "line": 115110284,
+      "subject": "Gregory Brown",
+      "object": "National Security Telecommunications Advisory Committee"
+    },
+    {
+      "line": 146491748,
+      "subject": "John S. Chen",
+      "object": "President’s Export Council"
+    },
+    {
+      "line": 181208694,
+      "subject": "Mike S. Zafirovski",
+      "object": "National Security Telecommunications Advisory Committee"
+    }
+  ],
+  "Cover artist": [
+    {
+      "line": 43162259,
+      "subject": "Betty Parsons",
+      "object": "Betty Parsons"
+    },
+    {
+      "line": 43162260,
+      "subject": "Betty Parsons",
+      "object": "Michael Malpass"
+    },
+    {
+      "line": 43162261,
+      "subject": "Betty Parsons",
+      "object": "Mino Argento (Painting Artist)"
+    },
+    {
+      "line": 43162262,
+      "subject": "Betty Parsons",
+      "object": "Ruth Vollmer"
+    }
+  ],
+  "Focus": [
+    {
+      "line": 333166754,
+      "subject": "m/012vjz2b",
+      "object": "Online marketing"
+    },
+    {
+      "line": 333166755,
+      "subject": "m/012vjz2b",
+      "object": "Search Engine Optimization"
+    },
+    {
+      "line": 333500783,
+      "subject": "m/0130mc03",
+      "object": "Health Care"
+    },
+    {
+      "line": 333500784,
+      "subject": "m/0130mc03",
+      "object": "Personal trainer"
+    }
+  ],
+  "Team coached": [
+    {
+      "line": 93399900,
+      "subject": "Erik Hamrén",
+      "object": "Sweden national football team"
+    },
+    {
+      "line": 174274026,
+      "subject": "Marcus Allbäck",
+      "object": "Sweden national football team"
+    },
+    {
+      "line": 180409056,
+      "subject": "Michal Bílek",
+      "object": "Czech Republic national football team"
+    },
+    {
+      "line": 185297028,
+      "subject": "Morten Olsen",
+      "object": "Denmark national football team"
+    }
+  ],
+  "Music video performance": [
+    {
+      "line": 31224068,
+      "subject": "Annie Bergin",
+      "object": "Annie Bergin"
+    },
+    {
+      "line": 37357595,
+      "subject": "Baby Fresh",
+      "object": "Josue Diaz"
+    },
+    {
+      "line": 143402326,
+      "subject": "Jay Goddi",
+      "object": "Josue Diaz"
+    },
+    {
+      "line": 147557733,
+      "subject": "Josue Diaz",
+      "object": "Josue Diaz"
+    }
+  ],
+  "Partner": [
+    {
+      "line": 115085951,
+      "subject": "Greg and Karen DeSanto",
+      "object": "Greg DeSanto"
+    },
+    {
+      "line": 115085952,
+      "subject": "Greg and Karen DeSanto",
+      "object": "Karen DeSanto"
+    },
+    {
+      "line": 249292397,
+      "subject": "Sonny & Cher",
+      "object": "Cher"
+    },
+    {
+      "line": 249292398,
+      "subject": "Sonny & Cher",
+      "object": "Sonny Bono"
+    }
+  ],
+  "Honorary Degrees": [
+    {
+      "line": 82271343,
+      "subject": "Donald R. Arnold",
+      "object": "Donald R. Arnold"
+    },
+    {
+      "line": 173560173,
+      "subject": "Manik Talwani",
+      "object": "Manik Talwani"
+    },
+    {
+      "line": 175696491,
+      "subject": "Marvin L. Colker",
+      "object": "Marvin L. Colker"
+    },
+    {
+      "line": 190506240,
+      "subject": "Nathan O. Kaplan",
+      "object": "Nathan O. Kaplan"
+    }
+  ],
+  "Composer": [
+    {
+      "line": 107300964,
+      "subject": "Galarrwuy Yunupingu",
+      "object": "Ted Egan"
+    },
+    {
+      "line": 157421648,
+      "subject": "Lady Starlight",
+      "object": "Klaus Meine"
+    },
+    {
+      "line": 157421649,
+      "subject": "Lady Starlight",
+      "object": "Rudolf Schenker"
+    }
+  ],
+  "Lyricist": [
+    {
+      "line": 157421653,
+      "subject": "Lady Starlight",
+      "object": "Klaus Meine"
+    },
+    {
+      "line": 188422990,
+      "subject": "My Lovely Horse",
+      "object": "Graham Linehan"
+    },
+    {
+      "line": 188422991,
+      "subject": "My Lovely Horse",
+      "object": "Neil Hannon"
+    }
+  ],
+  "Developer": [
+    {
+      "line": 217903963,
+      "subject": "Python (Programming Language)",
+      "object": "Alex Martelli"
+    },
+    {
+      "line": 217903964,
+      "subject": "Python (Programming Language)",
+      "object": "Guido van Rossum"
+    },
+    {
+      "line": 217903965,
+      "subject": "Python (Programming Language)",
+      "object": "Jeremy Hylton"
+    }
+  ],
+  "Costume design by": [
+    {
+      "line": 74929388,
+      "subject": "Deadly Outbreak",
+      "object": "Laura Dinolesko"
+    },
+    {
+      "line": 87835163,
+      "subject": "Einstein and Eddington (Historical drama Film)",
+      "object": "Joanna Eatwell"
+    },
+    {
+      "line": 309328357,
+      "subject": "Whiplash (Documentary Film)",
+      "object": "Lisa Norcia"
+    }
+  ],
+  "Event Competed In": [
+    {
+      "line": 22975851,
+      "subject": "Adrian Cosma",
+      "object": "Handball at the 1972 Summer Olympics"
+    },
+    {
+      "line": 25065925,
+      "subject": "Albert Oganezov",
+      "object": "Handball at the 1972 Summer Olympics"
+    },
+    {
+      "line": 318061351,
+      "subject": "Zdravko Miljak",
+      "object": "Handball at the 1972 Summer Olympics"
+    }
+  ],
+  "Website category": [
+    {
+      "line": 164349961,
+      "subject": "Lisa Heller (m/012z869p)",
+      "object": "Musician"
+    },
+    {
+      "line": 319874826,
+      "subject": "denseymour's types",
+      "object": "Online advertising"
+    },
+    {
+      "line": 319874827,
+      "subject": "denseymour's types",
+      "object": "Search Engine Optimization"
+    }
+  ],
+  "Invention": [
+    {
+      "line": 158276761,
+      "subject": "Larry Page",
+      "object": "Google Search"
+    },
+    {
+      "line": 238123373,
+      "subject": "Sergey Brin",
+      "object": "Google Search"
+    },
+    {
+      "line": 315472876,
+      "subject": "Yoshiro Nakamatsu",
+      "object": "CinemaScope"
+    }
+  ],
+  "Partner In Firm": [
+    {
+      "line": 141930982,
+      "subject": "Jacques Herzog",
+      "object": "Herzog and de Meuron"
+    },
+    {
+      "line": 211220026,
+      "subject": "Pierre de Meuron",
+      "object": "Herzog and de Meuron"
+    },
+    {
+      "line": 224900641,
+      "subject": "Richard Rogers",
+      "object": "Rogers Stirk Harbour & Partners"
+    }
+  ],
+  "Publisher": [
+    {
+      "line": 44913094,
+      "subject": "Bizarria Esspumosa Studio",
+      "object": "Bizarria Esspumosa Studio"
+    },
+    {
+      "line": 139553218,
+      "subject": "Iside sophia 1",
+      "object": "m/012r2y7v"
+    }
+  ],
+  "Director": [
+    {
+      "line": 57453587,
+      "subject": "Cavanaugh Flight Museum",
+      "object": "Doug Jeanes"
+    },
+    {
+      "line": 226764153,
+      "subject": "Robin Givhan",
+      "object": "Jim Hoskinson"
+    }
+  ],
+  "Story by": [
+    {
+      "line": 45167922,
+      "subject": "Black Is White (Silent Film)",
+      "object": "E. Magnus Ingleton"
+    },
+    {
+      "line": 45167923,
+      "subject": "Black Is White (Silent Film)",
+      "object": "George Barr McCutcheon"
+    }
+  ],
+  "Art direction by": [
+    {
+      "line": 87835162,
+      "subject": "Einstein and Eddington (Historical drama Film)",
+      "object": "Attila Raczkevy"
+    },
+    {
+      "line": 309328354,
+      "subject": "Whiplash (Documentary Film)",
+      "object": "Hunter Brown (Film Art Director)"
+    }
+  ],
+  "Album Contribution": [
+    {
+      "line": 56138073,
+      "subject": "Carlos Paúl",
+      "object": "Orlando Sanchez (Person)"
+    },
+    {
+      "line": 293315288,
+      "subject": "Ty Tabor",
+      "object": "Steve Blevins (m/012fmdcc)"
+    }
+  ],
+  "Theater Role": [
+    {
+      "line": 148373576,
+      "subject": "Julien Derouault",
+      "object": "Mr et Mme Rêve"
+    },
+    {
+      "line": 174714663,
+      "subject": "Marie-Claude Pietragalla",
+      "object": "Mr et Mme Rêve"
+    }
+  ],
+  "Brand": [
+    {
+      "line": 50081262,
+      "subject": "Brett Lewis (m/012smp63)",
+      "object": "Brett Lewis (m/012smp63)"
+    },
+    {
+      "line": 146548242,
+      "subject": "John Sutcliffe (Web Designer)",
+      "object": "John Sutcliffe (Web Designer)"
+    }
+  ],
+  "Place founded": [
+    {
+      "line": 45597882,
+      "subject": "Blackside, Inc.",
+      "object": "Boston"
+    },
+    {
+      "line": 204662610,
+      "subject": "PBS",
+      "object": "Boston"
+    }
+  ],
+  "Parent": [
+    {
+      "line": 148688562,
+      "subject": "June Butcher",
+      "object": "Lydia Simmonds"
+    },
+    {
+      "line": 234376755,
+      "subject": "Scarlett Allen",
+      "object": "Johnny Allen (TV Character)"
+    }
+  ],
+  "Romantically involved with": [
+    {
+      "line": 146691089,
+      "subject": "Johnny Allen (TV Character)",
+      "object": "Stephanie Allen (Fictional Character)"
+    },
+    {
+      "line": 253791048,
+      "subject": "Stephanie Allen (Fictional Character)",
+      "object": "Johnny Allen (TV Character)"
+    }
+  ],
+  "Parent Industry": [
+    {
+      "line": 201622671,
+      "subject": "Online marketing",
+      "object": "Marketing"
+    },
+    {
+      "line": 235507388,
+      "subject": "Search Engine Optimization",
+      "object": "Online marketing"
+    }
+  ],
+  "Website owner": [
+    {
+      "line": 142111613,
+      "subject": "Jaime Cuesta López",
+      "object": "Jaime Cuesta López"
+    },
+    {
+      "line": 331940657,
+      "subject": "m/0129c04t",
+      "object": "m/0129b_pt"
+    }
+  ],
+  "Sponsorship": [
+    {
+      "line": 190571790,
+      "subject": "National Geographic Society",
+      "object": "Richard E. Byrd"
+    },
+    {
+      "line": 190571791,
+      "subject": "National Geographic Society",
+      "object": "Robert Peary"
+    }
+  ],
+  "Choreographer": [
+    {
+      "line": 186281673,
+      "subject": "Mr et Mme Rêve",
+      "object": "Julien Derouault"
+    },
+    {
+      "line": 186281674,
+      "subject": "Mr et Mme Rêve",
+      "object": "Marie-Claude Pietragalla"
+    }
+  ],
+  "Chefs": [
+    {
+      "line": 65388974,
+      "subject": "Commoning Cafe Bogor",
+      "object": "Alex Rollin"
+    },
+    {
+      "line": 175876226,
+      "subject": "Mary Tyler Moore",
+      "object": "John C Fleer"
+    }
+  ],
+  "Subdiscipline of": [
+    {
+      "line": 175199665,
+      "subject": "Marketing",
+      "object": "Management"
+    },
+    {
+      "line": 216302631,
+      "subject": "Project management",
+      "object": "Management"
+    }
+  ],
+  "Producer(s)": [
+    {
+      "line": 201622125,
+      "subject": "Online advertising",
+      "object": "Dan DelMain"
+    },
+    {
+      "line": 235507397,
+      "subject": "Search Engine Optimization",
+      "object": "Dan DelMain"
+    }
+  ],
+  "Creator Of Strip": [
+    {
+      "line": 185634388,
+      "subject": "Motley's Crew",
+      "object": "Ben Templeton"
+    },
+    {
+      "line": 185634389,
+      "subject": "Motley's Crew",
+      "object": "Tom Forman (Comic Strip Creator)"
+    }
+  ],
+  "Sport Association": [
+    {
+      "line": 29952169,
+      "subject": "Andre Marriner",
+      "object": "Fédération Internationale de Football Association"
+    },
+    {
+      "line": 232879842,
+      "subject": "Sandra Hunt (Referee)",
+      "object": "Fédération Internationale de Football Association"
+    }
+  ],
+  "Subject": [
+    {
+      "line": 87835176,
+      "subject": "Einstein and Eddington (Historical drama Film)",
+      "object": "Albert Einstein"
+    }
+  ],
+  "Featured artist": [
+    {
+      "line": 254039843,
+      "subject": "Steve Blevins (m/012fmdcc)",
+      "object": "Steve Blevins (Blues-rock Artist)"
+    }
+  ],
+  "Label": [
+    {
+      "line": 175815119,
+      "subject": "Mary Katrantzou",
+      "object": "Mary Katrantzou"
+    }
+  ],
+  "Engineer": [
+    {
+      "line": 298892262,
+      "subject": "Vale de Ursa Viaduct, River Zezere.",
+      "object": "Edgar Cardoso"
+    }
+  ],
+  "Appears In Book": [
+    {
+      "line": 61014520,
+      "subject": "Chris Barnett (Biography)",
+      "object": "Chris Barnett (Biography)"
+    }
+  ],
+  "Content": [
+    {
+      "line": 73233420,
+      "subject": "Darren \"Whackhead\" Simpson",
+      "object": "Nic Marais"
+    }
+  ],
+  "Production design by": [
+    {
+      "line": 309328385,
+      "subject": "Whiplash (Documentary Film)",
+      "object": "Melanie Jones (Production Designer)"
+    }
+  ],
+  "Place": [
+    {
+      "line": 48670730,
+      "subject": "Boston",
+      "object": "Boston"
+    }
+  ],
+  "Set Decoration by": [
+    {
+      "line": 309328390,
+      "subject": "Whiplash (Documentary Film)",
+      "object": "Karuna Karmarkar"
+    }
+  ],
+  "Casting director": [
+    {
+      "line": 309328355,
+      "subject": "Whiplash (Documentary Film)",
+      "object": "Terri Taylor"
+    }
+  ],
+  "Specie": [
+    {
+      "line": 68178783,
+      "subject": "Count von Count",
+      "object": "The Muppets"
+    }
+  ],
+  "Project": [
+    {
+      "line": 180523844,
+      "subject": "Michiel Das",
+      "object": "Michiel Das"
+    }
+  ],
+  "TV Program (recurring writer)": [
+    {
+      "line": 74033695,
+      "subject": "David W. Rintels",
+      "object": "David W. Rintels"
+    }
+  ],
+  "Occupation": [
+    {
+      "line": 44297573,
+      "subject": "Billy Bob Brockali",
+      "object": "Musician"
+    }
+  ],
+  "Episode appearance": [
+    {
+      "line": 226764154,
+      "subject": "Robin Givhan",
+      "object": "Robin Givhan"
+    }
+  ],
+  "Play Designed": [
+    {
+      "line": 68008505,
+      "subject": "Costume designer",
+      "object": "Mr et Mme Rêve"
+    }
+  ],
+  "Editor": [
+    {
+      "line": 101008917,
+      "subject": "Fito Cabrales",
+      "object": "Ara Llibres"
+    }
+  ],
+  "Belongs to organization": [
+    {
+      "line": 68178778,
+      "subject": "Count von Count",
+      "object": "The Muppets"
+    }
+  ],
+  "Medical Specialty": [
+    {
+      "line": 147048895,
+      "subject": "Jonathan Miller",
+      "object": "Neurology"
+    }
+  ],
+  "Organization acquired": [
+    {
+      "line": 301882276,
+      "subject": "Vivendi",
+      "object": "Good Machine"
+    }
+  ],
+  "Created By": [
+    {
+      "line": 243137254,
+      "subject": "Silly Daddy",
+      "object": "Joe Chiappetta"
+    }
+  ],
+  "Organization advised": [
+    {
+      "line": 76618300,
+      "subject": "Dennis Seymour",
+      "object": "Mo Twister"
+    }
+  ],
+  "Building occupied": [
+    {
+      "line": 229121201,
+      "subject": "Royal Society of Arts (Organisation)",
+      "object": "Royal Society of Arts (Organisation)"
+    }
+  ],
+  "Spoken by character (if from fictional work)": [
+    {
+      "line": 39825492,
+      "subject": "Bashir (Fictional Organisation Founder)",
+      "object": "Bashir (Fictional Organisation Founder)"
+    }
+  ],
+  "Contributing author to": [
+    {
+      "line": 42597689,
+      "subject": "Bernat Moreno",
+      "object": "Bizarria Esspumosa Studio"
+    }
+  ],
+  "Employer": [
+    {
+      "line": 170503040,
+      "subject": "Lysis",
+      "object": "Theagenes (Soldier)"
+    }
+  ],
+  "Visiting scholars, fellows, etc.": [
+    {
+      "line": 297491434,
+      "subject": "University Yale",
+      "object": "Harold Bloom"
+    }
+  ],
+  "Candidate": [
+    {
+      "line": 215323476,
+      "subject": "Presidential candidacy of Fernando Poe, Jr.",
+      "object": "Fernando Poe, Jr."
+    }
+  ],
+  "Dedication": [
+    {
+      "line": 311221533,
+      "subject": "William Godwin",
+      "object": "Frankenstein"
+    }
+  ],
+  "Judge": [
+    {
+      "line": 57744874,
+      "subject": "Celia Kitzinger and Sue Wilkinson",
+      "object": "Mark Potter"
+    }
+  ],
+  "Musical Director": [
+    {
+      "line": 186281675,
+      "subject": "Mr et Mme Rêve",
+      "object": "Laurent Garnier"
+    }
+  ],
+  "Position": [
+    {
+      "line": 60209793,
+      "subject": "Chief Justice",
+      "object": "William Howard Taft"
+    }
+  ],
+  "Match": [
+    {
+      "line": 185297014,
+      "subject": "Morten Olsen",
+      "object": "Denmark national football team"
+    }
+  ],
+  "Court or title": [
+    {
+      "line": 226339957,
+      "subject": "Robert A. Blair (Judge)",
+      "object": "Court of Appeal for Ontario"
+    }
+  ],
+  "Languages Designed": [
+    {
+      "line": 115856297,
+      "subject": "Guido van Rossum",
+      "object": "Python (Programming Language)"
+    }
+  ],
+  "Sport coached": [
+    {
+      "line": 145540420,
+      "subject": "Joe Boyle (Coach)",
+      "object": "Running"
+    }
+  ],
+  "People with this family name": [
+    {
+      "line": 193802495,
+      "subject": "Nikko Marasigan",
+      "object": "Nikko Marasigan"
+    }
+  ],
+  "Part of professional field": [
+    {
+      "line": 145678602,
+      "subject": "Joel Glenn Wright (Organisation leader) #1",
+      "object": "Search Engine Optimization"
+    }
+  ],
+  "Religion Founded": [
+    {
+      "line": 85662213,
+      "subject": "Düsum Khyenpa, 1st Karmapa Lama",
+      "object": "Karma Kagyu"
+    }
+  ],
+  "Stage Director": [
+    {
+      "line": 210059410,
+      "subject": "Philippe Arlaud born in Paris 03 August 1948)",
+      "object": "Philippe Arlaud"
+    }
+  ],
+  "Product Endorsed": [
+    {
+      "line": 139475688,
+      "subject": "Isabel Preysler",
+      "object": "Manolo Blahnik"
+    }
+  ],
+  "Exhibition curated": [
+    {
+      "line": 127845370,
+      "subject": "Hélène Morlier",
+      "object": "Marcel Dourgnon"
+    }
+  ],
+  "Music video production crewed": [
+    {
+      "line": 47383342,
+      "subject": "Bobby Gonzalez (Music video crewmember)",
+      "object": "Luz Maria"
+    }
+  ],
+  "Interviewer": [
+    {
+      "line": 151149454,
+      "subject": "Kazushi Ono",
+      "object": "Simon Holledge (Writer)"
+    }
+  ],
+  "Production staff": [
+    {
+      "line": 71942699,
+      "subject": "Dance Captain",
+      "object": "James Steele (Stage Manager)"
+    }
+  ]
+}

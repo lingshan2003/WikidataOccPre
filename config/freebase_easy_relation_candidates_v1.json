@@ -1,0 +1,29 @@
+{
+  "name": "freebase_easy_person_relation_candidates_v1",
+  "status": "provisional_audit_only",
+  "description": "Predicates prioritized for coverage and sample review. This is not a training-graph whitelist or a one-to-one mapping to Wikidata's 40 relations.",
+  "priority": [
+    "Children",
+    "Sibling",
+    "Spouse (or domestic partner)",
+    "Influenced By",
+    "Academic advisor",
+    "Peer",
+    "Romantic relationship (with celebrities)",
+    "Celebrity friend",
+    "kp_lw/philosopher/influenced_by",
+    "kp_lw/philosophy_influencer/influencee",
+    "Martial Art Instructor(s)"
+  ],
+  "semantic_review": [
+    "Artist supported",
+    "Group",
+    "Matches Lost",
+    "Celebrity rival",
+    "President",
+    "Episode segment",
+    "Demonstration medal won",
+    "Tribute of",
+    "Interviewer"
+  ]
+}
