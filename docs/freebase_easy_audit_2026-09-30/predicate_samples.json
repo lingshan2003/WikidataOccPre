@@ -1,0 +1,1274 @@
+{
+  "Academic advisor": [
+    {
+      "source_line": 180449360,
+      "subject_name": "Michel Raynaud",
+      "predicate": "Academic advisor",
+      "object_name": "Alexander Grothendieck"
+    },
+    {
+      "source_line": 175424137,
+      "subject_name": "Marston Morse",
+      "predicate": "Academic advisor",
+      "object_name": "George David Birkhoff"
+    },
+    {
+      "source_line": 228238821,
+      "subject_name": "Ronald Ernest Aitchison",
+      "predicate": "Academic advisor",
+      "object_name": "Victor Albert Bailey"
+    },
+    {
+      "source_line": 99388099,
+      "subject_name": "Ferdinand Georg Frobenius",
+      "predicate": "Academic advisor",
+      "object_name": "Ernst Kummer"
+    },
+    {
+      "source_line": 142180624,
+      "subject_name": "Jakob Thomasius",
+      "predicate": "Academic advisor",
+      "object_name": "Valentin Alberti"
+    }
+  ],
+  "Album Contribution": [
+    {
+      "source_line": 293315288,
+      "subject_name": "Ty Tabor",
+      "predicate": "Album Contribution",
+      "object_name": "Steve Blevins (m/012fmdcc)"
+    }
+  ],
+  "Artist": [
+    {
+      "source_line": 25661610,
+      "subject_name": "Alf",
+      "predicate": "Artist",
+      "object_name": "Alison Moyet"
+    },
+    {
+      "source_line": 31224059,
+      "subject_name": "Annie Bergin",
+      "predicate": "Artist",
+      "object_name": "David Gedge"
+    },
+    {
+      "source_line": 147557720,
+      "subject_name": "Josue Diaz",
+      "predicate": "Artist",
+      "object_name": "Baby Fresh"
+    },
+    {
+      "source_line": 311504770,
+      "subject_name": "Willie Nelson",
+      "predicate": "Artist",
+      "object_name": "Willie Nelson"
+    },
+    {
+      "source_line": 189976579,
+      "subject_name": "Nalstoxic",
+      "predicate": "Artist",
+      "object_name": "Nalstoxic"
+    }
+  ],
+  "Artist supported": [
+    {
+      "source_line": 219121857,
+      "subject_name": "RJ Thompson",
+      "predicate": "Artist supported",
+      "object_name": "Gabriella Cilmi"
+    },
+    {
+      "source_line": 21338741,
+      "subject_name": "Aaron Goldstein",
+      "predicate": "Artist supported",
+      "object_name": "Tom Wilson (Blues Artist)"
+    },
+    {
+      "source_line": 89165652,
+      "subject_name": "Ella Fitzgerald",
+      "predicate": "Artist supported",
+      "object_name": "Aura Urziceanu Rully"
+    },
+    {
+      "source_line": 94290461,
+      "subject_name": "Ethan Luck",
+      "predicate": "Artist supported",
+      "object_name": "John Davis (Christian rock Artist)"
+    },
+    {
+      "source_line": 96368219,
+      "subject_name": "Exzavier Whitley (m/013124gp)",
+      "predicate": "Artist supported",
+      "object_name": "Micki Free"
+    }
+  ],
+  "Author": [
+    {
+      "source_line": 24615125,
+      "subject_name": "Akinwunmi Ambode",
+      "predicate": "Author",
+      "object_name": "Akinwunmi Ambode"
+    },
+    {
+      "source_line": 25806265,
+      "subject_name": "Ali",
+      "predicate": "Author",
+      "object_name": "Frédéric Roux (Author)"
+    },
+    {
+      "source_line": 39862488,
+      "subject_name": "Basil Dearden",
+      "predicate": "Author",
+      "object_name": "Ronald Millar (Writer)"
+    },
+    {
+      "source_line": 254087469,
+      "subject_name": "Steve Jobs",
+      "predicate": "Author",
+      "object_name": "Hercus Monte"
+    }
+  ],
+  "Award Won": [
+    {
+      "source_line": 106021451,
+      "subject_name": "Fu-Sheng Chiu",
+      "predicate": "Award Won",
+      "object_name": "Nicola Carraro"
+    },
+    {
+      "source_line": 145456262,
+      "subject_name": "Joaquin Baca-Asay",
+      "predicate": "Award Won",
+      "object_name": "Joaquin Baca-Asay"
+    },
+    {
+      "source_line": 150947381,
+      "subject_name": "Katie Couric",
+      "predicate": "Award Won",
+      "object_name": "Edward R. Murrow"
+    }
+  ],
+  "Based On": [
+    {
+      "source_line": 53752611,
+      "subject_name": "Cain (Farmer)",
+      "predicate": "Based On",
+      "object_name": "Cain (Farmer)"
+    },
+    {
+      "source_line": 197357472,
+      "subject_name": "Nuno Roque",
+      "predicate": "Based On",
+      "object_name": "Nuno Roque"
+    }
+  ],
+  "Blog": [
+    {
+      "source_line": 30108662,
+      "subject_name": "Andrew James (m/01310lvh)",
+      "predicate": "Blog",
+      "object_name": "Andrew James (m/01310lvh)"
+    },
+    {
+      "source_line": 110860684,
+      "subject_name": "Giuseppe Anzalone",
+      "predicate": "Blog",
+      "object_name": "Giuseppe Anzalone"
+    },
+    {
+      "source_line": 207436911,
+      "subject_name": "Paul Bakker (Blogger)",
+      "predicate": "Blog",
+      "object_name": "Paul Bakker (Blogger)"
+    }
+  ],
+  "Brand": [
+    {
+      "source_line": 146548242,
+      "subject_name": "John Sutcliffe (Web Designer)",
+      "predicate": "Brand",
+      "object_name": "John Sutcliffe (Web Designer)"
+    }
+  ],
+  "Celebrity friend": [
+    {
+      "source_line": 142622479,
+      "subject_name": "James Sutton (Actor) #1",
+      "predicate": "Celebrity friend",
+      "object_name": "Claire Cooper"
+    },
+    {
+      "source_line": 30518320,
+      "subject_name": "Angela Cartwright",
+      "predicate": "Celebrity friend",
+      "object_name": "Heather Menzies"
+    },
+    {
+      "source_line": 116211290,
+      "subject_name": "Gustave Flaubert",
+      "predicate": "Celebrity friend",
+      "object_name": "George Sand"
+    },
+    {
+      "source_line": 76325991,
+      "subject_name": "Demi Lovato",
+      "predicate": "Celebrity friend",
+      "object_name": "Meaghan Martin"
+    },
+    {
+      "source_line": 108309252,
+      "subject_name": "Gemma Ward",
+      "predicate": "Celebrity friend",
+      "object_name": "Jessica Hart"
+    }
+  ],
+  "Celebrity rival": [
+    {
+      "source_line": 190322412,
+      "subject_name": "Nas",
+      "predicate": "Celebrity rival",
+      "object_name": "Jay-Z"
+    },
+    {
+      "source_line": 139498690,
+      "subject_name": "Isabelle Huppert",
+      "predicate": "Celebrity rival",
+      "object_name": "Isabelle Adjani"
+    },
+    {
+      "source_line": 145537235,
+      "subject_name": "Joe Biden",
+      "predicate": "Celebrity rival",
+      "object_name": "Sarah Palin"
+    },
+    {
+      "source_line": 249428117,
+      "subject_name": "Sophie Anderton",
+      "predicate": "Celebrity rival",
+      "object_name": "Jasmine Lennard"
+    },
+    {
+      "source_line": 143433031,
+      "subject_name": "Jay-Z",
+      "predicate": "Celebrity rival",
+      "object_name": "Nas"
+    }
+  ],
+  "Children": [
+    {
+      "source_line": 59797551,
+      "subject_name": "Cheongyudeok",
+      "predicate": "Children",
+      "object_name": "Cheon Ho-Jin"
+    },
+    {
+      "source_line": 180224096,
+      "subject_name": "Michael King",
+      "predicate": "Children",
+      "object_name": "Jonathan King (Director)"
+    },
+    {
+      "source_line": 153818754,
+      "subject_name": "Klāvs Lawrence",
+      "predicate": "Children",
+      "object_name": "Sylvia Capercaillie"
+    },
+    {
+      "source_line": 42058754,
+      "subject_name": "Ben A. Jones",
+      "predicate": "Children",
+      "object_name": "Horace A. Jones"
+    },
+    {
+      "source_line": 121389686,
+      "subject_name": "Henrik Esterhuysen",
+      "predicate": "Children",
+      "object_name": "Richard E. Grant"
+    }
+  ],
+  "Composer": [
+    {
+      "source_line": 157421648,
+      "subject_name": "Lady Starlight",
+      "predicate": "Composer",
+      "object_name": "Klaus Meine"
+    },
+    {
+      "source_line": 157421649,
+      "subject_name": "Lady Starlight",
+      "predicate": "Composer",
+      "object_name": "Rudolf Schenker"
+    }
+  ],
+  "Cover artist": [
+    {
+      "source_line": 43162259,
+      "subject_name": "Betty Parsons",
+      "predicate": "Cover artist",
+      "object_name": "Betty Parsons"
+    },
+    {
+      "source_line": 43162261,
+      "subject_name": "Betty Parsons",
+      "predicate": "Cover artist",
+      "object_name": "Mino Argento (Painting Artist)"
+    },
+    {
+      "source_line": 43162262,
+      "subject_name": "Betty Parsons",
+      "predicate": "Cover artist",
+      "object_name": "Ruth Vollmer"
+    }
+  ],
+  "Demonstration medal won": [
+    {
+      "source_line": 29995511,
+      "subject_name": "Andrea Schöpp",
+      "predicate": "Demonstration medal won",
+      "object_name": "Monika Wagner"
+    },
+    {
+      "source_line": 184045611,
+      "subject_name": "Monika Wagner",
+      "predicate": "Demonstration medal won",
+      "object_name": "Andrea Schöpp"
+    }
+  ],
+  "Directed by": [
+    {
+      "source_line": 189976582,
+      "subject_name": "Nalstoxic",
+      "predicate": "Directed by",
+      "object_name": "Nalstoxic"
+    }
+  ],
+  "Employment history": [
+    {
+      "source_line": 61346620,
+      "subject_name": "Christine Lagarde",
+      "predicate": "Employment history",
+      "object_name": "William Cohen"
+    },
+    {
+      "source_line": 105385808,
+      "subject_name": "Friedrich von Thiersch",
+      "predicate": "Employment history",
+      "object_name": "Karl Jonas Mylius"
+    },
+    {
+      "source_line": 144070793,
+      "subject_name": "Jeffrey L. Fisher",
+      "predicate": "Employment history",
+      "object_name": "John Paul Stevens"
+    },
+    {
+      "source_line": 142425686,
+      "subject_name": "James Fallows",
+      "predicate": "Employment history",
+      "object_name": "Jimmy Carter"
+    },
+    {
+      "source_line": 310938803,
+      "subject_name": "Wilhelmina Luisa Fittig",
+      "predicate": "Employment history",
+      "object_name": "Jacob Burckhardt"
+    }
+  ],
+  "Episode appearance": [
+    {
+      "source_line": 226764154,
+      "subject_name": "Robin Givhan",
+      "predicate": "Episode appearance",
+      "object_name": "Robin Givhan"
+    }
+  ],
+  "Episode segment": [
+    {
+      "source_line": 56373949,
+      "subject_name": "Carol Cleveland",
+      "predicate": "Episode segment",
+      "object_name": "Eric Idle"
+    },
+    {
+      "source_line": 56373950,
+      "subject_name": "Carol Cleveland",
+      "predicate": "Episode segment",
+      "object_name": "John Cleese"
+    },
+    {
+      "source_line": 56373951,
+      "subject_name": "Carol Cleveland",
+      "predicate": "Episode segment",
+      "object_name": "Michael Palin"
+    },
+    {
+      "source_line": 56373953,
+      "subject_name": "Carol Cleveland",
+      "predicate": "Episode segment",
+      "object_name": "Terry Jones (Historian)"
+    },
+    {
+      "source_line": 265239973,
+      "subject_name": "Terry Jones (Historian)",
+      "predicate": "Episode segment",
+      "object_name": "John Cleese"
+    }
+  ],
+  "Film performance": [
+    {
+      "source_line": 139128251,
+      "subject_name": "Irina Savina",
+      "predicate": "Film performance",
+      "object_name": "Irina Savina"
+    },
+    {
+      "source_line": 285871297,
+      "subject_name": "Tiffany Shepis",
+      "predicate": "Film performance",
+      "object_name": "Do Not Disturb (Horror Film)"
+    }
+  ],
+  "Group": [
+    {
+      "source_line": 38389583,
+      "subject_name": "Bai Hong",
+      "predicate": "Group",
+      "object_name": "Bai Guang"
+    },
+    {
+      "source_line": 25606191,
+      "subject_name": "Alexandre Bogomolov",
+      "predicate": "Group",
+      "object_name": "Eleanor Roosevelt"
+    },
+    {
+      "source_line": 290833037,
+      "subject_name": "Trina",
+      "predicate": "Group",
+      "object_name": "Yung Berg"
+    },
+    {
+      "source_line": 112872636,
+      "subject_name": "Gong Qiuxia",
+      "predicate": "Group",
+      "object_name": "Bai Hong"
+    },
+    {
+      "source_line": 175801444,
+      "subject_name": "Mary J. Blige",
+      "predicate": "Group",
+      "object_name": "Eve (Hardcore hip hop Artist)"
+    }
+  ],
+  "Influenced By": [
+    {
+      "source_line": 140844826,
+      "subject_name": "Italo Calvino",
+      "predicate": "Influenced By",
+      "object_name": "Raymond Queneau"
+    },
+    {
+      "source_line": 25543831,
+      "subject_name": "Alexander Ostrowski",
+      "predicate": "Influenced By",
+      "object_name": "Erich Hecke"
+    },
+    {
+      "source_line": 145964507,
+      "subject_name": "John Carpenter",
+      "predicate": "Influenced By",
+      "object_name": "H. P. Lovecraft"
+    },
+    {
+      "source_line": 150467299,
+      "subject_name": "Karel Čapek",
+      "predicate": "Influenced By",
+      "object_name": "John Dewey"
+    },
+    {
+      "source_line": 83558650,
+      "subject_name": "Drago Jančar",
+      "predicate": "Influenced By",
+      "object_name": "Hermann Hesse"
+    }
+  ],
+  "Interviewer": [
+    {
+      "source_line": 151149454,
+      "subject_name": "Kazushi Ono",
+      "predicate": "Interviewer",
+      "object_name": "Simon Holledge (Writer)"
+    }
+  ],
+  "Leader of": [
+    {
+      "source_line": 76614882,
+      "subject_name": "Dennis R. Glass",
+      "predicate": "Leader of",
+      "object_name": "Dennis R. Glass"
+    },
+    {
+      "source_line": 145876536,
+      "subject_name": "John B. Hess",
+      "predicate": "Leader of",
+      "object_name": "John B. Hess"
+    },
+    {
+      "source_line": 190992402,
+      "subject_name": "Neal Patterson",
+      "predicate": "Leader of",
+      "object_name": "Neal Patterson"
+    },
+    {
+      "source_line": 142566359,
+      "subject_name": "James P. Gorman",
+      "predicate": "Leader of",
+      "object_name": "James P. Gorman"
+    },
+    {
+      "source_line": 160927640,
+      "subject_name": "Leonard S Schleifer",
+      "predicate": "Leader of",
+      "object_name": "Leonard S Schleifer"
+    }
+  ],
+  "Lyricist": [
+    {
+      "source_line": 157421653,
+      "subject_name": "Lady Starlight",
+      "predicate": "Lyricist",
+      "object_name": "Klaus Meine"
+    }
+  ],
+  "Married To": [
+    {
+      "source_line": 89085383,
+      "subject_name": "Elizabeth I of England",
+      "predicate": "Married To",
+      "object_name": "Marilyn Monroe"
+    },
+    {
+      "source_line": 174775261,
+      "subject_name": "Marilyn Monroe",
+      "predicate": "Married To",
+      "object_name": "Elizabeth I of England"
+    }
+  ],
+  "Martial Art Instructor(s)": [
+    {
+      "source_line": 110324067,
+      "subject_name": "Gilbert Yvel",
+      "predicate": "Martial Art Instructor(s)",
+      "object_name": "Jon Bluming"
+    },
+    {
+      "source_line": 185081965,
+      "subject_name": "Moriteru Ueshiba",
+      "predicate": "Martial Art Instructor(s)",
+      "object_name": "Morihei Ueshiba"
+    },
+    {
+      "source_line": 116538470,
+      "subject_name": "Gōzō Shioda",
+      "predicate": "Martial Art Instructor(s)",
+      "object_name": "Morihei Ueshiba"
+    },
+    {
+      "source_line": 82410955,
+      "subject_name": "Donnie Williams",
+      "predicate": "Martial Art Instructor(s)",
+      "object_name": "Steve Sanders (Martial Artist)"
+    },
+    {
+      "source_line": 144558262,
+      "subject_name": "Jesse Glover",
+      "predicate": "Martial Art Instructor(s)",
+      "object_name": "Bruce Lee"
+    }
+  ],
+  "Matches Lost": [
+    {
+      "source_line": 213442882,
+      "subject_name": "Polona Hercog",
+      "predicate": "Matches Lost",
+      "object_name": "Sloane Stephens"
+    },
+    {
+      "source_line": 26094918,
+      "subject_name": "Alizé Lim",
+      "predicate": "Matches Lost",
+      "object_name": "Andrea Petkovic"
+    },
+    {
+      "source_line": 56105064,
+      "subject_name": "Carlos Berlocq",
+      "predicate": "Matches Lost",
+      "object_name": "Sam Groth"
+    },
+    {
+      "source_line": 147918688,
+      "subject_name": "Juan Gisbert, Sr.",
+      "predicate": "Matches Lost",
+      "object_name": "William Bowrey"
+    },
+    {
+      "source_line": 26038811,
+      "subject_name": "Alison Riske",
+      "predicate": "Matches Lost",
+      "object_name": "Kristina Mladenovic"
+    }
+  ],
+  "Member": [
+    {
+      "source_line": 186825195,
+      "subject_name": "Mukesh Ambani",
+      "predicate": "Member",
+      "object_name": "Mukesh Ambani"
+    }
+  ],
+  "Member of": [
+    {
+      "source_line": 82693691,
+      "subject_name": "Dorothee Pesch",
+      "predicate": "Member of",
+      "object_name": "Dorothee Pesch"
+    },
+    {
+      "source_line": 61013707,
+      "subject_name": "Chris Barber",
+      "predicate": "Member of",
+      "object_name": "Chris Barber"
+    },
+    {
+      "source_line": 33497618,
+      "subject_name": "Armand Van Helden",
+      "predicate": "Member of",
+      "object_name": "Armand Van Helden"
+    },
+    {
+      "source_line": 143414055,
+      "subject_name": "Jay McShann",
+      "predicate": "Member of",
+      "object_name": "Jay McShann"
+    },
+    {
+      "source_line": 115038008,
+      "subject_name": "Greg Boyer",
+      "predicate": "Member of",
+      "object_name": "George Clinton"
+    }
+  ],
+  "Music video performance": [
+    {
+      "source_line": 31224068,
+      "subject_name": "Annie Bergin",
+      "predicate": "Music video performance",
+      "object_name": "Annie Bergin"
+    },
+    {
+      "source_line": 37357595,
+      "subject_name": "Baby Fresh",
+      "predicate": "Music video performance",
+      "object_name": "Josue Diaz"
+    },
+    {
+      "source_line": 143402326,
+      "subject_name": "Jay Goddi",
+      "predicate": "Music video performance",
+      "object_name": "Josue Diaz"
+    },
+    {
+      "source_line": 147557733,
+      "subject_name": "Josue Diaz",
+      "predicate": "Music video performance",
+      "object_name": "Josue Diaz"
+    }
+  ],
+  "Named after": [
+    {
+      "source_line": 180581071,
+      "subject_name": "Mickey Tettleton",
+      "predicate": "Named after",
+      "object_name": "Mickey Mantle"
+    },
+    {
+      "source_line": 43015030,
+      "subject_name": "Bette Midler",
+      "predicate": "Named after",
+      "object_name": "Bette Davis"
+    },
+    {
+      "source_line": 42272235,
+      "subject_name": "Benito Mussolini",
+      "predicate": "Named after",
+      "object_name": "Benito Juárez"
+    },
+    {
+      "source_line": 142812472,
+      "subject_name": "Jan-Michael Gambill",
+      "predicate": "Named after",
+      "object_name": "Jan-Michael Vincent"
+    },
+    {
+      "source_line": 233215027,
+      "subject_name": "Santino Marella",
+      "predicate": "Named after",
+      "object_name": "Gorilla Monsoon"
+    }
+  ],
+  "Organization founded": [
+    {
+      "source_line": 113984953,
+      "subject_name": "Grace Massa Langlois",
+      "predicate": "Organization founded",
+      "object_name": "Grace Massa Langlois"
+    },
+    {
+      "source_line": 331753987,
+      "subject_name": "m/0125x_tq",
+      "predicate": "Organization founded",
+      "object_name": "m/0125x_tq"
+    }
+  ],
+  "Peer": [
+    {
+      "source_line": 85756483,
+      "subject_name": "E. E. Cummings",
+      "predicate": "Peer",
+      "object_name": "George Herriman"
+    },
+    {
+      "source_line": 180286527,
+      "subject_name": "Michael Oakeshott",
+      "predicate": "Peer",
+      "object_name": "George Bernard Shaw"
+    },
+    {
+      "source_line": 202967671,
+      "subject_name": "Oscar Niemeyer",
+      "predicate": "Peer",
+      "object_name": "Roberto Burle Marx"
+    },
+    {
+      "source_line": 121667258,
+      "subject_name": "Herbert Marcuse",
+      "predicate": "Peer",
+      "object_name": "Theodor W. Adorno"
+    },
+    {
+      "source_line": 180204075,
+      "subject_name": "Michael Jackson",
+      "predicate": "Peer",
+      "object_name": "Paul McCartney"
+    }
+  ],
+  "People involved": [
+    {
+      "source_line": 152764002,
+      "subject_name": "Killing of Peter Fechter",
+      "predicate": "People involved",
+      "object_name": "Peter Fechter"
+    }
+  ],
+  "People with this family name": [
+    {
+      "source_line": 193802495,
+      "subject_name": "Nikko Marasigan",
+      "predicate": "People with this family name",
+      "object_name": "Nikko Marasigan"
+    }
+  ],
+  "People with this interest": [
+    {
+      "source_line": 178891111,
+      "subject_name": "Menashe Avramov (Russian Speaker) #2",
+      "predicate": "People with this interest",
+      "object_name": "Aviran Zazon"
+    }
+  ],
+  "Person": [
+    {
+      "source_line": 51607216,
+      "subject_name": "Buddy Ebsen",
+      "predicate": "Person",
+      "object_name": "Ahmad Jamal"
+    },
+    {
+      "source_line": 263335026,
+      "subject_name": "Taranto",
+      "predicate": "Person",
+      "object_name": "Roberta Vinci"
+    },
+    {
+      "source_line": 263335009,
+      "subject_name": "Taranto",
+      "predicate": "Person",
+      "object_name": "Davide Moro"
+    },
+    {
+      "source_line": 263335015,
+      "subject_name": "Taranto",
+      "predicate": "Person",
+      "object_name": "Giovanni Paisiello"
+    },
+    {
+      "source_line": 263335018,
+      "subject_name": "Taranto",
+      "predicate": "Person",
+      "object_name": "Livius Andronicus"
+    }
+  ],
+  "Place Musical Career Began": [
+    {
+      "source_line": 180959598,
+      "subject_name": "Mietta",
+      "predicate": "Place Musical Career Began",
+      "object_name": "Taranto"
+    }
+  ],
+  "Place of birth": [
+    {
+      "source_line": 167849784,
+      "subject_name": "Louis of Granada",
+      "predicate": "Place of birth",
+      "object_name": "Spagna (Italo disco Artist)"
+    },
+    {
+      "source_line": 224651948,
+      "subject_name": "Riccardo Tisci",
+      "predicate": "Place of birth",
+      "object_name": "Taranto"
+    },
+    {
+      "source_line": 254111961,
+      "subject_name": "Steve Morelli",
+      "predicate": "Place of birth",
+      "object_name": "Taranto"
+    },
+    {
+      "source_line": 31966489,
+      "subject_name": "Antonella Cannarozzi",
+      "predicate": "Place of birth",
+      "object_name": "Taranto"
+    },
+    {
+      "source_line": 233997365,
+      "subject_name": "Saverio Sammali",
+      "predicate": "Place of birth",
+      "object_name": "Taranto"
+    }
+  ],
+  "Place of death": [
+    {
+      "source_line": 64634270,
+      "subject_name": "Columella (Writer)",
+      "predicate": "Place of death",
+      "object_name": "Taranto"
+    },
+    {
+      "source_line": 211186559,
+      "subject_name": "Pierre Choderlos de Laclos",
+      "predicate": "Place of death",
+      "object_name": "Taranto"
+    }
+  ],
+  "President": [
+    {
+      "source_line": 59948626,
+      "subject_name": "Chester A. Arthur",
+      "predicate": "President",
+      "object_name": "James A. Garfield"
+    },
+    {
+      "source_line": 284675517,
+      "subject_name": "Thomas A. Hendricks",
+      "predicate": "President",
+      "object_name": "Grover Cleveland"
+    },
+    {
+      "source_line": 108761895,
+      "subject_name": "George Clinton (US Vice President)",
+      "predicate": "President",
+      "object_name": "James Madison"
+    },
+    {
+      "source_line": 234747095,
+      "subject_name": "Schuyler Colfax",
+      "predicate": "President",
+      "object_name": "Ulysses S. Grant"
+    },
+    {
+      "source_line": 146385008,
+      "subject_name": "John Nance Garner",
+      "predicate": "President",
+      "object_name": "Franklin D. Roosevelt"
+    }
+  ],
+  "Product Endorsed": [
+    {
+      "source_line": 139475688,
+      "subject_name": "Isabel Preysler",
+      "predicate": "Product Endorsed",
+      "object_name": "Manolo Blahnik"
+    }
+  ],
+  "Profession": [
+    {
+      "source_line": 29978355,
+      "subject_name": "Andrea Gibson",
+      "predicate": "Profession",
+      "object_name": "Rob Gibsun"
+    },
+    {
+      "source_line": 30884608,
+      "subject_name": "Anis Mojgani",
+      "predicate": "Profession",
+      "object_name": "Rob Gibsun"
+    },
+    {
+      "source_line": 233815861,
+      "subject_name": "Saul Williams",
+      "predicate": "Profession",
+      "object_name": "Rob Gibsun"
+    }
+  ],
+  "Record Label": [
+    {
+      "source_line": 143432765,
+      "subject_name": "Jay-P",
+      "predicate": "Record Label",
+      "object_name": "Jay-P"
+    }
+  ],
+  "Religion": [
+    {
+      "source_line": 72470431,
+      "subject_name": "Daniel Hamburg",
+      "predicate": "Religion",
+      "object_name": "Adi Da"
+    }
+  ],
+  "Romantic relationship (with celebrities)": [
+    {
+      "source_line": 77705049,
+      "subject_name": "Devendra Banhart",
+      "predicate": "Romantic relationship (with celebrities)",
+      "object_name": "Natalie Portman"
+    },
+    {
+      "source_line": 90803463,
+      "subject_name": "Enrique Iglesias",
+      "predicate": "Romantic relationship (with celebrities)",
+      "object_name": "Anna Kournikova"
+    },
+    {
+      "source_line": 287887446,
+      "subject_name": "Tom Sturridge",
+      "predicate": "Romantic relationship (with celebrities)",
+      "object_name": "Sienna Miller"
+    },
+    {
+      "source_line": 22591306,
+      "subject_name": "Adam Housley",
+      "predicate": "Romantic relationship (with celebrities)",
+      "object_name": "Tamera Mowry"
+    },
+    {
+      "source_line": 116341737,
+      "subject_name": "Gwyneth Paltrow",
+      "predicate": "Romantic relationship (with celebrities)",
+      "object_name": "Brad Pitt"
+    }
+  ],
+  "Sibling": [
+    {
+      "source_line": 108307921,
+      "subject_name": "Gemma Jones",
+      "predicate": "Sibling",
+      "object_name": "Nicholas Jones"
+    },
+    {
+      "source_line": 118843733,
+      "subject_name": "Harry Olivieri",
+      "predicate": "Sibling",
+      "object_name": "Pat Olivieri"
+    },
+    {
+      "source_line": 188962326,
+      "subject_name": "Mychal Rivera",
+      "predicate": "Sibling",
+      "object_name": "Naya Rivera"
+    },
+    {
+      "source_line": 132933400,
+      "subject_name": "Ibrahim (Politician)",
+      "predicate": "Sibling",
+      "object_name": "Murad I"
+    },
+    {
+      "source_line": 318501259,
+      "subject_name": "Zoltan Korda",
+      "predicate": "Sibling",
+      "object_name": "Alexander Korda"
+    }
+  ],
+  "Spouse (or domestic partner)": [
+    {
+      "source_line": 233680626,
+      "subject_name": "Satsuki Katayama",
+      "predicate": "Spouse (or domestic partner)",
+      "object_name": "Yōichi Masuzoe"
+    },
+    {
+      "source_line": 41526513,
+      "subject_name": "Begüm Kütük",
+      "predicate": "Spouse (or domestic partner)",
+      "object_name": "Erdil Yaşaroğlu"
+    },
+    {
+      "source_line": 80273524,
+      "subject_name": "Dmitry Abramovitch",
+      "predicate": "Spouse (or domestic partner)",
+      "object_name": "Olga Korobkina"
+    },
+    {
+      "source_line": 56394801,
+      "subject_name": "Carol Thigpen",
+      "predicate": "Spouse (or domestic partner)",
+      "object_name": "Czesław Miłosz"
+    },
+    {
+      "source_line": 117806801,
+      "subject_name": "Hanna Hertelendy",
+      "predicate": "Spouse (or domestic partner)",
+      "object_name": "Stephen Bekassy"
+    }
+  ],
+  "Starring TV role": [
+    {
+      "source_line": 145506799,
+      "subject_name": "Jodi Santamaria",
+      "predicate": "Starring TV role",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 33782241,
+      "subject_name": "Arron Villaflor",
+      "predicate": "Starring TV role",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 40003129,
+      "subject_name": "Basty Alcances",
+      "predicate": "Starring TV role",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 207825199,
+      "subject_name": "Paw Diaz",
+      "predicate": "Starring TV role",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 178485123,
+      "subject_name": "Melissa Ricks",
+      "predicate": "Starring TV role",
+      "object_name": "Star Circle Quest"
+    }
+  ],
+  "TV Program (recurring writer)": [
+    {
+      "source_line": 74033695,
+      "subject_name": "David W. Rintels",
+      "predicate": "TV Program (recurring writer)",
+      "object_name": "David W. Rintels"
+    }
+  ],
+  "TV episode performance": [
+    {
+      "source_line": 47404186,
+      "subject_name": "Bobby Slayton",
+      "predicate": "TV episode performance",
+      "object_name": "Bobby Slayton"
+    },
+    {
+      "source_line": 195817789,
+      "subject_name": "Norman Jewison",
+      "predicate": "TV episode performance",
+      "object_name": "Norman Jewison"
+    },
+    {
+      "source_line": 226764169,
+      "subject_name": "Robin Givhan",
+      "predicate": "TV episode performance",
+      "object_name": "Robin Givhan"
+    }
+  ],
+  "TV regular appearance": [
+    {
+      "source_line": 149691848,
+      "subject_name": "KC Concepcion",
+      "predicate": "TV regular appearance",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 31135473,
+      "subject_name": "Anne Curtis",
+      "predicate": "TV regular appearance",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 169874591,
+      "subject_name": "Luis Manzano",
+      "predicate": "TV regular appearance",
+      "object_name": "Star Circle Quest"
+    },
+    {
+      "source_line": 99212265,
+      "subject_name": "Felicia Barton",
+      "predicate": "TV regular appearance",
+      "object_name": "Jasmine Murray"
+    },
+    {
+      "source_line": 111500432,
+      "subject_name": "Gloria Diaz",
+      "predicate": "TV regular appearance",
+      "object_name": "Star Circle Quest"
+    }
+  ],
+  "Title": [
+    {
+      "source_line": 222597652,
+      "subject_name": "Reginald Paget, Baron Paget of Northampton",
+      "predicate": "Title",
+      "object_name": "Reginald Paget, Baron Paget of Northampton"
+    }
+  ],
+  "Tribute of": [
+    {
+      "source_line": 147136410,
+      "subject_name": "Jorane",
+      "predicate": "Tribute of",
+      "object_name": "Anne Sylvestre"
+    },
+    {
+      "source_line": 301103865,
+      "subject_name": "Vincent Delerm",
+      "predicate": "Tribute of",
+      "object_name": "Anne Sylvestre"
+    }
+  ],
+  "Website owner": [
+    {
+      "source_line": 142111613,
+      "subject_name": "Jaime Cuesta López",
+      "predicate": "Website owner",
+      "object_name": "Jaime Cuesta López"
+    }
+  ],
+  "is-a": [
+    {
+      "source_line": 29978367,
+      "subject_name": "Andrea Gibson",
+      "predicate": "is-a",
+      "object_name": "Rob Gibsun"
+    },
+    {
+      "source_line": 30884617,
+      "subject_name": "Anis Mojgani",
+      "predicate": "is-a",
+      "object_name": "Rob Gibsun"
+    },
+    {
+      "source_line": 233815893,
+      "subject_name": "Saul Williams",
+      "predicate": "is-a",
+      "object_name": "Rob Gibsun"
+    }
+  ],
+  "kp_lw/philosopher/influenced_by": [
+    {
+      "source_line": 71693170,
+      "subject_name": "Damaris Cudworth Masham",
+      "predicate": "kp_lw/philosopher/influenced_by",
+      "object_name": "Aristotle"
+    },
+    {
+      "source_line": 147019155,
+      "subject_name": "Jonathan Dancy",
+      "predicate": "kp_lw/philosopher/influenced_by",
+      "object_name": "John McDowell"
+    },
+    {
+      "source_line": 209470618,
+      "subject_name": "Peter Kreeft",
+      "predicate": "kp_lw/philosopher/influenced_by",
+      "object_name": "C. S. Lewis"
+    },
+    {
+      "source_line": 172171794,
+      "subject_name": "Maimonides",
+      "predicate": "kp_lw/philosopher/influenced_by",
+      "object_name": "ABU HAMIDAL. GHAZALI"
+    },
+    {
+      "source_line": 210031153,
+      "subject_name": "Philip Pettit",
+      "predicate": "kp_lw/philosopher/influenced_by",
+      "object_name": "Niccolò Machiavelli"
+    }
+  ],
+  "kp_lw/philosopher/main_interests": [
+    {
+      "source_line": 71878558,
+      "subject_name": "Dan Zahavi",
+      "predicate": "kp_lw/philosopher/main_interests",
+      "object_name": "Edmund Husserl"
+    },
+    {
+      "source_line": 219569334,
+      "subject_name": "Rae Helen Langton",
+      "predicate": "kp_lw/philosopher/main_interests",
+      "object_name": "Immanuel Kant"
+    },
+    {
+      "source_line": 284844019,
+      "subject_name": "Thomas Pogge",
+      "predicate": "kp_lw/philosopher/main_interests",
+      "object_name": "Immanuel Kant"
+    }
+  ],
+  "kp_lw/philosophy_influencer/influencee": [
+    {
+      "source_line": 193185617,
+      "subject_name": "Nicolas Malebranche",
+      "predicate": "kp_lw/philosophy_influencer/influencee",
+      "object_name": "Damaris Cudworth Masham"
+    },
+    {
+      "source_line": 105379259,
+      "subject_name": "Friedrich Nietzsche",
+      "predicate": "kp_lw/philosophy_influencer/influencee",
+      "object_name": "Julius Evola"
+    },
+    {
+      "source_line": 142180639,
+      "subject_name": "Jakob Thomasius",
+      "predicate": "kp_lw/philosophy_influencer/influencee",
+      "object_name": "Damaris Cudworth Masham"
+    },
+    {
+      "source_line": 105379262,
+      "subject_name": "Friedrich Nietzsche",
+      "predicate": "kp_lw/philosophy_influencer/influencee",
+      "object_name": "Raymond Geuss"
+    },
+    {
+      "source_line": 36295240,
+      "subject_name": "Averroes",
+      "predicate": "kp_lw/philosophy_influencer/influencee",
+      "object_name": "Maimonides"
+    }
+  ]
+}
