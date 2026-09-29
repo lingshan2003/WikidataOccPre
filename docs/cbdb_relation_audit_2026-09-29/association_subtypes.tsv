@@ -1,0 +1,36 @@
+subtype	chinese	english	parent	raw_rows	used_codes
+0101	社會關係（籠統）	Associations (General)	01	481	11
+0102	同為……之成員	Association through common membership	01	814	2
+0103	社會交際	Social Interactions	01	1032	22
+0202	師生關係	Teacher-Student	02	12685	10
+0203	學術交往	Intellectual Affiliations	02	1458	30
+0204	學術主題相近	Association by Scholarly Topic	02	1914	4
+0205	同為……之成員	Association through common membership	02	1850	5
+0206	學術襄助	Academic Patronage	02	300	8
+0207	文學藝術交往	Literary and Artistic Affiliations	02	2406	21
+0208	學術攻訐	Intellectual Attacks	02	26	2
+0301	朋友關係（籠統）	Friendship(General)	03	8572	10
+0401	政治關係（籠統）	Politics (General)	04	228	2
+0402	官場關係（平級）	Connection via office (equal)	04	927	1
+0403	官場關係（下屬）	Connection via office (subordinate)	04	1076	6
+0404	官場關係（上司）	Connection via office (superior)	04	1409	12
+0405	政治奧援	Supportive political association	04	4971	31
+0406	薦舉保任	Recommendation and sponsorship	04	3302	11
+0407	政治對抗	Oppositional political association	04	5333	57
+0501	著述關係（籠統）	Writings (General)	05	0	0
+0502	記詠文字	Commemorative Texts	05	10182	20
+0503	墓誌文字	Epitaphs	05	23561	31
+0504	序跋文字	Prefaces/Postfaces	05	23545	47
+0505	禮儀文字	Ritual Texts	05	8218	13
+0506	傳記文字	Biographical Texts	05	7911	13
+0507	論說文字	Explanatory Texts	05	925	7
+0508	箴銘文字	Mottos	05	550	7
+0509	書札文字	Correspondences	05	29915	8
+0510	應酬文字	Occasional Texts	05	33513	9
+0601	軍事關係（籠統）	Military (General)	06	0	0
+0602	軍事支持	Supportive military association	06	482	5
+0603	軍事對抗	Oppositional military association	06	1090	10
+0701	醫療關係（籠統）	Medicine (General)	07	26	4
+0801	宗教關係（籠統）	Religion (General)	08	238	4
+0901	家庭關係（籠統）	Family (General)	09	188	16
+1001	財務關係（籠統）	Finance (General)	10	375	14

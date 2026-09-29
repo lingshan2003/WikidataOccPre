@@ -1,0 +1,25 @@
+{
+  "status": "review_draft_only",
+  "freebase_values": "/Users/wangyue/RGCN/docs/freebase_easy_audit_2026-09-28/profession_values.tsv",
+  "old_nodes": "/Users/wangyue/RGCN/artifacts/nodes.csv",
+  "freebase_raw_values": 3899,
+  "old_distinct_level3_strings": 2855,
+  "status_value_counts": {
+    "exact_text_candidate": 382,
+    "unmatched": 3391,
+    "old_other_bucket": 117,
+    "ambiguous_old_mapping": 9
+  },
+  "status_priority_person_value_pair_counts": {
+    "exact_text_candidate": 422313,
+    "unmatched": 241141,
+    "old_other_bucket": 9436,
+    "ambiguous_old_mapping": 6068
+  },
+  "notes": [
+    "An exact text match is not an approved semantic crosswalk.",
+    "Counts are person/value pairs, not distinct people covered by a draft mapping.",
+    "Other/Missing and ambiguous old mappings require explicit decisions.",
+    "Final label policy must handle multiple occupations per person and be shared across sources."
+  ]
+}

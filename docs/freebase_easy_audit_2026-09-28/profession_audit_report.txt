@@ -1,0 +1,160 @@
+{
+  "status": "complete_subset_audit",
+  "attributes": "/mnt/network_data/personal_workspace/siruilai/wy/WikidataOccPre/external_data/freebase_easy/person_attributes_v1/person_attributes.tsv",
+  "relation_candidates": "/mnt/network_data/personal_workspace/siruilai/wy/WikidataOccPre/external_data/freebase_easy/pair_subset_audit_v1/relation_candidates_v1.tsv",
+  "attribute_rows_read": 29559683,
+  "malformed_attribute_rows": 0,
+  "profession_facts": 3084516,
+  "unique_person_profession_pairs": 3084516,
+  "duplicate_person_profession_facts": 0,
+  "people_with_profession": 1237189,
+  "distinct_profession_values": 3899,
+  "occupation_facts_kept_separate": 49,
+  "group_coverage": {
+    "priority": {
+      "participants": 641325,
+      "with_profession": 228581,
+      "with_one_distinct_profession": 74042,
+      "with_multiple_distinct_professions": 154539
+    },
+    "semantic_review": {
+      "participants": 1762,
+      "with_profession": 1209,
+      "with_one_distinct_profession": 52,
+      "with_multiple_distinct_professions": 1157
+    },
+    "union": {
+      "participants": 642384,
+      "with_profession": 229123,
+      "with_one_distinct_profession": 74067,
+      "with_multiple_distinct_professions": 155056
+    }
+  },
+  "elapsed_seconds": 33.7,
+  "notes": [
+    "Multi-profession counts use distinct raw values per person, not a normalized occupation ontology.",
+    "Broad and narrow profession strings may overlap semantically; no model label mapping was applied.",
+    "Occupation predicate facts remain separate because they are sparse and semantically unreviewed.",
+    "No person or relation candidate was removed."
+  ]
+}
+raw_value       facts   unique_people   priority_people review_people   union_people
+Actor   444049  444049  89773   239     89819
+Artist  230502  230502  39195   570     39465
+Performance Artist      166931  166931  32895   562     33157
+Writer  166513  166513  41332   141     41358
+Musician        150708  150708  26617   550     26877
+Athlete 126453  126453  26187   427     26391
+Film Producer   98488   98488   17372   63      17378
+Screenwriter    86812   86812   20139   58      20153
+Film director   76370   76370   15795   66      15823
+Politician      54402   54402   15010   86      15015
+Football player 52505   52505   11007   4       11007
+Business executive      47110   47110   9612    173     9667
+Singer  46702   46702   14842   319     14955
+Manager 46630   46630   9381    173     9436
+Editor  45745   45745   4735    12      4742
+Designer        42076   42076   4796    27      4803
+Composer (Profession)   38081   38081   7129    146     7169
+Film editor     37314   37314   3402    8       3407
+Operator        36342   36342   3459    8       3461
+Cameraman       36247   36247   3402    8       3404
+Cinematographer 35339   35339   3299    6       3301
+Television producer     32781   32781   6603    35      6606
+Businessperson  28344   28344   10479   40      10483
+Film Score Composer     26063   26063   4350    78      4369
+Journalist      21388   21388   6240    2       6240
+Educator        21152   21152   8352    17      8355
+Television crew 20867   20867   1544    3       1546
+Criminal defense lawyer 20433   20433   6708    46      6712
+Lawyer  20433   20433   6708    46      6712
+Baseball Player 19973   19973   2310    0       2310
+Mathematician   19192   19192   2048    0       2048
+Scientist       19169   19169   5566    8       5566
+Art Director    18512   18512   991     4       995
+Author  17097   17097   6615    52      6617
+distinct_values_per_person      all_people      priority_people review_people   union_people
+1       512996  74042   52      74067
+2       270521  54232   432     54451
+3       189370  34147   93      34188
+4       101677  21806   104     21878
+5       77238   16761   126     16826
+6       30920   9386    94      9424
+7       17668   5980    43      5997
+8       12362   3631    36      3639
+9       9127    2627    39      2641
+10      5765    1897    40      1917
+11      3436    1297    29      1304
+12      2173    909     24      917
+13      1415    613     30      619
+14      993     411     10      412
+15      610     291     10      291
+16      336     189     11      190
+17      206     121     13      121
+18      139     76      7       76
+19      98      57      5       57
+20      48      38      2       38
+21      35      27      4       27
+22      25      19      2       19
+23      7       5       0       5
+24      9       9       2       9
+[
+  {
+    "person_name": "Laura Ragsdale",
+    "distinct_profession_values": [
+      "Actor",
+      "Film Producer"
+    ]
+  },
+  {
+    "person_name": "Bruce Castor",
+    "distinct_profession_values": [
+      "Criminal defense lawyer",
+      "Lawyer",
+      "Politician"
+    ]
+  },
+  {
+    "person_name": "Mario E. Levit",
+    "distinct_profession_values": [
+      "Actor",
+      "Film Producer"
+    ]
+  },
+  {
+    "person_name": "Kathleen Daly (Painting Artist)",
+    "distinct_profession_values": [
+      "Artist",
+      "Illustrator (Profession)",
+      "Painter",
+      "Writer"
+    ]
+  },
+  {
+    "person_name": "Richard Reynolds (Football Player)",
+    "distinct_profession_values": [
+      "Athlete",
+      "Football player"
+    ]
+  },
+  {
+    "person_name": "Ace Sinclair",
+    "distinct_profession_values": [
+      "Actor",
+      "Pornographic film actor",
+      "Sex worker"
+    ]
+  },
+  {
+    "person_name": "Ted Hunter (Artist)",
+    "distinct_profession_values": [
+      "Artist",
+      "Painter"
+    ]
+  },
+  {
+    "person_name": "Ramya NSK",
+    "distinct_profession_values": [
+      "Artist",
+      "Musician",
+      "Performance Artist",

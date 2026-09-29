@@ -1,0 +1,485 @@
+code	raw_rows	chinese	english	inverse_code	official_subtype	subtype_chinese	subtype_english
+437	11887	贈詩、文	Presented literary composition as gift to	438	0510	應酬文字	Occasional Texts
+438	11885	收到Y的贈詩、文	Received literary composition as gift from	437	0510	應酬文字	Occasional Texts
+429	9755	致書Y	Sent letter to	430	0509	書札文字	Correspondences
+430	9753	被致書由Y	Was sent  letter by	429	0509	書札文字	Correspondences
+44	8811	為Y作墓誌銘	Epitaph written for	43	0503	墓誌文字	Epitaphs
+43	8809	墓誌銘由Y所作	Epitaph written by	44	0503	墓誌文字	Epitaphs
+9	7341	友	Friend of	9	0301	朋友關係（籠統）	Friendship(General)
+432	4966	收到Y的答書	Was sent a reply by	431	0509	書札文字	Correspondences
+431	4965	答Y書	Replied to letter from	432	0509	書札文字	Correspondences
+33	4567	書序由Y所作	Preface of book by	32	0504	序跋文字	Prefaces/Postfaces
+32	4561	為Y所著書作序	Prefaced book by	33	0504	序跋文字	Prefaces/Postfaces
+22	4275	為Y之學生	Student of	23	0202	師生關係	Teacher-Student
+23	4272	學生為Y	Student was	22	0202	師生關係	Teacher-Student
+45	3913	書跋由Y所作	Postface of book written by	46	0504	序跋文字	Prefaces/Postfaces
+46	3912	為Y所著書作跋	Postface written for book by	45	0504	序跋文字	Prefaces/Postfaces
+162	3609	為Y作臨別贈言(送別詩、序)	Departure note sent to	163	0510	應酬文字	Occasional Texts
+163	3606	臨別得到Y所作贈言(送別詩、序)	Departure note received from	162	0510	應酬文字	Occasional Texts
+145	2966	為Y作祭文	Sacrificial prayer written for	146	0505	禮儀文字	Ritual Texts
+146	2965	祭文由Y所作	Sacrificial prayer written by	145	0505	禮儀文字	Ritual Texts
+132	2634	傳記作者為Y	Biography written by	133	0506	傳記文字	Biographical Texts
+133	2634	為Y作傳	Biographer of	132	0506	傳記文字	Biographical Texts
+443	2289	為Y之建築物題詠、記、命名	Composed Building inscription for	444	0502	記詠文字	Commemorative Texts
+444	2284	建築物得到Y的題詠、記、命名	Building inscription composed by	443	0502	記詠文字	Commemorative Texts
+409	1609	墓表由Y所作	Tomb stone (mubiao) written by	410	0503	墓誌文字	Epitaphs
+410	1604	為Y作墓表	Wrote Tomb stone (mubiao) for	409	0503	墓誌文字	Epitaphs
+13	1542	推薦	Recommended	14	0406	薦舉保任	Recommendation and sponsorship
+14	1542	被Y推薦	Recommended by	13	0406	薦舉保任	Recommendation and sponsorship
+114	1230	相唱和	Poems composed with	114	0510	應酬文字	Occasional Texts
+17	1180	被Y欣賞/器重	Praised or admired by	18	0405	政治奧援	Supportive political association
+18	1169	欣賞/器重	Praised or admired	17	0405	政治奧援	Supportive political association
+425	1105	行狀由Y所作	Account of conduct (xingzhuang) written by	426	0506	傳記文字	Biographical Texts
+426	1100	為Y作行狀	Wrote account of conduct (xingzhuang) for	425	0506	傳記文字	Biographical Texts
+469	1059	為Y之詩文作跋	wrote colophon to the writings of	470	0504	序跋文字	Prefaces/Postfaces
+470	1059	詩文跋由Y所作	colophon to writings was composed by	469	0504	序跋文字	Prefaces/Postfaces
+406	1056	為Y作神道碑	Wrote Funerary stele for	405	0503	墓誌文字	Epitaphs
+405	1055	神道碑由Y所作	Funerary stele written by	406	0503	墓誌文字	Epitaphs
+197	927	同僚	Served in the same bureau with	197	0402	官場關係（平級）	Connection via office (equal)
+19	887	為Y之門人	Menren of	20	0202	師生關係	Teacher-Student
+20	887	門人為Y	Menren was	19	0202	師生關係	Teacher-Student
+149	851	為Y之書、畫作跋	Postscripted calligraphy or painting of	150	0504	序跋文字	Prefaces/Postfaces
+150	851	書、畫由Y作跋	Calligraphy or painting postscripted by	149	0504	序跋文字	Prefaces/Postfaces
+10	824	同年友	Friend in the same graduating class	10	0205	同為……之成員	Association through common membership
+479	800	為Y所作詩文作序	wrote preface for the literary works of	480	0504	序跋文字	Prefaces/Postfaces
+480	800	詩文序由Y所作	preface to literary works was written by	479	0504	序跋文字	Prefaces/Postfaces
+117	745	同學、同門	Tongxue was	117	0205	同為……之成員	Association through common membership
+108	706	論學	Discussed scholarship with	108	0204	學術主題相近	Association by Scholarly Topic
+390	646	向Y致賀	Congratulatory note sent to	391	0510	應酬文字	Occasional Texts
+391	646	從Y處收到賀詞 (occasion)	Congratulatory note received from	390	0510	應酬文字	Occasional Texts
+473	631	畫風師法Y	painted in style of	474	0207	文學藝術交往	Literary and Artistic Affiliations
+474	631	畫風為Y所師法	style of painting imitated by	473	0207	文學藝術交往	Literary and Artistic Affiliations
+11	609	彈劾	Impeached	12	0407	政治對抗	Oppositional political association
+12	604	被Y彈劾	Impeached by	11	0407	政治對抗	Oppositional political association
+231	587	從Y學	Studied with	232	0204	學術主題相近	Association by Scholarly Topic
+232	587	教授Y	Taught to	231	0204	學術主題相近	Association by Scholarly Topic
+427	560	畫贊(畫像記)由Y所作	Portrait eulogy written by	428	0502	記詠文字	Commemorative Texts
+428	560	為Y作畫贊(畫像記)	Wrote Portrait eulogy for	427	0502	記詠文字	Commemorative Texts
+50	546	從遊者為Y	followed by	49	0202	師生關係	Teacher-Student
+49	545	從Y遊	followed	50	0202	師生關係	Teacher-Student
+277	535	與Y遊	proceeded with (friendship)	277	0301	朋友關係（籠統）	Friendship(General)
+94	519	同鄉	Lived in the same village as	94	0102	同為……之成員	Association through common membership
+458	508	學記（書院記）由Y所作	School stele written by	459	0502	記詠文字	Commemorative Texts
+459	508	為Y作學記（書院記）	Wrote School stele for	458	0502	記詠文字	Commemorative Texts
+239	506	為Y作佛寺記	Buddhist temple stele written for	240	0502	記詠文字	Commemorative Texts
+240	506	佛寺記由Y所作	Buddhist temple stele written by	239	0502	記詠文字	Commemorative Texts
+37	504	弟子為Y	Disciple (dizi) was	36	0202	師生關係	Teacher-Student
+36	503	為Y之弟子	Disciple (dizi) of	37	0202	師生關係	Teacher-Student
+560	492	為Y作祠記	Wrote Shrine inscription for	561	0502	記詠文字	Commemorative Texts
+561	491	祠記由Y所作	Shrine inscription written by	560	0502	記詠文字	Commemorative Texts
+166	484	哀辭由Y所作	Lamentation prayer written by	167	0505	禮儀文字	Ritual Texts
+167	484	為Y作哀辭	Lamentation prayer written for	166	0505	禮儀文字	Ritual Texts
+423	464	挽詩、詞由Y所作	Elegy written by	424	0505	禮儀文字	Ritual Texts
+424	464	為Y作挽詩、詞	Wrote Elegy for	423	0505	禮儀文字	Ritual Texts
+481	462	上司為Y	superior was	482	0403	官場關係（下屬）	Connection via office (subordinate)
+482	462	下屬為Y	subordinate was	481	0404	官場關係（上司）	Connection via office (superior)
+15	432	反對/攻訐	Opposed or attacked	16	0407	政治對抗	Oppositional political association
+16	432	遭到Y的反對/攻訐	Opposed by or attacked by	15	0407	政治對抗	Oppositional political association
+89	381	字說、名述由Y所作	Explanation of capping name (zixu or zishuo) composed by	88	0507	論說文字	Explanatory Texts
+88	380	為Y作字說、名述	Explanation of capping name (zixu or zishuo) composed for	89	0507	論說文字	Explanatory Texts
+113	369	詩社成員	Member of poetry society with	113	0207	文學藝術交往	Literary and Artistic Affiliations
+27	332	支持	Supported	26	0405	政治奧援	Supportive political association
+26	331	得到Y的支持	Supported by	27	0405	政治奧援	Supportive political association
+539	304	政績為Y所稱道	political accomplishments praised by	540	0405	政治奧援	Supportive political association
+540	304	稱道Y之政績	praised the political accomplishments of	539	0405	政治奧援	Supportive political association
+136	300	反對/不支持Y的政策	Attacked or not support policies of	137	0407	政治對抗	Oppositional political association
+137	300	其政策被Y反對/不支持	Policies attacked-not supported by	136	0407	政治對抗	Oppositional political association
+64	297	為Y之部將	Officer under command of	65	0403	官場關係（下屬）	Connection via office (subordinate)
+65	297	部將為Y	Officer under his command was	64	0404	官場關係（上司）	Connection via office (superior)
+268	295	同會	Member of same club (hui, she, etc) as	268	0102	同為……之成員	Association through common membership
+95	267	相識	Knew	95	0301	朋友關係（籠統）	Friendship(General)
+404	253	戰友	Fought together	404	0602	軍事支持	Supportive military association
+555	253	與Y旅遊	journeyed with	555	0301	朋友關係（籠統）	Friendship(General)
+66	250	為Y之幕僚	Staff member of	67	0403	官場關係（下屬）	Connection via office (subordinate)
+67	250	幕僚為Y	Staff member was	66	0404	官場關係（上司）	Connection via office (superior)
+580	246	為Y之書題詞	Wrote inscription for writings of	581	0504	序跋文字	Prefaces/Postfaces
+581	246	書之題詞由Y所作	writings inscribed by	580	0504	序跋文字	Prefaces/Postfaces
+151	239	為Y作世系碑記	Ancestral stele or records written for	152	0502	記詠文字	Commemorative Texts
+152	239	世系碑記由Y所作	Ancestral stele or records written by	151	0502	記詠文字	Commemorative Texts
+522	230	與Y共赴難	in offering assistance went together with	522	0603	軍事對抗	Oppositional military association
+187	214	諡議由Y所作	Posthumous name essay written by	188	0502	記詠文字	Commemorative Texts
+188	214	為Y作諡議	Posthumous name essay written for	187	0502	記詠文字	Commemorative Texts
+29	193	排擠	Purged	30	0407	政治對抗	Oppositional political association
+30	193	遭Y排擠	Purged by	29	0407	政治對抗	Oppositional political association
+160	193	為Y作廟碑記	Temple stele(miaobei) written for	161	0502	記詠文字	Commemorative Texts
+161	193	廟碑記由Y所作	Temple stele(miaobei) written by	160	0502	記詠文字	Commemorative Texts
+445	184	同道	"Shared ""same way"" with"	445	0203	學術交往	Intellectual Affiliations
+515	184	得罪Y	insulted	516	0407	政治對抗	Oppositional political association
+516	183	被Y得罪	was insulted by	515	0407	政治對抗	Oppositional political association
+130	182	為Y之門客	Retainer (客) of	131	0405	政治奧援	Supportive political association
+131	182	門客為Y	Retainer (客) was	130	0405	政治奧援	Supportive political association
+433	178	致Y啓	Sent official letter to	434	0509	書札文字	Correspondences
+434	178	收到Y的啓	Received official letter from	433	0509	書札文字	Correspondences
+210	176	被Y（或追隨者）殺害	Killed by followers of	211	0407	政治對抗	Oppositional political association
+211	176	其（或追隨者）殺害Y	Followers killed	210	0407	政治對抗	Oppositional political association
+21	168	與Y結黨	Coalition associate of	21	0405	政治奧援	Supportive political association
+61	166	不合	Disagreed with views of	61	0407	政治對抗	Oppositional political association
+68	166	節行為Y所稱道	Recognized the virtue of	69	0103	社會交際	Social Interactions
+69	166	稱道Y之節行	Virtue recognized by	68	0103	社會交際	Social Interactions
+4	149	是Y的恩主	Patron of (= Client was)	5	0405	政治奧援	Supportive political association
+5	149	恩主是Y	Patron was (= Client of)	4	0405	政治奧援	Supportive political association
+206	141	抵禦或討平叛軍Y	Fought against the rebel	207	0603	軍事對抗	Oppositional military association
+207	141	叛軍遭到Y的抵禦或討平	Fought (as rebel) by loyalist	206	0603	軍事對抗	Oppositional military association
+343	140	戰勝	Defeated in battle	344	0603	軍事對抗	Oppositional military association
+344	140	敗於	Defeated in battle by	343	0603	軍事對抗	Oppositional military association
+558	133	為Y之考官	Examiner of	559	0202	師生關係	Teacher-Student
+559	133	考官為Y	Examined by	558	0202	師生關係	Teacher-Student
+251	130	合撰(編)著作	Co-authored book with	251	0203	學術交往	Intellectual Affiliations
+339	128	拜訪	Visited	340	0103	社會交際	Social Interactions
+340	128	受到Y拜訪	Visited by	339	0103	社會交際	Social Interactions
+483	128	為Y篆匾額、器銘	wrote plaque for	484	0508	箴銘文字	Mottos
+484	128	匾額、器銘由Y所篆	plaque written by	483	0508	箴銘文字	Mottos
+597	128	為Y的墓誌銘書丹	Epitaph calligraphy was done for Y	598			
+83	127	忌/惡	Disliked or hated	84	0407	政治對抗	Oppositional political association
+562	127	為Y之家僕	servant of	563	0101	社會關係（籠統）	Associations (General)
+563	127	家僕為Y	servant was	562	0101	社會關係（籠統）	Associations (General)
+84	126	為Y所忌/惡	Disliked or hated by	83	0407	政治對抗	Oppositional political association
+34	125	為Y學派的成員	Member of the school of	35	0205	同為……之成員	Association through common membership
+35	125	該學派的成員為Y	Member of his school was	34	0205	同為……之成員	Association through common membership
+598	125	墓誌銘由Y書丹	Epitaph calligraphy was done by Y	597			
+24	123	辟	Directly recruited (bi, zoubi, etc)	25	0404	官場關係（上司）	Connection via office (superior)
+25	123	為Y所辟	Directly recruited (bi, zoubi) by	24	0404	官場關係（上司）	Connection via office (superior)
+147	121	為Y作祝詞	Invocation prayer written for	148	0505	禮儀文字	Ritual Texts
+148	121	祝詞由Y所作	Invocation prayer written by	147	0505	禮儀文字	Ritual Texts
+70	119	詩作為Y所稱道	Poetry known or praised by	71	0207	文學藝術交往	Literary and Artistic Affiliations
+71	118	稱道Y的詩作	Knew or praised poetry of	70	0207	文學藝術交往	Literary and Artistic Affiliations
+297	118	齋、堂銘由Y所作	Study motto (zhaiming) by	298	0508	箴銘文字	Mottos
+298	118	為Y作齋、堂銘	Wrote Study motto (zhaiming) for	297	0508	箴銘文字	Mottos
+238	117	為Y作年譜	Nianpu composed for	237	0506	傳記文字	Biographical Texts
+237	116	年譜由Y所作	Nianpu composed by	238	0506	傳記文字	Biographical Texts
+471	116	陷害Y	did harm to	472	0407	政治對抗	Oppositional political association
+472	116	被Y陷害	was harmed by	471	0407	政治對抗	Oppositional political association
+553	114	上奏論Y	Memorialized concerning	554	0401	政治關係（籠統）	Politics (General)
+554	114	被Y奏論	was memorialized about by	553	0401	政治關係（籠統）	Politics (General)
+582	112	軍事支持Y	gave miitary support to/surrendered to	583	0602	軍事支持	Supportive military association
+583	111	受Y之軍事支持	was supported militarily/surrendered to by	582	0602	軍事支持	Supportive military association
+106	102	拒絕在Y主政的政府中任職	Refused office in administration of	107	0407	政治對抗	Oppositional political association
+107	102	拒絕在Y的主政期出仕	Offer of office refused by	106	0407	政治對抗	Oppositional political association
+584	102	軍事對抗Y	opposed militarily	585	0603	軍事對抗	Oppositional military association
+585	102	被Y軍事對抗Y	was opposed militarily by	584	0603	軍事對抗	Oppositional military association
+140	93	讚揚Y之學	Scholarship praised by	141	0203	學術交往	Intellectual Affiliations
+141	93	其學得到Y之讚揚	Praised scholarship of	140	0203	學術交往	Intellectual Affiliations
+396	93	家傳為Y所作	Family history (jiazhuan) composed by	397	0506	傳記文字	Biographical Texts
+397	93	為Y作家傳	Family history (jiazhuan) composed for	396	0506	傳記文字	Biographical Texts
+208	91	宗Y之學	Ancestral source of learning was	209	0203	學術交往	Intellectual Affiliations
+209	91	其學為Y所宗	Descent line of teaching to	208	0203	學術交往	Intellectual Affiliations
+527	85	為友人提供幫助	provided assistance as friend	528	0301	朋友關係（籠統）	Friendship(General)
+528	85	得到友人Y之幫助	received assistance from friend Y	527	0301	朋友關係（籠統）	Friendship(General)
+292	84	以文章、學問受知於	Associated with the menren of	293	0207	文學藝術交往	Literary and Artistic Affiliations
+293	84	稱道Y之文章、學問	Menren associated with	292	0207	文學藝術交往	Literary and Artistic Affiliations
+529	79	評論Y之著作	evaluated the writings of	530	0507	論說文字	Explanatory Texts
+530	79	著作被Y評論	writings evaluated by	529	0507	論說文字	Explanatory Texts
+367	78	政見趨同	Agreed with views of	367	0405	政治奧援	Supportive political association
+639	78	為Y的神道碑/墓誌/壙誌刊/刻石	Carved epitaph/funerary stele for Y	640	0503	墓誌文字	Epitaphs
+467	76	向Y問學	sought direction in learning from	468	0203	學術交往	Intellectual Affiliations
+468	76	指教Y	gave direction in learning to	467	0203	學術交往	Intellectual Affiliations
+640	76	神道碑/墓誌/壙誌由Y刊/刻石	Epitaph/funerary stele carved by Y	639	0503	墓誌文字	Epitaphs
+126	75	傳Y之學	Transmitted the scholarship of	127	0203	學術交往	Intellectual Affiliations
+127	75	其學由Y所傳	Scholarship transmitted by	126	0203	學術交往	Intellectual Affiliations
+275	75	家譜由Y作序	Preface to geneology composed by	276	0504	序跋文字	Prefaces/Postfaces
+276	75	為Y之家譜作序	Prefaced geneology of	275	0504	序跋文字	Prefaces/Postfaces
+497	75	為Y之生祠作記	Wrote living person shrine inscription for	498	0502	記詠文字	Commemorative Texts
+498	75	其生祠由Y作記	living person shrine inscription written by	497	0502	記詠文字	Commemorative Texts
+648	75	Y 為 X 建靈塔/舍利塔	Y built stupa for the relics of X	649	0801	宗教關係（籠統）	Religion (General)
+649	75	X 之靈塔/舍利塔為 Y 所建	The stupa for the relics of X was built by Y	648	0801	宗教關係（籠統）	Religion (General)
+551	72	為Y乞某事	Requests government act for	552	0406	薦舉保任	Recommendation and sponsorship
+552	72	某事由Y所乞	Government act requested by	551	0406	薦舉保任	Recommendation and sponsorship
+363	70	禮待	Treated with respect	364	0103	社會交際	Social Interactions
+364	70	受Y之禮待	Treated with respect by	363	0103	社會交際	Social Interactions
+0	68	未詳	[Undefined]	0	0101	社會關係（籠統）	Associations (General)
+596	65	與Y為講學	Discoursed on learning with Y	596			
+219	64	為Y所葬	Buried by	220	1001	財務關係（籠統）	Finance (General)
+220	64	葬	Buried	219	1001	財務關係（籠統）	Finance (General)
+462	64	壙記由Y所作	Kuangji (Grave Inscription) written by	463	0503	墓誌文字	Epitaphs
+463	64	為Y作壙記	Wrote kuangji (Grave Inscription) for	462	0503	墓誌文字	Epitaphs
+435	60	答Y啓	Replied to offical letter from	436	0509	書札文字	Correspondences
+436	60	收到Y的答啓	Received official reply from	435	0509	書札文字	Correspondences
+556	59	為Y作道觀記	Wrote Inscription for Daoist institution for	557	0505	禮儀文字	Ritual Texts
+557	59	道觀記由Y所作	Inscription for Daoist institution written by	556	0505	禮儀文字	Ritual Texts
+155	57	受Y的請求為他人（第三方）作墓誌銘	Epitaph written (for a third party) at the request of	154	0503	墓誌文字	Epitaphs
+154	56	求Y為他人（第三方）作墓誌銘	Requested epitaph (for a third party) from	155	0503	墓誌文字	Epitaphs
+243	56	因與Y的交往受牽連	Purged for association with	244	0405	政治奧援	Supportive political association
+244	56	與他的交往導致Y受牽連	Association caused purge of	243	0405	政治奧援	Supportive political association
+158	55	被Y逮捕	Arrested by	159	0407	政治對抗	Oppositional political association
+159	55	逮捕	Arrested	158	0407	政治對抗	Oppositional political association
+7	52	黨羽為Y	Coalition member of	8	0405	政治奧援	Supportive political association
+8	52	黨魁為Y	Coalition leader of	7	0405	政治奧援	Supportive political association
+172	51	稱道Y之文風	Praised the literary style of	173	0207	文學藝術交往	Literary and Artistic Affiliations
+173	51	文風為Y所稱道	Literary style praised by	172	0207	文學藝術交往	Literary and Artistic Affiliations
+439	51	題Y的書帖	Inscribed calligraphy of	440	0504	序跋文字	Prefaces/Postfaces
+440	51	其書帖由Y作題	Calligraphy inscribed by	439	0504	序跋文字	Prefaces/Postfaces
+441	51	題Y之畫作	Inscribed painting of	442	0504	序跋文字	Prefaces/Postfaces
+442	51	題畫詩文的作者為Y	Painting inscribed by	441	0504	序跋文字	Prefaces/Postfaces
+213	50	主Y家之教席	Tutor to the family of	214	0206	學術襄助	Academic Patronage
+214	50	聘Y主家之教席	Tutor of family was	213	0206	學術襄助	Academic Patronage
+256	50	私淑Y之學	Adopted the learning of	257	0203	學術交往	Intellectual Affiliations
+257	50	其學為Y所私淑	Learning adopted by	256	0203	學術交往	Intellectual Affiliations
+564	49	世交父執為Y	family friend was	565	0901	家庭關係（籠統）	Family (General)
+565	49	為Y之世交父執	Family friend to	564	0901	家庭關係（籠統）	Family (General)
+448	48	給Y錢物	gave money or goods to	449	1001	財務關係（籠統）	Finance (General)
+541	47	刊刻Y之著述	printed the writings of	542	0206	學術襄助	Academic Patronage
+542	47	著述由Y刊刻	writings printed by	541	0206	學術襄助	Academic Patronage
+449	46	接受Y的錢物	received money or goods from	448	1001	財務關係（籠統）	Finance (General)
+499	46	聘Y執教官學、書院	recruited Y to be instructor at school or academy	500	0206	學術襄助	Academic Patronage
+500	46	為Y所聘執教官學、書院	was recruited to be instructor at school or academy	499	0206	學術襄助	Academic Patronage
+532	45	為Y的墓誌銘作額篆	Calligraphy for heading of epitaph script done for	531	0504	序跋文字	Prefaces/Postfaces
+252	44	為Y建立祠廟	Shrine erected for	253	0801	宗教關係（籠統）	Religion (General)
+253	44	Y為之建立祠廟	Shrine erected by	252	0801	宗教關係（籠統）	Religion (General)
+321	44	碑陰為Y所作	Beiyin composed by	322	0503	墓誌文字	Epitaphs
+322	44	為Y作碑陰	Beiyin composed for	321	0503	墓誌文字	Epitaphs
+531	44	墓誌銘額篆由Y所作	Calligraphy for heading of epitaph script done by	532	0504	序跋文字	Prefaces/Postfaces
+381	43	降於	Surrendered to	382	0603	軍事對抗	Oppositional military association
+382	43	接受Y之納降	Surrender accepted from	381	0603	軍事對抗	Oppositional military association
+485	43	為Y明冤	achieved justice for	486	0101	社會關係（籠統）	Associations (General)
+486	42	其冤因Y得明	justice for achieved by	485	0101	社會關係（籠統）	Associations (General)
+223	40	喪事由Y經紀	Prepared for burial corpse of	224	1001	財務關係（籠統）	Finance (General)
+269	40	批評	Critic of	270	0407	政治對抗	Oppositional political association
+270	40	被Y批評	Criticized by	269	0407	政治對抗	Oppositional political association
+224	39	經紀Y之喪	Corpse prepared for burial by	223	1001	財務關係（籠統）	Finance (General)
+358	39	得到Y的喜爱	Liked by	359	0405	政治奧援	Supportive political association
+359	39	喜爱	Liked	358	0405	政治奧援	Supportive political association
+333	38	墓誌銘由Y作跋	Epitaph postface by	334	0504	序跋文字	Prefaces/Postfaces
+334	38	為Y之墓誌銘作跋	Epitaph postface for	333	0504	序跋文字	Prefaces/Postfaces
+519	38	獻策於Y	offered strategic plans to	520	0403	官場關係（下屬）	Connection via office (subordinate)
+520	38	採納Y之獻策	was offered strategic plans by	519	0404	官場關係（上司）	Connection via office (superior)
+57	37	文風效法Y	Followed literary style of	58	0207	文學藝術交往	Literary and Artistic Affiliations
+58	37	文風為Y所效法	Literary style followed by	57	0207	文學藝術交往	Literary and Artistic Affiliations
+456	37	編輯Y的學術作品	Scholarly works edited by	457	0203	學術交往	Intellectual Affiliations
+457	37	其學術作品由Y編輯	Edited scholarly works of	456	0203	學術交往	Intellectual Affiliations
+59	36	籌劃謀殺	Planned to assassinate	60	0407	政治對抗	Oppositional political association
+60	36	被Y籌劃謀殺	Assassination planned by	59	0407	政治對抗	Oppositional political association
+204	36	處決	Executed	205	0407	政治對抗	Oppositional political association
+205	36	被Y處決	Executed by	204	0407	政治對抗	Oppositional political association
+505	36	獻文、書于Y	presented writing, calligraphy to	506	0103	社會交際	Social Interactions
+341	35	編輯Y之詩/文	Poetry/prose edited by	342	0207	文學藝術交往	Literary and Artistic Affiliations
+342	35	詩/文由Y編輯	Edited the poetry/prose of	341	0207	文學藝術交往	Literary and Artistic Affiliations
+506	35	收到Y所獻詩、文、書	was presented writing, calligraphy by	505	0103	社會交際	Social Interactions
+42	34	研修理學	Philosophic school of lixue	42	0204	學術主題相近	Association by Scholarly Topic
+193	34	對Y執弟子禮	Honored	194	0203	學術交往	Intellectual Affiliations
+194	34	受Y之弟子禮	Honored by	193	0203	學術交往	Intellectual Affiliations
+40	33	其志業由Y傳承	Calling transmitted to	41	0203	學術交往	Intellectual Affiliations
+41	33	以Y之志業自任	Calling received from	40	0203	學術交往	Intellectual Affiliations
+156	32	被Y鞫治	Tried and found guilty by	157	0407	政治對抗	Oppositional political association
+157	32	鞫治	Tried and found guilty	156	0407	政治對抗	Oppositional political association
+120	31	同場屋/同應舉	Take imperial examinations with	120	0205	同為……之成員	Association through common membership
+489	31	代Y作文	wrote in the stead of	490	0103	社會交際	Social Interactions
+490	31	由Y代作文	writing in his stead done by	489	0103	社會交際	Social Interactions
+493	31	為Y所佑(政治關係)	was aided by (Political Association)	494	0405	政治奧援	Supportive political association
+494	31	護佑Y(政治關係)	aided (Political Association)	493	0405	政治奧援	Supportive political association
+185	29	決定Y的科舉次第	Determined jinshi rank of	186	0404	官場關係（上司）	Connection via office (superior)
+186	29	科舉次第由Y決定	Jinshi rank determined by	185	0404	官場關係（上司）	Connection via office (superior)
+454	29	家僕為Y	Household servant was	455	1001	財務關係（籠統）	Finance (General)
+455	29	家主為Y	Household master was	454	1001	財務關係（籠統）	Finance (General)
+225	28	為Y作硯銘	Inkstone motto written for	226	0508	箴銘文字	Mottos
+226	28	硯銘由Y所作	Inkstone motto written by	225	0508	箴銘文字	Mottos
+641	28	墓誌蓋由Y所書	Calligraphy on the tomb lid written by	642			
+642	28	為Y書墓誌蓋	Calligraphy on the tomb lid written for	641			
+217	27	受經於Y	Received the classics from	218	0203	學術交往	Intellectual Affiliations
+218	27	傳經於Y	Transmitted the classics to	217	0203	學術交往	Intellectual Affiliations
+260	27	拒為Y掾屬	Refused to be a secretary of	261	0407	政治對抗	Oppositional political association
+261	27	欲辟Y為幕僚但被拒絕	Secretary offer refused by	260	0407	政治對抗	Oppositional political association
+361	26	研讀Y的著作	Studied writings of	362	0203	學術交往	Intellectual Affiliations
+362	26	其著作為Y所研讀	Writings studied by	361	0203	學術交往	Intellectual Affiliations
+533	25	贈Y物	gave presents to	534	0103	社會交際	Social Interactions
+534	25	受Y之贈物	given presents by	533	0103	社會交際	Social Interactions
+574	25	為Y之婢	female servant of	575	0101	社會關係（籠統）	Associations (General)
+575	25	婢為Y	female servant was	574	0101	社會關係（籠統）	Associations (General)
+86	24	被Y養育	Raised in the home of	87	0901	家庭關係（籠統）	Family (General)
+87	24	養育	Raised in his home	86	0901	家庭關係（籠統）	Family (General)
+142	24	拒絕會面	Refused an audience with	143	0407	政治對抗	Oppositional political association
+143	24	會面的邀請被Y拒絕	Audience invitation refused by	142	0407	政治對抗	Oppositional political association
+174	22	神道碑的書法由Y所作	Calligraphy for funerary stele script done by	175	0503	墓誌文字	Epitaphs
+175	22	為Y之神道碑作書	Calligraphy for funerary stele script done for	174	0503	墓誌文字	Epitaphs
+180	22	根據Y的命令被處決	Executed at the order of	181	0407	政治對抗	Oppositional political association
+181	22	下令處決	Ordered the execution of	180	0407	政治對抗	Oppositional political association
+475	22	書、畫為Y所稱道	calligraphy or painting praised by	476	0207	文學藝術交往	Literary and Artistic Affiliations
+476	22	稱道Y的書、畫	praised calligraphy, painting of	475	0207	文學藝術交往	Literary and Artistic Affiliations
+55	21	被Y推薦參加制科考試	Recommended for decree exam by	56	0406	薦舉保任	Recommendation and sponsorship
+56	21	推薦Y參加制科考試	Recommended for decree exam	55	0406	薦舉保任	Recommendation and sponsorship
+241	21	神道碑額篆由Y所作	Calligraphy for heading of funerary stele script done by	242	0503	墓誌文字	Epitaphs
+242	21	為Y之神道碑作額篆	Calligraphy for heading of  funerary stele script done for	241	0503	墓誌文字	Epitaphs
+509	21	請Y作序、記	requested a preface, inscription from	510	0103	社會交際	Social Interactions
+510	21	受Y之請作序、記	preface, inscription requested by	509	0103	社會交際	Social Interactions
+379	20	書風為Y所模仿	Calligraphy emulated by	380	0207	文學藝術交往	Literary and Artistic Affiliations
+380	20	模仿Y的書風	Calligraphy emulated	379	0207	文學藝術交往	Literary and Artistic Affiliations
+465	20	為Y之收藏作跋	wrote colophon for item in collection of	466	0504	序跋文字	Prefaces/Postfaces
+466	20	收藏品由Y作跋	colophon for item in collection written by	465	0504	序跋文字	Prefaces/Postfaces
+278	19	副Y出使	Vice-envoy in embassy of	279	0405	政治奧援	Supportive political association
+279	19	為使團副使Y的正使	Chief envoy of vice-envoy	278	0404	官場關係（上司）	Connection via office (superior)
+513	19	反對Y稱帝	opposed assertion of emperorship by	514	0407	政治對抗	Oppositional political association
+514	19	稱帝為Y所反對	assertion of emperorship opposed by	513	0407	政治對抗	Oppositional political association
+573	19	著述由Y校訂	writings were edited by	572	0207	文學藝術交往	Literary and Artistic Affiliations
+586	19	諂事Y	Toady to Y	587	0403	官場關係（下屬）	Connection via office (subordinate)
+587	19	被Y諂事	Toadied to by Y	586	0404	官場關係（上司）	Connection via office (superior)
+198	18	義莊記由Y所作	Charitable estate stele written by	199	0502	記詠文字	Commemorative Texts
+199	18	為Y作義莊記	Charitable estate stele written for	198	0502	記詠文字	Commemorative Texts
+419	18	墓表序由Y所作	Tomb stone preface written by	420	0504	序跋文字	Prefaces/Postfaces
+420	18	為Y墓表作序	Wrote Tomb stone preface for	419	0504	序跋文字	Prefaces/Postfaces
+535	17	為Y取名、字	chose name, courtesy name for	536	0103	社會交際	Social Interactions
+536	17	名、字由Y所取	name, courtesy name chosen by	535	0103	社會交際	Social Interactions
+572	17	校訂Y之著述	edited the writings of	573	0207	文學藝術交往	Literary and Artistic Affiliations
+38	15	為Y作哀辭 [併入167]	Eulogized	39	0505	禮儀文字	Ritual Texts
+39	15	哀辭由Y所作[併入166]	Eulogized by	38	0505	禮儀文字	Ritual Texts
+517	14	題Y之墓	wrote inscription for tomb of	518	0503	墓誌文字	Epitaphs
+518	14	墓由Y題	inscription for tomb written by	517	0503	墓誌文字	Epitaphs
+128	13	建議處決Y	Recommended execution of	129	0407	政治對抗	Oppositional political association
+129	13	其處決係由Y建議	Execution recommended by	128	0407	政治對抗	Oppositional political association
+227	13	排Y之學	Denounced scholarship of	228	0208	學術攻訐	Intellectual Attacks
+228	13	其學為Y所排	Scholarship denounced by	227	0208	學術攻訐	Intellectual Attacks
+487	13	奏錄Y之文	memorialized the writings of	488	0203	學術交往	Intellectual Affiliations
+488	13	其文為Y所奏錄	writings memorialized by	487	0203	學術交往	Intellectual Affiliations
+47	11	醫愈	Healed	48	0701	醫療關係（籠統）	Medicine (General)
+48	11	被Y醫愈	Healed by	47	0701	醫療關係（籠統）	Medicine (General)
+53	11	職業被Y繼承	Occupation continued by	54	0101	社會關係（籠統）	Associations (General)
+54	11	繼承Y的職業	Occupation inherited from	53	0101	社會關係（籠統）	Associations (General)
+262	11	擁立Y	Supported selection as emperor	263	0405	政治奧援	Supportive political association
+263	11	得到Y的擁立	Selection as emperor supported	262	0405	政治奧援	Supportive political association
+303	11	拒為Y之黨	Refused to be in coalition of	304	0407	政治對抗	Oppositional political association
+304	11	邀Y入黨但遭到拒絕	Coalition membership refused by	303	0407	政治對抗	Oppositional political association
+502	11	被送別	as seen off on journey by	501	0103	社會交際	Social Interactions
+590	11	為Y請祀	Proposed to worship Y	591			
+591	11	Y為之請祀	Proposed by Y to be worshiped	590			
+599	11	為Y作記	Wrote inscription for Y	600			
+600	11	記由Y所作	Inscription written by Y	599			
+656	11	為 Y 墓/碑立石	Erecting the stele/stone for Y	657	01	社會關係（籠統）	Associations (General)
+657	11	墓/碑石由 Y 所立	Erecting the stele/stone by Y	656	01	社會關係（籠統）	Associations (General)
+323	10	著述為Y所採	Book relied on by	324	0203	學術交往	Intellectual Affiliations
+324	10	採Y之著述	Relied on book by	323	0203	學術交往	Intellectual Affiliations
+365	10	為Y侍女	Served as lady-in-waiting	366	0406	薦舉保任	Recommendation and sponsorship
+366	10	以Y為侍女	Served as lady-in-waiting by	365	0404	官場關係（上司）	Connection via office (superior)
+495	10	為Y之潛邸舊人	friend to Y when Y was heir-apparent	496	0403	官場關係（下屬）	Connection via office (subordinate)
+496	10	潛邸舊人為Y	friend from time as heir-apparent was	495	0404	官場關係（上司）	Connection via office (superior)
+501	10	送別	saw off on journey	502	0103	社會交際	Social Interactions
+637	10	為Y書諱/填諱	Filled the name of the deceased for	638			
+638	10	書諱/填諱由Y所作	Name of the deceased filled in by	637			
+118	9	為Y之謀士	Informal advisor of	119	0405	政治奧援	Supportive political association
+119	9	以Y為謀士	Informally advised by	118	0405	政治奧援	Supportive political association
+351	9	提議封贈Y	Posthumous titular office proposed for	352	0406	薦舉保任	Recommendation and sponsorship
+352	9	以Y言得到封贈	Posthumous titular office proposed by	351	0406	薦舉保任	Recommendation and sponsorship
+592	9	出財贍給Y	Contributed to the expenses of Y	593			
+593	9	Y為之出財贍給	Received contribution of expenses from Y	592			
+415	8	神道碑序由Y所作	Funerary stele preface written by	416	0504	序跋文字	Prefaces/Postfaces
+416	8	為Y神道碑作序	Wrote Funerary stele preface for	415	0504	序跋文字	Prefaces/Postfaces
+503	8	贈畫	presented painting to	504	0103	社會交際	Social Interactions
+504	8	得到贈畫	was presented painting by	503	0103	社會交際	Social Interactions
+521	8	結義	formed deep bond with	521	0603	軍事對抗	Oppositional military association
+523	8	為Y之行狀作跋	wrote colophon to the account of conduct of	524	0504	序跋文字	Prefaces/Postfaces
+524	8	行狀跋由Y所作	colophon to account of conduct written by	523	0504	序跋文字	Prefaces/Postfaces
+614	8	原告為Y	Plaintiff was Y	615			
+615	8	被告為Y	Defendant was Y	614			
+636	8	論政	Discussed policies with	636			
+75	7	被Y以詩諷忤	Criticized via poetry by	76	0407	政治對抗	Oppositional political association
+76	7	以詩諷忤Y	Used poetry to criticize	75	0407	政治對抗	Oppositional political association
+301	7	聘Y執教族學	Hired to teach in lineage school	302	0206	學術襄助	Academic Patronage
+302	7	為Y所聘執教族學	Hired to teach in lineage school by	301	0206	學術襄助	Academic Patronage
+413	7	墓誌銘序由Y所作	Epitaph preface written by	414	0504	序跋文字	Prefaces/Postfaces
+414	7	為Y墓誌銘作序	Wrote Epitaph preface for	413	0504	序跋文字	Prefaces/Postfaces
+72	6	為Y撰寫學術源宗	Scholarship source writings of	73	0506	傳記文字	Biographical Texts
+73	6	學術源宗由Y撰寫	Writings scholarship source of	72	0506	傳記文字	Biographical Texts
+282	6	被指為Y之同犯	Accused as criminal associate of	464	0405	政治奧援	Supportive political association
+464	6	其同犯被指為Y	Criminal associate was accused to be	282	0405	政治奧援	Supportive political association
+568	6	錄Y為假子(養子)	Took as foster son	569	0901	家庭關係（籠統）	Family (General)
+569	6	為Y之假子(養子)	Taken as foster son by	568	0901	家庭關係（籠統）	Family (General)
+335	5	聯姻建議被Y拒絕	Affinal relationship refused by	336	0901	家庭關係（籠統）	Family (General)
+336	5	拒絕Y的聯姻建議	Refused affinal relation offered by	335	0901	家庭關係（籠統）	Family (General)
+388	5	廢除Y的君位	Deposed	389	0407	政治對抗	Oppositional political association
+389	5	君位被Y廢除	Deposed by	388	0407	政治對抗	Oppositional political association
+421	5	墓表跋由Y所作	Tomb stone postface written by	422	0504	序跋文字	Prefaces/Postfaces
+422	5	為Y墓表作跋	Wrote Tomb stone postface for	421	0504	序跋文字	Prefaces/Postfaces
+491	5	拒Y游説	rejected the entreaties of	492	0407	政治對抗	Oppositional political association
+634	5	陪同	Accompanied	635			
+635	5	被Y陪同	Accompanied by Y	634			
+138	4	遭Y黨羽的攻訐	Attacked by coalition of	139	0407	政治對抗	Oppositional political association
+139	4	其黨攻訐Y	His coalition attacked	138	0407	政治對抗	Oppositional political association
+183	4	攻訐[併入15]	Attacked or denounced	184	0407	政治對抗	Oppositional political association
+184	4	遭Y攻訐 [併入16]	Attacked or denounced by	183	0407	政治對抗	Oppositional political association
+258	4	教授Y之學	Taught the philosophy of	259	0203	學術交往	Intellectual Affiliations
+259	4	其學由Y傳授學生	Philosophy taught to students by	258	0203	學術交往	Intellectual Affiliations
+273	4	支持Y的政策 [併入27]	Supported the policies of	274	0405	政治奧援	Supportive political association
+274	4	其政策得到Y的支持[併入26]	Supporter of policies was	273	0405	政治奧援	Supportive political association
+294	4	與Y爭權	Struggled for power with	294	0407	政治對抗	Oppositional political association
+354	4	以宦官事Y	Eunuch in service of	355	0405	政治奧援	Supportive political association
+355	4	為宦官Y所事	Served by eunuch	354	0405	政治奧援	Supportive political association
+460	4	奪Y之妻	Took possession of the wife of	461	0901	家庭關係（籠統）	Family (General)
+461	4	妻被Y奪	Wife was taken possession of by	460	0901	家庭關係（籠統）	Family (General)
+492	4	游説Y被拒絕	entreaties were rejected by	491	0407	政治對抗	Oppositional political association
+511	4	向Y借書	borrowed books from	512	0103	社會交際	Social Interactions
+512	4	借書給Y	books borrowed by	511	0103	社會交際	Social Interactions
+588	4	推薦Y給他人（第三方）	Recommended Y to a thrid person	589			
+589	4	被Y推薦給他人（第三方）	Recommended by Y to a third person	588			
+646	4	法嗣為Y	Dharma heir was	647			
+647	4	為Y之法嗣	Dharma heir of	646			
+189	3	反對赦免	Amnesty opposed for	190	0407	政治對抗	Oppositional political association
+190	3	對他的赦免遭到Y的反對	Amnesty opposed by	189	0407	政治對抗	Oppositional political association
+195	3	出財贍給Y之軍	Contributed to military expenses of	196	0602	軍事支持	Supportive military association
+196	3	軍隊得到Y之贍給	Military expenses contributed by	195	0602	軍事支持	Supportive military association
+299	3	逃離Y的統治區	Fled as officer from the realm of	300	0407	政治對抗	Oppositional political association
+300	3	Y自其統治區中逃離	Officer who fled from his realm was	299	0407	政治對抗	Oppositional political association
+309	3	其後代出於Y之門	Descendants were menren of	310	0203	學術交往	Intellectual Affiliations
+310	3	門人為Y之後代	Menren were descendants of	309	0203	學術交往	Intellectual Affiliations
+411	3	受Y請求作墓表	Received request for Tomb stone (mubiao) from	412	0503	墓誌文字	Epitaphs
+446	3	貸給Y	Lent to	447	1001	財務關係（籠統）	Finance (General)
+447	3	向Y貸	Borrowed from	446	1001	財務關係（籠統）	Finance (General)
+450	3	向Y購買	Bought from	451	1001	財務關係（籠統）	Finance (General)
+451	3	賣給Y	Sold to	450	1001	財務關係（籠統）	Finance (General)
+525	3	為Y之家傳作跋	wrote colophon to the family biography of	526	0504	序跋文字	Prefaces/Postfaces
+526	3	家傳跋由Y所作	colophon to the family biography written by	525	0504	序跋文字	Prefaces/Postfaces
+543	3	求他人（第三方）為Y作墓誌銘	Requested epitaph (from a third party) for	544	0503	墓誌文字	Epitaphs
+544	3	墓誌銘係由Y向他人（第三方）求得	Epitaph requested by (from a third party)	543	0503	墓誌文字	Epitaphs
+578	3	家傳序由Y所作	preface to family biography written by	579	0504	序跋文字	Prefaces/Postfaces
+579	3	為Y之家傳作序	wrote preface to family biography of	578	0504	序跋文字	Prefaces/Postfaces
+601	3	為Y作去思碑/記	Steles of appreciation for departed officials written for Y	602	0503	墓誌文字	Epitaphs
+602	3	去思碑/記由Y所作	Steles of appreciation for departed officials written by Y	601	0504	序跋文字	Prefaces/Postfaces
+652	3	求Y為他人（第三方）作行狀	Requested account of conduct (for a third party) from	653	0506	傳記文字	Biographical Texts
+653	3	受Y的請求為他人（第三方）作行狀	Account of conduct written (for a third party) at the request of	652	0506	傳記文字	Biographical Texts
+654	3	為 Y 施洗	Baptized Y	655			
+655	3	受洗於 Y	Baptized by Y	654			
+104	2	遺奏推薦	Dying memorial praised	105	0406	薦舉保任	Recommendation and sponsorship
+105	2	被Y在遺表中推薦	Praised in dying memorial by	104	0406	薦舉保任	Recommendation and sponsorship
+283	2	舉辦的鄉禮得到Y所作之序	Received essay on village toast (xiangyin xu) from	284	0510	應酬文字	Occasional Texts
+284	2	為Y舉辦的鄉禮作序	Wrote essay on village toast (xiangyin xu) for	283	0510	應酬文字	Occasional Texts
+315	2	從Y至貶所	Travel into exile accompanied	316	0301	朋友關係（籠統）	Friendship(General)
+316	2	由Y陪伴至貶所	Travel into exile accompanied by	315	0301	朋友關係（籠統）	Friendship(General)
+398	2	為Y作名說	Explanation of personal name (mingshuo) composed for	403	0507	論說文字	Explanatory Texts
+399	2	家譜由Y作後序	Postface to genealogy (jiapu) written by	400	0504	序跋文字	Prefaces/Postfaces
+400	2	為Y家譜作後序	Wrote Postface to genealogy (jiapu) for	399	0504	序跋文字	Prefaces/Postfaces
+403	2	名說由Y所作	Explanation of personal name (mingshuo) composed by	398	0507	論說文字	Explanatory Texts
+412	2	向Y求墓表	Requested Tomb stone (mubiao) be written by	411	0503	墓誌文字	Epitaphs
+417	2	神道碑跋由Y所作	Funerary stele postface written by	418	0504	序跋文字	Prefaces/Postfaces
+418	2	為Y神道碑作跋	Wrote Funerary stele postface for	417	0504	序跋文字	Prefaces/Postfaces
+452	2	佃戶為Y	Tenant was	453	1001	財務關係（籠統）	Finance (General)
+453	2	地主為Y	Landlord was	452	1001	財務關係（籠統）	Finance (General)
+477	2	以醫術事Y	with medical arts served	478	0701	醫療關係（籠統）	Medicine (General)
+478	2	被Y以醫術所事	was served by the medical arts of	477	0701	醫療關係（籠統）	Medicine (General)
+537	2	祭文跋由Y所作	colophon to sacrificial prayer written by	538	0504	序跋文字	Prefaces/Postfaces
+538	2	為Y祭文作跋	wrote colophon to sacrificial prayer for	537	0504	序跋文字	Prefaces/Postfaces
+549	2	為Y之義女	taken as foster daughter by	550	0901	家庭關係（籠統）	Family (General)
+550	2	義女為Y	took as foster daughter	549	0901	家庭關係（籠統）	Family (General)
+566	2	為Y主婚	arranged marriage of	567	0901	家庭關係（籠統）	Family (General)
+567	2	Y為之主婚	marriage arranged by	566	0901	家庭關係（籠統）	Family (General)
+570	2	與Y攀親戚敘族屬	Claimed to be kin with	571	0901	家庭關係（籠統）	Family (General)
+571	2	Y與之攀親戚敘族屬	Was claimed kin with	570	0901	家庭關係（籠統）	Family (General)
+576	2	獻詩集給Y	presented poetry collection to	577	0207	文學藝術交往	Literary and Artistic Affiliations
+577	2	被Y獻詩集	was presented poetry collection by	576	0207	文學藝術交往	Literary and Artistic Affiliations
+606	2	為Y作德政碑/頌	Steles of benevolent administration written for Y	607	0507	論說文字	Explanatory Texts
+607	2	德政碑/頌由Y所作	Steles of benevolent administration written by Y	606	0508	箴銘文字	Mottos
+630	2	為y之挽詩 ,壽詩/文作序	Preface to texts mourning/congratulating birthday of Y	631			
+631	2	挽詩 ,壽詩/文序被Y所作	Preface to texts mourning/congratulating birthday written by Y	630			
+247	1	為Y之義莊規矩作序	Charitable estate rules preface by	248	0504	序跋文字	Prefaces/Postfaces
+248	1	義莊規矩序由Y所作	Charitable estate rules preface for	247	0504	序跋文字	Prefaces/Postfaces
+349	1	(暫時保留，待刪除)	Assisted	350	0301	朋友關係（籠統）	Friendship(General)
+350	1	(暫時保留，待刪除)	Assisted by	349	0301	朋友關係（籠統）	Friendship(General)
+407	1	受Y請求作神道碑	Received request for Funerary stele from	408	0503	墓誌文字	Epitaphs
+408	1	向Y求神道碑	Requested Funerary stele be written by	407	0503	墓誌文字	Epitaphs
+507	1	蠱惑Y	seduced	508	0101	社會關係（籠統）	Associations (General)
+508	1	被Y蠱惑	was seduced by	507	0101	社會關係（籠統）	Associations (General)
+545	1	求Y為他人（第三方）作神道碑	Requested funerary stele (for a third party) from	546	0503	墓誌文字	Epitaphs
+546	1	受Y的請求為他人（第三方）作神道碑	Funerary stele written (for a third party) at the request of	545	0503	墓誌文字	Epitaphs
+547	1	求他人（第三方）為Y作神道碑	Requested funerary stele (from a third party) for	548	0503	墓誌文字	Epitaphs
+548	1	神道碑係由Y向他人（第三方）求得	Funerary stele requested by (from a third party)	547	0503	墓誌文字	Epitaphs
+603	1	為Y作遺愛碑/記	Wrote a stele/inscription [commemorating] the lasting care [of a former official] for Y	604	0505	禮儀文字	Ritual Texts
+604	1	遺愛碑/記由Y所作	Stele/inscription [commemorating] the lasting care [of a former official] written by Y	603	0506	傳記文字	Biographical Texts
+632	1	反叛	Rebelled against Y	633	0407	政治對抗	Oppositional political association
+633	1	被Y反叛	Rebelled by Y	632			
+650	1	門孫 (門人之門人) 為Y	Disciple's disciple was Y	651			
+651	1	為 Y 的門孫 (門人之門人)	Disciple's disciple of Y	650			
