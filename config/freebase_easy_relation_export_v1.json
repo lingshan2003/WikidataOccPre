@@ -1,0 +1,25 @@
+{
+  "name": "freebase_easy_strict_person_graph_v1",
+  "status": "exploratory_export_rules",
+  "description": "Strict two-endpoint graph with exactly one raw Profession value and a parsed birth or death year per endpoint; no L1/L2/L3 mapping.",
+  "relations": [
+    {"predicate": "Children", "relation": "child", "group": "kinship", "symmetric": false},
+    {"predicate": "Sibling", "relation": "sibling", "group": "kinship", "symmetric": true},
+    {"predicate": "Spouse (or domestic partner)", "relation": "partner", "group": "kinship", "symmetric": true},
+    {"predicate": "Academic advisor", "relation": "academic_advisor_raw", "group": "education", "symmetric": false},
+    {"predicate": "Martial Art Instructor(s)", "relation": "martial_arts_instructor_raw", "group": "education", "symmetric": false},
+    {"predicate": "Peer", "relation": "peer", "group": "social", "symmetric": true},
+    {"predicate": "Celebrity friend", "relation": "celebrity_friend", "group": "social", "symmetric": true},
+    {"predicate": "Romantic relationship (with celebrities)", "relation": "celebrity_romantic_relationship", "group": "social", "symmetric": true},
+    {"predicate": "Influenced By", "relation": "influenced_by", "group": "influence", "symmetric": false},
+    {"predicate": "kp_lw/philosopher/influenced_by", "relation": "influenced_by", "group": "influence", "symmetric": false},
+    {"predicate": "kp_lw/philosophy_influencer/influencee", "relation": "influenced_by", "group": "influence", "symmetric": false, "reverse": true}
+  ],
+  "notes": [
+    "Academic advisor and Martial Art Instructor(s) retain the raw Easy subject-to-object direction; the suffix _raw avoids asserting a fully verified student-to-teacher orientation.",
+    "Influence denotes intellectual or artistic influence and is not evidence of face-to-face contact.",
+    "Social predicates are celebrity/peer-specific and remain distinct from kinship.",
+    "Member of, Leader of, works, places, professions, types, events, President, matches, rivalries, and ambiguous support/interview predicates are excluded from this export.",
+    "Both endpoints must have a unique link-file ID for the exported graph; this is provisional identity evidence, not perfect entity resolution."
+  ]
+}

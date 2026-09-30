@@ -1,10 +1,49 @@
-| Relation | Message Observations | Test Node Coverage | Hard Retention Rate(in local message) | Retained-edge Share(in global graph) |
-|---|---:|---:|---:|---:|
-| inherited | 667,954 | 47,140 | 11.06% | 38.49% |
-| education_mentorship | 171,855 | 15,550 | 27.01% | 24.20% |
-| intimate_partnership | 129,983 | 25,567 | 28.03% | 18.99% |
-| religious_ordination | 126,384 | 4,592 | 20.08% | 13.23% |
-| influence_succession | 27,667 | 5,602 | 20.73% | 2.99% |
-| professional_collaboration | 10,962 | 3,017 | 36.16% | 2.07% |
-| other_acquired | 228 | 105 | 32.89% | 0.04% |
-| **Layer 1 Total** | **1,135,033** | — | **16.90%** | **100.00%** |
+| 时期 | 图内人物节点 | 原始人物关系三元组 |
+|---|---:|---:|
+| ≤1500 | 835 | 1,210 |
+| 1501–1900 | 16,536 | 19,928 |
+| 1901–1920 | 12,638 | 14,352 |
+| 1921–1940 | 18,095 | 20,779 |
+| 1941–1960 | 22,051 | 23,954 |
+| 1961–1980 | 15,559 | 15,833 |
+| 1981–2000 | 8,301 | 7,732 |
+| 2001 年以后 | 3,108 | 2,619 |
+
+
+| 渠道 | 来源于渠道的端点 |
+| --- | ---: |
+| `dbo:occupation` | 9,595 |
+| `dbo:profession` | 1,525 |
+| 职业型 `dbo:` 类型 | 12,440 |
+| Wikidata 职业Q | 32,130 |
+| **合计** | **55,690** |
+
+| 最终选中的类型 | 人数 |
+|---|---:|
+| `dbo:Cleric` | 5,627 |
+| `dbo:Athlete` | 3,573 |
+| `dbo:Politician` | 1,852 |
+| `dbo:Artist` | 733 |
+| `dbo:ChristianBishop` | 503 |
+| `dbo:Scientist`、`SportsManager`、`Coach`、`Actor`、`Writer`、`Presenter` | 分别为 34、31、28、27、26、6 |
+
+
+| 涉及到的 Q 类 | 人数 |
+|---|---:|
+| Q82955 政治人物 | 16,001 |
+| Q901 科学家 | 10,171 |
+| Q36180 作家 | 2,055 |
+| Q4964182 哲学家 | 1,659 |
+| Q483501 艺术家 | 1,421 |
+| Q188094 经济学家 | 519 |
+| Q4610556 模特 | 147 |
+| Q42973 建筑师 | 73 |
+| Q81096 工程师 | 61 |
+| Q1930187 记者 | 20 |
+| Q13590141 主持人 | 3 |
+
+| 文件 | 作用 |
+| --- | --- |
+| `facts.txt` | 三元组事实的主体文件。一行表达“主体—谓词—客体”：`is-a Person` 是类型，`Profession Actor`、`Date of birth ...` 是属性，`Children 某人` 是人物关系。 |
+| `freebase-links.txt` | 将 Freebase Easy 使用的名称链接到原始 Freebase 资源 ID，供身份核对；它不是属性表。 |
+| `scores.txt` | 实体的显著度分数；我们目前的人物与关系提取没有用它。 |

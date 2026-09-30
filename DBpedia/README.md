@@ -93,6 +93,8 @@ python scripts/prepare_life_period_induced_artifacts.py \
 
 `processed/model_input/occupation_assignments.tsv.gz` 记录每人的来源、所选原始值、源行号与全部同渠道备选值；`summary.json` 和 `occupation_label_counts.tsv` 记录规模与类别频数。`prepare` 默认会把少于 `min-class-count` 的职业保留在图中但设为 `y=-1`，不计入监督训练；时期脚本会在每期对支持量再次过滤。模型产物保存在仓库原有的、被 Git 忽略的 `artifacts/` 下。
 
+`processed/model_input/occupation_type_inventory.tsv` 列出本轮全部 20 个职业型 `dbo:` 类和 36 个审查通过的 Wikidata Q 类，并分别统计最终图中有该类型证据的人数、最终被选为唯一职业的人数；后者四渠道合计即 55,690 人。类型规则源文件分别是 `occupations.py` 的 `ROLE_TYPES` 和 `rules/q_class_review.tsv` 的 `accept` 行。
+
 ## 一条命令构图、训练和解释
 
 在装有 CUDA 版 PyTorch、PyTorch Geometric 及本仓库其他依赖的服务器环境中，从仓库根目录运行：
@@ -105,6 +107,8 @@ bash DBpedia/run_rgcn_graphmask_20y.sh run all
 ```
 
 `plan` 仅打印即将执行的命令和现有产物状态；`run all` 从三份原始压缩文件开始，已有完整的抽取、导出或构图产物会复用，然后依次训练全图和 8 个时期的 R-GCN，训练 GraphMask，生成测试集关系解释及汇总。运行前会检查所选 Python 的 CUDA 可用性、实际 GPU 和 PyG 的 `NeighborLoader`。默认一次只执行一个 GPU 任务。可用 `run data`、`run train`、`run graphmask` 分段运行；同一命令重复执行会跳过完整产物。若原始文件不在默认位置，可设置 `DBPEDIA_RAW_DIR`，已有抽取结果不需要再次提供原始文件。
+
+`run data` 还会生成 `artifacts/dbpedia_2022_priority_periods_20y_v1/graph_sizes.tsv`：`nonisolated_nodes` 是每期至少参与一条人物关系的端点数，`original_triples` 是排除预处理生成的 `__rev` 反向边后的原始关系三元组数。附带的 `isolated_nodes`、连通分量与两人分量数量用于解释稀疏时期图。
 
 上传到服务器时需要同步本目录的新脚本、两个 `config/dbpedia_*.json` 配置，以及 `training/train.py` 的时期缺席类别处理；只复制 Bash 文件不足以运行整套流程。
 

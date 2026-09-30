@@ -166,8 +166,10 @@ plan_data() {
   show "$PYTHON_BIN" DBpedia/run.py --raw-dir "$RAW" --output-dir "$PROCESSED"
   echo "[data] source: $PROCESSED/04_graph/"
   show "$PYTHON_BIN" DBpedia/export_q_r_q_extended.py --processed-dir "$PROCESSED"
+  show "$PYTHON_BIN" DBpedia/report_occupation_type_inventory.py --processed-dir "$PROCESSED"
   show "$PYTHON_BIN" run.py prepare --input "$INPUT_CSV" --output-dir "$FULL_ARTIFACT" --target-level 1 --min-class-count 20 --seed 42
   show "$PYTHON_BIN" scripts/prepare_life_period_induced_artifacts.py --source-data "$FULL_ARTIFACT/graph_data.pt" --output-root "$PERIOD_ROOT" --life-periods "$PERIOD_CONFIG" --split-seed "$SPLIT_SEED"
+  show "$PYTHON_BIN" DBpedia/report_period_graph_sizes.py --period-root "$PERIOD_ROOT" --period-config "$PERIOD_CONFIG"
 }
 
 run_data() {
@@ -187,6 +189,7 @@ run_data() {
     log_run "$PROCESSED/model_input/export.log" \
       "$PYTHON_BIN" DBpedia/export_q_r_q_extended.py --processed-dir "$PROCESSED"
   fi
+  "$PYTHON_BIN" DBpedia/report_occupation_type_inventory.py --processed-dir "$PROCESSED"
   if [[ -s "$FULL_ARTIFACT/graph_data.pt" && -s "$FULL_ARTIFACT/nodes.csv" && -s "$FULL_ARTIFACT/edges.csv" && -s "$FULL_ARTIFACT/split_summary.json" ]]; then
     echo "[skip] full graph artifact exists: $FULL_ARTIFACT/graph_data.pt"
   else
@@ -201,6 +204,8 @@ run_data() {
     "$PYTHON_BIN" scripts/prepare_life_period_induced_artifacts.py \
     --source-data "$FULL_ARTIFACT/graph_data.pt" --output-root "$PERIOD_ROOT" \
     --life-periods "$PERIOD_CONFIG" --split-seed "$SPLIT_SEED"
+  "$PYTHON_BIN" DBpedia/report_period_graph_sizes.py \
+    --period-root "$PERIOD_ROOT" --period-config "$PERIOD_CONFIG"
 }
 
 run_models() {
