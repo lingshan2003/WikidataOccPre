@@ -1,0 +1,55 @@
+qid	label_en	label_zh	decision	reason	official_url
+Q82955	politician	政治人物	accept	官方定义为寻求或担任政治职务、或积极参与政治的人，属于明确政治职业/社会角色。	https://www.wikidata.org/wiki/Q82955
+Q901	scientist	科学家	accept	明确以科学研究为职业或社会角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q901
+Q483501	artist	艺术家	accept	官方条目将其归为 occupation，并列出 artistic profession；尽管覆盖多类艺术创作，职业属性明确。	https://www.wikidata.org/wiki/Q483501
+Q36180	writer	作家	accept	明确的写作职业/社会角色。	https://www.wikidata.org/wiki/Q36180
+Q13474373	professional wrestler	职业摔跤手	accept	名称明确限定为 professional，属于职业体育角色。	https://www.wikidata.org/wiki/Q13474373
+Q4964182	philosopher	哲学家	accept	职业学科类别，官方条目定义为哲学家这一专业角色。	https://www.wikidata.org/wiki/Q4964182
+Q43115	saint	圣人	exclude	圣徒身份是宗教身份或荣誉/封圣状态，不代表职业。	https://www.wikidata.org/wiki/Q43115
+Q30461	president	总统/主席	conditional	这是可能指国家元首、组织负责人等多种职位的宽泛职务；能表示社会职务，但不稳定地表示职业。	https://www.wikidata.org/wiki/Q30461
+Q188094	economist	经济学家	accept	官方定义为经济学领域的专业人员，明确职业。	https://www.wikidata.org/wiki/Q188094
+Q33999	actor	演员	accept	明确表演职业。	https://www.wikidata.org/wiki/Q33999
+Q486839	member of parliament	议员	conditional	议员是明确的政治职务/社会角色，但属于职位任期，不一定是个人职业。	https://www.wikidata.org/wiki/Q486839
+Q2566598	religious	宗教人士	exclude	官方 Wikidata 讨论页以 religious (Q2566598) 标识该类；虽可识别为宗教身份类别，但实体页描述无法核实，标签本身不足以证明具体职业或职务。	https://www.wikidata.org/wiki/Q2566598
+Q132050	governor	州长/总督	conditional	治理职位明确，但 governor 可指多类任命或选举职务，通常是职位角色而非职业类别。	https://www.wikidata.org/wiki/Q132050
+Q4610556	model	模特	accept	官方定义为受雇展示、宣传和推广产品或作为视觉辅助的人，且条目将其列为 profession；职业属性明确。	https://www.wikidata.org/wiki/Q4610556
+Q30185	mayor	市长	conditional	明确的地方政治职务，但属于任职角色，不必然构成职业。	https://www.wikidata.org/wiki/Q30185
+Q19546	Pope	教宗	conditional	教宗是明确的宗教领导职务和社会角色；其宗教职务可保留为条件性角色证据。	https://www.wikidata.org/wiki/Q19546
+Q2159907	criminal	罪犯	exclude	犯罪者是行为/法律身份类别，不是职业或正向社会职务。	https://www.wikidata.org/wiki/Q2159907
+Q937857	association football player	足球运动员	accept	明确的足球运动员角色，可作为体育职业候选证据。	https://www.wikidata.org/wiki/Q937857
+Q10843402	swimmer	游泳运动员	conditional	游泳者既可能是职业运动员，也可能只表示从事游泳活动；该标签本身没有限定职业性。	https://www.wikidata.org/wiki/Q10843402
+Q42603	priest	牧师/神父	accept	明确的宗教服务职业/职务角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q42603
+Q3665646	basketball player	篮球运动员	accept	官方说明为从事篮球运动的人，并标注为 profession，职业体育角色明确。	https://www.wikidata.org/wiki/Q3665646
+Q42973	architect	建筑师	accept	明确专业职业。	https://www.wikidata.org/wiki/Q42973
+Q10871364	baseball player	棒球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q10871364
+Q15982795	bodybuilder	健美运动员	conditional	健美可为竞技职业，也可为健身活动；标签未限定职业竞技身份。	https://www.wikidata.org/wiki/Q15982795
+Q11774891	ice hockey player	冰球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q11774891
+Q81096	engineer	工程师	accept	明确专业职业。	https://www.wikidata.org/wiki/Q81096
+Q121998	ambassador	大使	conditional	大使是明确的外交任命职务，但通常描述具体任职身份而非稳定职业类别。	https://www.wikidata.org/wiki/Q121998
+Q16278103	squash player	壁球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q16278103
+Q28389	screenwriter	编剧	accept	明确影视写作职业。	https://www.wikidata.org/wiki/Q28389
+Q628099	association football coach	足球教练	accept	明确的教练职业角色。	https://www.wikidata.org/wiki/Q628099
+Q10833314	tennis player	网球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q10833314
+Q3501317	fashion designer	时装设计师	accept	明确设计职业。	https://www.wikidata.org/wiki/Q3501317
+Q378622	racing driver	赛车手	accept	官方定义为在竞赛中驾驶车辆的职业，且条目标注 profession。	https://www.wikidata.org/wiki/Q378622
+Q1930187	journalist	记者	accept	明确新闻采编职业。	https://www.wikidata.org/wiki/Q1930187
+Q488111	pornographic film actor	成人电影演员	accept	明确的影视表演职业；题材不改变其职业类别属性。	https://www.wikidata.org/wiki/Q488111
+Q13414980	Australian rules football player	澳式足球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q13414980
+Q14128148	gridiron football player	美式/橄榄球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q14128148
+Q13415036	rugby player	橄榄球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q13415036
+Q1028181	painter	画家	accept	明确视觉艺术职业。	https://www.wikidata.org/wiki/Q1028181
+Q13590141	presenter	主持人	accept	Wikidata 页面定义为主持活动的人，且条目标注 profession；属于明确角色职业。	https://www.wikidata.org/wiki/Q13590141
+Q11631	astronaut	宇航员	accept	明确专业职业/任务角色。	https://www.wikidata.org/wiki/Q11631
+Q373085	chancellor	总理/校长	conditional	chancellor 对应多个政治或机构职位，语义依上下文变化，属于职务角色但类别含义不唯一。	https://www.wikidata.org/wiki/Q373085
+Q33231	photographer	摄影师	accept	明确摄影职业。	https://www.wikidata.org/wiki/Q33231
+Q15117302	volleyball player	排球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q15117302
+Q4270517	skier	滑雪者	conditional	官方定义为进行滑雪的人，包含业余活动者；未限定职业或竞技身份。	https://www.wikidata.org/wiki/Q4270517
+Q2722764	radio personality	广播名人	conditional	媒体公众角色较宽泛，可能是职业身份，也可能只是以广播节目出名。	https://www.wikidata.org/wiki/Q2722764
+Q3055126	entomologist	昆虫学家	accept	明确专业学术/科学职业。	https://www.wikidata.org/wiki/Q3055126
+Q947873	television presenter	电视主持人	accept	明确电视主持职业。	https://www.wikidata.org/wiki/Q947873
+Q13365117			unresolved	官方 Wikidata 条目页与实体接口本次均无法读取。DBpedia 资料显示该 Q 类被用于手球运动员，但不足以核验其官方标签、定义和职业边界。	https://www.wikidata.org/wiki/Q13365117
+Q847400	Disk'O	Disk’O 游乐设施	exclude	官方条目实际指 Zamperla 制造的游乐设施，非人物或职业；原始清单的“Skater”共现不能改变 Q 类本身语义。	https://www.wikidata.org/wiki/Q847400
+Q13382519	table tennis player	乒乓球运动员	accept	明确的体育运动员角色，可作为职业候选证据。	https://www.wikidata.org/wiki/Q13382519
+Q16533	judge	法官	conditional	司法职务是明确社会角色，但条目类别可涵盖任命职务，并不总等同职业。	https://www.wikidata.org/wiki/Q16533
+Q49757	poet	诗人	accept	明确创作职业/社会角色。	https://www.wikidata.org/wiki/Q49757
+Q855091	guitarist	吉他手	conditional	可能指以演奏为职业的音乐家，也可能仅描述乐器演奏者，标签本身没有职业限定。	https://www.wikidata.org/wiki/Q855091

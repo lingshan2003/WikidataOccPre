@@ -1,0 +1,98 @@
+predicate_uri	decision	group_or_reason	selection_scope
+http://dbpedia.org/ontology/academicAdvisor	include	education_mentorship	direct
+http://dbpedia.org/ontology/academicDiscipline	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/agency	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/almaMater	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/appointer	include	appointment_religious_act	contextual
+http://dbpedia.org/ontology/associate	include	professional	direct
+http://dbpedia.org/ontology/associatedBand	exclude	music_acts_not_personal_tie	
+http://dbpedia.org/ontology/associatedMusicalArtist	exclude	music_acts_not_personal_tie	
+http://dbpedia.org/ontology/award	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/beatifiedBy	include	appointment_religious_act	contextual
+http://dbpedia.org/ontology/billed	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/birthPlace	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/board	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/bodyDiscovered	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/canonizedBy	include	appointment_religious_act	contextual
+http://dbpedia.org/ontology/chancellor	include	political_working_context	contextual
+http://dbpedia.org/ontology/child	include	kinship	direct
+http://dbpedia.org/ontology/choreographer	include	sports_performance	direct
+http://dbpedia.org/ontology/club	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/coach	include	sports_performance	direct
+http://dbpedia.org/ontology/college	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/convictionPenalty	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/currentPartner	include	partnership	direct
+http://dbpedia.org/ontology/deathCause	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/deathPlace	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/deputy	include	political_working_context	contextual
+http://www.w3.org/2002/07/owl#differentFrom	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/diocese	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/doctoralAdvisor	include	education_mentorship	direct
+http://dbpedia.org/ontology/doctoralStudent	include	education_mentorship	direct
+http://dbpedia.org/ontology/education	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/employer	include	professional	direct
+http://dbpedia.org/ontology/father	include	kinship	direct
+http://dbpedia.org/ontology/field	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/formerChoreographer	include	sports_performance	direct
+http://dbpedia.org/ontology/formerCoach	include	sports_performance	direct
+http://dbpedia.org/ontology/formerPartner	include	partnership	direct
+http://dbpedia.org/ontology/formerTeam	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/genre	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/governor	include	political_working_context	contextual
+http://dbpedia.org/ontology/governorGeneral	include	political_working_context	contextual
+http://dbpedia.org/ontology/hometown	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/honours	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/incumbent	exclude	indirect_or_unclear_social_tie	
+http://dbpedia.org/ontology/influenced	include	intellectual_influence	contextual
+http://dbpedia.org/ontology/influencedBy	include	intellectual_influence	contextual
+http://dbpedia.org/ontology/institution	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/instrument	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/knownFor	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/lieutenant	include	political_working_context	contextual
+http://dbpedia.org/ontology/location	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/mainInterest	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/majorShrine	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/managerClub	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/militaryBranch	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/militaryUnit	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/monarch	include	political_working_context	contextual
+http://dbpedia.org/ontology/mother	include	kinship	direct
+http://dbpedia.org/ontology/movement	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/nationality	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/notableIdea	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/notableStudent	include	education_mentorship	direct
+http://dbpedia.org/ontology/notableWork	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/occupation	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/opponent	include	sports_performance	direct
+http://dbpedia.org/ontology/parent	include	kinship	direct
+http://dbpedia.org/ontology/partner	include	partnership	direct
+http://dbpedia.org/ontology/party	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/philosophicalSchool	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/picture	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/placeOfBurial	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/portrayer	exclude	indirect_or_unclear_social_tie	
+http://dbpedia.org/ontology/position	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/predecessor	include	office_succession	contextual
+http://dbpedia.org/ontology/president	include	political_working_context	contextual
+http://dbpedia.org/ontology/primeMinister	include	political_working_context	contextual
+http://dbpedia.org/ontology/profession	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/raceHorse	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/recordLabel	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/region	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/relation	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/relative	include	kinship	direct
+http://dbpedia.org/ontology/residence	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/restingPlace	exclude	entity_attribute_or_category	
+http://www.w3.org/2000/01/rdf-schema#seeAlso	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/significantProject	exclude	indirect_or_unclear_social_tie	
+http://dbpedia.org/ontology/spouse	include	kinship	direct
+http://dbpedia.org/ontology/stateOfOrigin	exclude	entity_attribute_or_category	
+http://purl.org/dc/elements/1.1/subject	exclude	vague_or_metadata	
+http://dbpedia.org/ontology/successor	include	office_succession	contextual
+http://dbpedia.org/ontology/team	exclude	organization_or_non_person_endpoint	
+http://dbpedia.org/ontology/trainer	include	education_mentorship	direct
+http://dbpedia.org/ontology/training	include	education_mentorship	direct
+http://dbpedia.org/ontology/veneratedIn	exclude	entity_attribute_or_category	
+http://dbpedia.org/ontology/vicePresident	include	political_working_context	contextual
+http://dbpedia.org/ontology/vicePrimeMinister	include	political_working_context	contextual
+http://dbpedia.org/ontology/currentMember	exclude	record_not_person	
