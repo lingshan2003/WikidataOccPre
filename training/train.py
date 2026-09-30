@@ -610,17 +610,23 @@ def loss_components(
     device: torch.device,
 ) -> Tuple[Optional[torch.Tensor], torch.Tensor]:
     """Return optional class weights and log priors for the selected objective."""
-    if (counts <= 0).any():
-        raise ValueError("Every retained class must have at least one training example")
+    if (counts < 0).any() or not (counts > 0).any():
+        raise ValueError("Training split must contain at least one example of a valid class")
+    # Period subgraphs keep the full graph's label IDs for comparability. Some
+    # classes legitimately have no members in a given period; their loss weight
+    # is zero and their log prior is clamped below rather than dividing by zero.
+    present = counts > 0
     weights = None
     if loss_mode == "inverse_frequency":
-        weights = counts.sum() / (counts * counts.numel())
+        weights = torch.zeros_like(counts)
+        weights[present] = counts.sum() / (counts[present] * present.sum())
     elif loss_mode == "class_balanced":
         if not 0 <= class_balanced_beta < 1:
             raise ValueError("--class-balanced-beta must be in [0, 1)")
         beta = torch.tensor(class_balanced_beta, dtype=counts.dtype)
-        weights = (1.0 - beta) / (1.0 - torch.pow(beta, counts))
-        weights = weights / weights.mean()
+        weights = torch.zeros_like(counts)
+        weights[present] = (1.0 - beta) / (1.0 - torch.pow(beta, counts[present]))
+        weights[present] = weights[present] / weights[present].mean()
     priors = counts / counts.sum()
     return (
         weights.to(device) if weights is not None else None,

@@ -1,0 +1,9 @@
+{
+  "name": "dbpedia_ascribed_family_vs_remaining_social_ties_v1",
+  "version": 1,
+  "description": "DBpedia-specific relation taxonomy required by the existing R-GCN trainer. Inherited covers explicit person-family predicates present in every configured period artifact; acquired is a residual category and does not imply voluntary ties.",
+  "groups": {
+    "inherited": ["child", "father", "mother", "parent", "relative"],
+    "acquired": "all_remaining"
+  }
+}

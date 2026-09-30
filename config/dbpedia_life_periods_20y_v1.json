@@ -1,0 +1,21 @@
+{
+  "name": "dbpedia_life_periods_20_year_windows_v1",
+  "version": 1,
+  "description": "DBpedia life-period graph windows. Complete valid life intervals enter every overlapping window; a sole known birth or death year enters only its endpoint window. The final period remains open because the local DBpedia dump ends in 2022.",
+  "membership_rule": "life_interval_or_known_endpoint_in_period",
+  "birth_field": "birth_year",
+  "death_field": "death_year",
+  "missing_date_policy": "exclude_if_both_dates_missing",
+  "partial_date_policy": "include_known_endpoint_periods",
+  "invalid_interval_policy": "exclude_if_death_before_birth",
+  "periods": [
+    {"id": "through_1500", "label": "Through 1500 CE", "end": 1500},
+    {"id": "1501_1900", "label": "1501-1900 CE", "start": 1501, "end": 1900},
+    {"id": "1901_1920", "label": "1901-1920 CE", "start": 1901, "end": 1920},
+    {"id": "1921_1940", "label": "1921-1940 CE", "start": 1921, "end": 1940},
+    {"id": "1941_1960", "label": "1941-1960 CE", "start": 1941, "end": 1960},
+    {"id": "1961_1980", "label": "1961-1980 CE", "start": 1961, "end": 1980},
+    {"id": "1981_2000", "label": "1981-2000 CE", "start": 1981, "end": 2000},
+    {"id": "since_2001", "label": "2001 CE onward", "start": 2001}
+  ]
+}
