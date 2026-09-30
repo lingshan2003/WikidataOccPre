@@ -1,5 +1,7 @@
 # Freebase Easy 严格人物子图：扩展三元组导出 v1
 
+> 历史记录：这版把职业条件误设为“恰好一个”，排除了大量多职业人物。现已由[Freebase Easy 人物抽取 v2](/Users/wangyue/RGCN/Freebase/README.md)取代；请勿再用本页的 v1 命令生成最终数据。
+
 目标是从服务器已存在的 `person_cohort_profession_dated_v1/cohort_name_pairs.tsv` 构建一份与主数据 `Q_R_Q_extended.txt` **同样以关系边为行**的 CSV。它是独立的 Freebase 数据版本，不覆盖主数据；每人使用一个原始职业值，不构建职业 L1/L2/L3。规则写在 `config/freebase_easy_relation_export_v1.json`，执行脚本为 `scripts/freebase_easy_build_extended_v1.py`。
 
 ## v1 关系范围
@@ -42,3 +44,18 @@ python scripts/freebase_easy_build_extended_v1.py \
 ```
 
 脚本只读已导出的子集和属性/ID 表，使用 CPU。新目录必须为空，避免覆盖先前结果。完成后先看 `summary.json` 和 CSV 前几行，再决定是否作为训练数据使用。
+
+## 首次服务器运行结果（2026-09-30）
+
+服务器回传 `status=complete_export`，读取 148,445 条严格子集姓名对，其中 145,876 条命中 v1 的 11 个原始谓词。`row_decisions` 中 121,890 条因至少一端有多个不同 `Profession` 值而未入图，占命中记录的 **83.56%**；另有 1,498 条 ID 未解析、47 条自连、16 条亲属冲突。22,425 条原始记录纳入去重，得到 **14,451 条规范边、20,059 个节点**。这不是原始库人物或关系的总体规模。
+
+| 关系组 | 去重边数 | 占全部边 |
+| --- | ---: | ---: |
+| 亲属/伴侣 | 12,712 | 87.97% |
+| 教育/师承 | 820 | 5.67% |
+| 影响 | 857 | 5.93% |
+| 社交 | 62 | 0.43% |
+
+具体关系：`child` 4,815、`partner` 4,447、`sibling` 3,450、`influenced_by` 857、`academic_advisor_raw` 820、`peer` 29、`celebrity_friend` 20、`celebrity_romantic_relationship` 13。`martial_arts_instructor_raw` 本次没有入图边。样例显示 `Francesco Severi → Corrado Segre` 等导师事实及两端单职业 `Mathematician`；这只验证表结构与表面合理性，尚未完成系统的语义抽样审查。
+
+结论：导出流程可用，但“恰好一个原始职业”的严格口径造成很大的选择损失，且输出图仍高度偏向亲属关系。下一步宜先审查每类边的样例、单职业人物的职业分布以及图的连通性，再决定是否用明确的职业映射规则纳入多职业人物。不要把这 14,451 条边直接当作对 Freebase Easy 人际关系的完整覆盖。

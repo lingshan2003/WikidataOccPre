@@ -1,0 +1,26 @@
+{
+  "version": "freebase_easy_person_relations_v2",
+  "meaning": "Exploratory, name-matched Person pairs. Raw triples remain authoritative.",
+  "relations": [
+    {"predicate": "Children", "tier": "priority", "main": "child", "group": "kinship"},
+    {"predicate": "Sibling", "tier": "priority", "main": "sibling", "group": "kinship"},
+    {"predicate": "Spouse (or domestic partner)", "tier": "priority", "main": "partner", "group": "kinship"},
+    {"predicate": "Influenced By", "tier": "priority", "main": "influenced_by", "group": "influence"},
+    {"predicate": "Academic advisor", "tier": "priority", "main": "academic_advisor_raw", "group": "education"},
+    {"predicate": "Peer", "tier": "priority", "main": "peer", "group": "social"},
+    {"predicate": "Romantic relationship (with celebrities)", "tier": "priority", "main": "celebrity_romantic_relationship", "group": "social"},
+    {"predicate": "Celebrity friend", "tier": "priority", "main": "celebrity_friend", "group": "social"},
+    {"predicate": "kp_lw/philosopher/influenced_by", "tier": "priority", "main": "influenced_by", "group": "influence"},
+    {"predicate": "kp_lw/philosophy_influencer/influencee", "tier": "priority", "main": "influenced_by", "group": "influence", "inverse_when_normalizing": true},
+    {"predicate": "Martial Art Instructor(s)", "tier": "priority", "main": "martial_arts_instructor_raw", "group": "education"},
+    {"predicate": "Artist supported", "tier": "semantic_review"},
+    {"predicate": "Group", "tier": "semantic_review"},
+    {"predicate": "Matches Lost", "tier": "semantic_review"},
+    {"predicate": "Celebrity rival", "tier": "semantic_review"},
+    {"predicate": "President", "tier": "semantic_review"},
+    {"predicate": "Episode segment", "tier": "semantic_review"},
+    {"predicate": "Demonstration medal won", "tier": "semantic_review"},
+    {"predicate": "Tribute of", "tier": "semantic_review"},
+    {"predicate": "Interviewer", "tier": "semantic_review"}
+  ]
+}
