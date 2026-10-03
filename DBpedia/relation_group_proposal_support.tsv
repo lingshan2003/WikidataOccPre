@@ -1,0 +1,64 @@
+context	group	present_predicates	original_triples	share_percent_full	share_percent_acquired	absent_predicates
+full	inherited	5	14684	21.887		
+full	intimate_partnership	2	9398	14.008	17.933	
+full	education_mentorship	7	14959	22.297	28.544	
+full	professional_collaboration	2	178	0.265	0.340	
+full	influence_succession	4	23995	35.765	45.787	
+full	religious_authority_recognition	2	1687	2.515	3.219	
+full	other_acquired	11	2189	3.263	4.177	
+1501_1900	inherited	5	5207	26.129		
+1501_1900	intimate_partnership	2	1718	8.621	11.670	
+1501_1900	education_mentorship	6	3010	15.104	20.447	coach
+1501_1900	professional_collaboration	2	87	0.437	0.591	
+1501_1900	influence_succession	4	8885	44.586	60.356	
+1501_1900	religious_authority_recognition	2	551	2.765	3.743	
+1501_1900	other_acquired	11	470	2.358	3.193	
+1901_1920	inherited	5	2493	17.370		
+1901_1920	intimate_partnership	2	2067	14.402	17.430	
+1901_1920	education_mentorship	6	3158	22.004	26.630	coach
+1901_1920	professional_collaboration	2	62	0.432	0.523	
+1901_1920	influence_succession	4	5765	40.169	48.613	
+1901_1920	religious_authority_recognition	2	280	1.951	2.361	
+1901_1920	other_acquired	11	527	3.672	4.444	
+1921_1940	inherited	5	3180	15.304		
+1921_1940	intimate_partnership	2	3438	16.546	19.535	
+1921_1940	education_mentorship	7	5082	24.457	28.877	
+1921_1940	professional_collaboration	2	46	0.221	0.261	
+1921_1940	influence_succession	4	7950	38.260	45.173	
+1921_1940	religious_authority_recognition	2	308	1.482	1.750	
+1921_1940	other_acquired	11	775	3.730	4.404	
+1941_1960	inherited	5	4222	17.625		
+1941_1960	intimate_partnership	2	4334	18.093	21.964	
+1941_1960	education_mentorship	7	5685	23.733	28.811	
+1941_1960	professional_collaboration	2	48	0.200	0.243	
+1941_1960	influence_succession	4	8507	35.514	43.113	
+1941_1960	religious_authority_recognition	2	130	0.543	0.659	
+1941_1960	other_acquired	11	1028	4.292	5.210	
+1961_1980	inherited	5	2962	18.708		
+1961_1980	intimate_partnership	2	3394	21.436	26.369	
+1961_1980	education_mentorship	7	3941	24.891	30.619	
+1961_1980	professional_collaboration	2	33	0.208	0.256	
+1961_1980	influence_succession	4	4799	30.310	37.285	
+1961_1980	religious_authority_recognition	2	25	0.158	0.194	
+1961_1980	other_acquired	10	679	4.289	5.275	monarch
+1981_2000	inherited	5	1085	14.033		
+1981_2000	intimate_partnership	2	1800	23.280	27.080	
+1981_2000	education_mentorship	7	2206	28.531	33.188	
+1981_2000	professional_collaboration	2	10	0.129	0.150	
+1981_2000	influence_succession	4	2343	30.303	35.249	
+1981_2000	religious_authority_recognition	1	1	0.013	0.015	canonizedBy
+1981_2000	other_acquired	10	287	3.712	4.318	monarch
+since_2001	inherited	5	243	9.278		
+since_2001	intimate_partnership	2	699	26.690	29.419	
+since_2001	education_mentorship	7	714	27.262	30.051	
+since_2001	professional_collaboration	2	6	0.229	0.253	
+since_2001	influence_succession	4	816	31.157	34.343	
+since_2001	religious_authority_recognition	0	0	0.000	0.000	beatifiedBy,canonizedBy
+since_2001	other_acquired	9	141	5.384	5.934	monarch,appointer
+through_1500	inherited	5	108	8.926		
+through_1500	intimate_partnership	1	9	0.744	0.817	partner
+through_1500	education_mentorship	4	14	1.157	1.270	doctoralStudent,trainer,coach
+through_1500	professional_collaboration	0	0	0.000	0.000	associate,employer
+through_1500	influence_succession	4	983	81.240	89.201	
+through_1500	religious_authority_recognition	2	96	7.934	8.711	
+through_1500	other_acquired	0	0	0.000	0.000	president,primeMinister,governor,governorGeneral,monarch,chancellor,lieutenant,vicePresident,deputy,appointer,opponent

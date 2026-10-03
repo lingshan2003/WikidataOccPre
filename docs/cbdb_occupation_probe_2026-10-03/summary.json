@@ -1,0 +1,224 @@
+{
+  "database": "2026-09-14 original SQLite, read only",
+  "whitelist": "v1 unreviewed; all alternative results are sensitivity probes",
+  "date_people": 93688,
+  "baseline": {
+    "eligible_people": 38789,
+    "eligible_occupations": {
+      "做官": 37135,
+      "教育": 128,
+      "写作": 534,
+      "学术": 288,
+      "医疗": 38,
+      "宗教": 338,
+      "务农": 18,
+      "艺术": 290,
+      "经商": 20
+    },
+    "triples": 92168,
+    "output_people": 22392,
+    "output_occupations": {
+      "做官": 21504,
+      "艺术": 154,
+      "学术": 182,
+      "写作": 212,
+      "宗教": 188,
+      "医疗": 25,
+      "教育": 107,
+      "务农": 13,
+      "经商": 7
+    },
+    "official_official_triples": 87071
+  },
+  "unique_nonofficial_priority": {
+    "eligible_people": 38319,
+    "eligible_occupations": {
+      "做官": 34207,
+      "艺术": 640,
+      "学术": 987,
+      "写作": 1580,
+      "医疗": 67,
+      "教育": 340,
+      "务农": 58,
+      "从军": 5,
+      "宗教": 405,
+      "经商": 28,
+      "手工业": 2
+    },
+    "triples": 73174,
+    "output_people": 21134,
+    "output_occupations": {
+      "做官": 18572,
+      "学术": 759,
+      "艺术": 375,
+      "教育": 253,
+      "写作": 864,
+      "医疗": 43,
+      "宗教": 208,
+      "务农": 48,
+      "从军": 1,
+      "经商": 10,
+      "手工业": 1
+    },
+    "official_official_triples": 42753
+  },
+  "unique_all_domains_only": {
+    "eligible_people": 35861,
+    "eligible_occupations": {
+      "做官": 34207,
+      "教育": 128,
+      "写作": 534,
+      "学术": 288,
+      "医疗": 38,
+      "宗教": 338,
+      "务农": 18,
+      "艺术": 290,
+      "经商": 20
+    },
+    "triples": 45124,
+    "output_people": 17643,
+    "output_occupations": {
+      "做官": 17044,
+      "艺术": 112,
+      "学术": 126,
+      "写作": 153,
+      "宗教": 115,
+      "教育": 69,
+      "务农": 7,
+      "经商": 4,
+      "医疗": 13
+    },
+    "official_official_triples": 42753
+  },
+  "date_people_with_nonofficial_candidates": 4808,
+  "date_people_with_official_and_nonofficial": 2928,
+  "baseline_official_people_with_nonofficial": 2928,
+  "baseline_output_official_people_with_nonofficial": 2306,
+  "date_people_with_multiple_nonofficial": 696,
+  "missing_labels": {
+    "people": 54899,
+    "with_any_status": 2173,
+    "without_any_status": 52726,
+    "with_any_biog_notes": 38135,
+    "with_source_reference": 54860,
+    "with_text_role": 1833
+  },
+  "date_only_graph": {
+    "people": 43740,
+    "triples": 143528,
+    "baseline_labeled_people": 24912,
+    "unlabeled_people": 18828
+  },
+  "nonofficial_candidate_distribution": {
+    "艺术": 1047,
+    "学术": 1327,
+    "写作": 2048,
+    "经商": 32,
+    "医疗": 89,
+    "教育": 495,
+    "务农": 70,
+    "宗教": 468,
+    "从军": 6,
+    "手工业": 4
+  },
+  "text_role_codes": [
+    [
+      0,
+      "unknown",
+      "未詳"
+    ],
+    [
+      1,
+      "author",
+      "撰著者"
+    ],
+    [
+      2,
+      "editor",
+      "編輯者"
+    ],
+    [
+      3,
+      "compiler",
+      "編纂者"
+    ],
+    [
+      4,
+      "publisher",
+      "出版者"
+    ],
+    [
+      5,
+      "donor",
+      "捐助者"
+    ],
+    [
+      7,
+      "translator",
+      "翻譯者"
+    ],
+    [
+      8,
+      "annotator",
+      "註疏者"
+    ],
+    [
+      9,
+      "commentator",
+      "註釋者(含評點者)"
+    ],
+    [
+      10,
+      "proofreader",
+      "校對者"
+    ],
+    [
+      11,
+      "work included in",
+      "收入Y集"
+    ],
+    [
+      12,
+      "Editorial Associate",
+      "編輯助理"
+    ]
+  ],
+  "assume_office_codes": [
+    [
+      0,
+      "未詳",
+      "Unknown"
+    ],
+    [
+      1,
+      "赴任",
+      "Assumed the office"
+    ],
+    [
+      2,
+      "辭不就",
+      "Declined the office"
+    ],
+    [
+      3,
+      "未赴任而卒",
+      "Died before assuming the office"
+    ],
+    [
+      4,
+      "未赴任而改命",
+      "Appointment changed before assuming the office"
+    ],
+    [
+      5,
+      "未赴任",
+      "Did not assume the office"
+    ]
+  ],
+  "office_assumption_probe": {
+    "date_posting_people": 36346,
+    "date_people_any_explicit_assumed": 2756,
+    "date_people_unknown_only": 33459,
+    "date_people_all_explicit_not_assumed": 16
+  }
+}

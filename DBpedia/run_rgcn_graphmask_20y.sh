@@ -165,6 +165,7 @@ plan_data() {
   echo "[data] raw: $RAW/"
   show "$PYTHON_BIN" DBpedia/run.py --raw-dir "$RAW" --output-dir "$PROCESSED"
   echo "[data] source: $PROCESSED/04_graph/"
+  show "$PYTHON_BIN" DBpedia/report_final_relation_distribution.py --processed-dir "$PROCESSED"
   show "$PYTHON_BIN" DBpedia/export_q_r_q_extended.py --processed-dir "$PROCESSED"
   show "$PYTHON_BIN" DBpedia/report_occupation_type_inventory.py --processed-dir "$PROCESSED"
   show "$PYTHON_BIN" run.py prepare --input "$INPUT_CSV" --output-dir "$FULL_ARTIFACT" --target-level 1 --min-class-count 20 --seed 42
@@ -183,6 +184,7 @@ run_data() {
   require_file "$PROCESSED/04_graph/graph_nodes.tsv.gz"
   require_file "$PROCESSED/04_graph/graph_edges.tsv.gz"
   require_file "$PROCESSED/04_graph/candidate_evidence.tsv.gz"
+  "$PYTHON_BIN" DBpedia/report_final_relation_distribution.py --processed-dir "$PROCESSED"
   if [[ -s "$INPUT_CSV" && -s "$PROCESSED/model_input/summary.json" && -s "$PROCESSED/model_input/occupation_assignments.tsv.gz" ]]; then
     echo "[skip] DBpedia compatible CSV exists: $INPUT_CSV"
   else

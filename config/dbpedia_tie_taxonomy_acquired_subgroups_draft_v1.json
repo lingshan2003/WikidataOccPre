@@ -1,0 +1,16 @@
+{
+  "name": "dbpedia_main_aligned_acquired_subgroups_draft_v1",
+  "version": 1,
+  "status": "proposal_for_review",
+  "description": "Review proposal for the existing 33-predicate DBpedia graph. Preserves the current inherited/acquired split and aligns acquired themes with the main Wikidata experiment. Religious authority/recognition is a conceptual counterpart, not an exact equivalent, of religious ordination. Acquired means remaining social relations, not voluntary choice or a demonstrated contemporaneous interaction. All memberships are explicit so new predicates require review.",
+  "reference_taxonomy": "config/tie_taxonomy_acquired_subgroups_v1.json",
+  "groups": {
+    "inherited": ["child", "parent", "father", "mother", "relative"],
+    "intimate_partnership": ["spouse", "partner"],
+    "education_mentorship": ["doctoralAdvisor", "doctoralStudent", "academicAdvisor", "notableStudent", "trainer", "training", "coach"],
+    "professional_collaboration": ["associate", "employer"],
+    "influence_succession": ["influenced", "influencedBy", "successor", "predecessor"],
+    "religious_authority_recognition": ["beatifiedBy", "canonizedBy"],
+    "other_acquired": ["president", "primeMinister", "governor", "governorGeneral", "monarch", "chancellor", "lieutenant", "vicePresident", "deputy", "appointer", "opponent"]
+  }
+}

@@ -1,5 +1,7 @@
 # Freebase Easy 人物抽取 v2
 
+当前职业多值问题、已确定口径与后续决策步骤见 [`HANDOFF_PROFESSION_SELECTION.md`](HANDOFF_PROFESSION_SELECTION.md)。
+
 这一版按用户确认的口径重做：`is-a Person` 作为暂定人物名单；一个人物只要有 **至少一个不同的原始 `Profession` 值**，且出生年或死亡年有至少一个结构上可解析的年份，就进入资料完整队列。**所有职业值均保留为 JSON 数组**，不选主职业、不做 L1/L2/L3，也不因多职业删除人物或边。结构上可解析不代表日期或人物身份已经核实。
 
 ## 输入和输出
@@ -23,7 +25,7 @@
 
 所有关系事实保留原始主客体方向与 `source_line`；`Sibling`、伴侣等双向事实在原始表中仍是两行。思想影响谓词也尚未规范方向。`freebase-links.txt` 的 ID 是辅助身份线索；缺失或歧义不导致人物被删除。名称碰撞、虚构人物和伪人物对仍需后续审计。
 
-同一版原始文件过去的扫描记录可作核对基准：约 3,970,877 个 `Person` 名称、1,728,197 条全部人物名称对、148,445 条两端满足职业及日期条件的名称对、147,454 条 20 谓词初审记录、145,876 条 11 谓词主图候选原始记录。新脚本不把这些数字写死；若结果不同，先对照各阶段 `summary.json` 和输入文件。
+本次完整重跑得到 3,970,878 个 `Person` 名称、1,728,197 条全部人物名称对、148,445 条两端满足职业及日期条件的名称对、147,454 条 20 谓词初审记录、145,876 条 11 谓词主图候选原始记录。旧版第一阶段曾报告 3,970,877 个名称，差 1 个；以本次同批次输出为准。脚本不把这些数字写死；若结果不同，先对照各阶段 `summary.json` 和输入文件。
 
 ## 服务器运行
 
@@ -64,4 +66,14 @@ head -n 6 "$p/05_final/nodes.csv"
 head -n 6 "$p/05_final/main_relation_facts.csv"
 ```
 
-若只想下载本次可建图的核心数据，`05_final/nodes.csv` 和 `05_final/main_relation_facts.csv` 是最小组合；其余各阶段保留完整审计路径。
+若只想分析当前 11 谓词描述子集，`05_final/nodes.csv` 和 `05_final/main_relation_facts.csv` 是最小组合；其余各阶段保留完整审计路径。
+
+## 本地描述性统计
+
+下载包含 `02_cohort/cohort_people.tsv`、`03_pairs/cohort_name_pairs.tsv`、`04_relations/review_candidate_facts.tsv`、`05_final/nodes.csv`、`05_final/main_relation_facts.csv` 及阶段摘要的压缩包后，可解到 `external_data/freebase/descriptive_v2_local/`，运行：
+
+```bash
+python Freebase/describe_local.py
+```
+
+脚本逐项核对阶段数量，生成 `docs/freebase_easy_audit_2026-10-01/descriptive_report.md`。它统计关系频次、去自环与规范去重后的关系组，以及按出生年分组的人物数和同出生时期原始事实数。时期统计不推断关系发生年份。

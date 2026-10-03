@@ -1,5 +1,9 @@
 # DBpedia 人物社会关系与职业候选图抽取
 
+下一轮关系细分、重跑和可视化的工作状态及交接步骤见 [`HANDOFF_relation_groups_and_visualization.md`](HANDOFF_relation_groups_and_visualization.md)。
+
+分时期 **binary / multi_group RGCN + GraphMask** 流程见 [`GROUPED_PIPELINE.md`](GROUPED_PIPELINE.md)：`bash DBpedia/run_grouped_rgcn_graphmask_20y.sh plan all` 查看命令，`run all` 执行默认八时期 × 两种关系表示的 16 套独立模型与解释任务。
+
 `DBpedia/` 保存**可提交到仓库、可在服务器运行的 Python 脚本和规则**。三个原始 `.ttl.bz2` 文件放在 `external_data/dbpedia/2022.12.01/`；所有生成数据写到 `external_data/dbpedia/processed/`。`processed` 是常用的“已处理数据”目录名，这里只代表完成了本流程的规则处理，**不代表人物身份或职业标签已人工验证**。整个 `external_data/` 已由仓库 `.gitignore` 忽略。
 
 ## 运行
@@ -48,6 +52,7 @@ python3 DBpedia/run.py --from-stage dates
 - `processed/03_dates/all_participant_years.tsv.gz`：所有社会关系端点的年字段与冲突标志，包括因无可用年份而没有进入日期图的端点。
 - `processed/04_graph/direct_value_policy.tsv`、`rejected_direct_evidence.tsv.gz`：职业资源值的硬排除判定与被拒绝的原始事实。
 - 各阶段 `summary.json`、`predicate_flow.tsv`、`relation_flow.tsv`、`group_flow.tsv`：保留每一步影响了多少数据。
+- `processed/04_graph/final_relation_distribution.tsv`、`final_relation_group_distribution.tsv`：未分期最终图中 33 种原始谓词及关系组的边数和占比；不计模型构图时生成的 `__rev` 反向边。
 
 ## 与分时期实验的边界
 
@@ -101,7 +106,9 @@ python scripts/prepare_life_period_induced_artifacts.py \
 
 ```bash
 export DBPEDIA_PYTHON_BIN="$(command -v python)"
-export CUDA_VISIBLE_DEVICES=0
+nvidia-smi
+# 核对实时占用后选择空闲物理卡；以下仅示例选择物理 2 号卡。
+export CUDA_VISIBLE_DEVICES=2
 bash DBpedia/run_rgcn_graphmask_20y.sh plan all
 bash DBpedia/run_rgcn_graphmask_20y.sh run all
 ```

@@ -1,0 +1,34 @@
+predicate	tie_group	subgroup	original_triples	share_percent_full	share_percent_acquired
+child	inherited	inherited	6969	10.388	
+parent	inherited	inherited	3322	4.952	
+father	inherited	inherited	1092	1.628	
+mother	inherited	inherited	138	0.206	
+relative	inherited	inherited	3163	4.715	
+spouse	acquired	intimate_partnership	8868	13.218	16.922
+partner	acquired	intimate_partnership	530	0.790	1.011
+doctoralAdvisor	acquired	education_mentorship	4824	7.190	9.205
+doctoralStudent	acquired	education_mentorship	4051	6.038	7.730
+academicAdvisor	acquired	education_mentorship	1136	1.693	2.168
+notableStudent	acquired	education_mentorship	1032	1.538	1.969
+trainer	acquired	education_mentorship	3214	4.791	6.133
+training	acquired	education_mentorship	401	0.598	0.765
+coach	acquired	education_mentorship	301	0.449	0.574
+associate	acquired	professional_collaboration	147	0.219	0.281
+employer	acquired	professional_collaboration	31	0.046	0.059
+influenced	acquired	influence_succession	4985	7.430	9.512
+influencedBy	acquired	influence_succession	8386	12.500	16.002
+successor	acquired	influence_succession	7214	10.753	13.766
+predecessor	acquired	influence_succession	3410	5.083	6.507
+beatifiedBy	acquired	religious_authority_recognition	1119	1.668	2.135
+canonizedBy	acquired	religious_authority_recognition	568	0.847	1.084
+president	acquired	other_acquired	825	1.230	1.574
+primeMinister	acquired	other_acquired	792	1.181	1.511
+governor	acquired	other_acquired	261	0.389	0.498
+governorGeneral	acquired	other_acquired	13	0.019	0.025
+monarch	acquired	other_acquired	10	0.015	0.019
+chancellor	acquired	other_acquired	29	0.043	0.055
+lieutenant	acquired	other_acquired	90	0.134	0.172
+vicePresident	acquired	other_acquired	82	0.122	0.156
+deputy	acquired	other_acquired	52	0.078	0.099
+appointer	acquired	other_acquired	18	0.027	0.034
+opponent	acquired	other_acquired	17	0.025	0.032
