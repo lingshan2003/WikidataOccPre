@@ -72,6 +72,7 @@ class LifePeriodConfig:
     partial_date_policy: str
     invalid_interval_policy: str
     periods: Tuple[LifePeriod, ...]
+    allow_finite_last_period: bool = False
 
     @property
     def identifiers(self) -> Tuple[str, ...]:
@@ -84,7 +85,7 @@ class LifePeriodConfig:
         raise ValueError(f"Unknown life period {identifier!r}. Available: {list(self.identifiers)}")
 
     def manifest(self) -> Dict[str, object]:
-        return {
+        result = {
             "name": self.name,
             "version": self.version,
             "path": str(self.path),
@@ -97,6 +98,9 @@ class LifePeriodConfig:
             "invalid_interval_policy": self.invalid_interval_policy,
             "periods": [period.manifest() for period in self.periods],
         }
+        if self.allow_finite_last_period:
+            result["allow_finite_last_period"] = True
+        return result
 
 
 def _optional_integer(value: object, field: str, period_id: str) -> Optional[int]:
@@ -122,11 +126,11 @@ def _parse_period(value: object) -> LifePeriod:
     return LifePeriod(identifier.strip(), label.strip(), start, end)
 
 
-def _validate_partition(periods: Sequence[LifePeriod]) -> None:
+def _validate_partition(periods: Sequence[LifePeriod], *, allow_finite_last_period: bool = False) -> None:
     """Validate a contiguous historical timeline, while memberships may overlap."""
     if not periods:
         raise ValueError("Life-period configuration requires at least one period")
-    if periods[0].start is not None or periods[-1].end is not None:
+    if periods[0].start is not None or (periods[-1].end is not None and not allow_finite_last_period):
         raise ValueError("Life periods must cover all years: first start and final end must be open")
     for previous, current in zip(periods, periods[1:]):
         if previous.end is None or current.start is None or current.start != previous.end + 1:
@@ -178,7 +182,10 @@ def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
     periods = tuple(_parse_period(value) for value in raw_periods)
     if len(set(period.identifier for period in periods)) != len(periods):
         raise ValueError("Life-period IDs must be unique")
-    _validate_partition(periods)
+    allow_finite = payload.get("allow_finite_last_period", False)
+    if not isinstance(allow_finite, bool):
+        raise ValueError("allow_finite_last_period must be a Boolean")
+    _validate_partition(periods, allow_finite_last_period=allow_finite)
     return LifePeriodConfig(
         name=payload["name"].strip(),
         version=payload["version"],
@@ -191,6 +198,7 @@ def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
         partial_date_policy=str(partial_date_policy),
         invalid_interval_policy=INVALID_INTERVAL_POLICY,
         periods=periods,
+        allow_finite_last_period=allow_finite,
     )
 
 

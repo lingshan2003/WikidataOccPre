@@ -1,6 +1,18 @@
 # Freebase Easy 人物职业处理交接
 
-更新：2026-10-03。当前已完成数据抽取、描述性统计及职业大类映射的智能体初审草案，尚未冻结训练图或单职业标签。下一位接手者应先阅读本文件、[`README.md`](README.md)、[`relation_rules.json`](relation_rules.json)、[`descriptive_report.md`](../docs/freebase_easy_audit_2026-10-01/descriptive_report.md) 和 [`职业 L1 初审报告`](../docs/freebase_profession_review_2026-10-03/review_report.md)。
+更新：2026-10-07。已完成数据抽取、描述性统计、职业大类初审及用户授权的临时单标签实验图。标签仍未逐条人工审核；原始多职业与初审文件保持原样。下一位接手者应先阅读本文件、[`EXPERIMENT_PIPELINE.md`](EXPERIMENT_PIPELINE.md)、[`README.md`](README.md)、[`relation_rules.json`](relation_rules.json)、[`descriptive_report.md`](../docs/freebase_easy_audit_2026-10-01/descriptive_report.md) 和 [`职业 L1 初审报告`](../docs/freebase_profession_review_2026-10-03/review_report.md)。
+
+## 2026-10-06：临时单标签实验已获用户授权
+
+用户明确要求其余 19,135 人暂用其中一个职业作为标签。新的 `Freebase/prepare_graph.py` 保留 81,621 人的唯一大类候选；18,003 人按原数组顺序取第一个已有有效映射的职业；1,132 人没有有效大类映射，保留首个原职业并暂以 `Other` 参与实验。100,756 人全部保留且全图均有实验标签，人物选择审计保存在 `artifacts/freebase_provisional_l1_v1/label_selection_audit.tsv`。这项临时策略替代下文早期的实验弃权建议，但不改变原始多职业记录或审核状态。
+
+按既有方向规则另建规范关系版本：145,876 原始事实去自环和别名/对称重复后为 99,644 基础边，加生成反向后为 199,288 消息边。关系组为 inherited、intimate_partnership、education_mentorship、influence_succession、other_acquired，默认独立训练 8 个时期模型：<1500、1500–1900（含1900）、1901–1920 至 2001–2020，每窗20年、步长20年。最晚有效日期为2015，不为2021以后生成空训练图。
+
+完整入口为 `Freebase/run_grouped_rgcn_graphmask_20y.sh`，配置 `config/freebase_grouped_rgcn_graphmask_20y_v1.json`。本机已生成全部时期/分组图，并在 <1500 的真实数据上完成短轮数 RGCN→GraphMask→测试报告贯通验证。正式全时期训练由服务器执行，细节及限制见实验文档。
+
+2026-10-07 服务器运行约定：激活 `wywikidata` 后直接使用环境里的 `python`；设备无默认值，必须在 bash 前用 `export` 选择。用户提供的服务器状态为 6 张 RTX 4090，0–3 号已有程序运行，示例用 `export CUDA_VISIBLE_DEVICES=4` 与 `export FREEBASE_GROUP_DEVICE=cuda:0`；可手动换物理 5 号卡，详见实验文档。
+
+以下保留初审阶段的历史分析与审定建议；正式审核版仍应另开版本，不能把临时选择宣称为主职业真值。
 
 ## 当前数据与结论
 

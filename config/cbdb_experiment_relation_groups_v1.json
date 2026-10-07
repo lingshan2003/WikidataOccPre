@@ -1,0 +1,191 @@
+{
+  "name": "cbdb_main_aligned_experiment_groups_v1",
+  "version": 1,
+  "date": "2026-10-06",
+  "reference_taxonomy": "config/tie_taxonomy_acquired_subgroups_v1.json",
+  "fine_mapping": "config/cbdb_relation_groups_v1.json",
+  "description": "Primary CBDB experiment grouping. Collapse raw types and semantic roles to broad groups, retain original directed endpoint order, and use only the existing preparer-generated __rev convention. Fine mappings remain audit metadata. Periods and occupations are unchanged.",
+  "groups": {
+    "inherited": {
+      "label_zh": "亲属与家庭归属",
+      "fine_groups": [
+        "kin_parent_child",
+        "kin_ancestor_descendant",
+        "kin_sibling",
+        "kin_collateral",
+        "kin_affinal",
+        "kin_social_parent_child",
+        "kin_social_ancestor_descendant"
+      ],
+      "description": "依用户要求，KIN表除直接伴侣外均归此组；含姻亲、养继和嗣承，属于家庭归属实验口径，不等同全部生物血缘。交往表明确义亲或收养亲子角色也归入。"
+    },
+    "intimate_partnership": {
+      "label_zh": "婚姻与伴侣",
+      "fine_groups": [
+        "intimate_partnership"
+      ],
+      "description": "直接配偶、妾及明确订婚伴侣；不将亲家的配偶亲属路径当作本人伴侣。"
+    },
+    "education_mentorship": {
+      "label_zh": "教育与师承",
+      "fine_groups": [
+        "education_mentorship"
+      ],
+      "description": "直接求学、指导与师承链，含跨代门孙；不把作品研读等同直接师生。"
+    },
+    "professional_collaboration": {
+      "label_zh": "职业合作与服务",
+      "fine_groups": [
+        "official_colleagues",
+        "household_service"
+      ],
+      "description": "同僚、家内及侍从服务，以及明确共撰、编辑、校订、出版工作和聘教关系；不假定现代自由雇佣。"
+    },
+    "influence_succession": {
+      "label_zh": "影响与志业传承",
+      "fine_groups": [
+        "influence_succession"
+      ],
+      "description": "思想及文艺影响、私淑、著作研读、志业/职业传承，概念上对应主实验影响与接替主题。"
+    },
+    "religious_relation": {
+      "label_zh": "宗教制度与活动",
+      "fine_groups": [
+        "religious_relation"
+      ],
+      "description": "法嗣、洗礼、祠庙及宗教纪念等；比主实验祝圣关系更宽，不宣称相同具体机制。"
+    },
+    "textual_relations": {
+      "label_zh": "著述与文字关系",
+      "fine_groups": [
+        "text_correspondence",
+        "text_epitaph",
+        "text_preface",
+        "text_biography",
+        "text_other"
+      ],
+      "description": "CBDB特有的大量书札、墓志、序跋、传记、应酬及其他文字活动；文字委托也保留，不自动解释为生前直接社交。明确内容工作协作按覆盖规则归职业合作。"
+    },
+    "education_assessment": {
+      "label_zh": "科举与考校",
+      "fine_groups": [
+        "education_assessment"
+      ],
+      "description": "考官、科举次第评定；CBDB独特制度关系，和师生分开。"
+    },
+    "political_institutional": {
+      "label_zh": "政军制度与支持",
+      "fine_groups": [
+        "official_hierarchy",
+        "political_support",
+        "recommendation",
+        "military_support"
+      ],
+      "description": "官场上下级、政军支持、庇护、结盟与荐举等制度联系。"
+    },
+    "social_association": {
+      "label_zh": "朋友与学术社会联系",
+      "fine_groups": [
+        "friendship",
+        "social_association",
+        "academic_exchange"
+      ],
+      "description": "朋友、拜访、同乡同会、同门同年以及一般学术文艺联系；不把全部学术联系称为朋友。"
+    },
+    "opposition_conflict": {
+      "label_zh": "对抗与冲突",
+      "fine_groups": [
+        "opposition"
+      ],
+      "description": "政治、军事、学术及司法对抗；是冲突主题而非单一领域机制。"
+    },
+    "other_acquired": {
+      "label_zh": "其他后天社会关系",
+      "fine_groups": [
+        "financial_support",
+        "medical_care",
+        "family_social",
+        "other_association"
+      ],
+      "description": "财物与医疗协助、家庭事务及未明交往等显式剩余集合；acquired不表示所有关系出于自愿。明确义亲/收养亲子按覆盖规则归inherited。"
+    }
+  },
+  "code_overrides": {
+    "ASSOC:549": {
+      "group": "inherited",
+      "reason": "原码明确义女或假子(养子)的亲子角色，对应主实验家庭归属口径。"
+    },
+    "ASSOC:550": {
+      "group": "inherited",
+      "reason": "原码明确义女或假子(养子)的亲子角色，对应主实验家庭归属口径。"
+    },
+    "ASSOC:568": {
+      "group": "inherited",
+      "reason": "原码明确义女或假子(养子)的亲子角色，对应主实验家庭归属口径。"
+    },
+    "ASSOC:569": {
+      "group": "inherited",
+      "reason": "原码明确义女或假子(养子)的亲子角色，对应主实验家庭归属口径。"
+    },
+    "ASSOC:251": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:341": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:342": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:456": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:457": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:541": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:542": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:572": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:573": {
+      "group": "professional_collaboration",
+      "reason": "明确共撰、编辑、刊刻或校订另一端作品，按内容工作协作归入主实验职业合作主题；不把一般赠诗、墓志或评论当作合作。"
+    },
+    "ASSOC:213": {
+      "group": "professional_collaboration",
+      "reason": "原码描述另一端聘教或主其家庭教席，记录聘用服务而非证明聘用者是受教学生。"
+    },
+    "ASSOC:214": {
+      "group": "professional_collaboration",
+      "reason": "原码描述另一端聘教或主其家庭教席，记录聘用服务而非证明聘用者是受教学生。"
+    },
+    "ASSOC:301": {
+      "group": "professional_collaboration",
+      "reason": "原码描述另一端聘教或主其家庭教席，记录聘用服务而非证明聘用者是受教学生。"
+    },
+    "ASSOC:302": {
+      "group": "professional_collaboration",
+      "reason": "原码描述另一端聘教或主其家庭教席，记录聘用服务而非证明聘用者是受教学生。"
+    },
+    "ASSOC:499": {
+      "group": "professional_collaboration",
+      "reason": "原码描述另一端聘教或主其家庭教席，记录聘用服务而非证明聘用者是受教学生。"
+    },
+    "ASSOC:500": {
+      "group": "professional_collaboration",
+      "reason": "原码描述另一端聘教或主其家庭教席，记录聘用服务而非证明聘用者是受教学生。"
+    }
+  }
+}

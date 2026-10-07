@@ -1,0 +1,3562 @@
+{
+  "groups": {
+    "education_mentorship": {
+      "label_zh": "師承教學",
+      "description": "明確的師生、授業、求學、考校或學術傳承關係。方向標記關係另一端是教師或學生。"
+    },
+    "academic_exchange": {
+      "label_zh": "學術交流",
+      "description": "共同研學、學術論辯、思想影響或知識著述往來；不據此推定一般友誼。"
+    },
+    "friendship": {
+      "label_zh": "友誼",
+      "description": "明確標作朋友、相識、結義或以友人身份往來的關係。"
+    },
+    "social_association": {
+      "label_zh": "社會交往",
+      "description": "一般社會接觸、同鄉同會、拜訪、陪同及禮遇等交往。"
+    },
+    "official_colleagues": {
+      "label_zh": "同僚",
+      "description": "同一官署或職場中的平級同僚關係。"
+    },
+    "official_hierarchy": {
+      "label_zh": "官場上下級",
+      "description": "官職、任用、幕僚、部屬或其他明確官場上下級關係；方向指向上司或下屬。"
+    },
+    "political_support": {
+      "label_zh": "政治支持",
+      "description": "政治上的支持、庇護、聯盟、欣賞或相關政治助力；有明確施受方向時保留方向。"
+    },
+    "recommendation": {
+      "label_zh": "薦舉保任",
+      "description": "推薦、舉薦、保任或代為請求官方行動。"
+    },
+    "opposition": {
+      "label_zh": "對抗與衝突",
+      "description": "政治、學術、軍事或司法對抗；不同領域合併但由原名保留具體語義。"
+    },
+    "text_correspondence": {
+      "label_zh": "書札往來",
+      "description": "寄信、答信及其他明確書札往來。"
+    },
+    "text_epitaph": {
+      "label_zh": "墓葬紀念文字",
+      "description": "墓誌、墓表、神道碑等墓葬紀念文字的撰寫、請託或書刻。"
+    },
+    "text_preface": {
+      "label_zh": "序跋題詞",
+      "description": "書籍、書畫或紀念文字的序、跋、題詞及相關請託。"
+    },
+    "text_biography": {
+      "label_zh": "傳記文字",
+      "description": "傳、年譜、行狀、家傳等傳記類文字及相關請託。"
+    },
+    "text_other": {
+      "label_zh": "其他文字作品",
+      "description": "碑記、祭文、祝詞、箴銘、應酬文字、題名或其他文字行為；僅表示文本關係，不表示生前交往。"
+    },
+    "military_support": {
+      "label_zh": "軍事支持",
+      "description": "軍事援助、軍費供給、共同作戰或共同赴難等支持關係。"
+    },
+    "medical_care": {
+      "label_zh": "醫療照護",
+      "description": "治療、醫療服務或以醫術照護。"
+    },
+    "religious_relation": {
+      "label_zh": "宗教關係",
+      "description": "宗教建置、法脈、洗禮、祀典或宗教服務等關係。"
+    },
+    "financial_support": {
+      "label_zh": "財務與物質往來",
+      "description": "錢物、借貸、買賣、土地租佃、喪葬支出或其他經濟物質關係。"
+    },
+    "family_social": {
+      "label_zh": "家庭與姻親交往",
+      "description": "家庭、收養、婚姻安排及世交父執等家庭或姻親關係。"
+    },
+    "other_association": {
+      "label_zh": "其他或未明交往",
+      "description": "現有官方類別不足以支持更具體且穩妥的歸類，或關係內容尚不清楚。"
+    },
+    "education_assessment": {
+      "label_zh": "科舉考試關係",
+      "description": "考官與應試者、科舉名次評定等考試關係；方向指向應試者或考官。"
+    }
+  },
+  "relations": [
+    {
+      "relation": "ASSOC:4",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「是Y的恩主」(Patron of (= Client was))；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:5「恩主是Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:5",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「恩主是Y」(Patron was (= Client of))；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:4「是Y的恩主」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:7",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「黨羽為Y」(Coalition member of)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:8「黨魁為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:8",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「黨魁為Y」(Coalition leader of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:7「黨羽為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:9",
+      "group": "friendship",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「友」(Friend of)；role_type=M；官方子類 0301「朋友關係（籠統）」(Friendship(General))。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:9「友」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:10",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同年友」(Friend in the same graduating class)；role_type=M；官方子類 0205「同為……之成員」(Association through common membership)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:10「同年友」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:11",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「彈劾」(Impeached)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:12「被Y彈劾」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:12",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y彈劾」(Impeached by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:11「彈劾」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:13",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「推薦」(Recommended)；role_type=A；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:14「被Y推薦」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:14",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y推薦」(Recommended by)；role_type=P；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:13「推薦」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:15",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「反對/攻訐」(Opposed or attacked)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:16「遭到Y的反對/攻訐」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:16",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「遭到Y的反對/攻訐」(Opposed by or attacked by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:15「反對/攻訐」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:17",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y欣賞/器重」(Praised or admired by)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:18「欣賞/器重」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:18",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「欣賞/器重」(Praised or admired)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:17「被Y欣賞/器重」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:19",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「為Y之門人」(Menren of)；role_type=A；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:20「門人為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:20",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「門人為Y」(Menren was)；role_type=P；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:19「為Y之門人」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:21",
+      "group": "political_support",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「與Y結黨」(Coalition associate of)；role_type=M；官方子類 0405「政治奧援」(Supportive political association)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:21「與Y結黨」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:22",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「為Y之學生」(Student of)；role_type=A；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:23「學生為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:23",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「學生為Y」(Student was)；role_type=P；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:22「為Y之學生」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:24",
+      "group": "official_hierarchy",
+      "direction": "to_subordinate",
+      "qualifier": "",
+      "reason": "原名「辟」(Directly recruited (bi, zoubi, etc))；role_type=A；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:25「為Y所辟」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:25",
+      "group": "official_hierarchy",
+      "direction": "to_superior",
+      "qualifier": "",
+      "reason": "原名「為Y所辟」(Directly recruited (bi, zoubi) by)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:24「辟」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:26",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「得到Y的支持」(Supported by)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:27「支持」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:27",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「支持」(Supported)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:26「得到Y的支持」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:29",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「排擠」(Purged)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:30「遭Y排擠」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:30",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「遭Y排擠」(Purged by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:29「排擠」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:31",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「(暫時保留，待刪除)」(Passed institute exam with)；role_type=M；官方子類 0205「同為……之成員」(Association through common membership)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:31「(暫時保留，待刪除)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:32",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y所著書作序」(Prefaced book by)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:33「書序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:33",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書序由Y所作」(Preface of book by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:32「為Y所著書作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:34",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y學派的成員」(Member of the school of)；role_type=A；官方子類 0205「同為……之成員」(Association through common membership)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:35「該學派的成員為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:35",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「該學派的成員為Y」(Member of his school was)；role_type=P；官方子類 0205「同為……之成員」(Association through common membership)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:34「為Y學派的成員」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:36",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「為Y之弟子」(Disciple (dizi) of)；role_type=A；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:37「弟子為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:37",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「弟子為Y」(Disciple (dizi) was)；role_type=P；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:36「為Y之弟子」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:38",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作哀辭 [併入167]」(Eulogized)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:39「哀辭由Y所作[併入166]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:39",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「哀辭由Y所作[併入166]」(Eulogized by)；role_type=P；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:38「為Y作哀辭 [併入167]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:40",
+      "group": "education_mentorship",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「其志業由Y傳承」(Calling transmitted to)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:41「以Y之志業自任」已核對互指。 人工覆核：中文「其志業由Y傳承」與英文「Calling transmitted to」對施受方不一致，故不臆定師生方向。"
+    },
+    {
+      "relation": "ASSOC:41",
+      "group": "education_mentorship",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「以Y之志業自任」(Calling received from)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:40「其志業由Y傳承」已核對互指。 人工覆核：本碼中文與英文及逆碼40對職志傳承方向表述不完全對稱，保留unspecified。"
+    },
+    {
+      "relation": "ASSOC:42",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「研修理學」(Philosophic school of lixue)；role_type=M；官方子類 0204「學術主題相近」(Association by Scholarly Topic)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:42「研修理學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:43",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌銘由Y所作」(Epitaph written by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:44「為Y作墓誌銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:44",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作墓誌銘」(Epitaph written for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:43「墓誌銘由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:45",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書跋由Y所作」(Postface of book written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:46「為Y所著書作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:46",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y所著書作跋」(Postface written for book by)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:45「書跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:47",
+      "group": "medical_care",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「醫愈」(Healed)；role_type=A；官方子類 0701「醫療關係（籠統）」(Medicine (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:48「被Y醫愈」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:48",
+      "group": "medical_care",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y醫愈」(Healed by)；role_type=P；官方子類 0701「醫療關係（籠統）」(Medicine (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:47「醫愈」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:49",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「從Y遊」(followed)；role_type=A；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:50「從遊者為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:50",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「從遊者為Y」(followed by)；role_type=P；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:49「從Y遊」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:53",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「職業被Y繼承」(Occupation continued by)；role_type=P；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:54「繼承Y的職業」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:54",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「繼承Y的職業」(Occupation inherited from)；role_type=A；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:53「職業被Y繼承」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:55",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y推薦參加制科考試」(Recommended for decree exam by)；role_type=P；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:56「推薦Y參加制科考試」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:56",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「推薦Y參加制科考試」(Recommended for decree exam)；role_type=A；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:55「被Y推薦參加制科考試」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:57",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「文風效法Y」(Followed literary style of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:58「文風為Y所效法」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:58",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「文風為Y所效法」(Literary style followed by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:57「文風效法Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:59",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「籌劃謀殺」(Planned to assassinate)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:60「被Y籌劃謀殺」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:60",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y籌劃謀殺」(Assassination planned by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:59「籌劃謀殺」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:61",
+      "group": "opposition",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「不合」(Disagreed with views of)；role_type=M；官方子類 0407「政治對抗」(Oppositional political association)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:61「不合」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:64",
+      "group": "official_hierarchy",
+      "direction": "to_superior",
+      "qualifier": "",
+      "reason": "原名「為Y之部將」(Officer under command of)；role_type=A；官方子類 0403「官場關係（下屬）」(Connection via office (subordinate))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:65「部將為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:65",
+      "group": "official_hierarchy",
+      "direction": "to_subordinate",
+      "qualifier": "",
+      "reason": "原名「部將為Y」(Officer under his command was)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:64「為Y之部將」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:66",
+      "group": "official_hierarchy",
+      "direction": "to_superior",
+      "qualifier": "",
+      "reason": "原名「為Y之幕僚」(Staff member of)；role_type=A；官方子類 0403「官場關係（下屬）」(Connection via office (subordinate))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:67「幕僚為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:67",
+      "group": "official_hierarchy",
+      "direction": "to_subordinate",
+      "qualifier": "",
+      "reason": "原名「幕僚為Y」(Staff member was)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:66「為Y之幕僚」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:68",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「節行為Y所稱道」(Recognized the virtue of)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:69「稱道Y之節行」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:69",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「稱道Y之節行」(Virtue recognized by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:68「節行為Y所稱道」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:70",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「詩作為Y所稱道」(Poetry known or praised by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:71「稱道Y的詩作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:71",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「稱道Y的詩作」(Knew or praised poetry of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:70「詩作為Y所稱道」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:72",
+      "group": "text_biography",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「為Y撰寫學術源宗」(Scholarship source writings of)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:73「學術源宗由Y撰寫」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:73",
+      "group": "text_biography",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「學術源宗由Y撰寫」(Writings scholarship source of)；role_type=A；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:72「為Y撰寫學術源宗」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:75",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y以詩諷忤」(Criticized via poetry by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:76「以詩諷忤Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:76",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「以詩諷忤Y」(Used poetry to criticize)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:75「被Y以詩諷忤」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:83",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「忌/惡」(Disliked or hated)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:84「為Y所忌/惡」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:84",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「為Y所忌/惡」(Disliked or hated by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:83「忌/惡」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:86",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「被Y養育」(Raised in the home of)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:87「養育」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:87",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「養育」(Raised in his home)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:86「被Y養育」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:88",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作字說、名述」(Explanation of capping name (zixu or zishuo) composed for)；role_type=A；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:89「字說、名述由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:89",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「字說、名述由Y所作」(Explanation of capping name (zixu or zishuo) composed by)；role_type=P；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:88「為Y作字說、名述」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:94",
+      "group": "social_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同鄉」(Lived in the same village as)；role_type=M；官方子類 0102「同為……之成員」(Association through common membership)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:94「同鄉」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:95",
+      "group": "friendship",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「相識」(Knew)；role_type=M；官方子類 0301「朋友關係（籠統）」(Friendship(General))。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:95「相識」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:104",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「遺奏推薦」(Dying memorial praised)；role_type=A；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:105「被Y在遺表中推薦」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:105",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y在遺表中推薦」(Praised in dying memorial by)；role_type=P；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:104「遺奏推薦」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:106",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「拒絕在Y主政的政府中任職」(Refused office in administration of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:107「拒絕在Y的主政期出仕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:107",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「拒絕在Y的主政期出仕」(Offer of office refused by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:106「拒絕在Y主政的政府中任職」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:108",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「論學」(Discussed scholarship with)；role_type=M；官方子類 0204「學術主題相近」(Association by Scholarly Topic)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:108「論學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:113",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「詩社成員」(Member of poetry society with)；role_type=M；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:113「詩社成員」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:114",
+      "group": "text_other",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「相唱和」(Poems composed with)；role_type=M；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:114「相唱和」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:117",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同學、同門」(Tongxue was)；role_type=M；官方子類 0205「同為……之成員」(Association through common membership)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:117「同學、同門」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:118",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之謀士」(Informal advisor of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:119「以Y為謀士」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:119",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「以Y為謀士」(Informally advised by)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:118「為Y之謀士」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:120",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同場屋/同應舉」(Take imperial examinations with)；role_type=M；官方子類 0205「同為……之成員」(Association through common membership)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:120「同場屋/同應舉」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:126",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「傳Y之學」(Transmitted the scholarship of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:127「其學由Y所傳」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:127",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「其學由Y所傳」(Scholarship transmitted by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:126「傳Y之學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:128",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「建議處決Y」(Recommended execution of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:129「其處決係由Y建議」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:129",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其處決係由Y建議」(Execution recommended by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:128「建議處決Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:130",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之門客」(Retainer (客) of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:131「門客為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:131",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「門客為Y」(Retainer (客) was)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:130「為Y之門客」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:132",
+      "group": "text_biography",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「傳記作者為Y」(Biography written by)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:133「為Y作傳」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:133",
+      "group": "text_biography",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作傳」(Biographer of)；role_type=A；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:132「傳記作者為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:136",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「反對/不支持Y的政策」(Attacked or not support policies of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:137「其政策被Y反對/不支持」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:137",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其政策被Y反對/不支持」(Policies attacked-not supported by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:136「反對/不支持Y的政策」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:138",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「遭Y黨羽的攻訐」(Attacked by coalition of)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:139「其黨攻訐Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:139",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「其黨攻訐Y」(His coalition attacked)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:138「遭Y黨羽的攻訐」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:140",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「讚揚Y之學」(Scholarship praised by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:141「其學得到Y之讚揚」已核對互指。 人工覆核：中文「讚揚Y之學」表明本碼人物讚揚Y，覆核為actor_to_recipient。"
+    },
+    {
+      "relation": "ASSOC:141",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其學得到Y之讚揚」(Praised scholarship of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:140「讚揚Y之學」已核對互指。 人工覆核：中文「其學得到Y之讚揚」表明本碼人物受Y讚揚，覆核為recipient_to_actor。"
+    },
+    {
+      "relation": "ASSOC:142",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「拒絕會面」(Refused an audience with)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:143「會面的邀請被Y拒絕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:143",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「會面的邀請被Y拒絕」(Audience invitation refused by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:142「拒絕會面」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:145",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作祭文」(Sacrificial prayer written for)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:146「祭文由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:146",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「祭文由Y所作」(Sacrificial prayer written by)；role_type=P；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:145「為Y作祭文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:147",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作祝詞」(Invocation prayer written for)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:148「祝詞由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:148",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「祝詞由Y所作」(Invocation prayer written by)；role_type=P；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:147「為Y作祝詞」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:149",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之書、畫作跋」(Postscripted calligraphy or painting of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:150「書、畫由Y作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:150",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書、畫由Y作跋」(Calligraphy or painting postscripted by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:149「為Y之書、畫作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:151",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作世系碑記」(Ancestral stele or records written for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:152「世系碑記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:152",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「世系碑記由Y所作」(Ancestral stele or records written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:151「為Y作世系碑記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:154",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「求Y為他人（第三方）作墓誌銘」(Requested epitaph (for a third party) from)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:155「受Y的請求為他人（第三方）作墓誌銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:155",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y的請求為他人（第三方）作墓誌銘」(Epitaph written (for a third party) at the request of)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:154「求Y為他人（第三方）作墓誌銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:156",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y鞫治」(Tried and found guilty by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:157「鞫治」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:157",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「鞫治」(Tried and found guilty)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:156「被Y鞫治」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:158",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y逮捕」(Arrested by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:159「逮捕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:159",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「逮捕」(Arrested)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:158「被Y逮捕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:160",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作廟碑記」(Temple stele(miaobei) written for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:161「廟碑記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:161",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「廟碑記由Y所作」(Temple stele(miaobei) written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:160「為Y作廟碑記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:162",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作臨別贈言(送別詩、序)」(Departure note sent to)；role_type=A；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:163「臨別得到Y所作贈言(送別詩、序)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:163",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「臨別得到Y所作贈言(送別詩、序)」(Departure note received from)；role_type=P；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:162「為Y作臨別贈言(送別詩、序)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:166",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「哀辭由Y所作」(Lamentation prayer written by)；role_type=P；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:167「為Y作哀辭」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:167",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作哀辭」(Lamentation prayer written for)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:166「哀辭由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:172",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「稱道Y之文風」(Praised the literary style of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:173「文風為Y所稱道」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:173",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「文風為Y所稱道」(Literary style praised by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:172「稱道Y之文風」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:174",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑的書法由Y所作」(Calligraphy for funerary stele script done by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:175「為Y之神道碑作書」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:175",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之神道碑作書」(Calligraphy for funerary stele script done for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:174「神道碑的書法由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:180",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「根據Y的命令被處決」(Executed at the order of)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:181「下令處決」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:181",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「下令處決」(Ordered the execution of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:180「根據Y的命令被處決」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:183",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「攻訐[併入15]」(Attacked or denounced)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:184「遭Y攻訐 [併入16]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:184",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「遭Y攻訐 [併入16]」(Attacked or denounced by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:183「攻訐[併入15]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:185",
+      "group": "education_assessment",
+      "direction": "to_examinee",
+      "qualifier": "",
+      "reason": "原名「決定Y的科舉次第」(Determined jinshi rank of)；role_type=A；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:186「科舉次第由Y決定」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:186",
+      "group": "education_assessment",
+      "direction": "to_examiner",
+      "qualifier": "",
+      "reason": "原名「科舉次第由Y決定」(Jinshi rank determined by)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:185「決定Y的科舉次第」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:187",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「諡議由Y所作」(Posthumous name essay written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:188「為Y作諡議」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:188",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作諡議」(Posthumous name essay written for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:187「諡議由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:189",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「反對赦免」(Amnesty opposed for)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:190「對他的赦免遭到Y的反對」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:190",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「對他的赦免遭到Y的反對」(Amnesty opposed by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:189「反對赦免」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:193",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「對Y執弟子禮」(Honored)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:194「受Y之弟子禮」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:194",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「受Y之弟子禮」(Honored by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:193「對Y執弟子禮」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:195",
+      "group": "military_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「出財贍給Y之軍」(Contributed to military expenses of)；role_type=A；官方子類 0602「軍事支持」(Supportive military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:196「軍隊得到Y之贍給」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:196",
+      "group": "military_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「軍隊得到Y之贍給」(Military expenses contributed by)；role_type=P；官方子類 0602「軍事支持」(Supportive military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:195「出財贍給Y之軍」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:197",
+      "group": "official_colleagues",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同僚」(Served in the same bureau with)；role_type=M；官方子類 0402「官場關係（平級）」(Connection via office (equal))。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:197「同僚」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:198",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「義莊記由Y所作」(Charitable estate stele written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:199「為Y作義莊記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:199",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作義莊記」(Charitable estate stele written for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:198「義莊記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:204",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「處決」(Executed)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:205「被Y處決」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:205",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y處決」(Executed by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:204「處決」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:206",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「抵禦或討平叛軍Y」(Fought against the rebel)；role_type=A；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:207「叛軍遭到Y的抵禦或討平」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:207",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「叛軍遭到Y的抵禦或討平」(Fought (as rebel) by loyalist)；role_type=P；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:206「抵禦或討平叛軍Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:208",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「宗Y之學」(Ancestral source of learning was)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:209「其學為Y所宗」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:209",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「其學為Y所宗」(Descent line of teaching to)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:208「宗Y之學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:210",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y（或追隨者）殺害」(Killed by followers of)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:211「其（或追隨者）殺害Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:211",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「其（或追隨者）殺害Y」(Followers killed)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:210「被Y（或追隨者）殺害」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:213",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「主Y家之教席」(Tutor to the family of)；role_type=A；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:214「聘Y主家之教席」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:214",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「聘Y主家之教席」(Tutor of family was)；role_type=P；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:213「主Y家之教席」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:217",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「受經於Y」(Received the classics from)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:218「傳經於Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:218",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「傳經於Y」(Transmitted the classics to)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:217「受經於Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:219",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「為Y所葬」(Buried by)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:220「葬」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:220",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「葬」(Buried)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:219「為Y所葬」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:223",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「喪事由Y經紀」(Prepared for burial corpse of)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:224「經紀Y之喪」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:224",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「經紀Y之喪」(Corpse prepared for burial by)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:223「喪事由Y經紀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:225",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作硯銘」(Inkstone motto written for)；role_type=A；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:226「硯銘由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:226",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「硯銘由Y所作」(Inkstone motto written by)；role_type=P；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:225「為Y作硯銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:227",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「排Y之學」(Denounced scholarship of)；role_type=A；官方子類 0208「學術攻訐」(Intellectual Attacks)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:228「其學為Y所排」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:228",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其學為Y所排」(Scholarship denounced by)；role_type=P；官方子類 0208「學術攻訐」(Intellectual Attacks)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:227「排Y之學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:231",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「從Y學」(Studied with)；role_type=P；官方子類 0204「學術主題相近」(Association by Scholarly Topic)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:232「教授Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:232",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「教授Y」(Taught to)；role_type=A；官方子類 0204「學術主題相近」(Association by Scholarly Topic)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:231「從Y學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:235",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「(暫時保留，待刪除)」(Birth congratulated by)；role_type=P；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:236「(暫時保留，待刪除)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:236",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「(暫時保留，待刪除)」(Congratulated the birth of)；role_type=A；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:235「(暫時保留，待刪除)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:237",
+      "group": "text_biography",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「年譜由Y所作」(Nianpu composed by)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:238「為Y作年譜」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:238",
+      "group": "text_biography",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作年譜」(Nianpu composed for)；role_type=A；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:237「年譜由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:239",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作佛寺記」(Buddhist temple stele written for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:240「佛寺記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:240",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「佛寺記由Y所作」(Buddhist temple stele written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:239「為Y作佛寺記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:241",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑額篆由Y所作」(Calligraphy for heading of funerary stele script done by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:242「為Y之神道碑作額篆」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:242",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之神道碑作額篆」(Calligraphy for heading of  funerary stele script done for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:241「神道碑額篆由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:243",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「因與Y的交往受牽連」(Purged for association with)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 other_association，按原名具體語義調整。原描述兼有多種解讀或只說明牽連原因，方向不明，保留unspecified。逆碼 ASSOC:244「與他的交往導致Y受牽連」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:244",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「與他的交往導致Y受牽連」(Association caused purge of)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 other_association，按原名具體語義調整。原描述兼有多種解讀或只說明牽連原因，方向不明，保留unspecified。逆碼 ASSOC:243「因與Y的交往受牽連」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:247",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之義莊規矩作序」(Charitable estate rules preface by)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:248「義莊規矩序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:248",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「義莊規矩序由Y所作」(Charitable estate rules preface for)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:247「為Y之義莊規矩作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:249",
+      "group": "official_hierarchy",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「在Y的主政期出仕 [暫時保留，待刪除]」(Official in the administration of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 official_hierarchy，按原名具體語義調整。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:250「其主政期中Y出仕 [暫時保留，待刪除]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:250",
+      "group": "official_hierarchy",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「其主政期中Y出仕 [暫時保留，待刪除]」(Official in his administration was)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 official_hierarchy，按原名具體語義調整。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:249「在Y的主政期出仕 [暫時保留，待刪除]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:251",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「合撰(編)著作」(Co-authored book with)；role_type=M；官方子類 0203「學術交往」(Intellectual Affiliations)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:251「合撰(編)著作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:252",
+      "group": "religious_relation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y建立祠廟」(Shrine erected for)；role_type=A；官方子類 0801「宗教關係（籠統）」(Religion (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:253「Y為之建立祠廟」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:253",
+      "group": "religious_relation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「Y為之建立祠廟」(Shrine erected by)；role_type=P；官方子類 0801「宗教關係（籠統）」(Religion (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:252「為Y建立祠廟」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:256",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「私淑Y之學」(Adopted the learning of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:257「其學為Y所私淑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:257",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「其學為Y所私淑」(Learning adopted by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:256「私淑Y之學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:258",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「教授Y之學」(Taught the philosophy of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:259「其學由Y傳授學生」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:259",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「其學由Y傳授學生」(Philosophy taught to students by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:258「教授Y之學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:260",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「拒為Y掾屬」(Refused to be a secretary of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:261「欲辟Y為幕僚但被拒絕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:261",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「欲辟Y為幕僚但被拒絕」(Secretary offer refused by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:260「拒為Y掾屬」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:262",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「擁立Y」(Supported selection as emperor)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:263「得到Y的擁立」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:263",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「得到Y的擁立」(Selection as emperor supported)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:262「擁立Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:268",
+      "group": "social_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同會」(Member of same club (hui, she, etc) as)；role_type=M；官方子類 0102「同為……之成員」(Association through common membership)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:268「同會」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:269",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「批評」(Critic of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:270「被Y批評」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:270",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y批評」(Criticized by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:269「批評」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:273",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「支持Y的政策 [併入27]」(Supported the policies of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:274「其政策得到Y的支持[併入26]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:274",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其政策得到Y的支持[併入26]」(Supporter of policies was)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:273「支持Y的政策 [併入27]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:275",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「家譜由Y作序」(Preface to geneology composed by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:276「為Y之家譜作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:276",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之家譜作序」(Prefaced geneology of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:275「家譜由Y作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:277",
+      "group": "friendship",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「與Y遊」(proceeded with (friendship))；role_type=M；官方子類 0301「朋友關係（籠統）」(Friendship(General))。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:277「與Y遊」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:278",
+      "group": "official_hierarchy",
+      "direction": "to_superior",
+      "qualifier": "",
+      "reason": "原名「副Y出使」(Vice-envoy in embassy of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 official_hierarchy，按原名具體語義調整。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:279「為使團副使Y的正使」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:279",
+      "group": "official_hierarchy",
+      "direction": "to_subordinate",
+      "qualifier": "",
+      "reason": "原名「為使團副使Y的正使」(Chief envoy of vice-envoy)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:278「副Y出使」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:280",
+      "group": "text_correspondence",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「(暫時保留,待日後分入 429, 430, 431, 432)」(Corresponded with)；role_type=M；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:280「(暫時保留,待日後分入 429, 430, 431, 432)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:282",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被指為Y之同犯」(Accused as criminal associate of)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 opposition，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:464「其同犯被指為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:283",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「舉辦的鄉禮得到Y所作之序」(Received essay on village toast (xiangyin xu) from)；role_type=A；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:284「為Y舉辦的鄉禮作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:284",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「為Y舉辦的鄉禮作序」(Wrote essay on village toast (xiangyin xu) for)；role_type=P；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:283「舉辦的鄉禮得到Y所作之序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:292",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「以文章、學問受知於」(Associated with the menren of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:293「稱道Y之文章、學問」已核對互指。 人工覆核：中文「以文章、學問受知於」表明本碼人物受到Y賞識，覆核為recipient_to_actor。"
+    },
+    {
+      "relation": "ASSOC:293",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「稱道Y之文章、學問」(Menren associated with)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:292「以文章、學問受知於」已核對互指。 人工覆核：中文「稱道Y之文章、學問」表明本碼人物稱道Y，覆核為actor_to_recipient。"
+    },
+    {
+      "relation": "ASSOC:294",
+      "group": "opposition",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「與Y爭權」(Struggled for power with)；role_type=M；官方子類 0407「政治對抗」(Oppositional political association)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:294「與Y爭權」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:297",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「齋、堂銘由Y所作」(Study motto (zhaiming) by)；role_type=P；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:298「為Y作齋、堂銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:298",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作齋、堂銘」(Wrote Study motto (zhaiming) for)；role_type=A；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:297「齋、堂銘由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:299",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「逃離Y的統治區」(Fled as officer from the realm of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:300「Y自其統治區中逃離」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:300",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「Y自其統治區中逃離」(Officer who fled from his realm was)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:299「逃離Y的統治區」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:301",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「聘Y執教族學」(Hired to teach in lineage school)；role_type=P；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:302「為Y所聘執教族學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:302",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y所聘執教族學」(Hired to teach in lineage school by)；role_type=A；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:301「聘Y執教族學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:303",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「拒為Y之黨」(Refused to be in coalition of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:304「邀Y入黨但遭到拒絕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:304",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「邀Y入黨但遭到拒絕」(Coalition membership refused by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:303「拒為Y之黨」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:309",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「其後代出於Y之門」(Descendants were menren of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:310「門人為Y之後代」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:310",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「門人為Y之後代」(Menren were descendants of)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:309「其後代出於Y之門」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:315",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「從Y至貶所」(Travel into exile accompanied)；role_type=A；官方子類 0301「朋友關係（籠統）」(Friendship(General))；人工判讀至 social_association，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:316「由Y陪伴至貶所」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:316",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「由Y陪伴至貶所」(Travel into exile accompanied by)；role_type=P；官方子類 0301「朋友關係（籠統）」(Friendship(General))；人工判讀至 social_association，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:315「從Y至貶所」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:321",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「碑陰為Y所作」(Beiyin composed by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:322「為Y作碑陰」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:322",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作碑陰」(Beiyin composed for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:321「碑陰為Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:323",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「著述為Y所採」(Book relied on by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:324「採Y之著述」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:324",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「採Y之著述」(Relied on book by)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:323「著述為Y所採」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:325",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「[併入334]」(Postscripted stele for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:326「[併入333]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:326",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「[併入333]」(Stele for postscripted by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:325「[併入334]」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:333",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌銘由Y作跋」(Epitaph postface by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:334「為Y之墓誌銘作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:334",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之墓誌銘作跋」(Epitaph postface for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:333「墓誌銘由Y作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:335",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「聯姻建議被Y拒絕」(Affinal relationship refused by)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:336「拒絕Y的聯姻建議」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:336",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「拒絕Y的聯姻建議」(Refused affinal relation offered by)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:335「聯姻建議被Y拒絕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:339",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「拜訪」(Visited)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:340「受到Y拜訪」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:340",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受到Y拜訪」(Visited by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:339「拜訪」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:341",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「編輯Y之詩/文」(Poetry/prose edited by)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:342「詩/文由Y編輯」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:342",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「詩/文由Y編輯」(Edited the poetry/prose of)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:341「編輯Y之詩/文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:343",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「戰勝」(Defeated in battle)；role_type=A；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:344「敗於」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:344",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「敗於」(Defeated in battle by)；role_type=P；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:343「戰勝」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:349",
+      "group": "friendship",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「(暫時保留，待刪除)」(Assisted)；role_type=A；官方子類 0301「朋友關係（籠統）」(Friendship(General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:350「(暫時保留，待刪除)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:350",
+      "group": "friendship",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「(暫時保留，待刪除)」(Assisted by)；role_type=P；官方子類 0301「朋友關係（籠統）」(Friendship(General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:349「(暫時保留，待刪除)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:351",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「提議封贈Y」(Posthumous titular office proposed for)；role_type=A；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:352「以Y言得到封贈」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:352",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「以Y言得到封贈」(Posthumous titular office proposed by)；role_type=P；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:351「提議封贈Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:354",
+      "group": "official_hierarchy",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「以宦官事Y」(Eunuch in service of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 official_hierarchy，按原名具體語義調整。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:355「為宦官Y所事」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:355",
+      "group": "official_hierarchy",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為宦官Y所事」(Served by eunuch)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 official_hierarchy，按原名具體語義調整。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:354「以宦官事Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:358",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「得到Y的喜爱」(Liked by)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:359「喜爱」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:359",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「喜爱」(Liked)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:358「得到Y的喜爱」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:361",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「研讀Y的著作」(Studied writings of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:362「其著作為Y所研讀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:362",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「其著作為Y所研讀」(Writings studied by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:361「研讀Y的著作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:363",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「禮待」(Treated with respect)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:364「受Y之禮待」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:364",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y之禮待」(Treated with respect by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:363「禮待」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:365",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y侍女」(Served as lady-in-waiting)；role_type=A；官方子類 0406「薦舉保任」(Recommendation and sponsorship)；人工判讀至 official_hierarchy，按原名具體語義調整。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:366「以Y為侍女」已核對互指。 人工覆核：侍女服務關係不充分證明官場上下級，故不映射為official_hierarchy。"
+    },
+    {
+      "relation": "ASSOC:366",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「以Y為侍女」(Served as lady-in-waiting by)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:365「為Y侍女」已核對互指。 人工覆核：侍女服務關係不充分證明官場上下級，故不映射為official_hierarchy。"
+    },
+    {
+      "relation": "ASSOC:367",
+      "group": "political_support",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「政見趨同」(Agreed with views of)；role_type=M；官方子類 0405「政治奧援」(Supportive political association)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:367「政見趨同」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:379",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書風為Y所模仿」(Calligraphy emulated by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:380「模仿Y的書風」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:380",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「模仿Y的書風」(Calligraphy emulated)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:379「書風為Y所模仿」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:381",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「降於」(Surrendered to)；role_type=A；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:382「接受Y之納降」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:382",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「接受Y之納降」(Surrender accepted from)；role_type=P；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:381「降於」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:388",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「廢除Y的君位」(Deposed)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:389「君位被Y廢除」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:389",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「君位被Y廢除」(Deposed by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:388「廢除Y的君位」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:390",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「向Y致賀」(Congratulatory note sent to)；role_type=A；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:391「從Y處收到賀詞 (occasion)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:391",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「從Y處收到賀詞 (occasion)」(Congratulatory note received from)；role_type=P；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:390「向Y致賀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:396",
+      "group": "text_biography",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「家傳為Y所作」(Family history (jiazhuan) composed by)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:397「為Y作家傳」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:397",
+      "group": "text_biography",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作家傳」(Family history (jiazhuan) composed for)；role_type=A；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:396「家傳為Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:398",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作名說」(Explanation of personal name (mingshuo) composed for)；role_type=A；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:403「名說由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:399",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「家譜由Y作後序」(Postface to genealogy (jiapu) written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:400「為Y家譜作後序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:400",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y家譜作後序」(Wrote Postface to genealogy (jiapu) for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:399「家譜由Y作後序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:403",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「名說由Y所作」(Explanation of personal name (mingshuo) composed by)；role_type=P；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:398「為Y作名說」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:404",
+      "group": "military_support",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「戰友」(Fought together)；role_type=M；官方子類 0602「軍事支持」(Supportive military association)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:404「戰友」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:405",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑由Y所作」(Funerary stele written by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:406「為Y作神道碑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:406",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作神道碑」(Wrote Funerary stele for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:405「神道碑由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:407",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y請求作神道碑」(Received request for Funerary stele from)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:408「向Y求神道碑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:408",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「向Y求神道碑」(Requested Funerary stele be written by)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:407「受Y請求作神道碑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:409",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓表由Y所作」(Tomb stone (mubiao) written by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:410「為Y作墓表」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:410",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作墓表」(Wrote Tomb stone (mubiao) for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:409「墓表由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:411",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y請求作墓表」(Received request for Tomb stone (mubiao) from)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:412「向Y求墓表」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:412",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「向Y求墓表」(Requested Tomb stone (mubiao) be written by)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:411「受Y請求作墓表」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:413",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌銘序由Y所作」(Epitaph preface written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:414「為Y墓誌銘作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:414",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y墓誌銘作序」(Wrote Epitaph preface for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:413「墓誌銘序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:415",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑序由Y所作」(Funerary stele preface written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:416「為Y神道碑作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:416",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y神道碑作序」(Wrote Funerary stele preface for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:415「神道碑序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:417",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑跋由Y所作」(Funerary stele postface written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:418「為Y神道碑作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:418",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y神道碑作跋」(Wrote Funerary stele postface for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:417「神道碑跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:419",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓表序由Y所作」(Tomb stone preface written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:420「為Y墓表作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:420",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y墓表作序」(Wrote Tomb stone preface for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:419「墓表序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:421",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓表跋由Y所作」(Tomb stone postface written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:422「為Y墓表作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:422",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y墓表作跋」(Wrote Tomb stone postface for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:421「墓表跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:423",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「挽詩、詞由Y所作」(Elegy written by)；role_type=P；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:424「為Y作挽詩、詞」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:424",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作挽詩、詞」(Wrote Elegy for)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:423「挽詩、詞由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:425",
+      "group": "text_biography",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「行狀由Y所作」(Account of conduct (xingzhuang) written by)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:426「為Y作行狀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:426",
+      "group": "text_biography",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作行狀」(Wrote account of conduct (xingzhuang) for)；role_type=A；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:425「行狀由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:427",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「畫贊(畫像記)由Y所作」(Portrait eulogy written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:428「為Y作畫贊(畫像記)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:428",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作畫贊(畫像記)」(Wrote Portrait eulogy for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:427「畫贊(畫像記)由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:429",
+      "group": "text_correspondence",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「致書Y」(Sent letter to)；role_type=A；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:430「被致書由Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:430",
+      "group": "text_correspondence",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被致書由Y」(Was sent  letter by)；role_type=P；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:429「致書Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:431",
+      "group": "text_correspondence",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「答Y書」(Replied to letter from)；role_type=A；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:432「收到Y的答書」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:432",
+      "group": "text_correspondence",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「收到Y的答書」(Was sent a reply by)；role_type=P；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:431「答Y書」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:433",
+      "group": "text_correspondence",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「致Y啓」(Sent official letter to)；role_type=A；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:434「收到Y的啓」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:434",
+      "group": "text_correspondence",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「收到Y的啓」(Received official letter from)；role_type=P；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:433「致Y啓」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:435",
+      "group": "text_correspondence",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「答Y啓」(Replied to offical letter from)；role_type=A；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:436「收到Y的答啓」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:436",
+      "group": "text_correspondence",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「收到Y的答啓」(Received official reply from)；role_type=P；官方子類 0509「書札文字」(Correspondences)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:435「答Y啓」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:437",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「贈詩、文」(Presented literary composition as gift to)；role_type=A；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:438「收到Y的贈詩、文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:438",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「收到Y的贈詩、文」(Received literary composition as gift from)；role_type=P；官方子類 0510「應酬文字」(Occasional Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:437「贈詩、文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:439",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「題Y的書帖」(Inscribed calligraphy of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:440「其書帖由Y作題」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:440",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其書帖由Y作題」(Calligraphy inscribed by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:439「題Y的書帖」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:441",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「題Y之畫作」(Inscribed painting of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:442「題畫詩文的作者為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:442",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「題畫詩文的作者為Y」(Painting inscribed by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:441「題Y之畫作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:443",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之建築物題詠、記、命名」(Composed Building inscription for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:444「建築物得到Y的題詠、記、命名」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:444",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「建築物得到Y的題詠、記、命名」(Building inscription composed by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:443「為Y之建築物題詠、記、命名」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:445",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「同道」(Shared \"same way\" with)；role_type=M；官方子類 0203「學術交往」(Intellectual Affiliations)。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:445「同道」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:446",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「貸給Y」(Lent to)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:447「向Y貸」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:447",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「向Y貸」(Borrowed from)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:446「貸給Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:448",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「給Y錢物」(gave money or goods to)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:449「接受Y的錢物」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:449",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「接受Y的錢物」(received money or goods from)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:448「給Y錢物」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:450",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「向Y購買」(Bought from)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:451「賣給Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:451",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「賣給Y」(Sold to)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:450「向Y購買」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:452",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「佃戶為Y」(Tenant was)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:453「地主為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:453",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「地主為Y」(Landlord was)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:452「佃戶為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:454",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「家僕為Y」(Household servant was)；role_type=A；官方子類 1001「財務關係（籠統）」(Finance (General))；人工判讀至 other_association，按原名具體語義調整。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:455「家主為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:455",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「家主為Y」(Household master was)；role_type=P；官方子類 1001「財務關係（籠統）」(Finance (General))；人工判讀至 other_association，按原名具體語義調整。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:454「家僕為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:456",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「編輯Y的學術作品」(Scholarly works edited by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:457「其學術作品由Y編輯」已核對互指。 人工覆核：中文「編輯Y的學術作品」表明本碼人物編輯Y的作品，覆核為actor_to_recipient。"
+    },
+    {
+      "relation": "ASSOC:457",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其學術作品由Y編輯」(Edited scholarly works of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:456「編輯Y的學術作品」已核對互指。 人工覆核：中文「其學術作品由Y編輯」表明作品由Y編輯，覆核為recipient_to_actor。"
+    },
+    {
+      "relation": "ASSOC:458",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「學記（書院記）由Y所作」(School stele written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:459「為Y作學記（書院記）」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:459",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作學記（書院記）」(Wrote School stele for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:458「學記（書院記）由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:460",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「奪Y之妻」(Took possession of the wife of)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:461「妻被Y奪」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:461",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「妻被Y奪」(Wife was taken possession of by)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:460「奪Y之妻」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:462",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「壙記由Y所作」(Kuangji (Grave Inscription) written by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:463「為Y作壙記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:463",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作壙記」(Wrote kuangji (Grave Inscription) for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:462「壙記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:464",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「其同犯被指為Y」(Criminal associate was accused to be)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)；人工判讀至 opposition，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:282「被指為Y之同犯」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:465",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之收藏作跋」(wrote colophon for item in collection of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:466「收藏品由Y作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:466",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「收藏品由Y作跋」(colophon for item in collection written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:465「為Y之收藏作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:467",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "",
+      "reason": "原名「向Y問學」(sought direction in learning from)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:468「指教Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:468",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "",
+      "reason": "原名「指教Y」(gave direction in learning to)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)；人工判讀至 education_mentorship，按原名具體語義調整。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:467「向Y問學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:469",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之詩文作跋」(wrote colophon to the writings of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:470「詩文跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:470",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「詩文跋由Y所作」(colophon to writings was composed by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:469「為Y之詩文作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:471",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「陷害Y」(did harm to)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:472「被Y陷害」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:472",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y陷害」(was harmed by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:471「陷害Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:473",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「畫風師法Y」(painted in style of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:474「畫風為Y所師法」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:474",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「畫風為Y所師法」(style of painting imitated by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:473「畫風師法Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:475",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書、畫為Y所稱道」(calligraphy or painting praised by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:476「稱道Y的書、畫」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:476",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「稱道Y的書、畫」(praised calligraphy, painting of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:475「書、畫為Y所稱道」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:477",
+      "group": "medical_care",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「以醫術事Y」(with medical arts served)；role_type=A；官方子類 0701「醫療關係（籠統）」(Medicine (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:478「被Y以醫術所事」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:478",
+      "group": "medical_care",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y以醫術所事」(was served by the medical arts of)；role_type=P；官方子類 0701「醫療關係（籠統）」(Medicine (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:477「以醫術事Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:479",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y所作詩文作序」(wrote preface for the literary works of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:480「詩文序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:480",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「詩文序由Y所作」(preface to literary works was written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:479「為Y所作詩文作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:481",
+      "group": "official_hierarchy",
+      "direction": "to_superior",
+      "qualifier": "",
+      "reason": "原名「上司為Y」(superior was)；role_type=P；官方子類 0403「官場關係（下屬）」(Connection via office (subordinate))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:482「下屬為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:482",
+      "group": "official_hierarchy",
+      "direction": "to_subordinate",
+      "qualifier": "",
+      "reason": "原名「下屬為Y」(subordinate was)；role_type=A；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:481「上司為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:483",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y篆匾額、器銘」(wrote plaque for)；role_type=A；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:484「匾額、器銘由Y所篆」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:484",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「匾額、器銘由Y所篆」(plaque written by)；role_type=P；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:483「為Y篆匾額、器銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:485",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y明冤」(achieved justice for)；role_type=A；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:486「其冤因Y得明」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:486",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「其冤因Y得明」(justice for achieved by)；role_type=P；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:485「為Y明冤」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:487",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「奏錄Y之文」(memorialized the writings of)；role_type=A；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:488「其文為Y所奏錄」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:488",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其文為Y所奏錄」(writings memorialized by)；role_type=P；官方子類 0203「學術交往」(Intellectual Affiliations)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:487「奏錄Y之文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:489",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「代Y作文」(wrote in the stead of)；role_type=A；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:490「由Y代作文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:490",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「由Y代作文」(writing in his stead done by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:489「代Y作文」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:491",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「拒Y游説」(rejected the entreaties of)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:492「游説Y被拒絕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:492",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「游説Y被拒絕」(entreaties were rejected by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:491「拒Y游説」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:493",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「為Y所佑(政治關係)」(was aided by (Political Association))；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:494「護佑Y(政治關係)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:494",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「護佑Y(政治關係)」(aided (Political Association))；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:493「為Y所佑(政治關係)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:495",
+      "group": "social_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「為Y之潛邸舊人」(friend to Y when Y was heir-apparent)；role_type=A；官方子類 0403「官場關係（下屬）」(Connection via office (subordinate))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:496「潛邸舊人為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:496",
+      "group": "social_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「潛邸舊人為Y」(friend from time as heir-apparent was)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:495「為Y之潛邸舊人」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:497",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之生祠作記」(Wrote living person shrine inscription for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:498「其生祠由Y作記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:498",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「其生祠由Y作記」(living person shrine inscription written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:497「為Y之生祠作記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:499",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「聘Y執教官學、書院」(recruited Y to be instructor at school or academy)；role_type=A；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:500「為Y所聘執教官學、書院」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:500",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「為Y所聘執教官學、書院」(was recruited to be instructor at school or academy)；role_type=P；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:499「聘Y執教官學、書院」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:501",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「送別」(saw off on journey)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:502「被送別」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:502",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被送別」(as seen off on journey by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:501「送別」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:503",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「贈畫」(presented painting to)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:504「得到贈畫」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:504",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「得到贈畫」(was presented painting by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:503「贈畫」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:505",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「獻文、書于Y」(presented writing, calligraphy to)；role_type=A；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:506「收到Y所獻詩、文、書」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:506",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「收到Y所獻詩、文、書」(was presented writing, calligraphy by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:505「獻文、書于Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:507",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「蠱惑Y」(seduced)；role_type=A；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:508「被Y蠱惑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:508",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「被Y蠱惑」(was seduced by)；role_type=P；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:507「蠱惑Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:509",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「請Y作序、記」(requested a preface, inscription from)；role_type=A；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 text_preface，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:510「受Y之請作序、記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:510",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y之請作序、記」(preface, inscription requested by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 text_preface，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:509「請Y作序、記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:511",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「向Y借書」(borrowed books from)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:512「借書給Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:512",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「借書給Y」(books borrowed by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:511「向Y借書」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:513",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「反對Y稱帝」(opposed assertion of emperorship by)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:514「稱帝為Y所反對」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:514",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「稱帝為Y所反對」(assertion of emperorship opposed by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:513「反對Y稱帝」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:515",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「得罪Y」(insulted)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:516「被Y得罪」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:516",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y得罪」(was insulted by)；role_type=P；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:515「得罪Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:517",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「題Y之墓」(wrote inscription for tomb of)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:518「墓由Y題」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:518",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓由Y題」(inscription for tomb written by)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:517「題Y之墓」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:519",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「獻策於Y」(offered strategic plans to)；role_type=A；官方子類 0403「官場關係（下屬）」(Connection via office (subordinate))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:520「採納Y之獻策」已核對互指。 人工覆核：獻策是政治/政務上的建議，不足以證明官職上下級；依「獻策於Y」判為本碼人物向Y提供建議。"
+    },
+    {
+      "relation": "ASSOC:520",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「採納Y之獻策」(was offered strategic plans by)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:519「獻策於Y」已核對互指。 人工覆核：採納Y之獻策表示本碼人物接收Y的建議；不足以證明官職上下級。"
+    },
+    {
+      "relation": "ASSOC:521",
+      "group": "friendship",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「結義」(formed deep bond with)；role_type=M；官方子類 0603「軍事對抗」(Oppositional military association)；人工判讀至 friendship，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:521「結義」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:522",
+      "group": "military_support",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「與Y共赴難」(in offering assistance went together with)；role_type=M；官方子類 0603「軍事對抗」(Oppositional military association)；人工判讀至 military_support，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:522「與Y共赴難」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:523",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之行狀作跋」(wrote colophon to the account of conduct of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:524「行狀跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:524",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「行狀跋由Y所作」(colophon to account of conduct written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:523「為Y之行狀作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:525",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之家傳作跋」(wrote colophon to the family biography of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:526「家傳跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:526",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「家傳跋由Y所作」(colophon to the family biography written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:525「為Y之家傳作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:527",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為友人提供幫助」(provided assistance as friend)；role_type=A；官方子類 0301「朋友關係（籠統）」(Friendship(General))；人工判讀至 financial_support，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:528「得到友人Y之幫助」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:528",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「得到友人Y之幫助」(received assistance from friend Y)；role_type=P；官方子類 0301「朋友關係（籠統）」(Friendship(General))；人工判讀至 financial_support，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:527「為友人提供幫助」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:529",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「評論Y之著作」(evaluated the writings of)；role_type=A；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:530「著作被Y評論」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:530",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「著作被Y評論」(writings evaluated by)；role_type=P；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:529「評論Y之著作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:531",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌銘額篆由Y所作」(Calligraphy for heading of epitaph script done by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:532「為Y的墓誌銘作額篆」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:532",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y的墓誌銘作額篆」(Calligraphy for heading of epitaph script done for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:531「墓誌銘額篆由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:533",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「贈Y物」(gave presents to)；role_type=A；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 financial_support，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:534「受Y之贈物」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:534",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y之贈物」(given presents by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)；人工判讀至 financial_support，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:533「贈Y物」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:535",
+      "group": "social_association",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y取名、字」(chose name, courtesy name for)；role_type=A；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:536「名、字由Y所取」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:536",
+      "group": "social_association",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「名、字由Y所取」(name, courtesy name chosen by)；role_type=P；官方子類 0103「社會交際」(Social Interactions)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:535「為Y取名、字」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:537",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「祭文跋由Y所作」(colophon to sacrificial prayer written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:538「為Y祭文作跋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:538",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y祭文作跋」(wrote colophon to sacrificial prayer for)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:537「祭文跋由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:539",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「政績為Y所稱道」(political accomplishments praised by)；role_type=P；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:540「稱道Y之政績」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:540",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「稱道Y之政績」(praised the political accomplishments of)；role_type=A；官方子類 0405「政治奧援」(Supportive political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:539「政績為Y所稱道」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:541",
+      "group": "academic_exchange",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「刊刻Y之著述」(printed the writings of)；role_type=A；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:542「著述由Y刊刻」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:542",
+      "group": "academic_exchange",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「著述由Y刊刻」(writings printed by)；role_type=P；官方子類 0206「學術襄助」(Academic Patronage)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:541「刊刻Y之著述」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:543",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「求他人（第三方）為Y作墓誌銘」(Requested epitaph (from a third party) for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:544「墓誌銘係由Y向他人（第三方）求得」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:544",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌銘係由Y向他人（第三方）求得」(Epitaph requested by (from a third party))；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:543「求他人（第三方）為Y作墓誌銘」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:545",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「求Y為他人（第三方）作神道碑」(Requested funerary stele (for a third party) from)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:546「受Y的請求為他人（第三方）作神道碑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:546",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y的請求為他人（第三方）作神道碑」(Funerary stele written (for a third party) at the request of)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:545「求Y為他人（第三方）作神道碑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:547",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「求他人（第三方）為Y作神道碑」(Requested funerary stele (from a third party) for)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:548「神道碑係由Y向他人（第三方）求得」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:548",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑係由Y向他人（第三方）求得」(Funerary stele requested by (from a third party))；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:547「求他人（第三方）為Y作神道碑」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:549",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y之義女」(taken as foster daughter by)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:550「義女為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:550",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「義女為Y」(took as foster daughter)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:549「為Y之義女」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:551",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y乞某事」(Requests government act for)；role_type=A；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:552「某事由Y所乞」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:552",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「某事由Y所乞」(Government act requested by)；role_type=P；官方子類 0406「薦舉保任」(Recommendation and sponsorship)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:551「為Y乞某事」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:553",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「上奏論Y」(Memorialized concerning)；role_type=A；官方子類 0401「政治關係（籠統）」(Politics (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:554「被Y奏論」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:554",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「被Y奏論」(was memorialized about by)；role_type=P；官方子類 0401「政治關係（籠統）」(Politics (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:553「上奏論Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:555",
+      "group": "friendship",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「與Y旅遊」(journeyed with)；role_type=M；官方子類 0301「朋友關係（籠統）」(Friendship(General))。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:555「與Y旅遊」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:556",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作道觀記」(Wrote Inscription for Daoist institution for)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:557「道觀記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:557",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「道觀記由Y所作」(Inscription for Daoist institution written by)；role_type=P；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:556「為Y作道觀記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:558",
+      "group": "education_assessment",
+      "direction": "to_examinee",
+      "qualifier": "",
+      "reason": "原名「為Y之考官」(Examiner of)；role_type=A；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:559「考官為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:559",
+      "group": "education_assessment",
+      "direction": "to_examiner",
+      "qualifier": "",
+      "reason": "原名「考官為Y」(Examined by)；role_type=P；官方子類 0202「師生關係」(Teacher-Student)。師生方向按名稱判斷，to_teacher表示本碼人物是學生，to_student表示本碼人物是教師。逆碼 ASSOC:558「為Y之考官」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:560",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作祠記」(Wrote Shrine inscription for)；role_type=A；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:561「祠記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:561",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「祠記由Y所作」(Shrine inscription written by)；role_type=P；官方子類 0502「記詠文字」(Commemorative Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:560「為Y作祠記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:562",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y之家僕」(servant of)；role_type=A；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:563「家僕為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:563",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「家僕為Y」(servant was)；role_type=P；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:562「為Y之家僕」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:564",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「世交父執為Y」(family friend was)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:565「為Y之世交父執」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:565",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y之世交父執」(Family friend to)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:564「世交父執為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:566",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y主婚」(arranged marriage of)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:567「Y為之主婚」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:567",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「Y為之主婚」(marriage arranged by)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:566「為Y主婚」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:568",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「錄Y為假子(養子)」(Took as foster son)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:569「為Y之假子(養子)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:569",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y之假子(養子)」(Taken as foster son by)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:568「錄Y為假子(養子)」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:570",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「與Y攀親戚敘族屬」(Claimed to be kin with)；role_type=A；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:571「Y與之攀親戚敘族屬」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:571",
+      "group": "family_social",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「Y與之攀親戚敘族屬」(Was claimed kin with)；role_type=P；官方子類 0901「家庭關係（籠統）」(Family (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:570「與Y攀親戚敘族屬」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:572",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「校訂Y之著述」(edited the writings of)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:573「著述由Y校訂」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:573",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「著述由Y校訂」(writings were edited by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:572「校訂Y之著述」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:574",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「為Y之婢」(female servant of)；role_type=A；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:575「婢為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:575",
+      "group": "other_association",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「婢為Y」(female servant was)；role_type=P；官方子類 0101「社會關係（籠統）」(Associations (General))。無法由原名穩妥推定方向，保留unspecified。逆碼 ASSOC:574「為Y之婢」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:576",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「獻詩集給Y」(presented poetry collection to)；role_type=A；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:577「被Y獻詩集」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:577",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y獻詩集」(was presented poetry collection by)；role_type=P；官方子類 0207「文學藝術交往」(Literary and Artistic Affiliations)；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:576「獻詩集給Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:578",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「家傳序由Y所作」(preface to family biography written by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:579「為Y之家傳作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:579",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之家傳作序」(wrote preface to family biography of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:578「家傳序由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:580",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y之書題詞」(Wrote inscription for writings of)；role_type=A；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:581「書之題詞由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:581",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書之題詞由Y所作」(writings inscribed by)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:580「為Y之書題詞」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:582",
+      "group": "military_support",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「軍事支持Y」(gave miitary support to/surrendered to)；role_type=A；官方子類 0602「軍事支持」(Supportive military association)。原描述兼有多種解讀或只說明牽連原因，方向不明，保留unspecified。逆碼 ASSOC:583「受Y之軍事支持」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:583",
+      "group": "military_support",
+      "direction": "unspecified",
+      "qualifier": "",
+      "reason": "原名「受Y之軍事支持」(was supported militarily/surrendered to by)；role_type=P；官方子類 0602「軍事支持」(Supportive military association)。原描述兼有多種解讀或只說明牽連原因，方向不明，保留unspecified。逆碼 ASSOC:582「軍事支持Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:584",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「軍事對抗Y」(opposed militarily)；role_type=A；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:585「被Y軍事對抗Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:585",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y軍事對抗Y」(was opposed militarily by)；role_type=P；官方子類 0603「軍事對抗」(Oppositional military association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:584「軍事對抗Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:586",
+      "group": "political_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「諂事Y」(Toady to Y)；role_type=A；官方子類 0403「官場關係（下屬）」(Connection via office (subordinate))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:587「被Y諂事」已核對互指。 人工覆核：諂事Y表示本碼人物對Y施行逢迎，不據此認定正式官職上下級。"
+    },
+    {
+      "relation": "ASSOC:587",
+      "group": "political_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y諂事」(Toadied to by Y)；role_type=P；官方子類 0404「官場關係（上司）」(Connection via office (superior))。官場方向按角色判斷，to_superior表示目標為上司，to_subordinate表示目標為下屬。逆碼 ASSOC:586「諂事Y」已核對互指。 人工覆核：被Y諂事表示本碼人物是逢迎行為的對象，不據此認定正式官職上下級。"
+    },
+    {
+      "relation": "ASSOC:588",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「推薦Y給他人（第三方）」(Recommended Y to a thrid person)；role_type=A；無官方葉級子類；人工判讀至 recommendation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:589「被Y推薦給他人（第三方）」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:589",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y推薦給他人（第三方）」(Recommended by Y to a third person)；role_type=P；無官方葉級子類；人工判讀至 recommendation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:588「推薦Y給他人（第三方）」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:590",
+      "group": "religious_relation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y請祀」(Proposed to worship Y)；role_type=A；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:591「Y為之請祀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:591",
+      "group": "religious_relation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「Y為之請祀」(Proposed by Y to be worshiped)；role_type=P；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:590「為Y請祀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:592",
+      "group": "financial_support",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「出財贍給Y」(Contributed to the expenses of Y)；role_type=A；無官方葉級子類；人工判讀至 financial_support，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:593「Y為之出財贍給」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:593",
+      "group": "financial_support",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「Y為之出財贍給」(Received contribution of expenses from Y)；role_type=P；無官方葉級子類；人工判讀至 financial_support，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:592「出財贍給Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:594",
+      "group": "recommendation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y求謚號」(Requested a posthumous name for Y )；role_type=A；無官方葉級子類；人工判讀至 recommendation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:595「Y為之求謚號」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:595",
+      "group": "recommendation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「Y為之求謚號」(Received a posthumous name because of Y's request)；role_type=P；無官方葉級子類；人工判讀至 recommendation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:594「為Y求謚號」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:596",
+      "group": "academic_exchange",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「與Y為講學」(Discoursed on learning with Y)；role_type=M；無官方葉級子類；人工判讀至 academic_exchange，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:596「與Y為講學」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:597",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y的墓誌銘書丹」(Epitaph calligraphy was done for Y)；role_type=A；無官方葉級子類；人工判讀至 text_epitaph，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:598「墓誌銘由Y書丹」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:598",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌銘由Y書丹」(Epitaph calligraphy was done by Y)；role_type=P；無官方葉級子類；人工判讀至 text_epitaph，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:597「為Y的墓誌銘書丹」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:599",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作記」(Wrote inscription for Y)；role_type=A；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:600「記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:600",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「記由Y所作」(Inscription written by Y)；role_type=P；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:599「為Y作記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:601",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "去思碑／記（紀念離任官員）",
+      "reason": "原名「為Y作去思碑/記」(Steles of appreciation for departed officials written for Y)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:602「去思碑/記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:602",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "去思碑／記（紀念離任官員）",
+      "reason": "原名「去思碑/記由Y所作」(Steles of appreciation for departed officials written by Y)；role_type=P；官方子類 0504「序跋文字」(Prefaces/Postfaces)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:601「為Y作去思碑/記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:603",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "遺愛碑／記（紀念官員恩德）",
+      "reason": "原名「為Y作遺愛碑/記」(Wrote a stele/inscription [commemorating] the lasting care [of a former official] for Y)；role_type=A；官方子類 0505「禮儀文字」(Ritual Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:604「遺愛碑/記由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:604",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "遺愛碑／記（紀念官員恩德）",
+      "reason": "原名「遺愛碑/記由Y所作」(Stele/inscription [commemorating] the lasting care [of a former official] written by Y)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:603「為Y作遺愛碑/記」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:606",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y作德政碑/頌」(Steles of benevolent administration written for Y)；role_type=A；官方子類 0507「論說文字」(Explanatory Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:607「德政碑/頌由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:607",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「德政碑/頌由Y所作」(Steles of benevolent administration written by Y)；role_type=P；官方子類 0508「箴銘文字」(Mottos)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:606「為Y作德政碑/頌」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:614",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「原告為Y」(Plaintiff was Y)；role_type=A；無官方葉級子類；人工判讀至 opposition，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:615「被告為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:615",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被告為Y」(Defendant was Y)；role_type=P；無官方葉級子類；人工判讀至 opposition，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:614「原告為Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:630",
+      "group": "text_preface",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為y之挽詩 ,壽詩/文作序」(Preface to texts mourning/congratulating birthday of Y)；role_type=A；無官方葉級子類；人工判讀至 text_preface，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:631「挽詩 ,壽詩/文序被Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:631",
+      "group": "text_preface",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「挽詩 ,壽詩/文序被Y所作」(Preface to texts mourning/congratulating birthday written by Y)；role_type=P；無官方葉級子類；人工判讀至 text_preface，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:630「為y之挽詩 ,壽詩/文作序」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:632",
+      "group": "opposition",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「反叛」(Rebelled against Y)；role_type=A；官方子類 0407「政治對抗」(Oppositional political association)。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:633「被Y反叛」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:633",
+      "group": "opposition",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「被Y反叛」(Rebelled by Y)；role_type=P；無官方葉級子類；人工判讀至 opposition，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:632「反叛」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:634",
+      "group": "social_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「陪同」(Accompanied)；role_type=A；無官方葉級子類；人工判讀至 social_association，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:635「被Y陪同」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:635",
+      "group": "social_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「被Y陪同」(Accompanied by Y)；role_type=P；無官方葉級子類；人工判讀至 social_association，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:634「陪同」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:636",
+      "group": "other_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「論政」(Discussed policies with)；role_type=M；無官方葉級子類；人工判讀至 other_association，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:636「論政」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:637",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y書諱/填諱」(Filled the name of the deceased for)；role_type=A；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:638「書諱/填諱由Y所作」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:638",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「書諱/填諱由Y所作」(Name of the deceased filled in by)；role_type=P；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:637「為Y書諱/填諱」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:639",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y的神道碑/墓誌/壙誌刊/刻石」(Carved epitaph/funerary stele for Y)；role_type=A；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:640「神道碑/墓誌/壙誌由Y刊/刻石」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:640",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「神道碑/墓誌/壙誌由Y刊/刻石」(Epitaph/funerary stele carved by Y)；role_type=P；官方子類 0503「墓誌文字」(Epitaphs)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:639「為Y的神道碑/墓誌/壙誌刊/刻石」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:641",
+      "group": "text_epitaph",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓誌蓋由Y所書」(Calligraphy on the tomb lid written by)；role_type=P；無官方葉級子類；人工判讀至 text_epitaph，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:642「為Y書墓誌蓋」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:642",
+      "group": "text_epitaph",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y書墓誌蓋」(Calligraphy on the tomb lid written for)；role_type=A；無官方葉級子類；人工判讀至 text_epitaph，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:641「墓誌蓋由Y所書」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:645",
+      "group": "other_association",
+      "direction": "peer",
+      "qualifier": "",
+      "reason": "原名「田疇相鄰」(X's farmland borders Y's)；role_type=M；無官方葉級子類；人工判讀至 other_association，按原名具體語義調整。原名描述共同或對等關係，方向為peer。逆碼 ASSOC:645「田疇相鄰」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:646",
+      "group": "religious_relation",
+      "direction": "to_student",
+      "qualifier": "法嗣角色：本碼人物的法嗣為Y",
+      "reason": "原名「法嗣為Y」(Dharma heir was)；role_type=A；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:647「為Y之法嗣」已核對互指。 人工覆核：法嗣為Y表示目標Y是本碼人物的法嗣。"
+    },
+    {
+      "relation": "ASSOC:647",
+      "group": "religious_relation",
+      "direction": "to_teacher",
+      "qualifier": "法嗣角色：本碼人物為Y之法嗣",
+      "reason": "原名「為Y之法嗣」(Dharma heir of)；role_type=P；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:646「法嗣為Y」已核對互指。 人工覆核：為Y之法嗣表示本碼人物是Y的法嗣。"
+    },
+    {
+      "relation": "ASSOC:648",
+      "group": "religious_relation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「Y 為 X 建靈塔/舍利塔」(Y built stupa for the relics of X)；role_type=A；官方子類 0801「宗教關係（籠統）」(Religion (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:649「X 之靈塔/舍利塔為 Y 所建」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:649",
+      "group": "religious_relation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「X 之靈塔/舍利塔為 Y 所建」(The stupa for the relics of X was built by Y)；role_type=P；官方子類 0801「宗教關係（籠統）」(Religion (General))。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:648「Y 為 X 建靈塔/舍利塔」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:650",
+      "group": "education_mentorship",
+      "direction": "to_student",
+      "qualifier": "跨代師承（門人的門人；宗教身份未確定）",
+      "reason": "原名「門孫 (門人之門人) 為Y」(Disciple's disciple was Y)；role_type=A；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:651「為 Y 的門孫 (門人之門人)」已核對互指。 人工覆核：門人的門人為Y表示Y是本碼人物的跨代學生；未由名稱確定宗教身份。"
+    },
+    {
+      "relation": "ASSOC:651",
+      "group": "education_mentorship",
+      "direction": "to_teacher",
+      "qualifier": "跨代師承（門人的門人；宗教身份未確定）",
+      "reason": "原名「為 Y 的門孫 (門人之門人)」(Disciple's disciple of Y)；role_type=P；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:650「門孫 (門人之門人) 為Y」已核對互指。 人工覆核：為Y的門孫表示Y是本碼人物的跨代師長；未由名稱確定宗教身份。"
+    },
+    {
+      "relation": "ASSOC:652",
+      "group": "text_biography",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「求Y為他人（第三方）作行狀」(Requested account of conduct (for a third party) from)；role_type=A；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:653「受Y的請求為他人（第三方）作行狀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:653",
+      "group": "text_biography",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受Y的請求為他人（第三方）作行狀」(Account of conduct written (for a third party) at the request of)；role_type=P；官方子類 0506「傳記文字」(Biographical Texts)。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:652「求Y為他人（第三方）作行狀」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:654",
+      "group": "religious_relation",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為 Y 施洗」(Baptized Y)；role_type=A；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:655「受洗於 Y」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:655",
+      "group": "religious_relation",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「受洗於 Y」(Baptized by Y)；role_type=P；無官方葉級子類；人工判讀至 religious_relation，按原名具體語義調整。按中英文施受語義、role_type及互指逆碼核對方向；A/P通常對應actor_to_recipient/recipient_to_actor。逆碼 ASSOC:654「為 Y 施洗」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:656",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為 Y 墓/碑立石」(Erecting the stele/stone for Y)；role_type=A；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:657「墓/碑石由 Y 所立」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:657",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「墓/碑石由 Y 所立」(Erecting the stele/stone by Y)；role_type=P；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:656「為 Y 墓/碑立石」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:658",
+      "group": "text_other",
+      "direction": "actor_to_recipient",
+      "qualifier": "",
+      "reason": "原名「為Y起草任命文書(告身/制詞)」(Drafted appointment document for Y)；role_type=A；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:659「任命文書(告身/制詞)由Y起草」已核對互指。"
+    },
+    {
+      "relation": "ASSOC:659",
+      "group": "text_other",
+      "direction": "recipient_to_actor",
+      "qualifier": "",
+      "reason": "原名「任命文書(告身/制詞)由Y起草」(Appointment document drafted by Y)；role_type=P；無官方葉級子類；人工判讀至 text_other，按原名具體語義調整。按撰寫、寄出、請託與收到/由對方撰寫的語義判定方向；文本關係不推定生前社交關係。逆碼 ASSOC:658「為Y起草任命文書(告身/制詞)」已核對互指。"
+    }
+  ]
+}

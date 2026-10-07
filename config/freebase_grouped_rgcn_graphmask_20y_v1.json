@@ -1,0 +1,81 @@
+{
+  "name": "freebase_grouped_rgcn_graphmask_20y_v1",
+  "version": 1,
+  "source_data": "artifacts/freebase_provisional_l1_v1/graph_data.pt",
+  "period_root": "artifacts/freebase_life_periods_20y_v1",
+  "period_config": "config/freebase_life_periods_20y_v1.json",
+  "binary_taxonomy": "config/freebase_tie_taxonomy_v1.json",
+  "multi_group_taxonomy": "config/freebase_tie_taxonomy_acquired_subgroups_v1.json",
+  "relation_root": "artifacts/freebase_grouped_20y_v1",
+  "model_root": "runs/freebase_grouped_20y_v1",
+  "graphmask_root": "runs_graphmask/freebase_grouped_20y_v1",
+  "periods": "all",
+  "representations": [
+    "multi_group"
+  ],
+  "include_full": false,
+  "seed": 42,
+  "device": null,
+  "source_prepare": {
+    "input_dir": "external_data/freebase/descriptive_v2_local/05_final",
+    "audit_file": "external_data/freebase/profession_l1_review_v1/person_l1_audit.tsv",
+    "crosswalk_file": "docs/freebase_profession_review_2026-10-03/profession_l1_crosswalk_draft.tsv",
+    "label_policy": "mapped_first_other_fallback",
+    "seed": 42,
+    "min_class_count": 3,
+    "train_ratio": 0.7,
+    "val_ratio": 0.1,
+    "test_ratio": 0.2
+  },
+  "prepare": {
+    "split_seed": 42,
+    "train_ratio": 0.7,
+    "val_ratio": 0.1,
+    "test_ratio": 0.2,
+    "local_min_class_count": 3
+  },
+  "num_bases": {
+    "binary": 4,
+    "multi_group": 10
+  },
+  "train": {
+    "model": "rgcn",
+    "epochs": 50,
+    "train_mode": "sampled",
+    "eval_mode": "sampled",
+    "batch_size": 512,
+    "num_layers": 2,
+    "num_neighbors": "15,10",
+    "hidden_dim": 128,
+    "branch_dim": 64,
+    "rgcn_backend": "fast",
+    "dropout": 0.2,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "early_stop_metric": "macro_f1",
+    "min_delta": 0.001,
+    "patience": 6,
+    "num_workers": 4,
+    "occupation_feature_levels": "1",
+    "auxiliary_features": "temporal"
+  },
+  "graphmask_train": {
+    "num_neighbors": "auto",
+    "batch_size": 32,
+    "num_workers": 0,
+    "epochs_per_layer": 3,
+    "beta": 0.03,
+    "learning_rate": 0.0001,
+    "multiplier_learning_rate": 0.01,
+    "temperature": 0.3333333333333333,
+    "location_bias": 3.0,
+    "max_relative_macro_f1_diff": 0.05,
+    "train_split": "train",
+    "validation_split": "val"
+  },
+  "graphmask_report": {
+    "split": "test",
+    "num_neighbors": "auto",
+    "top_k": 50
+  }
+}

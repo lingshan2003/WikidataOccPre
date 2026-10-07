@@ -1,0 +1,3437 @@
+{
+  "groups": {
+    "kin_parent_child": {
+      "label_zh": "父母与子女",
+      "description": "源人物与目标人物之间的一代直系亲子关系；direction说明目标相对源人物是父母还是子女。"
+    },
+    "kin_ancestor_descendant": {
+      "label_zh": "祖先与后裔",
+      "description": "跨代直系祖先或后裔关系；direction说明目标相对源人物位于祖先端或后裔端。"
+    },
+    "kin_sibling": {
+      "label_zh": "兄弟姐妹",
+      "description": "同辈兄弟姐妹关系，包含同父异母、同母异父或继亲等明确标注的变体。"
+    },
+    "kin_collateral": {
+      "label_zh": "旁系亲属",
+      "description": "有旁系、族亲、表亲、姻表或辈分交错路径的亲属；不从复杂路径强行推定辈分方向。"
+    },
+    "kin_affinal": {
+      "label_zh": "姻亲",
+      "description": "通过婚姻或配偶亲属路径形成的姻亲关系；方向不从复合路径推定。"
+    },
+    "intimate_partnership": {
+      "label_zh": "配偶与伴侣",
+      "description": "源人物与目标人物构成配偶、妾或明确订婚伴侣关系，按同辈处理。"
+    },
+    "kin_social_parent_child": {
+      "label_zh": "非血缘父母与子女",
+      "description": "明确标注收养、继立、嗣承、养育或非亲生的亲子关系；保留非血缘性质，不归为血缘亲子。"
+    },
+    "kin_other": {
+      "label_zh": "其他或未明亲属关系",
+      "description": "码表明确未详、不可用、仅称谓不明或依据不足以归入上述关系的记录。"
+    },
+    "kin_social_ancestor_descendant": {
+      "label_zh": "非血缘祖先与后裔",
+      "description": "明确标注过继、嗣承或继立的多代直系关系；保留非血缘性质并按直系路径标示祖先/后裔方向。"
+    }
+  },
+  "relations": [
+    {
+      "relation": "KIN:2",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“直系祖先”；路径依据：路径 G-n 含上行 99 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:3",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之直系祖先”；路径依据：路径 WG-n 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:4",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族長輩”；路径依据：路径 K-n 含旁系步数 2 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:6",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之同族祖先”；路径依据：路径 WK-n 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:8",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻之直系祖先”；路径依据：路径 W1G-n 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:9",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“四十三世祖”；路径依据：路径 G-43 含上行 43 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:10",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“四十二世祖”；路径依据：路径 G-42 含上行 42 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:11",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“三十八世祖”；路径依据：路径 G-38 含上行 38 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:12",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“三十五世祖”；路径依据：路径 G-35 含上行 35 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:13",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“三十世祖”；路径依据：路径 G-30 含上行 30 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:14",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十七世祖”；路径依据：路径 G-27 含上行 27 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:15",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十二世祖”；路径依据：路径 G-22 含上行 22 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:16",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十九世祖”；路径依据：路径 G-19 含上行 19 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:17",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十八世祖”；路径依据：路径 G-18 含上行 18 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:18",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之十七世祖”；路径依据：路径 WG-17 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:19",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十七世祖”；路径依据：路径 G-17 含上行 17 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:20",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十六世祖”；路径依据：路径 G-16 含上行 16 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:21",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十五世祖”；路径依据：路径 G-15 含上行 15 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:22",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十四世祖”；路径依据：路径 G-14 含上行 14 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:23",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十三世祖”；路径依据：路径 G-13 含上行 13 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:24",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十二世祖”；路径依据：路径 G-12 含上行 12 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:25",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十一世祖”；路径依据：路径 G-11 含上行 11 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:26",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“十世祖”；路径依据：路径 G-10 含上行 10 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:27",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“九世叔伯祖”；路径依据：路径 G-9B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:28",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“九世祖;太高曾祖”；路径依据：路径 G-9 含上行 9 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:29",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“八世祖;太高祖”；路径依据：路径 G-8 含上行 8 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:30",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“八世叔伯祖”；路径依据：路径 G-8B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:31",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“七世祖;太曾祖”；路径依据：路径 G-7 含上行 7 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:32",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之七世祖”；路径依据：路径 WG-7 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:33",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“五世叔伯祖”；路径依据：路径 FFFFFB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:34",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之六世叔伯祖”；路径依据：路径 WG-6B 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:36",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“六世祖;太祖”；路径依据：路径 G-6 含上行 6 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:38",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族六世祖”；路径依据：路径 K-6 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:39",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“高祖;四世祖”；路径依据：路径 FFFF 含上行 4 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:40",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之高祖”；路径依据：路径 WFFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:42",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“外高祖父”；路径依据：路径 MFFF 含上行 4 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:44",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之四世叔伯祖”；路径依据：路径 WFFFFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:46",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族四世祖”；路径依据：路径 K-4 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:47",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族五世祖”；路径依据：路径 K-5 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:48",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“曾祖”；路径依据：路径 FFF 含上行 3 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:49",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之曾祖”；路径依据：路径 WFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:50",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾伯叔祖;從曾祖”；路径依据：路径 FFFB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:51",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之曾叔伯祖”；路径依据：路径 WFFFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:52",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“外曾祖父”；路径依据：路径 MFF 含上行 3 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:56",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻之曾祖”；路径依据：路径 WFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:57",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第三任妻之曾祖”；路径依据：路径 WFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:58",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾祖之從兄弟;再從曾祖”；路径依据：路径 FFFFBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:59",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻之曾祖”；路径依据：路径 WFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:61",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“得許娶曾孫女”；路径依据：路径 WFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:62",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“祖父”；路径依据：路径 FF 含上行 2 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:63",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之祖父”；路径依据：路径 WFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:64",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從祖;伯叔祖”；路径依据：路径 FFB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:65",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之叔伯祖”；路径依据：路径 WFFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:66",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“外祖父”；路径依据：路径 MF 含上行 2 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:67",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“岳母之父”；路径依据：路径 WMF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:70",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“許妻以孫女”；路径依据：路径 WFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:72",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻之祖”；路径依据：路径 WFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:73",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族祖父;族父的父親,即祖父的堂兄弟”；路径依据：路径 K-2(male) 含旁系步数 0 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:74",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻之祖”；路径依据：路径 WFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:75",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "无",
+      "reason": "中文名称“父”；路径依据：路径 F 含上行 1 代，目标位于源人物祖先方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:76",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“岳父”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:77",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“母舅”；路径依据：路径 MB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:78",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“外祖姑之夫;外祖父的姐妹之夫”；路径依据：路径 MFZH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:79",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從父;伯叔父”；路径依据：路径 FB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:80",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之叔伯”；路径依据：路径 WFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:82",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "嗣承/继嗣关系；不据此认定血缘",
+      "reason": "中文名称“嗣父”；路径依据：路径 F 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:86",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“許妻以女”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:87",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻父”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:88",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻父”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:90",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻之叔伯”；路径依据：路径 WFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:91",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻之叔伯”；路径依据：路径 WFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:92",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第三任妻父”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:93",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族姑”；路径依据：路径 K-1(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:94",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之母舅”；路径依据：路径 WMB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:96",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第四任妻父”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:97",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族父”；路径依据：路径 K-1(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:98",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼父”；路径依据：路径 F 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:100",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "妾及其子女关系标记",
+      "reason": "中文名称“妾之父”；路径依据：路径 CF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:103",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“兒子未婚妻之伯叔父”；路径依据：路径 SWFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:104",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姪女未婚夫之父”；路径依据：路径 BDHF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:105",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之姨夫”；路径依据：路径 WMZH 含婚姻连接（婚姻步数 2），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:107",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "养育/收养关系，非血缘",
+      "reason": "中文名称“養父”；路径依据：路径 F 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:111",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "无",
+      "reason": "中文名称“母”；路径依据：路径 M 含上行 1 代，目标位于源人物祖先方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:112",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第五任妻父”；路径依据：路径 WF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:117",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姻親”；路径依据：路径 A 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:118",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“兄弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:119",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從兄弟;堂兄弟”；路径依据：路径 FBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:121",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“舅表兄弟”；路径依据：路径 MBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:125",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“兄”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:126",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:127",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑表弟”；路径依据：路径 FZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:128",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“舅表兄”；路径依据：路径 MBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:130",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從弟”；路径依据：路径 FBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:131",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從兄”；路径依据：路径 FBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:132",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從弟”；路径依据：路径 FFBSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:133",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從兄”；路径依据：路径 FFBSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:134",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“丈夫”；路径依据：路径 H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:135",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“妻子”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:136",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姐夫”；路径依据：路径 ZH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:137",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻兄”；路径依据：路径 WB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:138",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:141",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨表姊妹之夫”；路径依据：路径 MZDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:142",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“岳母之外甥;妻之姨表兄弟”；路径依据：路径 WMZS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:143",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族兄”；路径依据：路径 K+(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:144",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族弟”；路径依据：路径 K-(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:147",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族人(輩分不詳)”；路径依据：路径 Kn 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:149",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "自称祖先记录；未表示谱系全链已验证",
+      "reason": "中文名称“自謂...之後”；路径 G-n (claimed) 是自述的祖先方向，保留自称性质，不表示谱系全链已验证。"
+    },
+    {
+      "relation": "KIN:150",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "同父异母/同母异父手足",
+      "reason": "中文名称“同母異父弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:151",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "同父异母/同母异父手足",
+      "reason": "中文名称“同母異父兄”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:152",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“內兄弟;妻兄弟”；路径依据：路径 WB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:153",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻兄弟”；路径依据：路径 WB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:156",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之堂兄弟”；路径依据：路径 WFBS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:157",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“堂姊妹之夫”；路径依据：路径 FBDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:158",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻兄”；路径依据：路径 WB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:159",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妹夫”；路径依据：路径 ZH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:162",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姊妹夫”；路径依据：路径 ZH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:163",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:164",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“姊”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:165",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“長兄”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:166",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“季弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:167",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從兄弟”；路径依据：路径 FFBSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:168",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "妾/伴侣称谓",
+      "reason": "中文名称“妾”；路径 C 与婚姻步数 1 表明源人物与妾的直接伴侣关系，因此归入配偶/伴侣组，direction为 peer。"
+    },
+    {
+      "relation": "KIN:169",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“妹”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:170",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "同父异母/同母异父手足",
+      "reason": "中文名称“同母異父兄弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:171",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:172",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼兄”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:173",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“連襟;妻姊妹之夫”；路径依据：路径 WZH 含婚姻连接（婚姻步数 2），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:176",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“女兒”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:177",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從子;姪子”；路径依据：路径 BS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:178",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姪女之夫”；路径依据：路径 BDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:179",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“外甥”；路径依据：路径 ZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:180",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:181",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:182",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“長子; 第一子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:183",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“次子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:184",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“三子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:185",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“四子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:186",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "嗣父/过继称谓；不据此证明生物血缘",
+      "reason": "中文名称“過繼的嗣子”；路径 S 表示目标为一代子女，明确过继/嗣承身份应保留 qualifier，但不能单凭码名断言其实际生物血缘。"
+    },
+    {
+      "relation": "KIN:188",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“季子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:191",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“五子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:193",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“獨子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:194",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“六子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:195",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:196",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“七子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:197",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“得許娶其女”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:198",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“唯一幸存的兒子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:199",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“八子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:201",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:202",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十五子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:204",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "庶出身份标记；码表未说明非血缘",
+      "reason": "中文名称“庶子”；路径 CS 的 S 表示目标为子女，步数为一代下行；庶出是身份标记，不据此推定非血缘。"
+    },
+    {
+      "relation": "KIN:205",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十三子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:206",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“九子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:207",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十一子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:210",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族子”；路径依据：路径 K+1(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:211",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:212",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十七子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:213",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十三子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:214",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:220",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“幸存的長子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:221",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十二子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:222",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十四子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:223",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之甥女婿”；路径依据：路径 WZDH 含婚姻连接（婚姻步数 2），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:224",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:226",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "码表标注私生；路径仍指亲生亲子关系",
+      "reason": "中文名称“私生子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:227",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "养育/收养关系，非血缘",
+      "reason": "中文名称“養女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:229",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十六子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:230",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:231",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十二子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:232",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“甥女婿;姊妹之女婿”；路径依据：路径 ZDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:234",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十五子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:235",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十一子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:238",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“外孫”；路径依据：路径 DS 含下行 2 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:239",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“外孫女婿”；路径依据：路径 DDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:240",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姪孫;從孫”；路径依据：路径 BSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:243",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“孫”；路径依据：路径 SS 含下行 2 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:244",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“孫女婿”；路径依据：路径 SDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:245",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姪孫女之夫”；路径依据：路径 BSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:248",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“得許娶其孫女”；路径依据：路径 SDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:250",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族孫”；路径依据：路径 K+2(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:251",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“孫女”；路径依据：路径 SD 含下行 2 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:252",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“外孫女之子”；路径依据：路径 DDS 含下行 3 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:253",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾姪孫;從曾孫”；路径依据：路径 BSSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:254",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾姪孫女婿”；路径依据：路径 BSSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:255",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“曾孫; 重孫”；路径依据：路径 SSS 含下行 3 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:256",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾孫女婿”；路径依据：路径 SSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:259",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從曾孫;堂姪曾孫”；路径依据：路径 FBSSSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:260",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族四世孫”；路径依据：路径 K+4 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:261",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“許妻以曾孫女”；路径依据：路径 SSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:263",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“玄孫;四世孫”；路径依据：路径 SSSS 含下行 4 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:264",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從玄孫女婿”；路径依据：路径 BSSSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:265",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“曾孫女之子”；路径依据：路径 SSDS 含下行 4 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:266",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“玄孫女婿”；路径依据：路径 SSSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:269",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族五世孫”；路径依据：路径 K+5 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:270",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從來孫女婿”；路径依据：路径 BSSSSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:271",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從來孫”；路径依据：路径 BSSSSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:272",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“六世孫;昆孫”；路径依据：路径 G+6 含下行 6 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:275",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族六世孫”；路径依据：路径 K+6 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:276",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“七世孫婿”；路径依据：路径 G+7H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:277",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“七世孫;仍孫”；路径依据：路径 G+7 含下行 7 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:278",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“兄弟之八世孫”；路径依据：路径 BG+8 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:279",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“八世孫;雲孫”；路径依据：路径 G+8 含下行 8 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:280",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“兄弟之九世孫”；路径依据：路径 BG+9 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:281",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“九世孫”；路径依据：路径 G+9 含下行 9 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:282",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十世孫”；路径依据：路径 G+10 含下行 10 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:283",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十一世孫”；路径依据：路径 G+11 含下行 11 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:284",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十二世孫”；路径依据：路径 G+12 含下行 12 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:285",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十三世孫”；路径依据：路径 G+13 含下行 13 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:286",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十四世孫”；路径依据：路径 G+14 含下行 14 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:287",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十五世孫”；路径依据：路径 G+15 含下行 15 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:288",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十六世孫”；路径依据：路径 G+16 含下行 16 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:289",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“十七世孫婿”；路径依据：路径 G+17H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:290",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十七世孫”；路径依据：路径 G+17 含下行 17 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:291",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十八世孫”；路径依据：路径 G+18 含下行 18 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:292",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“十九世孫”；路径依据：路径 G+19 含下行 19 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:293",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十二世孫”；路径依据：路径 G+22 含下行 22 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:294",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十七世孫”；路径依据：路径 G+27 含下行 27 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:295",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“三十世孫”；路径依据：路径 G+30 含下行 30 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:296",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“三十五世孫”；路径依据：路径 G+35 含下行 35 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:297",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“三十八世孫”；路径依据：路径 G+38 含下行 38 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:298",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“四十二世孫”；路径依据：路径 G+42 含下行 42 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:299",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“四十三世孫”；路径依据：路径 G+43 含下行 43 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:301",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“直系後裔之夫”；路径依据：路径 G+nH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:303",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“直系後裔”；路径依据：路径 G+n 含下行 99 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:304",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族晚輩”；路径依据：路径 K+n 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:305",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“同族晚輩之夫”；路径依据：路径 K+nH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:307",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十四子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:308",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第一任妻之堂兄弟”；路径依据：路径 WFBS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:309",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第二任妻之堂兄弟”；路径依据：路径 WFBS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:312",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“第三任妻之祖”；路径依据：路径 WFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:315",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "妾及其子女关系标记",
+      "reason": "中文名称“妾之叔伯”；路径依据：路径 CFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:320",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之族兄弟姊妹”；路径依据：路径 WK 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:321",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族姊妹之夫”；路径依据：路径 KH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:323",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "妾及其子女关系标记",
+      "reason": "中文名称“妾之兄弟”；路径依据：路径 CB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:325",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族兄弟”；路径依据：路径 K(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:326",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十九子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:327",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“長女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:329",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“三女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:330",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從女;姪女”；路径依据：路径 BD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:331",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑母”；路径依据：路径 FZ 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:332",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“長女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:333",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“二女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:334",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“四女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:335",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“五女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:336",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“四女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:337",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“五女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:338",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“三女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:339",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十八子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:340",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“四十六世孫”；路径依据：路径 G+46 含下行 46 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:341",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“未婚妻”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:342",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“未婚夫”；路径依据：路径 H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:343",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“獨女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:344",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第三任妻”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:345",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第一任丈夫”；路径依据：路径 H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:346",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第二任丈夫”；路径依据：路径 H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:347",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“曾孫女”；路径依据：路径 SSD 含下行 3 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:348",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十三世祖”；路径依据：路径 G-23 含上行 23 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:349",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十三世孫”；路径依据：路径 G+23 含下行 23 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:350",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十世祖”；路径依据：路径 G-20 含上行 20 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:351",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十世孫”；路径依据：路径 G+20 含下行 20 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:352",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十一世祖”；路径依据：路径 G-21 含上行 21 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:353",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十一世孫”；路径依据：路径 G+21 含下行 21 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:354",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“三十六世祖”；路径依据：路径 G-36 含上行 36 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:355",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“三十六世孫”；路径依据：路径 G+36 含下行 36 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:356",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“六女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:357",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“七女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:358",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“八女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:359",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“九女婿”；路径依据：路径 DH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:360",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“四十六世祖”；路径依据：路径 G-46 含上行 46 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:361",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼姊妹”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:362",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼兄弟”；路径依据：路径 B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:363",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "码表标注私生；路径仍指亲生亲子关系",
+      "reason": "中文名称“私生子之本生父”；路径依据：路径 F 同时含上行 1 步与下行 1 步，属于交错路径，不能仅凭净辈分推断方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:364",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“岳母”；路径依据：路径 WM 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:365",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨;從母”；路径依据：路径 MZ 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:366",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“甥女”；路径依据：路径 ZD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:367",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“高祖母”；路径依据：路径 FFFM 含上行 4 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:368",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“玄孫女”；路径依据：路径 SSSD 含下行 4 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:369",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“曾祖母”；路径依据：路径 FFM 含上行 3 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:370",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“祖母”；路径依据：路径 FM 含上行 2 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:371",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“外祖母”；路径依据：路径 MM 含上行 2 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:372",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“外孫女”；路径依据：路径 DD 含下行 2 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:373",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "码表标注私生；路径仍指亲生亲子关系",
+      "reason": "中文名称“私生女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:374",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“姊妹”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:375",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼母”；路径依据：路径 M 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:376",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:377",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "码表标注私生；路径仍指亲生亲子关系",
+      "reason": "中文名称“私生子女之本生母”；路径依据：路径 M 同时含上行 1 步与下行 1 步，属于交错路径，不能仅凭净辈分推断方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:378",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "嗣承/继嗣关系；不据此认定血缘",
+      "reason": "中文名称“嗣母”；路径依据：路径 M 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:379",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼姊”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:380",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "继亲关系，非血缘",
+      "reason": "中文名称“繼妹”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:381",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "同父异母/同母异父手足",
+      "reason": "中文名称“同母異父姊妹”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:382",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "同父异母/同母异父手足",
+      "reason": "中文名称“同母異父姊”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:383",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻姊”；路径依据：路径 WZ 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:384",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻妹”；路径依据：路径 WZ 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:385",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻弟”；路径依据：路径 WB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:386",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之姊妹”；路径依据：路径 WZ 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:387",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十世祖”；路径依据：路径 G-50 含上行 50 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:388",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十世孫”；路径依据：路径 G+50 含下行 50 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:389",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“四十七世祖”；路径依据：路径 G-47 含上行 47 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:390",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“四十七世孫”；路径依据：路径 G+47 含下行 47 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:391",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“四十五世祖”；路径依据：路径 G-45 含上行 45 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:392",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“四十五世孫”；路径依据：路径 G+45 含下行 45 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:393",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“四十四世祖”；路径依据：路径 G-44 含上行 44 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:394",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“四十四世孫”；路径依据：路径 G+44 含下行 44 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:395",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“翁;公公;丈夫之父”；路径依据：路径 HF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:396",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“子婦;兒媳”；路径依据：路径 SW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:397",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五世祖;高曾祖”；路径依据：路径 G-5 含上行 5 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:398",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五世孫;來孫”；路径依据：路径 G+5 含下行 5 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:399",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“丈夫之母;婆婆”；路径依据：路径 HM 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:400",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“伯叔母”；路径依据：路径 FBW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:401",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之從子”；路径依据：路径 WBS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:402",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之從女”；路径依据：路径 WBD 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:403",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表兄”；路径依据：路径 P+(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:404",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑表兄”；路径依据：路径 FZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:405",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑表兄弟”；路径依据：路径 FZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:406",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨表兄弟”；路径依据：路径 MZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:407",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨表弟”；路径依据：路径 MZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:408",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨表兄”；路径依据：路径 MZS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:410",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表弟”；路径依据：路径 P-(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:411",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表兄弟”；路径依据：路径 P(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:412",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表姐”；路径依据：路径 P+(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:413",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表妹”；路径依据：路径 P-(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:414",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表姐妹”；路径依据：路径 P(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:415",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“舅表弟”；路径依据：路径 MBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:416",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從妹”；路径依据：路径 FBD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:417",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從姊”；路径依据：路径 FBD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:418",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾姪孫女”；路径依据：路径 BSSD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:419",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族姊妹”；路径依据：路径 K(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:420",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "嫡母称谓；是否生母未明",
+      "reason": "中文名称“嫡母”；路径 M 表示目标为母亲方向，步数为一代上行；该称谓未足以确认生物学血缘。"
+    },
+    {
+      "relation": "KIN:421",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表姪”；路径依据：路径 P+1(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:422",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表叔伯”；路径依据：路径 P-1(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:423",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之姐妹”；路径依据：路径 HZ 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:424",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“兄弟之妻”；路径依据：路径 BW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:425",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之兄弟”；路径依据：路径 HB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:426",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑父”；路径依据：路径 FZH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:427",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“舅公;父或母之舅”；路径依据：路径 FMB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:428",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“甥孫”；路径依据：路径 ZSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:429",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“外祖父之兄弟”；路径依据：路径 MFB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:430",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“弟之外孫”；路径依据：路径 BDS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:431",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨表姊妹;從母妹”；路径依据：路径 MZD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:432",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“父之外祖”；路径依据：路径 FMF 含上行 3 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:433",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“外孫之子”；路径依据：路径 DSS 含下行 3 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:434",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之從子”；路径依据：路径 HBS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:435",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之從女”；路径依据：路径 HBD 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:436",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "养育/收养关系，非血缘",
+      "reason": "中文名称“養子(非嗣子)”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:437",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "养育/收养关系，非血缘",
+      "reason": "中文名称“養母”；路径依据：路径 M 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:438",
+      "group": "kin_sibling",
+      "direction": "peer",
+      "qualifier": "同父异母/同母异父手足",
+      "reason": "中文名称“同母異父妹”；路径依据：路径 Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓与 B/Z 同辈路径表明手足关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:439",
+      "group": "kin_social_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "过继嗣孙，非血缘/嗣承关系",
+      "reason": "中文名称“過繼的嗣孫”；路径 SS 表示两代下行至孙辈，明确“过继”标记保留非血缘属性，direction为 to_descendant。"
+    },
+    {
+      "relation": "KIN:440",
+      "group": "kin_social_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "嗣祖父，嗣承关系；不据此认定血缘",
+      "reason": "中文名称“嗣祖父”；路径 FF 表示两代上行至祖辈，嗣承称谓保留社会亲属 qualifier，direction为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:443",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族曾孫”；路径依据：路径 K+3(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:444",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族曾祖”；路径依据：路径 K-3(male) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:445",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從孫;堂姪孫”；路径依据：路径 FBSSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:446",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“祖父之從兄弟;再從祖”；路径依据：路径 FFFBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:447",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "自称后裔记录；未表示谱系全链已验证",
+      "reason": "中文名称“後裔(自稱)”；路径 G+n (claimed) 是自述的后裔方向，保留自称性质，不表示谱系全链已验证。"
+    },
+    {
+      "relation": "KIN:450",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十三女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:451",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“六女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:452",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“七女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:453",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“八女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:454",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“九女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:455",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:456",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十一女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:457",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十二女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:458",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“十四女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:459",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姪孫女”；路径依据：路径 BSD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:460",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族祖姑”；路径依据：路径 K-2(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:461",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族姊”；路径依据：路径 K+(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:462",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族妹”；路径依据：路径 K-(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:464",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“孫媳”；路径依据：路径 SSW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:465",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之祖父”；路径依据：路径 HFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:466",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之祖母”；路径依据：路径 HFM 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:467",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第四任妻”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:468",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "庶母称谓；血缘未明",
+      "reason": "中文名称“庶母”；路径 M 表示目标为母亲方向，步数为一代上行；庶母身份本身不足以判定生物学血缘。"
+    },
+    {
+      "relation": "KIN:469",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“祖姑”；路径依据：路径 FFZ 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:470",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾祖姑”；路径依据：路径 FFFZ 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:471",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族女”；路径依据：路径 K+1(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:472",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "始祖/始迁祖标记；不表示谱系全链已验证",
+      "reason": "中文名称“始祖;始遷祖”；路径 G-n (apical) 表示始祖/始迁祖的祖先端记录，保留其谱系声明性质，不表示中间各代已独立验证。"
+    },
+    {
+      "relation": "KIN:473",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“六世從孫; 姪昆孫”；路径依据：路径 BG+6 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:474",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“太伯叔祖;六世叔伯祖”；路径依据：路径 G-6B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:475",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從七世孫”；路径依据：路径 BG+7 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:476",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“七世伯叔祖”；路径依据：路径 G-7B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:481",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾孫媳婦”；路径依据：路径 SSSW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:482",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十四世祖”；路径依据：路径 G-24 含上行 24 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:483",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十五世祖”；路径依据：路径 G-25 含上行 25 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:484",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十六世祖”；路径依据：路径 G-26 含上行 26 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:485",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十八世祖”；路径依据：路径 G-28 含上行 28 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:486",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“二十九世祖”；路径依据：路径 G-29 含上行 29 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:487",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十七世祖”；路径依据：路径 G-57 含上行 57 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:488",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十八代祖”；路径依据：路径 G-58 含上行 58 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:489",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“六十八代祖”；路径依据：路径 G-68 含上行 68 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:490",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“十世伯叔祖”；路径依据：路径 G-10B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:491",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“十二世伯叔祖”；路径依据：路径 G-12B 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:492",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“堂舅;母亲的叔伯兄弟”；路径依据：路径 MFBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:493",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“外玄孫”；路径依据：路径 DSSS 含下行 4 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:494",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“高曾祖母”；路径依据：路径 FFFFM 含上行 5 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:497",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“七十三代祖”；路径依据：路径 G-73 含上行 73 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:498",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“伯叔曾祖母”；路径依据：路径 FFFBW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:499",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“伯叔祖母”；路径依据：路径 FFBW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:500",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“伯叔祖母姪”；路径依据：路径 FFBWBS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:501",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“太祖母”；路径依据：路径 G-7W 含上行 7 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:502",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“太高祖母”；路径依据：路径 G-8W 含上行 8 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:503",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“太高祖父的姊妹”；路径依据：路径 G-8Z 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:504",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫堂姪”；路径依据：路径 HFBSS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:505",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻舅祖”；路径依据：路径 WFMB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:507",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“始祖母”；路径依据：路径 G-nW 含上行 99 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:508",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姪媳婦”；路径依据：路径 BSW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:509",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“族侄媳”；路径依据：路径 K+1W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:510",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“曾祖母姪”；路径依据：路径 FFMBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:511",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“祖母姪”；路径依据：路径 FMBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:512",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“舅婆;父或母之舅母 FMBW/MMBW”；路径依据：路径 FMBW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:514",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表姐妹婿”；路径依据：路径 PH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:515",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表親”；路径依据：路径 Pn 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:516",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“伯;伯父”；路径依据：路径 FB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:517",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“叔;叔父”；路径依据：路径 FB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:518",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“伯祖;伯祖父”；路径依据：路径 FFB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:519",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“叔祖;叔祖父”；路径依据：路径 FFB 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:521",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之曾祖”；路径依据：路径 HFFF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:522",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十四世孫”；路径依据：路径 G+24 含下行 24 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:523",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十五世孫”；路径依据：路径 G+25 含下行 25 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:524",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十六世孫”；路径依据：路径 G+26 含下行 26 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:525",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十八世孫”；路径依据：路径 G+28 含下行 28 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:526",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“二十九世孫”；路径依据：路径 G+29 含下行 29 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:527",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十七世孫”；路径依据：路径 G+57 含下行 57 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:528",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十八世孫”；路径依据：路径 G+58 含下行 58 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:529",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“六十八世孫”；路径依据：路径 G+68 含下行 68 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:530",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“十世姪孫”；路径依据：路径 BG+10 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:531",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“十二世姪孫”；路径依据：路径 BG+12 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:532",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“堂姊妹之子”；路径依据：路径 FBDS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:533",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“曾祖母之父”；路径依据：路径 FFMF 含上行 4 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:534",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“七十三世孫”；路径依据：路径 G+73 含下行 73 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:535",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之曾姪孫;夫之從曾孫”；路径依据：路径 HBSSS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:536",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之姪孫;夫之從孫”；路径依据：路径 HBSS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:537",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑父之姪孫;姑父之從孫”；路径依据：路径 FZHBSS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:538",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“堂伯叔母”；路径依据：路径 FFBSW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:539",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“外甥孫婿”；路径依据：路径 ZSDH 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:540",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之從父”；路径依据：路径 HFB 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:541",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之族父;夫之族姑”；路径依据：路径 HK-1 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:542",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑母之曾孫;姑表兄弟之孫”；路径依据：路径 FZSSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:543",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姑母之孫;姑表兄弟之子”；路径依据：路径 FZSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:544",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“HZSS / HZSD / HZDS / HZDD”；路径依据：路径 HZS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:545",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之表兄弟姊妹”；路径依据：路径 WP 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:546",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“姨父”；路径依据：路径 MZF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:547",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之外甥”；路径依据：路径 WZS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:548",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十三世祖”；路径依据：路径 G-53 含上行 53 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:549",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十四世祖”；路径依据：路径 G-54 含上行 54 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:550",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十五世祖”；路径依据：路径 G-55 含上行 55 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:551",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“五十六世祖”；路径依据：路径 G-56 含上行 56 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:552",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十三世孫”；路径依据：路径 G+53 含下行 53 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:553",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十四世孫”；路径依据：路径 G+54 含下行 54 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:554",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十五世孫”；路径依据：路径 G+55 含下行 55 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:555",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“五十六世孫”；路径依据：路径 G+56 含下行 56 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:556",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之外甥女”；路径依据：路径 WZD 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:557",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻子的祖母”；路径依据：路径 WFM 含婚姻连接（婚姻步数 2），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:558",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之姑母”；路径依据：路径 WFZ 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:559",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第三任丈夫”；路径依据：路径 H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:560",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "继承身份，不据此断言过继或非血缘",
+      "reason": "中文名称“嗣子(作為繼承人的兒子)”；路径 S 表示目标为一代子女，名称说明继承人身份，不说明过继或非亲生，因此不推定非血缘。"
+    },
+    {
+      "relation": "KIN:561",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妻之五世祖”；路径依据：路径 WG-5 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:562",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“五世孫婿”；路径依据：路径 G+5H 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:563",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "码表标注私生；路径仍指亲生亲子关系",
+      "reason": "中文名称“本生祖”；路径依据：路径 FF 含上行 2 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:564",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "码表标注私生；路径仍指亲生亲子关系",
+      "reason": "中文名称“私生孫”；路径依据：路径 SS 含下行 2 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:565",
+      "group": "kin_social_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "继祖关系，非血缘",
+      "reason": "中文名称“繼祖”；路径 FF 表示两代上行至祖辈，继亲标记表明非血缘关系，direction为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:566",
+      "group": "kin_social_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "继孙关系，非血缘",
+      "reason": "中文名称“繼孫子”；路径 SS 表示两代下行至孙辈，继亲标记表明非血缘关系，direction为 to_descendant。"
+    },
+    {
+      "relation": "KIN:567",
+      "group": "kin_parent_child",
+      "direction": "to_parent",
+      "qualifier": "前母称谓；血缘性质未明",
+      "reason": "中文名称“前母”；路径 M 表示母亲方向，步数为一代上行；称谓及其反向码不足以确认血缘性质，保留未明 qualifier。"
+    },
+    {
+      "relation": "KIN:568",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "明确非亲生关系，非血缘",
+      "reason": "中文名称“非親生子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:569",
+      "group": "kin_social_parent_child",
+      "direction": "to_child",
+      "qualifier": "明确非亲生关系，非血缘",
+      "reason": "中文名称“非親生女”；路径依据：路径 D 含下行 1 代，目标位于源人物后裔方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:570",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "明确非亲生关系，非血缘",
+      "reason": "中文名称“非親生母”；路径依据：路径 M 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:571",
+      "group": "kin_social_parent_child",
+      "direction": "to_parent",
+      "qualifier": "明确非亲生关系，非血缘",
+      "reason": "中文名称“非親生父”；路径依据：路径 F 含上行 1 代，目标位于源人物祖先方向。 中文称谓/码路径含养、继、嗣或非亲生标记，且指向一代亲子；保留非血缘 qualifier，direction为 to_parent。"
+    },
+    {
+      "relation": "KIN:572",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "妾所生子女标记；具体血缘属性不由码名单独判定",
+      "reason": "中文名称“妾之子”；路径 S 表示目标为一代子女，名称标明妾所生身份；不将妾室身份误作非血缘依据。"
+    },
+    {
+      "relation": "KIN:573",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "妾所生子女标记；具体血缘属性不由码名单独判定",
+      "reason": "中文名称“妾之女”；路径 D 表示目标为一代子女，名称标明妾所生身份；不将妾室身份误作非血缘依据。"
+    },
+    {
+      "relation": "KIN:574",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“從姊妹”；路径依据：路径 FBD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:575",
+      "group": "kin_parent_child",
+      "direction": "to_child",
+      "qualifier": "无",
+      "reason": "中文名称“二十六子”；路径依据：路径 S 含下行 1 代，目标位于源人物后裔方向。 中文称谓与一代直系亲子路径支持该关系；F/M为目标父母端，S/D为目标子女端，direction为 to_child。"
+    },
+    {
+      "relation": "KIN:578",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“外曾祖母”；路径依据：路径 MFM 含上行 3 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:579",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從子;堂姪”；路径依据：路径 FBSS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:580",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“表姑”；路径依据：路径 K-1(female) 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:581",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從父”；路径依据：路径 FFBS 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:582",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從母”；路径依据：路径 FFBD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:583",
+      "group": "kin_collateral",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“再從女”；路径依据：路径 FBSD 含旁系步数 1 或族亲/表亲标记，显示经支系相连，复合路径不强定辈分。 中文称谓及旁系/族亲路径支持旁系归类；不从复杂路径强推辈分。"
+    },
+    {
+      "relation": "KIN:584",
+      "group": "kin_social_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "嗣祖母，嗣承关系；不据此认定血缘",
+      "reason": "中文名称“嗣祖母”；路径 MM 表示两代上行至祖辈，嗣承称谓保留社会亲属 qualifier，direction为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:585",
+      "group": "intimate_partnership",
+      "direction": "peer",
+      "qualifier": "无",
+      "reason": "中文名称“第五任妻”；路径依据：路径 W 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓为配偶、妾或订婚伴侣，且路径为直接 H/W 关系，direction为 peer。"
+    },
+    {
+      "relation": "KIN:586",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_descendant",
+      "qualifier": "无",
+      "reason": "中文名称“外孫之女”；路径依据：路径 DSD 含下行 3 代，目标位于源人物后裔方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_descendant。"
+    },
+    {
+      "relation": "KIN:587",
+      "group": "kin_ancestor_descendant",
+      "direction": "to_ancestor",
+      "qualifier": "无",
+      "reason": "中文名称“父之外祖母”；路径依据：路径 FMM 含上行 3 代，目标位于源人物祖先方向。 中文称谓与多代直系路径一致；按上/下行步数标 direction 为 to_ancestor。"
+    },
+    {
+      "relation": "KIN:588",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“妯娌;夫兄弟之妻”；路径依据：路径 HBW 含婚姻连接（婚姻步数 2），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:589",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“舅母”；路径依据：路径 MBW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:590",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫姊妹之子”；路径依据：路径 HZS 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:591",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫姊妹之女”；路径依据：路径 HZD 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:592",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“外孫媳”；路径依据：路径 DSW 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:593",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之外祖父”；路径依据：路径 HMF 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    },
+    {
+      "relation": "KIN:594",
+      "group": "kin_affinal",
+      "direction": "unspecified",
+      "qualifier": "无",
+      "reason": "中文名称“夫之外祖母”；路径依据：路径 HMM 含婚姻连接（婚姻步数 1），因此按婚姻路径判作姻亲/伴侣；复合路径不推定方向。 中文称谓与路径显示目标经配偶/婚姻关系进入，按姻亲处理。"
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 
 当前职业多值问题、已确定口径与后续决策步骤见 [`HANDOFF_PROFESSION_SELECTION.md`](HANDOFF_PROFESSION_SELECTION.md)。
 
+2026-10-06 已按用户授权新增临时单职业实验版本：剩余人物暂取一个职业，按 inherited 与 acquired 细类分组、20 年时期图独立训练 RGCN 并运行 GraphMask。完整命令、标签规则与输出路径见 [`EXPERIMENT_PIPELINE.md`](EXPERIMENT_PIPELINE.md)。2026-10-07 运行方式更新：先 `conda activate wywikidata`，再 `export CUDA_VISIBLE_DEVICES=4`、`export FREEBASE_GROUP_DEVICE=cuda:0`，最后执行 `bash Freebase/run_grouped_rgcn_graphmask_20y.sh run all`；不再自动选择设备。
+
 2026-10-03 已完成当前关系图 1,817 个职业值的并行智能体初审，候选映射和覆盖测量见 [`职业 L1 初审报告`](../docs/freebase_profession_review_2026-10-03/review_report.md)。这些是未人工批准的草案，不是冻结训练标签。`review_professions.py` 可复现词表盘点和人物层面的映射审计；原始抽取文件未修改。
 
 这一版按用户确认的口径重做：`is-a Person` 作为暂定人物名单；一个人物只要有 **至少一个不同的原始 `Profession` 值**，且出生年或死亡年有至少一个结构上可解析的年份，就进入资料完整队列。**所有职业值均保留为 JSON 数组**，不选主职业、不做 L1/L2/L3，也不因多职业删除人物或边。结构上可解析不代表日期或人物身份已经核实。

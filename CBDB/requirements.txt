@@ -1,0 +1,8 @@
+# Install a CUDA-compatible PyTorch first; NeighborLoader also needs a
+# matching pyg-lib or torch-sparse wheel (see CBDB/README.md).
+torch>=2.1
+torch-geometric>=2.5
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+scikit-learn>=1.3

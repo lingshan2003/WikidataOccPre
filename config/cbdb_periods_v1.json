@@ -1,0 +1,15 @@
+{
+  "name": "cbdb_periods_v1",
+  "version": 1,
+  "assignment": "any_known_birth_or_death",
+  "description": "Each person belongs to a period when at least one known Birth/Death year falls in its inclusive bounds. No lifetime interpolation; people and triples may belong to multiple periods.",
+  "periods": [
+    {"id": "to_699", "label_zh": "700年以前", "start": null, "end": 699},
+    {"id": "700_899", "label_zh": "700–899年", "start": 700, "end": 899},
+    {"id": "900_1099", "label_zh": "900–1099年", "start": 900, "end": 1099},
+    {"id": "1100_1299", "label_zh": "1100–1299年", "start": 1100, "end": 1299},
+    {"id": "1300_1499", "label_zh": "1300–1499年", "start": 1300, "end": 1499},
+    {"id": "1500_1699", "label_zh": "1500–1699年", "start": 1500, "end": 1699},
+    {"id": "1700_plus", "label_zh": "1700年及以后", "start": 1700, "end": null}
+  ]
+}

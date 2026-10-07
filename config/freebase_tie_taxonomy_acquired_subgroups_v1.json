@@ -1,0 +1,27 @@
+{
+  "name": "freebase_acquired_tie_subgroups_v1",
+  "version": 1,
+  "description": "Freebase-specific complete, mutually exclusive refinement of nine normalized relation bases. Partner and celebrity romantic relationship form intimate_partnership; academic advising and martial-arts instruction form education_mentorship; influenced_by is influence_succession. Peer and celebrity_friend remain other_acquired because they do not establish professional collaboration. No unsupported professional_collaboration or religious_ordination group is created. Raw advisor/instructor direction is retained without asserting an unverified student/teacher orientation.",
+  "reference_taxonomy": "config/freebase_tie_taxonomy_v1.json",
+  "groups": {
+    "inherited": [
+      "child",
+      "sibling"
+    ],
+    "intimate_partnership": [
+      "partner",
+      "celebrity_romantic_relationship"
+    ],
+    "education_mentorship": [
+      "academic_advisor_raw",
+      "martial_arts_instructor_raw"
+    ],
+    "influence_succession": [
+      "influenced_by"
+    ],
+    "other_acquired": [
+      "peer",
+      "celebrity_friend"
+    ]
+  }
+}

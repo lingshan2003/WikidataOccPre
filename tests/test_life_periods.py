@@ -11,6 +11,24 @@ from training.life_periods import life_period_membership, load_life_period_confi
 
 
 class LifePeriodTests(unittest.TestCase):
+    def test_freebase_finite_windows_and_exact_calendar_boundaries(self):
+        path = Path(__file__).resolve().parents[1] / "config/freebase_life_periods_20y_v1.json"
+        config = load_life_period_config(path)
+        years = [1499, 1500, 1900, 1901, 1920, 1921, 2020, 2021]
+        nodes = pd.DataFrame({"birth_year": years, "death_year": [None] * len(years)})
+        memberships, audit = life_period_membership(nodes, config)
+        selected = [[p for p, mask in memberships.items() if mask[i]] for i in range(len(years))]
+        self.assertEqual(selected, [["before_1500"], ["1500_1900"], ["1500_1900"],
+                                    ["1901_1920"], ["1901_1920"], ["1921_1940"], ["2001_2020"], []])
+        self.assertEqual(audit["life_period_membership_count"].tolist(), [1] * 7 + [0])
+        payload = json.loads(path.read_text())
+        payload.pop("allow_finite_last_period")
+        with tempfile.TemporaryDirectory() as directory:
+            finite = Path(directory) / "finite.json"
+            finite.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, "final end"):
+                load_life_period_config(finite)
+
     def test_life_intervals_can_overlap_periods_and_single_known_endpoints_are_kept(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "life_periods.json"

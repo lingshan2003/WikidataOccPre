@@ -1,0 +1,12 @@
+{
+  "name": "freebase_inherited_vs_acquired_ties_v1",
+  "version": 1,
+  "description": "Freebase-specific binary tie taxonomy for the nine normalized relation bases. Inherited is limited to child and sibling; acquired is every other normalized tie. Acquired does not imply voluntary choice or contemporaneous contact.",
+  "groups": {
+    "inherited": [
+      "child",
+      "sibling"
+    ],
+    "acquired": "all_remaining"
+  }
+}
