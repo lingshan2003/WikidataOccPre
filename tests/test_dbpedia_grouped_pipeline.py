@@ -115,6 +115,50 @@ class GroupedPipelinePlanTest(unittest.TestCase):
                         parsed = parser()
                     self.assertIsNotNone(parsed)
 
+    def test_layer0_supplement_reuses_rgcn_contracts_and_only_plans_five_probes(self):
+        supplement = ROOT / "config" / "dbpedia_multi_group_layer0_enabled_5periods_v1.json"
+        args = SimpleNamespace(
+            config=str(supplement), device=None, stage="graphmask", periods=None,
+            representations=None, include_full=False,
+        )
+        with mock.patch.dict(os.environ, {}, clear=True):
+            new = Pipeline(args)
+            old = Pipeline(SimpleNamespace(**{**vars(args), "config": str(CONFIG)}))
+        self.assertEqual(new.contexts, ["through_1500", "1501_1900", "1941_1960", "1981_2000", "since_2001"])
+        self.assertEqual(new.representations, ["multi_group"])
+        for period in new.contexts:
+            new_commands = new.commands(period, "multi_group")
+            old_commands = old.commands(period, "multi_group")
+            self.assertEqual(new_commands[:2], old_commands[:2])
+            self.assertNotEqual(new.directories(period, "multi_group")[2], old.directories(period, "multi_group")[2])
+            with mock.patch.object(sys, "argv", new_commands[2][2:]):
+                self.assertEqual(parse_graphmask_train_args().checkpoint_selection, "all-layers-enabled")
+        with mock.patch.dict(os.environ, {}, clear=True):
+            output = self.plan("graphmask", "--config", str(supplement))
+        self.assertEqual(output.count("[probe]"), 5)
+        self.assertEqual(output.count("[report]"), 5)
+        self.assertNotIn("[train]", output)
+        self.assertNotIn("[collapse]", output)
+
+    def test_supplement_wrapper_pins_scope_root_and_original_numeric_settings(self):
+        environment = dict(os.environ)
+        environment.update({
+            "DBPEDIA_PYTHON_BIN": sys.executable,
+            "DBPEDIA_GROUP_PERIODS": "all", "DBPEDIA_GROUP_REPRESENTATIONS": "binary",
+            "DBPEDIA_GROUP_INCLUDE_FULL": "1", "DBPEDIA_GROUP_GRAPHMASK_ROOT": "wrong_old_root",
+            "DBPEDIA_GROUP_GRAPHMASK_BETA": "0.9", "DBPEDIA_GROUP_SEED": "999",
+        })
+        output = subprocess.run(
+            ["bash", str(ROOT / "DBpedia/run_layer0_enabled_5periods.sh"), "plan"],
+            cwd=ROOT, env=environment, text=True, capture_output=True, check=True,
+        ).stdout
+        self.assertEqual(output.count("[probe]"), 5)
+        self.assertNotIn("wrong_old_root", output)
+        self.assertNotIn("/binary/", output)
+        self.assertNotIn("[probe] full/", output)
+        self.assertIn("--seed 42", output)
+        self.assertIn("--beta 0.03", output)
+
 
 class RunStepResumeTest(unittest.TestCase):
     def setUp(self):

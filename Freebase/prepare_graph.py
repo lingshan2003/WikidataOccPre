@@ -169,17 +169,42 @@ def normalize_relations(facts_path, rules_path, names):
     }
 
 
+def resolve_input_directory(configured):
+    """Accept an explicit override; bridge only the two known export layouts."""
+    override = os.environ.get("FREEBASE_INPUT_DIR")
+    selected = path(override or configured)
+    files = ("nodes.csv", "main_relation_facts.csv")
+    local = path("external_data/freebase/descriptive_v2_local/05_final")
+    server = path("external_data/freebase/processed/05_final")
+    # Do not replace a custom path or mix a partial export with another batch.
+    if not override and selected == local and not any((selected / f).exists() for f in files):
+        if all((server / f).is_file() for f in files):
+            print(f"[input] local download layout absent; using server export: {server}", flush=True)
+            return server
+    return selected
+
+
 def settings(config, output_dir, tables_only):
     c = read_json(config)
-    s = c["source_prepare"]
+    s = dict(c["source_prepare"])
     if s["label_policy"] not in POLICIES or s["min_class_count"] < 3:
         raise ValueError("Invalid label policy or min_class_count < 3")
     if not all(0 < s[k] < 1 for k in ("train_ratio", "val_ratio", "test_ratio")) or abs(sum(s[k] for k in ("train_ratio", "val_ratio", "test_ratio")) - 1) > 1e-8:
         raise ValueError("Source train/val/test ratios must be positive and sum to 1")
     output = path(output_dir) if output_dir else path(c["source_data"]).parent
-    inputs = {"nodes": path(s["input_dir"]) / "nodes.csv", "facts": path(s["input_dir"]) / "main_relation_facts.csv",
+    input_dir = resolve_input_directory(s["input_dir"])
+    if os.environ.get("FREEBASE_INPUT_DIR") or input_dir != path(s["input_dir"]):
+        s["input_dir"] = str(input_dir)
+    inputs = {"nodes": input_dir / "nodes.csv", "facts": input_dir / "main_relation_facts.csv",
               "audit": path(s["audit_file"]), "crosswalk": path(s["crosswalk_file"]),
               "relation_rules": path(s.get("relation_rules", "Freebase/relation_rules.json"))}
+    missing = [(key, p) for key, p in inputs.items() if not p.is_file()]
+    if missing:
+        details = "\n".join(f"  {key}: {p}" for key, p in missing)
+        raise FileNotFoundError("Missing Freebase input files:\n" + details +
+            "\nSet FREEBASE_INPUT_DIR to the directory containing nodes.csv and main_relation_facts.csv. "
+            "The person_l1_audit.tsv is generated locally and ignored by Git; copy it to its configured path "
+            "along with profession_l1_crosswalk_draft.tsv before running.")
     if any(output == p.parent or output in p.parents for p in inputs.values()):
         raise ValueError("Output directory overlaps an input directory")
     signature = {"schema_version": VERSION, "source_prepare": s, "tables_only": tables_only,
@@ -276,7 +301,11 @@ def main():
     p.add_argument("--output-dir", type=Path)
     p.add_argument("--tables-only", action="store_true", help="Use a separate output directory to inspect provisional labels without PyTorch")
     args = p.parse_args()
-    prepare(path(args.config), args.output_dir, tables_only=args.tables_only)
+    try:
+        prepare(path(args.config), args.output_dir, tables_only=args.tables_only)
+    except (FileNotFoundError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

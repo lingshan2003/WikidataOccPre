@@ -21,6 +21,9 @@ RGCN 默认两层，隐藏维度 128，特征分支 64，dropout 0.2，采样 `1
 
 GraphMask 默认 `num_neighbors=auto` 复用每个 RGCN 的 fanouts，batch 32、workers 0、每层 3 epoch、beta 0.03；验证集原模型和掩码后 Macro-F1 的相对差必须 ≤0.05。报告使用 test split，seed 42，top-k 50。不同表示的 GraphMask 都解释各自独立训练的冻结模型。
 
+默认从所有训练阶段选择最稀疏且通过保真度的 GraphMask，可能选中仅启用 Layer 1 门控的版本。
+针对五个 multi_group 时期的“仅从 Layer 0 门控已启用后选择”补充实验，见 [LAYER0_ENABLED_SUPPLEMENT.md](LAYER0_ENABLED_SUPPLEMENT.md)。该入口复用原 RGCN，另存 GraphMask 结果。
+
 ## 服务器运行
 
 在已跑通原始 DBpedia RGCN / GraphMask 的同一仓库和 Python 环境中，先同步这些新增文件：

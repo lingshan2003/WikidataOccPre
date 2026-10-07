@@ -140,7 +140,21 @@ docs/freebase_profession_review_2026-10-03/profession_l1_crosswalk_draft.tsv
 Freebase/relation_rules.json
 ```
 
-本地已具备这些输入。服务器若只有 `processed/05_final`，可将配置的 `source_prepare.input_dir` 改到该路径，其余输入也按实际路径修改。无需下载/重扫全量 `facts.txt`。可上传原始小表后在服务器重新准备；已生成的 `.pt` 及恢复记录绑定来源路径和文件时间戳，直接跨机器复制派生目录时不保证能复用恢复记录。
+本地已具备这些输入。服务器通常使用 `external_data/freebase/processed/05_final`；新版适配器在默认本地目录完全不存在且服务器目录的两个表都齐全时，自动使用该服务器目录。也可在 bash 前明确设置 `export FREEBASE_INPUT_DIR=external_data/freebase/processed/05_final`，它优先于配置。自定义或不完整输入目录不会自动切换，避免混用不同批次。
+
+`person_l1_audit.tsv` 是本地生成且被 Git 忽略的文件，同步代码不会将它上传到服务器；必须另行复制到配置路径。适配器会一次列出所有缺失输入，包含职业审核表和映射表。无需下载/重扫全量 `facts.txt`。可上传原始小表后在服务器重新准备；已生成的 `.pt` 及恢复记录绑定来源路径和文件时间戳，直接跨机器复制派生目录时不保证能复用恢复记录。
+
+2026-10-07 已将上述四个数据表打包为本地 `artifacts/freebase_training_inputs_v1.tar.gz`，包内保留项目相对路径。上传到服务器项目根目录后运行：
+
+```bash
+tar -xzf freebase_training_inputs_v1.tar.gz
+conda activate wywikidata
+export CUDA_VISIBLE_DEVICES=4
+export FREEBASE_GROUP_DEVICE=cuda:0
+bash Freebase/run_grouped_rgcn_graphmask_20y.sh run all
+```
+
+此方式补齐原配置要求的 `descriptive_v2_local` 路径及职业审核输入，无需修改配置；`Freebase/relation_rules.json` 和其他代码/配置仍需随仓库同步。只上传 Git 代码不能代替上传被忽略的数据表。
 
 环境覆盖参数包括 `FREEBASE_GROUP_PERIODS`、`FREEBASE_GROUP_REPRESENTATIONS`、`FREEBASE_GROUP_DEVICE`、`FREEBASE_GROUP_TRAIN_BATCH_SIZE`、`FREEBASE_GROUP_TRAIN_WORKERS`、`FREEBASE_GROUP_TRAIN_EPOCHS`、`FREEBASE_GROUP_TRAIN_FANOUTS`、`FREEBASE_GROUP_GRAPHMASK_BATCH_SIZE`、`FREEBASE_GROUP_GRAPHMASK_EPOCHS_PER_LAYER`、`FREEBASE_GROUP_GRAPHMASK_BETA`。各根目录可用 `FREEBASE_GROUP_SOURCE_DATA`、`FREEBASE_GROUP_PERIOD_ROOT`、`FREEBASE_GROUP_RELATION_ROOT`、`FREEBASE_GROUP_MODEL_ROOT`、`FREEBASE_GROUP_GRAPHMASK_ROOT` 覆盖。`--config` 或 `FREEBASE_GROUP_CONFIG` 可指定新实验配置。
 

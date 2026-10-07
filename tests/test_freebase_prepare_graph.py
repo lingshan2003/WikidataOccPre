@@ -3,9 +3,45 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
-from Freebase.prepare_graph import normalize_relations, select_label, single_year, write_rows
+from Freebase.prepare_graph import normalize_relations, resolve_input_directory, select_label, settings, single_year, write_rows
 from Freebase.review_professions import resolve_professions
+
+
+class InputLayoutTests(unittest.TestCase):
+    def test_missing_local_layout_uses_complete_server_export(self):
+        with tempfile.TemporaryDirectory() as directory, mock.patch("Freebase.prepare_graph.ROOT", Path(directory)), mock.patch.dict("os.environ", {}, clear=True):
+            root = Path(directory).resolve()
+            server = root / "external_data/freebase/processed/05_final"
+            server.mkdir(parents=True)
+            for name in ("nodes.csv", "main_relation_facts.csv"):
+                (server / name).write_text("fixture")
+            self.assertEqual(resolve_input_directory("external_data/freebase/descriptive_v2_local/05_final"), server)
+            # A partial configured export must not silently change source batch.
+            local = root / "external_data/freebase/descriptive_v2_local/05_final"
+            local.mkdir(parents=True)
+            (local / "nodes.csv").write_text("partial fixture")
+            self.assertEqual(resolve_input_directory(str(local)), local)
+
+    def test_explicit_input_override_is_used_even_if_missing(self):
+        with tempfile.TemporaryDirectory() as directory, mock.patch.dict("os.environ", {"FREEBASE_INPUT_DIR": directory}):
+            self.assertEqual(resolve_input_directory("unused"), Path(directory).resolve())
+
+    def test_missing_inputs_are_reported_together_before_stamping(self):
+        with tempfile.TemporaryDirectory() as directory, mock.patch.dict("os.environ", {}, clear=True):
+            root = Path(directory)
+            config = root / "config.json"
+            config.write_text(json.dumps({"source_data": str(root / "output/graph_data.pt"), "source_prepare": {
+                "input_dir": str(root / "missing"), "audit_file": str(root / "audit.tsv"),
+                "crosswalk_file": str(root / "crosswalk.tsv"), "relation_rules": str(root / "rules.json"),
+                "label_policy": "mapped_first_other_fallback", "min_class_count": 3,
+                "train_ratio": .7, "val_ratio": .1, "test_ratio": .2}}))
+            with self.assertRaises(FileNotFoundError) as caught:
+                settings(config, None, False)
+            message = str(caught.exception)
+            for name in ("nodes.csv", "main_relation_facts.csv", "audit.tsv", "crosswalk.tsv", "rules.json", "FREEBASE_INPUT_DIR"):
+                self.assertIn(name, message)
 
 
 class ProvisionalLabelTests(unittest.TestCase):

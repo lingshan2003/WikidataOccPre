@@ -191,7 +191,8 @@ class Pipeline:
 
     def plan(self):
         stage = self.args.stage
-        print(f"[plan] {len(self.contexts)} contexts x {len(self.representations)} representations = {len(self.contexts) * len(self.representations)} independent RGCN + GraphMask jobs", flush=True)
+        job_label = "GraphMask jobs using existing RGCNs" if stage == "graphmask" else "RGCN + GraphMask jobs"
+        print(f"[plan] {len(self.contexts)} contexts x {len(self.representations)} representations = {len(self.contexts) * len(self.representations)} independent {job_label}", flush=True)
         if stage in ("all", "prepare"):
             print("[prepare] reuse compatible existing period graphs; create missing periods only")
             selected = [p for p in self.contexts if p != "full"]
@@ -380,6 +381,10 @@ class Pipeline:
             validation = read_json(mask / "validation.json")
             if validation["relative_macro_f1_difference"] > self.config["graphmask_train"]["max_relative_macro_f1_diff"]:
                 raise ValueError(f"Probe violates configured fidelity threshold: {mask}")
+            if self.config["graphmask_train"].get("checkpoint_selection") == "all-layers-enabled":
+                selected = read_json(mask / "manifest.json").get("selected_checkpoint") or {}
+                if selected.get("policy") != "all-layers-enabled" or selected.get("enabled_layers") != [True] * self.config["train"]["num_layers"]:
+                    raise ValueError(f"Probe does not have all layer gates enabled: {mask}")
             self.run_step("report", report, mask / "test_report", REPORT_FILES, [data, model / "best_model.pt", mask / "graphmask_probe.pt", artifact / "nodes.csv"])
 
     def summarize(self):
@@ -406,6 +411,9 @@ class Pipeline:
                         self.failures.append({"context": context, "representation": rep, "error": str(error)})
                         reported = False
                 metrics = read_json(report_dir / "test_metrics.json") if reported else {}
+                manifest = read_json(mask / "manifest.json") if (mask / "manifest.json").is_file() else {}
+                selected = manifest.get("selected_checkpoint") or {}
+                layer_metrics = {r["layer"]: r for r in metrics.get("layers", [])}
                 if reported and (metrics.get("split") != "test" or metrics["roots"] != summary["test_nodes"] or metrics["labeled_roots"] != summary["test_nodes"]):
                     raise ValueError(f"Report test roots disagree with source split: {report_dir}")
                 errors = [f["error"] for f in self.failures if f.get("context") == context and f.get("representation") == rep]
@@ -416,6 +424,11 @@ class Pipeline:
                     "directed_relation_types": summary.get("relation_types"), "edges_before": collapse.get("edges_before"), "edges_after": collapse.get("edges_after"), "duplicates_removed": collapse.get("duplicates_removed"),
                     "rgcn_test_macro_f1": (trained.get("test") or {}).get("macro_f1"), "graphmask_original_macro_f1": metrics.get("original", {}).get("macro_f1"), "graphmask_masked_macro_f1": metrics.get("masked", {}).get("macro_f1"),
                     "prediction_agreement": metrics.get("prediction_agreement"), "hard_retention_rate": metrics.get("hard_retention_rate"), "validation_relative_f1_difference": validation.get("relative_macro_f1_difference"), "error": " | ".join(errors), "report_dir": str(report_dir),
+                    "checkpoint_selection": manifest.get("training_config", {}).get("checkpoint_selection", "any-stage"),
+                    "selected_epoch": selected.get("global_epoch"),
+                    "enabled_layers": json.dumps(selected.get("enabled_layers")) if selected else None,
+                    "layer0_hard_retention_rate": layer_metrics.get(0, {}).get("hard_retention_rate"),
+                    "layer1_hard_retention_rate": layer_metrics.get(1, {}).get("hard_retention_rate"),
                 })
                 if not reported:
                     continue
@@ -501,7 +514,10 @@ def main():
                 fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
             except BlockingIOError as error:
                 raise ValueError("Another pipeline is using this model root") from error
-            write_json(lock.parent / "grouped_pipeline_resolved_config.json", pipeline.config)
+            # Supplementary GraphMask runs reuse the RGCN root; retain its
+            # original experiment record and save the new config with the probes.
+            config_root = pipeline.path(pipeline.config["graphmask_root"]) if pipeline.args.stage in ("graphmask", "summarize") else lock.parent
+            write_json(config_root / "grouped_pipeline_resolved_config.json", pipeline.config)
             return pipeline.run()
     except Exception as error:
         print(f"ERROR: {error}", file=sys.stderr, flush=True)

@@ -347,6 +347,8 @@ def main() -> None:
             else "fixed-sampled-neighborhood"
         ),
         "sampling_seed": report_seed,
+        "enabled_layers": probe.enabled_layers.detach().cpu().tolist(),
+        "selected_checkpoint": probe_metadata.get("selected_checkpoint"),
         "top_k_per_root_per_layer": args.top_k,
         "relation_type_semantics": (
             "shuffled_model_assignments" if shuffled_relations else "source_relation_names"

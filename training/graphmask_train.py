@@ -42,6 +42,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temperature", type=float, default=1.0 / 3.0)
     parser.add_argument("--location-bias", type=float, default=3.0)
     parser.add_argument("--max-relative-macro-f1-diff", type=float, default=0.05)
+    parser.add_argument(
+        "--checkpoint-selection", choices=["any-stage", "all-layers-enabled"],
+        default="any-stage",
+        help="Choose the sparsest faithful validation checkpoint across any stage, "
+             "or only after every layer's gate has been enabled",
+    )
     parser.add_argument("--train-split", choices=["train"], default="train")
     parser.add_argument("--validation-split", choices=["val"], default="val")
     parser.add_argument("--seed", type=int, default=42)
@@ -114,6 +120,7 @@ def main() -> None:
     best_state = None
     best_validation = None
     best_retention = float("inf")
+    selected_checkpoint = None
     global_epoch = 0
 
     for layer in reversed(range(len(probe.gates))):
@@ -182,6 +189,10 @@ def main() -> None:
             relative_difference = relative_macro_f1_difference(validation)
             validation["relative_macro_f1_difference"] = relative_difference
             eligible = relative_difference <= args.max_relative_macro_f1_diff
+            enabled_layers = probe.enabled_layers.detach().cpu().tolist()
+            selection_eligible = eligible and (
+                args.checkpoint_selection == "any-stage" or all(enabled_layers)
+            )
             record = {
                 "global_epoch": global_epoch,
                 "enabled_through_layer": layer,
@@ -193,19 +204,34 @@ def main() -> None:
                 "lagrange_multiplier": float(optimization.multiplier.detach().item()),
                 "validation": validation,
                 "eligible": eligible,
+                "enabled_layers": enabled_layers,
+                "selection_eligible": selection_eligible,
             }
             history.append(record)
             print(json.dumps(record, ensure_ascii=False))
             retention = validation["hard_retention_rate"]
-            if eligible and retention is not None and float(retention) < best_retention:
+            if selection_eligible and retention is not None and float(retention) < best_retention:
                 best_retention = float(retention)
                 best_state = copy.deepcopy(probe.state_dict())
                 best_validation = copy.deepcopy(validation)
+                selected_checkpoint = {
+                    "policy": args.checkpoint_selection,
+                    "global_epoch": global_epoch,
+                    "enabled_through_layer": layer,
+                    "layer_epoch": layer_epoch,
+                    "enabled_layers": enabled_layers,
+                    "validation_hard_retention_rate": best_retention,
+                }
 
-    write_json(output_dir / "training_history.json", {"history": history})
+    write_json(output_dir / "training_history.json", {
+        "history": history,
+        "checkpoint_selection": args.checkpoint_selection,
+        "selected_checkpoint": selected_checkpoint,
+    })
     if best_state is None or best_validation is None:
         raise RuntimeError(
-            "No GraphMask probe satisfied the validation fidelity threshold; "
+            "No GraphMask probe satisfied the validation fidelity threshold "
+            f"under checkpoint selection policy {args.checkpoint_selection!r}; "
             "inspect training_history.json and adjust training or the explicit threshold"
         )
 
@@ -223,6 +249,8 @@ def main() -> None:
     best_validation["relative_macro_f1_difference"] = relative_macro_f1_difference(
         best_validation
     )
+    if best_validation["relative_macro_f1_difference"] > args.max_relative_macro_f1_diff:
+        raise RuntimeError("Selected GraphMask checkpoint failed validation re-evaluation")
     training_config = vars(args).copy()
     payload = probe_payload(
         probe,
@@ -234,6 +262,7 @@ def main() -> None:
         best_validation,
         training_config,
     )
+    payload["selected_checkpoint"] = selected_checkpoint
     torch.save(payload, output_dir / "graphmask_probe.pt")
     write_json(output_dir / "validation.json", best_validation)
     write_json(output_dir / "manifest.json", {
@@ -247,6 +276,7 @@ def main() -> None:
         "seed": payload["seed"],
         "git_revision": payload["git_revision"],
         "training_config": training_config,
+        "selected_checkpoint": selected_checkpoint,
     })
     print(json.dumps(best_validation, ensure_ascii=False, indent=2))
 
