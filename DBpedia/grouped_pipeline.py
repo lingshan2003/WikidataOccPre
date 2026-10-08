@@ -462,7 +462,7 @@ class Pipeline:
         print(f"[summary] {sum(r['status']=='complete' for r in matrix)}/{len(matrix)} complete reports: {root / 'matrix_summary.tsv'}", flush=True)
         return all(r["status"] == "complete" for r in matrix)
 
-    def run(self):
+    def run(self, *, summarize=True):
         if self.args.stage in ("all", "prepare"):
             self.prepare()
         else:
@@ -480,7 +480,7 @@ class Pipeline:
                         failure = {"context": context, "representation": rep, "error": str(error)}
                         self.failures.append(failure)
                         print(f"[failed] {context}/{rep}: {error}", file=sys.stderr, flush=True)
-        if self.args.stage != "prepare":
+        if summarize and self.args.stage != "prepare":
             ready = self.summarize()
             if self.args.stage == "summarize" and not ready:
                 self.failures.append({"error": "The requested matrix has incomplete reports"})

@@ -56,7 +56,7 @@ def period_label(period):
     return f"{start}–{end}"
 
 
-def collect(root, seed):
+def collect(root, seed, supplement_root=None):
     root = Path(root).resolve()
     resolved = read_json(root / "runs/dbpedia_grouped_20y_v1/grouped_pipeline_resolved_config.json")
     period_config = read_json(root / "config/dbpedia_life_periods_20y_v1.json")
@@ -68,20 +68,64 @@ def collect(root, seed):
     artifact_root = root / "artifacts/dbpedia_grouped_20y_v1"
     matrix_rows = read_json(mask_root / "matrix_summary.json")
     indexed = {(r["context"], r["representation"]): r for r in matrix_rows}
+    supplement_index = {}
+    supplement_config = None
+    if supplement_root is not None:
+        supplement_root = Path(supplement_root).resolve()
+        supplement_config = read_json(supplement_root / "grouped_pipeline_resolved_config.json")
+        expected_periods = {"through_1500", "1501_1900", "1941_1960", "1981_2000", "since_2001"}
+        if set(supplement_config["periods"]) != expected_periods or supplement_config["representations"] != ["multi_group"]:
+            raise ValueError("Expected exactly five multi-group supplement periods")
+        if supplement_config["graphmask_train"]["checkpoint_selection"] != "all-layers-enabled" or supplement_config["seed"] != seed:
+            raise ValueError("Unexpected supplement selection policy/seed")
+        supplement_rows = read_json(supplement_root / "matrix_summary.json")
+        supplement_index = {(r["context"], r["representation"]): r for r in supplement_rows}
+        if len(supplement_rows) != 5 or set(supplement_index) != {(p, "multi_group") for p in expected_periods}:
+            raise ValueError("Missing/extra supplement reports")
+        if read_json(supplement_root / "pipeline_failures.json"):
+            raise ValueError("Supplement pipeline recorded failures")
     tidy, audit, inputs = [], [], []
     for representation, labels in (("binary", BINARY_LABELS), ("multi_group", MULTI_LABELS)):
         expected = set(labels)
         for period in periods:
             period_id = period["id"]
-            summary = indexed[(period_id, representation)]
+            replacement = (period_id, representation) in supplement_index
+            summary = (supplement_index if replacement else indexed)[(period_id, representation)]
             if summary["status"] != "complete" or int(summary["seed"]) != seed:
                 raise ValueError(f"Incomplete or differently seeded run: {period_id}/{representation}")
-            run_dir = mask_root / period_id / representation / f"seed_{seed}"
+            original_run_dir = mask_root / period_id / representation / f"seed_{seed}"
+            run_dir = (supplement_root if replacement else mask_root) / period_id / representation / f"seed_{seed}"
             report_dir = run_dir / "test_report"
             metrics = read_json(report_dir / "test_metrics.json")
             manifest = read_json(report_dir / "manifest.json")
             validation = read_json(run_dir / "validation.json")
             probe_manifest = read_json(run_dir / "manifest.json")
+            history = read_json(run_dir / "training_history.json")["history"]
+            policy = "all-layers-enabled" if replacement else "any-stage"
+            threshold = probe_manifest["training_config"]["max_relative_macro_f1_diff"]
+            candidates = [r for r in history if r["validation"]["relative_macro_f1_difference"] <= threshold
+                          and r["validation"]["hard_retention_rate"] is not None
+                          and (not replacement or r["enabled_through_layer"] == 0)]
+            if not candidates:
+                raise ValueError(f"No eligible checkpoint: {run_dir}")
+            selected = min(candidates, key=lambda r: r["validation"]["hard_retention_rate"])
+            enabled = [i >= selected["enabled_through_layer"] for i in range(2)]
+            if not math.isclose(selected["validation"]["hard_retention_rate"], validation["hard_retention_rate"], abs_tol=1e-12):
+                raise ValueError(f"Selected epoch disagrees with validation: {run_dir}")
+            if replacement:
+                metadata = probe_manifest.get("selected_checkpoint") or {}
+                if metadata.get("policy") != policy or metadata.get("enabled_layers") != [True, True] or metadata.get("global_epoch") != selected["global_epoch"]:
+                    raise ValueError(f"Invalid supplement selected checkpoint: {run_dir}")
+                if manifest.get("enabled_layers") != [True, True] or manifest.get("selected_checkpoint") != metadata:
+                    raise ValueError(f"Report/probe enabled layers disagree: {run_dir}")
+                original_manifest = read_json(original_run_dir / "manifest.json")
+                for key in ("source_checkpoint", "data", "fanouts", "seed"):
+                    if probe_manifest[key] != original_manifest[key]:
+                        raise ValueError(f"Changed supplement source/sampling {key}: {run_dir}")
+                for key in set(probe_manifest["training_config"]) | set(original_manifest["training_config"]):
+                    if key not in ("output_dir", "checkpoint_selection", "device") and probe_manifest["training_config"].get(key) != original_manifest["training_config"].get(key):
+                        raise ValueError(f"Changed supplement training option {key}: {run_dir}")
+            source = "layer0_enabled_supplement" if replacement else "original"
             artifact_dir = artifact_root / period_id / representation
             split = read_json(artifact_dir / "split_summary.json")
             if metrics["split"] != "test" or metrics["roots"] != split["test_nodes"] or metrics["labeled_roots"] != split["test_nodes"]:
@@ -90,7 +134,6 @@ def collect(root, seed):
                 raise ValueError(f"Unexpected model/split/seed: {report_dir}")
             if manifest["fanouts"] != probe_manifest["fanouts"] or manifest["fanouts"] != [int(n) for n in resolved["train"]["num_neighbors"].split(",")]:
                 raise ValueError(f"Inconsistent RGCN/GraphMask sampling at {report_dir}")
-            threshold = probe_manifest["training_config"]["max_relative_macro_f1_diff"]
             if validation["relative_macro_f1_difference"] > threshold or not math.isclose(threshold, resolved["graphmask_train"]["max_relative_macro_f1_diff"]):
                 raise ValueError(f"Validation fidelity setting failed/changed: {run_dir}")
             layer = next(r for r in metrics["layers"] if int(r["layer"]) == 0)
@@ -113,7 +156,7 @@ def collect(root, seed):
             with (artifact_dir / "relation_stats.csv").open(encoding="utf-8", newline="") as handle:
                 graph_counts = {r["relation"]: int(r["count"]) for r in csv.DictReader(handle) if not r["relation"].endswith("__rev")}
             all_retained = math.isclose(float(layer["hard_retention_rate"]), 1.0, abs_tol=1e-10)
-            audit.append({"period_id": period_id, "period_label": period_label(period), "representation": representation, "layer": 0, "test_roots": metrics["roots"], "message_observations": observations, "hard_retained_messages": round(retained), "layer_hard_retention_rate": layer["hard_retention_rate"], "all_messages_retained": all_retained, "validation_relative_macro_f1_difference": validation["relative_macro_f1_difference"], "validation_fidelity_threshold": threshold, "fanouts": ",".join(map(str, manifest["fanouts"])), "report_dir": str(report_dir)})
+            audit.append({"period_id": period_id, "period_label": period_label(period), "representation": representation, "layer": 0, "result_source": source, "checkpoint_selection": policy, "selected_epoch": selected["global_epoch"], "enabled_layers": json.dumps(enabled), "layer0_gate_enabled": enabled[0], "test_roots": metrics["roots"], "message_observations": observations, "hard_retained_messages": round(retained), "layer_hard_retention_rate": layer["hard_retention_rate"], "all_messages_retained": all_retained, "validation_relative_macro_f1_difference": validation["relative_macro_f1_difference"], "validation_fidelity_threshold": threshold, "fanouts": ",".join(map(str, manifest["fanouts"])), "report_dir": str(report_dir)})
             for group in labels:
                 row = observed.get(group)
                 count = int(row["message_observations"]) if row else 0
@@ -125,9 +168,9 @@ def collect(root, seed):
                 if count and not graph_count:
                     raise ValueError(f"Observed messages without graph support: {period_id}/{group}")
                 status = "observed" if count else "no_sampled_messages" if graph_count else "no_graph_edges"
-                tidy.append({"period_id": period_id, "period_label": period_label(period), "representation": representation, "seed": seed, "layer": 0, "group": group, "original_triples_after_collapse": graph_count, "message_observations": count, "hard_retained_messages": round(group_retained), "retained_message_share": share, "retained_message_share_percent": 100 * share, "hard_retention_rate": float(row["hard_retention_rate"]) if row else None, "support_status": status, "layer_message_observations": observations, "layer_hard_retained_messages": round(retained), "layer_hard_retention_rate": layer["hard_retention_rate"], "all_layer_messages_retained": all_retained})
-            inputs.extend(str(p) for p in (report_dir / "relations_base.csv", report_dir / "test_metrics.json", report_dir / "manifest.json", run_dir / "validation.json", artifact_dir / "relation_stats.csv", artifact_dir / "split_summary.json"))
-    return periods, tidy, audit, {"received_root": str(root), "layer": 0, "seed": seed, "metric": "retained_edge_share", "metric_definition": "group hard-retained sampled messages / all hard-retained sampled messages in Layer 0", "reverse_policy": "base groups include both original and generated reverse message directions", "missing_policy": "grey dash means no sampled messages; zero share used only for reconciliation and full-precision tables", "row_marker": "asterisk means all sampled Layer-0 messages were hard-retained", "life_period_config": period_config, "taxonomy": taxonomy, "resolved_experiment": resolved, "input_paths": inputs}
+                tidy.append({"period_id": period_id, "period_label": period_label(period), "representation": representation, "seed": seed, "layer": 0, "result_source": source, "selected_epoch": selected["global_epoch"], "layer0_gate_enabled": enabled[0], "group": group, "original_triples_after_collapse": graph_count, "message_observations": count, "hard_retained_messages": round(group_retained), "retained_message_share": share, "retained_message_share_percent": 100 * share, "hard_retention_rate": float(row["hard_retention_rate"]) if row else None, "support_status": status, "layer_message_observations": observations, "layer_hard_retained_messages": round(retained), "layer_hard_retention_rate": layer["hard_retention_rate"], "all_layer_messages_retained": all_retained})
+            inputs.extend(str(p) for p in (report_dir / "relations_base.csv", report_dir / "test_metrics.json", report_dir / "manifest.json", run_dir / "validation.json", run_dir / "manifest.json", run_dir / "training_history.json", artifact_dir / "relation_stats.csv", artifact_dir / "split_summary.json"))
+    return periods, tidy, audit, {"received_root": str(root), "supplement_root": str(supplement_root) if supplement_root else None, "supplement_periods": list(supplement_config["periods"]) if supplement_config else [], "layer": 0, "seed": seed, "metric": "retained_edge_share", "metric_definition": "group hard-retained sampled messages / all hard-retained sampled messages in Layer 0", "reverse_policy": "base groups include both original and generated reverse message directions", "missing_policy": "grey dash means no sampled messages; zero share used only for reconciliation and full-precision tables", "row_marker": "asterisk means all sampled Layer-0 messages were hard-retained; supplement plots use gates-enabled checkpoints for these five multi-group rows", "life_period_config": period_config, "taxonomy": taxonomy, "resolved_experiment": resolved, "supplement_experiment": supplement_config, "input_paths": inputs}
 
 
 def plot_heatmap(periods, tidy, audit, representation, output_dir, seed):
@@ -172,11 +215,17 @@ def plot_heatmap(periods, tidy, audit, representation, output_dir, seed):
     colorbar.ax.tick_params(labelsize=11, length=0, pad=6)
     colorbar.set_label("Global hard-retained message share (%)", fontsize=13, labelpad=15)
     figure.text(0.5, 0.95, "DBpedia relation groups across life periods — Layer 0" if not binary else "DBpedia across life periods — Layer 0", ha="center", va="center", fontsize=23 if not binary else 19)
-    figure.text(0.5, 0.90, "Binary relation vocabulary" if binary else "Multi-group relation vocabulary", ha="center", va="center", fontsize=18)
+    supplemented = any(r["result_source"] == "layer0_enabled_supplement" for r in audit_index.values())
+    subtitle = "Binary relation vocabulary" if binary else "Multi-group relation vocabulary"
+    if supplemented:
+        subtitle += " · five-period checkpoint supplement"
+    figure.text(0.5, 0.90, subtitle, ha="center", va="center", fontsize=18)
     figure.text(0.04 if binary else 0.145, 0.107, "* All sampled Layer 0 messages retained. Grey cells (—): no sampled messages.", fontsize=10.2, color="#444444")
     figure.text(0.04 if binary else 0.145, 0.077, "Rows sum to 100% over observed groups; original and generated reverse directions combined.", fontsize=9.2 if binary else 10.2, color="#444444")
     fanouts = next(iter(audit_index.values()))["fanouts"]
     figure.text(0.04 if binary else 0.145, 0.047, f"Test-root sampling · seed {seed} · fanouts {fanouts} · life windows may overlap", fontsize=10.2, color="#444444")
+    if supplemented:
+        figure.text(0.145, 0.022, "New checkpoints: ≤1500, 1501–1900, 1941–1960, 1981–2000, ≥2001 (both layer gates enabled).", fontsize=10.2, color="#444444")
     stem = output_dir / f"dbpedia_{representation}_layer0_retained_message_share"
     for extension in ("png", "svg", "pdf"):
         figure.savefig(stem.with_suffix("." + extension), dpi=180, facecolor="white")
@@ -189,8 +238,9 @@ def main():
     parser.add_argument("--received-root", type=Path, default=Path("artifacts/dbpedia_visualization_received_2026_10_06"))
     parser.add_argument("--output-dir", type=Path, default=Path("visualization/dbpedia_grouped_layer0_2026_10_06"))
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--layer0-supplement-root", type=Path, help="Five-period GraphMask root; replace only these multi-group rows")
     args = parser.parse_args()
-    periods, tidy, audit, provenance = collect(args.received_root, args.seed)
+    periods, tidy, audit, provenance = collect(args.received_root, args.seed, args.layer0_supplement_root)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     write_tsv(args.output_dir / "layer0_relation_groups.tsv", tidy)
     write_tsv(args.output_dir / "layer0_period_audit.tsv", audit)

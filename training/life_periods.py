@@ -73,6 +73,7 @@ class LifePeriodConfig:
     invalid_interval_policy: str
     periods: Tuple[LifePeriod, ...]
     allow_finite_last_period: bool = False
+    calendar_layout: str = "partition"
 
     @property
     def identifiers(self) -> Tuple[str, ...]:
@@ -100,6 +101,8 @@ class LifePeriodConfig:
         }
         if self.allow_finite_last_period:
             result["allow_finite_last_period"] = True
+        if self.calendar_layout != "partition":
+            result["calendar_layout"] = self.calendar_layout
         return result
 
 
@@ -135,6 +138,20 @@ def _validate_partition(periods: Sequence[LifePeriod], *, allow_finite_last_peri
     for previous, current in zip(periods, periods[1:]):
         if previous.end is None or current.start is None or current.start != previous.end + 1:
             raise ValueError("Life periods must be ordered, non-overlapping, and gap-free in calendar time")
+
+
+def _validate_sliding_windows(periods: Sequence[LifePeriod]) -> None:
+    """An explicit opt-in to finite, equal-width windows on a regular grid."""
+    if not periods:
+        raise ValueError("Sliding windows require at least one window")
+    if any(p.start is None or p.end is None for p in periods):
+        raise ValueError("Sliding windows require finite start and end years")
+    widths = {p.end - p.start for p in periods}
+    if len(widths) != 1:
+        raise ValueError("Sliding windows must have equal widths")
+    strides = {b.start - a.start for a, b in zip(periods, periods[1:])}
+    if strides and (len(strides) != 1 or min(strides) <= 0 or max(strides) > next(iter(widths))):
+        raise ValueError("Sliding windows require a constant positive stride and overlapping windows")
 
 
 def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
@@ -185,7 +202,13 @@ def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
     allow_finite = payload.get("allow_finite_last_period", False)
     if not isinstance(allow_finite, bool):
         raise ValueError("allow_finite_last_period must be a Boolean")
-    _validate_partition(periods, allow_finite_last_period=allow_finite)
+    calendar_layout = payload.get("calendar_layout", "partition")
+    if calendar_layout == "partition":
+        _validate_partition(periods, allow_finite_last_period=allow_finite)
+    elif calendar_layout == "sliding_windows":
+        _validate_sliding_windows(periods)
+    else:
+        raise ValueError("calendar_layout must be 'partition' or 'sliding_windows'")
     return LifePeriodConfig(
         name=payload["name"].strip(),
         version=payload["version"],
@@ -199,6 +222,7 @@ def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
         invalid_interval_policy=INVALID_INTERVAL_POLICY,
         periods=periods,
         allow_finite_last_period=allow_finite,
+        calendar_layout=calendar_layout,
     )
 
 
@@ -207,7 +231,7 @@ def life_period_membership(nodes: pd.DataFrame, config: LifePeriodConfig) -> Tup
 
     A valid life interval ``[birth, death]`` belongs to period ``[start, end]``
     exactly when the intervals intersect. For the v2 policy, a person with
-    only a known birth (or only a known death) is assigned to the single period
+    only a known birth (or only a known death) is assigned to every window
     containing that observed endpoint; no unobserved years are extrapolated.
     """
     required = {config.birth_field, config.death_field}

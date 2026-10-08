@@ -67,6 +67,8 @@ def snapshot(directory, policy, threshold):
         "validation_relative_f1_difference": validation["relative_macro_f1_difference"],
         "validation_hard_retention_rate": validation["hard_retention_rate"],
         "test_macro_f1": metrics["masked"]["macro_f1"],
+        "test_accuracy": metrics["masked"]["accuracy"],
+        "prediction_agreement": metrics["prediction_agreement"],
         "test_hard_retention_rate": metrics["hard_retention_rate"],
         "layer0_hard_retention_rate": layers[0]["hard_retention_rate"],
         "layer1_hard_retention_rate": layers[1]["hard_retention_rate"],
@@ -91,6 +93,7 @@ def main():
     parser.add_argument("--config", default="config/dbpedia_multi_group_layer0_enabled_5periods_v1.json")
     parser.add_argument("--original-root", default="runs_graphmask/dbpedia_grouped_20y_v1")
     parser.add_argument("--supplement-root", help="Override new probe root (e.g. extracted download)")
+    parser.add_argument("--output-dir", help="Write comparison tables separately from the received reports")
     args = parser.parse_args()
     config = read_json(resolve(args.config))
     old_root = resolve(args.original_root)
@@ -123,14 +126,16 @@ def main():
                 for metric in ("hard_retention_rate", "retained_edge_share", "mean_keep_probability"):
                     item[label + "_" + metric] = float(obs[metric]) if obs.get(metric) else None
             group_rows.append(item)
-    write_table(new_root / "checkpoint_selection_comparison.tsv", rows)
-    write_table(new_root / "layer0_group_comparison.tsv", group_rows)
-    (new_root / "checkpoint_selection_comparison.json").write_text(
+    output = resolve(args.output_dir) if args.output_dir else new_root
+    output.mkdir(parents=True, exist_ok=True)
+    write_table(output / "checkpoint_selection_comparison.tsv", rows)
+    write_table(output / "layer0_group_comparison.tsv", group_rows)
+    (output / "checkpoint_selection_comparison.json").write_text(
         json.dumps({"original_root": str(old_root), "supplement_root": str(new_root),
                     "selection_metric": "Minimum overall validation hard retention subject to fidelity and stage eligibility",
                     "validation_fidelity_threshold": threshold, "periods": rows, "layer0_groups": group_rows},
                    ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Compared {len(rows)} periods: {new_root / 'checkpoint_selection_comparison.tsv'}")
+    print(f"Compared {len(rows)} periods: {output / 'checkpoint_selection_comparison.tsv'}")
 
 
 if __name__ == "__main__":

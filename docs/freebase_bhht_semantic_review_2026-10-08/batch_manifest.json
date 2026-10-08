@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-08",
+  "source": "docs/freebase_bhht_match_2026-10-08/profession_bhht_matches.tsv",
+  "review_professions": 1276,
+  "non_exact_professions": 1274,
+  "exact_cross_l1_professions": 2,
+  "partition": "rank-ordered review rows round-robin across 3 batches",
+  "batch_counts": [
+    426,
+    425,
+    425
+  ]
+}

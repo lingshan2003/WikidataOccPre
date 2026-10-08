@@ -1,0 +1,90 @@
+{
+  "version": "freebase_bhht_author_lookup_v1",
+  "graph_people": 100756,
+  "person_profession_pairs": 320525,
+  "unique_people_with_at_least_one_profession_by_match_status": {
+    "exact_unique": 96544,
+    "substring_same_l1_multiple_l2": 5128,
+    "substring_unique_candidate": 47447,
+    "no_author_rule": 6794,
+    "substring_cross_l1_conflict": 5037,
+    "exact_cross_l1_conflict": 47
+  },
+  "person_candidate_resolution_not_frozen_labels": {
+    "exact_only": {
+      "incomplete_mapping": 53918,
+      "unique_l1_candidate": 43961,
+      "multiple_l1_candidates": 2877
+    },
+    "exact_and_unique_l1_substring": {
+      "incomplete_mapping": 11154,
+      "unique_l1_candidate": 79100,
+      "multiple_l1_candidates": 10502
+    }
+  },
+  "professions": 1817,
+  "author_rule_rows": 1895,
+  "lookup_method_counts": {
+    "author_exact": 543,
+    "author_substring": 912,
+    "no_author_rule": 362
+  },
+  "match_status_counts": {
+    "exact_unique": 541,
+    "substring_unique_candidate": 748,
+    "substring_same_l1_multiple_l2": 39,
+    "substring_cross_l1_conflict": 125,
+    "no_author_rule": 362,
+    "exact_cross_l1_conflict": 2
+  },
+  "profession_occurrences_by_status": {
+    "exact_unique": 219093,
+    "substring_unique_candidate": 81753,
+    "substring_same_l1_multiple_l2": 5383,
+    "substring_cross_l1_conflict": 5268,
+    "no_author_rule": 8981,
+    "exact_cross_l1_conflict": 47
+  },
+  "previous_llm_comparison_counts": {
+    "agrees_with_previous_llm": 857,
+    "author_candidate_previous_needs_review": 243,
+    "no_unique_author_l1_candidate": 489,
+    "formal_author_other_previously_out_of_scope": 135,
+    "differs_from_previous_llm": 50,
+    "author_candidate_previous_out_of_scope": 43
+  },
+  "observed_reference_disagreement_professions": 13,
+  "observed_reference_l1_disagreement_professions": 8,
+  "exact_priority_differs_from_author_first_parent": 8,
+  "exact_priority_differs_from_author_first_l1": 4,
+  "no_author_rule_with_auxiliary_observed_reference": 4,
+  "inputs": {
+    "inventory": {
+      "path": "/Users/wangyue/RGCN/docs/freebase_profession_review_2026-10-03/profession_inventory.tsv",
+      "bytes": 200922,
+      "mtime_ns": 1791010611027777781
+    },
+    "previous_llm": {
+      "path": "/Users/wangyue/RGCN/docs/freebase_profession_review_2026-10-03/profession_l1_crosswalk_draft.tsv",
+      "bytes": 618126,
+      "mtime_ns": 1791011761567049395
+    },
+    "rules": {
+      "path": "/Users/wangyue/RGCN/external_data/notable_people/bhht_2022/derived/author_keyword_l123_rules.csv",
+      "bytes": 460210,
+      "mtime_ns": 1791439231285275037
+    },
+    "observed_reference": {
+      "path": "/Users/wangyue/RGCN/external_data/notable_people/bhht_2022/derived/observed_main_occupation_l123.csv",
+      "bytes": 542273,
+      "mtime_ns": 1791438884206427624
+    },
+    "nodes": {
+      "path": "/Users/wangyue/RGCN/external_data/freebase/descriptive_v2_local/05_final/nodes.csv",
+      "bytes": 10076499,
+      "mtime_ns": 1790779999000000000
+    }
+  },
+  "existing_crosswalk_or_training_labels_modified": false,
+  "new_llm_classification_performed": false
+}
