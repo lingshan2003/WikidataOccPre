@@ -1,0 +1,62 @@
+{
+  "version": "freebase_bhht_semantic_l1_review_v1",
+  "scope": "L1 only; L2 deferred; draft not human-approved or frozen",
+  "professions": 1817,
+  "reviewed_professions": 1276,
+  "retained_exact_unique": 541,
+  "semantic_resolved": 1148,
+  "needs_context": 128,
+  "primary_adjudications": 79,
+  "changed_from_unique_lookup": 96,
+  "specific_rationale_second_pass": 612,
+  "withdrawn_unique_lookup_to_needs_context": 33,
+  "changed_from_previous_proposed_llm": 26,
+  "level1_profession_counts": {
+    "Culture": 577,
+    "Sports/Games": 121,
+    "Leadership": 266,
+    "Discovery/Science": 348,
+    "Other": 377,
+    "UNRESOLVED": 128
+  },
+  "semantic_review_confidence_counts": {
+    "high": 527,
+    "medium": 621,
+    "low": 128
+  },
+  "graph_people": 100756,
+  "person_profession_pairs": 320525,
+  "person_resolution_not_training_labels": {
+    "multiple_l1": 15525,
+    "unique_l1": 83499,
+    "incomplete_mapping": 1732
+  },
+  "unresolved_person_profession_pairs_not_unique_people": 1880,
+  "alias_l1_inconsistency_rows": 0,
+  "review_by_original_match_status": {
+    "exact_cross_l1_conflict": {
+      "needs_context": 1,
+      "resolved": 1
+    },
+    "no_author_rule": {
+      "resolved": 274,
+      "needs_context": 88
+    },
+    "substring_cross_l1_conflict": {
+      "resolved": 119,
+      "needs_context": 6
+    },
+    "substring_same_l1_multiple_l2": {
+      "resolved": 37,
+      "needs_context": 2
+    },
+    "substring_unique_candidate": {
+      "resolved": 717,
+      "needs_context": 31
+    }
+  },
+  "independent_audit_disposition_counts": {
+    "accepted": 21,
+    "specific_rationale_supplied": 329
+  }
+}

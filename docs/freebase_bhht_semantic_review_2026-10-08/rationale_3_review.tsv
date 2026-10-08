@@ -1,0 +1,205 @@
+rank	raw_value	semantic_rationale	evidence	reviewer
+14	Businessperson	经营或创办商业活动，决定产品、交易、客户及日常运营事项；具体管理规模需看上下文。	occupation_meaning:经营或创办商业活动，决定产品、交易、客户及日常运营事项；具体管理规模需看上下文。	rationale_batch_3
+23	Football player	参加足球比赛并通过训练、配合和场上攻防争取比赛结果。	occupation_meaning:参加足球比赛并通过训练、配合和场上攻防争取比赛结果。	rationale_batch_3
+36	Health professional	评估健康状况、提供预防或治疗服务；该泛称没有限定具体医疗专科。	occupation_meaning:评估健康状况、提供预防或治疗服务；该泛称没有限定具体医疗专科。	rationale_batch_3
+48	Music Producer	统筹录音项目的曲目、演奏者、录音流程与成品声音，推动音乐作品完成发行。	occupation_meaning:统筹录音项目的曲目、演奏者、录音流程与成品声音，推动音乐作品完成发行。	rationale_batch_3
+78	Sex worker	按约定向客户提供性服务或成人陪伴服务；词项未指定具体服务形式。	occupation_meaning:按约定向客户提供性服务或成人陪伴服务；词项未指定具体服务形式。	rationale_batch_3
+86	Basketball Player	参加篮球训练和比赛，在场上执行进攻、防守及团队战术。	occupation_meaning:参加篮球训练和比赛，在场上执行进攻、防守及团队战术。	rationale_batch_3
+94	Race car driver	驾驶赛车参加赛道竞速，通过操控车辆争取比赛名次。	occupation_meaning:驾驶赛车参加赛道竞速，通过操控车辆争取比赛名次。	rationale_batch_3
+111	Arranger	将旋律和和声改编为适合特定乐器、声部或演出编制的音乐谱面。	occupation_meaning:将旋律和和声改编为适合特定乐器、声部或演出编制的音乐谱面。	rationale_batch_3
+124	Tennis player	进行网球训练并参加单打或双打比赛，以击球和战术争取胜局。	occupation_meaning:进行网球训练并参加单打或双打比赛，以击球和战术争取胜局。	rationale_batch_3
+132	Beautician	为顾客提供皮肤护理、化妆或其他美容服务。	occupation_meaning:为顾客提供皮肤护理、化妆或其他美容服务。	rationale_batch_3
+140	Ballet Dancer	排练并在舞台上表演古典芭蕾舞剧或舞蹈作品。	occupation_meaning:排练并在舞台上表演古典芭蕾舞剧或舞蹈作品。	rationale_batch_3
+156	Researcher	围绕某个问题设计调查或实验、收集资料并分析证据以形成结论；具体学科未限定。	occupation_meaning:围绕某个问题设计调查或实验、收集资料并分析证据以形成结论；具体学科未限定。	rationale_batch_3
+176	Golfer	练习并参加高尔夫赛事，以尽可能少的杆数完成球洞。	occupation_meaning:练习并参加高尔夫赛事，以尽可能少的杆数完成球洞。	rationale_batch_3
+186	Basketball Coach	制定训练计划、教授技术战术并带领篮球队备赛和参赛。	occupation_meaning:制定训练计划、教授技术战术并带领篮球队备赛和参赛。	rationale_batch_3
+192	Talk show host	主持谈话节目、介绍议题并采访嘉宾，引导录制或直播对话。	occupation_meaning:主持谈话节目、介绍议题并采访嘉宾，引导录制或直播对话。	rationale_batch_3
+207	Office Worker	处理办公室的文书、数据录入、通信、排程或一般行政事务；具体岗位未限定。	occupation_meaning:处理办公室的文书、数据录入、通信、排程或一般行政事务；具体岗位未限定。	rationale_batch_3
+218	Music video director	规划并指导音乐录影带的视觉叙事、镜头表演和拍摄制作。	occupation_meaning:规划并指导音乐录影带的视觉叙事、镜头表演和拍摄制作。	rationale_batch_3
+228	Social Worker	评估个人或家庭的社会服务需求，协助获得福利、住房、辅导等资源并跟进个案。	occupation_meaning:评估个人或家庭的社会服务需求，协助获得福利、住房、辅导等资源并跟进个案。	rationale_batch_3
+243	Business magnate	拥有或控制大型企业资产，作出高层商业投资、经营和扩张决策。	occupation_meaning:拥有或控制大型企业资产，作出高层商业投资、经营和扩张决策。	rationale_batch_3
+250	Supermodel	为时装、广告或媒体拍摄展示服装和产品，并参与相关宣传活动。	occupation_meaning:为时装、广告或媒体拍摄展示服装和产品，并参与相关宣传活动。	rationale_batch_3
+258	Biathlete	训练并参加冬季两项赛事，在越野滑雪与步枪射击两个环节竞赛。	occupation_meaning:训练并参加冬季两项赛事，在越野滑雪与步枪射击两个环节竞赛。	rationale_batch_3
+269	Psychotherapist	通过评估、谈话治疗等方法帮助来访者处理心理、情绪或行为问题。	occupation_meaning:通过评估、谈话治疗等方法帮助来访者处理心理、情绪或行为问题。	rationale_batch_3
+275	Spiritual leader	带领信众进行灵性指导、集体活动或宗教实践；具体宗教身份未限定。	occupation_meaning:带领信众进行灵性指导、集体活动或宗教实践；具体宗教身份未限定。	rationale_batch_3
+289	Sports instructor	向学员示范某项运动的动作规则，组织练习并纠正技术或安全问题。	occupation_meaning:向学员示范某项运动的动作规则，组织练习并纠正技术或安全问题。	rationale_batch_3
+298	Waiting staff	接待餐饮顾客、记录点单、递送食品饮料并处理用餐过程中的服务需求。	occupation_meaning:接待餐饮顾客、记录点单、递送食品饮料并处理用餐过程中的服务需求。	rationale_batch_3
+304	Orchestrator	把作曲家的音乐草稿扩写成各乐器声部的管弦乐总谱和分谱。	occupation_meaning:把作曲家的音乐草稿扩写成各乐器声部的管弦乐总谱和分谱。	rationale_batch_3
+316	Jazz Drummer	为爵士乐演奏鼓组节奏，并与其他乐手配合完成即兴或编排演出。	occupation_meaning:为爵士乐演奏鼓组节奏，并与其他乐手配合完成即兴或编排演出。	rationale_batch_3
+327	Territorial lord	作为领地贵族管理辖地、征收租税或行使地方司法与统治权。	occupation_meaning:作为领地贵族管理辖地、征收租税或行使地方司法与统治权。	rationale_batch_3
+337	Documentary Filmmaker	选题并拍摄、剪辑非虚构影像，以访谈、档案或现场记录呈现现实议题。	occupation_meaning:选题并拍摄、剪辑非虚构影像，以访谈、档案或现场记录呈现现实议题。	rationale_batch_3
+346	Cabaret Artist	在歌舞厅或综艺舞台演唱、跳舞、表演喜剧或呈现其他现场节目。	occupation_meaning:在歌舞厅或综艺舞台演唱、跳舞、表演喜剧或呈现其他现场节目。	rationale_batch_3
+353	Editing	校订文字、影像或声音材料的结构与内容，使其适合出版、播出或发行；词项只指编辑活动。	occupation_meaning:校订文字、影像或声音材料的结构与内容，使其适合出版、播出或发行；词项只指编辑活动。	rationale_batch_3
+366	Media Personality	通过电视、广播或网络节目出镜、主持或评论，与公众传播内容并维持媒体形象。	occupation_meaning:通过电视、广播或网络节目出镜、主持或评论，与公众传播内容并维持媒体形象。	rationale_batch_3
+387	Dramaturge	为剧院制作研究剧本背景、分析戏剧结构，并向导演和剧组提供文本建议。	occupation_meaning:为剧院制作研究剧本背景、分析戏剧结构，并向导演和剧组提供文本建议。	rationale_batch_3
+401	Law professor	在高校讲授法律课程、指导学生，并可能研究法律规则和司法制度。	occupation_meaning:在高校讲授法律课程、指导学生，并可能研究法律规则和司法制度。	rationale_batch_3
+406	Triathlete	训练并参加由游泳、骑行和跑步组成的三项全能比赛。	occupation_meaning:训练并参加由游泳、骑行和跑步组成的三项全能比赛。	rationale_batch_3
+413	Martial Arts Instructor	教授武术动作、套路或对练方法，组织练习并指导学员提高技术与安全意识。	occupation_meaning:教授武术动作、套路或对练方法，组织练习并指导学员提高技术与安全意识。	rationale_batch_3
+427	Ski jumper	从跳台滑下起跳，在空中保持姿势并以距离和动作质量参加跳台滑雪比赛。	occupation_meaning:从跳台滑下起跳，在空中保持姿势并以距离和动作质量参加跳台滑雪比赛。	rationale_batch_3
+433	Short Track Speed Skater	在短道冰场参加速度滑冰竞赛，通过弯道超越和冲刺争取名次。	occupation_meaning:在短道冰场参加速度滑冰竞赛，通过弯道超越和冲刺争取名次。	rationale_batch_3
+442	Voice acting in Japan	为动画、游戏或影视角色录制日语对白，塑造角色声音并参与配音录制。	occupation_meaning:为动画、游戏或影视角色录制日语对白，塑造角色声音并参与配音录制。	rationale_batch_3
+453	Gravure idol	为日本杂志写真页、写真集或宣传影像拍摄写真，并参与相关媒体宣传；该头衔是写真模特/艺人，而非普通行政岗位。	https://dictionary.goo.ne.jp/word/グラビアアイドル/; https://japanese-gravure.github.io/en/	rationale_batch_3
+468	TV chef	在电视节目中烹饪、讲解菜谱或展示餐饮知识，面向观众制作烹饪内容。	occupation_meaning:在电视节目中烹饪、讲解菜谱或展示餐饮知识，面向观众制作烹饪内容。	rationale_batch_3
+476	Opera composer	创作歌剧的音乐、声乐旋律和管弦乐部分，供舞台制作排演演出。	occupation_meaning:创作歌剧的音乐、声乐旋律和管弦乐部分，供舞台制作排演演出。	rationale_batch_3
+488	Dance Teacher	教授舞蹈动作、节奏和编排，带领学生排练并为演出或考试作准备。	occupation_meaning:教授舞蹈动作、节奏和编排，带领学生排练并为演出或考试作准备。	rationale_batch_3
+501	Contemporary artist	创作当代艺术作品，并通过展览、装置、影像或其他媒介向观众呈现。	occupation_meaning:创作当代艺术作品，并通过展览、装置、影像或其他媒介向观众呈现。	rationale_batch_3
+513	TV Program Creator	构思电视节目的主题、形式和内容，开发企划并协调节目制作。	occupation_meaning:构思电视节目的主题、形式和内容，开发企划并协调节目制作。	rationale_batch_3
+525	Skeleton racer	俯卧在小型雪橇上沿冰道高速滑行，参加钢架雪车竞速。	occupation_meaning:俯卧在小型雪橇上沿冰道高速滑行，参加钢架雪车竞速。	rationale_batch_3
+542	Steelworker	在钢铁生产现场操作设备、处理钢材或参与炼钢和轧制等工序。	occupation_meaning:在钢铁生产现场操作设备、处理钢材或参与炼钢和轧制等工序。	rationale_batch_3
+548	Postal worker	分拣、运输或投递信件包裹，并办理邮政柜台或配送相关事务。	occupation_meaning:分拣、运输或投递信件包裹，并办理邮政柜台或配送相关事务。	rationale_batch_3
+558	Dialect coach	帮助演员学习角色所需的方言发音、语调和口音，并在排演或拍摄中纠正表达。	occupation_meaning:帮助演员学习角色所需的方言发音、语调和口音，并在排演或拍摄中纠正表达。	rationale_batch_3
+565	Social Critic	撰写评论或发表意见，分析社会习俗、制度和公共议题并指出其问题。	occupation_meaning:撰写评论或发表意见，分析社会习俗、制度和公共议题并指出其问题。	rationale_batch_3
+572	Magistrate	主持基层法庭听证、审理特定案件或签发司法命令。	occupation_meaning:主持基层法庭听证、审理特定案件或签发司法命令。	rationale_batch_3
+584	Keytarist	演奏肩背式键盘合成器，在乐队或舞台演出中承担键盘旋律与伴奏。	occupation_meaning:演奏肩背式键盘合成器，在乐队或舞台演出中承担键盘旋律与伴奏。	rationale_batch_3
+593	Ballet master	负责芭蕾舞团的排练训练、舞步指导和剧目排演，确保舞者掌握演出编排。	occupation_meaning:负责芭蕾舞团的排练训练、舞步指导和剧目排演，确保舞者掌握演出编排。	rationale_batch_3
+600	Tour guide	带领游客参观景点，讲解历史文化信息并协调参观路线和团体行程。	occupation_meaning:带领游客参观景点，讲解历史文化信息并协调参观路线和团体行程。	rationale_batch_3
+608	Installation Artist	设计并搭建空间性艺术装置，利用物件、影像、光线或场地与观众互动。	occupation_meaning:设计并搭建空间性艺术装置，利用物件、影像、光线或场地与观众互动。	rationale_batch_3
+617	Video game designer	设计电子游戏的规则、关卡、角色和玩家体验，并与美术及开发团队协作实现。	occupation_meaning:设计电子游戏的规则、关卡、角色和玩家体验，并与美术及开发团队协作实现。	rationale_batch_3
+634	Animation Director	规划动画项目的视觉风格和镜头表现，指导动画师完成分镜、动作与画面制作。	occupation_meaning:规划动画项目的视觉风格和镜头表现，指导动画师完成分镜、动作与画面制作。	rationale_batch_3
+642	Film Distributor	取得影片发行权，安排影院或流媒体上映，并负责宣传、拷贝交付和发行渠道协调。	occupation_meaning:取得影片发行权，安排影院或流媒体上映，并负责宣传、拷贝交付和发行渠道协调。	rationale_batch_3
+653	Maid	清洁居所、整理房间、洗衣或完成雇主要求的日常家务。	occupation_meaning:清洁居所、整理房间、洗衣或完成雇主要求的日常家务。	rationale_batch_3
+666	Corporate lawyer	为公司提供合同、并购、合规或诉讼方面的法律意见，并代表公司处理法律事务。	occupation_meaning:为公司提供合同、并购、合规或诉讼方面的法律意见，并代表公司处理法律事务。	rationale_batch_3
+677	Professional Chess Player	参加职业棋赛，研究开局与局势并通过对局争取胜利和奖金。	occupation_meaning:参加职业棋赛，研究开局与局势并通过对局争取胜利和奖金。	rationale_batch_3
+683	Fashion Photographer	为时装、模特或品牌拍摄照片，设计布景、灯光和构图以呈现服饰形象。	occupation_meaning:为时装、模特或品牌拍摄照片，设计布景、灯光和构图以呈现服饰形象。	rationale_batch_3
+688	Chiropractor	评估肌肉骨骼不适并使用脊柱或关节手法及相关治疗协助缓解症状。	occupation_meaning:评估肌肉骨骼不适并使用脊柱或关节手法及相关治疗协助缓解症状。	rationale_batch_3
+699	Web Developer	编写和维护网站的前端页面或后台功能，使网站可访问、交互并连接数据服务。	occupation_meaning:编写和维护网站的前端页面或后台功能，使网站可访问、交互并连接数据服务。	rationale_batch_3
+714	Gospel singer	演唱福音音乐作品，在教会、录音或现场音乐活动中呈现声乐表演。	occupation_meaning:演唱福音音乐作品，在教会、录音或现场音乐活动中呈现声乐表演。	rationale_batch_3
+720	Stevedore	在港口安排或操作货物装卸设备，将货物装上船或从船上卸下。	occupation_meaning:在港口安排或操作货物装卸设备，将货物装上船或从船上卸下。	rationale_batch_3
+729	Educationalist	研究教育制度、教学方法或教育政策，并提出教育实践与改革方面的观点。	occupation_meaning:研究教育制度、教学方法或教育政策，并提出教育实践与改革方面的观点。	rationale_batch_3
+736	Saxophone player	演奏萨克斯管，在独奏、乐队或录音中承担旋律、即兴或合奏声部。	occupation_meaning:演奏萨克斯管，在独奏、乐队或录音中承担旋律、即兴或合奏声部。	rationale_batch_3
+740	Speech therapist	评估并治疗言语、语言、声音或吞咽障碍，制定训练方案并跟踪沟通能力变化。	occupation_meaning:评估并治疗言语、语言、声音或吞咽障碍，制定训练方案并跟踪沟通能力变化。	rationale_batch_3
+746	Gymnastics Coach	教授体操动作和器械技术，安排体能训练并指导运动员备赛与执行动作。	occupation_meaning:教授体操动作和器械技术，安排体能训练并指导运动员备赛与执行动作。	rationale_batch_3
+752	Wrestling Promoter	签约摔角选手、安排对阵和场地，并组织推广职业摔角赛事。	occupation_meaning:签约摔角选手、安排对阵和场地，并组织推广职业摔角赛事。	rationale_batch_3
+763	Rally Driver	驾驶赛车参加拉力赛，依据领航指令在不同路面赛段竞速。	occupation_meaning:驾驶赛车参加拉力赛，依据领航指令在不同路面赛段竞速。	rationale_batch_3
+774	Literary Scholar	研究文学作品、作者、文类和历史语境，并通过教学或学术出版传播成果。	occupation_meaning:研究文学作品、作者、文类和历史语境，并通过教学或学术出版传播成果。	rationale_batch_3
+787	Website content writer	为网站撰写文章、产品介绍或页面文案，并按受众与编辑要求修订内容。	occupation_meaning:为网站撰写文章、产品介绍或页面文案，并按受众与编辑要求修订内容。	rationale_batch_3
+794	Court clerk	整理法院案卷、登记文件、安排开庭日程并协助法庭行政流程。	occupation_meaning:整理法院案卷、登记文件、安排开庭日程并协助法庭行政流程。	rationale_batch_3
+806	Belly Dancer	排练并表演以躯干、腹部和髋部动作见长的舞蹈。	occupation_meaning:排练并表演以躯干、腹部和髋部动作见长的舞蹈。	rationale_batch_3
+814	Visual Effects Producer	统筹影视视觉特效项目的预算、进度、团队和交付，与导演及后期部门协调。	occupation_meaning:统筹影视视觉特效项目的预算、进度、团队和交付，与导演及后期部门协调。	rationale_batch_3
+820	Military Historian	研究军队、战争、战役和军事制度的历史材料，并撰写学术或历史著作。	occupation_meaning:研究军队、战争、战役和军事制度的历史材料，并撰写学术或历史著作。	rationale_batch_3
+825	Unit production manager	管理影视单元拍摄的预算、日程、人员和现场后勤，确保制作按计划推进。	occupation_meaning:管理影视单元拍摄的预算、日程、人员和现场后勤，确保制作按计划推进。	rationale_batch_3
+830	Public Relations Consultant	为客户制定公众沟通和媒体关系方案，撰写新闻材料并建议如何回应舆情。	occupation_meaning:为客户制定公众沟通和媒体关系方案，撰写新闻材料并建议如何回应舆情。	rationale_batch_3
+839	Script editor	评读剧本并提出结构、人物、对白和节奏修改意见，协助编剧完善影视文本。	occupation_meaning:评读剧本并提出结构、人物、对白和节奏修改意见，协助编剧完善影视文本。	rationale_batch_3
+848	Tax collector	核定或追缴应缴税款，通知纳税人并执行税务征收程序。	occupation_meaning:核定或追缴应缴税款，通知纳税人并执行税务征收程序。	rationale_batch_3
+856	Political Economist	研究政治制度、政策和权力关系如何影响经济生产、分配与市场行为。	occupation_meaning:研究政治制度、政策和权力关系如何影响经济生产、分配与市场行为。	rationale_batch_3
+873	Racketeering	通过勒索、欺诈或其他持续性非法经营活动获取利益；词项指犯罪行为类别。	occupation_meaning:通过勒索、欺诈或其他持续性非法经营活动获取利益；词项指犯罪行为类别。	rationale_batch_3
+880	Biophysicist	运用物理学实验和模型研究细胞、蛋白质或生物系统的结构与运作。	occupation_meaning:运用物理学实验和模型研究细胞、蛋白质或生物系统的结构与运作。	rationale_batch_3
+887	Jeweller (Film job)	为影视制作设计、制作或修复首饰道具，确保其符合角色造型和拍摄需要。	occupation_meaning:为影视制作设计、制作或修复首饰道具，确保其符合角色造型和拍摄需要。	rationale_batch_3
+901	Textile worker	操作纺织设备或处理纤维、纱线和织物，参与纺纱、织造、染整或成品加工。	occupation_meaning:操作纺织设备或处理纤维、纱线和织物，参与纺纱、织造、染整或成品加工。	rationale_batch_3
+909	Educational psychologist	研究学习与发展过程，评估学生的教育需求并为教学或学校支持提供心理专业建议。	occupation_meaning:研究学习与发展过程，评估学生的教育需求并为教学或学校支持提供心理专业建议。	rationale_batch_3
+916	Sports Reporter	采访运动员和教练、报道比赛结果与体育新闻，并向报纸、电视或网络受众发布内容。	occupation_meaning:采访运动员和教练、报道比赛结果与体育新闻，并向报纸、电视或网络受众发布内容。	rationale_batch_3
+922	Bioethicist	分析医学、生物技术和生命科学实践中的伦理问题，为研究或医疗决策提供评估意见。	occupation_meaning:分析医学、生物技术和生命科学实践中的伦理问题，为研究或医疗决策提供评估意见。	rationale_batch_3
+926	Radio announcer	在广播节目中播报新闻、介绍音乐或活动，并通过话筒向听众主持和传递信息。	occupation_meaning:在广播节目中播报新闻、介绍音乐或活动，并通过话筒向听众主持和传递信息。	rationale_batch_3
+938	Dominatrix	在成人服务情境中提供以支配角色为核心的BDSM服务，并与客户约定互动边界。	occupation_meaning:在成人服务情境中提供以支配角色为核心的BDSM服务，并与客户约定互动边界。	rationale_batch_3
+947	telecommunications expert	评估通信网络或电信设备的性能与故障，并就系统部署、连接或维护提供专业建议。	occupation_meaning:评估通信网络或电信设备的性能与故障，并就系统部署、连接或维护提供专业建议。	rationale_batch_3
+952	College Administrator	管理高校的招生、学生事务、学术项目或校务流程，并协调教职员和资源。	occupation_meaning:管理高校的招生、学生事务、学术项目或校务流程，并协调教职员和资源。	rationale_batch_3
+960	Theatrical Set Designer	为舞台剧设计布景方案和空间布局，并与制作团队确定道具、材料和搭建细节。	occupation_meaning:为舞台剧设计布景方案和空间布局，并与制作团队确定道具、材料和搭建细节。	rationale_batch_3
+968	Ski Racer	训练并参加高山滑雪竞速项目，在规定雪道上以最快时间完成比赛。	occupation_meaning:训练并参加高山滑雪竞速项目，在规定雪道上以最快时间完成比赛。	rationale_batch_3
+980	Information Technology Consultant	了解客户的信息系统需求，评估软硬件方案并建议或协助实施技术改进。	occupation_meaning:了解客户的信息系统需求，评估软硬件方案并建议或协助实施技术改进。	rationale_batch_3
+985	Basketball Analyst	观看并分析篮球比赛数据、战术和球员表现，再通过媒体或报告解释比赛走势。	occupation_meaning:观看并分析篮球比赛数据、战术和球员表现，再通过媒体或报告解释比赛走势。	rationale_batch_3
+991	Angel investor	以个人或投资实体资金投资早期企业，并评估创业团队、风险及潜在回报。	occupation_meaning:以个人或投资实体资金投资早期企业，并评估创业团队、风险及潜在回报。	rationale_batch_3
+1000	Special Effects Designer	为影视或舞台制作设计爆破、机械、环境或视觉特效方案并监督实现。	occupation_meaning:为影视或舞台制作设计爆破、机械、环境或视觉特效方案并监督实现。	rationale_batch_3
+1006	Tour manager	安排巡演日程、交通住宿、预算和演出场地，协调艺人及巡演工作人员。	occupation_meaning:安排巡演日程、交通住宿、预算和演出场地，协调艺人及巡演工作人员。	rationale_batch_3
+1013	Digital Artist	使用数字绘画、建模、影像或交互媒介创作视觉艺术作品。	occupation_meaning:使用数字绘画、建模、影像或交互媒介创作视觉艺术作品。	rationale_batch_3
+1021	Court reporter	以速记或录音转写方式逐字记录庭审、证词和其他司法程序。	occupation_meaning:以速记或录音转写方式逐字记录庭审、证词和其他司法程序。	rationale_batch_3
+1027	Floral Designer	选配花材并制作花束、桌花或活动花艺布置。	occupation_meaning:选配花材并制作花束、桌花或活动花艺布置。	rationale_batch_3
+1040	Greengrocer	采购并销售蔬菜水果，整理商品、称重计价并服务顾客。	occupation_meaning:采购并销售蔬菜水果，整理商品、称重计价并服务顾客。	rationale_batch_3
+1046	Confidence artist	通过假身份、虚假承诺或欺骗性故事骗取他人钱财或财物。	occupation_meaning:通过假身份、虚假承诺或欺骗性故事骗取他人钱财或财物。	rationale_batch_3
+1060	Athletic trainer	评估运动员伤病风险，制定预防和康复训练，并在训练或比赛中提供急救支持。	occupation_meaning:评估运动员伤病风险，制定预防和康复训练，并在训练或比赛中提供急救支持。	rationale_batch_3
+1069	Labor Union Leader	代表工会成员谈判劳动条件、组织工会事务并协调集体行动。	occupation_meaning:代表工会成员谈判劳动条件、组织工会事务并协调集体行动。	rationale_batch_3
+1075	Glovemaker	裁剪和缝制皮革、布料或其他材料，制作手套并完成尺寸与边缘加工。	occupation_meaning:裁剪和缝制皮革、布料或其他材料，制作手套并完成尺寸与边缘加工。	rationale_batch_3
+1083	Political campaigner	组织政治候选人或政策的宣传、筹款、选民联络及竞选活动。	occupation_meaning:组织政治候选人或政策的宣传、筹款、选民联络及竞选活动。	rationale_batch_3
+1088	Drag queen	以夸张性别化造型、服装和舞台表演呈现喜剧、歌舞或主持节目。	occupation_meaning:以夸张性别化造型、服装和舞台表演呈现喜剧、歌舞或主持节目。	rationale_batch_3
+1093	English Professor	在大学教授英语语言或文学课程，指导学生并可能从事相关学术研究。	occupation_meaning:在大学教授英语语言或文学课程，指导学生并可能从事相关学术研究。	rationale_batch_3
+1100	Civil Rights Leader	领导争取公民平等权利的组织或行动，协调倡议、公众动员和政策诉求。	occupation_meaning:领导争取公民平等权利的组织或行动，协调倡议、公众动员和政策诉求。	rationale_batch_3
+1108	Shop assistant	为顾客介绍商品、整理货架、补货并协助收银或门店日常运营。	occupation_meaning:为顾客介绍商品、整理货架、补货并协助收银或门店日常运营。	rationale_batch_3
+1118	TV Art Director	为电视节目设计布景和视觉方案，指导美术团队将节目创意转化为画面环境。	occupation_meaning:为电视节目设计布景和视觉方案，指导美术团队将节目创意转化为画面环境。	rationale_batch_3
+1129	Theatre teacher	教授戏剧表演、剧本、舞台实践或戏剧史，并组织课堂排演和学习评估。	occupation_meaning:教授戏剧表演、剧本、舞台实践或戏剧史，并组织课堂排演和学习评估。	rationale_batch_3
+1140	Clerk (Profession) #147	去除职业编号标记后，该职务通常处理记录、文件、登记或其他办公室事务；具体部门未说明。	occupation_meaning:去除职业编号标记后，该职务通常处理记录、文件、登记或其他办公室事务；具体部门未说明。	rationale_batch_3
+1151	Art History Professor	在高校讲授艺术史，研究艺术作品、流派和历史语境，并指导学生或发表学术成果。	occupation_meaning:在高校讲授艺术史，研究艺术作品、流派和历史语境，并指导学生或发表学术成果。	rationale_batch_3
+1165	Competitive Eater	参加限时进食比赛，在规定时间内按赛事规则完成指定食物挑战。	occupation_meaning:参加限时进食比赛，在规定时间内按赛事规则完成指定食物挑战。	rationale_batch_3
+1169	Lieutenant colonel	担任军队中校军衔，指挥营级或相关单位并执行上级军事任务。	occupation_meaning:担任军队中校军衔，指挥营级或相关单位并执行上级军事任务。	rationale_batch_3
+1179	Typeface designer	设计字体字形、字符比例和字族样式，制作可用于印刷或数字排版的字体。	occupation_meaning:设计字体字形、字符比例和字族样式，制作可用于印刷或数字排版的字体。	rationale_batch_3
+1185	Line producer	负责影视项目每日生产执行，控制预算、拍摄进度、用工和制作资源。	occupation_meaning:负责影视项目每日生产执行，控制预算、拍摄进度、用工和制作资源。	rationale_batch_3
+1193	Cultural Anthropologist	通过田野调查、访谈和民族志研究人群的文化实践、社会关系和生活方式。	occupation_meaning:通过田野调查、访谈和民族志研究人群的文化实践、社会关系和生活方式。	rationale_batch_3
+1203	Speech-language pathologist	诊断并治疗语言、发音、声音、流畅性或吞咽障碍，制定个体化康复方案。	occupation_meaning:诊断并治疗语言、发音、声音、流畅性或吞咽障碍，制定个体化康复方案。	rationale_batch_3
+1215	Oil Executive	管理石油企业的业务、投资、生产或市场运营，并作出组织层面的经营决策。	occupation_meaning:管理石油企业的业务、投资、生产或市场运营，并作出组织层面的经营决策。	rationale_batch_3
+1225	Window dresser	设计并布置商店橱窗和陈列空间，以展示商品并吸引顾客。	occupation_meaning:设计并布置商店橱窗和陈列空间，以展示商品并吸引顾客。	rationale_batch_3
+1230	Driller	操作钻机和相关工具，在勘探、采矿、建筑或能源作业中钻出规定孔洞。	occupation_meaning:操作钻机和相关工具，在勘探、采矿、建筑或能源作业中钻出规定孔洞。	rationale_batch_3
+1237	Open source/Internet technologist	开发、部署或维护互联网及开放源代码软件技术，并处理相关系统和工具。	occupation_meaning:开发、部署或维护互联网及开放源代码软件技术，并处理相关系统和工具。	rationale_batch_3
+1247	Audiologist	检查听力和平衡功能，诊断听觉障碍并提供听力康复、助听器评估或治疗服务。	occupation_meaning:检查听力和平衡功能，诊断听觉障碍并提供听力康复、助听器评估或治疗服务。	rationale_batch_3
+1251	Genetics Counselor	收集家族史并解释遗传检测风险，帮助个人或家庭理解遗传疾病与生育选择。	occupation_meaning:收集家族史并解释遗传检测风险，帮助个人或家庭理解遗传疾病与生育选择。	rationale_batch_3
+1257	Real Tennis Professional	教授真实网球规则和技术，或以职业选手身份训练并参加真实网球赛事。	occupation_meaning:教授真实网球规则和技术，或以职业选手身份训练并参加真实网球赛事。	rationale_batch_3
+1261	Milkmaid	挤奶并照料奶牛等产奶牲畜，处理牛奶收集和挤奶设备清洁。	occupation_meaning:挤奶并照料奶牛等产奶牲畜，处理牛奶收集和挤奶设备清洁。	rationale_batch_3
+1267	Children's writer	为儿童创作故事、诗歌或知识读物，并按年龄读者调整语言和叙事。	occupation_meaning:为儿童创作故事、诗歌或知识读物，并按年龄读者调整语言和叙事。	rationale_batch_3
+1274	Costume Supervisor	管理影视或舞台服装部门，采购、制作、试装并维护演出所需服装。	occupation_meaning:管理影视或舞台服装部门，采购、制作、试装并维护演出所需服装。	rationale_batch_3
+1280	Makeup Effects Artist	为影视或舞台演员制作并施用伤痕、怪物、老化等特殊化妆和假体效果。	occupation_meaning:为影视或舞台演员制作并施用伤痕、怪物、老化等特殊化妆和假体效果。	rationale_batch_3
+1290	Light Artist	以灯光、投影或发光装置创作艺术作品，并设计作品在展览空间中的呈现。	occupation_meaning:以灯光、投影或发光装置创作艺术作品，并设计作品在展览空间中的呈现。	rationale_batch_3
+1301	Astrobiologist	研究地球以外生命存在的可能性及生命在宇宙中的起源、演化和环境条件。	occupation_meaning:研究地球以外生命存在的可能性及生命在宇宙中的起源、演化和环境条件。	rationale_batch_3
+1312	Art therapist	运用绘画、雕塑等艺术活动帮助来访者表达情绪，并配合治疗目标评估身心状态。	occupation_meaning:运用绘画、雕塑等艺术活动帮助来访者表达情绪，并配合治疗目标评估身心状态。	rationale_batch_3
+1320	Non-commissioned officer	担任军士等士官军衔，带领基层士兵、执行训练并落实部队日常纪律和任务。	occupation_meaning:担任军士等士官军衔，带领基层士兵、执行训练并落实部队日常纪律和任务。	rationale_batch_3
+1324	Cavalryman	作为骑兵或骑兵部队成员执行侦察、机动作战及军事任务。	occupation_meaning:作为骑兵或骑兵部队成员执行侦察、机动作战及军事任务。	rationale_batch_3
+1333	Merchant navy	在商船上承担航行、值班、货物或轮机相关工作，服务商业海运；该泛称未指明船上岗位。	occupation_meaning:在商船上承担航行、值班、货物或轮机相关工作，服务商业海运；该泛称未指明船上岗位。	rationale_batch_3
+1339	Karate Instructor	教授空手道基本动作、套路和对练，安排训练并指导学员参加考试或比赛。	occupation_meaning:教授空手道基本动作、套路和对练，安排训练并指导学员参加考试或比赛。	rationale_batch_3
+1348	machineworker	在工厂操作或维护机器设备，按工艺要求加工材料或生产零部件。	occupation_meaning:在工厂操作或维护机器设备，按工艺要求加工材料或生产零部件。	rationale_batch_3
+1355	Gymnastics Teacher	教授体操课程和器械动作，安排学生练习并监督动作安全与技能进度。	occupation_meaning:教授体操课程和器械动作，安排学生练习并监督动作安全与技能进度。	rationale_batch_3
+1361	Drama Critic	观看戏剧演出并撰写评论，分析剧本、表演、导演和舞台制作效果。	occupation_meaning:观看戏剧演出并撰写评论，分析剧本、表演、导演和舞台制作效果。	rationale_batch_3
+1367	port worker	在港口装卸、搬运、仓储或维护货物和码头设备，支持船舶靠泊作业。	occupation_meaning:在港口装卸、搬运、仓储或维护货物和码头设备，支持船舶靠泊作业。	rationale_batch_3
+1373	Cornerman	在拳击或格斗比赛间歇为选手递水、处理伤情、提供战术建议并协助教练团队。	occupation_meaning:在拳击或格斗比赛间歇为选手递水、处理伤情、提供战术建议并协助教练团队。	rationale_batch_3
+1377	Assayer	取样并检测矿石、金属或贵金属的成分与纯度，出具化验或品位结果。	occupation_meaning:取样并检测矿石、金属或贵金属的成分与纯度，出具化验或品位结果。	rationale_batch_3
+1384	Cavalry Officer	指挥或管理骑兵部队，组织训练、部署机动单位并执行军事命令。	occupation_meaning:指挥或管理骑兵部队，组织训练、部署机动单位并执行军事命令。	rationale_batch_3
+1395	Shoemaking	裁切鞋面和鞋底材料并进行缝合、粘合或修整，制作或修理鞋履。	occupation_meaning:裁切鞋面和鞋底材料并进行缝合、粘合或修整，制作或修理鞋履。	rationale_batch_3
+1405	Security Firm Chief	经营私人安保公司，管理安保人员、客户合同、现场服务和公司运营。	occupation_meaning:经营私人安保公司，管理安保人员、客户合同、现场服务和公司运营。	rationale_batch_3
+1411	Events Organiser	规划活动流程、场地、预算、供应商和人员安排，确保会议、庆典或公众活动按时进行。	occupation_meaning:规划活动流程、场地、预算、供应商和人员安排，确保会议、庆典或公众活动按时进行。	rationale_batch_3
+1420	Prima donna	作为歌剧或歌唱演出中的首席女高音/主要女歌手排演并演唱核心角色。	occupation_meaning:作为歌剧或歌唱演出中的首席女高音/主要女歌手排演并演唱核心角色。	rationale_batch_3
+1427	Machine Tool operator	设置并操作车床、铣床或其他机床，切削、钻孔或成形工件至规定尺寸。	occupation_meaning:设置并操作车床、铣床或其他机床，切削、钻孔或成形工件至规定尺寸。	rationale_batch_3
+1435	Medical assistant	在医疗人员指导下记录病史和生命体征、准备诊室，并协助基础临床和行政工作。	occupation_meaning:在医疗人员指导下记录病史和生命体征、准备诊室，并协助基础临床和行政工作。	rationale_batch_3
+1441	Crewman	作为船舶或其他交通工具的普通船员执行值班、设备维护、货物或乘客服务等分工任务。	occupation_meaning:作为船舶或其他交通工具的普通船员执行值班、设备维护、货物或乘客服务等分工任务。	rationale_batch_3
+1448	Basketball Official	担任篮球比赛裁判，判定犯规、违例和得分并确保比赛按规则进行。	occupation_meaning:担任篮球比赛裁判，判定犯规、违例和得分并确保比赛按规则进行。	rationale_batch_3
+1456	Stunt Assistant	协助特技团队准备动作场景、检查防护设备、布置现场并配合演员和特技人员安全完成拍摄。	occupation_meaning:协助特技团队准备动作场景、检查防护设备、布置现场并配合演员和特技人员安全完成拍摄。	rationale_batch_3
+1465	Attaché	作为外交使团的专门事务官员处理所属领域的信息联络、报告和政府间协调。	occupation_meaning:作为外交使团的专门事务官员处理所属领域的信息联络、报告和政府间协调。	rationale_batch_3
+1474	Clinical Social Worker	评估并为有心理、家庭或社会困难的个案提供临床辅导、治疗转介和持续支持。	occupation_meaning:评估并为有心理、家庭或社会困难的个案提供临床辅导、治疗转介和持续支持。	rationale_batch_3
+1482	Custodian	清扫、保养并检查建筑设施，处理日常维护和场地安全问题。	occupation_meaning:清扫、保养并检查建筑设施，处理日常维护和场地安全问题。	rationale_batch_3
+1496	Australian rules football coach	训练澳式足球队员、安排战术和阵容，并指导球队准备比赛和赛季。	occupation_meaning:训练澳式足球队员、安排战术和阵容，并指导球队准备比赛和赛季。	rationale_batch_3
+1504	Professor of Elocution	教授发声、发音、朗诵和演讲表达技巧，指导学生进行口语或舞台呈现。	occupation_meaning:教授发声、发音、朗诵和演讲表达技巧，指导学生进行口语或舞台呈现。	rationale_batch_3
+1518	Legal writer	撰写法律文章、判例摘要、法律教材或面向专业读者的法律说明材料。	occupation_meaning:撰写法律文章、判例摘要、法律教材或面向专业读者的法律说明材料。	rationale_batch_3
+1523	Neuroscience	该词指研究脑、神经系统及其功能的学科领域，并未明确给出研究者、教师或临床岗位。	occupation_meaning:该词指研究脑、神经系统及其功能的学科领域，并未明确给出研究者、教师或临床岗位。	rationale_batch_3
+1530	Vocal Arranger	为歌曲安排合唱声部、和声走向与人声编制，并准备排练或录音所用谱面。	occupation_meaning:为歌曲安排合唱声部、和声走向与人声编制，并准备排练或录音所用谱面。	rationale_batch_3
+1540	Design Engineer	依据性能、材料和制造约束设计工程产品或部件，制作方案并验证其技术可行性。	occupation_meaning:依据性能、材料和制造约束设计工程产品或部件，制作方案并验证其技术可行性。	rationale_batch_3
+1547	Music Collector	搜集、整理并保存唱片、乐谱或音乐相关资料；称谓本身未说明是否为职业性工作。	occupation_meaning:搜集、整理并保存唱片、乐谱或音乐相关资料；称谓本身未说明是否为职业性工作。	rationale_batch_3
+1553	Geological engineer	运用地质和工程知识评估岩土、矿产或地下条件，并为工程建设、开采或资源开发设计方案。	occupation_meaning:运用地质和工程知识评估岩土、矿产或地下条件，并为工程建设、开采或资源开发设计方案。	rationale_batch_3
+1557	Military police	在军队内执行纪律与安全任务，巡逻、调查违纪事件并保障军事设施或人员安全。	occupation_meaning:在军队内执行纪律与安全任务，巡逻、调查违纪事件并保障军事设施或人员安全。	rationale_batch_3
+1564	Credit control	核查客户信用和逾期账款，设定信用额度并跟进欠款以控制企业的坏账风险。	occupation_meaning:核查客户信用和逾期账款，设定信用额度并跟进欠款以控制企业的坏账风险。	rationale_batch_3
+1569	Politician & Trade Unionist	参与公共政治活动并同时组织或代表工会成员，推动政策主张和劳工权益谈判。	occupation_meaning:参与公共政治活动并同时组织或代表工会成员，推动政策主张和劳工权益谈判。	rationale_batch_3
+1578	Molecular Geneticist	研究基因、DNA和遗传机制，通过实验分析遗传变异及其对生物性状或疾病的影响。	occupation_meaning:研究基因、DNA和遗传机制，通过实验分析遗传变异及其对生物性状或疾病的影响。	rationale_batch_3
+1583	Secret Intelligence Service officer	为国家情报机构搜集、分析或协调海外情报，以支持国家安全和政府决策。	occupation_meaning:为国家情报机构搜集、分析或协调海外情报，以支持国家安全和政府决策。	rationale_batch_3
+1589	Page-boy	在酒店、住宅或仪式场合递送物品、引导来宾或协助完成基础服务事务。	occupation_meaning:在酒店、住宅或仪式场合递送物品、引导来宾或协助完成基础服务事务。	rationale_batch_3
+1595	Wheelwright	制作或修理木制车轮及其轮辐、轮毂和轮圈等部件。	occupation_meaning:制作或修理木制车轮及其轮辐、轮毂和轮圈等部件。	rationale_batch_3
+1602	Social Historian	研究普通人群、家庭、劳动和日常生活的历史变化，利用档案与其他史料撰写分析。	occupation_meaning:研究普通人群、家庭、劳动和日常生活的历史变化，利用档案与其他史料撰写分析。	rationale_batch_3
+1606	Video editor	筛选并剪接影像和声音素材，调整节奏、顺序和转场以完成视频或影视成片。	occupation_meaning:筛选并剪接影像和声音素材，调整节奏、顺序和转场以完成视频或影视成片。	rationale_batch_3
+1611	Restaurant Mgt.	管理餐厅日常运营，包括排班、服务质量、库存、预算和员工协调。	occupation_meaning:管理餐厅日常运营，包括排班、服务质量、库存、预算和员工协调。	rationale_batch_3
+1621	Scout Leader	组织童军或青少年团体的活动、户外训练和技能课程，并负责成员指导与安全。	occupation_meaning:组织童军或青少年团体的活动、户外训练和技能课程，并负责成员指导与安全。	rationale_batch_3
+1625	Professor of Malayalam	在高校教授马拉雅拉姆语或相关文学课程，指导学生并开展语言文学研究。	occupation_meaning:在高校教授马拉雅拉姆语或相关文学课程，指导学生并开展语言文学研究。	rationale_batch_3
+1631	ADR Editor	剪辑和同步影视作品的自动对白替换录音，整理对白轨并使其与画面和原声匹配。	occupation_meaning:剪辑和同步影视作品的自动对白替换录音，整理对白轨并使其与画面和原声匹配。	rationale_batch_3
+1636	Child-Care Solicitor	为儿童照护、监护或福利案件提供法律咨询、准备诉讼材料并代表当事人出庭。	occupation_meaning:为儿童照护、监护或福利案件提供法律咨询、准备诉讼材料并代表当事人出庭。	rationale_batch_3
+1646	Population Biologist	研究种群数量、分布、遗传和生态变化，利用野外调查或模型解释其动态。	occupation_meaning:研究种群数量、分布、遗传和生态变化，利用野外调查或模型解释其动态。	rationale_batch_3
+1654	Wardrobe supervisor	统筹剧组或剧团服装的准备、试穿、维护和现场连续性，协调服装工作人员。	occupation_meaning:统筹剧组或剧团服装的准备、试穿、维护和现场连续性，协调服装工作人员。	rationale_batch_3
+1661	Fleet admiral	担任海军最高级将领之一，指挥舰队或制定高级军事部署与作战决策。	occupation_meaning:担任海军最高级将领之一，指挥舰队或制定高级军事部署与作战决策。	rationale_batch_3
+1668	Legal nurse consultant	运用护理专业知识审阅医疗记录、解释临床标准，并协助律师理解医疗事实和伤害问题。	occupation_meaning:运用护理专业知识审阅医疗记录、解释临床标准，并协助律师理解医疗事实和伤害问题。	rationale_batch_3
+1682	Sociologist of Science	研究科学组织、研究者群体和知识生产如何受到社会制度与文化影响。	occupation_meaning:研究科学组织、研究者群体和知识生产如何受到社会制度与文化影响。	rationale_batch_3
+1708	Medical technologist	在临床实验室操作仪器并检测血液、组织或其他样本，为疾病诊断和治疗提供检验结果。	occupation_meaning:在临床实验室操作仪器并检测血液、组织或其他样本，为疾病诊断和治疗提供检验结果。	rationale_batch_3
+1720	Pipefitter	根据图纸切割、弯曲和连接管道，安装或维修工业、建筑中的输送系统。	occupation_meaning:根据图纸切割、弯曲和连接管道，安装或维修工业、建筑中的输送系统。	rationale_batch_3
+1730	Oficer-Major of King Zog  I	为君主服务的高级军官，负责军职指挥或王室军事事务；原拼写不规范但角色指向军队任职。	occupation_meaning:为君主服务的高级军官，负责军职指挥或王室军事事务；原拼写不规范但角色指向军队任职。	rationale_batch_3
+1736	CG Artist	使用三维建模、渲染或数字绘画制作电影、游戏或广告所需的电脑图像。	occupation_meaning:使用三维建模、渲染或数字绘画制作电影、游戏或广告所需的电脑图像。	rationale_batch_3
+1743	Singer/Songwriter/Producer/Filmmaker	创作并演唱歌曲、制作录音，同时编导或制作影视内容，职责横跨多种文化作品生产。	occupation_meaning:创作并演唱歌曲、制作录音，同时编导或制作影视内容，职责横跨多种文化作品生产。	rationale_batch_3
+1754	Party organizer	组织政党活动或社交聚会的筹备、人员联络和现场安排；party具体指政党还是派对需语境判定。	occupation_meaning:组织政党活动或社交聚会的筹备、人员联络和现场安排；party具体指政党还是派对需语境判定。	rationale_batch_3
+1758	Divemaster	带领休闲潜水者进行水下潜水，进行安全简报、检查装备并在潜水过程中引导队伍。	occupation_meaning:带领休闲潜水者进行水下潜水，进行安全简报、检查装备并在潜水过程中引导队伍。	rationale_batch_3
+1763	Singer (Profession) #212	忽略Profession和编号标记后，该职业以演唱歌曲、排练曲目并进行录音或现场演出为核心。	occupation_meaning:忽略Profession和编号标记后，该职业以演唱歌曲、排练曲目并进行录音或现场演出为核心。	rationale_batch_3
+1769	Sheriff officer	执行地方治安与法院相关职责，例如巡逻、调查案件、送达法律文件或协助执行法令。	occupation_meaning:执行地方治安与法院相关职责，例如巡逻、调查案件、送达法律文件或协助执行法令。	rationale_batch_3
+1774	Hydrogeologist	研究地下水的分布、流动和水质，利用地质调查与水文数据评估水资源和地下环境。	occupation_meaning:研究地下水的分布、流动和水质，利用地质调查与水文数据评估水资源和地下环境。	rationale_batch_3
+1779	Figure skating coach	教授花样滑冰技术、跳跃和旋转，安排冰上训练并为运动员设计比赛节目。	occupation_meaning:教授花样滑冰技术、跳跃和旋转，安排冰上训练并为运动员设计比赛节目。	rationale_batch_3
+1784	Palaeontologist (Profession) #1	忽略Profession和编号标记后，该研究者通过化石采集、鉴定和比较重建古生物及其演化历史。	occupation_meaning:忽略Profession和编号标记后，该研究者通过化石采集、鉴定和比较重建古生物及其演化历史。	rationale_batch_3
+1791	Diocesan bishop	负责一个教区的牧灵、神职人员监督、教务行政和宗教仪式领导。	occupation_meaning:负责一个教区的牧灵、神职人员监督、教务行政和宗教仪式领导。	rationale_batch_3
+1795	Goatherd	放牧山羊并照料其饮水、饲料、健康和群体移动。	occupation_meaning:放牧山羊并照料其饮水、饲料、健康和群体移动。	rationale_batch_3
+1801	Slave Trader	买卖或转运被奴役的人以牟利；这是历史上以人口贩卖为核心的犯罪性身份。	occupation_meaning:买卖或转运被奴役的人以牟利；这是历史上以人口贩卖为核心的犯罪性身份。	rationale_batch_3
+1809	Web Application Developer	编写、测试和维护运行于浏览器或网络服务器上的应用程序及其数据接口。	occupation_meaning:编写、测试和维护运行于浏览器或网络服务器上的应用程序及其数据接口。	rationale_batch_3

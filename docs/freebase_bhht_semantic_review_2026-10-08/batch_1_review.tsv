@@ -320,7 +320,7 @@ rank	raw_value	semantic_level1	review_status	confidence	semantic_rationale	evide
 1458	Laity	Other	resolved	high	Laity指宗教团体中的普通信众/非神职成员，是宗教身份类别，不表示神职或宗教权威职位。	occupation_meaning:非神职普通信众	"[""Other""]"	bhht_semantic_batch_1
 1461	Gymterneter		needs_context	low	无法找到稳定可核实的职业词义，疑似拼写或数据污染，保留待核。	occupation_meaning:未找到可靠职业定义	[]	bhht_semantic_batch_1
 1464	Light Sculptor	Culture	resolved	medium	“Light Sculptor”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Light Sculptor—艺术创作、文学写作、音乐/舞台/影视制作或文化传播	"[""Culture""]"	bhht_semantic_batch_1
-1467	Chairty Worker		needs_context	low	疑为“Charity Worker”拼写错误；慈善工作者可能从事服务、筹款或倡议，职责不足以定类。	occupation_meaning:疑似charity worker拼写错误	"[""Other""]"	bhht_semantic_batch_1
+1467	Chairty Worker	Other	resolved	medium	“Chairty”明显是“Charity”的拼写错误；慈善机构工作人员提供公益项目与社区服务，词项没有组织领导职务信息。	occupation_meaning:慈善服务工作人员；raw_value疑为Charity Worker拼写错误	"[""Other""]"	bhht_semantic_batch_1
 1470	Vibraphonist	Culture	resolved	medium	“Vibraphonist”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Vibraphonist—艺术创作、文学写作、音乐/舞台/影视制作或文化传播	"[""Culture""]"	bhht_semantic_batch_1
 1474	Clinical Social Worker	Discovery/Science	resolved	medium	“Clinical Social Worker”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Clinical Social Worker—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用	"[""Discovery/Science""]"	bhht_semantic_batch_1
 1478	Drama Theorist	Discovery/Science	resolved	high	戏剧理论研究者分析戏剧文本、形式与历史，是学术研究而非舞台表演岗位。	occupation_meaning:戏剧理论研究	"[""Discovery/Science""]"	bhht_semantic_batch_1

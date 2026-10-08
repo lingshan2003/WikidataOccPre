@@ -1,0 +1,205 @@
+rank	raw_value	level1	review_status	semantic_rationale	evidence
+7	Film director	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+18	Composer (Profession)	Culture	resolved	“Composer (Profession)”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Composer (Profession)—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+27	Television director	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+41	Healthcare professional	Discovery/Science	resolved	“Healthcare professional”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Healthcare professional—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+58	Theatre Director	Culture	resolved	“Theatre Director”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Theatre Director—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+79	Pornographic film actor	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+88	Radio personality	Culture	resolved	“Radio personality”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Radio personality—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+97	TV Personality (Profession)	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+117	Publisher (Editor title)	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+129	Professional Boxer	Sports/Games	resolved	“Professional Boxer”指竞技运动员、赛车/球类/搏击等赛事参与者属于体育，据此其主要职责属于Sports/Games。	occupation_meaning:Professional Boxer—竞技运动员、赛车/球类/搏击等赛事参与者属于体育
+133	Television Editor	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+146	Law enforcement officer	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+160	Set Decorator	Culture	resolved	“Set Decorator”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Set Decorator—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+183	Domestic worker	Other	resolved	“Domestic worker”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Domestic worker—普通服务、手工业、劳务或日常职业不属于四个专门领域
+187	Playback Singer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+199	Vaudeville Performer	Culture	resolved	“Vaudeville Performer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Vaudeville Performer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+209	Sumo Wrestler	Sports/Games	resolved	“Sumo Wrestler”指竞技运动员、赛车/球类/搏击等赛事参与者属于体育，据此其主要职责属于Sports/Games。	occupation_meaning:Sumo Wrestler—竞技运动员、赛车/球类/搏击等赛事参与者属于体育
+219	American Football coach	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+235	Volleyball player	Sports/Games	resolved	“Volleyball player”指竞技运动员、赛车/球类/搏击等赛事参与者属于体育，据此其主要职责属于Sports/Games。	occupation_meaning:Volleyball player—竞技运动员、赛车/球类/搏击等赛事参与者属于体育
+244	Snowboarder	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+252	Master of Ceremonies	Culture	resolved	“Master of Ceremonies”指运动或活动中的表演型艺术仍属文化表演，据此其主要职责属于Culture。	occupation_meaning:Master of Ceremonies—运动或活动中的表演型艺术仍属文化表演
+259	Homemaking	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+270	Mangaka	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+279	Violinist	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+290	Carpentry	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+300	Music critic	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+312	Session musician	Culture	resolved	“Session musician”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Session musician—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+322	Jazz Musician	Culture	resolved	“Jazz Musician”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Jazz Musician—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+331	Character Actor	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+339	Opera Director (Profession)	Culture	resolved	“Opera Director (Profession)”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Opera Director (Profession)—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+349	Personal trainer	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+356	Acting Teacher	Culture	resolved	“Acting Teacher”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Acting Teacher—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+372	Software Engineer	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+394	Professional golfer	Sports/Games	resolved	“Professional golfer”指竞技运动员、赛车/球类/搏击等赛事参与者属于体育，据此其主要职责属于Sports/Games。	occupation_meaning:Professional golfer—竞技运动员、赛车/球类/搏击等赛事参与者属于体育
+403	Crime writer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+409	Visual Effects Artist	Culture	resolved	“Visual Effects Artist”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Visual Effects Artist—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+421	Theatre Manager	Culture	resolved	“Theatre Manager”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Theatre Manager—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+430	SEM Professional	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+435	Art Model	Culture	resolved	“Art Model”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Art Model—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+448	Radio Broadcaster	Culture	resolved	“Radio Broadcaster”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Radio Broadcaster—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+461	Electronic musician	Culture	resolved	“Electronic musician”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Electronic musician—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+472	Landlord	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+481	Food critic	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+491	Construction worker	Other	resolved	“Construction worker”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Construction worker—普通服务、手工业、劳务或日常职业不属于四个专门领域
+505	Bank cashier	Other	resolved	“Bank cashier”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Bank cashier—普通服务、手工业、劳务或日常职业不属于四个专门领域
+514	Dance Instructor	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+533	Science-fiction writer	Culture	resolved	“Science-fiction writer”指以科幻文学创作为核心的作者，据此其主要职责属于Culture。	occupation_meaning:Science-fiction writer—以科幻文学创作为核心的作者
+543	Visual Effects Supervisor	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+552	Tattoo artist	Culture	resolved	“Tattoo artist”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Tattoo artist—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+561	Art Teacher	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+567	Music editor	Culture	resolved	“Music editor”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Music editor—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+578	Celebrity chef	Other	resolved	“Celebrity chef”指烹饪并制作餐食的餐饮服务工作，据此其主要职责属于Other。	occupation_meaning:Celebrity chef—烹饪并制作餐食的餐饮服务工作
+585	Inker	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+594	Music Manager	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+602	Sound Recordist	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+611	Landholder	Other	resolved	“Landholder”指普通经营/服务岗位或一般雇员身份，未表达大型企业治理或专门领域，据此其主要职责属于Other。	occupation_meaning:Landholder—普通经营/服务岗位或一般雇员身份，未表达大型企业治理或专门领域
+619	Theater Performer	Culture	resolved	“Theater Performer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Theater Performer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+637	Presenter (Profession) #27	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+650	Director of audiography	Culture	resolved	“Director of audiography”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Director of audiography—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+658	Furniture Designer	Culture	resolved	“Furniture Designer”指音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类，据此其主要职责属于Culture。	occupation_meaning:Furniture Designer—音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类
+673	Public Relations	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+679	Cook (Profession) #121	Other	resolved	“Cook (Profession) #121”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Cook (Profession) #121—普通服务、手工业、劳务或日常职业不属于四个专门领域
+684	Dubbing Director	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+690	Sound Director	Culture	resolved	“Sound Director”指音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类，据此其主要职责属于Culture。	occupation_meaning:Sound Director—音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类
+707	Lumberjack	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+716	Porter	Other	resolved	“Porter”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Porter—普通服务、手工业、劳务或日常职业不属于四个专门领域
+723	Shoe designer	Culture	resolved	“Shoe designer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Shoe designer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+732	Arranger (Profession)	Culture	resolved	“Arranger (Profession)”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Arranger (Profession)—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+737	Climber	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+743	Voice coach	Culture	resolved	“Voice coach”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Voice coach—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+747	Public Relations Executive	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+755	Stunt Double	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+765	Still Photographer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+778	Microbiologist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+789	Commoner	Other	resolved	“Commoner”指普通经营/服务岗位或一般雇员身份，未表达大型企业治理或专门领域，据此其主要职责属于Other。	occupation_meaning:Commoner—普通经营/服务岗位或一般雇员身份，未表达大型企业治理或专门领域
+800	Digital Compositor	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+811	Software Architect	Discovery/Science	resolved	“Software Architect”指科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心，据此其主要职责属于Discovery/Science。	occupation_meaning:Software Architect—科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心
+815	Cultural Historian	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+822	Gamer	Sports/Games	resolved	“Gamer”指Gamer作为明确的电子游戏玩家身份属于游戏参与，据此其主要职责属于Sports/Games。	occupation_meaning:Gamer—Gamer作为明确的电子游戏玩家身份属于游戏参与
+826	Theatre practitioner	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+832	Ballet Teacher	Culture	resolved	“Ballet Teacher”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Ballet Teacher—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+841	Farmworker	Other	resolved	“Farmworker”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Farmworker—普通服务、手工业、劳务或日常职业不属于四个专门领域
+850	Vlogger	Culture	resolved	“Vlogger”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Vlogger—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+865	Jazz Composer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+876	Actor-manager	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+883	Gallery Owner	Culture	resolved	“Gallery Owner”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Gallery Owner—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+891	Garment Worker	Other	resolved	“Garment Worker”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Garment Worker—普通服务、手工业、劳务或日常职业不属于四个专门领域
+905	Cosmologist	Discovery/Science	resolved	“Cosmologist”指科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心，据此其主要职责属于Discovery/Science。	occupation_meaning:Cosmologist—科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心
+913	Special Effects Technician	Culture	resolved	“Special Effects Technician”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Special Effects Technician—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+919	Life Coach	Other	resolved	“Life Coach”指客户服务/看守场所等一般服务性工作，据此其主要职责属于Other。	occupation_meaning:Life Coach—客户服务/看守场所等一般服务性工作
+923	Network administrator	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+929	Boxing Trainer	Sports/Games	resolved	“Boxing Trainer”指体育训练、教练、裁判或运动队竞赛支持属于体育职能，据此其主要职责属于Sports/Games。	occupation_meaning:Boxing Trainer—体育训练、教练、裁判或运动队竞赛支持属于体育职能
+941	Railroad worker	Other	resolved	“Railroad worker”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Railroad worker—普通服务、手工业、劳务或日常职业不属于四个专门领域
+948	Historian of Science	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+954	Marine engineer	Discovery/Science	resolved	“Marine engineer”指科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心，据此其主要职责属于Discovery/Science。	occupation_meaning:Marine engineer—科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心
+963	Political strategist	Leadership	resolved	“Political strategist”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Political strategist—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+971	Mental health professional	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+981	Freelance Writer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+988	White-collar worker	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+993	Blogger (Website)	Culture	resolved	“Blogger (Website)”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Blogger (Website)—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1003	Station master	Other	resolved	“Station master”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Station master—普通服务、手工业、劳务或日常职业不属于四个专门领域
+1007	Alchemist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1015	Set Dresser	Culture	resolved	“Set Dresser”指音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类，据此其主要职责属于Culture。	occupation_meaning:Set Dresser—音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类
+1022	People's Artist of Ukraine	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1031	Jazz Artist/Singer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1042	Cardiac surgeon	Discovery/Science	resolved	“Cardiac surgeon”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Cardiac surgeon—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1054	Lacrosse Player	Sports/Games	resolved	“Lacrosse Player”指竞技运动员、赛车/球类/搏击等赛事参与者属于体育，据此其主要职责属于Sports/Games。	occupation_meaning:Lacrosse Player—竞技运动员、赛车/球类/搏击等赛事参与者属于体育
+1063	Legal Scholar	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1072	Defense policy analyst	Leadership	resolved	“Defense policy analyst”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Defense policy analyst—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1080	Managing Director	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1085	Environmental health officer	Discovery/Science	resolved	“Environmental health officer”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Environmental health officer—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1089	Acrobatics	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1096	Co-founder and Business Executive	Leadership	resolved	“Co-founder and Business Executive”指企业经营、公司高管、金融或商业管理职责属于领导/商业治理，据此其主要职责属于Leadership。	occupation_meaning:Co-founder and Business Executive—企业经营、公司高管、金融或商业管理职责属于领导/商业治理
+1102	Theater Actress	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1112	Dialogue Editor	Culture	resolved	“Dialogue Editor”指音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类，据此其主要职责属于Culture。	occupation_meaning:Dialogue Editor—音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类
+1123	Character Designer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1137	Folk Artist	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1146	Road manager	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1155	Mental health counselor	Discovery/Science	resolved	“Mental health counselor”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Mental health counselor—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1166	Java Developer	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1173	Aquanaut	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1181	Historian of Philosophy and Religion	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1190	Broadway Producer	Culture	resolved	“Broadway Producer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Broadway Producer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1198	Theater Arts Educator	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1204	Human Resources Officer	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1217	Roboticist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1226	Editorial Writer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1233	Payroll (Profession)	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1240	Film Photographer	Culture	resolved	“Film Photographer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Film Photographer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1248	Computer Graphics Animator	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1253	Make-Up Designer	Culture	resolved	“Make-Up Designer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Make-Up Designer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1258	Intellectual Historian	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1264	Nurse practitioner	Discovery/Science	resolved	“Nurse practitioner”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Nurse practitioner—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1268	VFX creative director	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1276	Certified Sex Therapist	Discovery/Science	resolved	“Certified Sex Therapist”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Certified Sex Therapist—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1281	Special Makeup Effects Artist	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1291	Child Psychologist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1305	Massage therapist	Discovery/Science	resolved	“Massage therapist”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Massage therapist—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1316	Prison officer	Leadership	resolved	“Prison officer”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Prison officer—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1321	Artistic Director (Job title)	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1327	Industrial Supplies Merchant Wholesalers	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1335	musician, mastering engineer	Culture	resolved	“musician, mastering engineer”指音乐家从事母带处理与录音声音后期制作，据此其主要职责属于Culture。	occupation_meaning:musician, mastering engineer—音乐家从事母带处理与录音声音后期制作
+1340	Dormitory Matron	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1351	Distillery Worker	Other	resolved	“Distillery Worker”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Distillery Worker—普通服务、手工业、劳务或日常职业不属于四个专门领域
+1358	Occupational Therapy Educator	Discovery/Science	resolved	“Occupational Therapy Educator”指医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用，据此其主要职责属于Discovery/Science。	occupation_meaning:Occupational Therapy Educator—医疗照护、治疗、诊断及健康专业服务属于医学/专业知识应用
+1364	Transient laborer	Other	resolved	“Transient laborer”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Transient laborer—普通服务、手工业、劳务或日常职业不属于四个专门领域
+1370	Aeronautics instructor	Discovery/Science	resolved	“Aeronautics instructor”指教学或学术岗位以专业知识研究、教育或学术传播为核心，据此其主要职责属于Discovery/Science。	occupation_meaning:Aeronautics instructor—教学或学术岗位以专业知识研究、教育或学术传播为核心
+1374	Carmelite Friar	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1379	Maritime Archaeologist	Discovery/Science	resolved	“Maritime Archaeologist”指科学探索/环境保护以生态、物种或自然科学知识为主要手段，据此其主要职责属于Discovery/Science。	occupation_meaning:Maritime Archaeologist—科学探索/环境保护以生态、物种或自然科学知识为主要手段
+1386	PR Expert	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1402	Multi Media Artist	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1407	Joomla developer	Discovery/Science	resolved	“Joomla developer”指科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心，据此其主要职责属于Discovery/Science。	occupation_meaning:Joomla developer—科学研究、技术设计/开发或学术研究传播以专业知识和技术系统为核心
+1412	Professor (Profession) #40	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1423	Military Strategist	Leadership	resolved	“Military Strategist”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Military Strategist—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1430	Shock jock	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1437	Lord Chamberlain	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1444	Vice admiral	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1452	Physical Training Instructor	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+1459	Barista	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1468	School counselor	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1475	Hospital Attendant	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1486	Wardrobe Assistant	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1500	divorce lawyer	Leadership	resolved	“divorce lawyer”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:divorce lawyer—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1508	Epistemologist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1519	Mayor of Montazels	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1527	Economic historian	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1535	Air Force Officer	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1541	Artillery Officer	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1549	Infantry Weapons Officer	Leadership	resolved	“Infantry Weapons Officer”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Infantry Weapons Officer—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1554	Quantum chemist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1559	ADR Script Writer	Culture	resolved	“ADR Script Writer”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:ADR Script Writer—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1565	Dispatcher	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1571	Performer-Songwriter-Musical Director	Culture	resolved	“Performer-Songwriter-Musical Director”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Performer-Songwriter-Musical Director—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1580	Internet Executive	Leadership	resolved	“Internet Executive”指企业经营、公司高管、金融或商业管理职责属于领导/商业治理，据此其主要职责属于Leadership。	occupation_meaning:Internet Executive—企业经营、公司高管、金融或商业管理职责属于领导/商业治理
+1584	Ghost singer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1590	Special Education Teacher	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1599	Chimney sweep	Other	resolved	“Chimney sweep”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Chimney sweep—普通服务、手工业、劳务或日常职业不属于四个专门领域
+1603	Professor of Ancient Greek History and Classical Studies	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1608	Usurper	Other	resolved	“Usurper”指犯罪、负面声名、成人服务或非正规活动身份归其他社会身份，据此其主要职责属于Other。	occupation_meaning:Usurper—犯罪、负面声名、成人服务或非正规活动身份归其他社会身份
+1612	County court bailiff	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1622	Philosopher of Science	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1628	Diving instructor	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+1633	Figurative Sculptor	Culture	resolved	“Figurative Sculptor”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Figurative Sculptor—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1640	Religious Judge	Leadership	resolved	“Religious Judge”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Religious Judge—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1649	Water Conservation Specialist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1655	Receiver general	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1662	Plastic arts	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1671	Atmospheric scientist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1684	Botanical Explorer	Discovery/Science	resolved	“Botanical Explorer”指科学探索/环境保护以生态、物种或自然科学知识为主要手段，据此其主要职责属于Discovery/Science。	occupation_meaning:Botanical Explorer—科学探索/环境保护以生态、物种或自然科学知识为主要手段
+1712	On-set Dresser	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1721	Nude model	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1732	Aerial Coordinator	Culture	resolved	“Aerial Coordinator”指音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类，据此其主要职责属于Culture。	occupation_meaning:Aerial Coordinator—音响、设计/技术、造型等岗位服务于演出、影视或文化作品的制作，按其文化生产功能归类
+1739	Salsa Dancer	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture
+1747	Founder/President T. Mellon & Sons Bank	Leadership	resolved	该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。	occupation_meaning:该岗位履行治理、司法、军事指挥、宗教权威或组织/商业管理职责，归入 Leadership。; author_role_analogy:author L1 Leadership
+1755	Outreach worker	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1760	Advocate General	Leadership	resolved	“Advocate General”指国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理，据此其主要职责属于Leadership。	occupation_meaning:Advocate General—国家政治、公共治理、军事指挥、司法法律或公共政策职能属于领导/治理
+1764	Nature Historian	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1770	Nurse anesthetist	Discovery/Science	resolved	该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。	occupation_meaning:该岗位以专业研究、教学、医疗服务或技术开发为核心，属于知识与科学专业职能。; author_role_analogy:author L1 Discovery/Science
+1776	Bootseller	Other	resolved	“Bootseller”指普通服务、手工业、劳务或日常职业不属于四个专门领域，据此其主要职责属于Other。	occupation_meaning:Bootseller—普通服务、手工业、劳务或日常职业不属于四个专门领域
+1780	Puzzle designer	Sports/Games	resolved	该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。	occupation_meaning:该岗位直接参与竞技项目、竞赛组织、体育训练/裁判或游戏活动，归入 Sports/Games。; author_role_analogy:author L1 Sports/Games
+1787	Moneylender	Leadership	resolved	“Moneylender”指泛企业战略、营销推广或财务信贷职能属于商业管理/金融，据此其主要职责属于Leadership。	occupation_meaning:Moneylender—泛企业战略、营销推广或财务信贷职能属于商业管理/金融
+1792	Gunslinger	Other	resolved	该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。	occupation_meaning:该岗位属于一般服务、日常工种、小型经营、家庭身份或其他非四类核心职能，归入 Other。; author_role_analogy:author L1 Other
+1797	Ringmaster	Culture	resolved	“Ringmaster”指艺术创作、文学写作、音乐/舞台/影视制作或文化传播，据此其主要职责属于Culture。	occupation_meaning:Ringmaster—艺术创作、文学写作、音乐/舞台/影视制作或文化传播
+1804	Professional Artist	Culture	resolved	该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。	occupation_meaning:该岗位通过创作、演出、编辑、制作或传播文化内容完成工作，归入 Culture。; author_role_analogy:author L1 Culture

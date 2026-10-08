@@ -96,18 +96,21 @@ needs = {
 overrides.update({
  25:'Leadership', 57:'Culture', 58:'Culture', 70:'Other', 83:'Other', 107:'Leadership',
  112:'Culture', 114:'Other', 144:'Leadership', 147:'Other', 156:'Other', 168:'Culture',
- 173:'Other', 178:'Sports/Games', 197:'Culture', 200:'Culture', 215:'Culture',
- 230:'Leadership', 233:'Leadership', 237:'Other', 250:'Discovery/Science', 272:'Culture',
+ 62:'Leadership', 106:'Leadership', 110:'Other', 147:'Leadership', 166:'Culture', 173:'Leadership', 177:'Other', 178:'Sports/Games', 197:'Culture', 200:'Culture', 215:'Leadership',
+ 230:'Leadership', 233:'Leadership', 237:'Other', 250:'Discovery/Science', 252:'Sports/Games', 272:'Culture', 307:'Other', 328:'Other',
  276:'Other', 282:'Discovery/Science', 288:'Culture', 294:'Culture', 306:'Culture',
- 328:'Leadership', 334:'Culture', 351:'Discovery/Science', 352:'Culture', 359:'Leadership',
+ 328:'Other', 334:'Culture', 351:'Discovery/Science', 352:'Culture', 359:'Leadership',
  366:'Culture', 384:'Leadership', 386:'Culture', 389:'Other', 390:'Culture', 391:'Other',
- 392:'Discovery/Science', 396:'Leadership', 399:'Sports/Games', 406:'Discovery/Science',
+ 387:'Leadership', 392:'Discovery/Science', 396:'Leadership', 399:'Sports/Games', 406:'Discovery/Science',
  411:'Culture', 424:'Other'
 })
 needs.update({
  67: ('Aircrew', 'Aircrew 可指军用或民用航空机组成员，职责背景可能分别归军事或普通服务，缺少具体岗位语境。', '["Leadership","Other"]'),
  202: ('Partisan', '可指党派支持者，也可指武装抵抗组织成员，两种含义的实际职责和类别不同。', '["Leadership","Other"]'),
- 209: ('Lineman', 'Lineman 可指美式足球位置，也可指电力/通信线路工，语境缺失会导致不同 L1。', '["Sports/Games","Other"]'),
+209: ('Lineman', 'Lineman 可指美式足球位置，也可指电力/通信线路工，语境缺失会导致不同 L1。', '["Sports/Games","Other"]'),
+68: ('Web analytics', '该值是网站数据分析领域名称，没有说明它表示数据分析岗位、营销服务还是网站相关研究工作，需补具体职务。', '["Discovery/Science","Other"]'),
+113: ('Railroad engineer', '该短语可指驾驶机车的铁路工作人员，也可指铁路系统/基础设施工程师，两种职责分属不同类别。', '["Other","Discovery/Science"]'),
+122: ('Rodeo performer', '该词可指参加竞技项目的牛仔/骑手，也可指在牛仔竞技场提供娱乐表演的表演者，需具体项目语境。', '["Sports/Games","Culture"]'),
  225: ('Government agent', '未说明代理机构和工作职责；政府代理人可能承担执法、情报、行政或其他职能，无法仅由“agent”确定 L1。', '["Leadership","Other"]'),
  244: ('Expert', '“Expert”只表示具备专长，没有指出专业领域或工作职责。', '[]'),
  258: ('Handmade soap', '这是手工皂产品/制作领域的短语，没有明确说明它表示制作者这一职业。', '[]'),
@@ -116,7 +119,7 @@ needs.update({
  323: ('Underwriting', '这是保险/金融职能或业务名称，没有说明具体岗位职责或是否指从业者。', '["Leadership","Other"]'),
  372: ('Kidnapping', '这是犯罪行为名称，不是明确职业名称；无法确认其作为职业字段的真实语义。', '[]')
 })
-overrides.update({67:'',202:'',209:'',225:'',244:'',258:'',286:'',320:'',323:'',372:''})
+overrides.update({67:'',68:'',113:'',122:'',202:'',209:'',225:'',244:'',258:'',286:'',320:'',323:'',372:''})
 for n, lab in overrides.items():
     if lab:
         labels[n] = lab
@@ -148,18 +151,24 @@ extra = {
 9: ('宗教领袖承担宗教共同体的权威与指导职责，按作者宗教领导类别归入 Leadership。', None),
 25: ('销售管理负责规划销售目标、带领销售团队并监督业绩，属于组织管理职能。', None),
 50: ('房地产企业家经营地产项目或相关业务，核心是商业经营管理，归入 Leadership。', None),
-62: ('人权倡议者推动权利保护与公众倡议，但词项本身没有公共职务或治理权；按非领导型倡议身份归 Other。', None),
+62: ('Human rights activist 从事人权公共倡议与社会行动；作者 Politics 类包含 activist/humanitarian 等公共倡议职责，因此归 Leadership。', None),
+106: ('Women’s rights activist 从事女性权益公共倡议；作者 Politics 类包含 activist/feminist 等社会政治倡议职责，因此归 Leadership。', None),
+147: ('Civil Rights Advocate 推动民权公共倡议和社会改革；作者 Politics 类以 civil_rights 为对应职责语义，归 Leadership。', None),
+173: ('Native American activist 代表原住民社群开展公共权益倡议；其职责属于社会政治行动，归 Leadership。', None),
+166: ('Virtuoso 指技艺精湛的音乐演奏者，属于音乐表演。', None),
 68: ('Web analytics 指收集并分析网站访问数据以支持网站运营/营销决策，是普通分析岗位。', None),
 83: ('酒店经理管理住宿接待和日常服务运营，属于酒店服务业管理，不据此推为大型企业领导。', None),
 107: ('Crown Princess 是王室继承序列中的贵族身份称谓，归入 Leadership 的 Nobility 语义。', None),
+110: ('Financial Analyst 分析财务数据并准备投资/经营决策报告；作者 analyst 相近职业归 Other，按具体分析岗位归类。', None),
 114: ('Online Marketing Professional 从事线上营销活动与推广，是常规营销服务岗位，归 Other。', None),
 144: ('法院官员在法院体系履行司法行政或法庭程序职责，属于法律/司法职能。', None),
-147: ('民权倡议者从事权利倡导与社会动员；没有明确治理职位，不等同政治领导者。', None),
+147: ('Civil Rights Advocate 推动民权公共倡议和社会改革；作者 Politics 类以 civil_rights 为对应职责语义，归 Leadership。', None),
 156: ('Chartered accountant 提供审计、会计和财务报告专业服务；按作者 accountant 近似职业归入 Other。', None),
-173: ('Native American activist 表示社群权益倡议工作，未说明其担任政治公职或治理职位。', None),
+173: ('Native American activist 代表原住民社群开展公共权益倡议；其职责属于社会政治行动，归 Leadership。', None),
 197: ('Cinematography 是电影摄影工作，负责以摄影机、镜头和光线实现影片画面表达，属于影视制作。', None),
 200: ('Music criticism 通过评论和分析音乐作品向读者/听众传播文化评价，属于文化写作。', None),
-215: ('Fashion entrepreneur 创办或经营时尚产业业务，工作直接围绕服饰与时尚文化产品。', None),
+215: ('Fashion entrepreneur 创办或经营时尚企业，核心职责是经营商业项目；“fashion”说明行业，不足以把企业创业职能改判为文化制作。', None),
+177: ('Investment broker 为客户撮合证券或其他投资产品交易，属于金融经纪专业服务；作者 broker 相近职业归 Other。', None),
 230: ('船舶所有者拥有并经营船舶资产，属于商业经营者身份。', None),
 233: ('Chief mate 是船长以下的高级甲板官员，负责航行值班并协助指挥船员，属组织/航海管理。', None),
 237: ('Digital marketing 从事线上推广和营销执行，是常规商业服务岗位，归 Other。', None),
@@ -167,6 +176,8 @@ extra = {
 272: ('影视片场 Grip 搭建和操作摄影机支撑、轨道及照明设备，属于影视制作技术工种。', None),
 277: ('原值“Poltician”是 politician 的明显拼写误差；按政治人物的公共治理职责归 Leadership。', None),
 282: ('摄影史研究者研究摄影媒介、作品和历史脉络，属于学术研究而非摄影创作岗位。', None),
+307: ('Recruitment Officer 负责筛选候选人、协调面试与招聘流程，是普通人事服务岗位，不承担治理职务。', None),
+328: ('Business consultant 向客户提供业务流程或管理建议，属于专业咨询服务；作者 consultant 相近职业归 Other。', None),
 288: ('特效总监负责规划并监督影视作品中的视觉/物理特效制作，属于影视制作职能。', None),
 294: ('Stage combat 是舞台/影视表演中的编排式打斗设计和排演，属于表演制作。', None),
 306: ('Escapology 指表演者从束缚或机关中脱身的魔术/杂技表演形式，属于娱乐表演。', 'https://www.dictionary.com/browse/escapology'),
@@ -177,6 +188,7 @@ extra = {
 366: ('Production stage manager 协调演出排练、演出流程和舞台部门执行，属于现场文化制作。', None),
 384: ('Master mariner 是具备商船驾驶资格的高级船舶指挥人员，承担航行与船员管理职责。', None),
 386: ('Media entrepreneur 创办或经营媒体业务，职责直接围绕媒体内容制作/传播。', None),
+387: ('Manager for a catering contractor 管理承接餐饮业务的承包商运营，核心职责是组织/商业管理。', None),
 390: ('Salonnières 主持文学/艺术沙龙并组织文化交流，属于文化传播活动。', 'https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/salonnieres-fl-17th-and-18th-c'),
 391: ('Illegal drug dealer 指非法交易毒品者，是犯罪身份，按 Other 处理。', None),
 392: ('Help desk coordinator 安排技术支持请求、分派工单并协调用户问题处理，属于 IT 服务支持。', None),
@@ -213,6 +225,7 @@ for i, r in enumerate(rows,1):
         raw, rationale, candidates=needs[i]
         evidence = {
             269:'https://www.loma.org/en/professional-development/talent-mobility-suite/flmi/',
+            113:'https://www.bls.gov/OOH/transportation-and-material-moving/railroad-occupations.htm',
         }.get(i, 'occupation_meaning:原值只给出泛称、资格、身份或无法确认的文本，需补充具体职责/语境。')
         out_rows.append({'rank':r['rank'],'raw_value':r['raw_value'],'semantic_level1':'','review_status':'needs_context','confidence':'low','semantic_rationale':rationale,'evidence':evidence,'candidate_l1s_json':candidates,'reviewer':'bhht_semantic_batch_2'})
         continue

@@ -1,0 +1,351 @@
+﻿rank	raw_value	finding_type	recommended_l1	final_level1	disposition	final_rationale
+115	Agriculturalist	category_correction	Other	Other	accepted	农业实务专家向农户或企业提供建议；本轮优先按作者同义agriculturist的Worker/Business(small)口径，而不因expert一词自动判为学术研究者。
+1811	Industriemechaniker	category_correction	Other	Other	accepted	德国工业机械技工制造装配机械零件，调试并维修生产设备，按作者mechanic/technician普通工种归Other；不是研发工程师。
+1451	Aircraft maintenance technician	category_correction	Other	Other	accepted	安装、检查和维修飞机设备的航空维修技工，按作者mechanic/technician普通工种归Other；不等同飞机研发工程师。
+1715	Computer Tech	category_correction	Other	Other	accepted	提供电脑设备安装、故障排查和用户支持，核心为技术服务/支持；与软件研发、科学研究职责区分。
+1587	Electronics technician	category_correction	Other	Other	accepted	从事电子设备测试、装配、维护及故障处理的技术工种；完整词为technician，未表示电子研发工程师。
+1005	Information systems technician	category_correction	Other	Other	accepted	提供电脑设备安装、故障排查和用户支持，核心为技术服务/支持；与软件研发、科学研究职责区分。
+855	Senior SEO Manager	consistency_and_category_correction	Other	Other	accepted	管理搜索优化和网站获客业务；沿用专门marketing工作职能类别，不因通用Manager词提升为公司高管。
+1605	Investment advisor	category_correction	Other	Other	accepted	为客户提供投资建议及个人财务方案，属于专业咨询服务；未表明控制金融机构或承担企业高管职责。
+1726	Investment banking	occupation_vs_field	needs_context		accepted	此词指投行业务领域，可能覆盖投资银行家、分析员、经纪服务或管理职务，未标出个体实际岗位。
+1754	Party organizer	occupation_sense_ambiguity	needs_context		accepted	Party可指政党，也可指社交派对；两种完整词义分别涉及政治组织或活动服务，缺少消歧限定。
+1780	Puzzle designer	category_correction	Culture	Culture	accepted	创作谜题规则、题面及解题体验，是创意内容设计；与Computer game designer同一设计口径，区别于竞技参与者。
+1362	Automotive design	field_sense_and_consistency	Culture	Culture	accepted	汽车外形、产品形态与使用体验的设计领域，按作者designer与本轮Industrial designer口径归Culture；未明确研发工程师职务。
+691	Drafter	author_exact_analogy	Culture	Culture	accepted	根据设计要求绘制技术图纸，核心是绘图表达而非独立工程研发；采用作者draftsman/draughtsman所属Culture口径。
+1480	Engineering Drafter	role_vs_subject	Culture	Culture	accepted	根据设计要求绘制技术图纸，核心是绘图表达而非独立工程研发；采用作者draftsman/draughtsman所属Culture口径。
+371	Music pedagogue	consistency_and_category_correction	Culture	Culture	accepted	从事音乐技艺教育与教学，与Music Teacher/Voice teacher等专门艺术教学采用相同口径；明确以学术理论研究为职责的Music Theorist另归Science。
+1204	Human Resources Officer	category_correction	Other	Other	accepted	处理招聘、员工档案和人事行政事务，标签未给公司决策权或公共治理职责；与Recruitment Officer采用一致口径。
+1516	Information security	occupation_vs_field	needs_context		accepted	信息安全是专业领域，可涉及安全研发、系统运行维护、普通技术支持或管理，未给出个体岗位。
+1523	Neuroscience	occupation_vs_field	needs_context		accepted	神经科学是学科名，未说明该值指研究人员、教师或实验技术员等岗位；按字段非职业描述暂留待查。
+1327	Industrial Supplies Merchant Wholesalers	occupation_vs_industry	needs_context		accepted	此值像工业用品批发的行业分类而非明确个人岗位，无法区分一般销售服务与公司经营管理。
+1333	Merchant navy	generic_occupational_group	needs_context		accepted	商船队/商船海员群体的泛称，未指明船上技术、运输服务或企业经营职责，暂不强定单类。
+150	Spokesperson	boundary_case_review	Culture	Culture	accepted	代表组织向公众和媒体传达信息，完整职务的核心是对外传播；组织属于政府或企业本身不改变这一传播职能。
+7	Film director	rationale_specificity	Culture	Culture	specific_rationale_supplied	导演确定影片的叙事和视觉风格，统筹演员表演、摄影、场面调度，并与剪辑等部门完成影片。
+14	Businessperson	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	经营或创办商业活动，决定产品、交易、客户及日常运营事项；具体管理规模需看上下文。
+19	Television producer	rationale_specificity	Culture	Culture	specific_rationale_supplied	统筹电视节目的选题、预算、演职人员、拍摄进度及播出交付。
+27	Television director	rationale_specificity	Culture	Culture	specific_rationale_supplied	电视导演规划节目镜头和现场调度，指导主持人与摄制组完成节目拍摄或直播。
+36	Health professional	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	评估健康状况、提供预防或治疗服务；该泛称没有限定具体医疗专科。
+43	Cameraman	rationale_specificity	Culture	Culture	specific_rationale_supplied	操作摄影机选择机位、镜头和运动方式，拍摄影视或新闻画面。
+79	Pornographic film actor	rationale_specificity	Culture	Culture	specific_rationale_supplied	成人影片演员在成人电影拍摄中按剧本表演角色，并配合导演完成镜头拍摄。
+86	Basketball Player	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	参加篮球训练和比赛，在场上执行进攻、防守及团队战术。
+89	Military Officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	指挥军人和部队执行训练、部署或作战任务，并负责纪律与行动协调。
+97	TV Personality (Profession)	rationale_specificity	Culture	Culture	specific_rationale_supplied	电视名人通过主持、访谈、表演或常驻节目露面形成电视公众形象；具体节目类型未限定。
+104	Translator (Film job)	rationale_specificity	Culture	Culture	specific_rationale_supplied	Film job限定影视翻译岗位，服务字幕、配音或影视文本制作，按专门文化制作职能归类。
+111	Arranger	rationale_specificity	Culture	Culture	specific_rationale_supplied	将旋律和和声改编为适合特定乐器、声部或演出编制的音乐谱面。
+117	Publisher (Editor title)	rationale_specificity	Culture	Culture	specific_rationale_supplied	出版编辑/出版人筛选和委托稿件，组织编辑校对、制作与发行，将作品推向读者。
+124	Tennis player	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	进行网球训练并参加单打或双打比赛，以击球和战术争取胜局。
+130	Child Actor	rationale_specificity	Culture	Culture	specific_rationale_supplied	在舞台或影视作品中扮演角色，按剧本完成台词、动作和排演。
+133	Television Editor	rationale_specificity	Culture	Culture	specific_rationale_supplied	电视编辑筛选并剪接拍摄素材，调整画面顺序、节奏和声音，形成播出节目。
+140	Ballet Dancer	rationale_specificity	Culture	Culture	specific_rationale_supplied	排练并在舞台上表演古典芭蕾舞剧或舞蹈作品。
+146	Law enforcement officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	执法人员巡逻、调查违法事件、执行逮捕或其他法定执法任务，维护公共秩序。
+151	Opera singer	rationale_specificity	Culture	Culture	specific_rationale_supplied	以受训的歌唱技巧演唱歌剧角色，并配合乐队和舞台表演完成戏剧情节。
+156	Researcher	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	围绕某个问题设计调查或实验、收集资料并分析证据以形成结论；具体学科未限定。
+184	Track and field athlete	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	参加田径项目的训练与比赛，如跑步、跳跃或投掷，并争取竞赛成绩。
+187	Playback Singer	rationale_specificity	Culture	Culture	specific_rationale_supplied	影视回放歌手为电影或电视录制歌曲人声，由演员在成片中对口型或以配乐呈现。
+192	Talk show host	rationale_specificity	Culture	Culture	specific_rationale_supplied	主持谈话节目、介绍议题并采访嘉宾，引导录制或直播对话。
+200	Talent manager	rationale_specificity	Culture	Culture	specific_rationale_supplied	代表演员、音乐人等艺人处理合同、演出机会、日程和职业发展事务。
+207	Office Worker	rationale_specificity	Other	Other	specific_rationale_supplied	处理办公室的文书、数据录入、通信、排程或一般行政事务；具体岗位未限定。
+214	Political activist	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	组织或参与政治倡议、集会和竞选行动，推动特定公共政策或政治变革。
+219	American Football coach	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	美式橄榄球教练制定战术与训练计划、指导球员技术，并在比赛中安排阵容和临场策略。
+228	Social Worker	rationale_specificity	Other	Other	specific_rationale_supplied	评估个人或家庭的社会服务需求，协助获得福利、住房、辅导等资源并跟进个案。
+236	Electrical engineer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	设计、测试和维护电力系统、电路或电气设备，解决供电与控制问题。
+244	Snowboarder	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	单板滑雪者脚踩单板滑行、完成转弯和跳跃动作，或参加速度与技巧赛事。
+250	Supermodel	rationale_specificity	Culture	Culture	specific_rationale_supplied	为时装、广告或媒体拍摄展示服装和产品，并参与相关宣传活动。
+256	Book editor	rationale_specificity	Culture	Culture	specific_rationale_supplied	审阅稿件、修改文字结构并与作者沟通，使书稿达到出版要求。
+259	Homemaking	rationale_specificity	Other	Other	specific_rationale_supplied	持家者安排家庭清洁、备餐、采购、预算和家人照护等日常家务。
+263	Speed Skater	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	在冰上进行速度滑冰训练和比赛，通过弯道技术、步频与耐力争取更快成绩。
+270	Mangaka	rationale_specificity	Culture	Culture	specific_rationale_supplied	漫画家创作漫画故事并绘制分格、人物和画面，把叙事组织成连续图像。
+275	Spiritual leader	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	带领信众进行灵性指导、集体活动或宗教实践；具体宗教身份未限定。
+279	Violinist	rationale_specificity	Culture	Culture	specific_rationale_supplied	小提琴家演奏小提琴曲目，在独奏、乐团或录音中完成音乐表达。
+285	Mechanical Engineer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	设计和改进机械设备、零部件及制造系统，并测试其安全性和运行性能。
+290	Carpentry	rationale_specificity	Other	Other	specific_rationale_supplied	木工按尺寸切割、连接和修整木材，制作或维修建筑构件、家具及木制品。
+300	Music critic	rationale_specificity	Culture	Culture	specific_rationale_supplied	音乐评论家聆听唱片或现场演出，分析作品与演绎，并撰写评论供读者参考。
+304	Orchestrator	rationale_specificity	Culture	Culture	specific_rationale_supplied	把作曲家的音乐草稿扩写成各乐器声部的管弦乐总谱和分谱。
+314	Aerospace Engineer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	设计、分析和测试飞机、航天器、推进或飞行控制系统。
+323	Game Show Host	rationale_specificity	Culture	Culture	specific_rationale_supplied	主持电视或现场竞赛节目，向选手提问、说明规则并推进游戏环节。
+327	Territorial lord	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	作为领地贵族管理辖地、征收租税或行使地方司法与统治权。
+331	Character Actor	rationale_specificity	Culture	Culture	specific_rationale_supplied	性格演员在影视或舞台作品中塑造有鲜明特征的配角，依据剧本呈现人物身份与行为。
+337	Documentary Filmmaker	rationale_specificity	Culture	Culture	specific_rationale_supplied	选题并拍摄、剪辑非虚构影像，以访谈、档案或现场记录呈现现实议题。
+340	Comic book creator	rationale_specificity	Culture	Culture	specific_rationale_supplied	创作漫画故事和角色，并绘制或统筹分格画面、对白与连续叙事。
+349	Personal trainer	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	私人健身教练评估客户体能，制定个别锻炼计划并指导动作、负荷和训练进度。
+353	Editing	rationale_specificity	Culture	Culture	specific_rationale_supplied	校订文字、影像或声音材料的结构与内容，使其适合出版、播出或发行；词项只指编辑活动。
+357	Music Teacher	rationale_specificity	Culture	Culture	specific_rationale_supplied	教授乐器演奏、声乐或乐理，通过示范、练习和反馈提升学生的音乐能力。
+366	Media Personality	rationale_specificity	Culture	Culture	specific_rationale_supplied	通过电视、广播或网络节目出镜、主持或评论，与公众传播内容并维持媒体形象。
+372	Software Engineer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	软件工程师设计、编写、测试和维护软件系统，处理功能、可靠性和性能问题。
+397	Professional Poker Player	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	参加职业扑克比赛，依据牌局概率、规则和对手行动进行策略决策。
+403	Crime writer	rationale_specificity	Culture	Culture	specific_rationale_supplied	犯罪题材作家构思并撰写以犯罪、侦查或司法案件为核心的小说或非虚构作品。
+406	Triathlete	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	训练并参加由游泳、骑行和跑步组成的三项全能比赛。
+410	Newspaper editor	rationale_specificity	Culture	Culture	specific_rationale_supplied	决定报纸内容安排，编辑稿件、核实事实并协调记者和版面截稿。
+427	Ski jumper	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	从跳台滑下起跳，在空中保持姿势并以距离和动作质量参加跳台滑雪比赛。
+430	SEM Professional	rationale_specificity	Other	Other	specific_rationale_supplied	搜索引擎营销从业者策划搜索引擎推广活动，运用SEO和付费搜索提高网站在搜索结果中的曝光与访问。
+433	Short Track Speed Skater	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	在短道冰场参加速度滑冰竞赛，通过弯道超越和冲刺争取名次。
+436	Cultural critic	rationale_specificity	Culture	Culture	specific_rationale_supplied	评论艺术、媒体或文化作品，分析其形式、观念及社会影响并向公众发表观点。
+442	Voice acting in Japan	rationale_specificity	Culture	Culture	specific_rationale_supplied	为动画、游戏或影视角色录制日语对白，塑造角色声音并参与配音录制。
+449	Mime artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	不用口语而以面部表情和身体动作塑造人物、物件或情境进行舞台表演。
+463	Registered nurse	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	评估病人状况、执行护理计划、给药并记录反应，同时与医生和家属沟通。
+468	TV chef	rationale_specificity	Culture	Culture	specific_rationale_supplied	在电视节目中烹饪、讲解菜谱或展示餐饮知识，面向观众制作烹饪内容。
+472	Landlord	rationale_specificity	Other	Other	specific_rationale_supplied	房东持有出租房产，与租客订立租约、收取租金并安排房屋维护。
+476	Opera composer	rationale_specificity	Culture	Culture	specific_rationale_supplied	创作歌剧的音乐、声乐旋律和管弦乐部分，供舞台制作排演演出。
+481	Food critic	rationale_specificity	Culture	Culture	specific_rationale_supplied	美食评论家品尝并评价餐馆菜品、服务和用餐体验，再撰写评论或专栏。
+488	Dance Teacher	rationale_specificity	Culture	Culture	specific_rationale_supplied	教授舞蹈动作、节奏和编排，带领学生排练并为演出或考试作准备。
+496	Baseball Umpire	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	在棒球比赛中判定好坏球、安全出局及规则争议，并维持比赛秩序。
+508	Music director	rationale_specificity	Culture	Culture	specific_rationale_supplied	确定音乐演出或录音的艺术方向，选择曲目并指导乐手、歌手或乐团排练。
+514	Dance Instructor	rationale_specificity	Culture	Culture	specific_rationale_supplied	舞蹈教师示范舞步和身体技巧，编排练习并纠正学生的节奏、姿势和动作。
+525	Skeleton racer	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	俯卧在小型雪橇上沿冰道高速滑行，参加钢架雪车竞速。
+536	Yoga Instructor	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	带领学员练习瑜伽体式、呼吸和放松方法，并按能力调整动作指导。
+543	Visual Effects Supervisor	rationale_specificity	Culture	Culture	specific_rationale_supplied	视觉特效总监规划影片特效方案、分配镜头并指导特效团队，审核合成结果与导演视觉目标是否一致。
+548	Postal worker	rationale_specificity	Other	Other	specific_rationale_supplied	分拣、运输或投递信件包裹，并办理邮政柜台或配送相关事务。
+554	Cattle Rancher	rationale_specificity	Other	Other	specific_rationale_supplied	饲养和管理牛群，安排放牧、繁殖、健康照料及牧场日常运营。
+558	Dialect coach	rationale_specificity	Culture	Culture	specific_rationale_supplied	帮助演员学习角色所需的方言发音、语调和口音，并在排演或拍摄中纠正表达。
+561	Art Teacher	rationale_specificity	Culture	Culture	specific_rationale_supplied	美术教师讲授绘画、构图、材料和艺术史基础，示范技法并指导学生完成作品。
+565	Social Critic	rationale_specificity	Culture	Culture	specific_rationale_supplied	撰写评论或发表意见，分析社会习俗、制度和公共议题并指出其问题。
+568	Fisherman	rationale_specificity	Other	Other	specific_rationale_supplied	使用渔具在海洋、河流或湖泊捕捞鱼类和其他水产品。
+572	Magistrate	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	主持基层法庭听证、审理特定案件或签发司法命令。
+581	House painter and decorator	rationale_specificity	Other	Other	specific_rationale_supplied	为住宅墙面和木作做表面处理、刷漆或贴饰面，按客户要求完成室内装饰。
+585	Inker	rationale_specificity	Culture	Culture	specific_rationale_supplied	漫画线稿描墨师沿铅笔草图描绘清晰墨线，补充阴影和线条层次，使漫画页达到印刷或上色状态。
+590	Studio executive	rationale_specificity	Culture	Culture	specific_rationale_supplied	管理影视、音乐或录音工作室的项目、预算和制作安排，决定内容制作及资源分配。
+594	Music Manager	rationale_specificity	Culture	Culture	specific_rationale_supplied	音乐经理安排音乐人的演出、录音、宣传和合同事务，协调艺人团队与唱片、场馆等合作方。
+597	Cosmetologist	rationale_specificity	Other	Other	specific_rationale_supplied	为顾客提供头发、皮肤或指甲护理与造型服务，并使用相应美容产品和工具。
+602	Sound Recordist	rationale_specificity	Culture	Culture	specific_rationale_supplied	录音师使用麦克风和录音设备采集现场对白、环境声或音乐，并管理音频素材。
+608	Installation Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	设计并搭建空间性艺术装置，利用物件、影像、光线或场地与观众互动。
+612	Auto mechanic	rationale_specificity	Other	Other	specific_rationale_supplied	检查车辆故障、维修或更换发动机及底盘部件，并进行安全和运行测试。
+617	Video game designer	rationale_specificity	Culture	Culture	specific_rationale_supplied	设计电子游戏的规则、关卡、角色和玩家体验，并与美术及开发团队协作实现。
+637	Presenter (Profession) #27	rationale_specificity	Culture	Culture	specific_rationale_supplied	节目主持人介绍内容、采访嘉宾并串联节目环节；“#27”是分类标记，不改变职业职责。
+642	Film Distributor	rationale_specificity	Culture	Culture	specific_rationale_supplied	取得影片发行权，安排影院或流媒体上映，并负责宣传、拷贝交付和发行渠道协调。
+651	Gossip columnist	rationale_specificity	Culture	Culture	specific_rationale_supplied	搜集并撰写有关名人社交生活和娱乐圈动态的专栏文章。
+666	Corporate lawyer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	为公司提供合同、并购、合规或诉讼方面的法律意见，并代表公司处理法律事务。
+673	Public Relations	rationale_specificity	Culture	Culture	specific_rationale_supplied	公共关系从业者制定对外沟通内容，联络媒体、回应公众询问并维护机构声誉。
+677	Professional Chess Player	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	参加职业棋赛，研究开局与局势并通过对局争取胜利和奖金。
+681	Generalissimo	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	作为最高级别军事统帅指挥军队、制定作战部署并协调高级军官。
+684	Dubbing Director	rationale_specificity	Culture	Culture	specific_rationale_supplied	配音导演安排配音演员角色和台词，指导表演并监督录音、对白同步及后期质量。
+688	Chiropractor	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	评估肌肉骨骼不适并使用脊柱或关节手法及相关治疗协助缓解症状。
+691	Drafter	rationale_specificity	Discovery/Science	Culture	specific_rationale_supplied	根据设计要求绘制技术图纸，核心是绘图表达而非独立工程研发；采用作者draftsman/draughtsman所属Culture口径。
+707	Lumberjack	rationale_specificity	Other	Other	specific_rationale_supplied	伐木工砍伐树木、去枝截段并将木材转运，为林业或木材加工提供原料。
+714	Gospel singer	rationale_specificity	Culture	Culture	specific_rationale_supplied	演唱福音音乐作品，在教会、录音或现场音乐活动中呈现声乐表演。
+717	Customs officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	检查跨境旅客和货物申报，执行关税、禁限物品及边境贸易规定。
+724	Pastoralist	rationale_specificity	Other	Other	specific_rationale_supplied	以放牧牲畜为生，管理牧群、水草和季节性迁徙。
+729	Educationalist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究教育制度、教学方法或教育政策，并提出教育实践与改革方面的观点。
+733	Newspaper publisher	rationale_specificity	Culture	Culture	specific_rationale_supplied	经营报纸出版机构，组织采编、印刷或发行并承担出版资源与业务决策。
+737	Climber	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	攀岩者在自然岩壁或人工岩场攀爬路线，运用攀登技术和保护装备完成路线或竞赛。
+740	Speech therapist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	评估并治疗言语、语言、声音或吞咽障碍，制定训练方案并跟踪沟通能力变化。
+744	Production Manager (Band)	rationale_specificity	Culture	Culture	specific_rationale_supplied	安排乐队录音或巡演的预算、场地、设备、人员和时间表，保障制作落地。
+747	Public Relations Executive	rationale_specificity	Culture	Culture	specific_rationale_supplied	公关主管制定媒体沟通和公众信息方案，管理新闻发布、品牌声誉和团队工作。
+750	Flamenco Dancer	rationale_specificity	Culture	Culture	specific_rationale_supplied	以弗拉门戈的脚步、手臂动作和节奏配合吉他与歌唱进行舞蹈演出。
+755	Stunt Double	rationale_specificity	Culture	Culture	specific_rationale_supplied	特技替身代替演员完成危险或高强度动作镜头，如打斗、坠落和高速追逐。
+761	Tennis coach	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	指导球员练习发球、步法和战术，并在比赛准备中分析对手与训练表现。
+765	Still Photographer	rationale_specificity	Culture	Culture	specific_rationale_supplied	剧照摄影师在影视拍摄现场记录演员、场景和制作花絮照片，供宣传、档案或出版使用。
+774	Literary Scholar	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究文学作品、作者、文类和历史语境，并通过教学或学术出版传播成果。
+778	Microbiologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	微生物学家在实验室或现场研究细菌、病毒、真菌等微生物的特性、繁殖和作用。
+781	Internet Entrepreneur	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	创办并经营互联网企业，开发线上产品或服务并组织团队和商业资源。
+787	Website content writer	rationale_specificity	Culture	Culture	specific_rationale_supplied	为网站撰写文章、产品介绍或页面文案，并按受众与编辑要求修订内容。
+790	Eastern Roman Emperor	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	统治东罗马帝国并主持国家行政、法律、军事及宫廷事务。
+800	Digital Compositor	rationale_specificity	Culture	Culture	specific_rationale_supplied	数字合成师将摄影、动画、图层和特效素材合成到同一画面，调整遮罩、色彩和光影以完成镜头。
+804	Hypnotherapist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	在受训范围内使用引导性放松和暗示技术，协助来访者处理习惯或心理困扰。
+812	Primatologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究灵长类动物的行为、生态、进化或保护状况，通常通过野外观察和数据分析开展工作。
+815	Cultural Historian	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	文化史学家利用文献、实物和档案研究艺术、思想或日常文化的历史变化，并撰写研究成果。
+820	Military Historian	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究军队、战争、战役和军事制度的历史材料，并撰写学术或历史著作。
+823	Visual Effects Designer	rationale_specificity	Culture	Culture	specific_rationale_supplied	规划影视画面的数字或实体视觉特效方案，并与制作团队确定实现方式。
+826	Theatre practitioner	rationale_specificity	Culture	Culture	specific_rationale_supplied	戏剧实践者参与戏剧创作、排演或演出，可能承担表演、导演、编剧或舞台工作的具体环节。
+830	Public Relations Consultant	rationale_specificity	Culture	Culture	specific_rationale_supplied	为客户制定公众沟通和媒体关系方案，撰写新闻材料并建议如何回应舆情。
+833	Pimp	rationale_specificity	Other	Other	specific_rationale_supplied	以控制或安排卖淫者并从其收入中获利为主要活动，属于剥削性非法/负面身份。
+839	Script editor	rationale_specificity	Culture	Culture	specific_rationale_supplied	评读剧本并提出结构、人物、对白和节奏修改意见，协助编剧完善影视文本。
+848	Tax collector	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	核定或追缴应缴税款，通知纳税人并执行税务征收程序。
+851	Graffiti artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	在墙面或公共载体创作涂鸦图像和文字，以视觉艺术方式表达主题。
+856	Political Economist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究政治制度、政策和权力关系如何影响经济生产、分配与市场行为。
+865	Jazz Composer	rationale_specificity	Culture	Culture	specific_rationale_supplied	爵士作曲家创作爵士旋律、和声和编曲，供乐队演奏、录音或现场表演。
+871	Christian Theologian	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究并阐释基督教教义、经典和神学问题，撰写学术或宗教论述。
+876	Actor-manager	rationale_specificity	Culture	Culture	specific_rationale_supplied	演员兼经理一边在舞台作品中扮演角色，一边经营剧团、安排演出并协调演员与制作团队。
+880	Biophysicist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	运用物理学实验和模型研究细胞、蛋白质或生物系统的结构与运作。
+885	Nurse midwife	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	提供孕期检查、分娩照护和产后随访，并指导新生儿及母体健康护理。
+901	Textile worker	rationale_specificity	Other	Other	specific_rationale_supplied	操作纺织设备或处理纤维、纱线和织物，参与纺纱、织造、染整或成品加工。
+906	Script doctor	rationale_specificity	Culture	Culture	specific_rationale_supplied	为剧本提出结构、对白和人物修改，并在制作阶段修补特定情节或场景。
+909	Educational psychologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究学习与发展过程，评估学生的教育需求并为教学或学校支持提供心理专业建议。
+914	Corporate officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	作为公司正式高管或职务负责人执行董事会授权，管理公司事务并履行治理职责。
+920	Publicist (Profession) #5	rationale_specificity	Culture	Culture	specific_rationale_supplied	为个人或机构撰写新闻稿、联系媒体并安排采访，以提升公众曝光。
+923	Network administrator	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	网络管理员配置和维护计算机网络、服务器与用户账户，监测运行状态并排查连接或安全故障。
+926	Radio announcer	rationale_specificity	Culture	Culture	specific_rationale_supplied	在广播节目中播报新闻、介绍音乐或活动，并通过话筒向听众主持和传递信息。
+943	Concert Producer	rationale_specificity	Culture	Culture	specific_rationale_supplied	统筹音乐会场地、预算、艺人、舞台技术和观众服务，确保现场演出按计划举行。
+948	Historian of Science	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	科学史学家研究科学理论、实验和机构在历史中的形成与变化，查阅档案并发表学术成果。
+952	College Administrator	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	管理高校的招生、学生事务、学术项目或校务流程，并协调教职员和资源。
+955	Cyberneticist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究控制、反馈和信息处理系统，建立模型解释生物或机器系统的调节行为。
+960	Theatrical Set Designer	rationale_specificity	Culture	Culture	specific_rationale_supplied	为舞台剧设计布景方案和空间布局，并与制作团队确定道具、材料和搭建细节。
+964	News producer	rationale_specificity	Culture	Culture	specific_rationale_supplied	策划新闻节目选题和播出顺序，协调记者、编辑、技术人员及直播流程。
+971	Mental health professional	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	心理健康专业人员评估心理健康需要，为来访者提供咨询、治疗、转介或康复支持；该称谓未限定具体资质。
+974	Letterer	rationale_specificity	Culture	Culture	specific_rationale_supplied	为漫画、插画或出版物绘制并排版文字、对白气泡和标题字形。
+978	A&R executive	rationale_specificity	Culture	Culture	specific_rationale_supplied	负责发掘签约音乐人、组织录制及艺人创作发展，核心是音乐内容生产管理。
+981	Freelance Writer	rationale_specificity	Culture	Culture	specific_rationale_supplied	自由撰稿人为出版物或客户独立选题、采访、撰写并交付文章、书稿或其他文字作品。
+985	Basketball Analyst	rationale_specificity	Culture	Culture	specific_rationale_supplied	观看并分析篮球比赛数据、战术和球员表现，再通过媒体或报告解释比赛走势。
+988	White-collar worker	rationale_specificity	Other	Other	specific_rationale_supplied	白领泛指以办公室、行政或专业知识工作为主的雇员群体；该词未说明具体岗位任务。
+991	Angel investor	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	以个人或投资实体资金投资早期企业，并评估创业团队、风险及潜在回报。
+996	Marine biologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究海洋生物及其栖息环境，通过采样、观察或实验分析生态过程。
+1000	Special Effects Designer	rationale_specificity	Culture	Culture	specific_rationale_supplied	为影视或舞台制作设计爆破、机械、环境或视觉特效方案并监督实现。
+1004	TV Meteorologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	分析气象观测和预报模型，并在电视节目中解释天气变化与预警信息。
+1007	Alchemist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	炼金术士在历史炼金术传统中试验物质配制、提炼和转化，记录实验并追求特定物质变化。
+1013	Digital Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	使用数字绘画、建模、影像或交互媒介创作视觉艺术作品。
+1022	People's Artist of Ukraine	rationale_specificity	Culture	Culture	specific_rationale_supplied	“乌克兰人民艺术家”是授予艺术贡献者的荣誉称号，可能授予演员、歌手、导演、作曲家或视觉艺术家等，不指定具体工种。
+1031	Jazz Artist/Singer	rationale_specificity	Culture	Culture	specific_rationale_supplied	爵士歌手/艺术家演唱爵士曲目，进行即兴诠释，并在音乐会、录音或广播中呈现作品。
+1034	Film Journalist	rationale_specificity	Culture	Culture	specific_rationale_supplied	采访电影从业者、报道电影产业新闻并撰写影评或电影专题。
+1040	Greengrocer	rationale_specificity	Other	Other	specific_rationale_supplied	采购并销售蔬菜水果，整理商品、称重计价并服务顾客。
+1043	Art Conservator	rationale_specificity	Culture	Culture	specific_rationale_supplied	检查艺术品材料和损坏状况，清洁、加固并制定保护修复方案以延缓劣化。
+1056	Biblical Scholar	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究圣经文本的语言、历史背景和解释传统，并发表学术成果。
+1063	Legal Scholar	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	法律学者研究法律制度、判例和法律理论，发表学术论著或讲授法律课程。
+1067	Shepherd	rationale_specificity	Other	Other	specific_rationale_supplied	照料并放牧羊群，带领牲畜觅食、保护其安全并协助繁育。
+1073	Gamekeeper	rationale_specificity	Other	Other	specific_rationale_supplied	管理猎场或野生动物栖地，巡查非法捕猎并维护猎物种群和场地。
+1080	Managing Director	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	董事总经理负责企业整体运营和战略执行，协调部门负责人并对经营结果承担管理责任。
+1083	Political campaigner	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	组织政治候选人或政策的宣传、筹款、选民联络及竞选活动。
+1086	Television executive producer	rationale_specificity	Culture	Culture	specific_rationale_supplied	决定电视节目项目方向、预算和关键人员，并监督制作、交付及发行。
+1089	Acrobatics	rationale_specificity	Culture	Culture	specific_rationale_supplied	杂技表演者练习并呈现翻腾、平衡、抛接或空中技巧等动作，通常在马戏、舞台或娱乐节目中演出。
+1093	English Professor	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	在大学教授英语语言或文学课程，指导学生并可能从事相关学术研究。
+1098	Dental hygienist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	清洁牙齿、检查口腔状况并指导患者预防牙周病和龋齿。
+1102	Theater Actress	rationale_specificity	Culture	Culture	specific_rationale_supplied	戏剧女演员排演并扮演舞台角色，通过台词、动作和情绪表达呈现剧本人物。
+1105	Enzymologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究酶的结构、催化机制和反应条件，开展实验并分析生化数据。
+1118	TV Art Director	rationale_specificity	Culture	Culture	specific_rationale_supplied	为电视节目设计布景和视觉方案，指导美术团队将节目创意转化为画面环境。
+1123	Character Designer	rationale_specificity	Culture	Culture	specific_rationale_supplied	角色设计师为动画、游戏或影视项目设计人物外形、服装、表情和造型设定。
+1126	noblewoman	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	以贵族家族成员或贵族头衔持有者身份参与宫廷、家族和礼仪事务；该词描述身份。
+1129	Theatre teacher	rationale_specificity	Culture	Culture	specific_rationale_supplied	教授戏剧表演、剧本、舞台实践或戏剧史，并组织课堂排演和学习评估。
+1137	Folk Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	民间艺术家创作或表演源自地方传统的音乐、舞蹈、手工艺或视觉作品。
+1140	Clerk (Profession) #147	rationale_specificity	Other	Other	specific_rationale_supplied	去除职业编号标记后，该职务通常处理记录、文件、登记或其他办公室事务；具体部门未说明。
+1146	Road manager	rationale_specificity	Culture	Culture	specific_rationale_supplied	巡演经理为演出团队安排路线、交通、住宿、场地进出和每日行程，确保巡演按时推进。
+1151	Art History Professor	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	在高校讲授艺术史，研究艺术作品、流派和历史语境，并指导学生或发表学术成果。
+1157	Softball Player	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	参加垒球训练和比赛，通过击球、跑垒与守备协作争取胜利。
+1166	Java Developer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	Java开发者用Java编写、测试和维护应用程序或服务，修复缺陷并实现软件功能。
+1169	Lieutenant colonel	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	担任军队中校军衔，指挥营级或相关单位并执行上级军事任务。
+1173	Aquanaut	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	水下探险者在水下栖居地或深潜环境中开展探索、观测和科研/技术任务。
+1176	Labour leader	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	组织和代表工人进行集体谈判、劳动权益倡议及工会事务管理。
+1181	Historian of Philosophy and Religion	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	哲学与宗教史学家研究思想文本、宗教传统及其历史语境，比较文献并撰写学术研究。
+1185	Line producer	rationale_specificity	Culture	Culture	specific_rationale_supplied	负责影视项目每日生产执行，控制预算、拍摄进度、用工和制作资源。
+1191	Caterer	rationale_specificity	Other	Other	specific_rationale_supplied	为活动或客户准备、运输和供应餐食，并安排服务人员与现场餐饮流程。
+1198	Theater Arts Educator	rationale_specificity	Culture	Culture	specific_rationale_supplied	戏剧艺术教育者教授表演、导演、舞台设计等戏剧课程，并指导学生制作或演出作品。
+1204	Human Resources Officer	rationale_specificity	Leadership	Other	specific_rationale_supplied	处理招聘、员工档案和人事行政事务，标签未给公司决策权或公共治理职责；与Recruitment Officer采用一致口径。
+1217	Roboticist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	机器人学家设计、制造或编程机器人系统，测试传感器、控制和机械部件的协同工作。
+1226	Editorial Writer	rationale_specificity	Culture	Culture	specific_rationale_supplied	社论作者围绕公共议题撰写机构立场文章或评论，向报刊读者阐释观点和论据。
+1230	Driller	rationale_specificity	Other	Other	specific_rationale_supplied	操作钻机和相关工具，在勘探、采矿、建筑或能源作业中钻出规定孔洞。
+1233	Payroll (Profession)	rationale_specificity	Other	Other	specific_rationale_supplied	薪资核算人员计算员工工资、扣款与税费，维护工资记录并安排薪款发放。
+1237	Open source/Internet technologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	开发、部署或维护互联网及开放源代码软件技术，并处理相关系统和工具。
+1241	Bellhop	rationale_specificity	Other	Other	specific_rationale_supplied	在酒店迎接客人、搬运行李并引导其前往客房或酒店设施。
+1248	Computer Graphics Animator	rationale_specificity	Culture	Culture	specific_rationale_supplied	计算机图形动画师制作数字角色、场景和运动，通过建模、绑定与动画帧形成动态图像。
+1251	Genetics Counselor	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	收集家族史并解释遗传检测风险，帮助个人或家庭理解遗传疾病与生育选择。
+1254	Nuclear Physicist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究原子核结构、核反应和放射性现象，通过实验或理论模型解释数据。
+1258	Intellectual Historian	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	思想史学家研究哲学、政治和社会观念在不同时代的形成与传播，利用文本和档案撰写研究。
+1261	Milkmaid	rationale_specificity	Other	Other	specific_rationale_supplied	挤奶并照料奶牛等产奶牲畜，处理牛奶收集和挤奶设备清洁。
+1265	Diagnostic radiographer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	操作X光、CT等影像设备获取医学图像，并协助患者完成检查定位。
+1268	VFX creative director	rationale_specificity	Culture	Culture	specific_rationale_supplied	视觉特效创意总监确定项目的特效风格和视觉概念，指导艺术家团队并审核关键镜头效果。
+1274	Costume Supervisor	rationale_specificity	Culture	Culture	specific_rationale_supplied	管理影视或舞台服装部门，采购、制作、试装并维护演出所需服装。
+1278	Silent Film Actress	rationale_specificity	Culture	Culture	specific_rationale_supplied	在无声电影中通过面部表情和肢体动作塑造角色并完成镜头表演。
+1281	Special Makeup Effects Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	特效化妆艺术家制作并应用假体、伤口、怪物或老化妆效，配合影视/舞台角色造型拍摄。
+1291	Child Psychologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	儿童心理学家评估儿童的认知、情绪和行为发展，为儿童及家庭提供心理干预或咨询。
+1301	Astrobiologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究地球以外生命存在的可能性及生命在宇宙中的起源、演化和环境条件。
+1317	Sketch Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	绘制人物、场景或概念草图，用于创作、设计、新闻或调查记录。
+1321	Artistic Director (Job title)	rationale_specificity	Culture	Culture	specific_rationale_supplied	艺术总监制定机构或制作项目的艺术方向，选择作品和创作者并统筹节目或展览计划。
+1324	Cavalryman	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	作为骑兵或骑兵部队成员执行侦察、机动作战及军事任务。
+1327	Industrial Supplies Merchant Wholesalers	rationale_specificity	Other		specific_rationale_supplied	此值像工业用品批发的行业分类而非明确个人岗位，无法区分一般销售服务与公司经营管理。
+1333	Merchant navy	rationale_specificity	Other		specific_rationale_supplied	商船队/商船海员群体的泛称，未指明船上技术、运输服务或企业经营职责，暂不强定单类。
+1336	Special Effects Creator	rationale_specificity	Culture	Culture	specific_rationale_supplied	为影视或舞台制作设计并实现机械、化学或视觉特效效果。
+1340	Dormitory Matron	rationale_specificity	Other	Other	specific_rationale_supplied	宿舍舍监安排住宿规则和日常管理，巡查宿舍、处理住户问题并协调清洁或值班人员。
+1352	Logger	rationale_specificity	Other	Other	specific_rationale_supplied	砍伐树木并将木材切割、装载和运出林区。
+1355	Gymnastics Teacher	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	教授体操课程和器械动作，安排学生练习并监督动作安全与技能进度。
+1359	Surgical Nurse	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	在手术前后照护患者，准备器械并协助手术团队维持无菌和安全流程。
+1362	Automotive design	rationale_specificity	Discovery/Science	Culture	specific_rationale_supplied	汽车外形、产品形态与使用体验的设计领域，按作者designer与本轮Industrial designer口径归Culture；未明确研发工程师职务。
+1365	First Assistant Director	rationale_specificity	Culture	Culture	specific_rationale_supplied	协助导演制定拍摄计划、管理片场秩序并协调演员与各部门按通告执行。
+1371	Pool Player	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	参加台球比赛，运用球杆击球、控制母球位置并按规则完成局面。
+1374	Carmelite Friar	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	加尔默罗会修士遵守修会生活和祈祷规范，参与宗教礼仪、共同体服务或牧灵工作。
+1377	Assayer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	取样并检测矿石、金属或贵金属的成分与纯度，出具化验或品位结果。
+1380	Clasics Violin Teacher	rationale_specificity	Culture	Culture	specific_rationale_supplied	教授古典小提琴演奏、读谱和乐曲诠释，通过练习纠正技巧并培养表演能力。
+1386	PR Expert	rationale_specificity	Culture	Culture	specific_rationale_supplied	公关专家为客户制定传播与声誉策略，撰写对外信息、回应媒体并处理公共沟通问题。
+1391	Rum-running	rationale_specificity	Other	Other	specific_rationale_supplied	在禁酒或管制时期秘密运输、销售酒类以逃避法律检查。
+1395	Shoemaking	rationale_specificity	Other	Other	specific_rationale_supplied	裁切鞋面和鞋底材料并进行缝合、粘合或修整，制作或修理鞋履。
+1402	Multi Media Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	多媒体艺术家综合影像、声音、数字技术和装置材料创作跨媒介艺术作品。
+1405	Security Firm Chief	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	经营私人安保公司，管理安保人员、客户合同、现场服务和公司运营。
+1408	Trampoline Gymnast	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	在蹦床上完成翻腾、转体和空中动作并参加体操比赛评分。
+1412	Professor (Profession) #40	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	教授讲授大学课程、开展学科研究并指导学生；此泛称没有说明具体学科。
+1424	Reverand	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	主持宗教礼拜、讲道并为信众提供宗教指导或牧灵服务。
+1427	Machine Tool operator	rationale_specificity	Other	Other	specific_rationale_supplied	设置并操作车床、铣床或其他机床，切削、钻孔或成形工件至规定尺寸。
+1430	Shock jock	rationale_specificity	Culture	Culture	specific_rationale_supplied	争议型电台主持人主持广播节目，刻意发表可能冒犯听众的意见或言论以制造话题。
+1437	Lord Chamberlain	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	宫廷大臣统筹王室/宫廷仪式和礼宾安排，管理相关事务并协助君主履行官方活动。
+1441	Crewman	rationale_specificity	Other	Other	specific_rationale_supplied	作为船舶或其他交通工具的普通船员执行值班、设备维护、货物或乘客服务等分工任务。
+1444	Vice admiral	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	海军中将指挥舰队或高级海军机构，制定行动部署并监督海军人员与任务执行。
+1448	Basketball Official	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	担任篮球比赛裁判，判定犯规、违例和得分并确保比赛按规则进行。
+1452	Physical Training Instructor	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	体能训练教练教授力量、耐力和身体素质训练，示范动作并评估学员训练进度。
+1456	Stunt Assistant	rationale_specificity	Culture	Culture	specific_rationale_supplied	协助特技团队准备动作场景、检查防护设备、布置现场并配合演员和特技人员安全完成拍摄。
+1459	Barista	rationale_specificity	Other	Other	specific_rationale_supplied	咖啡师研磨咖啡豆、制作浓缩咖啡和饮品，接单服务顾客并维护吧台设备。
+1465	Attaché	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	作为外交使团的专门事务官员处理所属领域的信息联络、报告和政府间协调。
+1468	School counselor	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	学校辅导员帮助学生处理学业规划、升学就业和个人适应问题，并联系家庭或专业支持资源。
+1475	Hospital Attendant	rationale_specificity	Other	Other	specific_rationale_supplied	医院护理助理协助患者移动、进食和日常舒适照护，并向护理团队报告观察到的变化。
+1479	Rock Musician	rationale_specificity	Culture	Culture	specific_rationale_supplied	创作或演奏摇滚音乐，参与乐队排练、录音和现场演出。
+1482	Custodian	rationale_specificity	Other	Other	specific_rationale_supplied	清扫、保养并检查建筑设施，处理日常维护和场地安全问题。
+1486	Wardrobe Assistant	rationale_specificity	Culture	Culture	specific_rationale_supplied	服装助理整理、保管和准备演出服装，协助演员试装并在拍摄/演出期间维护服饰连续性。
+1493	Set Painter	rationale_specificity	Culture	Culture	specific_rationale_supplied	按舞台或影视美术设计在布景表面绘制纹理、颜色和装饰效果。
+1496	Australian rules football coach	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	训练澳式足球队员、安排战术和阵容，并指导球队准备比赛和赛季。
+1501	Federal judge	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	主持联邦法院案件审理、解释和适用法律并作出司法裁决。
+1504	Professor of Elocution	rationale_specificity	Culture	Culture	specific_rationale_supplied	教授发声、发音、朗诵和演讲表达技巧，指导学生进行口语或舞台呈现。
+1508	Epistemologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	认识论学者研究知识、信念、证据与正当化等问题，提出概念分析并发表哲学研究。
+1516	Information security	rationale_specificity	Discovery/Science		specific_rationale_supplied	信息安全是专业领域，可涉及安全研发、系统运行维护、普通技术支持或管理，未给出个体岗位。
+1519	Mayor of Montazels	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	市长领导市政议会和地方行政，决定公共服务与预算优先级并监督市镇事务。
+1523	Neuroscience	rationale_specificity	Discovery/Science		specific_rationale_supplied	神经科学是学科名，未说明该值指研究人员、教师或实验技术员等岗位；按字段非职业描述暂留待查。
+1527	Economic historian	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	经济史学家研究过去的贸易、劳动、金融与经济制度，分析历史数据和档案并发表研究。
+1530	Vocal Arranger	rationale_specificity	Culture	Culture	specific_rationale_supplied	为歌曲安排合唱声部、和声走向与人声编制，并准备排练或录音所用谱面。
+1535	Air Force Officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	空军军官指挥或管理空军人员、训练和航空任务，按军阶承担部队准备与行动职责。
+1538	Bonesetter	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	以手法复位或固定骨折、脱位等骨骼损伤；属于传统或替代性医疗照护。
+1541	Artillery Officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	炮兵军官指挥炮兵分队及火力装备，训练炮组并规划火力支援和武器安全。
+1547	Music Collector	rationale_specificity	Culture	Culture	specific_rationale_supplied	搜集、整理并保存唱片、乐谱或音乐相关资料；称谓本身未说明是否为职业性工作。
+1551	Secret police	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	以秘密方式调查和压制被政府视为威胁的政治活动，执行国家安全监控或逮捕任务。
+1554	Quantum chemist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	量子化学家运用量子力学计算与实验研究分子结构、电子状态和化学反应。
+1557	Military police	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	在军队内执行纪律与安全任务，巡逻、调查违纪事件并保障军事设施或人员安全。
+1561	Assistant Teacher	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	协助主课教师备课、带小组活动、辅导学生并维持课堂秩序。
+1565	Dispatcher	rationale_specificity	Other	Other	specific_rationale_supplied	调度员接收运输、维修或紧急服务请求，安排车辆和人员路线、时序并传递现场信息。
+1569	Politician & Trade Unionist	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	参与公共政治活动并同时组织或代表工会成员，推动政策主张和劳工权益谈判。
+1578	Molecular Geneticist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究基因、DNA和遗传机制，通过实验分析遗传变异及其对生物性状或疾病的影响。
+1581	Information technology management	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	规划组织的IT预算、系统和人员配置，监督技术服务及信息基础设施运行。
+1584	Ghost singer	rationale_specificity	Culture	Culture	specific_rationale_supplied	代唱歌手预先录制影片歌曲，由画面中的演员对口型呈现；歌手本人通常不出现在镜头中。
+1587	Electronics technician	rationale_specificity	Discovery/Science	Other	specific_rationale_supplied	从事电子设备测试、装配、维护及故障处理的技术工种；完整词为technician，未表示电子研发工程师。
+1590	Special Education Teacher	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	特殊教育教师依据学生个别教育需求调整课程、教学材料和课堂支持，评估学习并协助学生发展。
+1593	media & culture scientist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	以社会科学方法研究媒体传播、文化生产及其对社会的影响。
+1600	Waste collector	rationale_specificity	Other	Other	specific_rationale_supplied	按路线收集生活或商业垃圾，并运送至处理或回收设施。
+1603	Professor of Ancient Greek History and Classical Studies	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	古希腊史与古典学教授研究并讲授古希腊语言、历史、文学和文明，指导学生开展相关学术研究。
+1606	Video editor	rationale_specificity	Culture	Culture	specific_rationale_supplied	筛选并剪接影像和声音素材，调整节奏、顺序和转场以完成视频或影视成片。
+1609	Character Modeler	rationale_specificity	Culture	Culture	specific_rationale_supplied	为动画、游戏或影视特效制作三维人物模型，并调整结构、材质和表情。
+1612	County court bailiff	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	县法院执达员送达法院文件、执行法院命令，并依法协助财产扣押或驱逐等程序。
+1615	Dramaturgist	rationale_specificity	Culture	Culture	specific_rationale_supplied	研究剧本和相关史料，为剧院提供文本分析、背景资料及戏剧结构建议。
+1622	Philosopher of Science	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	科学哲学家分析科学方法、解释、证据与理论的基础问题，撰写研究并从事学术教学。
+1625	Professor of Malayalam	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	在高校教授马拉雅拉姆语或相关文学课程，指导学生并开展语言文学研究。
+1628	Diving instructor	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	潜水教练讲授水肺或自由潜水技术与安全流程，带领学员进行水下训练和认证练习。
+1631	ADR Editor	rationale_specificity	Culture	Culture	specific_rationale_supplied	剪辑和同步影视作品的自动对白替换录音，整理对白轨并使其与画面和原声匹配。
+1634	Make-up artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	为演员、模特或客户设计和施作妆容，必要时制作角色妆、老化妆或特效妆。
+1643	Bank manager	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	管理银行分支机构的员工、客户服务、信贷业务和日常金融运营。
+1646	Population Biologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究种群数量、分布、遗传和生态变化，利用野外调查或模型解释其动态。
+1649	Water Conservation Specialist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	水资源节约专家评估用水需求和损耗，设计节水方案并监测水资源管理成效。
+1652	Pub Owner	rationale_specificity	Other	Other	specific_rationale_supplied	经营酒吧或酒馆，管理场地、饮品库存、员工和顾客服务。
+1655	Receiver general	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	财政总监/总收款官管理政府税款和公共收入的接收、入账与支付，确保财政账目准确。
+1659	Park ranger	rationale_specificity	Other	Other	specific_rationale_supplied	巡护公园或保护区，维护访客安全、解释自然资源规定并协助生态保护。
+1662	Plastic arts	rationale_specificity	Culture	Culture	specific_rationale_supplied	造型艺术指绘画、雕塑、版画等视觉造型创作领域；该词描述艺术门类，不指定某一岗位。
+1665	Kathak Dancer	rationale_specificity	Culture	Culture	specific_rationale_supplied	表演印度卡塔克古典舞，以复杂步伐、旋转、手势和节奏讲述故事。
+1668	Legal nurse consultant	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	运用护理专业知识审阅医疗记录、解释临床标准，并协助律师理解医疗事实和伤害问题。
+1671	Atmospheric scientist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	大气科学家分析天气和气候观测数据，研究大气过程并建立预测或环境模型。
+1675	Curriculum Director	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	制定课程框架和教学标准，协调学科团队并评估学校课程实施效果。
+1682	Sociologist of Science	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究科学组织、研究者群体和知识生产如何受到社会制度与文化影响。
+1708	Medical technologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	在临床实验室操作仪器并检测血液、组织或其他样本，为疾病诊断和治疗提供检验结果。
+1712	On-set Dresser	rationale_specificity	Culture	Culture	specific_rationale_supplied	片场布景师按设计摆放和维护家具、道具及现场陈设，保持拍摄空间的视觉连续性。
+1715	Computer Tech	rationale_specificity	Discovery/Science	Other	specific_rationale_supplied	提供电脑设备安装、故障排查和用户支持，核心为技术服务/支持；与软件研发、科学研究职责区分。
+1721	Nude model	rationale_specificity	Culture	Culture	specific_rationale_supplied	裸体模特为绘画、雕塑或摄影创作者摆姿，供其研究人体比例、姿态和光影。
+1730	Oficer-Major of King Zog  I	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	为君主服务的高级军官，负责军职指挥或王室军事事务；原拼写不规范但角色指向军队任职。
+1733	Solicitor advocate	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	代表客户提供法律意见、准备案件材料，并在获准法院出庭辩护。
+1736	CG Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	使用三维建模、渲染或数字绘画制作电影、游戏或广告所需的电脑图像。
+1739	Salsa Dancer	rationale_specificity	Culture	Culture	specific_rationale_supplied	萨尔萨舞者练习并表演萨尔萨舞步和编舞，在舞台、社交舞会或比赛中与舞伴共舞。
+1743	Singer/Songwriter/Producer/Filmmaker	rationale_specificity	Culture	Culture	specific_rationale_supplied	创作并演唱歌曲、制作录音，同时编导或制作影视内容，职责横跨多种文化作品生产。
+1747	Founder/President T. Mellon & Sons Bank	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	银行创办人兼总裁创立并领导银行，制定经营和贷款方向，监督金融业务、员工及客户关系。
+1755	Outreach worker	rationale_specificity	Other	Other	specific_rationale_supplied	外展服务人员主动联系社区居民，介绍社会或健康服务、评估需求并协助申请和转介。
+1758	Divemaster	rationale_specificity	Sports/Games	Sports/Games	specific_rationale_supplied	带领休闲潜水者进行水下潜水，进行安全简报、检查装备并在潜水过程中引导队伍。
+1761	Central Intelligence Agency Officer	rationale_specificity	Leadership	Leadership	specific_rationale_supplied	为国家情报机构收集、分析或管理海外情报，并执行授权的国家安全任务。
+1764	Nature Historian	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	自然史研究者观察和记录自然环境、生物与地质变化，利用标本、档案或野外资料撰写研究。
+1770	Nurse anesthetist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	麻醉护理师在手术前后评估患者，实施或协助麻醉并监测生命体征和苏醒恢复。
+1774	Hydrogeologist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	研究地下水的分布、流动和水质，利用地质调查与水文数据评估水资源和地下环境。
+1777	Rocket scientist	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	设计或分析火箭推进、飞行结构、导航和控制系统，并验证发射与飞行性能。
+1780	Puzzle designer	rationale_specificity	Sports/Games	Culture	specific_rationale_supplied	创作谜题规则、题面及解题体验，是创意内容设计；与Computer game designer同一设计口径，区别于竞技参与者。
+1784	Palaeontologist (Profession) #1	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	忽略Profession和编号标记后，该研究者通过化石采集、鉴定和比较重建古生物及其演化历史。
+1788	Peddler	rationale_specificity	Other	Other	specific_rationale_supplied	走街串巷或在临时摊位向顾客推销并出售小商品。
+1792	Gunslinger	rationale_specificity	Other	Other	specific_rationale_supplied	枪手/持枪打手以枪械参与决斗、护卫或暴力冲突；该称呼多指历史/负面身份而非正规职业。
+1795	Goatherd	rationale_specificity	Other	Other	specific_rationale_supplied	放牧山羊并照料其饮水、饲料、健康和群体移动。
+1798	Audio Dramatist	rationale_specificity	Culture	Culture	specific_rationale_supplied	创作广播或音频剧本，通过对白、音效和音乐构建戏剧情节。
+1801	Slave Trader	rationale_specificity	Other	Other	specific_rationale_supplied	买卖或转运被奴役的人以牟利；这是历史上以人口贩卖为核心的犯罪性身份。
+1804	Professional Artist	rationale_specificity	Culture	Culture	specific_rationale_supplied	职业艺术家以艺术创作为职业，持续制作、展示或销售作品；具体媒介和创作职责未在该称谓中说明。
+1809	Web Application Developer	rationale_specificity	Discovery/Science	Discovery/Science	specific_rationale_supplied	编写、测试和维护运行于浏览器或网络服务器上的应用程序及其数据接口。
