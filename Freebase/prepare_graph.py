@@ -19,10 +19,11 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from Freebase.review_professions import resolve_professions
+from Freebase import bhht_labels
 
 DEFAULT_CONFIG = ROOT / "config/freebase_grouped_rgcn_graphmask_20y_v1.json"
 SYMMETRIC = {"sibling", "partner", "peer", "celebrity_friend", "celebrity_romantic_relationship"}
-POLICIES = {"mapped_first_other_fallback", "mapped_first_raw_fallback"}
+POLICIES = {"mapped_first_other_fallback", "mapped_first_raw_fallback", bhht_labels.POLICY}
 VERSION = "freebase_provisional_single_l1_v1"
 
 
@@ -36,7 +37,7 @@ def read_json(p):
 
 
 def read_rows(p, delimiter=","):
-    with Path(p).open(encoding="utf-8", newline="") as stream:
+    with Path(p).open(encoding="utf-8-sig", newline="") as stream:
         yield from csv.DictReader(stream, delimiter=delimiter)
 
 
@@ -54,7 +55,7 @@ def stamp(p):
 
 def select_label(raw, mapping, previous, policy):
     """Select by recorded array order, never popularity, rarity or neighbours."""
-    if policy not in POLICIES:
+    if policy not in POLICIES - {bhht_labels.POLICY}:
         raise ValueError(f"Unknown label policy: {policy}")
     if not raw:
         raise ValueError("This cohort requires at least one recorded profession")
@@ -196,18 +197,25 @@ def settings(config, output_dir, tables_only):
     if os.environ.get("FREEBASE_INPUT_DIR") or input_dir != path(s["input_dir"]):
         s["input_dir"] = str(input_dir)
     inputs = {"nodes": input_dir / "nodes.csv", "facts": input_dir / "main_relation_facts.csv",
-              "audit": path(s["audit_file"]), "crosswalk": path(s["crosswalk_file"]),
+              "crosswalk": path(s["crosswalk_file"]),
               "relation_rules": path(s.get("relation_rules", "Freebase/relation_rules.json"))}
+    if s["label_policy"] != bhht_labels.POLICY:
+        inputs["audit"] = path(s["audit_file"])
     missing = [(key, p) for key, p in inputs.items() if not p.is_file()]
     if missing:
         details = "\n".join(f"  {key}: {p}" for key, p in missing)
-        raise FileNotFoundError("Missing Freebase input files:\n" + details +
-            "\nSet FREEBASE_INPUT_DIR to the directory containing nodes.csv and main_relation_facts.csv. "
+        label_hint = (
+            "Copy profession_l1_semantic_crosswalk.tsv to its configured path; v2 does not require the old person audit."
+            if s["label_policy"] == bhht_labels.POLICY else
             "The person_l1_audit.tsv is generated locally and ignored by Git; copy it to its configured path "
             "along with profession_l1_crosswalk_draft.tsv before running.")
+        raise FileNotFoundError("Missing Freebase input files:\n" + details +
+            "\nSet FREEBASE_INPUT_DIR to the directory containing nodes.csv and main_relation_facts.csv. "
+            + label_hint)
     if any(output == p.parent or output in p.parents for p in inputs.values()):
         raise ValueError("Output directory overlaps an input directory")
-    signature = {"schema_version": VERSION, "source_prepare": s, "tables_only": tables_only,
+    signature = {"schema_version": bhht_labels.VERSION if s["label_policy"] == bhht_labels.POLICY else VERSION,
+                 "source_prepare": s, "tables_only": tables_only,
                  "inputs": {k: stamp(v) for k, v in inputs.items()},
                  "relation_rules": read_json(inputs["relation_rules"])}
     return s, output, inputs, signature
@@ -219,14 +227,21 @@ def prepare(config, output_dir=None, *, tables_only=False):
                 "date_audit.tsv", "normalized_relation_facts.csv", "class_stats.csv", "relation_stats.csv", "attribute_conflicts.csv")
     if not tables_only:
         complete += ("graph_data.pt",)
+    if s["label_policy"] == bhht_labels.POLICY:
+        complete += ("profession_l1_crosswalk_v2.tsv",)
     manifest = output / "source_prepare_manifest.json"
     if output.exists():
         if all((output / f).is_file() and (output / f).stat().st_size > 0 for f in complete) and read_json(manifest) == signature:
             print(f"[reuse] compatible source artifact: {output}")
             return read_json(output / "split_summary.json")
         raise ValueError(f"Existing source output is incomplete/incompatible: {output}; use a new output directory")
-    nodes, selection, date_audit = load_node_tables(inputs["nodes"], inputs["audit"], inputs["crosswalk"],
-        policy=s["label_policy"], maximum_year=s.get("maximum_year", 2026))
+    crosswalk, label_details = None, {}
+    if s["label_policy"] == bhht_labels.POLICY:
+        nodes, selection, date_audit, crosswalk, label_details = bhht_labels.load_node_tables(
+            inputs["nodes"], inputs["crosswalk"], maximum_year=s.get("maximum_year", 2026), date_parser=single_year)
+    else:
+        nodes, selection, date_audit = load_node_tables(inputs["nodes"], inputs["audit"], inputs["crosswalk"],
+            policy=s["label_policy"], maximum_year=s.get("maximum_year", 2026))
     facts, vocabulary, relation_stats = normalize_relations(inputs["facts"], inputs["relation_rules"], {n["node_id"] for n in nodes})
     node_to_id = {n["node_id"]: i for i, n in enumerate(nodes)}
     relation_to_id = {r: i for i, r in enumerate(sorted(vocabulary + [r + "__rev" for r in vocabulary]))}
@@ -246,7 +261,7 @@ def prepare(config, output_dir=None, *, tables_only=False):
                "date_audit_status_counts": {k: dict(Counter(r[k] for r in date_audit)) for k in ("birth_status", "death_status")},
                "date_validation_maximum_year": s.get("maximum_year", 2026),
                "maximum_observed_year": max((n[k] for n in nodes for k in ("birth_year", "death_year") if n[k] != ""), default=None),
-               **relation_stats}
+               **relation_stats, **label_details}
     graph = metadata = None
     if not tables_only:
         import pandas as pd
@@ -281,6 +296,8 @@ def prepare(config, output_dir=None, *, tables_only=False):
     write_rows(temporary / "normalized_relation_facts.csv", ["source", "relation", "target", "first_source_line", "source_fact_count"], facts)
     write_rows(temporary / "label_selection_audit.tsv", list(selection[0]), selection, "\t")
     write_rows(temporary / "date_audit.tsv", list(date_audit[0]), date_audit, "\t")
+    if crosswalk is not None:
+        write_rows(temporary / "profession_l1_crosswalk_v2.tsv", list(crosswalk[0]), crosswalk, "\t")
     write_rows(temporary / "attribute_conflicts.csv", ["node_id", "attribute", "values"], [])
     write_rows(temporary / "class_stats.csv", ["occupation", "count"], [{"occupation": k, "count": v} for k, v in sorted(label_counts.items())])
     edge_counts = Counter(r["relation"] for r in edges)
