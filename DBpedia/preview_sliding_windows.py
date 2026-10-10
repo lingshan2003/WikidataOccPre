@@ -69,6 +69,8 @@ def preview(config_path):
             "original_triple_jaccard_previous": None if previous_edges is None else float((edge_mask & previous_edges).sum() / max(1, (edge_mask | previous_edges).sum())),
         }
         rows.append(row)
+        if windows.birth_only_alive_assumption is not None:
+            row["assumed_alive_through_nodes"] = int((mask & audit.life_period_death_year_imputed.to_numpy(dtype=bool)).sum())
         for index, group in enumerate(group_names):
             raw = int((edge_mask & (groups == index)).sum())
             merged = int((collapsed_mask & (cg == index)).sum())

@@ -29,6 +29,18 @@ LABELS = {
     "other_acquired": "Other acquired ties",
 }
 COLORS = ["#2b6f9c", "#dc7e36", "#469477", "#9973b2", "#be5e68", "#9a8344", "#647c88"]
+SPLIT_LABELS = dict(LABELS)
+SPLIT_LABELS.pop("influence_succession")
+SPLIT_LABELS.update(influence="Influence", succession="Succession")
+GROUP_LABELS = dict(LABELS, **SPLIT_LABELS)
+GROUP_COLORS = dict(zip(LABELS, COLORS), influence="#be5e68", succession="#6f5794")
+
+
+def group_labels(taxonomy):
+    groups = taxonomy["groups"]
+    if set(groups) not in (set(LABELS), set(SPLIT_LABELS)):
+        raise ValueError("Expected the seven-group v1 or eight-group split-influence/succession taxonomy")
+    return {group: GROUP_LABELS[group] for group in groups}
 
 
 def read_json(path):
@@ -55,8 +67,7 @@ def collect(root, start_year, end_year):
     config = read_json(root / "config/experiment.json")
     calendar = read_json(root / config["period_config"])
     taxonomy = read_json(root / config["multi_group_taxonomy"])
-    if set(taxonomy["groups"]) != set(LABELS):
-        raise ValueError("Expected the frozen seven-group taxonomy")
+    labels = group_labels(taxonomy)
     periods = {p["id"]: p for p in calendar["periods"]}
     if end_year < start_year:
         raise ValueError("End year precedes start year")
@@ -122,7 +133,7 @@ def collect(root, start_year, end_year):
         with (report / "relations_base.csv").open(newline="", encoding="utf-8") as handle:
             rows = [r for r in csv.DictReader(handle) if int(r["layer"]) == 0]
         observed = {r["relation"]: r for r in rows}
-        if len(rows) != len(observed) or set(observed) - set(LABELS):
+        if len(rows) != len(observed) or set(observed) - set(labels):
             raise ValueError(f"Duplicate/unknown groups: {context}")
         if sum(int(r["message_observations"]) for r in rows) != observations:
             raise ValueError(f"Message counts mismatch: {context}")
@@ -139,7 +150,7 @@ def collect(root, start_year, end_year):
                       "hard_retained_messages": round(retained), "test_nodes": metrics["roots"],
                       "prediction_agreement": metrics["prediction_agreement"], "masked_accuracy": metrics["masked"]["accuracy"],
                       "masked_macro_f1": metrics["masked"]["macro_f1"], "checkpoint_selection": policy})
-        for group in LABELS:
+        for group in labels:
             row = observed.get(group)
             count = int(row["message_observations"]) if row else 0
             group_retained = count * rate(row["hard_retention_rate"]) if row else 0
@@ -172,6 +183,7 @@ def write_tsv(path, rows):
 
 
 def plot(tidy, output):
+    labels = {group: GROUP_LABELS[group] for group in dict.fromkeys(r["group"] for r in tidy)}
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "axes.spines.top": False,
                          "axes.spines.right": False, "svg.fonttype": "none", "pdf.fonttype": 42})
 
@@ -185,7 +197,7 @@ def plot(tidy, output):
             ax.scatter([r["year"] for r in disabled], [r["plot_share_percent"] for r in disabled], s=15,
                        facecolors="white", edgecolors=color, linewidths=0.8, zorder=3, label="Layer 0 gate disabled")
             ax.legend(loc="best", frameon=False, fontsize=8)
-        ax.set_title(LABELS[group], loc="left", fontweight="bold")
+        ax.set_title(labels[group], loc="left", fontweight="bold")
         ax.set_xlabel("Window center year")
         ax.set_ylabel("Retained message share (%)")
         ax.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=1))
@@ -201,19 +213,24 @@ def plot(tidy, output):
             fig.savefig(output / f"{name}.{extension}", dpi=300, bbox_inches="tight", facecolor="white")
         plt.close(fig)
 
-    for (group, _), color in zip(LABELS.items(), COLORS):
+    for group in labels:
+        color = GROUP_COLORS[group]
         fig, ax = plt.subplots(figsize=(8.5, 4.6))
         draw(ax, group, color)
         fig.suptitle("DBpedia annual sliding windows — Layer 0", fontsize=12)
         fig.tight_layout()
         save(fig, f"layer0_{group}_annual")
-    fig, axes = plt.subplots(4, 2, figsize=(13, 14))
-    for ax, group, color in zip(axes.flat, LABELS, COLORS):
-        draw(ax, group, color)
-    axes.flat[-1].axis("off")
-    axes.flat[-1].text(0, 0.7, "Raw annual results; no bootstrap or smoothing.\nEach panel uses its own y-axis scale.\nGroups sum to 100% each year.\nOpen circles: Layer 0 gate disabled.\nGaps: no sampled support.", transform=axes.flat[-1].transAxes, va="top", linespacing=1.7)
+    fig, axes = plt.subplots((len(labels) + 1) // 2, 2, figsize=(13, 14))
+    for ax, group in zip(axes.flat, labels):
+        draw(ax, group, GROUP_COLORS[group])
+    note = "Raw annual results; no bootstrap or smoothing.\nEach panel uses its own y-axis scale.\nGroups sum to 100% each year.\nOpen circles: Layer 0 gate disabled.\nGaps: no sampled support."
+    if len(labels) % 2:
+        axes.flat[-1].axis("off")
+        axes.flat[-1].text(0, 0.7, note, transform=axes.flat[-1].transAxes, va="top", linespacing=1.7)
+    else:
+        fig.text(0.06, 0.015, note.replace("\n", "  "), fontsize=8, wrap=True)
     fig.suptitle("DBpedia relation-group trends — Layer 0", fontsize=17)
-    fig.tight_layout(rect=(0, 0, 1, 0.97), h_pad=2)
+    fig.tight_layout(rect=(0, 0 if len(labels) % 2 else 0.055, 1, 0.97), h_pad=2)
     save(fig, "layer0_all_groups_annual")
 
 
@@ -231,8 +248,9 @@ def main():
     (args.output_dir / "provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     plot(tidy, args.output_dir)
     disabled = sum(not row["layer0_gate_enabled"] for row in audit)
-    print(f"Validated {len(audit)} years, seven groups; Layer 0 disabled in {disabled} years")
-    print(f"Saved seven group plots + overview (PNG/SVG/PDF): {args.output_dir.resolve()}")
+    count = len(provenance["taxonomy"]["groups"])
+    print(f"Validated {len(audit)} years, {count} groups; Layer 0 disabled in {disabled} years")
+    print(f"Saved {count} group plots + overview (PNG/SVG/PDF): {args.output_dir.resolve()}")
 
 
 if __name__ == "__main__":

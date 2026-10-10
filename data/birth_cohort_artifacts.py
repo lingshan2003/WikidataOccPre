@@ -397,6 +397,17 @@ def build_period_induced_artifact(
         source_life_date_status_counts,
         selected_node_membership_count_counts,
     )
+    if period_config.birth_only_alive_assumption is not None:
+        imputed = life_audit["life_period_death_year_imputed"].to_numpy(dtype=bool)
+        details["life_date_imputation"] = {
+            "rule": period_config.birth_only_alive_assumption.manifest(),
+            "source_nodes_with_imputed_death": int(imputed.sum()),
+            "selected_nodes_with_imputed_death": int(imputed[selected_mask].sum()),
+            "effective_death_year_field": "life_period_effective_death_year",
+            "imputation_flag_field": "life_period_death_year_imputed",
+            "used_for": "life_period_membership_only",
+            "raw_death_year_and_temporal_features_preserved": True,
+        }
     metadata = {
         "target_column": source_metadata["target_column"],
         "num_relations": int(source_metadata["num_relations"]),

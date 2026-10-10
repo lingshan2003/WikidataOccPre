@@ -16,7 +16,17 @@ sys.path.insert(0, str(ROOT))
 from DBpedia.grouped_pipeline import Pipeline, write_json
 
 
-def interval_mask(birth, death, start, end):
+def effective_death_years(birth, death, birth_only_alive_assumption=None):
+    effective = death.copy()
+    inferred = np.zeros(len(birth), dtype=bool)
+    if birth_only_alive_assumption is not None:
+        inferred = np.isfinite(birth) & ~np.isfinite(death) & (birth > birth_only_alive_assumption["born_after"])
+        effective[inferred] = birth_only_alive_assumption["alive_through"]
+    return effective, inferred
+
+
+def interval_mask(birth, death, start, end, birth_only_alive_assumption=None):
+    death, _ = effective_death_years(birth, death, birth_only_alive_assumption)
     complete = np.isfinite(birth) & np.isfinite(death)
     valid = complete & (birth <= death)
     birth_only = np.isfinite(birth) & ~np.isfinite(death)
@@ -37,9 +47,11 @@ def audit(config, periods=None):
     edges = pd.read_csv(source_path.parent / "edges.csv")
     birth = pd.to_numeric(nodes.birth_year, errors="coerce").to_numpy(dtype=float)
     death = pd.to_numeric(nodes.death_year, errors="coerce").to_numpy(dtype=float)
+    assumption = pipeline.period_config.get("birth_only_alive_assumption")
+    effective_death, imputed = effective_death_years(birth, death, assumption)
     membership_count = np.zeros(len(nodes), dtype=np.int64)
     for period in pipeline.periods.values():
-        membership_count += interval_mask(birth, death, period["start"], period["end"])
+        membership_count += interval_mask(birth, death, period["start"], period["end"], assumption)
     source_ids = edges.source_id.to_numpy(dtype=np.int64)
     target_ids = edges.target_id.to_numpy(dtype=np.int64)
     group_for = {relation: group for group, relations in pipeline.multi["groups"].items() for relation in relations}
@@ -54,7 +66,7 @@ def audit(config, periods=None):
             pipeline.validate_period(context)
             collapsed_bundle = pipeline.validate_collapsed(context, "multi_group")
             period = pipeline.periods[context]
-            mask = interval_mask(birth, death, period["start"], period["end"])
+            mask = interval_mask(birth, death, period["start"], period["end"], assumption)
             selected = np.flatnonzero(mask)
             original_path = pipeline.source(context)
             original = torch.load(original_path, map_location="cpu", weights_only=False)
@@ -65,6 +77,15 @@ def audit(config, periods=None):
             grouped_edges = pd.read_csv(artifact / "edges.csv")
             check("exact_node_membership_and_source_indices", np.array_equal(selected, original_nodes.source_node_index.to_numpy()))
             check("exact_node_URI_order", np.array_equal(nodes.node_id.to_numpy()[selected], original_nodes.node_id.to_numpy()))
+            if assumption is not None:
+                check("raw_life_dates_preserved_with_separate_imputation_audit", np.array_equal(
+                    pd.to_numeric(original_nodes.death_year, errors="coerce").to_numpy(float), death[selected], equal_nan=True) and
+                    np.array_equal(pd.to_numeric(original_nodes.birth_year, errors="coerce").to_numpy(float), birth[selected], equal_nan=True) and
+                    np.array_equal(original_nodes.life_period_death_year_imputed.to_numpy(dtype=bool), imputed[selected]) and
+                    np.array_equal(original_nodes.life_period_effective_death_year.to_numpy(float), effective_death[selected], equal_nan=True))
+                raw_missing = np.column_stack((~np.isfinite(birth), ~np.isfinite(death), ~np.isfinite(birth) | ~np.isfinite(death)))
+                check("imputation_not_used_as_observed_temporal_features", np.array_equal(
+                    original["data"].temporal[:, 3:6].numpy(), raw_missing[selected].astype(np.float32)))
             check("membership_counts_across_all_annual_windows", np.array_equal(membership_count[selected], original_nodes.life_period_membership_count.to_numpy()))
             retained = mask[source_ids] & mask[target_ids]
             expected_edges = edges.loc[retained].copy().reset_index(drop=True)
@@ -86,8 +107,8 @@ def audit(config, periods=None):
             expected_grouped.relation_id = expected_grouped.relation.map(mapping)
             expected_grouped = expected_grouped.drop_duplicates(["source_id", "relation", "target_id"], keep="first").reset_index(drop=True)
             check("exact_group_mapping_reverse_direction_and_triple_dedup", expected_grouped[edge_columns].equals(grouped_edges[edge_columns]))
-            check("seven_groups_fourteen_directed_relation_ids", set(mapping) == set(pipeline.multi["groups"]) | {g + "__rev" for g in pipeline.multi["groups"]} and
-                  set(mapping.values()) == set(range(14)))
+            check("all_groups_have_distinct_forward_and_reverse_relation_ids", set(mapping) == set(pipeline.multi["groups"]) | {g + "__rev" for g in pipeline.multi["groups"]} and
+                  set(mapping.values()) == set(range(2 * len(pipeline.multi["groups"]))))
             check("grouped_node_table_unchanged", original_nodes.equals(grouped_nodes))
             graph, cg = original["data"], collapsed_bundle["data"]
             check("all_node_tensors_labels_and_features_unchanged_by_grouping", all(
@@ -129,6 +150,8 @@ def audit(config, periods=None):
                         "birth_only": int((np.isfinite(birth[selected]) & ~np.isfinite(death[selected])).sum()),
                         "death_only": int((~np.isfinite(birth[selected]) & np.isfinite(death[selected])).sum()),
                         "passed": all(passed), "checks": len(passed)})
+            if assumption is not None:
+                row["assumed_alive_nodes"] = int(imputed[selected].sum())
             for group in pipeline.multi["groups"]:
                 groups.append({"context": context, "group": group,
                                "raw_original_triples": int(base_edges.relation.isin(pipeline.multi["groups"][group]).sum()),

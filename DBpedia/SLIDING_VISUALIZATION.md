@@ -1,5 +1,11 @@
 # Annual relation-group figures
 
+The plotter also supports the eight-group split-influence/succession v2 taxonomy.
+For that rerun's config, dedicated package name and launch command, see
+[SPLIT_INFLUENCE_SUCCESSION.md](SPLIT_INFLUENCE_SUCCESSION.md). It produces eight
+separate curves and a 4-by-2 overview. The commands below describe the original
+seven-group experiment.
+
 Use the completed multi-group annual experiment. Each of the seven groups has
 one raw annual curve, with a seven-panel overview. Default center years are
 1901–2000 (the twentieth century); 1900 remains in the downloaded bundle.

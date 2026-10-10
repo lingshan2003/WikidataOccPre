@@ -60,6 +60,15 @@ class LifePeriod:
 
 
 @dataclass(frozen=True)
+class BirthOnlyAliveAssumption:
+    born_after: int
+    alive_through: int
+
+    def manifest(self) -> Dict[str, int]:
+        return {"born_after": self.born_after, "alive_through": self.alive_through}
+
+
+@dataclass(frozen=True)
 class LifePeriodConfig:
     name: str
     version: int
@@ -74,6 +83,7 @@ class LifePeriodConfig:
     periods: Tuple[LifePeriod, ...]
     allow_finite_last_period: bool = False
     calendar_layout: str = "partition"
+    birth_only_alive_assumption: Optional[BirthOnlyAliveAssumption] = None
 
     @property
     def identifiers(self) -> Tuple[str, ...]:
@@ -103,6 +113,8 @@ class LifePeriodConfig:
             result["allow_finite_last_period"] = True
         if self.calendar_layout != "partition":
             result["calendar_layout"] = self.calendar_layout
+        if self.birth_only_alive_assumption is not None:
+            result["birth_only_alive_assumption"] = self.birth_only_alive_assumption.manifest()
         return result
 
 
@@ -193,6 +205,18 @@ def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
         )
     if payload.get("invalid_interval_policy") != INVALID_INTERVAL_POLICY:
         raise ValueError(f"invalid_interval_policy must be {INVALID_INTERVAL_POLICY!r}")
+    assumption = None
+    if "birth_only_alive_assumption" in payload:
+        raw_assumption = payload["birth_only_alive_assumption"]
+        if not isinstance(raw_assumption, Mapping) or set(raw_assumption) != {"born_after", "alive_through"}:
+            raise ValueError("birth_only_alive_assumption requires exactly born_after and alive_through")
+        if any(isinstance(v, bool) or not isinstance(v, int) for v in raw_assumption.values()):
+            raise ValueError("birth_only_alive_assumption years must be integers")
+        if raw_assumption["alive_through"] <= raw_assumption["born_after"]:
+            raise ValueError("birth_only_alive_assumption alive_through must be greater than born_after")
+        if membership_rule != "life_interval_or_known_endpoint_in_period" or missing_date_policy != "exclude_if_both_dates_missing":
+            raise ValueError("birth_only_alive_assumption requires the known-endpoint membership and both-missing exclusion policies")
+        assumption = BirthOnlyAliveAssumption(**raw_assumption)
     raw_periods = payload.get("periods")
     if not isinstance(raw_periods, list):
         raise ValueError("Life-period configuration field 'periods' must be a list")
@@ -223,6 +247,7 @@ def load_life_period_config(path: str | Path | None) -> LifePeriodConfig:
         periods=periods,
         allow_finite_last_period=allow_finite,
         calendar_layout=calendar_layout,
+        birth_only_alive_assumption=assumption,
     )
 
 
@@ -232,7 +257,9 @@ def life_period_membership(nodes: pd.DataFrame, config: LifePeriodConfig) -> Tup
     A valid life interval ``[birth, death]`` belongs to period ``[start, end]``
     exactly when the intervals intersect. For the v2 policy, a person with
     only a known birth (or only a known death) is assigned to every window
-    containing that observed endpoint; no unobserved years are extrapolated.
+    containing that observed endpoint. An explicit birth_only_alive_assumption
+    extends eligible birth-only intervals through its fixed year for membership
+    only; observed death dates and the original node table remain unchanged.
     """
     required = {config.birth_field, config.death_field}
     missing = required - set(nodes)
@@ -241,14 +268,22 @@ def life_period_membership(nodes: pd.DataFrame, config: LifePeriodConfig) -> Tup
     birth = pd.to_numeric(nodes[config.birth_field], errors="coerce").to_numpy(dtype=float)
     death = pd.to_numeric(nodes[config.death_field], errors="coerce").to_numpy(dtype=float)
     has_birth, has_death = np.isfinite(birth), np.isfinite(death)
-    valid_life_interval = has_birth & has_death & (death >= birth)
-    birth_endpoint_only = has_birth & ~has_death
+    effective_death = death.copy()
+    inferred = np.zeros(len(nodes), dtype=bool)
+    if config.birth_only_alive_assumption is not None:
+        assumption = config.birth_only_alive_assumption
+        inferred = has_birth & ~has_death & (birth > assumption.born_after)
+        effective_death[inferred] = assumption.alive_through
+    has_effective_death = has_death | inferred
+    valid_life_interval = has_birth & has_effective_death & (effective_death >= birth)
+    birth_endpoint_only = has_birth & ~has_effective_death
     death_endpoint_only = ~has_birth & has_death
     status = np.full(len(nodes), "valid_life_interval", dtype=object)
     status[~has_birth & ~has_death] = "missing_birth_and_death"
     status[death_endpoint_only] = "death_endpoint_only"
     status[birth_endpoint_only] = "birth_endpoint_only"
-    status[has_birth & has_death & (death < birth)] = "death_before_birth"
+    status[inferred] = "assumed_alive_through_year"
+    status[has_birth & has_effective_death & (effective_death < birth)] = "death_before_birth"
 
     memberships: Dict[str, np.ndarray] = {}
     for period in config.periods:
@@ -256,7 +291,7 @@ def life_period_membership(nodes: pd.DataFrame, config: LifePeriodConfig) -> Tup
         if period.end is not None:
             mask &= birth <= period.end
         if period.start is not None:
-            mask &= death >= period.start
+            mask &= effective_death >= period.start
         if config.partial_date_policy == "include_known_endpoint_periods":
             birth_in_period = birth_endpoint_only.copy()
             death_in_period = death_endpoint_only.copy()
@@ -278,4 +313,7 @@ def life_period_membership(nodes: pd.DataFrame, config: LifePeriodConfig) -> Tup
         "eligible_for_life_period_experiment": eligible,
         "life_period_membership_count": np.sum(np.stack(list(memberships.values())), axis=0),
     })
+    if config.birth_only_alive_assumption is not None:
+        audit["life_period_effective_death_year"] = effective_death
+        audit["life_period_death_year_imputed"] = inferred
     return memberships, audit

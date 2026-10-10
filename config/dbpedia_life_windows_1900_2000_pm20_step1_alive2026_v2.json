@@ -1,0 +1,624 @@
+{
+  "name": "dbpedia_life_windows_1900_2000_pm20_step1_alive2026_v2",
+  "version": 2,
+  "description": "Centers 1900 through 2000; inclusive center +/-20 windows. Observed complete lifespans use overlap. Birth-only nodes born strictly after 1920 use assumed death 2026 for membership only; other partial dates keep the endpoint rule. Raw dates remain unchanged.",
+  "calendar_layout": "sliding_windows",
+  "membership_rule": "life_interval_or_known_endpoint_in_period",
+  "birth_field": "birth_year",
+  "death_field": "death_year",
+  "missing_date_policy": "exclude_if_both_dates_missing",
+  "partial_date_policy": "include_known_endpoint_periods",
+  "invalid_interval_policy": "exclude_if_death_before_birth",
+  "periods": [
+    {
+      "id": "center_1900",
+      "label": "1900 (1880-1920 CE)",
+      "start": 1880,
+      "end": 1920
+    },
+    {
+      "id": "center_1901",
+      "label": "1901 (1881-1921 CE)",
+      "start": 1881,
+      "end": 1921
+    },
+    {
+      "id": "center_1902",
+      "label": "1902 (1882-1922 CE)",
+      "start": 1882,
+      "end": 1922
+    },
+    {
+      "id": "center_1903",
+      "label": "1903 (1883-1923 CE)",
+      "start": 1883,
+      "end": 1923
+    },
+    {
+      "id": "center_1904",
+      "label": "1904 (1884-1924 CE)",
+      "start": 1884,
+      "end": 1924
+    },
+    {
+      "id": "center_1905",
+      "label": "1905 (1885-1925 CE)",
+      "start": 1885,
+      "end": 1925
+    },
+    {
+      "id": "center_1906",
+      "label": "1906 (1886-1926 CE)",
+      "start": 1886,
+      "end": 1926
+    },
+    {
+      "id": "center_1907",
+      "label": "1907 (1887-1927 CE)",
+      "start": 1887,
+      "end": 1927
+    },
+    {
+      "id": "center_1908",
+      "label": "1908 (1888-1928 CE)",
+      "start": 1888,
+      "end": 1928
+    },
+    {
+      "id": "center_1909",
+      "label": "1909 (1889-1929 CE)",
+      "start": 1889,
+      "end": 1929
+    },
+    {
+      "id": "center_1910",
+      "label": "1910 (1890-1930 CE)",
+      "start": 1890,
+      "end": 1930
+    },
+    {
+      "id": "center_1911",
+      "label": "1911 (1891-1931 CE)",
+      "start": 1891,
+      "end": 1931
+    },
+    {
+      "id": "center_1912",
+      "label": "1912 (1892-1932 CE)",
+      "start": 1892,
+      "end": 1932
+    },
+    {
+      "id": "center_1913",
+      "label": "1913 (1893-1933 CE)",
+      "start": 1893,
+      "end": 1933
+    },
+    {
+      "id": "center_1914",
+      "label": "1914 (1894-1934 CE)",
+      "start": 1894,
+      "end": 1934
+    },
+    {
+      "id": "center_1915",
+      "label": "1915 (1895-1935 CE)",
+      "start": 1895,
+      "end": 1935
+    },
+    {
+      "id": "center_1916",
+      "label": "1916 (1896-1936 CE)",
+      "start": 1896,
+      "end": 1936
+    },
+    {
+      "id": "center_1917",
+      "label": "1917 (1897-1937 CE)",
+      "start": 1897,
+      "end": 1937
+    },
+    {
+      "id": "center_1918",
+      "label": "1918 (1898-1938 CE)",
+      "start": 1898,
+      "end": 1938
+    },
+    {
+      "id": "center_1919",
+      "label": "1919 (1899-1939 CE)",
+      "start": 1899,
+      "end": 1939
+    },
+    {
+      "id": "center_1920",
+      "label": "1920 (1900-1940 CE)",
+      "start": 1900,
+      "end": 1940
+    },
+    {
+      "id": "center_1921",
+      "label": "1921 (1901-1941 CE)",
+      "start": 1901,
+      "end": 1941
+    },
+    {
+      "id": "center_1922",
+      "label": "1922 (1902-1942 CE)",
+      "start": 1902,
+      "end": 1942
+    },
+    {
+      "id": "center_1923",
+      "label": "1923 (1903-1943 CE)",
+      "start": 1903,
+      "end": 1943
+    },
+    {
+      "id": "center_1924",
+      "label": "1924 (1904-1944 CE)",
+      "start": 1904,
+      "end": 1944
+    },
+    {
+      "id": "center_1925",
+      "label": "1925 (1905-1945 CE)",
+      "start": 1905,
+      "end": 1945
+    },
+    {
+      "id": "center_1926",
+      "label": "1926 (1906-1946 CE)",
+      "start": 1906,
+      "end": 1946
+    },
+    {
+      "id": "center_1927",
+      "label": "1927 (1907-1947 CE)",
+      "start": 1907,
+      "end": 1947
+    },
+    {
+      "id": "center_1928",
+      "label": "1928 (1908-1948 CE)",
+      "start": 1908,
+      "end": 1948
+    },
+    {
+      "id": "center_1929",
+      "label": "1929 (1909-1949 CE)",
+      "start": 1909,
+      "end": 1949
+    },
+    {
+      "id": "center_1930",
+      "label": "1930 (1910-1950 CE)",
+      "start": 1910,
+      "end": 1950
+    },
+    {
+      "id": "center_1931",
+      "label": "1931 (1911-1951 CE)",
+      "start": 1911,
+      "end": 1951
+    },
+    {
+      "id": "center_1932",
+      "label": "1932 (1912-1952 CE)",
+      "start": 1912,
+      "end": 1952
+    },
+    {
+      "id": "center_1933",
+      "label": "1933 (1913-1953 CE)",
+      "start": 1913,
+      "end": 1953
+    },
+    {
+      "id": "center_1934",
+      "label": "1934 (1914-1954 CE)",
+      "start": 1914,
+      "end": 1954
+    },
+    {
+      "id": "center_1935",
+      "label": "1935 (1915-1955 CE)",
+      "start": 1915,
+      "end": 1955
+    },
+    {
+      "id": "center_1936",
+      "label": "1936 (1916-1956 CE)",
+      "start": 1916,
+      "end": 1956
+    },
+    {
+      "id": "center_1937",
+      "label": "1937 (1917-1957 CE)",
+      "start": 1917,
+      "end": 1957
+    },
+    {
+      "id": "center_1938",
+      "label": "1938 (1918-1958 CE)",
+      "start": 1918,
+      "end": 1958
+    },
+    {
+      "id": "center_1939",
+      "label": "1939 (1919-1959 CE)",
+      "start": 1919,
+      "end": 1959
+    },
+    {
+      "id": "center_1940",
+      "label": "1940 (1920-1960 CE)",
+      "start": 1920,
+      "end": 1960
+    },
+    {
+      "id": "center_1941",
+      "label": "1941 (1921-1961 CE)",
+      "start": 1921,
+      "end": 1961
+    },
+    {
+      "id": "center_1942",
+      "label": "1942 (1922-1962 CE)",
+      "start": 1922,
+      "end": 1962
+    },
+    {
+      "id": "center_1943",
+      "label": "1943 (1923-1963 CE)",
+      "start": 1923,
+      "end": 1963
+    },
+    {
+      "id": "center_1944",
+      "label": "1944 (1924-1964 CE)",
+      "start": 1924,
+      "end": 1964
+    },
+    {
+      "id": "center_1945",
+      "label": "1945 (1925-1965 CE)",
+      "start": 1925,
+      "end": 1965
+    },
+    {
+      "id": "center_1946",
+      "label": "1946 (1926-1966 CE)",
+      "start": 1926,
+      "end": 1966
+    },
+    {
+      "id": "center_1947",
+      "label": "1947 (1927-1967 CE)",
+      "start": 1927,
+      "end": 1967
+    },
+    {
+      "id": "center_1948",
+      "label": "1948 (1928-1968 CE)",
+      "start": 1928,
+      "end": 1968
+    },
+    {
+      "id": "center_1949",
+      "label": "1949 (1929-1969 CE)",
+      "start": 1929,
+      "end": 1969
+    },
+    {
+      "id": "center_1950",
+      "label": "1950 (1930-1970 CE)",
+      "start": 1930,
+      "end": 1970
+    },
+    {
+      "id": "center_1951",
+      "label": "1951 (1931-1971 CE)",
+      "start": 1931,
+      "end": 1971
+    },
+    {
+      "id": "center_1952",
+      "label": "1952 (1932-1972 CE)",
+      "start": 1932,
+      "end": 1972
+    },
+    {
+      "id": "center_1953",
+      "label": "1953 (1933-1973 CE)",
+      "start": 1933,
+      "end": 1973
+    },
+    {
+      "id": "center_1954",
+      "label": "1954 (1934-1974 CE)",
+      "start": 1934,
+      "end": 1974
+    },
+    {
+      "id": "center_1955",
+      "label": "1955 (1935-1975 CE)",
+      "start": 1935,
+      "end": 1975
+    },
+    {
+      "id": "center_1956",
+      "label": "1956 (1936-1976 CE)",
+      "start": 1936,
+      "end": 1976
+    },
+    {
+      "id": "center_1957",
+      "label": "1957 (1937-1977 CE)",
+      "start": 1937,
+      "end": 1977
+    },
+    {
+      "id": "center_1958",
+      "label": "1958 (1938-1978 CE)",
+      "start": 1938,
+      "end": 1978
+    },
+    {
+      "id": "center_1959",
+      "label": "1959 (1939-1979 CE)",
+      "start": 1939,
+      "end": 1979
+    },
+    {
+      "id": "center_1960",
+      "label": "1960 (1940-1980 CE)",
+      "start": 1940,
+      "end": 1980
+    },
+    {
+      "id": "center_1961",
+      "label": "1961 (1941-1981 CE)",
+      "start": 1941,
+      "end": 1981
+    },
+    {
+      "id": "center_1962",
+      "label": "1962 (1942-1982 CE)",
+      "start": 1942,
+      "end": 1982
+    },
+    {
+      "id": "center_1963",
+      "label": "1963 (1943-1983 CE)",
+      "start": 1943,
+      "end": 1983
+    },
+    {
+      "id": "center_1964",
+      "label": "1964 (1944-1984 CE)",
+      "start": 1944,
+      "end": 1984
+    },
+    {
+      "id": "center_1965",
+      "label": "1965 (1945-1985 CE)",
+      "start": 1945,
+      "end": 1985
+    },
+    {
+      "id": "center_1966",
+      "label": "1966 (1946-1986 CE)",
+      "start": 1946,
+      "end": 1986
+    },
+    {
+      "id": "center_1967",
+      "label": "1967 (1947-1987 CE)",
+      "start": 1947,
+      "end": 1987
+    },
+    {
+      "id": "center_1968",
+      "label": "1968 (1948-1988 CE)",
+      "start": 1948,
+      "end": 1988
+    },
+    {
+      "id": "center_1969",
+      "label": "1969 (1949-1989 CE)",
+      "start": 1949,
+      "end": 1989
+    },
+    {
+      "id": "center_1970",
+      "label": "1970 (1950-1990 CE)",
+      "start": 1950,
+      "end": 1990
+    },
+    {
+      "id": "center_1971",
+      "label": "1971 (1951-1991 CE)",
+      "start": 1951,
+      "end": 1991
+    },
+    {
+      "id": "center_1972",
+      "label": "1972 (1952-1992 CE)",
+      "start": 1952,
+      "end": 1992
+    },
+    {
+      "id": "center_1973",
+      "label": "1973 (1953-1993 CE)",
+      "start": 1953,
+      "end": 1993
+    },
+    {
+      "id": "center_1974",
+      "label": "1974 (1954-1994 CE)",
+      "start": 1954,
+      "end": 1994
+    },
+    {
+      "id": "center_1975",
+      "label": "1975 (1955-1995 CE)",
+      "start": 1955,
+      "end": 1995
+    },
+    {
+      "id": "center_1976",
+      "label": "1976 (1956-1996 CE)",
+      "start": 1956,
+      "end": 1996
+    },
+    {
+      "id": "center_1977",
+      "label": "1977 (1957-1997 CE)",
+      "start": 1957,
+      "end": 1997
+    },
+    {
+      "id": "center_1978",
+      "label": "1978 (1958-1998 CE)",
+      "start": 1958,
+      "end": 1998
+    },
+    {
+      "id": "center_1979",
+      "label": "1979 (1959-1999 CE)",
+      "start": 1959,
+      "end": 1999
+    },
+    {
+      "id": "center_1980",
+      "label": "1980 (1960-2000 CE)",
+      "start": 1960,
+      "end": 2000
+    },
+    {
+      "id": "center_1981",
+      "label": "1981 (1961-2001 CE)",
+      "start": 1961,
+      "end": 2001
+    },
+    {
+      "id": "center_1982",
+      "label": "1982 (1962-2002 CE)",
+      "start": 1962,
+      "end": 2002
+    },
+    {
+      "id": "center_1983",
+      "label": "1983 (1963-2003 CE)",
+      "start": 1963,
+      "end": 2003
+    },
+    {
+      "id": "center_1984",
+      "label": "1984 (1964-2004 CE)",
+      "start": 1964,
+      "end": 2004
+    },
+    {
+      "id": "center_1985",
+      "label": "1985 (1965-2005 CE)",
+      "start": 1965,
+      "end": 2005
+    },
+    {
+      "id": "center_1986",
+      "label": "1986 (1966-2006 CE)",
+      "start": 1966,
+      "end": 2006
+    },
+    {
+      "id": "center_1987",
+      "label": "1987 (1967-2007 CE)",
+      "start": 1967,
+      "end": 2007
+    },
+    {
+      "id": "center_1988",
+      "label": "1988 (1968-2008 CE)",
+      "start": 1968,
+      "end": 2008
+    },
+    {
+      "id": "center_1989",
+      "label": "1989 (1969-2009 CE)",
+      "start": 1969,
+      "end": 2009
+    },
+    {
+      "id": "center_1990",
+      "label": "1990 (1970-2010 CE)",
+      "start": 1970,
+      "end": 2010
+    },
+    {
+      "id": "center_1991",
+      "label": "1991 (1971-2011 CE)",
+      "start": 1971,
+      "end": 2011
+    },
+    {
+      "id": "center_1992",
+      "label": "1992 (1972-2012 CE)",
+      "start": 1972,
+      "end": 2012
+    },
+    {
+      "id": "center_1993",
+      "label": "1993 (1973-2013 CE)",
+      "start": 1973,
+      "end": 2013
+    },
+    {
+      "id": "center_1994",
+      "label": "1994 (1974-2014 CE)",
+      "start": 1974,
+      "end": 2014
+    },
+    {
+      "id": "center_1995",
+      "label": "1995 (1975-2015 CE)",
+      "start": 1975,
+      "end": 2015
+    },
+    {
+      "id": "center_1996",
+      "label": "1996 (1976-2016 CE)",
+      "start": 1976,
+      "end": 2016
+    },
+    {
+      "id": "center_1997",
+      "label": "1997 (1977-2017 CE)",
+      "start": 1977,
+      "end": 2017
+    },
+    {
+      "id": "center_1998",
+      "label": "1998 (1978-2018 CE)",
+      "start": 1978,
+      "end": 2018
+    },
+    {
+      "id": "center_1999",
+      "label": "1999 (1979-2019 CE)",
+      "start": 1979,
+      "end": 2019
+    },
+    {
+      "id": "center_2000",
+      "label": "2000 (1980-2020 CE)",
+      "start": 1980,
+      "end": 2020
+    }
+  ],
+  "birth_only_alive_assumption": {
+    "born_after": 1920,
+    "alive_through": 2026
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "dbpedia_main_aligned_acquired_subgroups_v2_split_influence_succession",
+  "version": 2,
+  "description": "Eight explicit groups for the existing 33-predicate DBpedia graph. Splits influence (influenced, influencedBy) and office succession (successor, predecessor). Family inherited ties and all other memberships remain as in v1. Life windows describe people, not relationship event dates.",
+  "reference_taxonomy": "config/tie_taxonomy_acquired_subgroups_v1.json",
+  "groups": {
+    "inherited": [
+      "child",
+      "parent",
+      "father",
+      "mother",
+      "relative"
+    ],
+    "intimate_partnership": [
+      "spouse",
+      "partner"
+    ],
+    "education_mentorship": [
+      "doctoralAdvisor",
+      "doctoralStudent",
+      "academicAdvisor",
+      "notableStudent",
+      "trainer",
+      "training",
+      "coach"
+    ],
+    "professional_collaboration": [
+      "associate",
+      "employer"
+    ],
+    "influence": [
+      "influenced",
+      "influencedBy"
+    ],
+    "succession": [
+      "successor",
+      "predecessor"
+    ],
+    "religious_authority_recognition": [
+      "beatifiedBy",
+      "canonizedBy"
+    ],
+    "other_acquired": [
+      "president",
+      "primeMinister",
+      "governor",
+      "governorGeneral",
+      "monarch",
+      "chancellor",
+      "lieutenant",
+      "vicePresident",
+      "deputy",
+      "appointer",
+      "opponent"
+    ]
+  },
+  "previous_taxonomy": "config/dbpedia_tie_taxonomy_acquired_subgroups_v1.json"
+}

@@ -11,7 +11,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from DBpedia.audit_sliding_window_artifacts import interval_mask
+from DBpedia.audit_sliding_window_artifacts import interval_mask, effective_death_years
 
 
 def window_stats(node_mask, sources, targets):
@@ -34,10 +34,15 @@ def analyze(source_dir, window_config, output_dir):
         raise ValueError("Source URI/index mapping differs between node and edge tables")
     birth = pd.to_numeric(nodes.birth_year, errors="coerce").to_numpy(float)
     death = pd.to_numeric(nodes.death_year, errors="coerce").to_numpy(float)
-    date_eligible = ((np.isfinite(birth) & np.isfinite(death) & (death >= birth)) |
-                     (np.isfinite(birth) ^ np.isfinite(death)))
-    small = interval_mask(birth, death, 1930, 1970)
-    wide = interval_mask(birth, death, 1900, 2000)
+    windows = json.loads(window_config.read_text())
+    if windows.get("calendar_layout") != "sliding_windows" or windows.get("partial_date_policy") != "include_known_endpoint_periods":
+        raise ValueError("Expected the life-window experiment policy")
+    assumption = windows.get("birth_only_alive_assumption")
+    effective_death, _ = effective_death_years(birth, death, assumption)
+    date_eligible = ((np.isfinite(birth) & np.isfinite(effective_death) & (effective_death >= birth)) |
+                     (np.isfinite(birth) ^ np.isfinite(effective_death)))
+    small = interval_mask(birth, death, 1930, 1970, assumption)
+    wide = interval_mask(birth, death, 1900, 2000, assumption)
     narrow_stats, narrow_isolated, narrow_incident = window_stats(small, sources, targets)
     wide_stats, wide_isolated, wide_incident = window_stats(wide, sources, targets)
     full_stats, full_isolated, _ = window_stats(np.ones(len(nodes), dtype=bool), sources, targets)
@@ -52,18 +57,15 @@ def analyze(source_dir, window_config, output_dir):
     if int(wide_isolated.sum()) != int(remaining.sum() + newly_added_isolated.sum()):
         raise AssertionError("Isolation transition accounting does not balance")
 
-    windows = json.loads(window_config.read_text())
-    if windows.get("calendar_layout") != "sliding_windows" or windows.get("partial_date_policy") != "include_known_endpoint_periods":
-        raise ValueError("Expected the existing life-window experiment policy")
     annual = []
     for period in windows["periods"]:
-        mask = interval_mask(birth, death, period["start"], period["end"])
+        mask = interval_mask(birth, death, period["start"], period["end"], assumption)
         stats, _, _ = window_stats(mask, sources, targets)
         annual.append({"context": period["id"], "center_year": (period["start"]+period["end"])//2,
                        "start": period["start"], "end": period["end"], **stats})
     sensitivity = []
     for half_width in (0, 5, 10, 20, 30, 40, 50):
-        mask = interval_mask(birth, death, 1950-half_width, 1950+half_width)
+        mask = interval_mask(birth, death, 1950-half_width, 1950+half_width, assumption)
         stats, isolated, _ = window_stats(mask, sources, targets)
         sensitivity.append({"center_year": 1950, "half_width": half_width,
                             "start": 1950-half_width, "end": 1950+half_width, **stats,
@@ -94,7 +96,9 @@ def analyze(source_dir, window_config, output_dir):
     summary = {
         "source_dir": str(source_dir.resolve()), "window_config": str(window_config.resolve()),
         "definition": "Selected node with zero incident induced edges, before GraphMask. Original predicates only; generated reverse messages and group deduplication do not change whether a node has a neighbour.",
-        "date_policy": "Valid complete life interval intersects window; sole known endpoint lies inside inclusive window; both missing or death before birth excluded. No missing-death extrapolation.",
+        "date_policy": "Valid complete life interval intersects window; sole known endpoint lies inside inclusive window; both missing or death before birth excluded. " +
+                       ("Explicit birth-only alive assumption applies to membership only." if assumption else "No missing-death extrapolation."),
+        "birth_only_alive_assumption": assumption,
         "small_1930_1970": narrow_stats, "wide_1900_2000": wide_stats, "full_source": full_stats,
         "transitions": {"rescued_original_isolated": int(rescued.sum()), "remaining_original_isolated": int(remaining.sum()),
                         "rescued_fraction_of_original_isolated": float(rescued.sum()/narrow_isolated.sum()),
