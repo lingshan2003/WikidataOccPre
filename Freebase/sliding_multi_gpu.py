@@ -103,11 +103,14 @@ def estimate_window_nodes(pipeline):
     if any(a > b for a, b in zip(ends, ends[1:])):
         raise ValueError("Largest-first scheduling requires monotonic sliding-window ends")
     delta, total = [0] * (len(periods) + 1), 0
+    assumption = getattr(pipeline, "period_config", {}).get("birth_only_alive_assumption")
     with source.open(encoding="utf-8-sig", newline="") as handle:
         for row in csv.DictReader(handle):
             total += 1
             birth = int(row["birth_year"]) if row["birth_year"] else None
             death = int(row["death_year"]) if row["death_year"] else None
+            if assumption is not None and birth is not None and death is None and birth > assumption["born_after"]:
+                death = assumption["alive_through"]
             if birth is None and death is None:
                 continue
             lo, hi = (birth, death) if birth is not None and death is not None else (

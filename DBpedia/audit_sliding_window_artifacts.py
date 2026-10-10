@@ -36,9 +36,10 @@ def interval_mask(birth, death, start, end, birth_only_alive_assumption=None):
             (death_only & (death >= start) & (death <= end)))
 
 
-def audit(config, periods=None):
-    pipeline = Pipeline(SimpleNamespace(config=config, periods=periods, representations="multi_group",
-                        device=None, include_full=False, stage="collapse"))
+def audit(config, periods=None, *, pipeline_class=None, device=None):
+    pipeline_class = pipeline_class or Pipeline
+    pipeline = pipeline_class(SimpleNamespace(config=config, periods=periods, representations="multi_group",
+                        device=device, include_full=False, stage="collapse"))
     if pipeline.period_config.get("calendar_layout") != "sliding_windows" or "full" in pipeline.contexts:
         raise ValueError("Audit requires sliding windows without a full-graph context")
     source_path = pipeline.path(pipeline.config["source_data"])

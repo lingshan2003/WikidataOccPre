@@ -275,6 +275,7 @@ def build_period_induced_artifact(
     val_ratio: float = 0.10,
     test_ratio: float = 0.20,
     local_min_class_count: int = 3,
+    _source_hash: str | None = None,
 ) -> Dict[str, object]:
     """Create one period-induced artifact, or verify and reuse an exact existing one."""
     if not np.isclose(train_ratio + val_ratio + test_ratio, 1.0):
@@ -283,7 +284,7 @@ def build_period_induced_artifact(
         raise ValueError("local_min_class_count must be at least 3 for a train/validation/test split")
     source_data, output_root = Path(source_data).resolve(), Path(output_root).resolve()
     period = period_config.period(period_id)
-    source_hash = sha256_file(source_data)
+    source_hash = _source_hash if _source_hash is not None else sha256_file(source_data)
     output_dir = output_root / period.identifier
     if output_dir.exists() and _existing_artifact_matches(
         output_dir,
@@ -497,16 +498,30 @@ def prepare_period_induced_artifacts(
         raise ValueError(f"Unknown requested life periods: {sorted(unknown)}")
     if len(set(selected_ids)) != len(selected_ids):
         raise ValueError("Life periods may be requested only once")
-    return [
-        build_period_induced_artifact(
+    # Keep the existing source digest provenance, but scan a shared source only
+    # once per batch. Source files must remain unchanged while building windows.
+    source_path = Path(source_data).resolve()
+    source_stat = source_path.stat()
+    source_stamp = (source_stat.st_size, source_stat.st_mtime_ns)
+    source_hash = sha256_file(source_path)
+    reports = []
+    for period_id in selected_ids:
+        before = source_path.stat()
+        if (before.st_size, before.st_mtime_ns) != source_stamp:
+            raise ValueError("Source graph changed during period preparation; use stable inputs and a new output root")
+        report = build_period_induced_artifact(
             source_data,
             output_root,
             config,
             period_id,
+            _source_hash=source_hash,
             **split_kwargs,
         )
-        for period_id in selected_ids
-    ]
+        after = source_path.stat()
+        if (after.st_size, after.st_mtime_ns) != source_stamp:
+            raise ValueError("Source graph changed during period preparation; use stable inputs and a new output root")
+        reports.append(report)
+    return reports
 
 
 def parse_args() -> argparse.Namespace:
