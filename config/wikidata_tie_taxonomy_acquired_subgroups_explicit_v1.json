@@ -1,0 +1,62 @@
+{
+  "name": "wikidata_acquired_tie_subgroups_explicit_v1",
+  "version": 1,
+  "description": "Frozen seven-group main-experiment taxonomy. other_acquired expands all_remaining against the current 40 Wikidata base relations. Influence/succession remains combined.",
+  "groups": {
+    "inherited": [
+      "father",
+      "mother",
+      "child",
+      "sibling",
+      "relative",
+      "stepparent",
+      "godparent",
+      "kinship_to_subject"
+    ],
+    "intimate_partnership": [
+      "spouse",
+      "unmarried_partner",
+      "significant_person"
+    ],
+    "education_mentorship": [
+      "student_of",
+      "doctoral_advisor",
+      "student",
+      "doctoral_student",
+      "trained_by",
+      "head_coach"
+    ],
+    "professional_collaboration": [
+      "employer",
+      "partner_in_business_or_sport",
+      "partnership_with",
+      "co-driver",
+      "copyright_representative",
+      "director/manager",
+      "owner_of",
+      "owned_by",
+      "sponsor"
+    ],
+    "influence_succession": [
+      "influenced_by",
+      "inspired_by",
+      "interested_in",
+      "follow",
+      "followed_by",
+      "replaces",
+      "replaced_by"
+    ],
+    "religious_ordination": [
+      "consecrator"
+    ],
+    "other_acquired": [
+      "allegiance",
+      "appointed_by",
+      "defender",
+      "investigated_by",
+      "patient_of",
+      "together_with"
+    ]
+  },
+  "reference_taxonomy": "config/tie_taxonomy_acquired_subgroups_v1.json"
+}

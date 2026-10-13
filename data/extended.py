@@ -159,10 +159,17 @@ def make_numeric_features(nodes: pd.DataFrame, train_nodes: Optional[Iterable[st
         fit_rows = np.ones(len(nodes), dtype=bool)
     else:
         fit_rows = nodes["node_id"].isin(set(train_nodes)).to_numpy()
-    mean = np.nanmean(raw[fit_rows], axis=0)
-    std = np.nanstd(raw[fit_rows], axis=0)
+    fit_values = np.where(np.isfinite(raw[fit_rows]), raw[fit_rows], np.nan)
+    supported = np.isfinite(fit_values).any(axis=0)
+    mean = np.zeros(raw.shape[1], dtype=np.float32)
+    std = np.ones(raw.shape[1], dtype=np.float32)
+    # A late life window can contain no recorded training deaths at all.
+    # Keep unsupported numeric dimensions neutral without fitting held-out dates.
+    mean[supported] = np.nanmean(fit_values[:, supported], axis=0)
+    std[supported] = np.nanstd(fit_values[:, supported], axis=0)
     std[std == 0] = 1.0
     normalised = (np.where(missing, mean, raw) - mean) / std
+    normalised[:, ~supported] = 0.0
     return np.column_stack([normalised, missing.astype(np.float32)]).astype(np.float32)
 
 

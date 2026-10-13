@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Package small annual DBpedia reports; no PyTorch, weights or graph tables needed."""
+"""Package small annual DBpedia/Freebase/Wikidata reports without loading weights."""
 
 import argparse
 import io
 import json
 from pathlib import Path
+import sys
 import tarfile
 
 REPO = Path(__file__).resolve().parents[1]
@@ -20,8 +21,11 @@ def source_path(value):
     return path if path.is_absolute() else REPO / path
 
 
-def package(config_path, output):
+def package(config_path, output=None):
     config = read_json(config_path)
+    dataset = next((label for prefix, label in (("freebase_", "Freebase"), ("dbpedia_", "DBpedia"), ("wikidata_", "Wikidata")) if config["name"].startswith(prefix)), None)
+    if dataset is None:
+        raise ValueError("Expected a DBpedia, Freebase or Wikidata experiment")
     periods = read_json(source_path(config["period_config"]))
     contexts = [p["id"] for p in periods["periods"]]
     if config["periods"] != "all":
@@ -79,9 +83,23 @@ def package(config_path, output):
         add(roots["period_root"] / context / "split_summary.json", f"periods/{context}/split_summary.json", required=False)
     normalized = dict(resolved, periods=contexts, period_config="config/windows.json", multi_group_taxonomy="config/taxonomy.json",
                       model_root="models", graphmask_root="graphmask", relation_root="relations", period_root="periods")
-    metadata = {"bundle_format": "dbpedia-sliding-reports-v1", "contexts": contexts, "seed": seed,
+    metadata = {"bundle_format": f"{dataset.lower()}-sliding-reports-v1", "dataset": dataset, "contexts": contexts, "seed": seed,
                 "representation": "multi_group", "experiment_name": config["name"], "files": sorted(files),
                 "excluded": ["model/probe weights", "graph tensors", "node/edge tables", "root-level edge reports", "logs"]}
+    def write_archive(archive):
+        for name, payload in (("bundle.json", metadata), ("config/experiment.json", normalized)):
+            content = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+            info = tarfile.TarInfo(name)
+            info.size = len(content)
+            archive.addfile(info, io.BytesIO(content))
+        for name, path in sorted(files.items()):
+            archive.add(path, arcname=name, recursive=False)
+
+    if output is None:
+        with tarfile.open(fileobj=sys.stdout.buffer, mode="w|gz") as archive:
+            write_archive(archive)
+        print(f"Streamed {len(contexts)} complete {dataset} windows, {len(files)} small report files", file=sys.stderr)
+        return
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     if output.exists():
@@ -89,13 +107,7 @@ def package(config_path, output):
     temporary = output.with_name(output.name + ".partial")
     try:
         with tarfile.open(temporary, "w:gz") as archive:
-            for name, payload in (("bundle.json", metadata), ("config/experiment.json", normalized)):
-                content = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-                info = tarfile.TarInfo(name)
-                info.size = len(content)
-                archive.addfile(info, io.BytesIO(content))
-            for name, path in sorted(files.items()):
-                archive.add(path, arcname=name, recursive=False)
+            write_archive(archive)
         temporary.rename(output)
     finally:
         temporary.unlink(missing_ok=True)
@@ -107,8 +119,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default=DEFAULT_CONFIG)
     parser.add_argument("--output", default="artifacts/dbpedia_sliding_1900_2000_reports.tar.gz")
+    parser.add_argument("--stdout", action="store_true", help="Stream archive to stdout; write no files on this host")
     args = parser.parse_args()
-    package(source_path(args.config), source_path(args.output))
+    package(source_path(args.config), None if args.stdout else source_path(args.output))
 
 
 if __name__ == "__main__":

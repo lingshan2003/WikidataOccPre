@@ -1,5 +1,12 @@
 # Annual relation-group figures
 
+The shared exporter/renderer also supports Freebase's five groups; its dedicated
+entry points and protocol notes are in [Freebase/SLIDING_VISUALIZATION.md](../Freebase/SLIDING_VISUALIZATION.md).
+For a read-only SSH download with no files created on the server, use the local
+`scripts/download_sliding_reports.py` entry point with the actual resolved
+experiment configuration. The exporter also accepts `--stdout` to stream its
+archive without creating files on the execution host.
+
 The plotter also supports the eight-group split-influence/succession v2 taxonomy.
 For that rerun's config, dedicated package name and launch command, see
 [SPLIT_INFLUENCE_SUCCESSION.md](SPLIT_INFLUENCE_SUCCESSION.md). It produces eight

@@ -34,13 +34,27 @@ SPLIT_LABELS.pop("influence_succession")
 SPLIT_LABELS.update(influence="Influence", succession="Succession")
 GROUP_LABELS = dict(LABELS, **SPLIT_LABELS)
 GROUP_COLORS = dict(zip(LABELS, COLORS), influence="#be5e68", succession="#6f5794")
+WIKIDATA_LABELS = dict(LABELS)
+WIKIDATA_LABELS.pop("religious_authority_recognition")
+WIKIDATA_LABELS["religious_ordination"] = "Religious ordination"
+GROUP_LABELS.update(WIKIDATA_LABELS)
+GROUP_COLORS["religious_ordination"] = "#9a8344"
+FREEBASE_GROUPS = {"inherited", "intimate_partnership", "education_mentorship", "influence_succession", "other_acquired"}
 
 
 def group_labels(taxonomy):
     groups = taxonomy["groups"]
-    if set(groups) not in (set(LABELS), set(SPLIT_LABELS)):
-        raise ValueError("Expected the seven-group v1 or eight-group split-influence/succession taxonomy")
-    return {group: GROUP_LABELS[group] for group in groups}
+    freebase = taxonomy.get("name", "").startswith("freebase_")
+    wikidata = taxonomy.get("name", "").startswith("wikidata_")
+    expected = (FREEBASE_GROUPS,) if freebase else (set(WIKIDATA_LABELS),) if wikidata else (set(LABELS), set(SPLIT_LABELS))
+    if set(groups) not in expected:
+        raise ValueError("Expected DBpedia seven/eight groups, Freebase five groups or Wikidata seven groups")
+    labels = {group: GROUP_LABELS[group] for group in groups}
+    if freebase:
+        if groups["influence_succession"] != ["influenced_by"]:
+            raise ValueError("Unexpected Freebase influence group; review its label before plotting")
+        labels["influence_succession"] = "Influence"
+    return labels
 
 
 def read_json(path):
@@ -62,11 +76,19 @@ def rate(value):
 def collect(root, start_year, end_year):
     root = Path(root).resolve()
     bundle = read_json(root / "bundle.json")
-    if bundle["bundle_format"] != "dbpedia-sliding-reports-v1":
+    dataset_formats = {"dbpedia-sliding-reports-v1": "DBpedia", "freebase-sliding-reports-v1": "Freebase", "wikidata-sliding-reports-v1": "Wikidata"}
+    if bundle["bundle_format"] not in dataset_formats:
         raise ValueError("Unsupported report bundle")
+    dataset = dataset_formats[bundle["bundle_format"]]
+    if bundle.get("dataset", dataset) != dataset:
+        raise ValueError("Dataset/bundle format mismatch")
     config = read_json(root / "config/experiment.json")
     calendar = read_json(root / config["period_config"])
     taxonomy = read_json(root / config["multi_group_taxonomy"])
+    if taxonomy.get("name", "").startswith("freebase_") != (dataset == "Freebase"):
+        raise ValueError("Dataset/taxonomy mismatch")
+    if taxonomy.get("name", "").startswith("wikidata_") != (dataset == "Wikidata"):
+        raise ValueError("Dataset/taxonomy mismatch")
     labels = group_labels(taxonomy)
     periods = {p["id"]: p for p in calendar["periods"]}
     if end_year < start_year:
@@ -108,7 +130,9 @@ def collect(root, start_year, end_year):
         if validation["relative_macro_f1_difference"] > threshold:
             raise ValueError(f"Validation fidelity failed: {context}")
         selected = probe["selected_checkpoint"]
-        policy = config["graphmask_train"]["checkpoint_selection"]
+        policy = config["graphmask_train"].get("checkpoint_selection", "any-stage")
+        if policy not in ("any-stage", "all-layers-enabled"):
+            raise ValueError(f"Unsupported checkpoint selection: {policy}")
         if selected["policy"] != policy or manifest["selected_checkpoint"] != selected or manifest["enabled_layers"] != selected["enabled_layers"]:
             raise ValueError(f"Checkpoint metadata mismatch: {context}")
         history = read_json(run / "training_history.json")["history"]
@@ -166,7 +190,7 @@ def collect(root, start_year, end_year):
                          "retained_message_share_percent": 100 * share, "support_status": status,
                          "plot_share_percent": 100 * share if count else None,
                          "layer0_gate_enabled": enabled[0], "seed": seed})
-    return tidy, audit, {"bundle": bundle, "experiment": config, "taxonomy": taxonomy,
+    return tidy, audit, {"bundle": bundle, "experiment": config, "taxonomy": taxonomy, "dataset": dataset, "group_labels": labels,
                          "metric": "Layer 0 hard-retained sampled message share",
                          "definition": "group hard-retained sampled messages / all Layer 0 hard-retained sampled messages",
                          "reverse_policy": "Original and generated reverse messages combined in each base group",
@@ -182,8 +206,8 @@ def write_tsv(path, rows):
         writer.writerows(rows)
 
 
-def plot(tidy, output):
-    labels = {group: GROUP_LABELS[group] for group in dict.fromkeys(r["group"] for r in tidy)}
+def plot(tidy, output, dataset="DBpedia", group_display_labels=None):
+    labels = {group: (group_display_labels or GROUP_LABELS)[group] for group in dict.fromkeys(r["group"] for r in tidy)}
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "axes.spines.top": False,
                          "axes.spines.right": False, "svg.fonttype": "none", "pdf.fonttype": 42})
 
@@ -217,10 +241,10 @@ def plot(tidy, output):
         color = GROUP_COLORS[group]
         fig, ax = plt.subplots(figsize=(8.5, 4.6))
         draw(ax, group, color)
-        fig.suptitle("DBpedia annual sliding windows — Layer 0", fontsize=12)
+        fig.suptitle(f"{dataset} annual sliding windows — Layer 0", fontsize=12)
         fig.tight_layout()
         save(fig, f"layer0_{group}_annual")
-    fig, axes = plt.subplots((len(labels) + 1) // 2, 2, figsize=(13, 14))
+    fig, axes = plt.subplots((len(labels) + 1) // 2, 2, figsize=(13, 3.5 * ((len(labels) + 1) // 2)))
     for ax, group in zip(axes.flat, labels):
         draw(ax, group, GROUP_COLORS[group])
     note = "Raw annual results; no bootstrap or smoothing.\nEach panel uses its own y-axis scale.\nGroups sum to 100% each year.\nOpen circles: Layer 0 gate disabled.\nGaps: no sampled support."
@@ -229,15 +253,15 @@ def plot(tidy, output):
         axes.flat[-1].text(0, 0.7, note, transform=axes.flat[-1].transAxes, va="top", linespacing=1.7)
     else:
         fig.text(0.06, 0.015, note.replace("\n", "  "), fontsize=8, wrap=True)
-    fig.suptitle("DBpedia relation-group trends — Layer 0", fontsize=17)
+    fig.suptitle(f"{dataset} relation-group trends — Layer 0", fontsize=17)
     fig.tight_layout(rect=(0, 0 if len(labels) % 2 else 0.055, 1, 0.97), h_pad=2)
     save(fig, "layer0_all_groups_annual")
 
 
-def main():
+def main(default_output="visualization/dbpedia_sliding_layer0_20th_century"):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--received-root", type=Path, required=True)
-    parser.add_argument("--output-dir", type=Path, default=Path("visualization/dbpedia_sliding_layer0_20th_century"))
+    parser.add_argument("--output-dir", type=Path, default=Path(default_output))
     parser.add_argument("--start-year", type=int, default=1901)
     parser.add_argument("--end-year", type=int, default=2000)
     args = parser.parse_args()
@@ -246,7 +270,7 @@ def main():
     write_tsv(args.output_dir / "layer0_group_annual.tsv", tidy)
     write_tsv(args.output_dir / "annual_audit.tsv", audit)
     (args.output_dir / "provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    plot(tidy, args.output_dir)
+    plot(tidy, args.output_dir, provenance["dataset"], provenance["group_labels"])
     disabled = sum(not row["layer0_gate_enabled"] for row in audit)
     count = len(provenance["taxonomy"]["groups"])
     print(f"Validated {len(audit)} years, {count} groups; Layer 0 disabled in {disabled} years")

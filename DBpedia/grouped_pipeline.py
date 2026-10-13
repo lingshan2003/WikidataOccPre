@@ -84,18 +84,21 @@ def taxonomy_members(payload):
 
 
 class Pipeline:
+    env_prefix = "DBPEDIA"
+
     def __init__(self, args):
         self.args = args
         self.config_path = self.path(args.config)
         self.config = read_json(self.config_path)
         c = self.config
+        prefix = self.env_prefix
         if c.get("version") != 1 or not c.get("name"):
             raise ValueError("Expected a named version-1 pipeline configuration")
         # Group-specific output variables never pick up the exact-baseline roots.
         for key in ("source_data", "period_root", "period_config", "binary_taxonomy", "multi_group_taxonomy", "relation_root", "model_root", "graphmask_root"):
-            c[key] = os.environ.get("DBPEDIA_GROUP_" + key.upper(), c[key])
-        c["device"] = args.device or os.environ.get("DBPEDIA_GROUP_DEVICE", os.environ.get("DBPEDIA_DEVICE", c["device"]))
-        c["seed"] = int(os.environ.get("DBPEDIA_GROUP_SEED", c["seed"]))
+            c[key] = os.environ.get(prefix + "_GROUP_" + key.upper(), c[key])
+        c["device"] = args.device or os.environ.get(prefix + "_GROUP_DEVICE", os.environ.get(prefix + "_DEVICE", c["device"]))
+        c["seed"] = int(os.environ.get(prefix + "_GROUP_SEED", c["seed"]))
         for section, key, env, cast in (
             ("train", "batch_size", "TRAIN_BATCH_SIZE", int),
             ("train", "num_workers", "TRAIN_WORKERS", int),
@@ -107,8 +110,8 @@ class Pipeline:
             ("graphmask_train", "beta", "GRAPHMASK_BETA", float),
             ("graphmask_train", "max_relative_macro_f1_diff", "GRAPHMASK_MAX_RELATIVE_F1_DIFF", float),
         ):
-            if "DBPEDIA_GROUP_" + env in os.environ:
-                c[section][key] = cast(os.environ["DBPEDIA_GROUP_" + env])
+            if prefix + "_GROUP_" + env in os.environ:
+                c[section][key] = cast(os.environ[prefix + "_GROUP_" + env])
         if c["train"]["model"] != "rgcn" or c["train"]["num_layers"] != 2:
             raise ValueError("This matrix requires two-layer RGCN")
         if c["graphmask_report"]["split"] != "test":
@@ -119,16 +122,16 @@ class Pipeline:
             flags(c[section])
         self.period_config = read_json(self.path(c["period_config"]))
         self.periods = {p["id"]: p for p in self.period_config["periods"]}
-        self.contexts = select_items(args.periods or os.environ.get("DBPEDIA_GROUP_PERIODS", c["periods"]), self.periods)
+        self.contexts = select_items(args.periods or os.environ.get(prefix + "_GROUP_PERIODS", c["periods"]), self.periods)
         include_full = args.include_full or c["include_full"]
-        if "DBPEDIA_GROUP_INCLUDE_FULL" in os.environ:
-            value = os.environ["DBPEDIA_GROUP_INCLUDE_FULL"]
+        if prefix + "_GROUP_INCLUDE_FULL" in os.environ:
+            value = os.environ[prefix + "_GROUP_INCLUDE_FULL"]
             if value not in ("0", "1"):
-                raise ValueError("DBPEDIA_GROUP_INCLUDE_FULL must be 0 or 1")
+                raise ValueError(prefix + "_GROUP_INCLUDE_FULL must be 0 or 1")
             include_full = args.include_full or value == "1"
         if include_full:
             self.contexts.insert(0, "full")
-        self.representations = select_items(args.representations or os.environ.get("DBPEDIA_GROUP_REPRESENTATIONS", c["representations"]), ("binary", "multi_group"))
+        self.representations = select_items(args.representations or os.environ.get(prefix + "_GROUP_REPRESENTATIONS", c["representations"]), ("binary", "multi_group"))
         self.binary = read_json(self.path(c["binary_taxonomy"]))
         self.multi = read_json(self.path(c["multi_group_taxonomy"]))
         self.members = taxonomy_members(self.multi)
