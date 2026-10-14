@@ -265,13 +265,14 @@ def plot(tidy, output, dataset="DBpedia", group_display_labels=None):
         ax.set_title(labels[group], loc="left", fontweight="bold")
         ax.set_xlabel("Window center year")
         ax.set_ylabel("Retained message share (%)")
-        ax.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=1))
         ax.xaxis.set_major_locator(MaxNLocator(nbins=6, integer=True))
         ax.grid(alpha=0.18)
         ax.set_axisbelow(True)
         ax.set_xlim(min(years), max(years)) if len(years) > 1 else ax.set_xlim(years[0] - 1, years[0] + 1)
         finite = [v for v in values if math.isfinite(v)]
-        ax.set_ylim(0, min(100, max(0.2, max(finite, default=0) * 1.15)))
+        upper = min(100, max(0.01, max(finite, default=0) * 1.15))
+        ax.set_ylim(0, upper)
+        ax.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=2 if upper < 1 else 1))
 
     def save(fig, name):
         for extension in ("png", "svg", "pdf"):
@@ -295,6 +296,8 @@ def plot(tidy, output, dataset="DBpedia", group_display_labels=None):
                 "Groups sum to 100% in completed years.\nOpen circles: Layer 0 gate disabled.\n"
                 "Grey bands/gaps: incomplete windows.\nMissing years: " + ", ".join(map(str, missing)) + ".\n"
                 "Other gaps: no sampled support.")
+    if not any(r["layer0_gate_enabled"] is False for r in tidy):
+        note = note.replace("Open circles: Layer 0 gate disabled.", "Layer 0 gates enabled in all completed windows.")
     if len(labels) % 2:
         axes.flat[-1].axis("off")
         axes.flat[-1].text(0, 0.7, note, transform=axes.flat[-1].transAxes, va="top", linespacing=1.7)
