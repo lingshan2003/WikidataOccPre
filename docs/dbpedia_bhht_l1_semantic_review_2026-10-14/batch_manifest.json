@@ -1,0 +1,35 @@
+{
+  "source": "/Users/wangyue/RGCN/docs/dbpedia_bhht_match_2026-10-14/occupation_bhht_matches.tsv",
+  "review_scope": [
+    "cross_l1_conflict",
+    "unmatched"
+  ],
+  "target_occupations": 943,
+  "target_nodes": 1710,
+  "levels": [
+    "Culture",
+    "Discovery/Science",
+    "Leadership",
+    "Sports/Games",
+    "Other"
+  ],
+  "l2_l3_policy": "deferred; not required to resolve L1",
+  "classification_type": "LLM semantic proposals; not human-confirmed or training labels",
+  "batches": [
+    {
+      "id": 1,
+      "count": 315
+    },
+    {
+      "id": 2,
+      "count": 314
+    },
+    {
+      "id": 3,
+      "count": 314
+    }
+  ],
+  "llm_model": "gpt-6-luna",
+  "llm_reasoning_effort": "xhigh",
+  "primary_adjudication": "main agent"
+}

@@ -1,0 +1,315 @@
+rank	occupation_label	graph_nodes	semantic_level1	review_status	confidence	candidate_l1s_json	semantic_rationale	evidence	reviewer
+54	daimyō	30	Leadership	resolved	high	"[""Leadership""]"	daimyō 是持有封地并统治地方、统辖家臣的日本封建领主，核心为政治与贵族统治。	https://jref.com/articles/daimy%C5%8D-%E5%A4%A7%E5%90%8D.28/	dbpedia_l1_batch_3
+110	conducting	15	Culture	resolved	high	"[""Culture""]"	Conducting 指组织乐团演奏、诠释乐谱并协调音乐表演，属于音乐创作与演出。	semantic_reasoning_only	dbpedia_l1_batch_3
+142	conservation movement	11		needs_context	low	"[""Leadership"",""Discovery/Science""]"	Conservation movement 是环境保护运动或关联领域；职业条目未说明本人是倡议者、科学家还是组织管理者，不能把倡议身份自动等同政治领导。	semantic_reasoning_only	dbpedia_l1_batch_3
+174	sports commentator	9	Culture	resolved	high	"[""Culture""]"	sports commentator 的职责是通过广播或电视解说赛事，核心工作是媒体传播而非参赛。	semantic_reasoning_only	dbpedia_l1_batch_3
+191	filmmaking	8	Culture	resolved	high	"[""Culture""]"	Filmmaking 指构思、拍摄和完成电影内容，属于影视文化制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+204	real estate developer	8	Leadership	resolved	high	"[""Leadership""]"	Real estate developer 负责取得土地、筹资并开发经营房地产项目，核心是地产企业经营。	semantic_reasoning_only	dbpedia_l1_batch_3
+227	lady of the bedchamber	7	Other	resolved	medium	"[""Other""]"	Lady of the Bedchamber 是王室女性的随侍与陪伴职位，职责属于宫廷个人服务，不等同于统治者或贵族身份。	https://en.wikipedia.org/wiki/Lady_of_the_Bedchamber	dbpedia_l1_batch_3
+243	acting	6	Culture	resolved	high	"[""Culture""]"	Acting 以角色表演呈现戏剧、影视等文化作品，属于表演艺术。	semantic_reasoning_only	dbpedia_l1_batch_3
+251	choreography	6	Culture	resolved	high	"[""Culture""]"	Choreography 创编舞蹈动作并组织舞台呈现，属于舞蹈艺术制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+256	economics	6	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Economics 作为职业领域指经济现象的分析与研究，属于学术和知识生产；此处不据此推断企业管理。	semantic_reasoning_only	dbpedia_l1_batch_3
+261	gulf cartel	6		needs_context	low	"[""Leadership"",""Other""]"	Gulf cartel 是犯罪组织名称，不是职位；关联者可能是成员、首领或其他身份，URI未指明其具体角色。	semantic_reasoning_only	dbpedia_l1_batch_3
+274	natural history	6	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Natural history 指观察、记录和研究自然生物及地质现象，属于自然科学探究。	semantic_reasoning_only	dbpedia_l1_batch_3
+285	vj (media personality)	6	Culture	resolved	high	"[""Culture""]"	VJ 是电视或视频节目的主持、介绍和媒体呈现者，属于广播影视传播。	semantic_reasoning_only	dbpedia_l1_batch_3
+291	arrangement	5	Culture	resolved	medium	"[""Culture""]"	Arrangement 在该音乐职业语境指改编、配器并编排乐曲，属于音乐制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+300	cattle raiding	5	Other	resolved	high	"[""Other""]"	Cattle raiding 指掠夺牲畜的违法暴力行为，是明确的负面犯罪身份，归Other。	semantic_reasoning_only	dbpedia_l1_batch_3
+316	lady-in-waiting	5	Other	resolved	medium	"[""Other""]"	Lady-in-waiting 是陪侍高位女性、协助其日常事务的宫廷随侍，属于个人服务而非政治统治职位。	https://dictionary.cambridge.org/us/dictionary/english/lady-in-waiting	dbpedia_l1_batch_3
+320	master of ceremonies	5	Culture	resolved	high	"[""Culture""]"	Master of ceremonies 主持仪式、活动或演出并串联现场流程，属于活动与媒体表演传播。	semantic_reasoning_only	dbpedia_l1_batch_3
+328	pedagogy	5	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Pedagogy 是教学理论与教学方法的专业领域，指向教育学知识和学术教育。	semantic_reasoning_only	dbpedia_l1_batch_3
+342	suffrage	5		needs_context	low	"[""Leadership""]"	Suffrage 指选举权及其争取运动，作为职业字段仍未说明本人是组织者、宣传者还是研究者，缺少具体岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+347	actor-manager	4	Culture	resolved	high	"[""Culture""]"	Actor-manager 同时担任演员并经营剧团或剧院，管理职能直接服务戏剧制作与演出。	semantic_reasoning_only	dbpedia_l1_batch_3
+363	child actor	4	Culture	resolved	high	"[""Culture""]"	Child actor 的核心职业仍是儿童演员，通过角色出演影视或舞台作品，年龄不改变表演艺术属性。	semantic_reasoning_only	dbpedia_l1_batch_3
+373	feminism	4		needs_context	low	"[""Leadership"",""Culture""]"	Feminism 是思想和社会运动名称，可对应倡议、写作、研究等不同工作，单凭运动名无法确定本人职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+386	kugyō	4	Leadership	resolved	medium	"[""Leadership""]"	kugyō 指日本宫廷的高阶贵族与朝廷官员身份，属于贵族和政治权力阶层。	https://en.wikipedia.org/wiki/Kugy%C5%8D	dbpedia_l1_batch_3
+407	plantation	4		needs_context	low	"[""Leadership"",""Other""]"	Plantation 指种植园或种植园经营领域，可能是所有者、管理者或农业雇工，原URI未区分角色。	semantic_reasoning_only	dbpedia_l1_batch_3
+418	tijuana cartel	4		needs_context	low	"[""Leadership"",""Other""]"	Tijuana Cartel 是犯罪组织名称，成员、首领与外围关联人员的职责不同，无法从组织名确定职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+422	abolitionism in the united kingdom	3		needs_context	low	"[""Leadership"",""Culture""]"	Abolitionism in the United Kingdom 是废奴运动和历史议题标签，没有说明本人是政治倡议者、作者或学者。	semantic_reasoning_only	dbpedia_l1_batch_3
+432	balloon (aircraft)	3		needs_context	low	"[""Discovery/Science"",""Sports/Games""]"	Balloon (aircraft) 指飞行器本身而非岗位；可能关联航空探索、驾驶或制造，具体职责未编码。	semantic_reasoning_only	dbpedia_l1_batch_3
+444	classics	3	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Classics 指古典语言、文学与历史的学术研究和教学，属于人文学术领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+474	governess	3	Other	resolved	high	"[""Other""]"	Governess 在私人家庭中照料并教育儿童，主要是家庭雇佣与家内服务职位。	semantic_reasoning_only	dbpedia_l1_batch_3
+481	gynaecologist	3	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Gynaecologist 是从事妇科诊断、预防和治疗的医学专业人员。	semantic_reasoning_only	dbpedia_l1_batch_3
+491	influencer	3	Culture	resolved	medium	"[""Culture""]"	Influencer 通过数字平台创作、呈现并传播内容，属于当代媒体传播。	semantic_reasoning_only	dbpedia_l1_batch_3
+500	lobbying	3		needs_context	low	"[""Leadership"",""Other""]"	Lobbying 指游说活动，但条目未说明对象、任职身份或是否担任政治职位；游说者不能仅凭活动名判作政治领导。	semantic_reasoning_only	dbpedia_l1_batch_3
+506	mechanical engineering	3	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Mechanical engineering 运用力学与工程知识设计、制造和改进机械系统，属于工程技术。	semantic_reasoning_only	dbpedia_l1_batch_3
+515	official	3		needs_context	low	"[""Leadership"",""Other"",""Sports/Games""]"	Official 是泛称官员或工作人员，可指政府、企业、体育比赛等多种岗位，样例也不能消除该歧义。	semantic_reasoning_only	dbpedia_l1_batch_3
+524	petroleum industry	3		needs_context	low	"[""Leadership"",""Discovery/Science"",""Other""]"	Petroleum industry 是行业而非岗位，可涉及工程、采油、销售或企业管理，缺少具体职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+530	printer (publishing)	3	Other	resolved	high	"[""Other""]"	Printer (publishing) 指操作印刷工艺生产出版物，是出版链条中的印刷技工岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+535	pundit	3	Culture	resolved	medium	"[""Culture""]"	Pundit 在所列职业语境中指面向公众发表分析和评论的媒体评论者，属于传播工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+553	versailles saint-quentin-en-yvelines university	3		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Versailles Saint-Quentin-en-Yvelines University 是高校名称；教授、校长、职员等岗位对应不同职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+559	accounting	2	Other	resolved	high	"[""Other""]"	Accounting 指记录、核算和审计组织财务账目，是明确的日常专业服务岗位而非高管职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+571	american burlesque	2	Culture	resolved	high	"[""Culture""]"	American burlesque 是舞台歌舞、喜剧和综艺表演类型，从业者属于演艺文化。	semantic_reasoning_only	dbpedia_l1_batch_3
+577	animal rights movement	2		needs_context	low	"[""Leadership"",""Culture""]"	Animal rights movement 是社会倡议运动，条目未说明本人负责倡议组织、创作传播还是研究，不能仅凭运动名判领导。	semantic_reasoning_only	dbpedia_l1_batch_3
+584	apartheid	2		needs_context	low	"[""Leadership"",""Culture"",""Other""]"	Apartheid 是政治制度与历史议题，不是职业；关联者可能是反对者、研究者或制度参与者。	semantic_reasoning_only	dbpedia_l1_batch_3
+587	arlington national cemetery	2		needs_context	low	"[""Leadership"",""Other""]"	Arlington National Cemetery 是机构与工作地点名称，墓园管理、军职及服务岗位均可能，URI未给出职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+591	assassin	2	Other	resolved	high	"[""Other""]"	Assassin 指受命或蓄意杀人的刺客，是明确的暴力犯罪身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+600	beneficiary	2		needs_context	low	[]	Beneficiary 表示受益或继承关系而非职业；没有足够信息确定具体工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+604	biography	2	Culture	resolved	medium	"[""Culture""]"	Biography 指撰写或编辑人物传记，核心产出是非虚构文学与出版内容。	semantic_reasoning_only	dbpedia_l1_batch_3
+612	casting (performing arts)	2	Culture	resolved	high	"[""Culture""]"	Casting (performing arts) 指为舞台或影视作品遴选演员并安排角色，直接服务表演制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+616	chair (official)	2	Leadership	resolved	medium	"[""Leadership""]"	Chair (official) 指主持组织或董事会并承担决策协调责任的负责人，属于组织领导职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+622	chiropodist	2	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Chiropodist 是诊治足部疾病并提供临床护理的医疗专业人员。	semantic_reasoning_only	dbpedia_l1_batch_3
+635	colliery	2		needs_context	low	"[""Leadership"",""Other""]"	Colliery 指煤矿或矿业场所，样例可能是矿主、经营者或矿业从业者，URI没有说明岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+640	community organizing	2		needs_context	low	"[""Leadership"",""Other""]"	Community organizing 是社区组织活动，职业字段没有说明组织者的议题、职权或具体岗位，不足以判定为政治领导。	semantic_reasoning_only	dbpedia_l1_batch_3
+657	cultural anthropology	2	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Cultural anthropology 以田野调查和比较方法研究人类文化与社会，属于学术研究领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+673	ecologist	2	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Ecologist 研究生物与环境之间的关系，属于生态科学专业人员。	semantic_reasoning_only	dbpedia_l1_batch_3
+682	exploration	2	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Exploration 指以实地考察、发现和记录未知地区或环境为核心的探索活动。	semantic_reasoning_only	dbpedia_l1_batch_3
+688	firefighter	2	Other	resolved	high	"[""Other""]"	Firefighter 扑救火灾、救援并处理应急现场，属于公共安全一线服务岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+696	furniture design	2	Culture	resolved	medium	"[""Culture""]"	Furniture design 创作家具的造型、结构和视觉方案，属于工业与视觉设计。	semantic_reasoning_only	dbpedia_l1_batch_3
+701	general (rank)	2	Leadership	resolved	high	"[""Leadership""]"	General (rank) 是军队高级将领军衔，承担军事指挥与统率职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+704	general manager (baseball)	2	Sports/Games	resolved	high	"[""Sports/Games""]"	General manager (baseball) 组建并管理棒球队阵容、球员交易与球队运作，属于体育队伍管理。	semantic_reasoning_only	dbpedia_l1_batch_3
+709	great atlantic and pacific tea company	2		needs_context	low	"[""Leadership"",""Other""]"	Great Atlantic and Pacific Tea Company 是企业名称；雇员、管理者和所有者的职业含义不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+715	hatmaking	2	Other	resolved	high	"[""Other""]"	Hatmaking 指制作和修整帽子，是明确的服饰手工与小型生产工种。	semantic_reasoning_only	dbpedia_l1_batch_3
+723	history of literature	2	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	History of literature 指研究文学作品的历史、演变与脉络，核心为文学史学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+731	human rights defender	2		needs_context	low	"[""Leadership"",""Culture""]"	Human rights defender 指人权倡议者，但条目未交代其组织领导、法律工作、媒体传播或其他具体职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+741	industrial engineering	2	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Industrial engineering 运用工程分析优化生产、流程和系统，属于工程技术。	semantic_reasoning_only	dbpedia_l1_batch_3
+746	investment analyst	2	Other	resolved	medium	"[""Other""]"	Investment analyst 研究证券和投资数据并撰写分析，是专业金融服务岗位，但职称本身不表示企业领导权。	semantic_reasoning_only	dbpedia_l1_batch_3
+752	kapitan cina	2	Leadership	resolved	medium	"[""Leadership""]"	Kapitan Cina 是殖民时期受任命的华人社区首领，承担社区治理和殖民行政中介职责。	https://www.tandfonline.com/doi/full/10.1080/14631369.2021.1976613	dbpedia_l1_batch_3
+757	kumu hula	2	Culture	resolved	high	"[""Culture""]"	Kumu hula 是教授并传承夏威夷草裙舞及其传统的舞蹈导师，属于文化艺术实践。	semantic_reasoning_only	dbpedia_l1_batch_3
+760	law professor	2	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Law professor 的明确本职是法学教学与学术研究，归学术教育而非司法执业。	semantic_reasoning_only	dbpedia_l1_batch_3
+765	list of directors general of cern	2		needs_context	low	"[""Discovery/Science"",""Leadership""]"	List of Directors General of CERN 是职位名录而非个人岗位；总干事可能兼具科研或机构治理经历，条目没有说明具体任期职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+777	media consultant	2	Culture	resolved	medium	"[""Culture""]"	Media consultant 为媒体内容、传播策略或宣传工作提供专业咨询，所指职能直接服务媒体传播。	semantic_reasoning_only	dbpedia_l1_batch_3
+786	mixed martial artist	2	Sports/Games	resolved	high	"[""Sports/Games""]"	Mixed martial artist 以综合格斗规则训练并参加竞技比赛，属于格斗体育。	semantic_reasoning_only	dbpedia_l1_batch_3
+796	neiman marcus	2		needs_context	low	"[""Leadership"",""Other""]"	Neiman Marcus 是零售企业名称，关联者可能是企业领导、所有者或一般职员，URI不能确定本人工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+806	orderly	2	Other	resolved	high	"[""Other""]"	Orderly 在医院运送病患、器材并协助病区日常运作，属于医疗辅助服务岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+818	petroleum	2		needs_context	low	"[""Leadership"",""Discovery/Science"",""Other""]"	Petroleum 指石油资源或行业领域，可对应采掘、工程、交易或企业经营，未指出具体岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+826	political science	2	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Political science 作为职业领域指研究政治制度、行为和公共政策的学术学科。	semantic_reasoning_only	dbpedia_l1_batch_3
+833	proctor	2	Other	resolved	high	"[""Other""]"	Proctor 负责考场监督、考试秩序及相关行政事务，属于普通行政服务岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+840	puritan	2		needs_context	low	"[""Leadership""]"	Puritan 是宗教身份或历史派别名称，不等同于牧师、宗教权威或其他具体职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+846	railroad engineer	2	Other	resolved	medium	"[""Other""]"	Railroad engineer 在该职业语境指驾驶和操控铁路列车的火车司机，不是机械工程研究人员。	semantic_reasoning_only	dbpedia_l1_batch_3
+853	scenic design	2	Culture	resolved	high	"[""Culture""]"	Scenic design 为戏剧或影视演出设计布景和舞台视觉环境，属于艺术制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+857	screenwriting	2	Culture	resolved	high	"[""Culture""]"	Screenwriting 创作影视剧本和对白，属于文学写作与影视内容制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+864	short story	2	Culture	resolved	high	"[""Culture""]"	Short story 指创作短篇小说，是明确的文学写作活动。	semantic_reasoning_only	dbpedia_l1_batch_3
+870	slovak people	2		needs_context	low	[]	Slovak people 是民族群体标签，属于身份而非职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+881	surgery	2	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Surgery 是以手术诊疗疾病和损伤的医学专业实践。	semantic_reasoning_only	dbpedia_l1_batch_3
+891	theatre manager	2	Culture	resolved	medium	"[""Culture""]"	Theatre manager 经营剧院并安排戏剧演出和剧场运营，管理职能直接服务文化演出。	semantic_reasoning_only	dbpedia_l1_batch_3
+895	thoroughbred	2		needs_context	low	"[""Sports/Games"",""Other""]"	Thoroughbred 是赛马品种名称，可能关联饲养、训练或赛事工作，品种标签本身不指明具体职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+899	translation	2	Culture	resolved	high	"[""Culture""]"	Translation 将文本或口语转换为另一种语言，是语言传播与出版文化工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+904	vaudeville	2	Culture	resolved	high	"[""Culture""]"	Vaudeville 是以短剧、音乐、喜剧等为主的舞台综艺表演，从业者属演艺文化。	semantic_reasoning_only	dbpedia_l1_batch_3
+915	women's suffrage in the united states	2		needs_context	low	"[""Leadership"",""Culture""]"	Women's suffrage in the United States 是政治权利运动与历史议题，未说明本人从事倡议、写作还是学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+920	12th spa	1		needs_context	low	"[""Leadership""]"	12th SPA 是朝鲜最高人民会议的届次/机构简称，不是职位；代表、议员或其他关联身份须由岗位字段确认。	https://en.wikipedia.org/wiki/Kang_Yong-sop	dbpedia_l1_batch_3
+925	abogado	1	Leadership	resolved	high	"[""Leadership""]"	abogado 在西语中指执业律师或法律代理人，属于法律专业职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+928	académie de l'air et de l'espace	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Académie de l'air et de l'espace 是航空航天学术团体名称；会员、研究者和机构职员的岗位含义不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+931	acrobatics	1		needs_context	low	"[""Culture"",""Sports/Games""]"	Acrobatics 可指马戏舞台表演，也可指体操或竞技动作；职业字段没有表演或比赛语境。	semantic_reasoning_only	dbpedia_l1_batch_3
+939	advice column	1	Culture	resolved	high	"[""Culture""]"	Advice column 指撰写报刊答疑专栏，以文字向读者提供建议，属于新闻出版写作。	semantic_reasoning_only	dbpedia_l1_batch_3
+947	agent of the catholic committee	1	Leadership	resolved	medium	"[""Leadership""]"	Agent of the Catholic Committee 指代表爱尔兰天主教政治委员会开展公共事务与权利倡议，是明确的政治组织代表职能。	https://ccea.org.uk/downloads/docs/Support/A2%202%20Support/2024/eGUIDE_A2_2_Option_3_Ireland_1778-1803_1.pdf	dbpedia_l1_batch_3
+955	aids	1		needs_context	low	"[""Leadership"",""Culture"",""Other""]"	AIDS 是疾病名称或公共议题，关联者可能是研究者、患者权益倡议者或其他身份，不能据此确定职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+960	albanologist	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Albanologist 研究阿尔巴尼亚语言、文学和历史，属于区域语言文化学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+965	almanac	1	Culture	resolved	medium	"[""Culture""]"	Almanac 职业语境指编纂或编辑年鉴类出版物，属于编辑出版。	semantic_reasoning_only	dbpedia_l1_batch_3
+978	angat buhay	1		needs_context	low	"[""Leadership"",""Other""]"	Angat Buhay 是公益组织名称，关联身份可能是创办人、管理者、志愿者或受益者，原URI未给出岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+983	animal trapping	1	Other	resolved	high	"[""Other""]"	Animal trapping 以设置陷阱捕捉动物为生，是狩猎及资源采集工种。	semantic_reasoning_only	dbpedia_l1_batch_3
+986	anomalistics	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Anomalistics 以系统方法研究异常或未获解释的现象，属于研究性知识领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+990	anti-rape movement	1		needs_context	low	"[""Leadership"",""Culture""]"	Anti-rape movement 是反性暴力社会运动，条目没有说明本人从事组织倡议、法律支持、媒体创作还是研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+995	aquanaut	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Aquanaut 参与水下长期考察、实验和探索，核心为水下科学探索。	semantic_reasoning_only	dbpedia_l1_batch_3
+999	arcelor mittal	1		needs_context	low	"[""Leadership"",""Discovery/Science"",""Other""]"	ArcelorMittal 是钢铁公司名称，单凭雇主不能判断相关者是高管、工程人员还是普通职工。	semantic_reasoning_only	dbpedia_l1_batch_3
+1006	archeology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Archeology 通过遗址、器物和文献研究人类历史，属于学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1011	armed forces	1		needs_context	low	"[""Leadership"",""Other""]"	Armed forces 指军队这一组织或服役体系，未区分将领、军官、士兵及文职岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1024	aruma	1		needs_context	low	"[""Leadership"",""Other""]"	Aruma 是残障支持服务机构名称；与机构相关不代表具体从事管理、护理或其他岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1032	audio engineering	1	Culture	resolved	medium	"[""Culture""]"	Audio engineering 在职业语境中负责录音、混音和声音技术实现，直接服务音乐或影视内容制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1040	automobile dealer	1	Other	resolved	high	"[""Other""]"	Automobile dealer 销售汽车并经营零售车行，是普通商业销售或小型经营岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1045	avant-garde	1		needs_context	low	"[""Culture"",""Discovery/Science""]"	Avant-garde 指艺术与思想中的先锋风格，不是单一职业；相关者可能创作、评论或仅参与该运动。	semantic_reasoning_only	dbpedia_l1_batch_3
+1049	bachelor of economics	1		needs_context	low	[]	Bachelor of Economics 是学历名称，说明受教育背景而不是实际职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1058	baptists	1		needs_context	low	"[""Leadership""]"	Baptists 是宗教派别或信仰身份，不能据此认定本人担任牧师或宗教权威。	semantic_reasoning_only	dbpedia_l1_batch_3
+1072	bennett, coleman & co. ltd.	1		needs_context	low	"[""Leadership"",""Culture"",""Other""]"	Bennett, Coleman & Co. Ltd. 是媒体企业名称；员工、出版者和企业负责人对应不同L1。	semantic_reasoning_only	dbpedia_l1_batch_3
+1076	bharatanatyam	1	Culture	resolved	high	"[""Culture""]"	Bharatanatyam 是印度古典舞蹈表演与教学领域，属于舞蹈艺术和文化传承。	semantic_reasoning_only	dbpedia_l1_batch_3
+1086	birmingham museum and art gallery	1		needs_context	low	"[""Culture"",""Leadership"",""Other""]"	Birmingham Museum and Art Gallery 是文化机构名称，策展、管理、保安或行政等岗位未被区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1094	boat building	1	Other	resolved	high	"[""Other""]"	Boat building 指按工艺制造或修造船只，是明确的手工制造职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1099	bollywood	1	Culture	resolved	medium	"[""Culture""]"	Bollywood 指印度电影产业的影视创作、表演和制作领域，所指核心是文化生产。	semantic_reasoning_only	dbpedia_l1_batch_3
+1109	brant foundation	1		needs_context	low	"[""Leadership"",""Culture""]"	Brant Foundation 是艺术公益机构名称；艺术赞助人、管理人员或普通员工等职业角色无法由名称确定。	semantic_reasoning_only	dbpedia_l1_batch_3
+1114	british co-operative movement	1		needs_context	low	"[""Leadership"",""Other""]"	British co-operative movement 是社会经济运动名称，未说明本人是成员、倡议者、研究者还是机构负责人。	semantic_reasoning_only	dbpedia_l1_batch_3
+1118	brooklyn dodgers	1		needs_context	low	"[""Sports/Games"",""Leadership""]"	Brooklyn Dodgers 是职业棒球队名称；球员、教练、球队管理者和所有者的职责不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1131	butoh	1	Culture	resolved	high	"[""Culture""]"	Butoh 是日本舞蹈与身体剧场表演形式，属于舞台艺术。	semantic_reasoning_only	dbpedia_l1_batch_3
+1137	california geological survey	1		needs_context	low	"[""Discovery/Science"",""Leadership"",""Other""]"	California Geological Survey 是政府地质调查机构名称；地质研究、行政领导和技术服务岗位均可能。	semantic_reasoning_only	dbpedia_l1_batch_3
+1141	cameo appearance	1	Culture	resolved	high	"[""Culture""]"	Cameo appearance 指在影视或舞台作品中客串出演，属于表演工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1147	canon regular	1	Leadership	resolved	medium	"[""Leadership""]"	Canon regular 是在共同生活的宗教团体中履行圣职的正规会士，属于宗教职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1153	captain (nautical)	1	Leadership	resolved	high	"[""Leadership""]"	Captain (nautical) 负责船舶航行、船员和安全的船长，承担正式指挥权。	semantic_reasoning_only	dbpedia_l1_batch_3
+1160	carnegie endowment for international peace	1		needs_context	low	"[""Leadership"",""Discovery/Science""]"	Carnegie Endowment for International Peace 是政策研究与公益机构；研究员、管理者和捐赠关联身份不可由机构名区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1164	catholic	1		needs_context	low	"[""Leadership""]"	Catholic 是宗教归属身份，不能单凭教派名称推断其是否从事教会职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1171	celebrity chef	1	Culture	resolved	medium	"[""Culture""]"	Celebrity chef 以烹饪创作并通过电视、出版或公众活动呈现菜品，是文化与媒体传播型厨师。	semantic_reasoning_only	dbpedia_l1_batch_3
+1174	center for ai and digital policy	1		needs_context	low	"[""Leadership"",""Discovery/Science""]"	Center for AI and Digital Policy 是政策研究机构名称，研究、倡议与管理岗位无法从机构名确定。	semantic_reasoning_only	dbpedia_l1_batch_3
+1179	chaga people	1		needs_context	low	[]	Chaga people 是民族群体标签，不是职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1186	chargé d'affaires	1	Leadership	resolved	high	"[""Leadership""]"	Chargé d'affaires 是代表国家主持外交使团事务的外交官，属于公共治理与外交领导。	semantic_reasoning_only	dbpedia_l1_batch_3
+1190	charles de gaulle airport	1		needs_context	low	"[""Other"",""Leadership""]"	Charles de Gaulle Airport 是机场地点与机构名称；管理、航务、安全和服务岗位未被区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1200	chewing gum	1		needs_context	low	"[""Leadership"",""Other""]"	Chewing gum 是商品名称；相关职业可能是产品制造、销售或企业经营，URI只给出产品。	semantic_reasoning_only	dbpedia_l1_batch_3
+1210	chief mechanical engineer	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Chief mechanical engineer 负责机械设备的工程设计、技术审核和系统运行，核心仍是工程专业职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+1217	children of god (cult)	1		needs_context	low	"[""Leadership"",""Other""]"	Children of God 是宗教组织名称，成员、创办人和宗教领袖不能仅凭组织关联区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1220	chinjufu-shōgun	1	Leadership	resolved	high	"[""Leadership""]"	Chinjufu-shōgun 是日本古代负责北方防务与军事镇抚的将军职位。	https://www.persee.fr/doc/dhjap_0000-0000_1975_dic_3_1_871_t2_0053_0000_3?pageId=T2_54	dbpedia_l1_batch_3
+1224	christian apologetics	1		needs_context	low	"[""Leadership"",""Culture"",""Discovery/Science""]"	Christian apologetics 是宗教辩护与论述领域，可由神职人员、作者或学者从事，未说明具体岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1237	circuit court	1		needs_context	low	"[""Leadership""]"	Circuit Court 指法院或司法机构而非职业称谓；法官、书记员及其他雇员不能从法院名区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1248	city planning	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	City planning 通过土地利用、交通和城市空间规划解决公共环境问题，属于专业规划与技术领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+1261	collagist	1	Culture	resolved	high	"[""Culture""]"	Collagist 通过拼贴材料创作视觉艺术作品，是视觉艺术创作者。	semantic_reasoning_only	dbpedia_l1_batch_3
+1270	columbia records	1		needs_context	low	"[""Culture"",""Leadership""]"	Columbia Records 是唱片公司名称；艺人、制作人、发行人员和企业管理者的角色不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1284	common serjeant of london	1	Leadership	resolved	high	"[""Leadership""]"	Common Serjeant of London 是伦敦中央刑事法院的高级常任法官职位，承担司法裁判职责。	https://www.judiciary.uk/wp-content/uploads/2018/07/20180704-lcj-speech-mansion-house-speech.pdf	dbpedia_l1_batch_3
+1292	comptometer	1		needs_context	low	"[""Other"",""Discovery/Science""]"	Comptometer 是计算设备名称，可能对应操作员、发明者或设备相关工作，URI本身不指明岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1297	conceptual art	1	Culture	resolved	high	"[""Culture""]"	Conceptual art 是以观念、文本或行动为核心的当代艺术创作实践。	semantic_reasoning_only	dbpedia_l1_batch_3
+1308	conservation biology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Conservation biology 运用生物学研究保护物种、栖息地和生态系统，属于科学研究领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+1313	contract killing	1	Other	resolved	high	"[""Other""]"	Contract killing 指受雇实施谋杀的犯罪行为，是明确的负面身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+1321	cosmographer	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Cosmographer 综合绘制地图并研究地理、天文和世界结构，属于地理与探索知识工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1324	council of india	1		needs_context	low	"[""Leadership""]"	Council of India 是历史治理机构名称；成员身份、行政职务和一般关联关系未由URI区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1333	creationist	1		needs_context	low	"[""Leadership"",""Discovery/Science""]"	Creationist 表示对创世论的信念或倡导立场，可能关联神职、写作或研究，不能直接等同宗教权威。	semantic_reasoning_only	dbpedia_l1_batch_3
+1341	criminology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Criminology 以社会科学方法研究犯罪、成因和司法制度，属于学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1346	csds	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	CSDS 是多种机构共用的缩写，原URI和样例不足以确定具体含义及本人职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1352	cultural history	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Cultural history 研究社会生活、观念和文化实践的历史演变，属于历史学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1358	darknet market	1		needs_context	low	"[""Other"",""Leadership""]"	Darknet market 是非法交易平台或市场名称，关联者可能是经营者、买家或其他参与者，职位不明。	semantic_reasoning_only	dbpedia_l1_batch_3
+1364	demimonde	1		needs_context	low	"[""Culture"",""Other""]"	Demimonde 指社会圈层或边缘社交环境，不是可确定职责的职业称谓。	semantic_reasoning_only	dbpedia_l1_batch_3
+1368	department of environment, land, water and planning (victoria)	1		needs_context	low	"[""Leadership"",""Other""]"	Department of Environment, Land, Water and Planning 是政府部门名称；部长、行政领导和普通公务员职能不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1374	dialectical behavior therapy	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Dialectical behavior therapy 是有明确临床方法的心理治疗实践，归入医疗与心理专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1380	dirección de inteligencia nacional	1		needs_context	low	"[""Leadership"",""Other""]"	Dirección de Inteligencia Nacional 是智利情报机构名称；特工、管理者和其他雇员不能由机构名区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1390	division general	1	Leadership	resolved	high	"[""Leadership""]"	Division general 是法语军事体系中的高级将领军衔，承担部队统率和军事指挥。	https://www.defense.gouv.fr/terre/grades-larmee-terre	dbpedia_l1_batch_3
+1394	drafter	1		needs_context	low	"[""Culture"",""Other""]"	Drafter 可指技术制图员，也可能指艺术绘图或文稿起草者；输入缺少绘图任务和行业语境。	semantic_reasoning_only	dbpedia_l1_batch_3
+1407	ealing studios	1		needs_context	low	"[""Culture"",""Leadership""]"	Ealing Studios 是影视制作机构名称；演员、制片人、技术人员或公司管理者均可能与其相关。	semantic_reasoning_only	dbpedia_l1_batch_3
+1411	economic history	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Economic history 以历史材料分析经济制度、生产和市场的变化，属于学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1417	embroidery	1	Culture	resolved	medium	"[""Culture""]"	Embroidery 指以针线制作图案和纺织艺术品，职业核心是装饰性手工艺术创作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1421	encyclopaedist	1	Culture	resolved	medium	"[""Culture""]"	Encyclopaedist 编写、编辑或统筹百科全书条目，以出版知识内容为主要产出。	semantic_reasoning_only	dbpedia_l1_batch_3
+1429	engraving	1	Culture	resolved	high	"[""Culture""]"	Engraving 通过雕刻版面创作版画或装饰图像，属于视觉艺术与印刷艺术。	semantic_reasoning_only	dbpedia_l1_batch_3
+1434	epistemology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Epistemology 是研究知识、真理和认知依据的哲学学术分支。	semantic_reasoning_only	dbpedia_l1_batch_3
+1438	erik erikson	1		needs_context	low	"[""Discovery/Science"",""Culture""]"	Erik Erikson 是具名个人而非职业描述，可能表示人物关系或提及对象，无法由姓名判定工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1444	ethnolog	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Ethnolog 指研究族群、社会与文化比较的民族学者，属于学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1447	eugenicist	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Eugenicist 在该完整职业称谓中指从事优生学理论或研究的倡导者，归入研究知识领域；词项并不指定政治职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1452	evangelicalism	1		needs_context	low	"[""Leadership""]"	Evangelicalism 是宗教运动或信仰传统名称，未说明本人是否担任牧师、神学研究者或其他角色。	semantic_reasoning_only	dbpedia_l1_batch_3
+1462	experimental psychology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Experimental psychology 通过实验方法研究心理过程，是明确的科学研究领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+1465	factory	1		needs_context	low	"[""Leadership"",""Other""]"	Factory 指工厂这一工作场所或生产机构，管理者、工人和所有者的职业含义不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1468	fashion	1	Culture	resolved	high	"[""Culture""]"	Fashion 职业领域包括服饰设计、造型和时尚内容创作，属于文化与视觉设计。	semantic_reasoning_only	dbpedia_l1_batch_3
+1480	fiat group automobiles	1		needs_context	low	"[""Leadership"",""Other""]"	Fiat Group Automobiles 是汽车企业名称，不能仅凭企业关联区分管理、工程和生产岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1491	film theorist	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Film theorist 研究电影媒介、叙事和审美理论，职业核心是学术分析而非影视创作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1495	first ladies and gentlemen of india	1		needs_context	low	"[""Leadership"",""Other""]"	First ladies and gentlemen of India 是配偶或礼仪身份类别，不是统一职业；个人另有职业须单独确认。	semantic_reasoning_only	dbpedia_l1_batch_3
+1509	food writing	1	Culture	resolved	high	"[""Culture""]"	Food writing 以文字撰写烹饪、饮食和食评内容，属于文化写作与出版。	semantic_reasoning_only	dbpedia_l1_batch_3
+1516	forge	1	Other	resolved	medium	"[""Other""]"	Forge 在该职业语境指以锻炉加工金属并制作铁器，是金属加工工种。	semantic_reasoning_only	dbpedia_l1_batch_3
+1522	free german youth	1		needs_context	low	"[""Leadership"",""Other""]"	Free German Youth 是政治青年组织名称，成员、干部和公职人员身份不同，URI未说明具体岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1527	frics	1		needs_context	low	"[""Discovery/Science"",""Leadership"",""Other""]"	FRICS 是专业测量师机构的资深会员资格缩写，不等于具体岗位或任职等级。	semantic_reasoning_only	dbpedia_l1_batch_3
+1530	funeral director	1	Other	resolved	high	"[""Other""]"	Funeral director 统筹遗体安置、葬礼安排并服务逝者家属，属于日常礼仪服务行业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1533	furniture	1		needs_context	low	"[""Culture"",""Other""]"	Furniture 是产品类别；设计师、制造工人和经营者均可能与家具相关，原URI未指定工作内容。	semantic_reasoning_only	dbpedia_l1_batch_3
+1540	gaming control board	1		needs_context	low	"[""Leadership"",""Other""]"	Gaming Control Board 是博彩监管机构名称，委员会成员、监管人员和其他雇员职责不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1544	general (mexico)	1	Leadership	resolved	high	"[""Leadership""]"	General (Mexico) 指墨西哥军队中的将军军衔，承担军事指挥。	semantic_reasoning_only	dbpedia_l1_batch_3
+1551	geography	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Geography 研究地表、空间分布、环境与人地关系，是学术与科学领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+1555	girasia	1	Leadership	resolved	medium	"[""Leadership""]"	Girasia 是印度地方武装首领或小邦领主所用称号，指向地方统治与政治权力。	https://en.wikipedia.org/wiki/Garasia	dbpedia_l1_batch_3
+1559	gold mine	1		needs_context	low	"[""Leadership"",""Discovery/Science"",""Other""]"	Gold mine 是矿场或产业名称，可对应采矿、地质勘探或矿业经营，无法从URI判明具体岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1567	government worker	1		needs_context	low	"[""Leadership"",""Other""]"	Government worker 是宽泛的政府雇员称谓，不区分政策领导、公务行政或一般服务岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1576	graphic design occupations	1	Culture	resolved	medium	"[""Culture""]"	Graphic design occupations 以图像、字体和版式进行视觉传达与设计，属于文化传播和视觉创作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1582	grupo globo	1		needs_context	low	"[""Culture"",""Leadership""]"	Grupo Globo 是媒体集团名称，记者、艺人、制作人员和企业管理者均可能任职。	semantic_reasoning_only	dbpedia_l1_batch_3
+1588	gynaecology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Gynaecology 是诊断和治疗妇科疾病的临床医学专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1593	halcon resources	1		needs_context	low	"[""Leadership"",""Other""]"	Halcon Resources 是能源企业名称，雇主信息没有指出具体岗位或职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+1600	hcl technologies	1		needs_context	low	"[""Leadership"",""Discovery/Science""]"	HCL Technologies 是信息技术企业名称，关联者可能是技术人员、创办人或高管。	semantic_reasoning_only	dbpedia_l1_batch_3
+1605	hearing australia	1		needs_context	low	"[""Discovery/Science"",""Leadership"",""Other""]"	Hearing Australia 是听力服务机构名称，临床、行政和管理岗位均可能，URI没有说明职位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1611	henry viii of england	1		needs_context	low	"[""Leadership"",""Other""]"	Henry VIII of England 是具名历史人物而非职业标签，职业关联无法从姓名本身确定。	semantic_reasoning_only	dbpedia_l1_batch_3
+1618	hindustani classical	1	Culture	resolved	high	"[""Culture""]"	Hindustani classical 指印度斯坦古典音乐的表演、作曲或传承，属于音乐文化。	semantic_reasoning_only	dbpedia_l1_batch_3
+1626	holocaust	1		needs_context	low	"[""Leadership"",""Culture"",""Other""]"	Holocaust 是历史事件名称，不说明相关者是研究者、幸存者、行动者还是其他身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+1642	hydroelectricity	1		needs_context	low	"[""Discovery/Science"",""Leadership"",""Other""]"	Hydroelectricity 是能源技术与产业领域，可能指工程、公共部门治理或企业经营，岗位不明确。	semantic_reasoning_only	dbpedia_l1_batch_3
+1645	ibn fahd helli	1		needs_context	low	[]	Ibn Fahd Helli 是具名人物URI而非可辨认职业名称，输入没有说明其与职业的关系。	semantic_reasoning_only	dbpedia_l1_batch_3
+1650	independent contractor	1		needs_context	low	[]	Independent contractor 只说明雇佣或合同形式，未说明实际提供的职业服务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1655	information technologies	1		needs_context	low	"[""Discovery/Science"",""Leadership"",""Other""]"	Information technologies 是宽泛技术行业，可能涉及工程开发、管理或一般IT服务，岗位不明确。	semantic_reasoning_only	dbpedia_l1_batch_3
+1658	institut français des relations internationales	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Institut français des relations internationales 是研究机构名称；研究员、管理人员或其他关联身份无法由机构名区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1667	international relations	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	International relations 作为职业领域指国际政治与外交关系的研究和分析，属于学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1675	intervention (counseling)	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Intervention (counseling) 指专业人员为成瘾或心理问题组织咨询干预，属于临床与心理健康服务专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1681	iron ore	1		needs_context	low	"[""Leadership"",""Discovery/Science"",""Other""]"	Iron ore 是矿产与产业名称，无法区分采矿、工程、贸易或企业经营岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1684	islamic extremism	1		needs_context	low	"[""Leadership"",""Other""]"	Islamic extremism 是意识形态或议题名称，未说明本人是研究者、倡议者或组织成员。	semantic_reasoning_only	dbpedia_l1_batch_3
+1688	jam	1	Leadership	resolved	medium	"[""Leadership""]"	Jam 是俾路支和信德地区的传统统治者或部族首领称号，所指为政治与地方治理权位。	https://en.wikipedia.org/wiki/Jam_(title)	dbpedia_l1_batch_3
+1691	jardine lloyd thompson group	1		needs_context	low	"[""Leadership"",""Other""]"	Jardine Lloyd Thompson Group 是商业集团名称，无法由雇主判断本人是管理者还是普通员工。	semantic_reasoning_only	dbpedia_l1_batch_3
+1699	johnson space center	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Johnson Space Center 是航天研究机构与工作地点名称，工程师、宇航员和管理人员职责不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1705	kabuki	1	Culture	resolved	high	"[""Culture""]"	Kabuki 是日本传统戏剧，职业语境指从事歌舞伎演出或制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1710	khananda	1	Culture	resolved	high	"[""Culture""]"	Khananda 是演唱阿塞拜疆 mugham 的传统歌者，属于音乐演出。	https://unesco.az/en/articles/intangible_cultural_heritage/azerbaijani-mugham	dbpedia_l1_batch_3
+1713	king's counsel	1	Leadership	resolved	high	"[""Leadership""]"	King's Counsel 是经正式任命的高级律师资格，属于法律职业体系。	semantic_reasoning_only	dbpedia_l1_batch_3
+1718	labor movement	1		needs_context	low	"[""Leadership"",""Other""]"	Labor movement 是工会与劳工权益运动，成员、组织者、政治代表和学者的职业含义不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1722	lamda	1		needs_context	low	"[""Culture"",""Discovery/Science""]"	LAMDA 是伦敦音乐与戏剧学院名称，学生、演员、教师和雇员身份无法由校名区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1725	landheer	1	Leadership	resolved	medium	"[""Leadership""]"	Landheer 是荷属东印度私人领地的土地领主，具有对辖区居民和地方官员的治理权。	https://en.wikipedia.org/wiki/Landheer	dbpedia_l1_batch_3
+1730	lease lock	1		needs_context	low	"[""Leadership"",""Other""]"	LeaseLock 是企业或商业产品名称，无法由名称判断关联者的具体职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1733	legal adviser	1	Leadership	resolved	high	"[""Leadership""]"	Legal adviser 提供法律解释、合规意见和诉讼策略，属于法律专业职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+1740	lgbt	1		needs_context	low	[]	LGBT 是身份群体标签，不是职业或工作职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+1752	list of colonial heads of portuguese india	1		needs_context	low	"[""Leadership""]"	List of colonial heads of Portuguese India 是职位名录类别而非具体岗位；此条没有说明关联者担任哪一任、哪种治理职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1766	list of political theorists	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	List of political theorists 是学者名录类别，不说明相关者本人是否从事政治理论研究或政治任职。	semantic_reasoning_only	dbpedia_l1_batch_3
+1772	list of you tubers	1		needs_context	low	"[""Culture""]"	List of YouTubers 是网络创作者名录，不是具体岗位描述；无法确认相关者的频道内容和实际工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1778	litterateur	1	Culture	resolved	medium	"[""Culture""]"	Litterateur 指从事文学创作、评论或出版的文人，核心是文学文化工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1783	longhunter	1		needs_context	low	"[""Discovery/Science"",""Other""]"	Longhunter 同时指长期边疆狩猎者和探索者，捕猎谋生与地域探索两种职业属性并存，URI未说明主职。	https://history.ky.gov/stories-and-blogs/kentuckys-long-hunters-pelts-profits-and-the-push-for-westward-expansion	dbpedia_l1_batch_3
+1793	madras university	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Madras University 是高校名称，教师、研究者、校长和一般雇员的岗位无法从校名确定。	semantic_reasoning_only	dbpedia_l1_batch_3
+1796	mail carrier	1	Other	resolved	high	"[""Other""]"	Mail carrier 按线路收取、分拣并投递邮件，是普通公共邮政服务工种。	semantic_reasoning_only	dbpedia_l1_batch_3
+1801	management consulting	1	Other	resolved	medium	"[""Other""]"	Management consulting 为客户组织提供管理分析和改进建议；顾问身份本身不表示其掌握受聘组织的高管权力。	semantic_reasoning_only	dbpedia_l1_batch_3
+1806	marketing management	1	Leadership	resolved	medium	"[""Leadership""]"	Marketing management 指管理企业营销职能、策略与团队的岗位，含明确的组织管理责任。	semantic_reasoning_only	dbpedia_l1_batch_3
+1813	master of the horse	1	Leadership	resolved	medium	"[""Leadership""]"	Master of the Horse 是王室宫廷负责皇家马厩、马匹与骑乘仪式的正式高阶宫廷职务。	https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Master_of_the_Horse	dbpedia_l1_batch_3
+1824	media studies	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Media studies 是以学术方法研究大众传媒、传播制度和媒体内容的学科。	semantic_reasoning_only	dbpedia_l1_batch_3
+1843	methodism	1		needs_context	low	"[""Leadership""]"	Methodism 是宗教派别和信仰传统，不等同于牧师、教会管理者或神学研究者。	semantic_reasoning_only	dbpedia_l1_batch_3
+1848	middle ages	1		needs_context	low	"[""Discovery/Science"",""Culture""]"	Middle Ages 是历史时期名称，不能说明相关者是历史学家、作家还是仅以该时期为研究主题。	semantic_reasoning_only	dbpedia_l1_batch_3
+1852	military engineering	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Military engineering 可指军队工程兵职责，也可指工程技术领域；原URI没有表明其军职或设计研究任务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1861	mission (christian)	1	Leadership	resolved	medium	"[""Leadership""]"	Mission (Christian) 在职业语境指传教和承担宗教传播职责，属于宗教职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+1867	montessori	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Montessori 指以蒙台梭利教学法开展儿童教育的专业领域，核心为教育方法与教学实践。	semantic_reasoning_only	dbpedia_l1_batch_3
+1875	muhammad ali jinnah	1		needs_context	low	"[""Leadership"",""Other""]"	Muhammad Ali Jinnah 是具名政治人物URI而非岗位；样例关联不能证明本人从事何种职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1890	mythography	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Mythography 指编纂、研究和比较神话传统，属于人文学术研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+1893	narrative	1		needs_context	low	"[""Culture"",""Discovery/Science""]"	Narrative 是叙事形式或理论概念，可能涉及写作、研究或表演，不能单独识别职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1897	national education workers' union	1		needs_context	low	"[""Discovery/Science"",""Other"",""Leadership""]"	National Education Workers' Union 是工会名称，成员、教师、工会领袖或政治任职者均可能。	semantic_reasoning_only	dbpedia_l1_batch_3
+1900	national rally (france)	1		needs_context	low	"[""Leadership""]"	National Rally (France) 是政党名称，党员、候选人、党务干部和民选官员并非同一岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1903	native headmen of ceylon	1	Leadership	resolved	medium	"[""Leadership""]"	Native headmen of Ceylon 指殖民时期由行政体系任命、在地方承担管理和警务职责的本地首领。	https://www.noolaham.net/project/47/4612/4612.pdf	dbpedia_l1_batch_3
+1912	neuropsychiatry	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Neuropsychiatry 是结合神经科学与精神医学诊治神经和精神障碍的医学专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1915	new brunswick	1		needs_context	low	[]	New Brunswick 是地名或行政区名称，不包含职业职责信息。	semantic_reasoning_only	dbpedia_l1_batch_3
+1918	news 24 (albania)	1		needs_context	low	"[""Culture"",""Leadership""]"	News 24 (Albania) 是电视新闻机构名称；记者、主持人、经营者和管理者等角色未区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+1928	norman lear center	1		needs_context	low	"[""Discovery/Science"",""Culture""]"	Norman Lear Center 是研究中心名称，研究员、传播人员和中心管理者等岗位无法由机构名确定。	semantic_reasoning_only	dbpedia_l1_batch_3
+1932	novel	1	Culture	resolved	high	"[""Culture""]"	Novel 指创作长篇虚构文学作品，是明确的文学写作职业领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+1940	occult	1		needs_context	low	"[""Culture"",""Discovery/Science"",""Leadership""]"	Occult 是宽泛的知识与信仰主题，可能关联作者、研究者或宗教实践者，未说明具体职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1947	ombudsman	1	Leadership	resolved	high	"[""Leadership""]"	Ombudsman 是依法受命调查公共机构投诉并监督行政行为的公共监督官员。	semantic_reasoning_only	dbpedia_l1_batch_3
+1962	organization theory	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Organization theory 研究组织结构、行为和管理机制，是社会科学学术领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+1968	orthopedic surgery	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Orthopedic surgery 是诊疗骨骼、关节和肌肉损伤疾病的临床外科专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+1972	oud	1		needs_context	low	"[""Culture"",""Other""]"	Oud 是乐器名称；相关者可能演奏、制作或销售该乐器，URI没有指明岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+1976	pacifism in the united states	1		needs_context	low	"[""Leadership"",""Culture""]"	Pacifism in the United States 是和平主义运动与历史议题，未说明本人是倡议者、写作者或研究者。	semantic_reasoning_only	dbpedia_l1_batch_3
+1980	panda tv	1		needs_context	low	"[""Culture"",""Leadership""]"	Panda TV 是直播平台或企业名称，主播、管理者、投资者和一般雇员职责不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+1988	party promoter	1	Culture	resolved	medium	"[""Culture""]"	Party promoter 策划并推广派对和娱乐活动，职责属于现场娱乐和文化活动制作。	semantic_reasoning_only	dbpedia_l1_batch_3
+1994	pathology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Pathology 通过组织、细胞和实验室检查研究及诊断疾病，是医学专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2000	people’s majlis	1		needs_context	low	"[""Leadership""]"	People's Majlis 是马尔代夫立法机关名称，成员、议员和机构工作人员的职位需由明确任职信息确认。	semantic_reasoning_only	dbpedia_l1_batch_3
+2008	phonetician	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Phonetician 研究语音的发音、声学和感知，是语言科学研究者。	semantic_reasoning_only	dbpedia_l1_batch_3
+2015	pig iron	1		needs_context	low	"[""Leadership"",""Other""]"	Pig iron 是炼铁产品名称，可能关联冶炼工、贸易商或企业经营者，原URI未指明工作角色。	semantic_reasoning_only	dbpedia_l1_batch_3
+2019	pimp	1	Other	resolved	high	"[""Other""]"	Pimp 指从性剥削中牟利的中介者，是明确的犯罪与负面身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+2037	political commentator	1	Culture	resolved	high	"[""Culture""]"	Political commentator 通过媒体解释并评论政治事件，实际工作是公众传播而非政治任职。	semantic_reasoning_only	dbpedia_l1_batch_3
+2042	political journalist	1	Culture	resolved	high	"[""Culture""]"	Political journalist 调查、撰写并传播政治新闻，职业核心是新闻媒体工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2048	political prisoner	1		needs_context	low	"[""Leadership"",""Other""]"	Political prisoner 是因政治原因被拘禁的身份状态，不说明其原职业或政治活动岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+2060	portland mavericks	1		needs_context	low	"[""Sports/Games"",""Leadership""]"	Portland Mavericks 是棒球队名称，团队关联可能是球员、教练、管理者或所有者。	semantic_reasoning_only	dbpedia_l1_batch_3
+2065	prebendary	1	Leadership	resolved	medium	"[""Leadership""]"	Prebendary 是在主教座堂或学院教会任职并领取教会俸禄的教士职务，属于宗教体系。	https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Prebendary	dbpedia_l1_batch_3
+2072	president of the united states of america	1		needs_context	low	"[""Leadership""]"	President of the United States 是明确政治最高职务，但该输入样例人物与该职位明显不符，无法确认此URI是否真为其职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2079	principal (university)	1	Leadership	resolved	medium	"[""Leadership""]"	Principal (university) 是大学的院校负责人，承担机构治理和行政领导职责。	semantic_reasoning_only	dbpedia_l1_batch_3
+2086	produce	1		needs_context	low	"[""Leadership"",""Other""]"	Produce 指农产品或生鲜商品，可能对应生产、批发或经营活动，未指出本人实际岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+2097	propagandist	1		needs_context	low	"[""Leadership"",""Culture""]"	Propagandist 指制作或传播宣传材料，可服务政治权力、军队或媒体组织，缺少具体领域和职务上下文。	semantic_reasoning_only	dbpedia_l1_batch_3
+2104	psychical researcher	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Psychical researcher 以调查和实验方式研究所谓超常心理现象，职业称谓明确指研究活动。	semantic_reasoning_only	dbpedia_l1_batch_3
+2107	public health nursing	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Public health nursing 是由护士提供人群健康评估、疾病预防和社区护理的医疗专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2113	puma se	1		needs_context	low	"[""Leadership"",""Other""]"	Puma SE 是运动用品公司名称，设计、销售、管理等工作不能由企业名判断。	semantic_reasoning_only	dbpedia_l1_batch_3
+2116	purser	1	Other	resolved	high	"[""Other""]"	Purser 处理船舶乘客服务、账目、供应和日常行政，是交通服务岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+2121	queens college, cuny	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	Queens College, CUNY 是高校名称，学术任职和行政管理等岗位均可能。	semantic_reasoning_only	dbpedia_l1_batch_3
+2132	rallying	1	Sports/Games	resolved	high	"[""Sports/Games""]"	Rallying 指汽车拉力赛的竞赛活动，职业语境为赛车运动员或赛事从业者。	semantic_reasoning_only	dbpedia_l1_batch_3
+2135	real estate agent	1	Other	resolved	high	"[""Other""]"	Real estate agent 代表客户挂牌、推介并协商房产交易，是普通地产销售服务职业，不等于地产开发商或企业高管。	semantic_reasoning_only	dbpedia_l1_batch_3
+2150	rehabilitation counseling	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Rehabilitation counseling 由受训专业人员评估功能限制并制定心理、就业和生活适应方案，属于康复与咨询专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2160	retired	1		needs_context	low	[]	Retired 是当前就业状态，不是所从事的职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2165	rheumatology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Rheumatology 是诊治关节、肌肉和免疫系统疾病的临床医学专业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2170	rockstar (drink)	1		needs_context	low	"[""Leadership"",""Other""]"	Rockstar (drink) 是饮料品牌名称，可能关联创办、销售或管理岗位，原URI只给出产品品牌。	semantic_reasoning_only	dbpedia_l1_batch_3
+2173	roman catholicism in australia	1		needs_context	low	"[""Leadership"",""Other""]"	Roman Catholicism in Australia 是宗教与地域主题，不说明本人承担教会职务或其他工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2178	rpsg group	1		needs_context	low	"[""Leadership"",""Other""]"	RPSG Group 是企业集团名称，无法从组织名区分高管、雇员或其他关联者。	semantic_reasoning_only	dbpedia_l1_batch_3
+2184	salon (gathering)	1		needs_context	low	"[""Culture"",""Leadership""]"	Salon (gathering) 是社交聚会形式；主持沙龙、赞助文化活动或参加聚会对应不同身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+2187	satire	1	Culture	resolved	high	"[""Culture""]"	Satire 通过文字、表演或影像以讽刺方式创作作品，属于文化表达和创作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2195	scientific journalist	1	Culture	resolved	high	"[""Culture""]"	Scientific journalist 负责报道并解释科学议题，职位核心是新闻采编和大众传播。	semantic_reasoning_only	dbpedia_l1_batch_3
+2201	scriptwriter	1	Culture	resolved	high	"[""Culture""]"	Scriptwriter 为电影、电视剧或舞台演出撰写剧本，属于文化内容创作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2207	secularism	1		needs_context	low	"[""Leadership"",""Culture""]"	Secularism 是思想立场或社会运动，未说明本人从事倡议、写作、研究或政治任职。	semantic_reasoning_only	dbpedia_l1_batch_3
+2210	semitic languages	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Semitic languages 指闪米特语言的比较、描述和历史研究领域，样例职业语境对应语言学研究。	semantic_reasoning_only	dbpedia_l1_batch_3
+2224	sheristadar	1	Other	resolved	medium	"[""Other""]"	Sheristadar 是印度法院负责接收、核验诉状和文书流程的行政官员，核心为法院文书管理而非法官裁判。	https://en.wikipedia.org/wiki/Sheristadar	dbpedia_l1_batch_3
+2230	shorthand	1	Other	resolved	high	"[""Other""]"	Shorthand 指以速记记录口述内容，通常对应文秘或记录员等普通行政服务工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2240	slave trader	1	Other	resolved	high	"[""Other""]"	Slave trader 指买卖和贩运奴隶的从业者，是明确的严重剥削和负面身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+2245	social psychology	1	Discovery/Science	resolved	high	"[""Discovery/Science""]"	Social psychology 研究个体与群体互动中的心理过程，是社会科学学术领域。	semantic_reasoning_only	dbpedia_l1_batch_3
+2251	songstress	1	Culture	resolved	high	"[""Culture""]"	Songstress 指以歌唱演出为职业的女歌手，属于音乐表演。	semantic_reasoning_only	dbpedia_l1_batch_3
+2259	spiritual healer	1		needs_context	low	"[""Leadership"",""Discovery/Science"",""Other""]"	Spiritual healer 可指宗教治疗者、传统疗愈服务人员或其他实践者，未说明其宗教权威或临床资格。	semantic_reasoning_only	dbpedia_l1_batch_3
+2263	sports announcer	1	Culture	resolved	high	"[""Culture""]"	Sports announcer 通过广播或电视播报并解说体育赛事，职业核心是媒体传播。	semantic_reasoning_only	dbpedia_l1_batch_3
+2270	stand for children	1		needs_context	low	"[""Leadership"",""Other""]"	Stand for Children 是公益倡议组织名称；职员、志愿者和组织领导职位不能由名称区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+2274	state fiscal service of ukraine	1		needs_context	low	"[""Leadership"",""Other""]"	State Fiscal Service of Ukraine 是政府税务机关名称，官员、执法人员和一般公务员职责不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+2278	stephen foster	1		needs_context	low	"[""Culture"",""Other""]"	Stephen Foster 是具名人物URI而非职业名称；不能把亲属关系或样例提及视作本人职业。	semantic_reasoning_only	dbpedia_l1_batch_3
+2289	suicide bomber	1	Other	resolved	high	"[""Other""]"	Suicide bomber 指以自杀方式实施恐怖袭击的人员，是明确的暴力犯罪身份。	semantic_reasoning_only	dbpedia_l1_batch_3
+2296	tabla	1		needs_context	low	"[""Culture"",""Other""]"	Tabla 是印度鼓类乐器名称；演奏者、制作者或销售者都可能与乐器相关，职位没有写明。	semantic_reasoning_only	dbpedia_l1_batch_3
+2303	tavistock and portman nhs foundation trust	1		needs_context	low	"[""Discovery/Science"",""Leadership"",""Other""]"	Tavistock and Portman NHS Foundation Trust 是医疗机构名称，临床、研究、行政和管理岗位未被区分。	semantic_reasoning_only	dbpedia_l1_batch_3
+2318	the antara foundation	1		needs_context	low	"[""Leadership"",""Other""]"	The Antara Foundation 是公益卫生组织名称，相关者可能是管理者、顾问、职员或志愿者。	semantic_reasoning_only	dbpedia_l1_batch_3
+2322	the family international	1		needs_context	low	"[""Leadership"",""Other""]"	The Family International 是宗教组织名称，成员或宗教领导者等身份需具体职位上下文。	semantic_reasoning_only	dbpedia_l1_batch_3
+2326	the phillips collection	1		needs_context	low	"[""Culture"",""Leadership""]"	The Phillips Collection 是艺术博物馆名称，创办人、策展人、管理者和雇员的工作不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+2336	tiffany & company	1		needs_context	low	"[""Leadership"",""Other""]"	Tiffany & Company 是商业企业名称，不能由公司关联判断具体职务。	semantic_reasoning_only	dbpedia_l1_batch_3
+2339	topography	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Topography 通过测量并绘制地表高程与地形特征形成地图资料，属于测绘与地理技术工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2347	typefounder	1	Other	resolved	high	"[""Other""]"	Typefounder 铸造或制作印刷活字，是明确的印刷制造手工业岗位。	semantic_reasoning_only	dbpedia_l1_batch_3
+2351	udaipur state	1		needs_context	low	"[""Leadership"",""Other""]"	Udaipur State 是历史邦国名称，官员、贵族、诗人或与邦国相关者的岗位不明确。	semantic_reasoning_only	dbpedia_l1_batch_3
+2358	unit production manager	1	Culture	resolved	high	"[""Culture""]"	Unit production manager 统筹电影摄制单元的预算、人员、日程和现场执行，属于影视制作管理职能。	semantic_reasoning_only	dbpedia_l1_batch_3
+2365	university of washington	1		needs_context	low	"[""Discovery/Science"",""Leadership""]"	University of Washington 是大学名称，学术人员和管理行政人员的职责不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+2369	urdu	1		needs_context	low	"[""Culture"",""Discovery/Science""]"	Urdu 是语言名称，可能对应写作者、翻译或语言学者，单凭语言标签无法确定工作。	semantic_reasoning_only	dbpedia_l1_batch_3
+2373	ventriloquism	1	Culture	resolved	high	"[""Culture""]"	Ventriloquism 是以口技塑造角色并进行舞台或媒体表演的演艺技能。	semantic_reasoning_only	dbpedia_l1_batch_3
+2379	vice-president of the united states	1		needs_context	low	"[""Leadership""]"	Vice-President of the United States 是明确政治职务，但该输入样例人物与副总统身份不符，无法确认职业字段是否有效。	semantic_reasoning_only	dbpedia_l1_batch_3
+2388	waggoner ranch	1		needs_context	low	"[""Leadership"",""Other""]"	Waggoner Ranch 是牧场/地产名称，所有者、经营者和雇工的工作角色不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+2394	weather forecasting	1	Discovery/Science	resolved	medium	"[""Discovery/Science""]"	Weather forecasting 分析大气观测并预测天气变化，职业核心是应用气象分析。	semantic_reasoning_only	dbpedia_l1_batch_3
+2399	weta-tv	1		needs_context	low	"[""Culture"",""Leadership""]"	WETA-TV 是公共电视台名称，记者、节目制作人员和机构管理者的职业含义不同。	semantic_reasoning_only	dbpedia_l1_batch_3
+2403	woman of the bedchamber	1	Other	resolved	medium	"[""Other""]"	Woman of the Bedchamber 是王室女性的随侍职位，负责陪伴和日常协助，属于个人服务而非统治职务。	https://en.wikipedia.org/wiki/Woman_of_the_Bedchamber	dbpedia_l1_batch_3
+2410	writing	1	Culture	resolved	high	"[""Culture""]"	Writing 指创作或撰写文字作品，属于文学与传播内容生产。	semantic_reasoning_only	dbpedia_l1_batch_3
+2413	youth leader	1	Leadership	resolved	medium	"[""Leadership""]"	Youth leader 指负责带领青年团体、设定活动方向并组织成员的正式群体领导角色。	semantic_reasoning_only	dbpedia_l1_batch_3
