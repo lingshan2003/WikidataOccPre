@@ -47,7 +47,8 @@ const widths = [380, 95, 210, 245, 420, 190, 185, 450, 400];
 for (let c = 0; c < 9; c++) mapping.getRangeByIndexes(0, c, end, 1).format.columnWidthPx = widths[c];
 mapping.getRange(`B2:B${end}`).setNumberFormat('#,##0');
 mapping.getRange(`B2:B${end}`).format.horizontalAlignment = 'right';
-mapping.tables.add(`A1:I${end}`, true, 'DBpediaBHHTMapping');
+const mappingTable = mapping.tables.add(`A1:I${end}`, true, 'DBpediaBHHTMapping');
+mappingTable.showFilterButton = true;
 mapping.getRange('A1:I1').format = { fill: '#234563', font: { name: 'Arial', size: 10, bold: true, color: '#FFFFFF' },
   horizontalAlignment: 'center', verticalAlignment: 'center', rowHeightPx: 34, wrapText: true };
 mapping.getRange(`F2:H${end}`).format.fill = '#FFF6D8';
@@ -126,6 +127,7 @@ console.log((await wb.inspect({ kind: 'table', range: 'Summary!A5:D15', include:
 const errors = await wb.inspect({ kind: 'match', searchTerm: '#REF!|#DIV/0!|#VALUE!|#NAME\\?|#NUM!|#NULL!|#SPILL!|#CALC!', options: { useRegex: true, maxResults: 20 }, maxChars: 700 });
 console.log(errors.ndjson);
 for (const [sheetName, range, file] of [['Summary', 'A1:D24', 'summary_preview.png'], ['Mapping', 'A1:I12', 'mapping_preview.png']]) {
+  if (process.env.DBPEDIA_WORKBOOK_PREVIEW_SHEETS && !process.env.DBPEDIA_WORKBOOK_PREVIEW_SHEETS.split(',').includes(sheetName)) continue;
   const image = await wb.render({ sheetName, range, scale: 1.5, format: 'png' });
   await fs.writeFile(path.join(runtime, file), new Uint8Array(await image.arrayBuffer()));
 }
