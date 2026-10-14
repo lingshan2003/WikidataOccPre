@@ -21,7 +21,7 @@ def source_path(value):
     return path if path.is_absolute() else REPO / path
 
 
-def package(config_path, output=None):
+def package(config_path, output=None, allow_incomplete=False):
     config = read_json(config_path)
     dataset = next((label for prefix, label in (("freebase_", "Freebase"), ("dbpedia_", "DBpedia"), ("wikidata_", "Wikidata")) if config["name"].startswith(prefix)), None)
     if dataset is None:
@@ -39,12 +39,29 @@ def package(config_path, output=None):
     seed = config["seed"]
     roots = {k: source_path(config[k]) for k in ("model_root", "graphmask_root", "relation_root", "period_root")}
     matrix = read_json(roots["graphmask_root"] / "matrix_summary.json")
+    context_rows = {}
     for context in contexts:
         rows = [r for r in matrix if r["context"] == context and r["representation"] == "multi_group" and int(r["seed"]) == seed]
-        if len(rows) != 1 or rows[0]["status"] != "complete":
+        if len(rows) != 1:
             raise ValueError(f"Missing/incomplete summary: {context}/multi_group/seed_{seed}")
-    if read_json(roots["graphmask_root"] / "pipeline_failures.json"):
+        context_rows[context] = rows[0]
+    complete_contexts = [c for c in contexts if context_rows[c]["status"] == "complete"]
+    incomplete_contexts = [c for c in contexts if context_rows[c]["status"] != "complete"]
+    failures = read_json(roots["graphmask_root"] / "pipeline_failures.json")
+    if not allow_incomplete and incomplete_contexts:
+        context = incomplete_contexts[0]
+        raise ValueError(f"Missing/incomplete summary: {context}/multi_group/seed_{seed}")
+    if failures and not allow_incomplete:
         raise ValueError("pipeline_failures.json is nonempty; resolve failures before packaging")
+    if allow_incomplete:
+        # Partial exports may omit only contexts explicitly marked incomplete in the
+        # full matrix. A global failure or one attached to a complete context could
+        # otherwise conceal a systemic issue or a failed report that is being packed.
+        for failure in failures:
+            context = failure.get("context") if isinstance(failure, dict) else None
+            representation = failure.get("representation") if isinstance(failure, dict) else None
+            if context not in incomplete_contexts or representation not in (None, "multi_group"):
+                raise ValueError(f"Cannot export partial bundle with unscoped or complete-context failure: {failure}")
     resolved_path = roots["model_root"] / "grouped_pipeline_resolved_config.json"
     if not resolved_path.is_file():
         resolved_path = roots["graphmask_root"] / "grouped_pipeline_resolved_config.json"
@@ -71,7 +88,7 @@ def package(config_path, output=None):
     add(source_path(config["multi_group_taxonomy"]), "config/taxonomy.json")
     for name in ("matrix_summary.json", "matrix_summary.tsv", "relation_group_summary.json", "relation_group_summary.tsv", "pipeline_failures.json"):
         add(roots["graphmask_root"] / name, "graphmask/" + name)
-    for context in contexts:
+    for context in complete_contexts:
         suffix = f"{context}/multi_group/seed_{seed}"
         for name in ("manifest.json", "validation.json", "training_history.json"):
             add(roots["graphmask_root"] / suffix / name, f"graphmask/{suffix}/{name}")
@@ -83,7 +100,11 @@ def package(config_path, output=None):
         add(roots["period_root"] / context / "split_summary.json", f"periods/{context}/split_summary.json", required=False)
     normalized = dict(resolved, periods=contexts, period_config="config/windows.json", multi_group_taxonomy="config/taxonomy.json",
                       model_root="models", graphmask_root="graphmask", relation_root="relations", period_root="periods")
-    metadata = {"bundle_format": f"{dataset.lower()}-sliding-reports-v1", "dataset": dataset, "contexts": contexts, "seed": seed,
+    metadata = {"bundle_format": f"{dataset.lower()}-sliding-reports-v1", "dataset": dataset, "contexts": contexts,
+                "complete_contexts": complete_contexts, "incomplete_contexts": incomplete_contexts,
+                "context_status": {context: context_rows[context]["status"] for context in contexts},
+                "completeness": "partial" if incomplete_contexts else "complete",
+                "partial_export": bool(incomplete_contexts), "seed": seed,
                 "representation": "multi_group", "experiment_name": config["name"], "files": sorted(files),
                 "excluded": ["model/probe weights", "graph tensors", "node/edge tables", "root-level edge reports", "logs"]}
     def write_archive(archive):
@@ -98,7 +119,7 @@ def package(config_path, output=None):
     if output is None:
         with tarfile.open(fileobj=sys.stdout.buffer, mode="w|gz") as archive:
             write_archive(archive)
-        print(f"Streamed {len(contexts)} complete {dataset} windows, {len(files)} small report files", file=sys.stderr)
+        print(f"Streamed {len(complete_contexts)}/{len(contexts)} complete {dataset} windows, {len(files)} small report files", file=sys.stderr)
         return
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -111,7 +132,7 @@ def package(config_path, output=None):
         temporary.rename(output)
     finally:
         temporary.unlink(missing_ok=True)
-    print(f"Packaged {len(contexts)} complete multi-group windows, {len(files)} small report files")
+    print(f"Packaged {len(complete_contexts)}/{len(contexts)} complete multi-group windows, {len(files)} small report files")
     print(f"Archive: {output.resolve()} ({output.stat().st_size / 1024**2:.2f} MiB)")
 
 
@@ -120,8 +141,10 @@ def main():
     parser.add_argument("--config", default=DEFAULT_CONFIG)
     parser.add_argument("--output", default="artifacts/dbpedia_sliding_1900_2000_reports.tar.gz")
     parser.add_argument("--stdout", action="store_true", help="Stream archive to stdout; write no files on this host")
+    parser.add_argument("--allow-incomplete", action="store_true",
+                        help="Export complete-context reports with full matrix/failure records for incomplete contexts")
     args = parser.parse_args()
-    package(source_path(args.config), None if args.stdout else source_path(args.output))
+    package(source_path(args.config), None if args.stdout else source_path(args.output), allow_incomplete=args.allow_incomplete)
 
 
 if __name__ == "__main__":

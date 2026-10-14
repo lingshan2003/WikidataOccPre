@@ -73,7 +73,7 @@ def rate(value):
     return number
 
 
-def collect(root, start_year, end_year):
+def collect(root, start_year, end_year, allow_incomplete=False):
     root = Path(root).resolve()
     bundle = read_json(root / "bundle.json")
     dataset_formats = {"dbpedia-sliding-reports-v1": "DBpedia", "freebase-sliding-reports-v1": "Freebase", "wikidata-sliding-reports-v1": "Wikidata"}
@@ -96,8 +96,17 @@ def collect(root, start_year, end_year):
     seed = config["seed"]
     mask = root / config["graphmask_root"]
     matrix = read_json(mask / "matrix_summary.json")
-    if read_json(mask / "pipeline_failures.json"):
+    failures = read_json(mask / "pipeline_failures.json")
+    incomplete = set(bundle.get("incomplete_contexts", []))
+    if incomplete and not allow_incomplete:
+        raise ValueError("Partial bundle requires --allow-incomplete; missing windows cannot be plotted as observations")
+    if failures and not allow_incomplete:
         raise ValueError("Bundle contains pipeline failures")
+    if allow_incomplete:
+        if incomplete and (bundle.get("completeness") != "partial" or bundle.get("partial_export") is not True):
+            raise ValueError("Incomplete contexts lack explicit partial-bundle metadata")
+        if any(not isinstance(f, dict) or f.get("context") not in incomplete or f.get("representation") not in (None, "multi_group") for f in failures):
+            raise ValueError("Partial bundle has a global failure or a failure on a completed context")
     tidy, audit = [], []
     for year in range(start_year, end_year + 1):
         context = f"center_{year}"
@@ -107,9 +116,27 @@ def collect(root, start_year, end_year):
         if period["start"] + period["end"] != 2 * year:
             raise ValueError(f"Unexpected center/bounds: {period}")
         summary = [r for r in matrix if r["context"] == context and r["representation"] == "multi_group" and int(r["seed"]) == seed]
-        if len(summary) != 1 or summary[0]["status"] != "complete":
+        if len(summary) != 1:
             raise ValueError(f"Incomplete/duplicate matrix row: {context}")
         summary = summary[0]
+        if context in incomplete:
+            if summary["status"] == "complete" or bundle.get("context_status", {}).get(context) != summary["status"]:
+                raise ValueError(f"Partial-bundle status disagrees with matrix: {context}")
+            audit.append({"year": year, "context": context, "window_start": period["start"], "window_end": period["end"],
+                          "selected_epoch": None, "layer0_gate_enabled": None, "layer0_hard_retention_rate": None,
+                          "message_observations": None, "hard_retained_messages": None, "test_nodes": None,
+                          "prediction_agreement": None, "masked_accuracy": None, "masked_macro_f1": None,
+                          "checkpoint_selection": config["graphmask_train"].get("checkpoint_selection", "any-stage"),
+                          "window_status": summary["status"], "error": summary.get("error", "")})
+            for group in labels:
+                tidy.append({"year": year, "context": context, "window_start": period["start"], "window_end": period["end"],
+                             "group": group, "original_triples_after_collapse": None, "message_observations": None,
+                             "hard_retained_messages": None, "retained_message_share": None,
+                             "retained_message_share_percent": None, "support_status": "incomplete_window",
+                             "plot_share_percent": None, "layer0_gate_enabled": None, "seed": seed})
+            continue
+        if summary["status"] != "complete":
+            raise ValueError(f"Incomplete matrix row lacks partial-bundle metadata: {context}")
         run = mask / context / "multi_group" / f"seed_{seed}"
         report = run / "test_report"
         metrics = read_json(report / "test_metrics.json")
@@ -173,7 +200,8 @@ def collect(root, start_year, end_year):
                       "layer0_hard_retention_rate": layer["hard_retention_rate"], "message_observations": observations,
                       "hard_retained_messages": round(retained), "test_nodes": metrics["roots"],
                       "prediction_agreement": metrics["prediction_agreement"], "masked_accuracy": metrics["masked"]["accuracy"],
-                      "masked_macro_f1": metrics["masked"]["macro_f1"], "checkpoint_selection": policy})
+                      "masked_macro_f1": metrics["masked"]["macro_f1"], "checkpoint_selection": policy,
+                      "window_status": "complete", "error": ""})
         for group in labels:
             row = observed.get(group)
             count = int(row["message_observations"]) if row else 0
@@ -190,13 +218,18 @@ def collect(root, start_year, end_year):
                          "retained_message_share_percent": 100 * share, "support_status": status,
                          "plot_share_percent": 100 * share if count else None,
                          "layer0_gate_enabled": enabled[0], "seed": seed})
+    if not any(r["window_status"] == "complete" for r in audit):
+        raise ValueError("No completed windows in the requested plotting range")
     return tidy, audit, {"bundle": bundle, "experiment": config, "taxonomy": taxonomy, "dataset": dataset, "group_labels": labels,
                          "metric": "Layer 0 hard-retained sampled message share",
                          "definition": "group hard-retained sampled messages / all Layer 0 hard-retained sampled messages",
                          "reverse_policy": "Original and generated reverse messages combined in each base group",
                          "missing_policy": "No sampled support: plot gap; accounting share is zero",
                          "smoothing": None, "bootstrap": False, "confidence_interval": None,
-                         "center_years": [start_year, end_year], "received_root": str(root)}
+                         "center_years": [start_year, end_year], "received_root": str(root),
+                         "incomplete_years": [r["year"] for r in audit if r["window_status"] != "complete"],
+                         "complete_windows": sum(r["window_status"] == "complete" for r in audit),
+                         "completeness": "partial" if incomplete else "complete"}
 
 
 def write_tsv(path, rows):
@@ -215,7 +248,15 @@ def plot(tidy, output, dataset="DBpedia", group_display_labels=None):
         rows = [r for r in tidy if r["group"] == group]
         years = [r["year"] for r in rows]
         values = [float("nan") if r["plot_share_percent"] is None else r["plot_share_percent"] for r in rows]
+        for row in rows:
+            if row["support_status"] == "incomplete_window":
+                ax.axvspan(row["year"] - 0.5, row["year"] + 0.5, color="#c5c5c5", alpha=0.23, linewidth=0)
         ax.plot(years, values, color=color, linewidth=1.7)
+        isolated = [i for i, value in enumerate(values) if math.isfinite(value)
+                    and (i == 0 or not math.isfinite(values[i - 1]))
+                    and (i == len(values) - 1 or not math.isfinite(values[i + 1]))]
+        if isolated:
+            ax.scatter([years[i] for i in isolated], [values[i] for i in isolated], s=15, color=color, zorder=2)
         disabled = [r for r in rows if not r["layer0_gate_enabled"] and r["plot_share_percent"] is not None]
         if disabled:
             ax.scatter([r["year"] for r in disabled], [r["plot_share_percent"] for r in disabled], s=15,
@@ -248,12 +289,19 @@ def plot(tidy, output, dataset="DBpedia", group_display_labels=None):
     for ax, group in zip(axes.flat, labels):
         draw(ax, group, GROUP_COLORS[group])
     note = "Raw annual results; no bootstrap or smoothing.\nEach panel uses its own y-axis scale.\nGroups sum to 100% each year.\nOpen circles: Layer 0 gate disabled.\nGaps: no sampled support."
+    missing = sorted({r["year"] for r in tidy if r["support_status"] == "incomplete_window"})
+    if missing:
+        note = ("Raw annual results; no bootstrap or smoothing.\nEach panel uses its own y-axis scale.\n"
+                "Groups sum to 100% in completed years.\nOpen circles: Layer 0 gate disabled.\n"
+                "Grey bands/gaps: incomplete windows.\nMissing years: " + ", ".join(map(str, missing)) + ".\n"
+                "Other gaps: no sampled support.")
     if len(labels) % 2:
         axes.flat[-1].axis("off")
         axes.flat[-1].text(0, 0.7, note, transform=axes.flat[-1].transAxes, va="top", linespacing=1.7)
     else:
         fig.text(0.06, 0.015, note.replace("\n", "  "), fontsize=8, wrap=True)
-    fig.suptitle(f"{dataset} relation-group trends — Layer 0", fontsize=17)
+    suffix = f" ({len({r['year'] for r in tidy}) - len(missing)}/{len({r['year'] for r in tidy})} windows complete)" if missing else ""
+    fig.suptitle(f"{dataset} relation-group trends — Layer 0{suffix}", fontsize=17)
     fig.tight_layout(rect=(0, 0 if len(labels) % 2 else 0.055, 1, 0.97), h_pad=2)
     save(fig, "layer0_all_groups_annual")
 
@@ -264,16 +312,17 @@ def main(default_output="visualization/dbpedia_sliding_layer0_20th_century"):
     parser.add_argument("--output-dir", type=Path, default=Path(default_output))
     parser.add_argument("--start-year", type=int, default=1901)
     parser.add_argument("--end-year", type=int, default=2000)
+    parser.add_argument("--allow-incomplete", action="store_true", help="Show explicitly recorded incomplete windows as gaps")
     args = parser.parse_args()
-    tidy, audit, provenance = collect(args.received_root, args.start_year, args.end_year)
+    tidy, audit, provenance = collect(args.received_root, args.start_year, args.end_year, args.allow_incomplete)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     write_tsv(args.output_dir / "layer0_group_annual.tsv", tidy)
     write_tsv(args.output_dir / "annual_audit.tsv", audit)
     (args.output_dir / "provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     plot(tidy, args.output_dir, provenance["dataset"], provenance["group_labels"])
-    disabled = sum(not row["layer0_gate_enabled"] for row in audit)
+    disabled = sum(row["layer0_gate_enabled"] is False for row in audit)
     count = len(provenance["taxonomy"]["groups"])
-    print(f"Validated {len(audit)} years, {count} groups; Layer 0 disabled in {disabled} years")
+    print(f"Validated {provenance['complete_windows']}/{len(audit)} windows, {count} groups; Layer 0 disabled in {disabled} completed years")
     print(f"Saved {count} group plots + overview (PNG/SVG/PDF): {args.output_dir.resolve()}")
 
 
