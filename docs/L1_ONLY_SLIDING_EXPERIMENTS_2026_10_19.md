@@ -76,3 +76,21 @@ bash Wikidata/run_sliding_l1_only.sh run all --gpus 1,2 --periods center_1900,ce
 在tmux运行可在SSH断开后继续；只保留 `log` 与 `codex-control` 两窗，不为每个GPU新增tmux窗口。将log窗切到本次full.log，必要时读取对应每卡worker日志。
 
 重复相同命令会复用有效、兼容的已完成阶段；这是阶段级续跑，不是未完成epoch的optimizer状态恢复。窗口因OOM失败时保留已完成阶段，先查看GPU占用再按同参数补跑缺失窗口；不自动降低batch或改seed。
+# Freebase automatic pilot expansion
+
+The existing durable orchestrator also accepts the frozen Freebase v4 protocol:
+
+```bash
+python -u Wikidata/run_pilot_then_full.py --dataset freebase \
+  --config config/freebase_grouped_sliding_1900_2000_pm20_step1_l1_only_alive2026_v4.json \
+  --gpus 0,1,3,4,5 --minimum-free-mib 1
+```
+
+It runs centers 1900/1950/2000, checks source/stage provenance, life membership,
+splits, checkpoint policy, validation fidelity and test message counts, then
+expands only after those checks pass. It calls the frozen L1-only entry point;
+the config path must match that entry point. Logs, GPU telemetry, validation and
+exit status are saved in the configured GraphMask root's `orchestration_runs/`.
+This does not change training settings or checkpoint selection. The GPU pool
+must be explicitly chosen from available cards before launch.
+

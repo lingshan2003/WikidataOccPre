@@ -32,6 +32,7 @@ def gpu_snapshot(selected):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default=DEFAULT_CONFIG)
+    parser.add_argument("--dataset", choices=("wikidata", "freebase"), default="wikidata")
     parser.add_argument("--gpus", required=True)
     parser.add_argument("--minimum-free-mib", type=int, default=1024)
     args = parser.parse_args()
@@ -40,6 +41,11 @@ def main():
         raise ValueError("This preflight telemetry entry point uses physical GPU indices")
     os.chdir(ROOT)
     cfg = read_json(args.config)
+    if args.dataset == "freebase":
+        from scripts.l1_only_sliding import SPECS
+        expected = ROOT / "config" / (SPECS["freebase"][0] + ".json")
+        if Path(args.config).resolve() != expected.resolve():
+            raise ValueError("The Freebase L1-only entry point requires its frozen v4 config")
     model_root = ROOT / cfg["model_root"]
     model_root.mkdir(parents=True, exist_ok=True)
     with (model_root / ".pilot_then_full.lock").open("a+") as lock:
@@ -52,7 +58,8 @@ def main():
         directory.mkdir(parents=True, exist_ok=False)
         record = {"status": "running", "phase": "pilot", "hostname": socket.gethostname(),
                   "started_at": datetime.now(timezone.utc).isoformat(), "gpu_ids": selected,
-                  "argv": sys.argv, "config": cfg, "pilot_periods": ["center_1900", "center_1950", "center_2000"],
+                  "argv": sys.argv, "config": cfg, "dataset": args.dataset,
+                  "pilot_periods": ["center_1900", "center_1950", "center_2000"],
                   "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
         status_file = directory / "status.json"
         write_json(status_file, record)
@@ -91,6 +98,8 @@ def main():
                 record["phase"] = phase
                 write_json(status_file, record)
                 command = ["bash", "Wikidata/run_sliding_multi_gpu.sh", "run", "all", "--config", args.config, "--gpus", args.gpus]
+                if args.dataset == "freebase":
+                    command = ["bash", "Freebase/run_sliding_l1_only.sh", "run", "all", "--gpus", args.gpus]
                 if periods:
                     command += ["--periods", periods]
                 print("[orchestration] " + shlex.join(command), flush=True)
@@ -108,7 +117,7 @@ def main():
                 if phase == "pilot":
                     record["phase"] = "validate_pilot"
                     write_json(status_file, record)
-                    checked = validate(args.config, periods)
+                    checked = validate(args.config, periods, args.dataset)
                     checked["pilot_minimum_free_MiB"] = dict(minimum_free)
                     checked["gpu_telemetry_errors"] = list(telemetry_errors)
                     write_json(directory / "pilot_validation.json", checked)

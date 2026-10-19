@@ -22,10 +22,25 @@ def probability(value):
     return value
 
 
-def validate(config, periods):
-    p = Pipeline(SimpleNamespace(config=config, stage="summarize", device=None, periods=periods,
+def validate(config, periods, dataset="wikidata"):
+    pipeline_class = Pipeline
+    if dataset == "freebase":
+        from Freebase.grouped_pipeline import Pipeline as pipeline_class
+    elif dataset != "wikidata":
+        raise ValueError(f"Unsupported dataset: {dataset}")
+    p = pipeline_class(SimpleNamespace(config=config, stage="summarize", device="cuda:0", periods=periods,
                                  representations="multi_group", include_full=False))
-    p.require_source()
+    if dataset == "freebase":
+        from Freebase.prepare_graph import settings
+        source_dir = p.path(p.config["source_data"]).parent
+        _, _, _, signature = settings(config, source_dir, False)
+        required = ("graph_data.pt", "nodes.csv", "edges.csv", "split_summary.json", "source_prepare_manifest.json")
+        if any(not (source_dir / name).is_file() or (source_dir / name).stat().st_size == 0 for name in required):
+            raise ValueError("Incomplete Freebase source")
+        if read_json(source_dir / "source_prepare_manifest.json") != signature:
+            raise ValueError("Freebase source provenance changed")
+    else:
+        p.require_source()
     results = []
     for context in p.contexts:
         artifact, model, mask = p.directories(context, "multi_group")
@@ -106,9 +121,10 @@ def validate(config, periods):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True)
+    parser.add_argument("--dataset", choices=("wikidata", "freebase"), default="wikidata")
     parser.add_argument("--periods", default="center_1900,center_1950,center_2000")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
-    result = validate(args.config, args.periods)
+    result = validate(args.config, args.periods, args.dataset)
     write_json(args.output, result)
     print(json.dumps(result, ensure_ascii=False), flush=True)
