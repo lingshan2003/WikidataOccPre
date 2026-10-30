@@ -23,6 +23,7 @@ from Freebase.sliding_multi_gpu import output_locks, select_gpus
 
 BASE = "config/freebase_grouped_sliding_1900_2000_pm20_step1_l1_only_alive2026_v4.json"
 OUT = "runs_graphmask/freebase_l1_only_repeat_1940_1942_20261030_v1"
+ORIGINAL_OUT = OUT
 PERIODS = "center_1940,center_1942"
 VARIANTS = ((42, 2), (42, 3), (43, 1))
 
@@ -56,7 +57,8 @@ def gpu_snapshot():
 
 def collect(out):
     rows = []
-    for seed, run in ((42, 1), *VARIANTS):
+    variants = read_json(out / "experiment_manifest.json").get("variants", VARIANTS)
+    for seed, run in ((42, 1), *variants):
         config = ROOT / BASE if (seed, run) == (42, 1) else out / "configs" / f"seed{seed}_run{run}.json"
         if not config.exists():
             continue
@@ -97,8 +99,9 @@ def collect(out):
     columns = list(dict.fromkeys(k for r in rows for k in r))
     with (out / "results.tsv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=columns, delimiter="\t"); w.writeheader(); w.writerows(rows)
-    lines = ["Layer 0 Intimate partnership占全部保留消息的百分比。seed=42 Run 1是原实验；Run 2/3为独立完整重跑。seed=43只安排Run 1。", ""]
-    for seed, runs in ((42, (1,2,3)), (43, (1,))):
+    lines = ["Layer 0 Intimate partnership占全部保留消息的百分比。seed=42 Run 1是原实验，其余为独立完整重跑。", ""]
+    for seed in dict.fromkeys(r["seed"] for r in rows):
+        runs = sorted({r["run"] for r in rows if r["seed"] == seed})
         lines += [f"| seed={seed} | 1940 | 1942 |", "|---|---:|---:|"]
         for run in runs:
             cells = []
@@ -132,7 +135,8 @@ def run(args):
         configs = out / "configs"; configs.mkdir(exist_ok=True)
         for seed, repeat in VARIANTS:
             c = dict(base.config)
-            name = f"freebase_l1_only_repeat_1940_1942_seed{seed}_run{repeat}_v1"
+            name = (f"freebase_l1_only_repeat_1940_1942_seed{seed}_run{repeat}_v1" if OUT == ORIGINAL_OUT
+                    else f"{out.name}_seed{seed}_run{repeat}")
             c.update(name=name, seed=seed, periods=PERIODS,
                      model_root=f"runs/{name}", graphmask_root=f"{OUT}/seed{seed}_run{repeat}")
             target = configs / f"seed{seed}_run{repeat}.json"
@@ -155,11 +159,22 @@ def run(args):
         write_json(out / "experiment_manifest.json", record)
         pending = [(seed, repeat, year) for seed,repeat in VARIANTS for year in (1940,1942)]
         active = {}
+        last_gpu_scan = time.monotonic()
         def interrupted(signum, frame): raise KeyboardInterrupt
         signal.signal(signal.SIGTERM, interrupted)
         code = 1
         try:
             while pending or active:
+                if pending and len(pool) < 4 and time.monotonic() - last_gpu_scan >= 10:
+                    latest = gpu_snapshot()
+                    candidates = [g for g in requested_pool if g not in pool and latest[g]["utilization"] < 60
+                                  and latest[g]["total_mib"] - latest[g]["used_mib"] >= 8000]
+                    candidates.sort(key=lambda g: (latest[g]["utilization"], latest[g]["used_mib"]))
+                    for gpu in candidates[:4-len(pool)]:
+                        pool.append(gpu)
+                        record.setdefault("gpu_additions", []).append(dict(gpu=gpu,snapshot=latest[gpu],at=datetime.now(timezone.utc).isoformat()))
+                        print(f"[additional available GPU] {gpu}",flush=True)
+                    last_gpu_scan = time.monotonic()
                 for gpu in pool:
                     if gpu in active or not pending: continue
                     seed, repeat, year = pending.pop(0)
@@ -198,13 +213,24 @@ def run(args):
 
 
 def main():
+    global OUT, VARIANTS
     os.chdir(ROOT)
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("mode",choices=("run","worker","summarize"))
     p.add_argument("--gpus")
     p.add_argument("--config",type=Path)
     p.add_argument("--year",type=int,choices=(1940,1942))
+    p.add_argument("--seeds",help="Fresh seed sweep, e.g. 44,45,46,47; requires a new output root")
+    p.add_argument("--output-root",default=ORIGINAL_OUT)
     args=p.parse_args()
+    OUT = args.output_root
+    if args.seeds:
+        seeds = [int(s) for s in args.seeds.split(",")]
+        if not seeds or len(set(seeds)) != len(seeds) or any(s < 0 for s in seeds) or OUT == ORIGINAL_OUT:
+            raise ValueError("Use distinct nonnegative seeds and a new output root")
+        VARIANTS = tuple((seed,1) for seed in seeds)
+    if (ROOT / OUT).resolve().parent != (ROOT / "runs_graphmask").resolve():
+        raise ValueError("Repeat output must be a dedicated directory directly in runs_graphmask")
     if args.mode=="worker":
         job=pipeline(args.config,f"center_{args.year}")
         job.gpu_preflight(); job.validate_period(f"center_{args.year}")
