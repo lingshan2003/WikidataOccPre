@@ -115,15 +115,20 @@ def run(args):
     out = ROOT / OUT
     out.mkdir(parents=True, exist_ok=True)
     base = pipeline(ROOT / BASE)
-    pool = select_gpus(args.gpus)
+    requested_pool = select_gpus(args.gpus)
     with contextlib.ExitStack() as stack:
         lock = stack.enter_context((out / ".repeat.lock").open("a+"))
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         stack.enter_context(output_locks(base))
         snapshot = gpu_snapshot()
-        for gpu in pool:
-            if gpu not in snapshot or snapshot[gpu]["utilization"] >= 60 or snapshot[gpu]["total_mib"] - snapshot[gpu]["used_mib"] < 8000:
-                raise ValueError(f"GPU {gpu} is no longer sufficiently free: {snapshot.get(gpu)}")
+        if set(requested_pool) - set(snapshot):
+            raise ValueError("Requested GPU is absent from nvidia-smi")
+        pool = [g for g in requested_pool if snapshot[g]["utilization"] < 60
+                and snapshot[g]["total_mib"] - snapshot[g]["used_mib"] >= 8000]
+        pool = sorted(pool, key=lambda g: (snapshot[g]["utilization"], snapshot[g]["used_mib"]))[:4]
+        if len(pool) < 2:
+            raise ValueError(f"Need at least two available GPUs for this parallel launch: {snapshot}")
+        print(f"[selected GPUs] {pool}; candidate pool={requested_pool}; snapshot={snapshot}",flush=True)
         configs = out / "configs"; configs.mkdir(exist_ok=True)
         for seed, repeat in VARIANTS:
             c = dict(base.config)
@@ -139,7 +144,7 @@ def run(args):
         record = dict(status="running", started_at=datetime.now(timezone.utc).isoformat(),
                       git_revision=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
                       hostname=os.uname().nodename, python=sys.executable, cwd=str(ROOT), argv=sys.argv,
-                      baseline=BASE, windows=[1940,1942], variants=VARIANTS, gpu_pool=pool, gpu_preflight=snapshot,
+                      baseline=BASE, windows=[1940,1942], variants=VARIANTS, gpu_pool=pool, candidate_gpu_pool=requested_pool, gpu_preflight=snapshot,
                       control="Original seed42 run reused only as baseline Run1; all six repeats have separate output paths",
                       fixed="Original period graphs, collapsed graphs, labels and split_seed=20260814; original training/GraphMask budgets and any-stage checkpoint rule",
                       changed_seed="Global seed controls RGCN, GraphMask and test neighbor sampling; split seed remains fixed",
