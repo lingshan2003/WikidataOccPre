@@ -104,9 +104,9 @@ def curve(ax, rows, seed, group, metric, label, distinguish_seed=True):
                    linewidths=1.2, zorder=3)
 
 
-def axes_style(ax, metric):
+def axes_style(ax, metric, upper=100):
     ax.set_xlim(1899.7, 1910.3)
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, upper)
     ax.set_xticks(YEARS[::2])
     ax.xaxis.set_major_locator(MaxNLocator(integer=True, nbins=6))
     ax.yaxis.set_major_formatter(PercentFormatter(100))
@@ -143,7 +143,8 @@ def main():
     for ax, (group, label) in zip(axes.flat, labels.items()):
         for seed in SEEDS:
             curve(ax, rows, seed, group, args.metric, f"Seed {seed}")
-        axes_style(ax, args.metric)
+        upper=min(100,max(0.1,max(rows[s,y,group][args.metric] for s in SEEDS for y in YEARS)*1.15))
+        axes_style(ax, args.metric, upper)
         ax.set_title(label)
     axes.flat[-1].axis("off")
     axes.flat[-1].legend(handles=handles, loc="center", frameon=False)
@@ -153,7 +154,8 @@ def main():
         fig, ax = plt.subplots(figsize=(8.4, 4.8))
         for seed in SEEDS:
             curve(ax, rows, seed, group, args.metric, f"GraphMask seed {seed}")
-        axes_style(ax, args.metric)
+        upper=min(100,max(0.1,max(rows[s,y,group][args.metric] for s in SEEDS for y in YEARS)*1.15))
+        axes_style(ax, args.metric, upper)
         ax.legend(handles=handles, frameon=False)
         fig.suptitle(f"Freebase: {label}")
         save(fig, output, f"freebase_frozen_rgcn_{args.metric}_{group}")
