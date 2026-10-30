@@ -38,11 +38,17 @@ def parse_args(argv=None):
     p.add_argument("--num-gpus", type=int, help="First N cards from the explicit pool")
     p.add_argument("--periods", help="Comma-separated center_YYYY IDs, or all")
     p.add_argument("--device", choices=("cuda:0", "cpu"), default="cuda:0")
+    p.add_argument("--seed", type=int, choices=(42,43), default=42,
+                   help="Seed43 is supported for the approved Freebase full-window replication")
     return p.parse_args(argv)
 
 
 def make_pipeline(args):
     name, module, _, groups = SPECS[args.dataset]
+    if args.seed == 43:
+        if args.dataset != "freebase":
+            raise ValueError("The seed43 replication is configured for Freebase only")
+        name = "freebase_grouped_sliding_1900_2000_pm20_step1_l1_only_seed43_alive2026_v1"
     args.config = str(ROOT / "config" / (name + ".json"))
     args.representations, args.include_full = None, False
     expected = read_json(args.config)
@@ -59,8 +65,8 @@ def make_pipeline(args):
         raise ValueError("Only L1 occupation inputs are allowed; auxiliary features must be none")
     if args.dataset != "freebase" and c["source_prepare"]["target_level"] != 1:
         raise ValueError("The target must be L1")
-    if c["seed"] != 42 or c["prepare"]["split_seed"] != 20260814:
-        raise ValueError("Frozen training seed=42 and within-window split seed=20260814 required")
+    if c["seed"] != args.seed or c["prepare"]["split_seed"] != 20260814:
+        raise ValueError("Frozen requested training seed and within-window split seed=20260814 required")
     if c["graphmask_train"]["checkpoint_selection"] != "any-stage":
         raise ValueError("Use the confirmed any-stage checkpoint rule")
     if c["train"]["epochs"] != 50 or c["graphmask_train"]["epochs_per_layer"] != 3:
@@ -122,7 +128,7 @@ def main(argv=None):
     print(f"[{args.mode}] {args.dataset}: {len(pipeline.contexts)} windows; L1 -> L1; auxiliary=none; groups={len(pipeline.multi['groups'])}; GPUs={pool}", flush=True)
     print("[command] " + shlex.join(command), flush=True)
     if args.mode == "plan":
-        print("[budget] RGCN <=50 epochs (early stop), GraphMask 3 epochs/layer; seed=42, split_seed=20260814; checkpoint=any-stage")
+        print(f"[budget] RGCN <=50 epochs (early stop), GraphMask 3 epochs/layer; seed={pipeline.config['seed']}, split_seed=20260814; checkpoint=any-stage")
         print("[membership] birth >1920 and missing death -> alive through 2026; windows +/-20 years, annual centers 1900-2000")
         for key in ("source_data", "period_root", "relation_root", "model_root", "graphmask_root"):
             print(f"[{key}] {pipeline.config[key]}")
