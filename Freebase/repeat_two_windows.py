@@ -149,7 +149,7 @@ def run(args):
                       git_revision=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
                       hostname=os.uname().nodename, python=sys.executable, cwd=str(ROOT), argv=sys.argv,
                       baseline=BASE, windows=[1940,1942], variants=VARIANTS, gpu_pool=pool, candidate_gpu_pool=requested_pool, gpu_preflight=snapshot,
-                      control="Original seed42 run reused only as baseline Run1; all six repeats have separate output paths",
+                      control="Original seed42 run reused only as baseline Run1; all new jobs have separate output paths",
                       fixed="Original period graphs, collapsed graphs, labels and split_seed=20260814; original training/GraphMask budgets and any-stage checkpoint rule",
                       changed_seed="Global seed controls RGCN, GraphMask and test neighbor sampling; split seed remains fixed",
                       resume="Only compatible completed stages of the SAME repeat; no reuse across repeats", jobs=[])
@@ -226,8 +226,8 @@ def main():
     OUT = args.output_root
     if args.seeds:
         seeds = [int(s) for s in args.seeds.split(",")]
-        if not seeds or len(set(seeds)) != len(seeds) or any(s < 0 for s in seeds) or OUT == ORIGINAL_OUT:
-            raise ValueError("Use distinct nonnegative seeds and a new output root")
+        if not seeds or 42 in seeds or len(set(seeds)) != len(seeds) or any(s < 0 for s in seeds) or OUT == ORIGINAL_OUT:
+            raise ValueError("Use distinct nonnegative new seeds (42 is reserved for baseline) and a new output root")
         VARIANTS = tuple((seed,1) for seed in seeds)
     if (ROOT / OUT).resolve().parent != (ROOT / "runs_graphmask").resolve():
         raise ValueError("Repeat output must be a dedicated directory directly in runs_graphmask")
