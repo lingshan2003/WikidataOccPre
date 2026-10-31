@@ -9,6 +9,7 @@ from training.attention_common import root_indices
 from training.graphmask.common import (load_run_context,make_loader,resolve_device,resolve_fanouts,set_seed,evaluate_probe,graphmask_kl,probe_payload,write_json)
 from training.graphmask.core import GraphMaskProbe
 from training.train import batch_features
+from training.graphmask.window_schedule import window_order,batch_seed
 
 def drop(v):
     a,b=v['original']['macro_f1'],v['masked']['macro_f1']
@@ -82,10 +83,17 @@ def main():
             layer=len(probe.gates)-1-epoch//cfg['epochs_per_layer']
             for enabled in range(len(probe.gates)-1,layer-1,-1):probe.enable_layer(enabled)
             probe.train();set_seed(cfg['graphmask_seed']+epoch+1)
-            loaders=[iter(make_loader(c['data'],c['roots'],c['fanouts'],cfg['batch_size'],shuffle=True,num_workers=0)) for c in contexts]
+            isolated=cfg.get('rng_protocol')=='per_window_batch_v1'
+            loaders=[]
+            for i,c in enumerate(contexts):
+                if isolated:set_seed(batch_seed(cfg['graphmask_seed'],epoch,0,i))
+                loaders.append(iter(make_loader(c['data'],c['roots'],c['fanouts'],cfg['batch_size'],shuffle=True,num_workers=0)))
             losses=[dict(kl=0.,penalty=0.,updates=0) for c in contexts]
             for step in range(steps):
-                for i,c in enumerate(contexts):
+                order=window_order(len(contexts),cfg.get('window_order_seed'),epoch,step)
+                for i in order:
+                    c=contexts[i]
+                    if isolated:set_seed(batch_seed(cfg['graphmask_seed'],epoch,step,i))
                     batch=next(loaders[i]).to(device);n=int(batch.batch_size)
                     f=batch_features(batch,c['restored'].feature_schema,c['meta']['occupation_unknown_ids'])
                     with torch.no_grad():original,traces=c['restored'].adapter.trace(f,batch.edge_index,batch.edge_type)
@@ -105,7 +113,7 @@ def main():
             retention=sum(v['hard_retention_rate'] for v in validation.values())/len(contexts)
             tier=0 if worst<=cfg['strict_relative_f1_drop'] else 1
             rank=(tier,retention)
-            record=dict(epoch=epoch+1,layer=layer,enabled_layers=probe.enabled_layers.tolist(),worst_relative_f1_drop=worst,mean_retention=retention,validation=validation,train=losses,multipliers=torch.nn.functional.softplus(alpha).detach().cpu().tolist())
+            record=dict(epoch=epoch+1,window_order_seed=cfg.get('window_order_seed'),first_round_order=[contexts[i]['year'] for i in window_order(len(contexts),cfg.get('window_order_seed'),epoch,0)],layer=layer,enabled_layers=probe.enabled_layers.tolist(),worst_relative_f1_drop=worst,mean_retention=retention,validation=validation,train=losses,multipliers=torch.nn.functional.softplus(alpha).detach().cpu().tolist())
             history.append(record);write_json(out/'training_history.json',dict(history=history));print(json.dumps(record),flush=True)
             if worst<=cfg['maximum_relative_f1_drop'] and (best_rank is None or rank<best_rank):
                 best_rank=rank;best=dict(state=copy.deepcopy(probe.state_dict()),record=record)
