@@ -1,0 +1,31 @@
+{
+  "name": "freebase_shared_graphmask_1900_1909_rgcn42_gm43_v1",
+  "baseline_config": "config/freebase_grouped_sliding_1900_2000_pm20_step1_l1_only_alive2026_v4.json",
+  "years": [
+    1900,
+    1901,
+    1902,
+    1903,
+    1904,
+    1905,
+    1906,
+    1907,
+    1908,
+    1909
+  ],
+  "output_root": "runs_graphmask/freebase_shared_graphmask_1900_1909_rgcn42_gm43_v1",
+  "model_seed": 42,
+  "graphmask_seed": 43,
+  "validation_seed": 100042,
+  "report_seed": 42,
+  "epochs_per_layer": 3,
+  "batch_size": 32,
+  "beta": 0.03,
+  "learning_rate": 0.0001,
+  "multiplier_learning_rate": 0.01,
+  "strict_relative_f1_drop": 0.05,
+  "maximum_relative_f1_drop": 0.1,
+  "checkpoint_selection": "any-stage",
+  "window_balance": "round_robin_minimum_full_batches_per_window",
+  "explicit_temporal_penalty": false
+}
