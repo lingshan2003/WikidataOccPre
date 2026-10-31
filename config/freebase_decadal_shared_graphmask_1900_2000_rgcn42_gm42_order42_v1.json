@@ -1,0 +1,25 @@
+{
+  "name": "freebase_decadal_shared_graphmask_1900_2000_rgcn42_gm42_order42_v1",
+  "configs": [
+    "config/freebase_shared_graphmask_1900_1909_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1910_1919_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1920_1929_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1930_1939_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1940_1949_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1950_1959_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1960_1969_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1970_1979_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1980_1989_rgcn42_gm42_order42_v1.json",
+    "config/freebase_shared_graphmask_1990_2000_rgcn42_gm42_order42_v1.json"
+  ],
+  "candidate_gpus": [
+    0,
+    1,
+    3,
+    4,
+    5
+  ],
+  "minimum_free_mib": 8000,
+  "maximum_gpu_utilization_exclusive": 60,
+  "maximum_parallel_jobs": 4
+}
