@@ -55,6 +55,7 @@ def main():
     steps=min(len(c['roots'])//cfg['batch_size'] for c in contexts)
     assert steps>0
     print(f'[balance] {steps} full batches/window/epoch; {len(contexts)} windows',flush=True)
+    if device.type=='cuda':print(f'[memory] allocated={torch.cuda.memory_allocated(device)/2**20:.1f} MiB; peak={torch.cuda.max_memory_allocated(device)/2**20:.1f} MiB',flush=True)
     if args.preflight_only:return
     manifest=dict(status='running',config=cfg,git_revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),hostname=os.uname().nodename,cwd=str(ROOT),python=sys.executable,steps_per_window=steps,sources=[dict(year=c['year'],data=str(c['data_path']),checkpoint=str(c['model_path'])) for c in contexts])
     write_json(out/'experiment_manifest.json',manifest)
